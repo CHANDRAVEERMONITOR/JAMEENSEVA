@@ -3,84 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jameenseva - Digital Signed Khatiyan Delivery</title>
+    <title>JAMEENSEVA - बिहार भूमि सुधार</title>
     <style>
-        .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
-}
-.grid-item {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    transition: 0.3s;
-    text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-.grid-item:hover {
-    transform: translateY(-5px);
-    border-color: #004a99;
-}
-.grid-item i { font-size: 2em; display: block; margin-bottom: 10px; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; }
-        header { background-color: #004a99; color: red; padding: 25px; text-align: center; }
-        .hero { background: white; padding: 30px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
-        .service-card { background: #fff; padding: 20px; margin: 20px; border-left: 5px solid #28a745; border-radius: 5px; }
-        .btn { background-color: #ff5722; color: white; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; margin-top: 15px; }
-        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        footer { text-align: center; padding: 20px; font-size: 0.9em; color: #666; }
+        body { font-family: 'Arial', sans-serif; margin: 0; background: #f4f7f6; }
+        
+        /* Govt Style Top Bar */
+        .top-banner { background: white; padding: 10px 5%; display: flex; align-items: center; border-bottom: 4px solid #005689; }
+        .logo-img { height: 70px; margin-right: 15px; }
+        .govt-text h2 { margin: 0; color: #4b0082; font-size: 22px; }
+        .govt-text h3 { margin: 0; color: #4b0082; font-size: 18px; }
+
+        /* Photos Section */
+        .officials-container { display: flex; justify-content: center; gap: 30px; padding: 20px; flex-wrap: wrap; background: #fff; }
+        .official-card { text-align: center; border: 1px solid #ddd; padding: 15px; width: 250px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .official-card img { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #005689; }
+        .official-card p { margin-top: 10px; font-size: 14px; color: #333; line-height: 1.4; }
+
+        /* Blue Service Tiles */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 20px 5%; }
+        .tile { background: #005689; color: white; padding: 25px; text-align: center; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 16px; transition: 0.3s; }
+        .tile:hover { background: #003d63; transform: scale(1.02); }
+
+        /* Footer */
+        footer { background: #002e46; color: white; text-align: center; padding: 15px; margin-top: 30px; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>JAMEENSEVA (जमीन सेवा)</h1>
-    <p>बिहार जमीन सर्वे - डिजिटल खतियान घर बैठे मंगवाएं</p>
-</header>
-    <div class="grid-container">
-    <a href="khatiyan.html" class="grid-item">
-        <span>📜</span>
-        <strong>डिजिटल खतियान</strong>
-    </a>
-
-    <a href="forms.html" class="grid-item">
-        <span>📥</span>
-        <strong>फॉर्म डाउनलोड</strong>
-    </a>
-
-    <a href="vanshavali.html" class="grid-item">
-        <span>🌳</span>
-        <strong>वंशावली गाइड</strong>
-    </a>
-
-    <a href="check-records.html" class="grid-item">
-        <span>🔍</span>
-        <strong>रिकॉर्ड चेक</strong>
-    </a>
-
-    <a href="contact.html" class="grid-item">
-        <span>📞</span>
-        <strong>सहायता केंद्र</strong>
-    </a>
+<div class="top-banner">
+    <img src="https://state.bihar.gov.in/static-pages/dlrs/images/logo.png" class="logo-img" alt="Bihar Logo">
+    <div class="govt-text">
+        <h2>बिहार जमीन सेवा </h2>
+        <h3>घर बैठे खतियान या पंचनमा बटवारा बनाकर मँगवाए </h3>
+    </div>
 </div>
 
-<div class="service-card">
-    <h3>हमारी सेवाएं:</h3>
-    <ul>
-        <li>डिजिटल हस्ताक्षरित खतियान (Digital Signed)</li>
-        <li>नक्शा डिलीवरी (Map Delivery)</li>
-        <li>घर बैठे सुरक्षित डिलीवरी</li>
-        <li>24/7 सहायता (Support)</li>
-    </ul>
+<div class="services-grid">
+    <a href="khatiyan.html" class="tile">ऑनलाइन खतियान ऑर्डर करें</a>
+    <a href="forms.html" class="tile">आम सूचना एवं फॉर्म डाउनलोड</a>
+    <a href="check-records.html" class="tile">पंचनमा बटवारा बनवाने का ऑर्डर </a>
+    <a href="vanshavali.html" class="tile">वंशावली गाइड एवं सहायता</a>
+    <a href="ragister2.html" class="tile">रजिस्टर-2 ओरिजिनल ऑर्डर </a>
+    <a href="map.html" class="tile">गाँव का नक्शा ऑर्डर करें</a>
+    <a href="contact.html" class="tile">हेल्पलाइन एवं संपर्क</a>
 </div>
 
 <footer>
-    &copy; 2024 Jameenseva Bihar | Fast & Secure Delivery via Shiprocket
+    &copy; 2026 JAMEENSEVA - जमीन सर्वे बिहार से संबन्धित सभी जानकारी ओर सेवा के लिए निजी पोर्टल
 </footer>
 
 </body>
