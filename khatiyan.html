@@ -1,0 +1,97 @@
+<div class="form-container">
+    <h2>Digital Khatiyan Order Form</h2>
+    
+    <form id="orderForm">
+        <input type="text" name="Name" placeholder="अपना नाम" required>
+        <input type="text" name="Phone" placeholder="मोबाइल नंबर" required>
+
+        <select id="district" name="District" onchange="updateBlocks()" required>
+            <option value="">अपना जिला चुनें</option>
+           const data = { "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Palasi", "Raniganj", "Sikti", "Terhagachh"],
+    "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
+    "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
+    "Banka": ["Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Shambhuganj"],
+    "Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Bhagwanpur", "Cheria Bariarpur", "Khodawandpur", "Matihani", "Sahebpur Kamal", "Teghra"],
+    "Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Nathnagar", "Pirpainti", "Sabour", "Sultanganj"],
+    "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Udwantnagar"],
+    "Buxar": ["Buxar", "Brahampur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Nayanagar", "Rajpur", "Simri"],
+    "Darbhanga": ["Benipur", "Baheri", "Biraul", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kushmeshwar Asthan", "Singhwara", "Tardih"],
+    "East Champaran": ["Motihari", "Adapur", "Areraj", "Chakia", "Chiraia", "Dhaka", "Harsidhi", "Kesaria", "Madhuban", "Mehsi", "Pakri Dayal", "Patahi", "Raxaul", "Sugauli", "Turkaulia"],
+    "Gaya": ["Gaya Town", "Amas", "Atri", "Bankey Bazar", "Bodhgaya", "Dobhi", "Dumaria", "Guraru", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Paraiya", "Sherghati", "Tan Kuppa", "Wazirganj"],
+    "Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Kuchaikote", "Manjha", "Pachrukhi", "Sidhwalia", "Thawe", "Uchkaon", "Vijayipur"],
+    "Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "Islant Nagar", "Jhajha", "Khaira", "Laxmipur", "Sikandra", "Sono"],
+    "Jehanabad": ["Jehanabad", "Ghoshi", "Kako", "Makhdumpur", "Modanganj", "Ratni Faridpur"],
+    "Kaimur": ["Bhabua", "Adhaura", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur"],
+    "Katihar": ["Katihar", "Ahmedpur", "Azamnagar", "Barari", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Korha", "Manihari", "Mansahi", "Pranpur", "Sameli"],
+    "Khagaria": ["Khagaria", "Alamnagar", "Beldaur", "Chautham", "Gogri", "Mansi", "Parbatta"],
+    "Kishanganj": ["Kishanganj", "Bahadurganj", "Dighalbank", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
+    "Lakhisarai": ["Lakhisarai", "Barahiya", "Chanan", "Halsi", "Pipariya", "Surajgarha"],
+    "Madhepura": ["Madhepura", "Alamnagar", "Behariganj", "Chausa", "Gwalpara", "Kishunganj", "Kumarkhand", "Murliganj", "Puraini", "Singheshwar"],
+    "Madhubani": ["Madhubani", "Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Harlakhi", "Jainagar", "Jhanjharpur", "Khajauli", "Ladania", "Laukaha", "Laukahi", "Madhepur", "Pandaul", "Phulparas", "Rajnagar"],
+    "Munger": ["Munger", "Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Sadaipur", "Tarapur"],
+    "Muzaffarpur": ["Muzaffarpur Town", "Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Musalari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
+    "Nalanda": ["Biharsharif", "Asthawan", "Ben", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Noorsarai", "Parwalpur", "Rahuui", "Rajgir", "Sarfira", "Silao", "Tharthari"],
+    "Nawada": ["Nawada", "Akbarpur", "Govindpur", "Hisua", "Kashichak", "Kauwakoal", "Meskaur", "Narhat", "Pakribarawan", "Rajauli", "Roh", "Warisaliganj"],
+    "Patna": ["Patna Sadar", "Bakhtiyarpur", "Barh", "Belchhi", "Bihta", "Bikram", "Danapur", "Daniyawan", "Dulhin Bazar", "Fatwah", "Khagaul", "Khusrupur", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Phulwari Sharif", "Punpun", "Sampatchak"],
+    "Purnia": ["Purnia", "Amour", "Baisi", "Banmankhi", "Bayasi", "Dhamdaha", "Kasba", "Krityanand Nagar", "Rupauli", "Srinagar"],
+    "Rohtas": ["Sasaram", "Akhorigola", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Kargahar", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Sanjhauli", "Sheosagar", "Suryapura", "Tilauthu"],
+    "Saharsa": ["Saharsa", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Simri Bakhtiyarpur", "Sonbarsa", "Sour Bazar"],
+    "Samastipur": ["Samastipur", "Bibhutipur", "Bithan", "Dalsinghsarai", "Hasanpur", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Morwa", "Patori", "Pusa", "Rosera", "Sarairanjan", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
+    "Saran": ["Chhapra", "Amnour", "Baniyapur", "Dariyapur", "Dighwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Parsa", "Revelganj", "Sonepur", "Taraiya"],
+    "Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],
+    "Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],
+    "Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Dumra", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Sursand"],
+    "Siwan": ["Siwan", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Ziradei"],
+    "Supaul": ["Supaul", "Basantpur", "Chatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],
+    "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desri", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
+    "West Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhitaha", "Gaunaha", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+};
+        </select>
+
+        <select id="block" name="Block" onchange="showVillageInput()" required disabled>
+            <option value="">पहले जिला चुनें</option>
+        </select>
+
+        <div id="villageSection" style="display:none;">
+            <input type="text" name="Village" placeholder="अपने गाँव/मौजा का नाम लिखें" required>
+            <input type="text" name="ThanaNo" placeholder="थाना नंबर (यदि पता हो)">
+        </div>
+
+        <textarea name="Address" placeholder="पूरा डाक पता (Pin Code के साथ)" required></textarea>
+        
+        <button type="submit" class="btn-order">Confirm Order (₹799)</button>
+    </form>
+</div>
+
+<script>
+const data = {
+    "Patna": ["Phulwari Sharif", "Sampatchak", "Bihta", "Danapur", "Fatwah"],
+    "Gaya": ["Bodhgaya", "Dobhi", "Sherghati", "Belaganj"],
+    "Darbhanga": ["Benipur", "Baheri", "Biraul", "Keoti", "Hanuman Nagar"],
+    "Muzaffarpur": ["Mushahari", "Kanti", "Motipur", "Sakra"]
+};
+
+function updateBlocks() {
+    const districtSelect = document.getElementById("district");
+    const blockSelect = document.getElementById("block");
+    const selectedDistrict = districtSelect.value;
+
+    blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>';
+    
+    if (selectedDistrict && data[selectedDistrict]) {
+        blockSelect.disabled = false;
+        data[selectedDistrict].forEach(block => {
+            let option = document.createElement("option");
+            option.value = block;
+            option.text = block;
+            blockSelect.add(option);
+        });
+    } else {
+        blockSelect.disabled = true;
+    }
+}
+
+function showVillageInput() {
+    document.getElementById("villageSection").style.display = "block";
+}
+</script>
