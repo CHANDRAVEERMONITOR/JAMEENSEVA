@@ -7,7 +7,40 @@
 
         <select id="district" name="District" onchange="updateBlocks()" required>
             <option value="">अपना जिला चुनें</option>
-           const data = { "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Palasi", "Raniganj", "Sikti", "Terhagachh"],
+    const data = {<select id="district" name="District" onchange="updateBlocks()" required>
+    <option value="">अपना जिला चुनें</option>
+    <option value="Araria">Araria</option>
+    <option value="Arwal">Arwal</option>
+    <option value="Aurangabad">Aurangabad</option>
+    <option value="Banka">Banka</option>
+    <option value="Begusarai">Begusarai</option>
+    <option value="Bhagalpur">Bhagalpur</option>
+    <option value="Bhojpur">Bhojpur</option>
+    <option value="Buxar">Buxar</option>
+    <option value="Darbhanga">Darbhanga</option>
+    <option value="East Champaran">East Champaran</option>
+    <option value="Gaya">Gaya</option>
+    </select>
+    
+
+       <select id="block" name="Block" onchange="showVillageInput()" required disabled>
+            <option value="">पहले जिला चुनें</option>
+        </select>
+
+        <div id="villageSection" style="display:none;">
+            <input type="text" name="Village" placeholder="अपने गाँव/मौजा का नाम लिखें" required>
+            <input type="text" name="ThanaNo" placeholder="थाना नंबर (यदि पता हो)">
+        </div>
+
+        <textarea name="Address" placeholder="पूरा डाक पता (Pin Code के साथ)" required></textarea>
+        
+        <button type="submit" class="btn-order">Confirm Order (₹799)</button>
+    </form>
+</div>
+
+<script>
+    const data = {
+    "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Palasi", "Raniganj", "Sikti", "Terhagachh"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
     "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
     "Banka": ["Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Shambhuganj"],
@@ -45,30 +78,6 @@
     "Supaul": ["Supaul", "Basantpur", "Chatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],
     "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desri", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
     "West Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhitaha", "Gaunaha", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
-};
-        </select>
-
-        <select id="block" name="Block" onchange="showVillageInput()" required disabled>
-            <option value="">पहले जिला चुनें</option>
-        </select>
-
-        <div id="villageSection" style="display:none;">
-            <input type="text" name="Village" placeholder="अपने गाँव/मौजा का नाम लिखें" required>
-            <input type="text" name="ThanaNo" placeholder="थाना नंबर (यदि पता हो)">
-        </div>
-
-        <textarea name="Address" placeholder="पूरा डाक पता (Pin Code के साथ)" required></textarea>
-        
-        <button type="submit" class="btn-order">Confirm Order (₹799)</button>
-    </form>
-</div>
-
-<script>
-const data = {
-    "Patna": ["Phulwari Sharif", "Sampatchak", "Bihta", "Danapur", "Fatwah"],
-    "Gaya": ["Bodhgaya", "Dobhi", "Sherghati", "Belaganj"],
-    "Darbhanga": ["Benipur", "Baheri", "Biraul", "Keoti", "Hanuman Nagar"],
-    "Muzaffarpur": ["Mushahari", "Kanti", "Motipur", "Sakra"]
 };
 
 function updateBlocks() {
