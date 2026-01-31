@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jameenseva - Digital Signed Khatiyan Delivery</title>
     <style>
+        .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+.grid-item {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.grid-item:hover {
+    transform: translateY(-5px);
+    border-color: #004a99;
+}
+.grid-item i { font-size: 2em; display: block; margin-bottom: 10px; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f2f5; }
         header { background-color: #004a99; color: red; padding: 25px; text-align: center; }
         .hero { background: white; padding: 30px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
@@ -17,6 +39,32 @@
 <body>
 
 <header>
+    <div class="grid-container">
+    <a href="khatiyan.html" class="grid-item">
+        <span>📜</span>
+        <strong>डिजिटल खतियान</strong>
+    </a>
+
+    <a href="forms.html" class="grid-item">
+        <span>📥</span>
+        <strong>फॉर्म डाउनलोड</strong>
+    </a>
+
+    <a href="vanshavali.html" class="grid-item">
+        <span>🌳</span>
+        <strong>वंशावली गाइड</strong>
+    </a>
+
+    <a href="check-records.html" class="grid-item">
+        <span>🔍</span>
+        <strong>रिकॉर्ड चेक</strong>
+    </a>
+
+    <a href="contact.html" class="grid-item">
+        <span>📞</span>
+        <strong>सहायता केंद्र</strong>
+    </a>
+</div>
     <h1>JAMEENSEVA (जमीन सेवा)</h1>
     <p>बिहार जमीन सर्वे - डिजिटल खतियान घर बैठे मंगवाएं</p>
 </header>
