@@ -1,90 +1,77 @@
 <!DOCTYPE html>
 <html lang="hi">
-    <div style="text-align: center; padding: 10px;">
-    <img src="logo.png" alt="Jameen Seva Logo" style="height: 80px; width: auto;">
-</div>
 <head>
-
-    <div style="background: #ffffff; border-bottom: 2px solid #28a745; padding: 5px 0; display: flex; align-items: center;">
-    <div style="background: #d9534f; color: white; padding: 5px 15px; font-weight: bold; font-size: 14px; white-space: nowrap; border-radius: 0 20px 20px 0; z-index: 1;">
-        नया अपडेट:
-    </div>
-    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="font-size: 16px; font-weight: bold; color: #333; cursor: pointer;">
-        📢 बिहार जमीन सर्वे 2026 शुरू! अपना पुराना खतियान और वंशावली घर बैठे यहाँ से ऑर्डर करें... | 📢 डिजिटल नक्शा अब उपलब्ध | 📢 किसी भी सहायता के लिए व्हाट्सएप करें।
-    </marquee>
-</div><div style="background: #ffffff; border-bottom: 2px solid #28a745; padding: 5px 0; display: flex; align-items: center;">
-    <div style="background: #d9534f; color: white; padding: 5px 15px; font-weight: bold; font-size: 14px; white-space: nowrap; border-radius: 0 20px 20px 0; z-index: 1;">
-        नया अपडेट:
-    </div>
-    <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" style="font-size: 16px; font-weight: bold; color: #333; cursor: pointer;">
-        📢 बिहार जमीन सर्वे 2026 शुरू! अपना पुराना खतियान और वंशावली घर बैठे यहाँ से ऑर्डर करें... | 📢 डिजिटल नक्शा अब उपलब्ध | 📢 किसी भी सहायता के लिए व्हाट्सएप करें।
-    </marquee>
-</div>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAMEENSEVA - बिहार भूमि सुधार</title>
     <style>
-        body { font-family: 'Arial', sans-serif; margin: center; background: #f4f7f6; }
-        <div style="background-color: #28a745; padding: 15px 0; text-align: center; width: 100%; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    <h1 style="color: #000000; font-size: 32px; font-weight: 800; margin: 0; font-family: 'Arial Black', sans-serif; text-transform: uppercase; letter-spacing: 1px;">
-        बिहार जमीन सेवा - घर बैठे सुविधा
-    </h1>
-    <p style="color: #000000; font-weight: bold; margin: 5px 0 0 0; font-size: 16px;">
-        खतियान, नक्शा और जमीन के सभी सरकारी दस्तावेज प्राप्त करें
-    </p>
-</div>
+        /* Basic Setup */
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: #f4f7f6; color: #333; }
         
-        /* Govt Style Top Bar */
-        .top-banner { background: green; padding: 20px 10%; display: flex; align-items: center; border-bottom: 8px solid #005689; }
-        .logo-img { height: 70px; margin-right: 15px; }
-        .govt-text h2 { margin: 0; color: #4b0082; font-size: 22px; }
-        .govt-text h3 { margin: 0; color: #4b0082; font-size: 18px; }
+        /* Logo Section */
+        .logo-container { text-align: center; padding: 15px; background: white; }
+        .logo-img { height: 80px; width: auto; }
 
-    
-        /* Blue Service Tiles */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; padding: 15px 5%; }
-        .tile { background: #005689; color: white; padding: 25px; text-align: center; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 16px; transition: 0.3s; }
-        .tile:hover { background: #003d63; transform: scale(1.02); }
+        /* Green Heading Section */
+        .green-header { background-color: #28a745; padding: 20px 10px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .green-header h1 { color: #000000; font-size: 28px; font-weight: 800; margin: 0; text-transform: uppercase; }
+        .green-header p { color: #000000; font-weight: bold; margin: 8px 0 0 0; font-size: 16px; }
+
+        /* Moving Update Bar */
+        .news-bar { background: #ffffff; border-bottom: 2px solid #28a745; padding: 8px 0; display: flex; align-items: center; }
+        .news-label { background: #d9534f; color: white; padding: 5px 15px; font-weight: bold; font-size: 14px; white-space: nowrap; border-radius: 0 20px 20px 0; z-index: 1; }
+        marquee { font-size: 16px; font-weight: bold; color: #333; }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; padding: 30px 5%; }
+        .tile { background: #005689; color: white; padding: 30px 20px; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-bottom: 4px solid #003d63; }
+        .tile:hover { background: #003d63; transform: translateY(-5px); box-shadow: 0 6px 15px rgba(0,0,0,0.2); }
 
         /* Footer */
-        footer { background: #002e46; color: green; text-align: center; padding: 25px; margin-top: 35px; }
+        footer { background-color: #222; color: #ccc; padding: 30px 10%; font-size: 13px; text-align: center; margin-top: 50px; line-height: 1.6; }
+        footer b { color: #fff; }
+        footer a { color: #28a745; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    
-      <div class="govt-text">
-        <h2>बिहार जमीन सेवा </h2>
-        <h3>घर बैठे खतियान या पंचनमा बटवारा मँगवाए * CASE ON DELIVERY * </h3>
+    <div class="logo-container">
+        <img src="logo.png" alt="Jameen Seva Logo" class="logo-img">
     </div>
-</div>
 
-<div class="services-grid">
-    <a href="khatiyan.html" class="tile">ऑनलाइन खतियान ऑर्डर करें</a>
-    <a href="check-records.html" class="tile">पंचनमा बटवारा बनवाने का ऑर्डर </a>
-     <a href="ragister2.html" class="tile">रजिस्टर-2 या जमाबंदी ओरिजिनल ऑर्डर </a>
-    <a href="forms.html" class="tile">  फॉर्म डाउनलोड एवं आम सूचना  </a>
-    <a href="vanshavali.html" class="tile">वंशावली गाइड एवं सहायता</a>
-   <a href="map.html" class="tile">अपना खाता देखें </a>
-    <a href="contact.html" class="tile">हेल्पलाइन एवं संपर्क</a>
-</div>
-    <footer style="background-color: #333; color: #ccc; padding: 20px; font-size: 13px; text-align: center; margin-top: 50px;">
-    <p><b>Important Disclaimer:</b> JameenSeva.in एक निजी प्लेटफॉर्म है। हम बिहार सरकार के राजस्व एवं भूमि सुधार विभाग से संबद्ध नहीं हैं।</p>
-    
-    <p>हम केवल आपकी सुविधा के लिए दस्तावेजों की प्रतिलिपि (Copy) निकालने में सहायता प्रदान करते हैं। हमारे द्वारा ली जाने वाली फीस हमारी सेवा और सुविधा का शुल्क है। </p>
-    
-    <hr style="border: 0.5px solid #555; width: 80%; margin: 15px auto;">
-    
-    <p>&copy; 2026 JameenSeva.in | Designed by Chandraveer | <a href="#" style="color: #fff;">नियम एवं शर्तें (T&C)</a></p>
-</footer>
+    <div class="green-header">
+        <h1>बिहार जमीन सेवा - घर बैठे सुविधा</h1>
+        <p>खतियान, नक्शा और जमीन के सभी सरकारी दस्तावेज प्राप्त करें</p>
+    </div>
+
+    <div class="news-bar">
+        <div class="news-label">नया अपडेट:</div>
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+            📢 बिहार जमीन सर्वे 2026 शुरू! अपना पुराना खतियान और वंशावली घर बैठे यहाँ से ऑर्डर करें... | 📢 डिजिटल नक्शा अब उपलब्ध | 📢 "CASE ON DELIVERY" की सुविधा उपलब्ध है।
+        </marquee>
+    </div>
+
+    <div style="text-align: center; padding-top: 20px;">
+        <h2 style="color: #005689; font-size: 20px;">हमारी ऑनलाइन सेवाएं</h2>
+        <p style="color: #666;">नीचे दी गई किसी भी सेवा को चुनने के लिए क्लिक करें</p>
+    </div>
+
+    <div class="services-grid">
+        <a href="khatiyan-order.html?service=Khatiyan" class="tile">ऑनलाइन खतियान ऑर्डर करें</a>
+        <a href="khatiyan-order.html?service=Panchnama" class="tile">पंचनमा बटवारा ऑर्डर</a>
+        <a href="khatiyan-order.html?service=Jamabandi" class="tile">रजिस्टर-2/जमाबंदी ऑर्डर</a>
+        <a href="forms.html" class="tile">फॉर्म डाउनलोड एवं सूचना</a>
+        <a href="khatiyan-order.html?service=Vanshavali" class="tile">वंशावली गाइड एवं सहायता</a>
+        <a href="map.html" class="tile">अपना खाता / नक्शा देखें</a>
+        <a href="contact.html" class="tile">हेल्पलाइन एवं संपर्क</a>
+    </div>
+
+    <footer>
+        <p><b>Important Disclaimer:</b> JameenSeva.in एक निजी प्लेटफॉर्म है। हम बिहार सरकार के राजस्व एवं भूमि सुधार विभाग से संबद्ध नहीं हैं।</p>
+        <p>हम केवल आपकी सुविधा के लिए दस्तावेजों की प्रतिलिपि (Copy) निकालने में सहायता प्रदान करते हैं। हमारे द्वारा ली जाने वाली फीस हमारी सेवा और सुविधा का शुल्क है। कानूनी उपयोग के लिए कृपया सरकारी कार्यालय से संपर्क करें।</p>
+        <hr style="border: 0.5px solid #444; width: 80%; margin: 15px auto;">
+        <p>&copy; 2026 JameenSeva.in | Designed by Chandraveer | <a href="#">नियम एवं शर्तें (T&C)</a></p>
+    </footer>
 
 </body>
-
 </html>
-
-
-
-
-
-
