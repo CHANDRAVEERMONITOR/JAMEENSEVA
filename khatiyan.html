@@ -50,12 +50,38 @@
     </div>
 
     <div class="form-group">
-        <label>5. खाता / खेसरा (यदि हो):</label>
-        <input type="text" id="details" placeholder="उदा. खाता-10, खेसरा-500">
+        <label>5. खाताा (यदि हो):</label>
+        <input type="text" id="details" placeholder="उदा. खाता-10">
+    </div>
+     <div class="form-group">
+        <label>6. खेसरा (यदि हो):</label>
+        <input type="text" id="details" placeholder=" खेसरा-500">
+    </div>
+     <div class="form-group">
+    <label>7. खतियान का प्रकार चुनें:</label>
+    <div style="display: flex; gap: 20px; margin-top: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd;">
+        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+            <input type="radio" name="khatiyan_type" value="नया (C.S.)" checked style="width: auto; margin-right: 8px;"> नया (C.S.)
+        </label>
+        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+            <input type="radio" name="khatiyan_type" value="पुराना (R.S.)" style="width: auto; margin-right: 8px;"> पुराना (R.S.)
+        </label>
+        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+            <input type="radio" name="khatiyan_type" value="चकबंदी" style="width: auto; margin-right: 8px;"> चकबंदी
+        </label>
+    </div>
+</div>
+     <div class="form-group">
+        <label>7. रैयत का नाम(यदि हो ) :</label>
+        <input type="text" id="details" placeholder=" खाताधारी का नाम ">
+    </div>
+     <div class="form-group">
+        <label>8. नाम के साथ पूरा पता :</label>
+        <input type="text" id="details" placeholder="उदा. वह पता जहां खतियान मंगवाना है ">
     </div>
 
     <div class="form-group">
-        <label>6. अपना मोबाइल नंबर:</label>
+        <label>9. अपना मोबाइल नंबर:</label>
         <input type="tel" id="mobile" placeholder="WhatsApp नंबर लिखें" maxlength="10">
     </div>
 
@@ -135,7 +161,7 @@ function submitOrder() {
         alert("कृपया सही मोबाइल नंबर लिखें");
         return;
     }
-    alert("आपका ऑर्डर नोट कर लिया गया है। जल्द ही हम आपसे संपर्क करेंगे!");
+    alert(" THANKS आपका ऑर्डर नोट कर लिया गया है। जल्द ही हम आपसे संपर्क करेंगे!");
 }
 </script>
 
