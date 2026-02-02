@@ -1,43 +1,121 @@
+<div class="container">
+    <h2> ऑर्डर फॉर्म- घर पर खतियान मंगवाएं *CASH ON DELIVERY* </h2>
+    
+    <div class="form-group">
+        <label>1. जिला चुनें (District):</label>
+        <select id="district" onchange="loadBlocks()">
+            <option value="">-- चुनें --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>2. प्रखंड चुनें (Block):</label>
+        <select id="block">
+            <option value="">-- पहले जिला चुनें --</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>3. थाना नंबर:</label>
+            <input type="number" id="thana_no" placeholder="उदा. 125">
+        </div>
+        <div class="form-group">
+            <label>4. मौजा/गाँव:</label>
+            <input type="text" id="village" placeholder="गाँव का नाम">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>5. खाता (यदि हो):</label>
+        <input type="text" id="khata_no" placeholder="उदा. खाता-10">
+    </div>
+    
+    <div class="form-group">
+        <label>6. खेसरा (यदि हो):</label>
+        <input type="text" id="khesra_no" placeholder=" खेसरा-500">
+    </div>
+
+    <div class="form-group">
+        <label>7. खतियान का प्रकार चुनें:</label>
+        <div style="display: flex; gap: 20px; margin-top: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd;">
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="नया (C.S.)" checked style="width: auto; margin-right: 8px;"> नया (C.S.)
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="पुराना (R.S.)" style="width: auto; margin-right: 8px;"> पुराना (R.S.)
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="चकबंदी" style="width: auto; margin-right: 8px;"> चकबंदी
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>8. रैयत का नाम (यदि हो):</label>
+        <input type="text" id="raiyat_name" placeholder=" खाताधारी का नाम ">
+    </div>
+
+    <div class="form-group">
+        <label>9. अपना नाम के साथ पूरा पता:</label>
+        <input type="text" id="full_address" placeholder="उदा. वह पता जहां खतियान मंगवाना है ">
+    </div>
+
+    <div class="form-group">
+        <label>10. पिन कोड:</label>
+        <input type="text" id="pincode" placeholder="उदा. 846004 ">
+    </div>
+
+    <div class="form-group">
+        <label>11. अपना मोबाइल नंबर:</label>
+        <input type="tel" id="mobile" placeholder="WhatsApp नंबर लिखें" maxlength="10">
+    </div>
+
+    <button onclick="submitOrder()">ऑर्डर सबमिट करें ₹799/- </button>
+    <p class="note">सबमिट करने के बाद हम आपसे WhatsApp पर संपर्क करेंगे।</p>
+</div>
+
+<script>
+// (Purana biharData aur loadBlocks yahan rahega)
+
 function submitOrder() {
-    // 1. Unique Tracking ID aur Date banana
     const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
     const orderDate = new Date().toLocaleDateString('hi-IN');
 
-    // 2. Data Collect karna (Aapki Sheet ke Headers ke mutabik)
+    // Nayi IDs ke saath data collect karna
     const formData = {
-        "ORDER ID": trackingID,
-        "DATE": orderDate,
-        "जिला चुनें (District)": document.getElementById("district").value,
-        "प्रखंड चुनें (Block)": document.getElementById("block").value,
-        "थाना नंबर": document.getElementById("thana_no").value,
-        "मौजा/गाँव": document.getElementById("village").value,
-        "खाता (यदि हो)": document.getElementById("khata_no").value,
-        "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
-        "खतियान का प्रकार चुनें": document.querySelector('input[name="khatiyan_type"]:checked').value,
-        "रैयत का नाम(यदि हो ) ": document.getElementById("raiyat_name").value,
-        "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
-        "पिन कोड": document.getElementById("pincode").value,
-        "अपना मोबाइल नंबर": document.getElementById("mobile").value
+        "OrderID": trackingID,
+        "Date": orderDate,
+        "Zila": document.getElementById("district").value,
+        "Prakhand": document.getElementById("block").value,
+        "Thana_Number": document.getElementById("thana_no").value,
+        "Mauza_Gaon": document.getElementById("village").value,
+        "Khata": document.getElementById("khata_no").value,
+        "Khesra": document.getElementById("khesra_no").value,
+        "Khatiyan_Type": document.querySelector('input[name="khatiyan_type"]:checked').value,
+        "Raiyat_Name": document.getElementById("raiyat_name").value,
+        "Pura_Pata": document.getElementById("full_address").value,
+        "Pin_Code": document.getElementById("pincode").value,
+        "Mobile_Number": document.getElementById("mobile").value,
+        "Status": "Pending"
     };
 
-    // Validation
-    if(!formData["जिला चुनें (District)"] || !formData["अपना मोबाइल नंबर"]) {
-        alert("कृपया जिला और मोबाइल नंबर जरूर भरें!");
+    if(!formData.Zila || !formData.Prakhand || !formData.Mobile_Number) {
+        alert("कृपया जिला, ब्लॉक और मोबाइल नंबर जरूर भरें!");
         return;
     }
 
-    // 3. SheetDB ko data bhejna
-    // APKA_API_URL ki jagah apna SheetDB link paste karein
-    fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
+    // SheetDB API (Yahan apna URL dalein)
+    fetch('https://sheetdb.io/api/v1/APKA_API_URL', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
     })
     .then(res => {
-        alert("सफल! आपका ट्रैकिंग नंबर है: " + trackingID);
-        // WhatsApp link
-        const msg = `नमस्ते, मेरा ऑर्डर आईडी ${trackingID} है।`;
-        window.open(`https://wa.me/9142075859?text=${encodeURIComponent(msg)}`, '_blank');
+        alert("सफल! ट्रैकिंग आईडी: " + trackingID);
+        // WhatsApp redirection
+        window.open(`https://wa.me/91YOURNUMBER?text=Mera Order ID: ${trackingID}`, '_blank');
     })
-    .catch(err => alert("कोशिश जारी है, लेकिन कुछ एरर आ रहा है।"));
+    .catch(err => alert("Error ho gaya!"));
 }
+</script>
