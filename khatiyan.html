@@ -194,7 +194,7 @@ function submitOrder() {
         body: JSON.stringify({ data: [formData] })
     })
     .then(res => {
-        alert("बधाई हो! आपका ऑर्डर दर्ज हो गया है।\nTracking ID: " + trackingID);
+        alert("बधाई हो! आपका ऑर्डर दर्ज हो गया है।/स्क्रीनशॉट लेकर सुरक्षित रखें ताकि आप अपना स्टेटस चेक कर सकें\nTracking ID: " + trackingID);
         // WhatsApp redirection
         const message = `नमस्ते, मेरा ऑर्डर आईडी *${trackingID}* है। मैंने खतियान के लिए फॉर्म भरा है।`;
         window.open(`https://wa.me/9142075859?text=${encodeURIComponent(message)}`, '_blank');
