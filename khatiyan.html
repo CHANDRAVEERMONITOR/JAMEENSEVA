@@ -51,37 +51,39 @@
 
     <div class="form-group">
         <label>5. खाता (यदि हो):</label>
-        <input type="text" id="details" placeholder="उदा. खाता-10">
+        <input type="text" id="khata_no" placeholder="उदा. खाता-10">
     </div>
      <div class="form-group">
         <label>6. खेसरा (यदि हो):</label>
-        <input type="text" id="details" placeholder=" खेसरा-500">
+        <input type="text" id="khesra_no" placeholder=" खेसरा-500">
+    </div>
+
+    <div class="form-group">
+        <label>7. खतियान का प्रकार चुनें:</label>
+        <div style="display: flex; gap: 20px; margin-top: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd;">
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="नया (C.S.)" checked style="width: auto; margin-right: 8px;"> नया (C.S.)
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="पुराना (R.S.)" style="width: auto; margin-right: 8px;"> पुराना (R.S.)
+            </label>
+            <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
+                <input type="radio" name="khatiyan_type" value="चकबंदी" style="width: auto; margin-right: 8px;"> चकबंदी
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>8. रैयत का नाम(यदि हो):</label>
+        <input type="text" id="raiyat_name" placeholder=" खाताधारी का नाम ">
     </div>
      <div class="form-group">
-    <label>7. खतियान का प्रकार चुनें:</label>
-    <div style="display: flex; gap: 20px; margin-top: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd;">
-        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
-            <input type="radio" name="khatiyan_type" value="नया (C.S.)" checked style="width: auto; margin-right: 8px;"> नया (C.S.)
-        </label>
-        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
-            <input type="radio" name="khatiyan_type" value="पुराना (R.S.)" style="width: auto; margin-right: 8px;"> पुराना (R.S.)
-        </label>
-        <label style="display: flex; align-items: center; cursor: pointer; font-weight: normal;">
-            <input type="radio" name="khatiyan_type" value="चकबंदी" style="width: auto; margin-right: 8px;"> चकबंदी
-        </label>
-    </div>
-</div>
-     <div class="form-group">
-        <label>8. रैयत का नाम(यदि हो ) :</label>
-        <input type="text" id="details" placeholder=" खाताधारी का नाम ">
+        <label>9. अपना नाम के साथ पूरा पता:</label>
+        <input type="text" id="full_address" placeholder="उदा. वह पता जहां खतियान मंगवाना है ">
     </div>
      <div class="form-group">
-        <label>9. अपना नाम के साथ पूरा पता :</label>
-        <input type="text" id="details" placeholder="उदा. वह पता जहां खतियान मंगवाना है ">
-    </div>
-     <div class="form-group">
-        <label>10. पिन कोड  :</label>
-        <input type="text" id="details" placeholder="उदा. 846004 ">
+        <label>10. पिन कोड:</label>
+        <input type="text" id="pincode" placeholder="उदा. 846004 ">
     </div>
 
     <div class="form-group">
@@ -94,7 +96,6 @@
 </div>
 
 <script>
-// Bihar Districts and Blocks Data
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -161,18 +162,28 @@ function loadBlocks() {
 
 function submitOrder() {
     const mobile = document.getElementById("mobile").value;
-    if(mobile.length < 10) {
-        alert("कृपया सही मोबाइल नंबर लिखें");
-        return;
-    }
-    alert(" THANKS आपका ऑर्डर नोट कर लिया गया है। जल्द ही हम आपसे संपर्क करेंगे!");
-}
-</script>
+    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
+    const orderDate = new Date().toLocaleDateString('hi-IN');
 
+    // Data Mapping (Aapki Sheet ke Headers ke mutabik)
+    const formData = {
+        "ORDER ID": trackingID,
+        "DATE": orderDate,
+        "जिला चुनें (District)": document.getElementById("district").value,
+        "प्रखंड चुनें (Block)": document.getElementById("block").value,
+        "थाना नंबर": document.getElementById("thana_no").value,
+        "मौजा/गाँव": document.getElementById("village").value,
+        "खाता (यदि हो)": document.getElementById("khata_no").value,
+        "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
+        "खतियान का प्रकार चुनें": document.querySelector('input[name="khatiyan_type"]:checked').value,
+        "रैयत का नाम(यदि हो ) ": document.getElementById("raiyat_name").value,
+        "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
+        "पिन कोड": document.getElementById("pincode").value,
+        "अपना मोबाइल नंबर": mobile
+    };
 
-
-    if(!formData.Zila || !formData.Prakhand || !formData.Mobile_Number) {
-        alert("कृपया जिला, ब्लॉक और मोबाइल नंबर जरूर भरें!");
+    if(!formData["जिला चुनें (District)"] || !formData["प्रखंड चुनें (Block)"] || mobile.length < 10) {
+        alert("कृपया जिला, ब्लॉक और 10 अंकों का मोबाइल नंबर जरूर भरें!");
         return;
     }
 
@@ -183,11 +194,12 @@ function submitOrder() {
         body: JSON.stringify({ data: [formData] })
     })
     .then(res => {
-        alert("सफल! ट्रैकिंग आईडी: " + trackingID);
+        alert("बधाई हो! आपका ऑर्डर दर्ज हो गया है।\nTracking ID: " + trackingID);
         // WhatsApp redirection
-        window.open(`https://wa.me/91YOURNUMBER?text=Mera Order ID: ${trackingID}`, '_blank');
+        const message = `नमस्ते, मेरा ऑर्डर आईडी *${trackingID}* है। मैंने खतियान के लिए फॉर्म भरा है।`;
+        window.open(`https://wa.me/91YOURNUMBER?text=${encodeURIComponent(message)}`, '_blank');
     })
-    .catch(err => alert("Error ho gaya!"));
+    .catch(err => alert("Error: Data bhejte waqt dikkat aayi!"));
 }
 </script>
 </body>
