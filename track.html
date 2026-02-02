@@ -1,0 +1,56 @@
+<div style="max-width: 550px; margin: 20px auto; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #28a745;">
+    <h3 style="color: #005689; margin-bottom: 10px;">अपना ऑर्डर स्टेटस चेक करें</h3>
+    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">अपना Tracking ID (उदा. JS-1234) नीचे दर्ज करें</p>
+    
+    <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;">
+        <input type="text" id="order_id_input" placeholder="JS-XXXX" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; width: 65%; font-size: 16px; outline: none; transition: 0.3s;">
+        <button onclick="checkStatus()" style="padding: 12px 15px; background: #005689; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; flex-grow: 1;">चेक करें</button>
+    </div>
+
+    <div id="status_result" style="display: none; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px dashed #005689;">
+        </div>
+</div>
+
+<script>
+function checkStatus() {
+    const inputId = document.getElementById("order_id_input").value.trim().toUpperCase();
+    const resultDiv = document.getElementById("status_result");
+
+    if (!inputId) {
+        alert("कृपया अपना ऑर्डर आईडी दर्ज करें!");
+        return;
+    }
+
+    resultDiv.style.display = "block";
+    resultDiv.innerHTML = "<p style='text-align:center;'>डेटा खोजा जा रहा है...</p>";
+
+    // SheetDB API URL (Yahan apna sahi link dalein)
+    fetch(`https://sheetdb.io/api/v1/tethdim34qjsy`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.length > 0) {
+            const order = data[0];
+            
+            // HTML taiyar karna details dikhane ke liye
+            resultDiv.innerHTML = `
+                <div style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px; text-align: center;">
+                    <strong style="color: #28a745; font-size: 20px;">स्टेटस: ${order["Status"]}</strong>
+                </div>
+                <p><strong>आदेश आईडी:</strong> ${order["ORDER ID"]}</p>
+                <p><strong>रैयत का नाम:</strong> ${order["रैयत का नाम(यदि हो)"] || 'N/A'}</p>
+                <p><strong>खाता नंबर:</strong> ${order["खाता (यदि हो)"] || 'N/A'}</p>
+                <p><strong>खेसरा नंबर:</strong> ${order["खेसरा (यदि हो)"] || 'N/A'}</p>
+                <p><strong>गाँव/मौजा:</strong> ${order["मौजा/गाँव"]}</p>
+                <div style="margin-top: 10px; font-size: 12px; color: #888; text-align: center;">
+                    ऑर्डर की तारीख: ${order["DATE"]}
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `<p style="color: red; text-align: center;">क्षमा करें! आईडी <b>${inputId}</b> नहीं मिली। कृपया सही आईडी दर्ज करें।</p>`;
+        }
+    })
+    .catch(err => {
+        resultDiv.innerHTML = "<p style='color: red; text-align: center;'>सर्वर एरर! कृपया बाद में प्रयास करें।</p>";
+    });
+}
+</script>
