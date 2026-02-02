@@ -25,7 +25,8 @@ function checkStatus() {
     resultDiv.innerHTML = "<p style='text-align:center;'>डेटा खोजा जा रहा है...</p>";
 
     // SheetDB API URL (Yahan apna sahi link dalein)
-    fetch(`https://sheetdb.io/api/v1/tethdim34qjsy`)
+    fetch(`https://sheetdb.io/api/v1/tethdim34qjsy/search?ORDER%20ID=${inputId}`)
+        
     .then(response => response.json())
     .then(data => {
         if (data.length > 0) {
