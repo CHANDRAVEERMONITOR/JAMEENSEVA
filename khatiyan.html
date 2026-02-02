@@ -188,7 +188,7 @@ function submitOrder() {
     }
 
     // SheetDB API (Yahan apna URL dalein)
-    fetch('https://sheetdb.io/api/v1/APKA_API_URL', {
+    fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
@@ -197,7 +197,7 @@ function submitOrder() {
         alert("बधाई हो! आपका ऑर्डर दर्ज हो गया है।\nTracking ID: " + trackingID);
         // WhatsApp redirection
         const message = `नमस्ते, मेरा ऑर्डर आईडी *${trackingID}* है। मैंने खतियान के लिए फॉर्म भरा है।`;
-        window.open(`https://wa.me/91YOURNUMBER?text=${encodeURIComponent(message)}`, '_blank');
+        window.open(`https://wa.me/9142075859?text=${encodeURIComponent(message)}`, '_blank');
     })
     .catch(err => alert("Error: Data bhejte waqt dikkat aayi!"));
 }
