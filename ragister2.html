@@ -178,13 +178,18 @@ function submitOrder() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
     })
-    .then(res => {
-        if(res.ok) {
-            alert("सफल! आपका COD ऑर्डर ID: " + trackingID);
-        } else {
-            alert("SheetDB Error: Data submit nahi ho saka.");
-        }
-    })
+        
+    ..then(res => {
+    alert("बधाई हो! आपकी Order ID: " + trackingID + " दर्ज हो गयी है। अब कृपया Payment poora karein.");
+    
+    var method = document.getElementById("paymentMethod").value;
+    if(method === "Online") {
+        // Data save hone ke baad Razorpay button dikhao
+        document.getElementById("razorpay-area").style.display = "block";
+        document.getElementById("submit-btn").style.display = "none";
+    }
+})
+    
     .catch(err => alert("Connection Error: Data bhejte waqt dikkat aayi!"));
 }
 </script>
