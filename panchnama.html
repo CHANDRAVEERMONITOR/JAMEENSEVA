@@ -179,7 +179,7 @@ function submitOrder() {
         body: JSON.stringify({ data: [formData] })
     })
         
-    ..then(res => {
+    then(res => {
     alert("बधाई हो! आपकी Order ID: " + trackingID + " दर्ज हो गयी है। अब कृपया Payment poora karein.");
     
     var method = document.getElementById("paymentMethod").value;
