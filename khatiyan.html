@@ -180,6 +180,34 @@ function submitOrder() {
         "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
         "पिन कोड": document.getElementById("pincode").value,
         "अपना मोबाइल नंबर": mobile
+
+        <label>Payment Method चुनें:</label><br>
+<select name="data[PaymentMethod]" id="paymentMethod" onchange="togglePayment()" required style="width: 100%; padding: 10px; margin-top: 5px;">
+    <option value="">--चुनें--</option>
+    <option value="COD">Case on Delivery (जमीन पर पहुँचने के बाद)</option>
+    <option value="Online">Online Payment (Razorpay)</option>
+</select>
+
+<div id="<form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async> </script> </form>" style="display:none; margin-top: 20px; text-align: center;">
+    <p style="color: green; font-weight: bold;">Online Payment करने पर 10% की छूट!</p>
+    </div>
+
+   <script>
+        function togglePayment() {
+            var method = document.getElementById("paymentMethod").value;
+            var razorpayArea = document.getElementById("razorpay-area");
+            var submitButton = document.getElementById("submit-btn"); // Aapke Submit button ki ID
+
+            if (method === "Online") {
+                razorpayArea.style.display = "block";
+                if(submitButton) submitButton.style.display = "none";
+            } else {
+                razorpayArea.style.display = "none";
+                if(submitButton) submitButton.style.display = "block";
+            }
+        }
+ <script>
+    
     };
 
     if(!formData["जिला चुनें (District)"] || !formData["प्रखंड चुनें (Block)"] || mobile.length < 10) {
