@@ -175,7 +175,13 @@ function submitOrder() {
                     <form>
                         <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async><\/script>
                     </form>
-                </div>
+                
+
+                   var method = document.getElementById("paymentMethod").value;
+        if(method === "Online") {
+            document.getElementById("razorpay-area").style.display = "block";
+            document.getElementById("submit-btn").style.display = "none";
+        }
 
                 <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-bottom:10px;">
                     📦 ऑर्डर ट्रैक करें
