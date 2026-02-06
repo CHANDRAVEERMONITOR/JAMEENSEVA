@@ -61,7 +61,7 @@
 
     <div class="form-group">
         <label>12. भुगतान का तरीका चुनें:</label>
-        <select id="paymentMethod" onchange="togglePayment()">
+        <select id="paymentMethod">
             <option value="COD">Case on Delivery (COD)</option>
             <option value="Online">Online Payment (Razorpay)</option>
         </select>
@@ -70,7 +70,7 @@
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें ₹799/-</button>
 
     <div id="razorpay-area">
-        <p style="color: #28a745; font-weight: bold;">ऑनलाइन पेमेंट सुरक्षित है। नीचे बटन दबाएं:</p>
+        <p style="color: #28a745; font-weight: bold;">ऑर्डर सुरक्षित हो गया है! अब नीचे बटन से पेमेंट पूरा करें:</p>
         <form>
             <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async></script>
         </form>
@@ -142,22 +142,11 @@ function loadBlocks() {
     }
 }
 
-function togglePayment() {
-    var method = document.getElementById("paymentMethod").value;
-    var razorpayArea = document.getElementById("razorpay-area");
-    var submitButton = document.getElementById("submit-btn");
-    if (method === "Online") {
-        razorpayArea.style.display = "block";
-        submitButton.style.display = "none";
-    } else {
-        razorpayArea.style.display = "none";
-        submitButton.style.display = "block";
-    }
-}
-
 function submitOrder() {
     const mobile = document.getElementById("mobile").value;
-    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
+    const trackingID = "JS-KH-" + Math.floor(1000 + Math.random() * 9000);
+    const method = document.getElementById("paymentMethod").value;
+
     const formData = {
         "ORDER ID": trackingID,
         "DATE": new Date().toLocaleDateString('hi-IN'),
@@ -167,24 +156,40 @@ function submitOrder() {
         "मौजा/गाँव": document.getElementById("village").value,
         "खाता (यदि हो)": document.getElementById("khata_no").value,
         "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
-        "खतियान का प्रकार चुनें": document.querySelector('input[name="khatiyan_type"]:checked').value,
+        "खतियान का प्रकार": document.querySelector('input[name="khatiyan_type"]:checked').value,
         "रैयत का नाम(यदि हो)": document.getElementById("raiyat_name").value,
         "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
         "पिन कोड": document.getElementById("pincode").value,
-        "अपना मोबाइल नंबर": mobile
+        "अपना मोबाइल नंबर": mobile,
+        "PAYMENT METHOD": method
     };
 
     if(!formData["जिला चुनें (District)"] || mobile.length < 10) {
         alert("कृपया जिला और 10 अंकों का मोबाइल नंबर भरें!"); return;
     }
 
+    // Pehle Data Save Hoga
     fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
     })
-    .then(res => alert("सफल! आपका COD ऑर्डर ID: " + trackingID))
-    .catch(err => alert("Error!"));
+    .then(res => {
+        // Data save hone ke baad Tracking ID dikhayenge
+        alert("सफल! आपकी ऑर्डर ID: " + trackingID + " है। इसे नोट कर लें।");
+        
+        if (method === "Online") {
+            // Agar online hai tab Razorpay dikhao
+            document.getElementById("razorpay-area").style.display = "block";
+            document.getElementById("submit-btn").style.display = "none";
+        } else {
+            // Agar COD hai to message dikhakar reload kar sakte hain ya button hide kar sakte hain
+            alert("आपका Cash on Delivery ऑर्डर कन्फर्म हो गया है।");
+            document.getElementById("submit-btn").innerText = "ऑर्डर कन्फर्म है ✅";
+            document.getElementById("submit-btn").disabled = true;
+        }
+    })
+    .catch(err => alert("Error: Data save nahi ho paya!"));
 }
 </script>
 </body>
