@@ -143,10 +143,11 @@ function loadBlocks() {
 }
 
 function submitOrder() {
+    // 1. Order ID generate karna
+    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
     const mobile = document.getElementById("mobile").value;
-    const trackingID = "JS-KH-" + Math.floor(1000 + Math.random() * 9000);
-    const method = document.getElementById("paymentMethod").value;
 
+    // 2. Data ikatha karna (SheetDB ke liye)
     const formData = {
         "ORDER ID": trackingID,
         "DATE": new Date().toLocaleDateString('hi-IN'),
@@ -156,40 +157,56 @@ function submitOrder() {
         "मौजा/गाँव": document.getElementById("village").value,
         "खाता (यदि हो)": document.getElementById("khata_no").value,
         "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
-        "खतियान का प्रकार": document.querySelector('input[name="khatiyan_type"]:checked').value,
+        "जमाबंदी नंबर": document.getElementById("jamabandi_no").value,
         "रैयत का नाम(यदि हो)": document.getElementById("raiyat_name").value,
         "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
         "पिन कोड": document.getElementById("pincode").value,
-        "अपना मोबाइल नंबर": mobile,
-        "PAYMENT METHOD": method
+        "अपना मोबाइल नंबर": mobile
     };
 
+    // 3. Validation
     if(!formData["जिला चुनें (District)"] || mobile.length < 10) {
-        alert("कृपया जिला और 10 अंकों का मोबाइल नंबर भरें!"); return;
+        alert("कृपया जिला और 10 अंकों का मोबाइल नंबर भरें!"); 
+        return;
     }
 
-    // Pehle Data Save Hoga
+    // 4. SheetDB ko data bhejna
     fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
     })
     .then(res => {
-        // Data save hone ke baad Tracking ID dikhayenge
-        alert("सफल! आपकी ऑर्डर ID: " + trackingID + " है। इसे नोट कर लें।");
-        
-        if (method === "Online") {
-            // Agar online hai tab Razorpay dikhao
-            document.getElementById("razorpay-area").style.display = "block";
-            document.getElementById("submit-btn").style.display = "none";
-        } else {
-            // Agar COD hai to message dikhakar reload kar sakte hain ya button hide kar sakte hain
-            alert("आपका Cash on Delivery ऑर्डर कन्फर्म हो गया है।");
-            document.getElementById("submit-btn").innerText = "ऑर्डर कन्फर्म है ✅";
-            document.getElementById("submit-btn").disabled = true;
-        }
+        // 5. Success Screen with Your Tracking Link
+        document.body.innerHTML = `
+            <div style="max-width:450px; margin:50px auto; text-align:center; padding:30px; background:white; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.1); font-family:sans-serif; border-top:8px solid #005689;">
+                <div style="font-size:60px; color:#28a745; margin-bottom:10px;">✅</div>
+                <h2 style="color:#005689; margin-bottom:15px;">ऑर्डर सफलतापूर्वक बुक हुआ!</h2>
+                
+                <p style="margin-bottom:5px;">आपकी ऑर्डर ID है:</p>
+                <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:20px;">
+                    ${trackingID}
+                </div>
+
+                <div style="margin:20px 0;">
+                    <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:15px; border-radius:8px; font-weight:bold; font-size:16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        📦 ऑर्डर ट्रैक करें (Track Order)
+                    </a>
+                </div>
+
+                <p style="color:#666; font-size:14px;">कृपया इस ID को नोट कर लें। हमारी टीम जल्द ही आपसे संपर्क करेगी।</p>
+                
+                <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+                
+                <button onclick="window.location.reload()" style="background:none; border:none; color:#005689; font-weight:bold; cursor:pointer; font-size:14px;">
+                    ← वापस फॉर्म पर आएं
+                </button>
+            </div>
+        `;
     })
-    .catch(err => alert("Error: Data save nahi ho paya!"));
+    .catch(err => {
+        alert("माफ करें! डेटा भेजने में समस्या हुई। कृपया इंटरनेट चेक करें।");
+    });
 }
 </script>
 </body>
