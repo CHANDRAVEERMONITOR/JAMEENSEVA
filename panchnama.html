@@ -39,15 +39,17 @@
     <div class="row">
         <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="उदा. 125"></div>
         <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
+        <div class="form-group"><label>5. रैयत का नाम(यदि हो):</label><input type="text" id="raiyatname" placeholder="अपना नाम लिखें"></div>
     </div>
 
     <div class="upload-box">
-        <label>📄 दस्तावेज अपलोड करें (PDF/DOC/Image):</label>
+        <label>📄 आमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल का फोटो और सादे कागज पर वंशावली  बनाकर सभी अपलोड करें (PDF/DOC/Image):</label>
         <input type="file" id="user_file">
     </div>
 
-    <div class="form-group"><label>5. पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
-    <div class="form-group"><label>6. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    <div class="form-group"><label>6. पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
+    <div class="form-group"><label>6. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 846604"></div>
+    <div class="form-group"><label>7. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
     <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया पेज न छोड़ें।</div>
@@ -135,7 +137,7 @@ async function submitOrder() {
         const base64Data = e.target.result.split(',')[1];
         
         // 1. DRIVE UPLOAD
-        const scriptURL = "YAHAN_APNA_APPS_SCRIPT_URL_DALEIN"; 
+        const scriptURL = "https://script.google.com/macros/s/AKfycbxELiNX4DK8tUlsVyaEtDWvStSLPl-8tuN8rkcsCBXNK7W2BcSKhEGGnI2Zck_nPQ-CaQ/exec"; 
         
         try {
             await fetch(scriptURL, {
@@ -151,6 +153,8 @@ async function submitOrder() {
                 "DATE": new Date().toLocaleDateString('hi-IN'),
                 "जिला": document.getElementById("district").value,
                 "प्रखंड": document.getElementById("block").value,
+            "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
+                "पिन कोड": document.getElementById("pincode").value,
                 "मोबाइल": mobile,
                 "पता": document.getElementById("full_address").value
             };
@@ -161,7 +165,7 @@ async function submitOrder() {
                 body: JSON.stringify({ data: [formData] })
             });
 
-            alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं।");
+            alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं। हम जल्द आपसे संपर्क करेंगे ");
             location.reload();
 
         } catch (err) {
