@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>पंचनामा बटवारा के लिए ऑर्डर बना कर case on delivery - JameenSeva.in</title>
+    <title>पंचनामा बटवारा - JameenSeva.in</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; }
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 5px solid #005689; }
@@ -13,15 +13,16 @@
         select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; background-color: #fafafa; }
         .row { display: flex; gap: 10px; }
         .row .form-group { flex: 1; }
-        button { width: 100%; padding: 15px; background-color: #005689; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .note { font-size: 12px; color: #666; margin-top: 10px; text-align: center; }
-        #razorpay-area { display:none; margin-top: 20px; text-align: center; padding: 15px; border: 2px dashed #28a745; border-radius: 10px; background: #f9fff9; }
+        button { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        button:disabled { background-color: #ccc; cursor: not-allowed; }
+        .upload-box { background: #eefbff; border: 1px dashed #005689; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        #status-msg { display:none; text-align: center; font-weight: bold; color: #005689; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2> पंचनामा बटवारा के लिए ऑर्डर- बना कर case on delivery </h2>
+    <h2> पंचनामा बटवारा के लिए ऑर्डर </h2>
     
     <div class="form-group">
         <label>1. जिला चुनें (District):</label>
@@ -32,9 +33,7 @@
 
     <div class="form-group">
         <label>2. प्रखंड चुनें (Block):</label>
-        <select id="block">
-            <option value="">-- पहले जिला चुनें --</option>
-        </select>
+        <select id="block"><option value="">-- पहले जिला चुनें --</option></select>
     </div>
 
     <div class="row">
@@ -42,26 +41,20 @@
         <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
     </div>
 
-  
-    <div class="form-group"><label>9. अपना नाम के साथ पूरा पता :</label><input type="text" id="full_address" placeholder="जहाँ खतियान भेजना है"></div>
-    <div class="form-group"><label>10. पिन कोड:</label><input type="text" id="pincode" placeholder="Pincode"></div>
-    <div class="form-group"><label>11. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" placeholder="WhatsApp नंबर" maxlength="10"></div>
-
-
-    <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें /-</button>
-
-    <div id="razorpay-area">
-        <p style="color: #28a745; font-weight: bold;">ऑनलाइन पेमेंट सुरक्षित है। नीचे बटन दबाएं:</p>
-        <form>
-            <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async></script>
-        </form>
+    <div class="upload-box">
+        <label>📄 दस्तावेज अपलोड करें (PDF/DOC/Image):</label>
+        <input type="file" id="user_file">
     </div>
 
-    <p class="note">सबमिट करने के बाद हम आपसे WhatsApp पर संपर्क करेंगे।</p>
+    <div class="form-group"><label>5. पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
+    <div class="form-group"><label>6. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+
+    <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
+    <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया पेज न छोड़ें।</div>
 </div>
 
 <script>
-// BIHAR DATA (Unchanged)
+// BIHAR FULL DATA LIST
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -100,14 +93,13 @@ const biharData = {
     "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
     "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
     "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
-    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-// District Selector Initialization
+// Initialize Districts
 const districtSelect = document.getElementById("district");
 for (let dist in biharData) {
-    let opt = document.createElement("option");
-    opt.value = dist; opt.innerHTML = dist;
+    let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
     districtSelect.appendChild(opt);
 }
 
@@ -117,68 +109,68 @@ function loadBlocks() {
     blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
     if (selectedDist) {
         biharData[selectedDist].forEach(block => {
-            let opt = document.createElement("option");
-            opt.value = block; opt.innerHTML = block;
+            let opt = document.createElement("option"); opt.value = block; opt.innerHTML = block;
             blockSelect.appendChild(opt);
         });
     }
 }
 
-function togglePayment() {
-    var method = document.getElementById("paymentMethod").value;
-    var razorpayArea = document.getElementById("razorpay-area");
-    var submitButton = document.getElementById("submit-btn");
-    if (method === "Online") {
-        razorpayArea.style.display = "block";
-        submitButton.style.display = "none";
-    } else {
-        razorpayArea.style.display = "none";
-        submitButton.style.display = "block";
-    }
-}
-
-function submitOrder() {
-    // Generate Order ID
-    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
+async function submitOrder() {
+    const btn = document.getElementById("submit-btn");
+    const status = document.getElementById("status-msg");
+    const fileInput = document.getElementById("user_file");
     const mobile = document.getElementById("mobile").value;
 
-    const formData = {
-        "ORDER ID": trackingID,
-        "DATE": new Date().toLocaleDateString('hi-IN'),
-        "जिला चुनें (District)": document.getElementById("district").value,
-        "प्रखंड चुनें (Block)": document.getElementById("block").value,
-        "थाना नंबर": document.getElementById("thana_no").value,
-        "मौजा/गाँव": document.getElementById("village").value,
-        
-        // FIXED ID
-        "रैयत का नाम(यदि हो)": document.getElementById("raiyat_name").value,
-        "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
-        "पिन कोड": document.getElementById("pincode").value,
-        "अपना मोबाइल नंबर": mobile
-    }
+    if(!mobile || mobile.length < 10) { alert("सही मोबाइल नंबर भरें!"); return; }
+    if(fileInput.files.length === 0) { alert("कृपया फाइल चुनें!"); return; }
 
-    if(!formData["जिला चुनें (District)"] || mobile.length < 10) {
-        alert("कृपया जिला और 10 अंकों का मोबाइल नंबर भरें!"); return;
-    }
+    btn.disabled = true;
+    status.style.display = "block";
 
-    fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [formData] })
-    })
+    const file = fileInput.files[0];
+    const trackingID = "JS-PAN-" + Math.floor(1000 + Math.random() * 9000);
+    
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+        const base64Data = e.target.result.split(',')[1];
         
-    then(res => {
-    alert("बधाई हो! आपकी Order ID: " + trackingID + " दर्ज हो गयी है। हम आपको whatapp पर संपर्क करेंगे  .");
-    
-    var method = document.getElementById("paymentMethod").value;
-    if(method === "Online") {
-        // Data save hone ke baad Razorpay button dikhao
-        document.getElementById("razorpay-area").style.display = "block";
-        document.getElementById("submit-btn").style.display = "none";
-    }
-})
-    
-    .catch(err => alert("Connection Error: Data bhejte waqt dikkat aayi!"));
+        // 1. DRIVE UPLOAD
+        const scriptURL = "YAHAN_APNA_APPS_SCRIPT_URL_DALEIN"; 
+        
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
+            });
+
+            // 2. SHEETDB UPLOAD
+            const formData = {
+                "ORDER ID": trackingID,
+                "DATE": new Date().toLocaleDateString('hi-IN'),
+                "जिला": document.getElementById("district").value,
+                "प्रखंड": document.getElementById("block").value,
+                "मोबाइल": mobile,
+                "पता": document.getElementById("full_address").value
+            };
+
+            await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: [formData] })
+            });
+
+            alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं।");
+            location.reload();
+
+        } catch (err) {
+            alert("त्रुटि: " + err.message);
+            btn.disabled = false;
+            status.style.display = "none";
+        }
+    };
+    reader.readAsDataURL(file);
 }
 </script>
 </body>
