@@ -17,7 +17,7 @@
         .note { font-size: 12px; color: #666; margin-top: 10px; text-align: center; }
         .payment-box { background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-top: 20px; text-align: center; }
         .btn-cod { background-color: #28a745; margin-top: 10px; }
-        #razorpay-area { margin: 15px 0; min-height: 50px; }
+        #razorpay-form { display: flex; justify-content: center; margin: 15px 0; min-height: 50px; }
     </style>
 </head>
 <body>
@@ -66,6 +66,7 @@
 </div>
 
 <script>
+// (Bihar Data object yahan pura paste karein...)
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -177,38 +178,42 @@ function showSuccessPage(id) {
     document.getElementById("main-content").innerHTML = `
         <div style="text-align:center; padding:10px;">
             <div style="font-size:50px; color:#28a745;">✅</div>
-            <h2 style="color:#005689; margin-top:0;">ऑर्डर ID जेनरेट हो गई!</h2>
+            <h2 style="color:#005689; margin-top:0;">ऑर्डर सफलतापूर्वक बुक हुआ!</h2>
             
+            <p>आपकी ट्रैकिंग ID:</p>
             <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:15px;">
                 ${id}
             </div>
-            <p style="color:#333; font-weight:bold;">कृपया पेमेंट पूरा करें या COD चुनें।</p>
 
             <div class="payment-box">
-                <p style="color:#856404; font-weight:bold; margin-bottom:10px;">ऑनलाइन पेमेंट (Razorpay)</p>
-                <div id="razorpay-area"></div>
+                <p style="color:#856404; font-weight:bold; margin-bottom:10px;">पेमेंट विकल्प</p>
+                
+                <div id="razorpay-form"></div>
                 
                 <p style="margin:15px 0; font-weight:bold; color:#aaa;">──────── OR ────────</p>
 
-                <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD) बुक करें</button>
+                <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD)</button>
             </div>
 
             <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-top:20px;">
-                📦 ट्रैक करें
+                📦 ऑर्डर ट्रैक करें
             </a>
         </div>
     `;
 
-    // पेमेंट बटन को मैन्युअली लोड करना
+    // Razorpay Script Injection inside a Form
+    const myForm = document.createElement("form");
     const rpScript = document.createElement("script");
     rpScript.src = "https://checkout.razorpay.com/v1/payment-button.js";
     rpScript.setAttribute("data-payment_button_id", "pl_SCKTQmKjqJ35JV");
     rpScript.async = true;
-    document.getElementById("razorpay-area").appendChild(rpScript);
+    
+    myForm.appendChild(rpScript);
+    document.getElementById("razorpay-form").appendChild(myForm);
 }
 
 function confirmCOD(id) {
-    alert("आपका COD ऑर्डर (ID: " + id + ") कन्फर्म हो गया है।");
+    alert("आपका COD ऑर्डर (ID: " + id + ") स्वीकार कर लिया गया है।");
     window.location.reload(); 
 }
 </script>
