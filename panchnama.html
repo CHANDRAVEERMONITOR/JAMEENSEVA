@@ -27,7 +27,7 @@
     <div class="form-group">
         <label>1. जिला चुनें (District):</label>
         <select id="district" onchange="loadBlocks()">
-            <option value="">-- चुनें --</option>
+            <option value="">-- जिला चुनें --</option>
         </select>
     </div>
 
@@ -37,26 +37,29 @@
     </div>
 
     <div class="row">
-        <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="उदा. 125"></div>
-        <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
-        <div class="form-group"><label>5. रैयत का नाम(यदि हो):</label><input type="text" id="raiyatname" placeholder="अपना नाम लिखें"></div>
+        <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="थाना नं."></div>
+        <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव"></div>
     </div>
+    
+    <div class="form-group"><label>5. रैयत का नाम (यदि हो):</label><input type="text" id="raiyatname" placeholder="नाम लिखें"></div>
 
     <div class="upload-box">
-        <label>📄 अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें (PDF):</label>
+        <label>📄 दस्तावेज अपलोड करें (PDF/Images):</label>
         <input type="file" id="user_file">
     </div>
 
-    <div class="form-group"><label>6. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
-    <div class="form-group"><label>6. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 846604"></div>
-    <div class="form-group"><label>7. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    <div class="form-group"><label>6. पूरा पता (Courier Address):</label><input type="text" id="full_address" placeholder="पूरा पता लिखें"></div>
+    <div class="row">
+        <div class="form-group"><label>7. पिन कोड:</label><input type="text" id="pincode" placeholder="846604"></div>
+        <div class="form-group"><label>8. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
-    <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया पेज न छोड़ें।</div>
+    <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया रुकें।</div>
 </div>
 
 <script>
-// BIHAR FULL DATA LIST
+// BIHAR ALL 38 DISTRICTS & BLOCKS
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -95,10 +98,10 @@ const biharData = {
     "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
     "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
     "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
-    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-// Initialize Districts
+// Initialize District List
 const districtSelect = document.getElementById("district");
 for (let dist in biharData) {
     let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
@@ -121,10 +124,13 @@ async function submitOrder() {
     const btn = document.getElementById("submit-btn");
     const status = document.getElementById("status-msg");
     const fileInput = document.getElementById("user_file");
+    
+    const district = document.getElementById("district").value;
+    const block = document.getElementById("block").value;
     const mobile = document.getElementById("mobile").value;
 
-    if(!mobile || mobile.length < 10) { alert("सही मोबाइल नंबर भरें!"); return; }
-    if(fileInput.files.length === 0) { alert("कृपया फाइल चुनें!"); return; }
+    if(!district || !block || mobile.length < 10) { alert("कृपया जिला, ब्लॉक और सही मोबाइल नंबर भरें!"); return; }
+    if(fileInput.files.length === 0) { alert("कृपया दस्तावेज फाइल चुनें!"); return; }
 
     btn.disabled = true;
     status.style.display = "block";
@@ -151,15 +157,15 @@ async function submitOrder() {
             const formData = {
                 "ORDER ID": trackingID,
                 "DATE": new Date().toLocaleDateString('hi-IN'),
-                "जिला": document.getElementById("district").value,
-                "प्रखंड": document.getElementById("block").value,
-            "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
-                "पिन कोड": document.getElementById("pincode").value,
-                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें":document.getElementById("file").value,
-                "मौजा/गाँव": document.getElementById("village").value,
-                "थाना नंबर": document.getElementById("thana_no").value,
-                "अपना मोबाइल नंबर": mobile,
-                "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value
+                "जिला": district,
+                "प्रखंड": block,
+                "थाना": document.getElementById("thana_no").value,
+                "गाँव": document.getElementById("village").value,
+                "रैयत": document.getElementById("raiyatname").value,
+                "पता": document.getElementById("full_address").value,
+                "पिनकोड": document.getElementById("pincode").value,
+                "मोबाइल": mobile,
+                "फाइल": "Drive Folder में उपलब्ध"
             };
 
             await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
@@ -168,7 +174,7 @@ async function submitOrder() {
                 body: JSON.stringify({ data: [formData] })
             });
 
-            alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं। हम जल्द आपसे संपर्क करेंगे ");
+            alert("✅ ऑर्डर सफल! \nID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं।");
             location.reload();
 
         } catch (err) {
