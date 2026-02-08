@@ -15,9 +15,9 @@
         .row .form-group { flex: 1; }
         button { width: 100%; padding: 15px; background-color: #005689; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         .note { font-size: 12px; color: #666; margin-top: 10px; text-align: center; }
-        .payment-box { background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-top: 20px; text-align: center; min-height: 100px; }
+        .payment-box { background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-top: 20px; text-align: center; }
         .btn-cod { background-color: #28a745; margin-top: 10px; }
-        #razorpay-container { margin: 15px 0; }
+        #razorpay-area { margin: 15px 0; min-height: 50px; }
     </style>
 </head>
 <body>
@@ -31,40 +31,86 @@
             <option value="">-- चुनें --</option>
         </select>
     </div>
+
     <div class="form-group">
         <label>2. प्रखंड चुनें (Block):</label>
-        <select id="block"><option value="">-- पहले जिला चुनें --</option></select>
+        <select id="block">
+            <option value="">-- पहले जिला चुनें --</option>
+        </select>
     </div>
+
     <div class="row">
         <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="उदा. 125"></div>
         <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
     </div>
-    <div class="form-group"><label>5. खाता नंबर:</label><input type="text" id="khata_no"></div>
-    <div class="form-group"><label>6. खेसरा नंबर:</label><input type="text" id="khesra_no"></div>
+
+    <div class="form-group"><label>5. खाता (यदि हो):</label><input type="text" id="khata_no" placeholder="खाता नंबर"></div>
+    <div class="form-group"><label>6. खेसरा (यदि हो):</label><input type="text" id="khesra_no" placeholder="खेसरा नंबर"></div>
+
     <div class="form-group">
-        <label>7. खतियान का प्रकार:</label>
-        <div style="display: flex; gap: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd;">
-            <label><input type="radio" name="khatiyan_type" value="नया (C.S.)" checked> नया</label>
-            <label><input type="radio" name="khatiyan_type" value="पुराना (R.S.)"> पुराना</label>
+        <label>7. खतियान का प्रकार चुनें:</label>
+        <div style="display: flex; gap: 10px; background: #f9f9f9; padding: 10px; border-radius: 6px; border: 1px solid #ddd; flex-wrap: wrap;">
+            <label><input type="radio" name="khatiyan_type" value="नया (C.S.)" checked> नया (C.S.)</label>
+            <label><input type="radio" name="khatiyan_type" value="पुराना (R.S.)"> पुराना (R.S.)</label>
             <label><input type="radio" name="khatiyan_type" value="चकबंदी"> चकबंदी</label>
         </div>
     </div>
-    <div class="form-group"><label>8. रैयत का नाम:</label><input type="text" id="raiyat_name"></div>
-    <div class="form-group"><label>9. पूरा पता:</label><input type="text" id="full_address"></div>
-    <div class="form-group"><label>10. पिन कोड:</label><input type="text" id="pincode"></div>
-    <div class="form-group"><label>11. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+
+    <div class="form-group"><label>8. रैयत का नाम(यदि हो):</label><input type="text" id="raiyat_name" placeholder="खाताधारी का नाम"></div>
+    <div class="form-group"><label>9. पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ खतियान भेजना है"></div>
+    <div class="form-group"><label>10. पिन कोड:</label><input type="text" id="pincode" placeholder="Pincode"></div>
+    <div class="form-group"><label>11. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" placeholder="WhatsApp नंबर" maxlength="10"></div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर बुक करें (Confirm Order)</button>
     <p class="note">बुक करने के बाद आपको पेमेंट और ट्रैकिंग ID मिलेगी।</p>
 </div>
 
 <script>
-// Bihar Data (Keeping it short for the example, use your full list)
-const biharData = {"Patna": ["Bakhtiarpur", "Barh"], "Gaya": ["Amas", "Atri"]}; // Add all districts here
+const biharData = {
+    "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
+    "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
+    "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
+    "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
+    "Begusarai": ["Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
+    "Bhagalpur": ["Bariarpur", "Bauxi", "Bhagalpur", "Colgong", "Gopalpur", "Ismailpur", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangrachowk", "Sabour", "Shahkund", "Sultanganj"],
+    "Bhojpur": ["Agiaon", "Arrah", "Barhara", "Behea", "Charpokhari", "Gadhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
+    "Buxar": ["Brahmpur", "Buxar", "Chakki", "Chausa", "Chougain", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],
+    "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],
+    "East Champaran": ["Adapur", "Areraj", "Banjaria", "Bankatwa", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Turkaulia"],
+    "Gaya": ["Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumararia", "Fatehpur", "Gaya Town", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Manpur", "Mohanpur", "Muhali", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tikari", "Wazirganj"],
+    "Gopalganj": ["Baikunthpur", "Barauli", "Bhorey", "Gopalganj", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwariya", "Sidhwalia", "Thawe", "Uchka Gaon", "Vijayipur"],
+    "Jamui": ["Barhat", "Chakai", "Gidhaur", "Islamnagar Aliganj", "Jamui", "Jhajha", "Khaira", "Laxmipur", "Sikandra", "Sono"],
+    "Jehanabad": ["Ghosi", "Hulasganj", "Jehanabad", "Kako", "Makhdumpur", "Modanganj", "Ratni Faridpur"],
+    "Kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"],
+    "Katihar": ["Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Katihar", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
+    "Khagaria": ["Alauli", "Beldaur", "Chautham", "Gogri", "Khagaria", "Mansi", "Parbatta"],
+    "Kishanganj": ["Bahadurganj", "Dighalbank", "Kishanganj", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
+    "Lakhisarai": ["Barahiya", "Halsi", "Lakhisarai", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
+    "Madhepura": ["Alamnagar", "Bihariganj", "Chausa", "Gwalpara", "Kishunganj", "Kumarkhand", "Madhepura", "Murliganj", "Puraini", "Singheshwar", "Udakishunganj"],
+    "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
+    "Munger": ["Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Munger", "Sadaipur", "Sangrampur", "Tarapur"],
+    "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
+    "Nalanda": ["Asthawan", "Ben", "Biharsharif", "Binda", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajgir", "Sarabera", "Silao", "Tharthari"],
+    "Nawada": ["Akbarpur", "Govindpur", "Hisua", "Kashi Chak", "Kauwakoal", "Meskaur", "Narayanganj", "Narihat", "Nawada", "Pakribarawan", "Rajaul", "Roh", "Sirdala", "Warisaliganj"],
+    "Patna": ["Bakhtiarpur", "Barh", "Belchi", "Bihta", "Bikram", "Danapur", "Daniyanwan", "Dullhin Bazar", "Fatwah", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Patna Sadar", "Phulwari Sharif", "Punpun", "Sampatchak"],
+    "Purnia": ["Amour", "Baisa", "Banmankhi", "Barhara", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Purnia East", "Rupauli", "Srinagar"],
+    "Rohtas": ["Akot", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sasaram", "Sheosagar", "Surajpura", "Tilauthu"],
+    "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
+    "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Morwa", "Patori", "Pusa", "Rosera", "Samastipur", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
+    "Saran": ["Amnour", "Baniapur", "Chhapra", "Dariyapur", "Digwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Sonepur", "Taraiya"],
+    "Sheikhpura": ["Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Sheikhopur Sarai", "Sheikhpura"],
+    "Sheohar": ["Dumri Katsari", "Piprarhi", "Puranahiya", "Sheohar", "Tariyani"],
+    "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Surand"],
+    "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
+    "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
+    "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
+    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+};
 
 const districtSelect = document.getElementById("district");
 for (let dist in biharData) {
-    let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
+    let opt = document.createElement("option");
+    opt.value = dist; opt.innerHTML = dist;
     districtSelect.appendChild(opt);
 }
 
@@ -74,7 +120,8 @@ function loadBlocks() {
     blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
     if (selectedDist) {
         biharData[selectedDist].forEach(block => {
-            let opt = document.createElement("option"); opt.value = block; opt.innerHTML = block;
+            let opt = document.createElement("option");
+            opt.value = block; opt.innerHTML = block;
             blockSelect.appendChild(opt);
         });
     }
@@ -83,19 +130,32 @@ function loadBlocks() {
 function submitOrder() {
     const btn = document.getElementById("submit-btn");
     const mobile = document.getElementById("mobile").value;
-    if(mobile.length < 10) { alert("सही मोबाइल नंबर भरें!"); return; }
+    const dist = document.getElementById("district").value;
+
+    if(!dist || mobile.length < 10) {
+        alert("कृपया जिला और सही मोबाइल नंबर भरें!"); return;
+    }
 
     btn.disabled = true;
-    btn.innerText = "प्रोसेसिंग...";
+    btn.innerText = "डेटा सुरक्षित किया जा रहा है...";
 
     const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
+    const khatiyanType = document.querySelector('input[name="khatiyan_type"]:checked').value;
+
     const formData = {
         "ORDER ID": trackingID,
         "DATE": new Date().toLocaleDateString('hi-IN'),
-        "जिला": document.getElementById("district").value,
-        "प्रखंड": document.getElementById("block").value,
-        "मोबाइल": mobile
-        // Add other fields here as per your SheetDB headers
+        "जिला चुनें (District)": dist,
+        "प्रखंड चुनें (Block)": document.getElementById("block").value,
+        "थाना नंबर": document.getElementById("thana_no").value,
+        "मौजा/गाँव": document.getElementById("village").value,
+        "खाता (यदि हो)": document.getElementById("khata_no").value,
+        "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
+        "खतियान का प्रकार": khatiyanType,
+        "रैयत का नाम(यदि हो)": document.getElementById("raiyat_name").value,
+        "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
+        "पिन कोड": document.getElementById("pincode").value,
+        "अपना मोबाइल नंबर": mobile
     };
 
     fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
@@ -107,36 +167,49 @@ function submitOrder() {
         showSuccessPage(trackingID);
     })
     .catch(err => {
-        alert("Error!");
+        alert("Error! डेटा भेजने में समस्या हुई।");
         btn.disabled = false;
+        btn.innerText = "ऑर्डर बुक करें (Confirm Order)";
     });
 }
 
 function showSuccessPage(id) {
-    // 1. Success Screen HTML
     document.getElementById("main-content").innerHTML = `
-        <div style="text-align:center;">
-            <h2 style="color:#28a745;">✅ ऑर्डर बुक हो गया!</h2>
-            <p>आपकी ट्रैकिंग ID: <b>${id}</b></p>
-            <div class="payment-box">
-                <p><b>पेमेंट का तरीका चुनें:</b></p>
-                <div id="razorpay-container"></div> <p style="margin:10px 0;">--- या ---</p>
-                <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD)</button>
+        <div style="text-align:center; padding:10px;">
+            <div style="font-size:50px; color:#28a745;">✅</div>
+            <h2 style="color:#005689; margin-top:0;">ऑर्डर ID जेनरेट हो गई!</h2>
+            
+            <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:15px;">
+                ${id}
             </div>
+            <p style="color:#333; font-weight:bold;">कृपया पेमेंट पूरा करें या COD चुनें।</p>
+
+            <div class="payment-box">
+                <p style="color:#856404; font-weight:bold; margin-bottom:10px;">ऑनलाइन पेमेंट (Razorpay)</p>
+                <div id="razorpay-area"></div>
+                
+                <p style="margin:15px 0; font-weight:bold; color:#aaa;">──────── OR ────────</p>
+
+                <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD) बुक करें</button>
+            </div>
+
+            <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-top:20px;">
+                📦 ट्रैक करें
+            </a>
         </div>
     `;
 
-    // 2. Load Razorpay Button Manually
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/payment-button.js";
-    script.setAttribute("data-payment_button_id", "pl_SCKTQmKjqJ35JV");
-    script.async = true;
-    document.getElementById("razorpay-container").appendChild(script);
+    // पेमेंट बटन को मैन्युअली लोड करना
+    const rpScript = document.createElement("script");
+    rpScript.src = "https://checkout.razorpay.com/v1/payment-button.js";
+    rpScript.setAttribute("data-payment_button_id", "pl_SCKTQmKjqJ35JV");
+    rpScript.async = true;
+    document.getElementById("razorpay-area").appendChild(rpScript);
 }
 
 function confirmCOD(id) {
-    alert("आपका COD ऑर्डर (ID: " + id + ") स्वीकार कर लिया गया है।");
-    window.location.reload();
+    alert("आपका COD ऑर्डर (ID: " + id + ") कन्फर्म हो गया है।");
+    window.location.reload(); 
 }
 </script>
 </body>
