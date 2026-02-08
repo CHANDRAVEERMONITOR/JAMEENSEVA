@@ -26,32 +26,31 @@
     
     <div class="form-group">
         <label>1. जिला चुनें (District):</label>
-        <select id="district" onchange="loadBlocks()">
+        <select id="district_el" onchange="loadBlocks()">
             <option value="">-- जिला चुनें --</option>
         </select>
     </div>
 
     <div class="form-group">
         <label>2. प्रखंड चुनें (Block):</label>
-        <select id="block"><option value="">-- पहले जिला चुनें --</option></select>
+        <select id="block_el"><option value="">-- पहले जिला चुनें --</option></select>
     </div>
 
     <div class="row">
         <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="थाना नं."></div>
         <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव"></div>
     </div>
-    
-    <div class="form-group"><label>5. रैयत का नाम (यदि हो):</label><input type="text" id="raiyatname" placeholder="नाम लिखें"></div>
 
     <div class="upload-box">
         <label>📄 दस्तावेज अपलोड करें (PDF/Images):</label>
         <input type="file" id="user_file">
     </div>
 
-    <div class="form-group"><label>6. पूरा पता (Courier Address):</label><input type="text" id="full_address" placeholder="पूरा पता लिखें"></div>
+    <div class="form-group"><label>5. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="पूरा पता लिखें"></div>
+    
     <div class="row">
-        <div class="form-group"><label>7. पिन कोड:</label><input type="text" id="pincode" placeholder="846604"></div>
-        <div class="form-group"><label>8. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+        <div class="form-group"><label>6. पिन कोड:</label><input type="text" id="pincode" placeholder="846604"></div>
+        <div class="form-group"><label>7. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
     </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
@@ -59,7 +58,7 @@
 </div>
 
 <script>
-// BIHAR ALL 38 DISTRICTS & BLOCKS
+// BIHAR FULL DATA LIST
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -98,24 +97,22 @@ const biharData = {
     "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
     "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
     "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
-    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-// Initialize District List
-const districtSelect = document.getElementById("district");
-for (let dist in biharData) {
-    let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
-    districtSelect.appendChild(opt);
+const dSel = document.getElementById("district_el");
+for (let d in biharData) {
+    let o = document.createElement("option"); o.value = d; o.innerHTML = d;
+    dSel.appendChild(o);
 }
 
 function loadBlocks() {
-    const blockSelect = document.getElementById("block");
-    const selectedDist = districtSelect.value;
-    blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-    if (selectedDist) {
-        biharData[selectedDist].forEach(block => {
-            let opt = document.createElement("option"); opt.value = block; opt.innerHTML = block;
-            blockSelect.appendChild(opt);
+    const bSel = document.getElementById("block_el");
+    bSel.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+    if (dSel.value) {
+        biharData[dSel.value].forEach(b => {
+            let o = document.createElement("option"); o.value = b; o.innerHTML = b;
+            bSel.appendChild(o);
         });
     }
 }
@@ -123,68 +120,3 @@ function loadBlocks() {
 async function submitOrder() {
     const btn = document.getElementById("submit-btn");
     const status = document.getElementById("status-msg");
-    const fileInput = document.getElementById("user_file");
-    
-    const district = document.getElementById("district").value;
-    const block = document.getElementById("block").value;
-    const mobile = document.getElementById("mobile").value;
-
-    if(!district || !block || mobile.length < 10) { alert("कृपया जिला, ब्लॉक और सही मोबाइल नंबर भरें!"); return; }
-    if(fileInput.files.length === 0) { alert("कृपया दस्तावेज फाइल चुनें!"); return; }
-
-    btn.disabled = true;
-    status.style.display = "block";
-
-    const file = fileInput.files[0];
-    const trackingID = "JS-PAN-" + Math.floor(1000 + Math.random() * 9000);
-    
-    const reader = new FileReader();
-    reader.onload = async function(e) {
-        const base64Data = e.target.result.split(',')[1];
-        
-        // 1. DRIVE UPLOAD
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxELiNX4DK8tUlsVyaEtDWvStSLPl-8tuN8rkcsCBXNK7W2BcSKhEGGnI2Zck_nPQ-CaQ/exec"; 
-        
-        try {
-            await fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
-            });
-
-            // 2. SHEETDB UPLOAD
-            const formData = {
-                "ORDER ID": trackingID,
-                "DATE": new Date().toLocaleDateString('hi-IN'),
-                "जिला": district,
-                "प्रखंड": block,
-                "थाना": document.getElementById("thana_no").value,
-                "गाँव": document.getElementById("village").value,
-                "रैयत": document.getElementById("raiyatname").value,
-                "पता": document.getElementById("full_address").value,
-                "पिनकोड": document.getElementById("pincode").value,
-                "मोबाइल": mobile,
-                "फाइल": "Drive Folder में उपलब्ध"
-            };
-
-            await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: [formData] })
-            });
-
-            alert("✅ ऑर्डर सफल! \nID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं।");
-            location.reload();
-
-        } catch (err) {
-            alert("त्रुटि: " + err.message);
-            btn.disabled = false;
-            status.style.display = "none";
-        }
-    };
-    reader.readAsDataURL(file);
-}
-</script>
-</body>
-</html>
