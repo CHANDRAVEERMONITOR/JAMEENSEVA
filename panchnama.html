@@ -43,13 +43,13 @@
     </div>
 
     <div class="upload-box">
-        <label>📄 आमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल का फोटो और सादे कागज पर वंशावली  बनाकर सभी अपलोड करें (PDF/DOC/Image):</label>
+        <label>📄 अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें (PDF):</label>
         <input type="file" id="user_file">
     </div>
 
-    <div class="form-group"><label>6. पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
+    <div class="form-group"><label>6. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
     <div class="form-group"><label>6. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 846604"></div>
-    <div class="form-group"><label>7. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    <div class="form-group"><label>7. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
     <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया पेज न छोड़ें।</div>
@@ -155,8 +155,10 @@ async function submitOrder() {
                 "प्रखंड": document.getElementById("block").value,
             "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
                 "पिन कोड": document.getElementById("pincode").value,
-                "मोबाइल": mobile,
-                "पता": document.getElementById("full_address").value
+                "मौजा/गाँव": document.getElementById("village").value,
+                "थाना नंबर": document.getElementById("thana_no").value,
+                "अपना मोबाइल नंबर": mobile,
+                "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value
             };
 
             await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
