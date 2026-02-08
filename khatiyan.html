@@ -15,6 +15,8 @@
         .row .form-group { flex: 1; }
         button { width: 100%; padding: 15px; background-color: #005689; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         .note { font-size: 12px; color: #666; margin-top: 10px; text-align: center; }
+        .payment-box { background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-top: 20px; text-align: center; }
+        .btn-cod { background-color: #28a745; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -63,6 +65,7 @@
 </div>
 
 <script>
+// (Bihar Data object remains same as your original code)
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -125,14 +128,24 @@ function loadBlocks() {
 }
 
 function submitOrder() {
-    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
+    const btn = document.getElementById("submit-btn");
     const mobile = document.getElementById("mobile").value;
+    const dist = document.getElementById("district").value;
+
+    if(!dist || mobile.length < 10) {
+        alert("कृपया जिला और सही मोबाइल नंबर भरें!"); return;
+    }
+
+    btn.disabled = true;
+    btn.innerText = "प्रोसेसिंग...";
+
+    const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
     const khatiyanType = document.querySelector('input[name="khatiyan_type"]:checked').value;
 
     const formData = {
         "ORDER ID": trackingID,
         "DATE": new Date().toLocaleDateString('hi-IN'),
-        "जिला चुनें (District)": document.getElementById("district").value,
+        "जिला चुनें (District)": dist,
         "प्रखंड चुनें (Block)": document.getElementById("block").value,
         "थाना नंबर": document.getElementById("thana_no").value,
         "मौजा/गाँव": document.getElementById("village").value,
@@ -145,55 +158,61 @@ function submitOrder() {
         "अपना मोबाइल नंबर": mobile
     };
 
-    if(!formData["जिला चुनें (District)"] || mobile.length < 10) {
-        alert("कृपया जिला और सही मोबाइल नंबर भरें!"); return;
-    }
-
-    // SheetDB submit
     fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: [formData] })
     })
     .then(res => {
-        // SUCCESS SCREEN: Yahan ID dikhayenge aur Payment ka option denge
-        document.getElementById("main-content").innerHTML = `
-            <div style="text-align:center; padding:10px; font-family:sans-serif;">
-                <div style="font-size:60px; color:#28a745; margin-bottom:10px;">✅</div>
-                <h2 style="color:#005689;">ऑर्डर ID जेनरेट हो गई!</h2>
-                
-                <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:15px;">
-                    ${trackingID}
-                </div>
-
-                <p style="color:#333; font-weight:bold; margin-bottom:20px;">ऑर्डर ट्रैक करने के लिए इसे नोट कर लें।</p>
-                
-                <div style="background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-bottom:20px;">
-                    <p style="color:#856404; font-weight:bold; margin-top:0;">भुगतान करें (Payment Option)</p>
-                    <p style="font-size:14px; color:#666;">ऑनलाइन पेमेंट करके ऑर्डर कन्फर्म करें:</p>
-                    
-                    <form>
-                        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async><\/script>
-                    </form>
-                
-
-                   var method = document.getElementById("paymentMethod").value;
-        if(method === "Online") {
-            document.getElementById("razorpay-area").style.display = "block";
-            document.getElementById("submit-btn").style.display = "none";
-        }
-
-                <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-bottom:10px;">
-                    📦 ऑर्डर ट्रैक करें
-                </a>
-
-                <button onclick="window.location.reload()" style="background:none; border:none; color:#666; cursor:pointer; font-size:14px; text-decoration:underline;">
-                    नया ऑर्डर फॉर्म भरें
-                </button>
-            </div>
-        `;
+        showSuccessPage(trackingID);
     })
-    .catch(err => alert("Error! Kripya dobara koshish karein."));
+    .catch(err => {
+        alert("Error! कृपया दोबारा कोशिश करें।");
+        btn.disabled = false;
+        btn.innerText = "ऑर्डर बुक करें (Confirm Order)";
+    });
+}
+
+function showSuccessPage(id) {
+    document.getElementById("main-content").innerHTML = `
+        <div style="text-align:center; padding:10px;">
+            <div style="font-size:50px; color:#28a745;">✅</div>
+            <h2 style="color:#005689; margin-top:0;">सफलतापूर्वक सबमिट हुआ!</h2>
+            
+            <p>आपकी ट्रैकिंग ID:</p>
+            <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:15px;">
+                ${id}
+            </div>
+
+            <div class="payment-box">
+                <p style="color:#856404; font-weight:bold; margin-bottom:10px;">पेमेंट विकल्प चुनें</p>
+                
+                <form>
+                    <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SCKTQmKjqJ35JV" async><\/script>
+                </form>
+
+                <p style="margin:15px 0; font-weight:bold; color:#666;">--- या ---</p>
+
+                <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD)</button>
+                <p style="font-size:11px; color:red; margin-top:5px;">*COD में ₹50 अतिरिक्त शुल्क लग सकता है।</p>
+            </div>
+
+            <hr style="margin:20px 0; border:0; border-top:1px solid #eee;">
+            
+            <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-bottom:10px;">
+                📦 ऑर्डर ट्रैक करें
+            </a>
+
+            <button onclick="window.location.reload()" style="background:none; border:none; color:#666; cursor:pointer; font-size:14px; text-decoration:underline;">
+                नया ऑर्डर फॉर्म भरें
+            </button>
+        </div>
+    `;
+}
+
+function confirmCOD(id) {
+    alert("आपका COD ऑर्डर (ID: " + id + ") स्वीकार कर लिया गया है। हमारे प्रतिनिधि आपसे संपर्क करेंगे।");
+    window.location.href = "https://jameenseva.in/success-cod.html"; // अपने थैंक्यू पेज का लिंक दें
 }
 </script>
 </body>
