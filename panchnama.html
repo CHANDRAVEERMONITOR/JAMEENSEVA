@@ -47,7 +47,7 @@
     </div>
 
     <div class="upload-box">
-        <label>📄 सभी कागजात एक PDF बनाकर अपलोड करें:</label>
+        <label>📄अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें :</label>
         <input type="file" id="user_file" accept="application/pdf">
     </div>
 
@@ -55,7 +55,7 @@
     
     <div class="row">
         <div class="form-group"><label>7. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 847104"></div>
-        <div class="form-group"><label>8. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+        <div class="form-group"><label>8. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
     </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
@@ -163,10 +163,10 @@ async function submitOrder() {
                 "प्रखंड": document.getElementById("block").value,
                 "मौजा/गाँव": document.getElementById("village").value,
                 "थाना नंबर": document.getElementById("thana_no").value,
-                "रैयत नाम": document.getElementById("raiyatname").value,
+                "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
                 "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
                 "पिन कोड": document.getElementById("pincode").value,
-                "नंबर": mobile
+                "अपना मोबाइल नंबर": mobile
             };
 
             const sheetResponse = await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
