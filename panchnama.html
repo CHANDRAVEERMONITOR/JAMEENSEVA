@@ -11,8 +11,8 @@
         .form-group { margin-bottom: 15px; }
         label { font-weight: bold; display: block; margin-bottom: 5px; color: #333; font-size: 14px; }
         select, input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; background-color: #fafafa; }
-        .row { display: flex; gap: 10px; }
-        .row .form-group { flex: 1; }
+        .row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .row .form-group { flex: 1; min-width: 140px; }
         button { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
         .upload-box { background: #eefbff; border: 1px dashed #005689; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
@@ -39,24 +39,31 @@
     <div class="row">
         <div class="form-group"><label>3. थाना नंबर:</label><input type="number" id="thana_no" placeholder="उदा. 125"></div>
         <div class="form-group"><label>4. मौजा/गाँव:</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
-        <div class="form-group"><label>5. रैयत का नाम(यदि हो):</label><input type="text" id="raiyatname" placeholder="अपना नाम लिखें"></div>
+    </div>
+
+    <div class="form-group">
+        <label>5. रैयत का नाम (यदि हो):</label>
+        <input type="text" id="raiyatname" placeholder="रैयत का नाम लिखें">
     </div>
 
     <div class="upload-box">
-        <label>📄अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें (PDF):</label>
-        <input type="file" id="user_file">
+        <label>📄 सभी कागजात एक PDF बनाकर अपलोड करें:</label>
+        <input type="file" id="user_file" accept="application/pdf">
     </div>
 
     <div class="form-group"><label>6. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
-    <div class="form-group"><label>6. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 846604"></div>
-    <div class="form-group"><label>7. अपना मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    
+    <div class="row">
+        <div class="form-group"><label>7. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 847104"></div>
+        <div class="form-group"><label>8. मोबाइल नंबर:</label><input type="tel" id="mobile" maxlength="10"></div>
+    </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
-    <div id="status-msg">प्रोसेसिंग... फाइल अपलोड हो रही है, कृपया पेज न छोड़ें।</div>
+    <div id="status-msg">प्रोसेसिंग... कृपया प्रतीक्षा करें।</div>
 </div>
 
 <script>
-// BIHAR FULL DATA LIST
+// BIHAR DATA LIST (Keeping your original data)
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -130,16 +137,17 @@ async function submitOrder() {
     status.style.display = "block";
 
     const file = fileInput.files[0];
-    const trackingID = "JS-PAN-" + Math.floor(1000 + Math.random() * 9000);
+    const trackingID = "PAN-" + Math.floor(1000 + Math.random() * 9000);
     
     const reader = new FileReader();
     reader.onload = async function(e) {
         const base64Data = e.target.result.split(',')[1];
         
-        // 1. DRIVE UPLOAD
+        // Google Drive Script Link
         const scriptURL = "https://script.google.com/macros/s/AKfycbxELiNX4DK8tUlsVyaEtDWvStSLPl-8tuN8rkcsCBXNK7W2BcSKhEGGnI2Zck_nPQ-CaQ/exec"; 
         
         try {
+            // 1. UPLOAD FILE TO DRIVE
             await fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -147,28 +155,32 @@ async function submitOrder() {
                 body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
             });
 
-            // 2. SHEETDB UPLOAD
+            // 2. UPLOAD DATA TO SHEETDB (Matches your Google Sheet Headers)
             const formData = {
                 "ORDER ID": trackingID,
-                "DATE": new Date().toLocaleDateString('hi-IN'),
-                "जिला": document.getElementById("district").value,
+                "Status": "PENDING",
+                "DATE": new Date().toLocaleDateString('hi-IN') + " " + document.getElementById("district").value,
                 "प्रखंड": document.getElementById("block").value,
-            "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
-                "पिन कोड": document.getElementById("pincode").value,
                 "मौजा/गाँव": document.getElementById("village").value,
                 "थाना नंबर": document.getElementById("thana_no").value,
-                "अपना मोबाइल नंबर": mobile,
-                "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value
+                "रैयत नाम": document.getElementById("raiyatname").value,
+                "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
+                "पिन कोड": document.getElementById("pincode").value,
+                "नंबर": mobile
             };
 
-            await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
+            const sheetResponse = await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ data: [formData] })
             });
 
-            alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nदस्तावेज अपलोड हो गए हैं। हम जल्द आपसे संपर्क करेंगे ");
-            location.reload();
+            if(sheetResponse.ok) {
+                alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nडाटा और फाइल अपलोड हो गए हैं।");
+                location.reload();
+            } else {
+                throw new Error("SheetDB Upload Failed");
+            }
 
         } catch (err) {
             alert("त्रुटि: " + err.message);
