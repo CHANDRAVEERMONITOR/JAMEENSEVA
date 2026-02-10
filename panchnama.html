@@ -63,7 +63,6 @@
 </div>
 
 <script>
-// BIHAR DATA LIST (Keeping your original data)
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -105,7 +104,6 @@ const biharData = {
     "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-// Initialize Districts
 const districtSelect = document.getElementById("district");
 for (let dist in biharData) {
     let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
@@ -142,12 +140,9 @@ async function submitOrder() {
     const reader = new FileReader();
     reader.onload = async function(e) {
         const base64Data = e.target.result.split(',')[1];
-        
-        // Google Drive Script Link
         const scriptURL = "https://script.google.com/macros/s/AKfycbxELiNX4DK8tUlsVyaEtDWvStSLPl-8tuN8rkcsCBXNK7W2BcSKhEGGnI2Zck_nPQ-CaQ/exec"; 
         
         try {
-            // 1. UPLOAD FILE TO DRIVE
             await fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -155,18 +150,18 @@ async function submitOrder() {
                 body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
             });
 
-            // 2. UPLOAD DATA TO SHEETDB (Matches your Google Sheet Headers)
             const formData = {
                 "ORDER ID": trackingID,
                 "Status": "PENDING",
-                "DATE": new Date().toLocaleDateString('hi-IN') + " " + document.getElementById("district").value,
+                "DATE": new Date().toLocaleDateString('hi-IN'),
+                "जिला": document.getElementById("district").value,
                 "प्रखंड": document.getElementById("block").value,
                 "मौजा/गाँव": document.getElementById("village").value,
                 "थाना नंबर": document.getElementById("thana_no").value,
                 "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
                 "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
                 "पिन कोड": document.getElementById("pincode").value,
-                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": "Drive में देखें"
+                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": "Drive में देखें",
                 "अपना मोबाइल नंबर": mobile
             };
 
