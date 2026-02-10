@@ -16,7 +16,7 @@
         button { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
         .upload-box { background: #eefbff; border: 1px dashed #005689; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        #status-msg { display:none; text-align: center; font-weight: bold; color: #005689; margin-top: 10px; }
+        #status-msg { display:none; text-align: center; font-weight: bold; color: #d9534f; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -47,11 +47,11 @@
     </div>
 
     <div class="upload-box">
-        <label>📄अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें :</label>
+        <label>📄 अमीन द्वारा शेड्यूल, आधार और वंशावली की एक PDF अपलोड करें:</label>
         <input type="file" id="user_file" accept="application/pdf">
     </div>
 
-    <div class="form-group"><label>6. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="जहाँ कुरियर भेजना है"></div>
+    <div class="form-group"><label>6. अपना नाम के साथ पूरा पता:</label><input type="text" id="full_address" placeholder="पूरा पता लिखें"></div>
     
     <div class="row">
         <div class="form-group"><label>7. पिन कोड:</label><input type="text" id="pincode" placeholder="उदा. 847104"></div>
@@ -59,10 +59,11 @@
     </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
-    <div id="status-msg">प्रोसेसिंग... कृपया प्रतीक्षा करें।</div>
+    <div id="status-msg">प्रोसेसिंग... कृपया पेज न छोड़ें, लिंक जनरेट हो रहा है।</div>
 </div>
 
 <script>
+// BIHAR DATA (Full List you provided)
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -104,20 +105,19 @@ const biharData = {
     "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-const districtSelect = document.getElementById("district");
-for (let dist in biharData) {
-    let opt = document.createElement("option"); opt.value = dist; opt.innerHTML = dist;
-    districtSelect.appendChild(opt);
+const dSelect = document.getElementById("district");
+for (let d in biharData) {
+    let o = document.createElement("option"); o.value = d; o.innerHTML = d;
+    dSelect.appendChild(o);
 }
 
 function loadBlocks() {
-    const blockSelect = document.getElementById("block");
-    const selectedDist = districtSelect.value;
-    blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
-    if (selectedDist) {
-        biharData[selectedDist].forEach(block => {
-            let opt = document.createElement("option"); opt.value = block; opt.innerHTML = block;
-            blockSelect.appendChild(opt);
+    const bSelect = document.getElementById("block");
+    bSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+    if (dSelect.value) {
+        biharData[dSelect.value].forEach(b => {
+            let o = document.createElement("option"); o.value = b; o.innerHTML = b;
+            bSelect.appendChild(o);
         });
     }
 }
@@ -125,31 +125,35 @@ function loadBlocks() {
 async function submitOrder() {
     const btn = document.getElementById("submit-btn");
     const status = document.getElementById("status-msg");
-    const fileInput = document.getElementById("user_file");
+    const fileIn = document.getElementById("user_file");
     const mobile = document.getElementById("mobile").value;
 
     if(!mobile || mobile.length < 10) { alert("सही मोबाइल नंबर भरें!"); return; }
-    if(fileInput.files.length === 0) { alert("कृपया फाइल चुनें!"); return; }
+    if(fileIn.files.length === 0) { alert("कृपया फाइल चुनें!"); return; }
 
     btn.disabled = true;
     status.style.display = "block";
 
-    const file = fileInput.files[0];
+    const file = fileIn.files[0];
     const trackingID = "PAN-" + Math.floor(1000 + Math.random() * 9000);
     
     const reader = new FileReader();
     reader.onload = async function(e) {
         const base64Data = e.target.result.split(',')[1];
-        const scriptURL = "https://script.google.com/macros/s/AKfycbxELiNX4DK8tUlsVyaEtDWvStSLPl-8tuN8rkcsCBXNK7W2BcSKhEGGnI2Zck_nPQ-CaQ/exec"; 
+        const scriptURL = "YOUR_APPS_SCRIPT_URL_HERE"; // यहाँ अपना नया Apps Script URL डालें
         
         try {
-            await fetch(scriptURL, {
+            // 1. UPLOAD TO DRIVE AND GET LINK
+            const driveResp = await fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
             });
 
+            const driveData = await driveResp.json();
+            const driveLink = driveData.url;
+
+            // 2. UPLOAD TO SHEETDB
             const formData = {
                 "ORDER ID": trackingID,
                 "Status": "PENDING",
@@ -161,7 +165,7 @@ async function submitOrder() {
                 "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
                 "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
                 "पिन कोड": document.getElementById("pincode").value,
-                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": "Drive में देखें",
+                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": driveLink,
                 "अपना मोबाइल नंबर": mobile
             };
 
@@ -172,10 +176,8 @@ async function submitOrder() {
             });
 
             if(sheetResponse.ok) {
-                alert("✅ सफलता! ऑर्डर ID: " + trackingID + "\nडाटा और फाइल अपलोड हो गए हैं।");
+                alert("✅ सफलता! लिंक शीट में सेव हो गया। ID: " + trackingID);
                 location.reload();
-            } else {
-                throw new Error("SheetDB Upload Failed");
             }
 
         } catch (err) {
