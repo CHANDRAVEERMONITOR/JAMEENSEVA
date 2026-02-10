@@ -1,25 +1,71 @@
-<div id="prakriya-dashboard" style="display:none; margin-top: 20px; padding: 15px; background: #f4f4f4; border-radius: 10px;">
-    <h2 style="text-align:center; color:#005689;">Sabhi Sevayein aur Unki Prakriya</h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>सेवा निर्देशिका - JameenSeva.in</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 0; }
+        .header { background: #008037; color: white; text-align: center; padding: 20px; }
+        .container { max-width: 800px; margin: 20px auto; padding: 15px; }
         
-        <div style="background:white; padding:15px; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h3 style="color:#005689; margin-top:0;">1. Khatiyan Kaise Mangwayein?</h3>
-            <p style="font-size:14px; color:#555;">Khatiyan mangwane ke liye aapko district aur block chunna hota hai...</p>
-            <a href="blog.html#khatiyan" style="text-decoration:none; color:#ff9800; font-weight:bold;">Poori Jankari Padhein →</a>
-        </div>
+        /* बटन ग्रिड स्टाइल */
+        .topic-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 30px; }
+        .topic-btn { background: #005689; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; text-align: center; font-size: 14px; }
+        .topic-btn:hover { background: #003d61; }
 
-        <div style="background:white; padding:15px; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h3 style="color:#005689; margin-top:0;">2. Dakhil Kharij (Mutation)</h3>
-            <p style="font-size:14px; color:#555;">Zameen registry ke baad mutation ki online prakriya kya hai...</p>
-            <a href="blog.html#mutation" style="text-decoration:none; color:#ff9800; font-weight:bold;">Poori Jankari Padhein →</a>
-        </div>
+        /* ब्लॉग पोस्ट स्टाइल */
+        .blog-post { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 40px; border-top: 5px solid #005689; }
+        h2 { color: #005689; margin-top: 0; }
+        p { line-height: 1.6; color: #333; }
+        
+        /* फॉर्म का लिंक बटन */
+        .apply-link { display: inline-block; background: #ff9800; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 15px; }
+        .apply-link:hover { background: #e68a00; }
+    </style>
+</head>
+<body>
 
-        <div style="background:white; padding:15px; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-            <h3 style="color:#005689; margin-top:0;">3. Vanshavali Kaise Banwayein?</h3>
-            <p style="font-size:14px; color:#555;">Vanshavali banane ke liye zaroori dastawez aur step-by-step guide...</p>
-            <a href="blog.html#vanshavali" style="text-decoration:none; color:#ff9800; font-weight:bold;">Poori Jankari Padhein →</a>
-        </div>
-
-    </div>
+<div class="header">
+    <h1>सभी सेवाओं की जानकारी</h1>
+    <p>नीचे अपनी सेवा चुनें और पूरी प्रक्रिया जानें</p>
 </div>
+
+<div class="container">
+    <div class="topic-menu">
+        <a href="#khatiyan" class="topic-btn">खतियान प्रक्रिया</a>
+        <a href="#mutation" class="topic-btn">दाखिल-खारिज</a>
+        <a href="#vanshavali" class="topic-btn">वंशावली गाइड</a>
+        <a href="#registry" class="topic-btn">जमीन रजिस्ट्री</a>
+    </div>
+
+    <hr>
+
+    <div id="khatiyan" class="blog-post">
+        <h2>📜 खतियान घर पर कैसे मंगवाएं?</h2>
+        <p>बिहार में अपना पुराना (R.S.) या नया (C.S.) खतियान प्राप्त करना अब आसान है। आप हमारे माध्यम से ऑनलाइन ऑर्डर देकर इसकी डिजिटल या फिजिकल कॉपी घर पर मंगा सकते हैं।</p>
+        <p><b>आवश्यक जानकारी:</b> जिला, प्रखंड, मौजा और खाता नंबर।</p>
+        <a href="index.html" class="apply-link">अभी ऑनलाइन ऑर्डर करें </a>
+    </div>
+
+    <div id="mutation" class="blog-post">
+        <h2>✍️ दाखिल-खारिज (Mutation) की प्रक्रिया</h2>
+        <p>जमीन खरीदने के बाद सरकारी रजिस्टर में अपना नाम दर्ज करवाना 'दाखिल-खारिज' कहलाता है। इसके बिना आपकी जमीन का मालिकाना हक अधूरा रहता है।</p>
+        <p><b>स्टेप्स:</b> ऑनलाइन आवेदन करें -> कर्मचारी जांच -> आपत्ति आमंत्रण -> शुद्धि पत्र।</p>
+        <a href="index.html" class="apply-link">मदद के लिए फॉर्म भरें</a>
+    </div>
+
+    <div id="vanshavali" class="blog-post">
+        <h2>👨‍👩‍👧 वंशावली कैसे बनवाएं?</h2>
+        <p>जमीन के बंटवारे या सर्वे के समय वंशावली की सबसे ज्यादा जरूरत होती है। यह आपके पूर्वजों के साथ आपके संबंध को प्रमाणित करता है।</p>
+        <a href="index.html" class="apply-link">वंशावली फॉर्म मंगवाएं</a>
+    </div>
+
+</div>
+
+<footer style="text-align:center; padding:20px; color:#666;">
+    © 2026 JameenSeva.in - आपकी जमीन, हमारी जिम्मेदारी
+</footer>
+
+</body>
+</html>
