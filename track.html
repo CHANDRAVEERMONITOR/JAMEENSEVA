@@ -1,47 +1,92 @@
-.navbar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        background-color: #28a745;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 15px 0;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 18px;
-        display: flex;
-        align-items: center;
-        gap: 7px;
-    }
-    .navbar a:hover { color: #ffc107; }
-    @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
-</style>
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ऑर्डर ट्रैकिंग | Jameen Seva</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; }
+        
+        /* Navbar Styling */
+        .navbar {
+            position: sticky; top: 0; width: 100%; background-color: #28a745;
+            display: flex; justify-content: space-around; align-items: center;
+            padding: 15px 0; box-shadow: 0 6px 14px rgba(0,0,0,0.1); z-index: 1000;
+        }
+        .navbar a {
+            color: white; text-decoration: none; font-weight: bold; font-size: 16px;
+            display: flex; align-items: center; gap: 7px;
+        }
+        .navbar a:hover { color: #ffc107; }
+        @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
+
+        /* Tracking Box */
+        .main-container { max-width: 600px; margin: 30px auto; padding: 20px; }
+        .track-card {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;
+            border-top: 6px solid #28a745;
+        }
+        
+        .input-group { display: flex; gap: 10px; margin-top: 20px; }
+        input[type="text"] {
+            flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 8px;
+            font-size: 16px; outline: none; transition: 0.3s;
+        }
+        input[type="text"]:focus { border-color: #28a745; }
+        
+        .btn-search {
+            background: #005689; color: white; border: none; padding: 14px 25px;
+            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;
+        }
+        .btn-search:hover { background: #003d63; }
+
+        /* Result Section */
+        #status_result {
+            display: none; margin-top: 25px; text-align: left;
+            background: #ffffff; border-radius: 12px; border: 1px solid #eee;
+            overflow: hidden; animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .status-header { background: #f8f9fa; padding: 15px; border-bottom: 2px solid #eee; text-align: center; }
+        .status-badge {
+            background: #28a745; color: white; padding: 5px 15px;
+            border-radius: 20px; font-size: 18px; display: inline-block; margin-top: 5px;
+        }
+        .detail-row {
+            display: flex; justify-content: space-between; padding: 10px 20px;
+            border-bottom: 1px solid #f1f1f1; font-size: 14px;
+        }
+        .detail-row span:first-child { color: #666; font-weight: 500; }
+        .detail-row span:last-child { color: #333; font-weight: bold; text-align: right; }
+        
+        .footer-note { padding: 15px; font-size: 12px; color: #888; text-align: center; background: #fffdf5; }
+    </style>
+</head>
+<body>
 
 <nav class="navbar">
     <a href="index.html">🏠 Home</a>
-    <a href="index.html#services">📄 Our Services</a>
+    <a href="index.html#services">📄 Services</a>
     <a href="blog.html">✍️ Blog</a>
-    <a href="track.html">🚚 Order Tracking</a>
-    <a href="contact.html">📞 Contact Us</a>
+    <a href="track.html">🚚 Tracking</a>
+    <a href="contact.html">📞 Contact</a>
 </nav>
-<div style="max-width: 550px; margin: 20px auto; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #28a745;">
-    <h3 style="color: #005689; margin-bottom: 10px;">अपना ऑर्डर स्टेटस चेक करें</h3>
-    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">अपना Tracking ID (उदा. JS-1234) नीचे दर्ज करें ऑर्डर अपडेट होने मे 24 घंटा लग सकती है </p>
-    
-    <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;">
-        <input type="text" id="order_id_input" placeholder="JS-XXXX" style="padding: 12px; border: 2px solid #ddd; border-radius: 8px; width: 65%; font-size: 16px; outline: none; transition: 0.3s;">
-        <button onclick="checkStatus()" style="padding: 12px 15px; background: #005689; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; flex-grow: 1;">चेक करें</button>
+
+<div class="main-container">
+    <div class="track-card">
+        <h2 style="color: #005689; margin: 0;">ऑर्डर ट्रैकिंग सिस्टम</h2>
+        <p style="color: #666; font-size: 14px;">अपना Tracking ID दर्ज करें (उदा: JS-101)</p>
+        
+        <div class="input-group">
+            <input type="text" id="order_id_input" placeholder="ऑर्डर आईडी यहाँ लिखें...">
+            <button class="btn-search" onclick="checkStatus()">खोजें</button>
+        </div>
+        <p style="font-size: 11px; color: #999; margin-top: 10px;">अपडेट होने में 24 घंटे का समय लग सकता है।</p>
     </div>
 
-    <div id="status_result" style="display: none; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px dashed #005689;">
-        </div>
+    <div id="status_result"></div>
 </div>
 
 <script>
@@ -50,41 +95,64 @@ function checkStatus() {
     const resultDiv = document.getElementById("status_result");
 
     if (!inputId) {
-        alert("कृपया अपना ऑर्डर आईडी दर्ज करें!");
+        alert("कृपया अपना ऑर्डर आईडी (ORDER ID) दर्ज करें!");
         return;
     }
 
     resultDiv.style.display = "block";
-    resultDiv.innerHTML = "<p style='text-align:center;'>डेटा खोजा जा रहा है...</p>";
+    resultDiv.innerHTML = "<div style='padding:40px; text-align:center;'>🔍 डेटा खोजा जा रहा है, कृपया प्रतीक्षा करें...</div>";
 
-    // SheetDB API URL (Yahan apna sahi link dalein)
+    // SheetDB API URL
     fetch(`https://sheetdb.io/api/v1/tethdim34qjsy/search?ORDER%20ID=${inputId}`)
-        
     .then(response => response.json())
     .then(data => {
         if (data.length > 0) {
             const order = data[0];
             
-            // HTML taiyar karna details dikhane ke liye
+            // Status color logic
+            let statusColor = "#28a745"; 
+            if(order["Status"] === "Pending") statusColor = "#ffc107";
+            if(order["Status"] === "Cancelled") statusColor = "#dc3545";
+
             resultDiv.innerHTML = `
-                <div style="border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px; text-align: center;">
-                    <strong style="color: #28a745; font-size: 20px;">स्टेटस: ${order["Status"]}</strong>
+                <div class="status-header">
+                    <div style="font-size:14px; color:#666;">वर्तमान स्थिति</div>
+                    <div class="status-badge" style="background:${statusColor}">${order["Status"]}</div>
                 </div>
-                <p><strong>आदेश आईडी:</strong> ${order["ORDER ID"]}</p>
-                <p><strong>रैयत का नाम:</strong> ${order["रैयत का नाम(यदि हो)"] || 'N/A'}</p>
-                <p><strong>खाता नंबर:</strong> ${order["खाता (यदि हो)"] || 'N/A'}</p>
-                <p><strong>खेसरा नंबर:</strong> ${order["खेसरा (यदि हो)"] || 'N/A'}</p>
-                <p><strong>गाँव/मौजा:</strong> ${order["मौजा/गाँव"]}</p>
-                <div style="margin-top: 10px; font-size: 12px; color: #888; text-align: center;">
-                    ऑर्डर की तारीख: ${order["DATE"]}
+                
+                <div class="detail-row"><span>ऑर्डर आईडी</span> <span>${order["ORDER ID"]}</span></div>
+                <div class="detail-row"><span>ऑर्डर तिथि</span> <span>${order["DATE"]}</span></div>
+                <div class="detail-row"><span>रैयत का नाम</span> <span>${order["रैयत का नाम(यदि हो)"] || 'N/A'}</span></div>
+                <div class="detail-row"><span>मौजा/गाँव</span> <span>${order["मौजा/गाँव"]}</span></div>
+                <div class="detail-row"><span>जिला/प्रखंड</span> <span>${order["जिला चुनें (District)"]} / ${order["प्रखंड चुनें (Block)"]}</span></div>
+                <div class="detail-row"><span>खाता/खेसरा</span> <span>${order["खाता (यदि हो)"]} / ${order["खेसरा (यदि हो)"]}</span></div>
+                <div class="detail-row"><span>खतियान प्रकार</span> <span>${order["खतियान का प्रकार"]}</span></div>
+                <div class="detail-row"><span>जमाबंदी नंबर</span> <span>${order["जमाबंदी नंबर"] || 'N/A'}</span></div>
+                <div class="detail-row"><span>मोबाइल नंबर</span> <span>${order["अपना मोबाइल नंबर"]}</span></div>
+                <div class="detail-row"><span>पेमेंट मोड</span> <span>${order["भुगतान का तरीका चुनें"]}</span></div>
+                
+                <div style="padding: 15px; background: #fff9e6; border-top: 1px solid #ffeeba;">
+                    <strong style="font-size:13px; color:#856404;">डिलीवरी पता:</strong>
+                    <p style="margin:5px 0 0; font-size:13px; line-height:1.5;">${order["अपना नाम के साथ पूरा पता"]}, पिन: ${order["पिन कोड"]}</p>
+                </div>
+
+                <div class="footer-note">
+                    Jameen Seva - आपके दस्तावेजों की सुरक्षा हमारी जिम्मेदारी है।
                 </div>
             `;
         } else {
-            resultDiv.innerHTML = `<p style="color: red; text-align: center;">क्षमा करें! आईडी <b>${inputId}</b> नहीं मिली। कृपया सही आईडी दर्ज करें।</p>`;
+            resultDiv.innerHTML = `
+                <div style="padding:40px; text-align:center;">
+                    <p style="color:red; font-weight:bold;">ID "${inputId}" नहीं मिली!</p>
+                    <p style="font-size:13px; color:#666;">कृपया अपनी सही ID जांचें या 24 घंटे बाद प्रयास करें।</p>
+                </div>`;
         }
     })
     .catch(err => {
-        resultDiv.innerHTML = "<p style='color: red; text-align: center;'>सर्वर एरर! कृपया बाद में प्रयास करें।</p>";
+        resultDiv.innerHTML = "<div style='padding:40px; text-align:center; color:red;'>सर्वर से संपर्क नहीं हो पा रहा है। कृपया बाद में प्रयास करें।</div>";
     });
 }
 </script>
+
+</body>
+</html>
