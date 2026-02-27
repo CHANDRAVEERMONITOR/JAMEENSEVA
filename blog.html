@@ -6,7 +6,7 @@
     <title>Jameen Seva - जानकारी एवं प्रक्रिया</title>
     <style>
         :root { --primary: #28a745; --dark-blue: #005689; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); margin: 0; line-height: 1.6; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); margin: 0; line-height: 1.8; color: #333; }
         
         /* Navbar */
         .navbar { position: sticky; top: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
@@ -15,25 +15,23 @@
         .header { background: var(--dark-blue); color: white; text-align: center; padding: 40px 20px; }
         .container { max-width: 900px; margin: -30px auto 40px; padding: 0 15px; }
 
-        /* Index Links */
+        /* Index List */
         .link-section { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .link-section h3 { margin-top: 0; color: var(--dark-blue); border-bottom: 2px solid #eee; padding-bottom: 10px; }
         .info-link { display: block; color: #333; text-decoration: none; font-size: 17px; padding: 12px; border-bottom: 1px solid #f0f0f0; transition: 0.3s; font-weight: 500; }
         .info-link:hover { color: var(--primary); background: #f9f9f9; padding-left: 20px; }
 
-        /* Blog Content Card */
-        .blog-card { display: none; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 20px; animation: fadeIn 0.5s; }
+        /* Blog Card */
+        .blog-card { display: none; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 20px; border-top: 6px solid var(--primary); animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
-        h2 { color: var(--dark-blue); font-size: 26px; margin-top: 0; }
-        .meta-info { font-size: 13px; color: #888; margin-bottom: 20px; }
+        h2 { color: var(--dark-blue); font-size: 26px; }
+        h3 { color: var(--primary); margin-top: 25px; }
         .step { background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 5px solid var(--primary); }
-        .ad-space { background: #fafafa; border: 1px dashed #ccc; text-align: center; padding: 20px; margin: 20px 0; color: #999; font-size: 12px; }
+        .highlight { background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 5px solid #ffc107; font-weight: bold; }
         
-        .order-btn { display: block; background: #ff9800; color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-size: 20px; font-weight: bold; margin-top: 30px; transition: 0.3s; }
-        .order-btn:hover { background: #e68a00; transform: scale(1.02); }
-
-        footer { text-align: center; padding: 40px; color: #666; font-size: 14px; }
+        .order-btn { display: block; background: #ff9800; color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-size: 20px; font-weight: bold; margin-top: 30px; }
+        
+        footer { text-align: center; padding: 40px; color: #666; }
     </style>
 </head>
 <body>
@@ -42,36 +40,68 @@
     <a href="index.html">🏠 Home</a>
     <a href="blog.html">✍️ Blog</a>
     <a href="track.html">🚚 Tracking</a>
-    <a href="contact.html">📞 Contact Us</a>
+    <a href="contact.html">📞 Contact</a>
 </nav>
 
 <div class="header">
     <h1>बिहार भूमि ज्ञान केंद्र 2026</h1>
-    <p>जमीन से जुड़ी हर समस्या का सही और सटीक समाधान</p>
+    <p>जमीन सर्वे और सरकारी कागजातों की संपूर्ण जानकारी</p>
 </div>
 
 <div class="container">
+    
     <div class="link-section">
-        <h3>विषय चुनें (Topics)</h3>
-        <a href="javascript:void(0)" onclick="showBlog('blog1')" class="info-link">📑 बिहार खतियान होम डिलीवरी प्रक्रिया</a>
-        <a href="javascript:void(0)" onclick="showBlog('blog2')" class="info-link">🤝 पंचनामा बंटवारा कैसे बनाएं?</a>
-        <a href="javascript:void(0)" onclick="showBlog('blog3')" class="info-link">🌳 वंशावली फॉर्म और नियम</a>
-        </div>
+        <h3>महत्वपूर्ण लेख (Topics)</h3>
+        <a href="javascript:void(0)" onclick="showBlog('khatiyan-blog')" class="info-link">📜 बिहार खतियान होम डिलीवरी प्रक्रिया</a>
+        <a href="javascript:void(0)" onclick="showBlog('panchnama-blog')" class="info-link">🤝 पंचनामा बटवारा कैसे बनाएं? (विस्तृत जानकारी)</a>
+        <a href="javascript:void(0)" onclick="showBlog('vanshavali-blog')" class="info-link">👨‍👩‍👧 वंशावली कैसे बनवाएं? स्टेप-बाय-स्टेप</a>
+    </div>
 
-    <div id="blog1" class="blog-card">
+    <div id="khatiyan-blog" class="blog-card">
         <h2>📜 खतियान घर पर मंगवाने की पूरी प्रक्रिया</h2>
-        <div class="meta-info">Updated: Feb 2026 | By: Jameen Seva Team</div>
-        <p>बिहार में अब आप घर बैठे अपनी जमीन का खतियान मंगवा सकते हैं...</p>
-        <div class="step"><b>स्टेप 1:</b> हमारी साइट पर विवरण भरें।</div>
+        <p>बिहार में अपना पुराना (R.S.) या नया (C.S.) खतियान प्राप्त करना अब डिजिटल युग में बहुत आसान हो गया है।</p>
+        <div class="step"><b>स्टेप 1:</b> हमारी वेबसाइट JameenSeva.in पर जाएं।</div>
+        <div class="step"><b>स्टेप 2:</b> अपना जिला, प्रखंड और मौजा चुनें।</div>
+        <p>दस्तावेज डाक द्वारा आपके घर 7-10 दिनों में पहुँच जाएगा।</p>
         <a href="index.html" class="order-btn">अभी आर्डर करें</a>
     </div>
 
-    <div id="blog2" class="blog-card">
-        <h2>🤝 पंचनामा बंटवारा: नियम और प्रक्रिया</h2>
-        <p>सर्वे 2026 के लिए आपसी बंटवारा बहुत जरूरी है...</p>
+    <div id="panchnama-blog" class="blog-card">
+        <h1>बिहार भूमि सर्वे 2026: घर बैठे 'पंचनामा बटवारा' बनाने का सबसे आसान तरीका</h1>
+        <p>बिहार में चल रहे भूमि सर्वे में सबसे बड़ी चुनौती अपनी जमीन का मालिकाना हक साबित करना है। अगर आपके पूर्वजों के नाम पर जमीन है और अभी तक कागजी बंटवारा नहीं हुआ है, तो यह लेख आपके लिए बहुत महत्वपूर्ण है।</p>
+
+        <h2>पंचनामा बटवारा क्या है?</h2>
+        <p>जब परिवार के सभी सदस्य आपसी सहमति से जमीन को आपस में बांटते हैं और उसे एक दस्तावेज पर लिख लेते हैं, तो उसे <strong>पंचनामा बटवारा</strong> कहा जाता है। बिहार सर्वे 2026 के नियमों के अनुसार, अगर आपके पास रजिस्ट्री वाला बंटवारा नहीं है, तो सरपंच और पंचों द्वारा सत्यापित पंचनामा भी 100% मान्य होगा।</p>
+
+        <h3>बंटवारा नामा तैयार करने के 5 महत्वपूर्ण स्टेप्स</h3>
+        
+        <div class="step">
+            <b>1. वंशावली (Family Tree) तैयार करें:</b> सबसे पहले एक सादे कागज पर अपने परिवार का पूरा विवरण लिखें। इसमें खतियानी रैयात से लेकर वर्तमान वारिसों तक का नाम होना चाहिए।
         </div>
 
+        <p><b>2. स्टाम्प पेपर का चुनाव:</b> विशेषज्ञों के अनुसार, आप ₹100 या ₹500 के नॉन-जुडिशियल स्टाम्प पेपर का उपयोग कर सकते हैं। इसके ऊपर "पारिवारिक बंटवारा नामा" स्पष्ट रूप से लिखें।</p>
+
+        <div class="highlight">
+            3. चौहद्दी का सही विवरण: ध्यान दें: खाता और खेसरा नंबर लिखने के साथ-साथ चारों दिशाओं (उत्तर, दक्षिण, पूर्व, पश्चिम) के पड़ोसियों का नाम लिखना न भूलें।
+        </div>
+
+        <h3>4. गवाह और पंचों के हस्ताक्षर</h3>
+        <p>इस दस्तावेज को मजबूत बनाने के लिए गांव के कम से कम 3 गवाहों और अपने क्षेत्र के <strong>सरपंच या मुखिया</strong> की मोहर और हस्ताक्षर जरूर लगवाएं।</p>
+
+        <h2>सर्वे में इसका लाभ कैसे उठाएं?</h2>
+        <p>जब सर्वे अधिकारी आपके गांव में आएं, तो उन्हें 'स्वघोषणा पत्र' (Form 2) के साथ इस पंचनामा की फोटोकॉपी जरूर दें। इससे आपका नया खतियान आपके अपने नाम से अलग बनकर आएगा।</p>
+
+        <a href="index.html" class="order-btn">अभी अपना कागज़ आर्डर करें</a>
     </div>
+
+    <div id="vanshavali-blog" class="blog-card">
+        <h2>👨‍👩‍👧 वंशावली कैसे बनवाएं?</h2>
+        <p>वंशावली बंटवारे के लिए आधार है। इसे आप अपने मुखिया या सरपंच से बनवा सकते हैं।</p>
+        <div class="step"><b>टिप:</b> वंशावली में सभी जीवित और मृत वारिसों का स्पष्ट उल्लेख करें।</div>
+        <a href="index.html" class="order-btn">मदद के लिए संपर्क करें</a>
+    </div>
+
+</div>
 
 <footer>
     <p>&copy; 2026 JameenSeva.in - बिहार की सेवा में समर्पित</p>
