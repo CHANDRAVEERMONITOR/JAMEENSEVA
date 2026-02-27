@@ -1,4 +1,36 @@
+.navbar {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background-color: #28a745;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 15px 0;
+        box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+    .navbar a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+    }
+    .navbar a:hover { color: #ffc107; }
+    @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
+</style>
 
+<nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#services">📄 Our Services</a>
+    <a href="blog.html">✍️ Blog</a>
+    <a href="track.html">🚚 Order Tracking</a>
+    <a href="contact.html">📞 Contact Us</a>
+</nav>
 <div style="max-width: 550px; margin: 20px auto; padding: 25px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.15); text-align: center; border-top: 5px solid #28a745;">
     <h3 style="color: #005689; margin-bottom: 10px;">अपना ऑर्डर स्टेटस चेक करें</h3>
     <p style="font-size: 13px; color: #666; margin-bottom: 15px;">अपना Tracking ID (उदा. JS-1234) नीचे दर्ज करें ऑर्डर अपडेट होने मे 24 घंटा लग सकती है </p>
