@@ -3,170 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jameen Seva - जानकारी एवं प्रक्रिया</title>
+    <title>बिहार भूमि जानकारी ब्लॉग - जमीन सेवा सहायता केंद्र</title>
     <style>
-        :root { --primary: #28a745; --dark-blue: #005689; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: var(--bg); margin: 0; line-height: 1.8; color: #333; }
+        :root { --primary: #28a745; --dark: #005689; --gray: #f8f9fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #eee; color: #333; }
         
         /* Navbar */
-        .navbar { position: sticky; top: 0; width: 100%; background: var(--primary); display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
-        
-        .header { background: var(--dark-blue); color: white; text-align: center; padding: 40px 20px; }
-        .container { max-width: 900px; margin: -30px auto 40px; padding: 0 15px; }
+        .nav { background: var(--primary); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 16px; }
 
-        /* Index List */
-        .link-section { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px; }
-        .info-link { display: block; color: #333; text-decoration: none; font-size: 17px; padding: 12px; border-bottom: 1px solid #f0f0f0; transition: 0.3s; font-weight: 500; }
-        .info-link:hover { color: var(--primary); background: #f9f9f9; padding-left: 20px; }
+        .header-blog { background: var(--dark); color: white; text-align: center; padding: 40px 20px; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
 
-        /* Blog Card */
-        .blog-card { display: none; background: white; padding: 35px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-top: 20px; border-top: 6px solid var(--primary); animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* AdSense Space */
+        .ad-top { background: white; padding: 15px; margin-bottom: 20px; text-align: center; border-radius: 8px; border: 1px dashed #bbb; color: #999; font-size: 12px; }
+
+        /* Blog Grid Layout */
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
-        h2 { color: var(--dark-blue); font-size: 26px; }
-        h3 { color: var(--primary); margin-top: 25px; }
-        .step { background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 15px 0; border-left: 5px solid var(--primary); }
-        .highlight { background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 5px solid #ffc107; font-weight: bold; }
+        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
-        .order-btn { display: block; background: #ff9800; color: white; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-size: 20px; font-weight: bold; margin-top: 30px; }
+        .blog-img { width: 100%; height: 180px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 40px; }
         
-        footer { text-align: center; padding: 40px; color: #666; }
+        .blog-content { padding: 20px; flex-grow: 1; }
+        .blog-content h2 { font-size: 20px; margin: 0 0 10px; color: var(--dark); line-height: 1.4; }
+        .blog-content p { font-size: 14px; color: #666; margin-bottom: 20px; }
+        
+        .read-more { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-align: center; }
+        
+        footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
+        footer a { color: #ffc107; text-decoration: none; margin: 0 10px; }
+
+        @media (max-width: 600px) { .blog-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <a href="index.html">🏠 Home</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="track.html">🚚 Tracking</a>
-    <a href="contact.html">📞 Contact</a>
+<nav class="nav">
+    <a href="index.html">🏠 होम</a>
+    <a href="blog.html">✍️ ब्लॉग</a>
+    <a href="track.html">🚚 ट्रैकिंग</a>
+    <a href="contact.html">📞 संपर्क</a>
 </nav>
 
-<div class="header">
-    <h1>बिहार भूमि ज्ञान केंद्र 2026</h1>
-    <p>जमीन सर्वे और सरकारी कागजातों की संपूर्ण जानकारी</p>
+<div class="header-blog">
+    <h1>जमीन सेवा जानकारी पोर्टल</h1>
+    <p>बिहार भूमि सर्वे 2026 और जमीन संबंधित सभी कानूनी जानकारी यहाँ पाएं</p>
 </div>
 
 <div class="container">
-    
-    <div class="link-section">
-        <h3>महत्वपूर्ण लेख (Topics)</h3>
-        <a href="javascript:void(0)" onclick="showBlog('khatiyan-blog')" class="info-link">📜 बिहार खतियान होम डिलीवरी प्रक्रिया</a>
-        <a href="javascript:void(0)" onclick="showBlog('panchnama-blog')" class="info-link">🤝 पंचनामा बटवारा कैसे बनाएं? (विस्तृत जानकारी)</a>
-        <a href="javascript:void(0)" onclick="showBlog('vanshavali-blog')" class="info-link">👨‍👩‍👧 वंशावली कैसे बनवाएं? स्टेप-बाय-स्टेप</a>
-         <a href="javascript:void(0)" onclick="showBlog('ragister 2-blog')" class="info-link">👨‍👩‍👧 ragister-2 क्या है घर पर कैसे मंगवाएं  </a>
-    </div>
+    <div class="ad-top">-- AdSense Ad (Top Unit) --</div>
 
-    <div id="khatiyan-blog" class="blog-card">
-        <h2>📜 खतियान घर पर मंगवाने की पूरी प्रक्रिया</h2>
-        <p>बिहार में अपना पुराना (R.S.) या नया (C.S.) खतियान प्राप्त करना अब डिजिटल युग में बहुत आसान हो गया है।</p>
-        <div class="step"><b>स्टेप 1:</b> हमारी वेबसाइट JameenSeva.in पर जाएं।</div>
-        <div class="step"><b>स्टेप 2:</b> अपना जिला, प्रखंड और मौजा चुनें।</div>
-        <p>दस्तावेज डाक द्वारा आपके घर 7-10 दिनों में पहुँच जाएगा।</p>
-        <a href="index.html" class="order-btn">अभी आर्डर करें</a>
-    </div>
-
-    <div id="panchnama-blog" class="blog-card">
-        <h1>बिहार भूमि सर्वे 2026: घर बैठे 'पंचनामा बटवारा' बनाने का सबसे आसान तरीका</h1>
-        <p>बिहार में चल रहे भूमि सर्वे में सबसे बड़ी चुनौती अपनी जमीन का मालिकाना हक साबित करना है। अगर आपके पूर्वजों के नाम पर जमीन है और अभी तक कागजी बंटवारा नहीं हुआ है, तो यह लेख आपके लिए बहुत महत्वपूर्ण है।</p>
-
-        <h2>पंचनामा बटवारा क्या है?</h2>
-        <p>जब परिवार के सभी सदस्य आपसी सहमति से जमीन को आपस में बांटते हैं और उसे एक दस्तावेज पर लिख लेते हैं, तो उसे <strong>पंचनामा बटवारा</strong> कहा जाता है। बिहार सर्वे 2026 के नियमों के अनुसार, अगर आपके पास रजिस्ट्री वाला बंटवारा नहीं है, तो सरपंच और पंचों द्वारा सत्यापित पंचनामा भी 100% मान्य होगा।</p>
-
-        <h3>बंटवारा नामा तैयार करने के 5 महत्वपूर्ण स्टेप्स</h3>
+    <div class="blog-grid">
         
-        <div class="step">
-            <b>1. वंशावली (Family Tree) तैयार करें:</b> सबसे पहले एक सादे कागज पर अपने परिवार का पूरा विवरण लिखें। इसमें खतियानी रैयात से लेकर वर्तमान वारिसों तक का नाम होना चाहिए।
+        <div class="blog-card">
+            <div class="blog-img" style="background: #e3f2fd;">📜</div>
+            <div class="blog-content">
+                <h2>बिहार पुराना केवाला ऑनलाइन कैसे निकालें?</h2>
+                <p>क्या आपका केवाला खो गया है? जानें डीड नंबर और साल की मदद से घर बैठे केवाला मंगवाने का पूरा प्रोसेस...</p>
+                <a href="kewalablog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
         </div>
 
-        <p><b>2. स्टाम्प पेपर का चुनाव:</b> विशेषज्ञों के अनुसार, आप ₹100 या ₹500 के नॉन-जुडिशियल स्टाम्प पेपर का उपयोग कर सकते हैं। इसके ऊपर "पारिवारिक बंटवारा नामा" स्पष्ट रूप से लिखें।</p>
-
-        <div class="highlight">
-            3. चौहद्दी का सही विवरण: ध्यान दें: खाता और खेसरा नंबर लिखने के साथ-साथ चारों दिशाओं (उत्तर, दक्षिण, पूर्व, पश्चिम) के पड़ोसियों का नाम लिखना न भूलें।
+        <div class="blog-card">
+            <div class="blog-img" style="background: #f1f8e9;">🤝</div>
+            <div class="blog-content">
+                <h2>पंचनामा बंटवारा कैसे बनाएं?</h2>
+                <p>बिहार सर्वे 2026 में बिना वसीयत जमीन का बंटवारा करने के लिए पंचनामा सबसे आसान तरीका है। यहाँ देखें फॉर्मेट...</p>
+                <a href="panchnamablog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
         </div>
 
-        <h3>4. गवाह और पंचों के हस्ताक्षर</h3>
-        <p>इस दस्तावेज को मजबूत बनाने के लिए गांव के कम से कम 3 गवाहों और अपने क्षेत्र के <strong>सरपंच या मुखिया</strong> की मोहर और हस्ताक्षर जरूर लगवाएं।</p>
+        <div class="blog-card">
+            <div class="blog-img" style="background: #fff3e0;">📑</div>
+            <div class="blog-content">
+                <h2>जमाबंदी पंजी-2 ऑनलाइन सुधार (परिमार्जन)</h2>
+                <p>अगर आपकी रसीद नहीं कट रही या रकबा जीरो दिख रहा है, तो परिमार्जन पोर्टल पर सुधार की पूरी प्रक्रिया जानें...</p>
+                <a href="jamabandiblog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
 
-        <h2>सर्वे में इसका लाभ कैसे उठाएं?</h2>
-        <p>जब सर्वे अधिकारी आपके गांव में आएं, तो उन्हें 'स्वघोषणा पत्र' (Form 2) के साथ इस पंचनामा की फोटोकॉपी जरूर दें। इससे आपका नया खतियान आपके अपने नाम से अलग बनकर आएगा।</p>
+        </div>
 
-        <a href="index.html" class="order-btn">अभी अपना कागज़ आर्डर करें</a>
-    </div>
-
-
-    <div id="ragister 2-blog" class="blog-card">
-    <h2>जमाबंदी कैसे निकले </h2>
-    <div class="meta-info">Updated: 27 Feb 2026</div>
-    
-    <div class="ad-space">-- AdSense Ad --</div>
-    
-    <p>जमाबंदी पंजी या रजिस्टर-2 निकालने के लिए अब आपको किसी ऑफिस की चक्कर काटने की जरूरत नहीं है अब आप मेरे साइट से डायरेक्ट cod मे घर पर सत्यापित नकल यानि ओरिजिनल मँगवा सकतें है  </p>
-    
-    <div class="step">
-        <b>मुख्य जानकारी:</b> जमाबंदी पंजी मँगवाने का पूरा प्रोसेस। बिहार जमाबंदी पंजी-2 ऑनलाइन सुधार और पूरी जानकारी 2026
-    </div>
-
-    <p>पंजी-2 में अक्सर होने वाली गलतियां:
-अक्सर पुराने रिकॉर्ड को डिजिटल करते समय कुछ गलतियां हो गई हैं, जैसे:
-
-नाम की गलती: रैयत का नाम गलत दर्ज होना या पिता का नाम गायब होना।
-
-रकबा शून्य (Zero): ऑनलाइन रिकॉर्ड में जमीन की मात्रा 0 दिखाई देना।
-
-लगान (रसीद) नहीं कटना: पुराना लगान बाकी दिखना या रसीद ऑनलाइन नहीं दिखना।
-
-खाता/खेसरा गायब: जमीन का विवरण सही से नहीं चढ़ना।
-
-पंजी-2 (जमाबंदी) में सुधार कैसे करें? (परिमार्जन पोर्टल)
-बिहार सरकार ने इन गलतियों को सुधारने के लिए 'परिमार्जन' (Parimarjan) पोर्टल शुरू किया है। इसकी प्रक्रिया नीचे दी गई है:
-
-1. आवश्यक दस्तावेज तैयार करें:
-
-सुधार के लिए एक शपथ पत्र (Affidavit)।
-
-शुद्धि पत्र की प्रति या पुरानी रसीद की फोटोकॉपी।
-
-वंशावली (यदि जमीन पूर्वजों के नाम पर है)।
-
-2. ऑनलाइन आवेदन:
-बिहार भूमि की आधिकारिक वेबसाइट पर जाकर 'परिमार्जन' विकल्प को चुनें। यहाँ अपनी शिकायत दर्ज करें और ऊपर दिए गए दस्तावेजों को स्कैन करके अपलोड करें।
-
-3. अंचल कार्यालय द्वारा सत्यापन:
-आपके आवेदन के बाद, हल्का कर्मचारी और राजस्व अधिकारी इसकी जांच करेंगे। यदि आपके दस्तावेज सही पाए जाते हैं, तो आपकी ऑनलाइन डिजिटल पंजी-2 में सुधार कर दिया जाएगा।
-
-सर्वे 2026 में पंजी-2 का महत्व
-वर्तमान सर्वे में अधिकारी आपसे 'वशावली' के साथ 'अद्यतन लगान रसीद' मांगते हैं। रसीद तभी कटेगी जब आपकी पंजी-2 अपडेट होगी। यदि आपकी जमाबंदी ऑनलाइन नहीं दिख रही है, तो तुरंत 'अप्रतिबद्ध जमाबंदी' (Uncommitted Jamabandi) के तहत आवेदन करें।
-
-निष्कर्ष:
-पंजी-2 केवल एक कागज नहीं, बल्कि आपकी जमीन की पहचान है। सर्वे खत्म होने से पहले यह सुनिश्चित कर लें कि आपकी जमाबंदी ऑनलाइन सही दिख रही है।</p>
-    
-    <a href="index.html" class="order-btn">सेवा का लाभ उठाएं</a>
-</div>
-    
-
-    <div id="vanshavali-blog" class="blog-card">
-        <h2>👨‍👩‍👧 वंशावली कैसे बनवाएं?</h2>
-        <p>वंशावली बंटवारे के लिए आधार है। इसे आप अपने मुखिया या सरपंच से बनवा सकते हैं।</p>
-        <div class="step"><b>टिप:</b> वंशावली में सभी जीवित और मृत वारिसों का स्पष्ट उल्लेख करें।</div>
-        <a href="index.html" class="order-btn">मदद के लिए संपर्क करें</a>
-    </div>
-
+    <div class="ad-top" style="margin-top: 30px;">-- AdSense Ad (Middle Unit) --</div>
 </div>
 
 <footer>
-    <p>&copy; 2026 JameenSeva.in - बिहार की सेवा में समर्पित</p>
+    <p>&copy; 2026 JameenSeva.in - बिहार की सबसे भरोसेमंद जमीन सेवा</p>
+    <p>
+        <a href="disclaimer.html">Disclaimer</a> | 
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="contact.html">Contact Us</a>
+    </p>
 </footer>
 
-<script>
-    function showBlog(blogId) {
-        var allBlogs = document.getElementsByClassName('blog-card');
-        for (var i = 0; i < allBlogs.length; i++) { allBlogs[i].style.display = 'none'; }
-        var selectedBlog = document.getElementById(blogId);
-        selectedBlog.style.display = 'block';
-        window.scrollTo({ top: selectedBlog.offsetTop - 100, behavior: 'smooth' });
-    }
-</script>
 </body>
 </html>
