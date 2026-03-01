@@ -1,66 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <url>
-    <loc>https://jameenseva.in/</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>1.00</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jameenseva.in/</loc><lastmod>2026-03-01</lastmod><priority>1.00</priority></url>
+  <url><loc>https://jameenseva.in/blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.90</priority></url>
+  <url><loc>https://jameenseva.in/sarkari.html</loc><lastmod>2026-03-01</lastmod><priority>0.85</priority></url>
 
-  <url>
-    <loc>https://jameenseva.in/blog.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.90</priority>
-  </url>
+  <url><loc>https://jameenseva.in/bihar-rcms-guide.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/bihar-naksha-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/lpc-guide-bihar.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/e-mapi-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/bihar-survey-guide-2026.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/parimarjan-plus.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/dakhil-kharij.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/panchnama-batwara.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/kewala-download.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/khatiyan-guide.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
 
-  <url>
-    <loc>https://jameenseva.in/khatiyan.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/panchnama.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/vanshavali.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/ragister2.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/track.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.80</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/sarkari.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.70</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/contact.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.50</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/about-us.html</loc>
-    <lastmod>2026-02-27</lastmod>
-    <priority>0.50</priority>
-  </url>
-
+  <url><loc>https://jameenseva.in/about.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/contact.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/disclaimer.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
 </urlset>
