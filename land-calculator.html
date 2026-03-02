@@ -36,8 +36,8 @@
 
 <div class="calc-card">
     <div class="header">
-        <h1>Smart Land Expert</h1>
-        <p style="font-size:12px; margin-top:5px;">बिहार विशेष सर्वेक्षण 2026 मानक</p>
+        <h1>Smart Land Expert v5.0</h1>
+        <p style="font-size:12px; margin-top:5px;">बिहार विशेष सर्वेक्षण 2026 मानक (Auto-Split Mode)</p>
     </div>
 
     <div class="body-content">
@@ -65,7 +65,7 @@
             <div class="input-box"><label>बीघा (Bigha)</label><input type="number" id="in_bigha" oninput="convert('bigha')"></div>
             <div class="input-box"><label>कट्ठा (Kattha)</label><input type="number" id="in_kattha" oninput="convert('kattha')"></div>
             <div class="input-box"><label>धूर (Dhur)</label><input type="number" id="in_dhur" oninput="convert('dhur')"></div>
-            <div class="input-box"><label>वर्ग फीट (Sq. Ft)</label><input type="number" id="in_sqft" oninput="convert('sqft')" step="any"></div>
+            <div class="input-box full-span"><label>वर्ग फीट (Sq. Ft)</label><input type="number" id="in_sqft" oninput="convert('sqft')" step="any"></div>
         </div>
 
         <div class="results-bar">
@@ -76,7 +76,7 @@
         </div>
 
         <div class="btn-container">
-            <button class="btn btn-print" onclick="window.print()">Print PDF</button>
+            <button class="btn btn-print" onclick="window.print()">Print PDF Report</button>
             <button class="btn btn-copy" onclick="copyReport()">Copy Results</button>
         </div>
     </div>
@@ -92,23 +92,38 @@ function convert(source) {
     let sqft = 0;
     let dhurSqft = (laggi * 1.5) ** 2;
 
-    // Convert everything to Sqft base
+    // 1. Calculate total SQFT based on input
     if (source === 'dismil') sqft = val * 435.6;
     else if (source === 'sqft') sqft = val;
     else if (source === 'dhur') sqft = val * dhurSqft;
     else if (source === 'kattha') sqft = val * 20 * dhurSqft;
     else if (source === 'bigha') sqft = val * 400 * dhurSqft;
 
-    // Fill inputs with Rounding logic
+    // 2. Main Logic: Auto-Split (Bigha -> Kattha -> Dhur)
+    let totalDhur = sqft / dhurSqft;
+    
+    // Math.floor use karenge taaki poora number bigha me jaye, bacha hua kattha me
+    let bighaVal = Math.floor(totalDhur / 400);
+    let remainingDhurAfterBigha = totalDhur % 400;
+    
+    let katthaVal = Math.floor(remainingDhurAfterBigha / 20);
+    let dhurVal = remainingDhurAfterBigha % 20;
+
+    // 3. Update Inputs (Excluding source to avoid loop)
     if (source !== 'dismil') document.getElementById('in_dismil').value = (sqft / 435.6).toFixed(3);
     if (source !== 'sqft') document.getElementById('in_sqft').value = sqft.toFixed(2);
     
-    let totalDhur = sqft / dhurSqft;
-    if (source !== 'dhur') document.getElementById('in_dhur').value = Math.round(totalDhur);
-    if (source !== 'kattha') document.getElementById('in_kattha').value = Math.round(totalDhur / 20);
-    if (source !== 'bigha') document.getElementById('in_bigha').value = Math.round(totalDhur / 400);
+    // Yahan hum B-K-D ko tabhi update karenge jab source unme se koi ek na ho, 
+    // ya fir logical update karenge
+    if (source === 'dismil' || source === 'sqft') {
+        document.getElementById('in_bigha').value = bighaVal;
+        document.getElementById('in_kattha').value = katthaVal;
+        document.getElementById('in_dhur').value = dhurVal.toFixed(2);
+    } else if (source === 'bigha' || source === 'kattha' || source === 'dhur') {
+        // User manually inputting BKD, we keep it as it is for total SQFT calculation above
+    }
 
-    // Mini results
+    // 4. Update Other Stats
     document.getElementById('res_acre').innerText = (sqft / 43560).toFixed(4);
     document.getElementById('res_kari').innerText = Math.round((sqft / 435.6) * 1000);
     document.getElementById('res_meter').innerText = (sqft / 10.764).toFixed(2);
