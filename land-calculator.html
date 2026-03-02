@@ -3,153 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JameenSeva - All-in-One Land Calculator</title>
+    <title>Smart Land Expert - JameenSeva</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #064e3b; /* Deep Green */
-            --accent: #b45309;  /* Golden Brown */
-            --light-bg: #f8fafc;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #cbd5e1;
-            margin: 0;
-            padding: 10px;
-        }
-
-        .calc-card {
-            max-width: 650px;
-            margin: 20px auto;
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 2px solid var(--primary);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(to right, var(--primary), #065f46);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-        }
-
-        .header h1 { margin: 0; font-size: 24px; text-transform: uppercase; }
-
-        .body-content { padding: 25px; }
-
-        .lagga-section {
-            background: #fef3c7;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #fcd34d;
-            text-align: center;
-        }
-
-        .lagga-section label { font-weight: 700; color: var(--primary); display: block; margin-bottom: 8px; }
-
-        select {
-            width: 100%;
-            max-width: 300px;
-            padding: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
-            color: var(--primary);
-        }
-
-        .input-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .input-box {
-            background: var(--light-bg);
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            transition: 0.3s;
-        }
-
-        .input-box:focus-within {
-            border-color: var(--accent);
-            background: white;
-            box-shadow: 0 0 10px rgba(180, 83, 9, 0.1);
-        }
-
-        .input-box label {
-            display: block;
-            font-size: 12px;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .input-box input {
-            width: 100%;
-            border: none;
-            outline: none;
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary);
-            background: transparent;
-        }
-
+        :root { --primary: #064e3b; --accent: #b45309; }
+        body { font-family: 'Poppins', sans-serif; background-color: #cbd5e1; margin: 0; padding: 10px; }
+        .calc-card { max-width: 650px; margin: 20px auto; background: #fff; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); border: 2px solid var(--primary); overflow: hidden; }
+        .header { background: linear-gradient(to right, var(--primary), #065f46); color: white; padding: 25px; text-align: center; border-bottom: 5px solid var(--accent); }
+        .header h1 { margin: 0; font-size: 22px; text-transform: uppercase; }
+        .body-content { padding: 20px; }
+        .lagga-section { background: #fef3c7; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #fcd34d; text-align: center; }
+        select { width: 100%; max-width: 250px; padding: 10px; font-size: 18px; font-weight: 700; border: 2px solid var(--primary); border-radius: 8px; color: var(--primary); }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .input-box { background: #f8fafc; padding: 12px; border-radius: 10px; border: 2px solid #e2e8f0; }
+        .input-box:focus-within { border-color: var(--accent); background: white; }
+        .input-box label { display: block; font-size: 12px; font-weight: 700; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
+        .input-box input { width: 100%; border: none; outline: none; font-size: 20px; font-weight: 700; color: var(--primary); background: transparent; }
         .full-span { grid-column: 1 / -1; border-color: var(--primary); background: #ecfdf5; }
-
-        .results-bar {
-            margin-top: 25px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .mini-result {
-            background: #f1f5f9;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            border-bottom: 3px solid var(--accent);
-        }
-
+        .results-bar { margin-top: 20px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .mini-result { background: #f1f5f9; padding: 10px; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--accent); }
         .mini-result span { font-size: 11px; color: #475569; display: block; font-weight: 600; }
         .mini-result b { font-size: 16px; color: #0f172a; }
-
-        .btn-container {
-            margin-top: 25px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-print { background: var(--primary); color: white; }
-        .btn-copy { background: var(--accent); color: white; }
-        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-
-        .footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        @media print { .btn-container, .lagga-section { display: none; } }
+        .btn-container { margin-top: 20px; display: flex; gap: 10px; }
+        .btn { flex: 1; padding: 15px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; transition: 0.3s; }
+        .btn-print { background: var(--primary); }
+        .btn-copy { background: var(--accent); }
+        .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        @media print { .btn-container, .lagga-section, .header p { display: none; } }
     </style>
 </head>
 <body>
@@ -157,7 +37,7 @@
 <div class="calc-card">
     <div class="header">
         <h1>Smart Land Expert</h1>
-        <p style="margin:5px 0 0; opacity:0.8; font-size:12px;">Bihar Special Survey Edition 2026</p>
+        <p style="font-size:12px; margin-top:5px;">बिहार विशेष सर्वेक्षण 2026 मानक</p>
     </div>
 
     <div class="body-content">
@@ -180,27 +60,71 @@
         <div class="input-grid">
             <div class="input-box full-span">
                 <label>डिसमिल (Dismil)</label>
-                <input type="number" id="in_dismil" oninput="convert('dismil')" placeholder="0.00">
+                <input type="number" id="in_dismil" oninput="convert('dismil')" step="any">
             </div>
-            <div class="input-box">
-                <label>बीघा (Bigha)</label>
-                <input type="number" id="in_bigha" oninput="convert('bigha')" placeholder="0">
-            </div>
-            <div class="input-box">
-                <label>कट्ठा (Kattha)</label>
-                <input type="number" id="in_kattha" oninput="convert('kattha')" placeholder="0">
-            </div>
-            <div class="input-box">
-                <label>धूर (Dhur)</label>
-                <input type="number" id="in_dhur" oninput="convert('dhur')" placeholder="0">
-            </div>
-            <div class="input-box">
-                <label>वर्ग फीट (Sq. Ft)</label>
-                <input type="number" id="in_sqft" oninput="convert('sqft')" placeholder="0">
-            </div>
+            <div class="input-box"><label>बीघा (Bigha)</label><input type="number" id="in_bigha" oninput="convert('bigha')"></div>
+            <div class="input-box"><label>कट्ठा (Kattha)</label><input type="number" id="in_kattha" oninput="convert('kattha')"></div>
+            <div class="input-box"><label>धूर (Dhur)</label><input type="number" id="in_dhur" oninput="convert('dhur')"></div>
+            <div class="input-box"><label>वर्ग फीट (Sq. Ft)</label><input type="number" id="in_sqft" oninput="convert('sqft')" step="any"></div>
         </div>
 
         <div class="results-bar">
             <div class="mini-result"><span>एकड़ (Acre)</span><b id="res_acre">0</b></div>
-            <div class="mini-result"><span>वर्ग कड़ी (Kari)</span><b id="res_kari">0</b></div>
-            <div class="mini-result"><span>वर्ग मीटर
+            <div class="mini-result"><span>वर्ग कड़ी (Kari)</span><b id="res_kari">0</b></div>
+            <div class="mini-result"><span>वर्ग मीटर (Mtr)</span><b id="res_meter">0</b></div>
+            <div class="mini-result"><span>वर्ग गज (Yard)</span><b id="res_gaj">0</b></div>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn btn-print" onclick="window.print()">Print PDF</button>
+            <button class="btn btn-copy" onclick="copyReport()">Copy Results</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function convert(source) {
+    let laggi = parseFloat(document.getElementById('laggi').value);
+    let val = parseFloat(document.getElementById('in_' + source).value);
+    
+    if (isNaN(val) || val < 0) { clearOtherFields(source); return; }
+
+    let sqft = 0;
+    let dhurSqft = (laggi * 1.5) ** 2;
+
+    // Convert everything to Sqft base
+    if (source === 'dismil') sqft = val * 435.6;
+    else if (source === 'sqft') sqft = val;
+    else if (source === 'dhur') sqft = val * dhurSqft;
+    else if (source === 'kattha') sqft = val * 20 * dhurSqft;
+    else if (source === 'bigha') sqft = val * 400 * dhurSqft;
+
+    // Fill inputs with Rounding logic
+    if (source !== 'dismil') document.getElementById('in_dismil').value = (sqft / 435.6).toFixed(3);
+    if (source !== 'sqft') document.getElementById('in_sqft').value = sqft.toFixed(2);
+    
+    let totalDhur = sqft / dhurSqft;
+    if (source !== 'dhur') document.getElementById('in_dhur').value = Math.round(totalDhur);
+    if (source !== 'kattha') document.getElementById('in_kattha').value = Math.round(totalDhur / 20);
+    if (source !== 'bigha') document.getElementById('in_bigha').value = Math.round(totalDhur / 400);
+
+    // Mini results
+    document.getElementById('res_acre').innerText = (sqft / 43560).toFixed(4);
+    document.getElementById('res_kari').innerText = Math.round((sqft / 435.6) * 1000);
+    document.getElementById('res_meter').innerText = (sqft / 10.764).toFixed(2);
+    document.getElementById('res_gaj').innerText = (sqft / 9).toFixed(2);
+}
+
+function clearOtherFields(source) {
+    const ids = ['in_dismil', 'in_sqft', 'in_dhur', 'in_kattha', 'in_bigha'];
+    ids.forEach(i => { if(i !== 'in_'+source) document.getElementById(i).value = ''; });
+}
+
+function copyReport() {
+    let text = `JameenSeva Report:\nLaggi: ${document.getElementById('laggi').value} Hath\nDismil: ${document.getElementById('in_dismil').value}\nHisaab: ${document.getElementById('in_bigha').value} Bigha, ${document.getElementById('in_kattha').value} Kattha, ${document.getElementById('in_dhur').value} Dhur\nWebsite: JameenSeva.in`;
+    navigator.clipboard.writeText(text);
+    alert("हिसाब कॉपी हो गया!");
+}
+</script>
+</body>
+</html>
