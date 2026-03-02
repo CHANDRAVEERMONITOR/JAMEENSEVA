@@ -3,211 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Bihar Land Calculator | JameenSeva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Advanced Land Expert Calculator | JameenSeva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1b5e20; /* गहरा हरा - बिहार राजस्व रंग */
-            --accent: #d4af37;  /* गोल्ड - प्रीमियम लुक */
-            --bg: #fdfdfd;
+            --primary-dark: #113a13;
+            --primary-light: #27ae60;
+            --gold: #d4af37;
+            --bg-color: #f8f9fa;
         }
 
-        body { font-family: 'Roboto', sans-serif; background: #e0e0e0; padding: 10px; }
+        body {
+            font-family: 'Noto Sans Devanagari', 'Montserrat', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 10px;
+        }
 
-        .main-container {
-            max-width: 650px;
+        .calc-wrapper {
+            max-width: 800px;
             margin: 20px auto;
-            background: var(--bg);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border: 2px solid var(--accent);
-            overflow: hidden;
-        }
-
-        .head-section {
-            background: var(--primary);
-            color: white;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
-        }
-
-        .head-section h1 { margin: 0; font-size: 24px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-
-        .calculator-body { padding: 25px; }
-
-        .lagga-selector {
-            background: #fff9c4;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border: 1px dashed #fbc02d;
-            text-align: center;
-        }
-
-        .lagga-selector label { font-weight: bold; color: var(--primary); font-size: 18px; display: block; margin-bottom: 10px; }
-
-        select {
-            width: 80%;
-            padding: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
             background: white;
-            cursor: pointer;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border: 1px solid var(--gold);
         }
 
-        .input-box-grid {
+        /* Header Styling */
+        .header-brand {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-brand h1 { margin: 0; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .header-brand p { margin: 10px 0 0; font-size: 14px; opacity: 0.9; }
+
+        /* Form Styling */
+        .calc-content { padding: 30px; }
+
+        .settings-panel {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px solid var(--gold);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .input-main-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
-        .box { background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 10px; transition: 0.3s; }
-        .box:focus-within { border-color: var(--accent); box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        .custom-input {
+            position: relative;
+            background: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #edf2f7;
+            transition: 0.3s;
+        }
 
-        .box label { font-size: 13px; font-weight: bold; color: #555; display: block; margin-bottom: 5px; }
-        
-        .box input {
+        .custom-input:focus-within {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 12px rgba(39, 174, 96, 0.15);
+        }
+
+        .custom-input label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #718096;
+            display: block;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .custom-input input {
             width: 100%;
             border: none;
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--primary);
             outline: none;
-            background: transparent;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
         }
 
-        .full-width { grid-column: 1 / -1; background: #e8f5e9; border: 2px solid var(--primary); }
+        /* Result Cards */
+        .report-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #cbd5e0;
+        }
 
-        .other-results {
-            margin-top: 25px;
+        .summary-card {
+            background: #f1f8e9;
+            padding: 20px;
+            border-radius: 15px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .mini-card { background: #f1f8e9; padding: 10px; text-align: center; border-radius: 8px; border: 1px solid #c8e6c9; }
-        .mini-card span { font-size: 11px; color: #666; display: block; }
-        .mini-card b { font-size: 14px; color: #1b5e20; }
+        .stat { text-align: center; }
+        .stat span { font-size: 11px; color: #666; display: block; }
+        .stat b { font-size: 18px; color: var(--primary-dark); }
 
-        .formula-card {
-            margin-top: 25px;
-            background: #fafafa;
-            border-top: 1px solid #eee;
+        /* Action Buttons */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            flex: 1;
             padding: 15px;
-            font-size: 12px;
-            color: #777;
-            text-align: center;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-print { background: var(--primary-dark); color: white; }
+        .btn-copy { background: var(--gold); color: #000; }
+        .btn-action:hover { opacity: 0.9; transform: scale(0.98); }
+
+        /* Print CSS */
+        @media print {
+            body { background: white; padding: 0; }
+            .calc-wrapper { box-shadow: none; border: 1px solid #000; }
+            .btn-group, .settings-panel { display: none; }
         }
     </style>
 </head>
 <body>
 
-<div class="main-container">
-    <div class="head-section">
-        <h1>डिजिटल जमीन मापी कैलकुलेटर</h1>
-        <div style="font-size: 12px; margin-top: 5px;">बिहार विशेष सर्वे 2026 मानक पर आधारित</div>
+<div class="calc-wrapper" id="printArea">
+    <div class="header-brand">
+        <h1>जमीन गणना रिपोर्ट प्रो</h1>
+        <p>JameenSeva.in | बिहार भू-अभिलेख मानक 2026</p>
     </div>
 
-    <div class="calculator-body">
-        
-        <div class="lagga-selector">
-            <label>📏 अपना लग्गा चुनें (हाथ में):</label>
-            <select id="laggi" onchange="calculate('sqft')">
-                <option value="4">4 हाथ</option>
-                <option value="4.5">4.5 हाथ</option>
-                <option value="5">5 हाथ</option>
-                <option value="5.5" selected>5.5 हाथ</option>
-                <option value="6">6 हाथ</option>
-                <option value="6.5">6.5 हाथ</option>
-                <option value="7">7 हाथ</option>
-                <option value="7.5">7.5 हाथ</option>
-                <option value="8.25">8.25 हाथ (राजस्व मानक)</option>
-            </select>
+    <div class="calc-content">
+        <div class="settings-panel">
+            <div>
+                <label style="font-weight:bold; color: #113a13;">क्षेत्रीय लग्गी (हाथ): </label>
+                <select id="laggi" onchange="runCalculation('sqft')" style="padding: 10px; border-radius: 5px; font-weight:bold; border: 2px solid var(--primary-dark);">
+                    <option value="4">4 हाथ</option>
+                    <option value="4.5">4.5 हाथ</option>
+                    <option value="5.5" selected>5.5 हाथ</option>
+                    <option value="6">6 हाथ</option>
+                    <option value="6.5">6.5 हाथ</option>
+                    <option value="8.25">8.25 हाथ (सरकारी)</option>
+                </select>
+            </div>
+            <div id="statusLabel" style="font-size: 12px; color: #1b5e20; font-weight: bold;">● लाइव गणना चालू है</div>
         </div>
 
-        <div class="input-box-grid">
-            <div class="box full-width">
+        <div class="input-main-grid">
+            <div class="custom-input" style="grid-column: 1 / -1; border: 2px solid var(--primary-light);">
                 <label>डिसमिल (Dismil)</label>
-                <input type="number" id="id_dismil" oninput="calculate('dismil')" placeholder="0">
+                <input type="number" id="val_dismil" oninput="runCalculation('dismil')" placeholder="डिसमिल यहाँ लिखें...">
             </div>
-            
-            <div class="box">
-                <label>धूर (Dhur)</label>
-                <input type="number" id="id_dhur" oninput="calculate('dhur')" placeholder="0">
-            </div>
-
-            <div class="box">
-                <label>कट्ठा (Kattha)</label>
-                <input type="number" id="id_kattha" oninput="calculate('kattha')" placeholder="0">
-            </div>
-
-            <div class="box">
-                <label>बीघा (Bigha)</label>
-                <input type="number" id="id_bigha" oninput="calculate('bigha')" placeholder="0">
-            </div>
-
-            <div class="box">
-                <label>वर्ग फीट (Sq. Ft)</label>
-                <input type="number" id="id_sqft" oninput="calculate('sqft')" placeholder="0">
-            </div>
+            <div class="custom-input"><label>बीघा (Bigha)</label><input type="number" id="val_bigha" oninput="runCalculation('bigha')" placeholder="0"></div>
+            <div class="custom-input"><label>कट्ठा (Kattha)</label><input type="number" id="val_kattha" oninput="runCalculation('kattha')" placeholder="0"></div>
+            <div class="custom-input"><label>धूर (Dhur)</label><input type="number" id="val_dhur" oninput="runCalculation('dhur')" placeholder="0"></div>
+            <div class="custom-input"><label>वर्ग फीट (Sq. Ft)</label><input type="number" id="val_sqft" oninput="runCalculation('sqft')" placeholder="0"></div>
         </div>
 
-        <div class="other-results">
-            <div class="mini-card"><span>वर्ग कड़ी</span><b id="res_kari">0</b></div>
-            <div class="mini-card"><span>वर्ग गज</span><b id="res_gaj">0</b></div>
-            <div class="mini-card"><span>वर्ग मीटर</span><b id="res_meter">0</b></div>
-            <div class="mini-card"><span>एकड़</span><b id="res_acre">0</b></div>
-            <div class="mini-card"><span>बिता (9")</span><b id="res_bitta">0</b></div>
-            <div class="mini-card"><span>धुरकी</span><b id="res_dhurki">0</b></div>
-        </div>
+        <div class="report-section" id="report">
+            <h3 style="font-size: 16px; color: var(--primary-dark);">मापी का विवरण (Calculated Report):</h3>
+            <div class="summary-card">
+                <div class="stat"><span>एकड़</span><b id="res_acre">0</b></div>
+                <div class="stat"><span>वर्ग कड़ी</span><b id="res_kari">0</b></div>
+                <div class="stat"><span>वर्ग मीटर</span><b id="res_meter">0</b></div>
+                <div class="stat"><span>वर्ग गज</span><b id="res_gaj">0</b></div>
+                <div class="stat"><span>धुरकी</span><b id="res_dhurki">0</b></div>
+                <div class="stat"><span>बिता</span><b id="res_bitta">0</b></div>
+            </div>
 
-        <div class="formula-card">
-            <b>सूत्र:</b> धूर = (डिसमिल × 193.6) ÷ लग्गा² | 20 धूर = 1 कट्ठा | 20 कट्ठा = 1 बीघा
+            <div class="btn-group">
+                <button class="btn-action btn-print" onclick="window.print()">📥 रिपोर्ट प्रिंट करें / PDF</button>
+                <button class="btn-action btn-copy" onclick="copyResults()">📋 हिसाब कॉपी करें</button>
+            </div>
         </div>
+        
+        <p style="font-size: 11px; text-align: center; color: #999; margin-top: 20px;">
+            * 20 धूर = 1 कट्ठा | 20 कट्ठा = 1 बीघा | लग्गी के अनुसार धूर का मान स्वतः बदला गया है।
+        </p>
     </div>
 </div>
 
 <script>
-function calculate(source) {
+function runCalculation(source) {
     let laggi = parseFloat(document.getElementById('laggi').value);
-    let val = parseFloat(document.getElementById('id_' + source).value);
+    let inputVal = parseFloat(document.getElementById('val_' + source).value);
     
-    if (isNaN(val) || val < 0) { clearAll(source); return; }
+    if (isNaN(inputVal) || inputVal < 0) {
+        if(inputVal !== 0) return;
+    }
 
     let sqft = 0;
-    let oneDhurSqft = (laggi * 1.5) ** 2; // लग्गी आधारित 1 धूर का मान फीट में
+    let oneDhurSqft = (laggi * 1.5) ** 2;
 
-    // 1. सबसे पहले सबको Square Feet में बदलो (आधार)
-    if (source === 'dismil') sqft = val * 435.6;
-    else if (source === 'sqft') sqft = val;
-    else if (source === 'dhur') sqft = val * oneDhurSqft;
-    else if (source === 'kattha') sqft = val * 20 * oneDhurSqft;
-    else if (source === 'bigha') sqft = val * 400 * oneDhurSqft;
+    // 1. Convert everything to SqFt first
+    if (source === 'dismil') sqft = inputVal * 435.6;
+    else if (source === 'sqft') sqft = inputVal;
+    else if (source === 'dhur') sqft = inputVal * oneDhurSqft;
+    else if (source === 'kattha') sqft = inputVal * 20 * oneDhurSqft;
+    else if (source === 'bigha') sqft = inputVal * 400 * oneDhurSqft;
 
-    // 2. अब Square Feet से बाकी सारी वैल्यूज भरें
-    if (source !== 'dismil') document.getElementById('id_dismil').value = (sqft / 435.6).toFixed(3);
-    if (source !== 'sqft') document.getElementById('id_sqft').value = sqft.toFixed(2);
+    // 2. Fill all fields based on SqFt
+    if (source !== 'dismil') document.getElementById('val_dismil').value = (sqft / 435.6).toFixed(3);
+    if (source !== 'sqft') document.getElementById('val_sqft').value = sqft.toFixed(2);
     
     let totalDhur = sqft / oneDhurSqft;
-    if (source !== 'dhur') document.getElementById('id_dhur').value = totalDhur.toFixed(2);
-    if (source !== 'kattha') document.getElementById('id_kattha').value = (totalDhur / 20).toFixed(2);
-    if (source !== 'bigha') document.getElementById('id_bigha').value = (totalDhur / 400).toFixed(3);
+    if (source !== 'dhur') document.getElementById('val_dhur').value = totalDhur.toFixed(2);
+    if (source !== 'kattha') document.getElementById('val_kattha').value = (totalDhur / 20).toFixed(2);
+    if (source !== 'bigha') document.getElementById('val_bigha').value = (totalDhur / 400).toFixed(3);
 
-    // 3. एक्स्ट्रा डेटा
-    document.getElementById('res_kari').innerText = Math.round((sqft / 435.6) * 1000);
-    document.getElementById('res_gaj').innerText = (sqft / 9).toFixed(2);
-    document.getElementById('res_meter').innerText = (sqft / 10.764).toFixed(2);
+    // 3. Update Summary Stats
     document.getElementById('res_acre').innerText = (sqft / 43560).toFixed(4);
-    document.getElementById('res_bitta').innerText = (sqft / 0.5625).toFixed(0); // 1 बिता = 9 इंच = 0.75 फीट -> 0.75^2 = 0.5625
+    document.getElementById('res_kari').innerText = Math.round((sqft / 435.6) * 1000);
+    document.getElementById('res_meter').innerText = (sqft / 10.764).toFixed(2);
+    document.getElementById('res_gaj').innerText = (sqft / 9).toFixed(2);
     document.getElementById('res_dhurki').innerText = (totalDhur * 20).toFixed(0);
+    document.getElementById('res_bitta').innerText = (sqft / 0.5625).toFixed(0);
 }
 
-function clearAll(source) {
-    const fields = ['id_dismil', 'id_dhur', 'id_kattha', 'id_bigha', 'id_sqft'];
-    fields.forEach(f => { if(f !== 'id_'+source) document.getElementById(f).value = ''; });
+function copyResults() {
+    let text = `जमीन मापी रिपोर्ट (JameenSeva.in)\n`;
+    text += `लग्गी: ${document.getElementById('laggi').value} हाथ\n`;
+    text += `डिसमिल: ${document.getElementById('val_dismil').value}\n`;
+    text += `बीघा-कट्ठा-धूर: ${document.getElementById('val_bigha').value}-${document.getElementById('val_kattha').value}-${document.getElementById('val_dhur').value}\n`;
+    text += `वर्ग फीट: ${document.getElementById('val_sqft').value}\n`;
+    
+    navigator.clipboard.writeText(text).then(() => {
+        alert("हिसाब कॉपी हो गया है! अब आप इसे WhatsApp पर भेज सकते हैं।");
+    });
 }
 </script>
 
