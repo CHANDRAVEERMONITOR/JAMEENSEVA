@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>एडवांस्ड बिहार जमीन कैलकुलेटर - JameenSeva</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; padding: 15px; }
+        .wrapper { max-width: 600px; margin: 0 auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 8px solid #27ae60; }
+        h2 { text-align: center; color: #2c3e50; font-size: 24px; text-transform: uppercase; margin-bottom: 20px; }
+        .calc-section { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #eee; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
+        select, input { width: 100%; padding: 12px; margin-bottom: 15px; border: 2px solid #cbd5e0; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+        .btn { width: 100%; background: #27ae60; color: #fff; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .btn:hover { background: #219150; }
+        .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; display: none; }
+        .res-card { background: #e8f4fd; padding: 10px; border-radius: 6px; border-left: 4px solid #3498db; }
+        .res-card span { display: block; font-size: 14px; color: #555; }
+        .res-card b { font-size: 18px; color: #2c3e50; }
+        .paimana { font-size: 13px; color: #666; background: #fff8e1; padding: 10px; border-radius: 6px; margin-top: 20px; border: 1px solid #ffe082; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h2>बिहार जमीन मापी कैलकुलेटर</h2>
+
+    <div class="calc-section">
+        <label>अपनी लग्गी चुनें (हाथ में):</label>
+        <select id="laggi">
+            <option value="4">4 हाथ</option>
+            <option value="4.5">4.5 हाथ</option>
+            <option value="5">5 हाथ</option>
+            <option value="5.5" selected>5.5 हाथ (मानक)</option>
+            <option value="6">6 हाथ</option>
+            <option value="6.5">6.5 हाथ</option>
+            <option value="7">7 हाथ</option>
+            <option value="7.5">7.5 हाथ</option>
+        </select>
+
+        <label>डिसमिल (Dismil) दर्ज करें:</label>
+        <input type="number" id="inputDismil" placeholder="उदा: 10" step="any">
+        
+        <button class="btn" onclick="calculateFromDismil()">हिसाब निकालें</button>
+    </div>
+
+    <div class="res-grid" id="results">
+        <div class="res-card"><span>कुल धूर</span><b id="outDhur">0</b></div>
+        <div class="res-card"><span>कुल कट्ठा</span><b id="outKattha">0</b></div>
+        <div class="res-card"><span>कुल बीघा</span><b id="outBigha">0</b></div>
+        <div class="res-card"><span>वर्ग फीट (ft²)</span><b id="outSqft">0</b></div>
+        <div class="res-card"><span>वर्ग कड़ी</span><b id="outKari">0</b></div>
+        <div class="res-card"><span>वर्ग गज</span><b id="outGaj">0</b></div>
+        <div class="res-card"><span>वर्ग मीटर</span><b id="outMeter">0</b></div>
+        <div class="res-card"><span>एकड़</span><b id="outAcre">0</b></div>
+    </div>
+
+    <div class="paimana">
+        <strong>महत्वपूर्ण पैमाना:</strong><br>
+        • 1 हाथ = 18 इंच (1.5 फीट) | 1 बित्ता = 9 इंच<br>
+        • 1 डिसमिल = 435.6 वर्ग फीट | 1000 वर्ग कड़ी<br>
+        • 1 डिसमिल = 48.4 वर्ग गज | 40.47 वर्ग मीटर<br>
+        • 100 डिसमिल = 1 एकड़ | 1 बीघा = 20 कट्ठा | 1 कट्ठा = 20 धूर
+    </div>
+</div>
+
+<script>
+function calculateFromDismil() {
+    let dismil = parseFloat(document.getElementById('inputDismil').value);
+    let laggi = parseFloat(document.getElementById('laggi').value);
+
+    if (isNaN(dismil) || dismil <= 0) {
+        alert("कृपया सही डिसमिल नंबर डालें");
+        return;
+    }
+
+    // आपके फॉर्मूले के अनुसार: धूर = (dismil * 968/5) / (laggi * laggi)
+    // नोट: 968/5 = 193.6 (जो कि लग्गी आधारित धूर निकालने का सटीक गुणांक है)
+    let dhur = (dismil * 193.6) / (laggi * laggi);
+    
+    let kattha = dhur / 20;
+    let bigha = kattha / 20;
+    
+    // अन्य पैमानों का कन्वर्जन
+    let sqft = dismil * 435.6;
+    let kari = dismil * 1000;
+    let meter = dismil * 40.47;
+    let gaj = dismil * 48.4;
+    let acre = dismil / 100;
+
+    // रिजल्ट दिखाना
+    document.getElementById('outDhur').innerText = dhur.toFixed(2);
+    document.getElementById('outKattha').innerText = kattha.toFixed(2);
+    document.getElementById('outBigha').innerText = bigha.toFixed(2);
+    document.getElementById('outSqft').innerText = sqft.toFixed(2);
+    document.getElementById('outKari').innerText = kari.toLocaleString();
+    document.getElementById('outMeter').innerText = meter.toFixed(2);
+    document.getElementById('outGaj').innerText = gaj.toFixed(2);
+    document.getElementById('outAcre').innerText = acre.toFixed(3);
+
+    document.getElementById('results').style.display = 'grid';
+}
+</script>
+
+</body>
+</html>
