@@ -23,16 +23,17 @@
         /* Blog Grid Layout */
         .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         
-        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; }
+        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; margin-bottom: 20px; }
         .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
-        .blog-img { width: 100%; height: 180px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        .blog-img { width: 100%; height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .blog-img img { width: 100%; height: 100%; object-fit: cover; }
         
         .blog-content { padding: 20px; flex-grow: 1; }
         .blog-content h2 { font-size: 20px; margin: 0 0 10px; color: var(--dark); line-height: 1.4; }
         .blog-content p { font-size: 14px; color: #666; margin-bottom: 20px; }
         
-        .read-more { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-align: center; }
+        .read-more { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-align: center; border:none; }
         
         footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
         footer a { color: #ffc107; text-decoration: none; margin: 0 10px; }
@@ -59,234 +60,96 @@
 
     <div class="blog-grid">
         
-       <div class="blog-card">
-    <div class="blog-img">
-        <img src="kewala-photo.jpg" alt="Kewala" style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px 10px 0 0;">
-    </div>
-    
-    <div class="blog-content">
-        <h2>बिहार पुराना केवाला ऑनलाइन कैसे निकालें?</h2>
-        <p>क्या आपका केवाला खो गया है? जानें डीड नंबर और साल की मदद से घर बैठे केवाला मंगवाने का पूरा प्रोसेस...</p>
-        <a href="kewalablog.html" class="read-more">पूरा पढ़ें (Read More)</a>
-    </div>
-</div>
-
-        <div style="display: flex; flex-direction: column; border-bottom: 2px solid #eee; padding: 20px 0; margin-bottom: 20px;">
-    <h2 style="margin: 0 0 10px 0;">
-        <a href="blog-dakhil-kharij2.html" style="color: #2980b9; text-decoration: none; font-size: 26px;">
-            पुराने जमीन का दाखिल-खारिज (Mutation) कैसे कराएं? 2026 के नए नियम
-        </a>
-    </h2>
-    <p style="font-size: 18px; color: #555;">
-        केवाला, बंटवारा नामा और पंचनामा के जरिए पुरानी जमीन को अपने नाम करने की पूरी प्रक्रिया स्टेप-बाय-स्टेप समझें...
-    </p>
-    <a href="blog-dakhil-kharij2.html" style="color: #e67e22; font-weight: bold; font-size: 18px; text-decoration: none;">
-        विस्तार से पढ़ें...
-    </a>
-</div>
-
-      <div class="blog-card" style="border: 1px solid #ddd; border-radius: 10px; margin-bottom: 20px; overflow: hidden; background: #fff;">
-   <div style="text-align: center; margin: 20px 0;">
-    <img src="panchnama-photo.jpeg" alt="Bihar Panchnama Sample" style="width: 80%; max-width: 350px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-    <p style="color: #666; font-size: 14px;"><i>फोटो: पंचनामा बटवारा का नमूना (Sample)</i></p>
-</div>
-    
-    <div class="blog-content" style="padding: 15px;">
-        <h2 style="color: #005689; font-size: 20px;">पंचनामा बटवारा क्या है और सर्वे में क्यों जरूरी है?</h2>
-        <p style="color: #666; font-size: 14px;">जानें कैसे आपसी सहमति से घर बैठे जमीन का बटवारा नामा तैयार करें और सर्वे में अपना अलग खतियान बनवाएं...</p>
-        <a href="panchnamablog.html" style="display: inline-block; background: #28a745; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px;">पूरा पढ़ें (Read More)</a>
-    </div>
-</div>
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #f0fdf4; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="parimarjan.png" alt="Dakhil Kharij Bihar" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e8f5e9; color: #28a745; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">जमीन सुधार</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">दाखिल खारिज (Mutation) क्या है? ऑनलाइन प्रक्रिया 2026</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">सिर्फ रजिस्ट्री काफी नहीं! जानें कैसे अपने नाम से रसीद कटवाएं और जमाबंदी कायम करें। बिहार सर्वे के लिए सबसे जरूरी जानकारी...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="dakhil-kharij-blog.html" style="background: #28a745; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(40,167,69,0.3);">पूरा पढ़ें (Read More)</a>
-            <span style="color: #999; font-size: 13px;">🕒 5 min read</span>
-        </div>
-    </div>
-</div>
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #fff9f0; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="parimarjan.png" alt="Bihar Parimarjan Plus" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #fff3e0; color: #ef6c00; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">रिकॉर्ड सुधार</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">परिमार्जन प्लस (Parimarjan Plus): जमीन रिकॉर्ड में सुधार कैसे करें?</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">क्या आपकी जमाबंदी में नाम, खाता, खेसरा या रकबा गलत है? जानें बिहार सरकार के नए पोर्टल से घर बैठे सुधार करने का पूरा तरीका...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="parimarjan-blog.html" style="background: #1b5e20; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(27,94,32,0.3);">पूरा पढ़ें (Read More)</a>
-            <span style="color: #999; font-size: 13px;">🕒 8 min read</span>
-        </div>
-    </div>
-</div>
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e3f2fd; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="khatiyan-photo.jpeg" alt="Bihar Khatiyan Download" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e3f2fd; color: #1565c0; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">भूमि रिकॉर्ड</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">नया और पुराना खतियान ऑनलाइन कैसे निकालें? घर बैठे प्राप्त करें</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">बिहार सर्वे 2026 के लिए खतियान सबसे जरूरी दस्तावेज है। जानें नया और पुराना खतियान आर्डर करने की पूरी प्रक्रिया और इसके महत्व को...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="khatiyan-blog.html" style="background: #1565c0; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(21,101,192,0.3);">पूरा पढ़ें (Read More)</a>
-            <span style="color: #999; font-size: 13px;">🕒 10 min read</span>
-        </div>
-    </div>
-</div>
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="survey-guide.jpg" alt="Bihar Special Survey Guide 2026" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">विशेष सर्वेक्षण 2026</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">बिहार विशेष सर्वेक्षण: सभी प्रपत्रों (Forms) की सूची और नियम 2026</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">प्रपत्र-2 से लेकर प्रपत्र-18 तक का क्या काम है? अमीन और कानूनगो के कर्तव्य क्या हैं? जानिए सरकारी मार्गदर्शिका के अनुसार पूरी जानकारी...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="bihar-survey-guide-2026.html" style="background: #1a5f7a; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(26,95,122,0.3);">पूरा लेख पढ़ें (4000+ Words)</a>
-            <span style="color: #999; font-size: 13px;">🕒 5 min read</span>
-        </div>
-    </div>
-</div>
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #fff3e0; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="emapi-photo.jpeg" alt="Bihar e-Mapi Online Application" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e1f5fe; color: #0288d1; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">डिजिटल सेवा</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">e-Mapi: बिहार में जमीन की सरकारी नापी के लिए ऑनलाइन आवेदन कैसे करें?</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">अब अमीन के चक्कर काटना बंद! जानें ई-मापी पोर्टल पर रजिस्ट्रेशन, फीस और डिजिटल नापी रिपोर्ट प्राप्त करने का पूरा तरीका (5000+ शब्दों की गाइड)...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="e-mapi-blog.html" style="background: #e65100; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(230,81,0,0.3);">पूरी प्रक्रिया पढ़ें (Read More)</a>
-            <span style="color: #999; font-size: 13px;">🕒 5 min read</span>
-        </div>
-    </div>
-</div>
-
-
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e8f5e9; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="lpc-photo.jpg" alt="Bihar LPC Online Apply Guide" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">किसान सेवा</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">LPC सर्टिफिकेट ऑनलाइन कैसे बनाएं? आवेदन से डाउनलोड तक की पूरी जानकारी</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">बैंक लोन (KCC) और सरकारी सब्सिडी के लिए LPC सबसे जरूरी है। जानें बिहार भूमि पोर्टल पर शपथ-पत्र अपलोड करने और स्टेटस चेक करने का सही तरीका...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="lpc-guide-bihar.html" style="background: #2e7d32; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(46,125,50,0.3);">पूरा पढ़ें (Read More)</a>
-            <span style="color: #999; font-size: 13px;">🕒 15 min read</span>
-        </div>
-    </div>
-</div>
-<div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e3f2fd; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="naksha-photo.jpg" alt="Bihar Digital Map Home Delivery" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e3f2fd; color: #1565c0; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">होम डिलीवरी</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">बिहार जमीन का नक्शा ऑनलाइन कैसे मंगाएं? जानें पूरी प्रक्रिया और फीस</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">अब नक्शे के लिए गुलज़ारबाग जाने की ज़रूरत नहीं! घर बैठे इंडिया पोस्ट के जरिए डिजिटल नक्शा मंगाने का स्टेप-बाय-स्टेप तरीका और सरकारी रेट यहाँ देखें...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="bihar-naksha-blog.html" style="background: #1565c0; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(21,101,192,0.3);">नक्शा ऑर्डर गाइड पढ़ें</a>
-            <span style="color: #999; font-size: 13px;">🕒 5 min read</span>
-        </div>
-    </div>
-</div>
-
-    <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e8eaf6; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="rcms-photo.png" alt="Bihar Revenue Court Case Status RCMS" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #e8eaf6; color: #283593; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">न्यायालय सेवा</span>
-        <h2 style="color: #005689; font-size: 22px; margin-top: 10px;">RCMS बिहार: जमीन का केस ऑनलाइन कैसे दर्ज करें और स्टेटस कैसे देखें?</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">DCLR या ADM कोर्ट के चक्कर काटना बंद! जानें RCMS पोर्टल पर केस फाइल करने, अगली तारीख (Hearing Date) और ऑर्डर शीट डाउनलोड करने का पूरा तरीका...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="bihar-rcms-guide.html" style="background: #283593; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(40,53,147,0.3);">केस गाइड पढ़ें</a>
-            <span style="color: #999; font-size: 13px;">🕒 5 min read</span>
-        </div>
-    </div>
-</div>
-        <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #e8eaf6; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="calculator-photo.jpeg" alt="Bihar Jameen Napi Calculator Tool" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-            <div class="blog-card" style="border: 1px solid #ddd; border-radius: 12px; margin-bottom: 25px; overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;">
-    
-    <div class="blog-img" style="height: 200px; background: #fdf2f2; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        <img src="calculator-photo.jpeg" alt="Khatian and Naksha Area Difference Bihar" style="width: 100%; height: 100%; object-fit: cover;">
-    </div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">जमीन विवाद समाधान</span>
-        <h2 style="color: #064e3b; font-size: 22px; margin-top: 10px;">खतियान और नक्शा में रकबा (Area) अलग-अलग क्यों होता है? जानें असली कारण</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">क्या आपके खतियान में जमीन ज्यादा है और नक्शे में कम? जानें एवरेज विधि का गणित और विवाद की स्थिति में कानून किसे सही मानता है...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="area-antar-blog.html" style="background: #991b1b; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(153,27,27,0.3);">पूरी जानकारी पढ़ें</a>
-            <span style="color: #999; font-size: 13px;">🕒 6 min read</span>
-        </div>
-    </div>
-</div>
-    
-    <div class="blog-content" style="padding: 20px;">
-        <span style="background: #fff3e0; color: #e65100; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold;">जमीन नापी सेवा</span>
-        <h2 style="color: #064e3b; font-size: 22px; margin-top: 10px;">Bihar Jameen Napi Calculator: बीघा, कट्ठा, धूर और डिसमिल का सही हिसाब</h2>
-        <p style="color: #666; font-size: 15px; line-height: 1.6;">अब अमीन की जरूरत नहीं! खुद से निकालें जमीन का रकबा। जानें 4 से 8.5 हाथ के लग्गे के अनुसार जमीन नापने का पूरा गणित और ऑनलाइन कैलकुलेटर का सही इस्तेमाल...</p>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
-            <a href="calculator-blog.html" style="background: #064e3b; color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 4px 10px rgba(6,78,59,0.3);">कैलकुलेटर गाइड पढ़ें</a>
-            <span style="color: #999; font-size: 13px;">🕒 4 min read</span>
-        </div>
-    </div>
-</div>
-        
-        
         <div class="blog-card">
-            <div class="parimarjan.png" style="background: #fff3e0;">📑</div>
+            <div class="blog-img">
+                <img src="kewala-photo.jpg" alt="Kewala">
+            </div>
             <div class="blog-content">
-                <h2>जमाबंदी पंजी-2 ऑनलाइन सुधार (परिमार्जन)</h2>
-                <p>अगर आपकी रसीद नहीं कट रही या रकबा जीरो दिख रहा है, तो परिमार्जन पोर्टल पर सुधार की पूरी प्रक्रिया जानें...</p>
-                <a href="jamabandiblog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+                <h2>बिहार पुराना केवाला ऑनलाइन कैसे निकालें?</h2>
+                <p>क्या आपका केवाला खो गया है? जानें डीड नंबर और साल की मदद से घर बैठे केवाला मंगवाने का पूरा प्रोसेस...</p>
+                <a href="kewalablog.html" class="read-more">पूरा पढ़ें (Read More)</a>
             </div>
         </div>
 
+        <div class="blog-card" style="border-bottom: 4px solid #991b1b;">
+            <div class="blog-img" style="background: #fdf2f2;">
+                <img src="naksha-photo.jpg" alt="Khatian vs Naksha Area Antar">
+            </div>
+            <div class="blog-content">
+                <span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">नया अपडेट</span>
+                <h2 style="margin-top:10px;">खतियान और नक्शा में रकबा अलग क्यों?</h2>
+                <p>क्या आपके नक्शे और खतियान का क्षेत्रफल मेल नहीं खा रहा? जानें इसके पीछे का वैज्ञानिक कारण और अमीन का गणित...</p>
+                <a href="area-antar-blog.html" class="read-more" style="background:#991b1b;">पूरा पढ़ें (Read More)</a>
+            </div>
         </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="panchnama-photo.jpeg" alt="Bihar Panchnama">
+            </div>
+            <div class="blog-content">
+                <h2>पंचनामा बटवारा क्या है और सर्वे में क्यों जरूरी है?</h2>
+                <p>जानें कैसे आपसी सहमति से घर बैठे जमीन का बटवारा नामा तैयार करें और सर्वे में अपना अलग खतियान बनवाएं...</p>
+                <a href="panchnamablog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="parimarjan.png" alt="Dakhil Kharij Bihar">
+            </div>
+            <div class="blog-content">
+                <h2>दाखिल खारिज (Mutation) क्या है? ऑनलाइन प्रक्रिया 2026</h2>
+                <p>सिर्फ रजिस्ट्री काफी नहीं! जानें कैसे अपने नाम से रसीद कटवाएं और जमाबंदी कायम करें। बिहार सर्वे के लिए सबसे जरूरी जानकारी...</p>
+                <a href="dakhil-kharij-blog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="parimarjan.png" alt="Bihar Parimarjan Plus">
+            </div>
+            <div class="blog-content">
+                <h2>परिमार्जन प्लस (Parimarjan Plus): रिकॉर्ड सुधार कैसे करें?</h2>
+                <p>क्या आपकी जमाबंदी में नाम, खाता, खेसरा या रकबा गलत है? जानें नए पोर्टल से सुधार करने का पूरा तरीका...</p>
+                <a href="parimarjan-blog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="khatiyan-photo.jpeg" alt="Bihar Khatiyan Download">
+            </div>
+            <div class="blog-content">
+                <h2>नया और पुराना खतियान ऑनलाइन कैसे निकालें?</h2>
+                <p>बिहार सर्वे 2026 के लिए खतियान सबसे जरूरी दस्तावेज है। जानें नया और पुराना खतियान आर्डर करने की पूरी प्रक्रिया...</p>
+                <a href="khatiyan-blog.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="calculator-photo.jpeg" alt="Bihar Land Calculator">
+            </div>
+            <div class="blog-content">
+                <h2>Bihar Jameen Napi Calculator: बीघा-कट्ठा का सही हिसाब</h2>
+                <p>अब अमीन की जरूरत नहीं! जानें 4 से 8.5 हाथ के लग्गे के अनुसार जमीन नापने का पूरा गणित और कैलकुलेटर का सही इस्तेमाल...</p>
+                <a href="calculator-blog.html" class="read-more" style="background:#064e3b;">कैलकुलेटर गाइड पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img">
+                <img src="rcms-photo.png" alt="Bihar RCMS">
+            </div>
+            <div class="blog-content">
+                <h2>RCMS बिहार: जमीन का केस ऑनलाइन कैसे दर्ज करें?</h2>
+                <p>DCLR या ADM कोर्ट के चक्कर काटना बंद! जानें RCMS पोर्टल पर केस फाइल करने और स्टेटस देखने का पूरा तरीका...</p>
+                <a href="bihar-rcms-guide.html" class="read-more" style="background:#283593;">केस गाइड पढ़ें</a>
+            </div>
+        </div>
+
+    </div>
 
     <div class="ad-top" style="margin-top: 30px;">-- AdSense Ad (Middle Unit) --</div>
 </div>
