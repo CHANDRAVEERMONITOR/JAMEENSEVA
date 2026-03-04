@@ -21,19 +21,20 @@
         .ad-top { background: white; padding: 15px; margin-bottom: 20px; text-align: center; border-radius: 8px; border: 1px dashed #bbb; color: #999; font-size: 12px; }
 
         /* Blog Grid Layout */
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
         
-        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; margin-bottom: 20px; }
+        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid #ddd; }
         .blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
         
-        .blog-img { width: 100%; height: 200px; background: #ddd; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .blog-img img { width: 100%; height: 100%; object-fit: cover; }
+        .blog-img-box { width: 100%; height: 200px; background: #e8eaf6; overflow: hidden; }
+        .blog-img-box img { width: 100%; height: 100%; object-fit: cover; }
         
         .blog-content { padding: 20px; flex-grow: 1; }
         .blog-content h2 { font-size: 20px; margin: 0 0 10px; color: var(--dark); line-height: 1.4; }
-        .blog-content p { font-size: 14px; color: #666; margin-bottom: 20px; }
+        .blog-content p { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; }
         
-        .read-more { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 14px; text-align: center; border:none; }
+        .read-more { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 14px; text-align: center; transition: 0.3s; }
+        .read-more:hover { background: var(--dark); }
         
         footer { background: #333; color: white; text-align: center; padding: 30px; margin-top: 50px; }
         footer a { color: #ffc107; text-decoration: none; margin: 0 10px; }
@@ -61,8 +62,8 @@
     <div class="blog-grid">
         
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="kewala-photo.jpg" alt="Kewala">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Bihar Kewala Online">
             </div>
             <div class="blog-content">
                 <h2>बिहार पुराना केवाला ऑनलाइन कैसे निकालें?</h2>
@@ -71,21 +72,20 @@
             </div>
         </div>
 
-        <div class="blog-card" style="border-bottom: 4px solid #991b1b;">
-            <div class="blog-img" style="background: #fdf2f2;">
-                <img src="naksha-photo.jpg" alt="Khatian vs Naksha Area Antar">
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="parimarjan.png" alt="Mutation Rules Bihar">
             </div>
             <div class="blog-content">
-                <span style="background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold;">नया अपडेट</span>
-                <h2 style="margin-top:10px;">खतियान और नक्शा में रकबा अलग क्यों?</h2>
-                <p>क्या आपके नक्शे और खतियान का क्षेत्रफल मेल नहीं खा रहा? जानें इसके पीछे का वैज्ञानिक कारण और अमीन का गणित...</p>
-                <a href="area-antar-blog.html" class="read-more" style="background:#991b1b;">पूरा पढ़ें (Read More)</a>
+                <h2>पुराने जमीन का दाखिल-खारिज (Mutation) कैसे कराएं? 2026</h2>
+                <p>केवाला, बंटवारा नामा और पंचनामा के जरिए पुरानी जमीन को अपने नाम करने की पूरी प्रक्रिया स्टेप-बाय-स्टेप समझें...</p>
+                <a href="blog-dakhil-kharij2.html" class="read-more">विस्तार से पढ़ें...</a>
             </div>
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="panchnama-photo.jpeg" alt="Bihar Panchnama">
+            <div class="blog-img-box">
+                <img src="panchnama-photo.jpeg" alt="Bihar Panchnama Sample">
             </div>
             <div class="blog-content">
                 <h2>पंचनामा बटवारा क्या है और सर्वे में क्यों जरूरी है?</h2>
@@ -95,30 +95,30 @@
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="parimarjan.png" alt="Dakhil Kharij Bihar">
+            <div class="blog-img-box">
+                <img src="parimarjan.png" alt="Dakhil Kharij Guide">
             </div>
             <div class="blog-content">
                 <h2>दाखिल खारिज (Mutation) क्या है? ऑनलाइन प्रक्रिया 2026</h2>
-                <p>सिर्फ रजिस्ट्री काफी नहीं! जानें कैसे अपने नाम से रसीद कटवाएं और जमाबंदी कायम करें। बिहार सर्वे के लिए सबसे जरूरी जानकारी...</p>
+                <p>सिर्फ रजिस्ट्री काफी नहीं! जानें कैसे अपने नाम से रसीद कटवाएं और जमाबंदी कायम करें। बिहार सर्वे की जरूरी जानकारी...</p>
                 <a href="dakhil-kharij-blog.html" class="read-more">पूरा पढ़ें (Read More)</a>
             </div>
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
+            <div class="blog-img-box">
                 <img src="parimarjan.png" alt="Bihar Parimarjan Plus">
             </div>
             <div class="blog-content">
                 <h2>परिमार्जन प्लस (Parimarjan Plus): रिकॉर्ड सुधार कैसे करें?</h2>
-                <p>क्या आपकी जमाबंदी में नाम, खाता, खेसरा या रकबा गलत है? जानें नए पोर्टल से सुधार करने का पूरा तरीका...</p>
+                <p>क्या आपकी जमाबंदी में नाम, खाता, खेसरा या रकबा गलत है? जानें बिहार सरकार के नए पोर्टल से सुधार का तरीका...</p>
                 <a href="parimarjan-blog.html" class="read-more">पूरा पढ़ें (Read More)</a>
             </div>
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="khatiyan-photo.jpeg" alt="Bihar Khatiyan Download">
+            <div class="blog-img-box">
+                <img src="khatiyan-photo.jpeg" alt="Download Bihar Khatiyan">
             </div>
             <div class="blog-content">
                 <h2>नया और पुराना खतियान ऑनलाइन कैसे निकालें?</h2>
@@ -128,24 +128,90 @@
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="calculator-photo.jpeg" alt="Bihar Land Calculator">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Bihar Special Survey Guide">
             </div>
             <div class="blog-content">
-                <h2>Bihar Jameen Napi Calculator: बीघा-कट्ठा का सही हिसाब</h2>
-                <p>अब अमीन की जरूरत नहीं! जानें 4 से 8.5 हाथ के लग्गे के अनुसार जमीन नापने का पूरा गणित और कैलकुलेटर का सही इस्तेमाल...</p>
-                <a href="calculator-blog.html" class="read-more" style="background:#064e3b;">कैलकुलेटर गाइड पढ़ें</a>
+                <h2>बिहार विशेष सर्वेक्षण: सभी प्रपत्रों (Forms) की सूची और नियम</h2>
+                <p>प्रपत्र-2 से लेकर प्रपत्र-18 तक का क्या काम है? अमीन और कानूनगो के कर्तव्य क्या हैं? जानिए पूरी जानकारी...</p>
+                <a href="bihar-survey-guide-2026.html" class="read-more">पूरा लेख पढ़ें</a>
             </div>
         </div>
 
         <div class="blog-card">
-            <div class="blog-img">
-                <img src="rcms-photo.png" alt="Bihar RCMS">
+            <div class="blog-img-box">
+                <img src="emapi-photo.jpeg" alt="Bihar e-Mapi">
             </div>
             <div class="blog-content">
-                <h2>RCMS बिहार: जमीन का केस ऑनलाइन कैसे दर्ज करें?</h2>
-                <p>DCLR या ADM कोर्ट के चक्कर काटना बंद! जानें RCMS पोर्टल पर केस फाइल करने और स्टेटस देखने का पूरा तरीका...</p>
-                <a href="bihar-rcms-guide.html" class="read-more" style="background:#283593;">केस गाइड पढ़ें</a>
+                <h2>e-Mapi: बिहार में जमीन की सरकारी नापी के लिए आवेदन</h2>
+                <p>अब अमीन के चक्कर काटना बंद! जानें ई-मापी पोर्टल पर रजिस्ट्रेशन, फीस और डिजिटल नापी रिपोर्ट प्राप्त करने का तरीका...</p>
+                <a href="e-mapi-blog.html" class="read-more">पूरी प्रक्रिया पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Bihar LPC Guide">
+            </div>
+            <div class="blog-content">
+                <h2>LPC सर्टिफिकेट ऑनलाइन कैसे बनाएं? आवेदन से डाउनलोड</h2>
+                <p>बैंक लोन (KCC) और सरकारी सब्सिडी के लिए LPC सबसे जरूरी है। जानें बिहार भूमि पोर्टल पर आवेदन का सही तरीका...</p>
+                <a href="lpc-guide-bihar.html" class="read-more">पूरा पढ़ें (Read More)</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Bihar Map Online">
+            </div>
+            <div class="blog-content">
+                <h2>बिहार जमीन का नक्शा ऑनलाइन कैसे मंगाएं? फीस और प्रोसेस</h2>
+                <p>अब नक्शे के लिए गुलज़ारबाग जाने की ज़रूरत नहीं! घर बैठे इंडिया पोस्ट के जरिए डिजिटल नक्शा मंगाने का तरीका...</p>
+                <a href="bihar-naksha-blog.html" class="read-more">नक्शा ऑर्डर गाइड पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="rcms-photo.png" alt="Bihar RCMS Court Case">
+            </div>
+            <div class="blog-content">
+                <h2>RCMS बिहार: जमीन का केस ऑनलाइन दर्ज और स्टेटस देखें</h2>
+                <p>DCLR या ADM कोर्ट के चक्कर काटना बंद! जानें RCMS पोर्टल पर केस फाइल करने और ऑर्डर शीट डाउनलोड करने का तरीका...</p>
+                <a href="bihar-rcms-guide.html" class="read-more">केस गाइड पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Bihar Jameen Calculator">
+            </div>
+            <div class="blog-content">
+                <h2>Jameen Napi Calculator: बीघा, कट्ठा, धूर का सही हिसाब</h2>
+                <p>अब अमीन की जरूरत नहीं! खुद से निकालें जमीन का रकबा। जानें लग्गे के अनुसार जमीन नापने का पूरा गणित...</p>
+                <a href="calculator-blog.html" class="read-more">कैलकुलेटर गाइड पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="calculator-photo.jpeg" alt="Khatian vs Naksha">
+            </div>
+            <div class="blog-content">
+                <h2>खतियान और नक्शा में रकबा (Area) अलग-अलग क्यों होता है?</h2>
+                <p>क्या आपके खतियान में जमीन ज्यादा है और नक्शे में कम? जानें एवरेज विधि का गणित और असली कारण...</p>
+                <a href="area-antar-blog.html" class="read-more">पूरी जानकारी पढ़ें</a>
+            </div>
+        </div>
+
+        <div class="blog-card">
+            <div class="blog-img-box">
+                <img src="parimarjan.png" alt="Jamabandi Correction">
+            </div>
+            <div class="blog-content">
+                <h2>जमाबंदी पंजी-2 ऑनलाइन सुधार (परिमार्जन) प्रक्रिया</h2>
+                <p>अगर आपकी रसीद नहीं कट रही या रकबा जीरो दिख रहा है, तो परिमार्जन पोर्टल पर सुधार की पूरी प्रक्रिया जानें...</p>
+                <a href="jamabandiblog.html" class="read-more">पूरा पढ़ें (Read More)</a>
             </div>
         </div>
 
