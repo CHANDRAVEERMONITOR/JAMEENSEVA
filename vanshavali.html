@@ -3,81 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>वंशावली कैसे बनाएं - Jameen seva</title>
+    <title>Jameenseva - Photo to PDF Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; background: #f9f9f9; }
-        header { background: #004a99; color: white; padding: 15px; text-align: center; }
-        .content { max-width: 800px; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .step { background: #e8f5e9; border-left: 5px solid #2e7d32; padding: 10px; margin-bottom: 10px; }
-        .download-btn { display: inline-block; background: #2e7d32; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .back-link { display: block; margin-top: 20px; color: #004a99; text-decoration: none; }
+        :root { --primary: #2c3e50; --accent: #e74c3c; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 600px; text-align: center; }
+        h1 { color: var(--primary); margin-bottom: 5px; }
+        .subtitle { color: #7f8c8d; margin-bottom: 25px; font-size: 14px; }
+        
+        .upload-box { border: 2px dashed #bdc3c7; padding: 40px; border-radius: 12px; cursor: pointer; transition: 0.3s; background: #fafafa; margin-bottom: 20px; }
+        .upload-box:hover { border-color: var(--accent); background: #fdf2f1; }
+        
+        .controls { background: #f9f9f9; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: left; }
+        .control-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #34495e; }
+        
+        input[type="range"] { width: 100%; cursor: pointer; }
+        .toggle-container { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        
+        #downloadBtn { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; display: none; transition: 0.3s; }
+        #downloadBtn:hover { background: #c0392b; transform: translateY(-2px); }
+        
+        #previewArea { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+        .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; border: 2px solid #ddd; }
+        .status { margin-top: 10px; font-size: 13px; color: #27ae60; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    
-<header>
-    <h1>JAMEEN SEVA (जमीन सेवा)</h1>
-    <p>वंशावली (Genealogy) बनाने की पूरी जानकारी</p>
-</header>
-<style>
-    .navbar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        background-color: #28a745;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 12px 0;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .navbar a:hover { color: #ffc107; }
-    @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
-</style>
+<div class="card">
+    <h1>Jameen Seva PDF Tool</h1>
+    <p class="subtitle">Zameen ke documents ko PDF banayein (MB/KB control ke saath)</p>
 
-<nav class="navbar">
-    <a href="index.html">🏠 Home</a>
-    <a href="index.html#services">📄 Our Services</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="track.html">🚚 Order Tracking</a>
-    <a href="contact.html">📞 Contact Us</a>
-</nav>
-
-<div class="content">
-    <h2>वंशावली कैसे तैयार करें?</h2>
-    <p>बिहार जमीन सर्वे के लिए वंशावली एक अनिवार्य दस्तावेज है। इसे आप दो तरीके से बना सकते हैं:</p>
-
-    <div class="step">
-        <strong>1. खुद से शपथ पत्र (Affidavit):</strong> आप सादे कागज पर वंशावली बनाकर कार्यपालक दंडाधिकारी से नोटरी करवा सकते हैं।
+    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
+        <strong>📁 Photos Select Karein</strong>
+        <p style="font-size: 12px;">(JPG, PNG supported)</p>
+        <input type="file" id="fileInput" multiple accept="image/*" style="display:none" onchange="previewImages(this.files)">
     </div>
 
-    <div class="step">
-        <strong>2. ग्राम कचहरी द्वारा:</strong> आप अपने सरपंच से भी वंशावली निर्गत करवा सकते हैं, जो सर्वे में मान्य है।
+    <div class="controls">
+        <div class="control-group">
+            <label>File Size Control (Quality): <span id="qVal">80</span>%</label>
+            <input type="range" id="quality" min="10" max="100" value="80" oninput="document.getElementById('qVal').innerText=this.value">
+            <small style="color: #95a5a6;">Kam karne par KB size kam ho jayegi.</small>
+        </div>
+
+        <div class="control-group">
+            <label class="toggle-container">
+                <input type="checkbox" id="bwToggle"> Black & White Mode (Sarkari Form ke liye)
+            </label>
+        </div>
     </div>
 
-    <h3>जरूरी निर्देश:</h3>
-    <ul>
-        <li>वंशावली में परिवार के सभी मृत और जीवित सदस्यों का नाम स्पष्ट होना चाहिए।</li>
-        <li>पूर्वजों का नाम खतियान के अनुसार ही लिखें।</li>
-        <li>हस्ताक्षर और मुहर स्पष्ट होनी चाहिए।</li>
-    </ul>
-
-    <a href="blog.html" class="read-more">जमीन संबंधित और जानकारी पूरा पढ़ें (Read More)</a>
+    <div id="previewArea"></div>
+    <div id="statusMsg" class="status"></div>
     
-    <a href="index.html" class="back-link">← मुख्य पेज पर वापस जाएं</a>
+    <button id="downloadBtn" onclick="generatePDF()">PDF Download Karein</button>
+    
+    <p style="font-size: 11px; color: #bdc3c7; margin-top: 20px;">Safe & Secure: Aapki files server par upload nahi hoti.</p>
 </div>
+
+<script>
+    let selectedFiles = [];
+
+    function previewImages(files) {
+        selectedFiles = Array.from(files);
+        const preview = document.getElementById('previewArea');
+        const btn = document.getElementById('downloadBtn');
+        const status = document.getElementById('statusMsg');
+        
+        preview.innerHTML = "";
+        if (selectedFiles.length > 0) {
+            btn.style.display = "block";
+            status.innerText = selectedFiles.length + " photos select hui hain.";
+            
+            selectedFiles.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'thumb';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+    }
+
+    async function processImage(file, quality, isBW) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    if (isBW) {
+                        ctx.filter = 'grayscale(100%) brightness(1.1) contrast(1.1)';
+                    }
+                    
+                    ctx.drawImage(img, 0, 0);
+                    // Quality range 0.1 to 1.0
+                    resolve(canvas.toDataURL('image/jpeg', quality / 100));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    async function generatePDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
+        const quality = document.getElementById('quality').value;
+        const isBW = document.getElementById('bwToggle').checked;
+        const btn = document.getElementById('downloadBtn');
+        
+        btn.innerText = "Processing...";
+        btn.disabled = true;
+
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const processedImg = await processImage(selectedFiles[i], quality, isBW);
+            
+            if (i > 0) doc.addPage();
+            
+            // A4 size calculation (210mm x 297mm)
+            const imgProps = doc.getImageProperties(processedImg);
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            
+            doc.addImage(processedImg, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+        }
+
+        doc.save("Jameenseva_Document.pdf");
+        btn.innerText = "PDF Download Karein";
+        btn.disabled = false;
+    }
+</script>
 
 </body>
 </html>
