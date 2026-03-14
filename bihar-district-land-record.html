@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Bihar District Land Record | सभी जिलों की जमाबंदी और खाता खेसरा देखें</title>
-
-<meta name="description" content="बिहार के सभी 38 जिलों का जमीन रिकॉर्ड देखें। खाता, खेसरा, जमाबंदी, दाखिल खारिज और भूमि जानकारी ऑनलाइन देखें।">
+<title>Bihar District Land Record | सभी जिलों की जमीन जानकारी</title>
 
 <style>
 
@@ -24,7 +22,7 @@ padding:20px;
 }
 
 .container{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 padding:20px;
 }
@@ -43,28 +41,24 @@ box-shadow:0 2px 5px rgba(0,0,0,0.1);
 text-align:center;
 }
 
-.card h3{
-margin-top:0;
-}
-
 .btn{
-display:inline-block;
-padding:8px 12px;
+display:block;
+margin:6px 0;
+padding:8px;
 background:#1976d2;
 color:white;
 text-decoration:none;
 border-radius:5px;
-font-size:14px;
 }
 
 .btn2{
-display:inline-block;
-padding:8px 12px;
+display:block;
+margin:6px 0;
+padding:8px;
 background:#43a047;
 color:white;
 text-decoration:none;
 border-radius:5px;
-font-size:14px;
 }
 
 footer{
@@ -82,105 +76,59 @@ padding:15px;
 
 <header>
 <h1>बिहार के सभी जिलों का जमीन रिकॉर्ड</h1>
-<p>Jamabandi | Khata | Khesra | Land Record</p>
+<p>Khata | Khesra | Jamabandi | Land Record</p>
 </header>
 
 <div class="container">
 
 <div class="grid">
 
-<!-- District Card -->
+<!-- 38 District -->
+
+<script>
+
+let districts = [
+
+"Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur",
+"Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj",
+"Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj",
+"Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur",
+"Nalanda","Nawada","Patna","Purnea","Rohtas","Saharsa",
+"Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi",
+"Siwan","Supaul","Vaishali","West Champaran"
+
+];
+
+districts.forEach(d => {
+
+document.write(`
 
 <div class="card">
-<h3>Patna</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
+
+<h3>${d}</h3>
+
+<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">
+Khata Khesra Check
+</a>
+
+<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">
+Jamabandi / Dakhil Kharij
+</a>
+
 </div>
 
-<div class="card">
-<h3>Gaya</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
+`);
 
-<div class="card">
-<h3>Nalanda</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
+});
 
-<div class="card">
-<h3>Muzaffarpur</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Darbhanga</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Bhagalpur</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Samastipur</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Sitamarhi</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Madhubani</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Saharsa</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Supaul</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
-
-<div class="card">
-<h3>Madhepura</h3>
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">Khata Khesra Check</a>
-<br><br>
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">Jamabandi / Dakhil Kharij</a>
-</div>
+</script>
 
 </div>
 
 </div>
 
 <footer>
-© 2026 JameenSeva.in | Bihar Land Record Information
+© 2026 JameenSeva.in
 </footer>
 
 </body>
