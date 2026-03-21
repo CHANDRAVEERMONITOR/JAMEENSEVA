@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Panchnama - JameenSeva</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 40px; background: #f4f7f6; color: #333; }
+        .container { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 25px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
+        .success-icon { font-size: 50px; color: #27ae60; margin-bottom: 10px; }
+        .btn { display: inline-block; background: #27ae60; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 20px; box-shadow: 0 4px 10px rgba(39,174,96,0.3); }
+        #timer { color: #e67e22; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="success-icon">✔</div>
+        <h2 style="margin: 0;">Payment Success!</h2>
+        <p>Aapka Panchnama format taiyar hai.</p>
+        
+        <div id="loading-area">
+            <p>File <span id="timer">5</span> second mein download hogi...</p>
+        </div>
+
+        <a href="APKA_GOOGLE_DRIVE_LINK" id="downloadLink" class="btn" style="display: none;">⬇️ Click to Download PDF</a>
+
+        <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+        <p style="font-size: 0.8em; color: #666;">Dhyan dein: Agar download shuru nahi hota, toh upar diye gaye button par click karein.</p>
+    </div>
+
+    <script>
+        let count = 5;
+        let timer = document.getElementById('timer');
+        let btn = document.getElementById('downloadLink');
+        let driveLink = btn.href;
+
+        let countdown = setInterval(function() {
+            count--;
+            timer.innerText = count;
+            if (count <= 0) {
+                clearInterval(countdown);
+                document.getElementById('loading-area').style.display = 'none';
+                btn.style.display = 'inline-block';
+                // Auto Download Trigger
+                window.location.href = driveLink;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
