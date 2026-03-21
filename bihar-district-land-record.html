@@ -89,43 +89,35 @@ padding:15px;
 <!-- 38 District -->
 
 <script>
-
 let districts = [
-
-"Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur",
-"Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj",
-"Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj",
-"Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur",
-"Nalanda","Nawada","Patna","Purnea","Rohtas","Saharsa",
-"Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi",
-"Siwan","Supaul","Vaishali","West Champaran"
-
+    "Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur",
+    "Bhojpur","Buxar","Darbhanga","East Champaran","Gaya","Gopalganj",
+    "Jamui","Jehanabad","Kaimur","Katihar","Khagaria","Kishanganj",
+    "Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur",
+    "Nalanda","Nawada","Patna","Purnea","Rohtas","Saharsa",
+    "Samastipur","Saran","Sheikhpura","Sheohar","Sitamarhi",
+    "Siwan","Supaul","Vaishali","West Champaran"
 ];
 
 districts.forEach(d => {
+    // District name ko file name format mein badalne ke liye (e.g. "Patna" -> "patna.html")
+    let fileName = d.toLowerCase().replace(/ /g, "-") + ".html";
 
-document.write(`
+    document.write(`
+        <div class="card">
+            <h3>${d}</h3>
+            
+            <a class="btn" href="${fileName}">
+                खतियान / खाता देखें
+            </a>
 
-<div class="card">
-
-<h3>${d}</h3>
-
-<a class="btn" href="https://land.bihar.gov.in/Ror2025/RoR.aspx" target="_blank">
-Khata Khesra Check
-</a>
-
-<a class="btn2" href="https://biharbhumi.bihar.gov.in/" target="_blank">
-Jamabandi / Dakhil Kharij
-</a>
-
-</div>
-
-`);
-
+            <a class="btn2" href="${fileName}#jamabandi">
+                जमाबंदी / रसीद देखें
+            </a>
+        </div>
+    `);
 });
-
 </script>
-
 </div>
 
 </div>
