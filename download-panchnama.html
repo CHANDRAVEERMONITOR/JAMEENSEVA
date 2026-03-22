@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
+<meta name="robots" content="noindex, nofollow">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Panchnama - JameenSeva</title>
@@ -30,10 +31,19 @@
     </div>
 
     <script>
+    // Security Check: Kya user Razorpay se aaya hai?
+    // Note: 'api.razorpay.com' ya 'checkout.razorpay.com' check karega
+    var legalReferrer = document.referrer;
+    
+    if (legalReferrer.indexOf("razorpay.com") === -1 && legalReferrer.indexOf("jameenseva.in") === -1) {
+        // Agar koi direct link khole toh use Home Page par bhej do
+        alert("Security Alert: Direct access block hai. Kripya payment karke download karein.");
+        window.location.href = "https://jameenseva.in/panchnama-batwara-download.html";
+    } else {
+        // Agar payment se aaya hai toh download chalu karo
         let count = 5;
         let timer = document.getElementById('timer');
         let btn = document.getElementById('downloadLink');
-        let driveLink = btn.href;
 
         let countdown = setInterval(function() {
             count--;
@@ -42,10 +52,12 @@
                 clearInterval(countdown);
                 document.getElementById('loading-area').style.display = 'none';
                 btn.style.display = 'inline-block';
-                // Auto Download Trigger
-                window.location.href = driveLink;
+                // Auto Download
+                window.location.href = btn.href;
             }
         }, 1000);
-    </script>
+    }
+</script>
+
 </body>
 </html>
