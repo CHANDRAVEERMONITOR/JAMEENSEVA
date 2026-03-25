@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uttarakhand Professional Land Calculator | Nali, Mutthi, Bigha | Jameenseva.in</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
+
+    <style>
+        :root { --uk-green: #1b5e20; --uk-gold: #ffc107; --uk-blue: #0d47a1; --white: #ffffff; --bg: #f0f4f0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: #2c3e50; }
+        
+        .wrapper { max-width: 900px; margin: auto; background: var(--white); border-radius: 15px; box-shadow: 0 12px 35px rgba(0,0,0,0.15); border: 1px solid #c8e6c9; overflow: hidden; }
+        
+        .header { background: linear-gradient(135deg, var(--uk-green), var(--uk-blue)); color: white; padding: 35px 20px; text-align: center; border-bottom: 5px solid var(--uk-gold); }
+        .header h1 { margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 1.5px; }
+        
+        .body-content { padding: 30px; }
+        
+        /* UK Special Notice */
+        .uk-notice { background: #e8f5e9; border: 1px solid #c8e6c9; border-left: 6px solid var(--uk-green); padding: 15px; border-radius: 8px; margin-bottom: 25px; font-size: 14px; }
+
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        @media (max-width: 650px) { .input-row { grid-template-columns: 1fr; } }
+        
+        label { display: block; font-weight: 600; margin-bottom: 10px; color: var(--uk-green); }
+        input, select { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: var(--uk-green); outline: none; box-shadow: 0 0 10px rgba(27, 94, 32, 0.1); }
+
+        .btn-main { width: 100%; padding: 20px; background: var(--uk-green); color: white; border: none; border-radius: 10px; font-size: 22px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3); }
+        .btn-main:hover { background: #2e7d32; transform: translateY(-2px); }
+
+        .action-btns { display: flex; gap: 15px; margin-top: 25px; }
+        .btn-action { flex: 1; padding: 15px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .copy-btn { background: #0288d1; }
+        .print-btn { background: #455a64; }
+
+        /* UK Results Layout */
+        #result-section { display: none; margin-top: 40px; border-top: 3px solid #eee; padding-top: 30px; }
+        .result-banner { background: #f1f8e9; border: 2px solid var(--uk-green); border-radius: 15px; padding: 30px; text-align: center; margin-bottom: 30px; }
+        .result-banner h2 { margin: 10px 0; color: var(--uk-green); font-size: 30px; }
+        
+        .unit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .unit-card { background: #fff; padding: 18px; border: 1px solid #e0e0e0; border-radius: 10px; border-top: 5px solid var(--uk-blue); text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .unit-card small { color: #666; font-size: 12px; display: block; margin-bottom: 8px; text-transform: uppercase; font-weight: bold; }
+        .unit-card b { font-size: 19px; color: var(--uk-blue); }
+
+        .guide-box { margin-top: 40px; background: #fafafa; padding: 25px; border-radius: 12px; border: 1px solid #ddd; }
+        .guide-box h3 { margin-top: 0; color: var(--uk-green); border-bottom: 2px solid var(--uk-gold); display: inline-block; }
+        .imp-notes { background: var(--uk-blue); color: white; padding: 18px; border-radius: 8px; margin-top: 20px; font-size: 14px; text-align: center; }
+
+        @media print {
+            .header { background: #1b5e20 !important; color: white !important; }
+            .btn-main, .action-btns, .input-row { display: none !important; }
+            #result-section { display: block !important; }
+            .wrapper { border: 2px solid #000; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <h1>Uttarakhand Land Revenue Portal</h1>
+        <p style="margin-top: 8px;">बीघा, मुट्ठी, नाली और डिसमिल सटीक कैलकुलेटर</p>
+    </div>
+
+    <div class="body-content">
+        <div class="uk-notice">
+            🌲 <strong>उत्तराखंड विशेष:</strong> पहाड़ी क्षेत्रों में <strong>1 नाली = 16 मुट्ठी</strong> और <strong>1 नाली = 2160 वर्ग फुट</strong> मानक माना जाता है। मैदानी क्षेत्रों (रुद्रपुर/तराई) में बीघा-बिस्वा का यूपी वाला सिस्टम चलता है।
+        </div>
+
+        <div class="input-row">
+            <div>
+                <label>क्षेत्रफल (Area Value):</label>
+                <input type="number" id="areaValue" placeholder="उदा. 2160">
+            </div>
+            <div>
+                <label>यूनिट (Select Unit):</label>
+                <select id="unitSelect">
+                    <option value="sqft">Square Feet (वर्ग फुट)</option>
+                    <option value="nali">Nali (नाली)</option>
+                    <option value="mutthi">Mutthi (मुट्ठी)</option>
+                    <option value="dismil">Dismil (डिसमिल)</option>
+                    <option value="acre">Acre (एकड़)</option>
+                    <option value="hectare">Hectare (हेक्टेयर)</option>
+                    <option value="bigha">Bigha (बीघा)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div>
+                <label>लाठा / गट्ठा (Inch Size):</label>
+                <select id="lathaSize" onchange="checkCustom()">
+                    <option value="99">99 इंच (Standard)</option>
+                    <option value="108">108 इंच (तराई क्षेत्र)</option>
+                    <option value="90">90 इंच (पहाड़ी क्षेत्र)</option>
+                    <option value="custom">Custom (अपना इंच डालें)</option>
+                </select>
+            </div>
+            <div id="customLathaDiv" style="display:none;">
+                <label>Custom Inch Value:</label>
+                <input type="number" id="customInch" value="99">
+            </div>
+        </div>
+
+        <button class="btn-main" onclick="calculateUK()">गणना करें (Calculate)</button>
+
+        <div id="result-section">
+            <div class="result-banner">
+                <small>उत्तराखंड भू-राजस्व रिपोर्ट:</small>
+                <h2 id="ukPrimary">0 Nali, 0 Mutthi</h2>
+                <p id="upPrimary" style="font-weight: 600; color: #555; margin-top: 10px;"></p>
+                
+                <div class="action-btns">
+                    <button class="btn-action copy-btn" onclick="copyResult()">📋 Copy Full Report</button>
+                    <button class="btn-action print-btn" onclick="window.print()">🖨️ Save as PDF</button>
+                </div>
+            </div>
+
+            <div class="unit-grid">
+                <div class="unit-card"><small>नाली (Nali)</small><b id="resNali">0</b></div>
+                <div class="unit-card"><small>मुट्ठी (Mutthi)</small><b id="resMutthi">0</b></div>
+                <div class="unit-card"><small>डिसमिल (Dismil)</small><b id="resDismil">0</b></div>
+                <div class="unit-card"><small>एकड़ (Acre)</small><b id="resAcre">0</b></div>
+                <div class="unit-card"><small>हेक्टेयर (Hectare)</small><b id="resHect">0</b></div>
+                <div class="unit-card"><small>वर्ग फुट (Sqft)</small><b id="resSqft">0</b></div>
+            </div>
+
+            <div class="guide-box">
+                <h3>📖 उत्तराखंड भूमि पैमाना गाइड:</h3>
+                <div class="guide-list" style="font-size: 14px; color: #555; line-height: 1.8;">
+                    • <b>1 नाली:</b> 2160 वर्ग फुट (240 वर्ग गज)<br>
+                    • <b>1 मुट्ठी:</b> 135 वर्ग फुट<br>
+                    • <b>1 नाली:</b> 16 मुट्ठी (Uttarakhand Standard)<br>
+                    • <b>1 एकड़:</b> लगभग 20 नाली के बराबर होता है।
+                </div>
+                <div class="imp-notes">
+                    तराई क्षेत्र (रुद्रपुर, हल्द्वानी) में 1 बीघा = 20 बिस्वा का सिस्टम यूपी के समान ही है।
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: #263238; color: #90a4ae; text-align: center; padding: 25px; font-size: 13px;">
+        © 2026 Jameenseva.in | उत्तराखंड और यूपी की जमीन सेवा <br>
+        Developed for Rudrapur & Deoria Professionals
+    </footer>
+</div>
+
+<script>
+    function checkCustom() {
+        document.getElementById('customLathaDiv').style.display = (document.getElementById('lathaSize').value === 'custom') ? 'block' : 'none';
+    }
+
+    function calculateUK() {
+        let val = parseFloat(document.getElementById('areaValue').value);
+        let unit = document.getElementById('unitSelect').value;
+        let latha = (document.getElementById('lathaSize').value === 'custom') ? parseFloat(document.getElementById('customInch').value) : parseFloat(document.getElementById('lathaSize').value);
+
+        if(!val || val <= 0) { alert("भैया, पहले सही माप दर्ज करें!"); return; }
+
+        // Logic
+        let lathaFt = latha / 12;
+        let oneDhur = lathaFt * lathaFt;
+        let oneBiswa = oneDhur * 20;
+        let oneBigha = oneBiswa * 20;
+        
+        // UK Standard Logic
+        let oneNaliSqft = 2160;
+        let oneMutthiSqft = 135;
+
+        let sqft = 0;
+        if(unit === "sqft") sqft = val;
+        else if(unit === "nali") sqft = val * oneNaliSqft;
+        else if(unit === "mutthi") sqft = val * oneMutthiSqft;
+        else if(unit === "dismil") sqft = val * 435.6;
+        else if(unit === "acre") sqft = val * 43560;
+        else if(unit === "hectare") sqft = val * 107639;
+        else if(unit === "bigha") sqft = val * oneBigha;
+
+        // UK Primary Result (Nali - Mutthi)
+        let nali = Math.floor(sqft / oneNaliSqft);
+        let remNali = sqft % oneNaliSqft;
+        let mutthi = (remNali / oneMutthiSqft).toFixed(2);
+
+        // UP Primary Result (Bigha - Biswa)
+        let b = Math.floor(sqft / oneBigha);
+        let remB = sqft % oneBigha;
+        let bi = Math.floor(remB / oneBiswa);
+        let dh = ((remB % oneBiswa) / oneDhur).toFixed(1);
+
+        document.getElementById('ukPrimary').innerText = `${nali} नाली, ${mutthi} मुट्ठी`;
+        document.getElementById('upPrimary').innerText = `मैदानी पैमाना: ${b} बीघा, ${bi} बिस्वा, ${dh} धुर`;
+        
+        document.getElementById('resNali').innerText = (sqft / oneNaliSqft).toFixed(2);
+        document.getElementById('resMutthi').innerText = (sqft / oneMutthiSqft).toFixed(1);
+        document.getElementById('resDismil').innerText = (sqft / 435.6).toFixed(2);
+        document.getElementById('resAcre').innerText = (sqft / 43560).toFixed(4);
+        document.getElementById('resHect').innerText = (sqft / 107639).toFixed(4);
+        document.getElementById('resSqft').innerText = sqft.toFixed(2);
+
+        document.getElementById('result-section').style.display = 'block';
+    }
+
+    function copyResult() {
+        let data = `--- JAMEENSEVA UK-UP REPORT ---\n`;
+        data += `Area: ${document.getElementById('areaValue').value} ${document.getElementById('unitSelect').value}\n`;
+        data += `UK Result: ${document.getElementById('ukPrimary').innerText}\n`;
+        data += `UP Result: ${document.getElementById('upPrimary').innerText}\n`;
+        data += `Hectare: ${document.getElementById('resHect').innerText}\n`;
+        data += `Check more on Jameenseva.in`;
+
+        navigator.clipboard.writeText(data).then(() => {
+            alert("पूरी उत्तराखंड रिपोर्ट कॉपी हो गई है!");
+        });
+    }
+</script>
+</body>
+</html>
