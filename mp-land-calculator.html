@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP Master Land Calculator | Bigha, Katha, Hectare | Jameenseva.in</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
+
+    <style>
+        :root { --mp-blue: #0d47a1; --mp-accent: #ff7043; --mp-light: #e3f2fd; --dark: #263238; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 15px; color: #333; }
+        
+        .wrapper { max-width: 950px; margin: 20px auto; background: var(--white); border-radius: 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.1); border: 1px solid #cfd8dc; overflow: hidden; }
+        
+        .header { background: linear-gradient(135deg, var(--mp-blue), #1565c0); color: white; padding: 40px 20px; text-align: center; border-bottom: 6px solid var(--mp-accent); }
+        .header h1 { margin: 0; font-size: 30px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .body-content { padding: 35px; }
+        
+        .notice-mp { background: #fff3e0; border-left: 6px solid var(--mp-accent); padding: 18px; border-radius: 10px; margin-bottom: 30px; font-size: 15px; color: #e65100; font-weight: 500; }
+
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 25px; }
+        
+        label { display: block; font-weight: 700; margin-bottom: 10px; color: var(--mp-blue); font-size: 14px; text-transform: uppercase; }
+        input, select { width: 100%; padding: 16px; border: 2px solid #eceff1; border-radius: 12px; font-size: 16px; transition: 0.3s; background: #fafafa; box-sizing: border-box; }
+        input:focus { border-color: var(--mp-blue); background: #fff; outline: none; box-shadow: 0 0 15px rgba(13, 71, 161, 0.1); }
+
+        .btn-mp { width: 100%; padding: 22px; background: var(--mp-blue); color: white; border: none; border-radius: 12px; font-size: 22px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 8px 25px rgba(13, 71, 161, 0.3); text-transform: uppercase; }
+        .btn-mp:hover { background: #0a3d8a; transform: translateY(-3px); }
+
+        /* Dashboard Results */
+        #result-mp { display: none; margin-top: 45px; animation: fadeIn 0.5s ease; }
+        .main-display { background: var(--mp-light); border: 2px dashed var(--mp-blue); border-radius: 20px; padding: 35px; text-align: center; margin-bottom: 35px; }
+        .main-display h2 { margin: 15px 0; color: var(--mp-blue); font-size: 36px; }
+        .sub-text { font-size: 18px; color: #546e7a; font-weight: 600; }
+
+        .action-row { display: flex; gap: 20px; justify-content: center; margin-top: 25px; }
+        .btn-tool { padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: white; display: flex; align-items: center; gap: 10px; font-size: 16px; }
+        .copy-btn { background: #43a047; }
+        .print-btn { background: var(--dark); }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 20px; }
+        .stat-card { background: #fff; padding: 20px; border-radius: 15px; border: 1px solid #eee; text-align: center; border-bottom: 4px solid var(--mp-accent); transition: 0.3s; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .stat-card small { color: #90a4ae; font-size: 12px; font-weight: bold; display: block; margin-bottom: 8px; text-transform: uppercase; }
+        .stat-card b { font-size: 20px; color: var(--dark); }
+
+        /* Professional Manual */
+        .mp-guide { margin-top: 50px; background: #fdfdfd; border: 1px solid #e0e0e0; padding: 30px; border-radius: 15px; }
+        .mp-guide h3 { color: var(--mp-blue); border-left: 5px solid var(--mp-accent); padding-left: 15px; margin-top: 0; }
+        .mp-guide ul { padding-left: 20px; color: #455a64; font-size: 15px; line-height: 2; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        @media print {
+            .header { background: #0d47a1 !important; }
+            .btn-mp, .action-row, .input-grid, select, input { display: none !important; }
+            #result-mp { display: block !important; }
+            .wrapper { border: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <h1>Madhya Pradesh Bhu-Abhilekh Tool</h1>
+        <p style="margin-top: 10px; opacity: 0.9;">मध्य प्रदेश भूमि पैमाइश एवं रकबा कैलकुलेटर</p>
+    </div>
+
+    <div class="body-content">
+        <div class="notice-mp">
+            📢 <b>MP स्पेशल:</b> मध्य प्रदेश में <b>1 हेक्टेयर = 3.95 बीघा</b> (मानक) माना जाता है। ग्वालियर/चंबल संभाग में बीघा का साइज अलग हो सकता है।
+        </div>
+
+        <div class="input-grid">
+            <div>
+                <label>एमपी संभाग/क्षेत्र (Select Division):</label>
+                <select id="mpRegion" onchange="updateUnits()">
+                    <option value="standard">मानक MP (Bhopal/Indore/Jabalpur)</option>
+                    <option value="gwalior">ग्वालियर/चंबल संभाग (Gwalior Division)</option>
+                    <option value="bundelkhand">बुंदेलखंड क्षेत्र (Sagar/Tikamgarh)</option>
+                </select>
+            </div>
+            <div>
+                <label>माप (Value) दर्ज करें:</label>
+                <input type="number" id="inputValue" placeholder="उदा. 1.5">
+            </div>
+        </div>
+
+        <div class="input-grid">
+            <div>
+                <label>इनपुट यूनिट (Input Unit):</label>
+                <select id="inputUnit">
+                    <option value="hectare">Hectare (हेक्टेयर - MP Std)</option>
+                    <option value="bigha">Bigha (बीघा)</option>
+                    <option value="sqft">Square Feet (वर्ग फुट)</option>
+                    <option value="acre">Acre (एकड़)</option>
+                    <option value="dismil">Dismil (डिसमिल)</option>
+                    <option value="katha">Katha (कट्ठा)</option>
+                </select>
+            </div>
+            <div>
+                <label>लाठा साइज (MP Standard 99"):</label>
+                <select id="lathaSize">
+                    <option value="99">99 इंच (Standard)</option>
+                    <option value="108">108 इंच (Local Custom)</option>
+                    <option value="94">94 इंच (Custom)</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn-mp" onclick="calculateMP()">गणना करें | CALCULATE NOW</button>
+
+        <div id="result-mp">
+            <div class="main-display">
+                <small style="color: #546e7a; font-weight: bold;">कुल रकबा रिपोर्ट (MP Land Report):</small>
+                <h2 id="mpPrimary">0 Bigha, 0 Katha</h2>
+                <p id="mpSecondary" class="sub-text">0.0000 Hectare</p>
+                
+                <div class="action-row">
+                    <button class="btn-tool copy-btn" onclick="copyMP()">📋 कॉपी करें</button>
+                    <button class="btn-tool print-btn" onclick="window.print()">🖨️ प्रिंट PDF</button>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card"><small>हेक्टेयर (Hectare)</small><b id="outHect">0</b></div>
+                <div class="stat-card"><small>एकड़ (Acre)</small><b id="outAcre">0</b></div>
+                <div class="stat-card"><small>वर्ग फुट (Sqft)</small><b id="outSqft">0</b></div>
+                <div class="stat-card"><small>डिसमिल (Dismil)</small><b id="outDismil">0</b></div>
+                <div class="stat-card"><small>वर्ग मीटर (Sqm)</small><b id="outSqm">0</b></div>
+                <div class="stat-card"><small>धुर (Dhur)</small><b id="outDhur">0</b></div>
+            </div>
+
+            <div class="mp-guide">
+                <h3>📖 मध्य प्रदेश पैमाइश निर्देशिका:</h3>
+                <div class="guide-content">
+                    <ul>
+                        <li><b>हेक्टेयर का महत्व:</b> MP में खसरा/खतौनी में रकबा हमेशा हेक्टेयर में दर्ज होता है।</li>
+                        <li><b>बीघा का गणित:</b> 1 हेक्टेयर = 10,000 वर्ग मीटर = लगभग 3.95 बीघा।</li>
+                        <li><b>एकड़:</b> 1 एकड़ = 0.4047 हेक्टेयर = 100 डिसमिल।</li>
+                        <li><b>स्थानीय इकाई:</b> 1 बीघा = 20 कट्ठा, 1 कट्ठा = 20 धुर।</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--dark); color: #90a4ae; text-align: center; padding: 30px; font-size: 14px;">
+        © 2026 Jameenseva.in | MP-UP-UK Land Experts <br>
+        <small>Digital Land Revenue Solutions for Madhya Pradesh</small>
+    </footer>
+</div>
+
+<script>
+    function calculateMP() {
+        let val = parseFloat(document.getElementById('inputValue').value);
+        let unit = document.getElementById('inputUnit').value;
+        let region = document.getElementById('mpRegion').value;
+        let lathaInch = parseFloat(document.getElementById('lathaSize').value);
+
+        if(!val || val <= 0) { alert("कृपया सही वैल्यू दर्ज करें!"); return; }
+
+        // MP Specific Constants
+        let lathaFt = lathaInch / 12;
+        let oneDhur = lathaFt * lathaFt;
+        let oneKatha = oneDhur * 20;
+        let oneBigha = oneKatha * 20;
+        
+        // Hectare calculation for MP (Base)
+        let sqft = 0;
+        if(unit === "hectare") sqft = val * 107639;
+        else if(unit === "bigha") sqft = val * oneBigha;
+        else if(unit === "sqft") sqft = val;
+        else if(unit === "acre") sqft = val * 43560;
+        else if(unit === "dismil") sqft = val * 435.6;
+        else if(unit === "katha") sqft = val * oneKatha;
+
+        // Results
+        let b = Math.floor(sqft / oneBigha);
+        let remB = sqft % oneBigha;
+        let k = Math.floor(remB / oneKatha);
+        let d = ((remB % oneKatha) / oneDhur).toFixed(1);
+
+        let hect = (sqft / 107639).toFixed(4);
+
+        document.getElementById('mpPrimary').innerText = `${b} बीघा, ${k} कट्ठा, ${d} धुर`;
+        document.getElementById('mpSecondary').innerText = `सरकारी रकबा: ${hect} हेक्टेयर`;
+        
+        document.getElementById('outHect').innerText = hect;
+        document.getElementById('outAcre').innerText = (sqft / 43560).toFixed(4);
+        document.getElementById('outSqft').innerText = sqft.toFixed(1);
+        document.getElementById('outDismil').innerText = (sqft / 435.6).toFixed(2);
+        document.getElementById('outSqm').innerText = (sqft / 10.764).toFixed(2);
+        document.getElementById('outDhur').innerText = (sqft / oneDhur).toFixed(0);
+
+        document.getElementById('result-mp').style.display = 'block';
+    }
+
+    function copyMP() {
+        let report = `--- JAMEENSEVA MP LAND REPORT ---\n`;
+        report += `नतीजा: ${document.getElementById('mpPrimary').innerText}\n`;
+        report += `हेक्टेयर: ${document.getElementById('outHect').innerText}\n`;
+        report += `एकड़: ${document.getElementById('outAcre').innerText}\n`;
+        report += `Visit Jameenseva.in for Digital Records.`;
+
+        navigator.clipboard.writeText(report).then(() => {
+            alert("MP पैमाइश रिपोर्ट कॉपी हो गई है!");
+        });
+    }
+</script>
+</body>
+</html>
