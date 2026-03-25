@@ -3,140 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UP Master Land Calculator: Unwansi to Bigha | Jameenseva.in</title>
+    <title>Universal UP Land Converter: Any Unit to All Units | Jameenseva.in</title>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
 
     <style>
         :root { --primary: #d35400; --secondary: #2c3e50; --accent: #27ae60; --bg: #fdfaf6; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 15px; }
-        .wrapper { max-width: 800px; margin: auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid #eee; overflow: hidden; }
-        .header { background: var(--secondary); color: white; padding: 30px; text-align: center; border-bottom: 5px solid var(--primary); }
-        .header h1 { margin: 0; font-size: 26px; }
-        .body-content { padding: 30px; }
-        .input-box { margin-bottom: 25px; }
-        label { font-weight: bold; color: #444; display: block; margin-bottom: 10px; }
-        input, select { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 8px rgba(211, 84, 0, 0.2); }
-        .btn { width: 100%; padding: 20px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: #ba4a00; transform: translateY(-2px); }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 10px; }
+        .wrapper { max-width: 850px; margin: 20px auto; background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid #eee; overflow: hidden; }
+        .header { background: var(--secondary); color: white; padding: 25px; text-align: center; border-bottom: 5px solid var(--primary); }
+        .header h1 { margin: 0; font-size: 24px; }
+        .body-content { padding: 25px; }
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } }
+        label { font-weight: bold; color: #444; display: block; margin-bottom: 8px; font-size: 14px; }
+        input, select { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: 0.3s; background: #fff; }
+        input:focus, select:focus { border-color: var(--primary); outline: none; }
+        .btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn:hover { background: #ba4a00; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3); }
 
-        /* Results Styling */
+        /* Results Display */
         #results { display: none; margin-top: 30px; animation: slideUp 0.4s ease-out; }
-        .main-card { background: #fffcf0; border: 2px dashed #f39c12; padding: 25px; border-radius: 15px; text-align: center; margin-bottom: 25px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-        .card { background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 5px solid var(--primary); box-shadow: 2px 2px 10px rgba(0,0,0,0.03); }
-        .card span { font-size: 12px; color: #777; display: block; margin-bottom: 5px; }
-        .card b { font-size: 16px; color: var(--secondary); }
+        .main-card { background: #ebf9f1; border: 2px solid var(--accent); padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #eee; border-bottom: 4px solid var(--primary); transition: 0.3s; }
+        .card:hover { transform: scale(1.02); }
+        .card span { font-size: 11px; color: #777; display: block; text-transform: uppercase; margin-bottom: 4px; }
+        .card b { font-size: 15px; color: var(--secondary); }
         
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .units-table { width: 100%; margin-top: 20px; border-collapse: collapse; font-size: 13px; }
-        .units-table td { border: 1px solid #eee; padding: 8px; color: #666; }
+        .badge { background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #555; vertical-align: middle; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
     <div class="header">
-        <h1>उत्तर प्रदेश भूमि पैमाइश कैलकुलेटर</h1>
-        <p style="margin: 8px 0 0; opacity: 0.8;">सटीक सरकारी पैमाना: उनवांसी से हेक्टेयर तक</p>
+        <h1>Universal UP Land Converter 2.0</h1>
+        <p style="margin: 5px 0 0; opacity: 0.8;">किसी भी यूनिट से पैमाइश करें (Bigha, Acre, Hectare...)</p>
     </div>
 
     <div class="body-content">
-        <div class="input-box">
-            <label>कुल क्षेत्रफल (Square Feet) यहाँ लिखें:</label>
-            <input type="number" id="sqftValue" placeholder="उदा. 10000">
+        <div class="input-row">
+            <div>
+                <label>माप (Value) डालें:</label>
+                <input type="number" id="inputValue" placeholder="उदा. 100">
+            </div>
+            <div>
+                <label>यूनिट चुनें (Input Unit):</label>
+                <select id="inputUnit">
+                    <option value="sqft">Square Feet (वर्ग फुट)</option>
+                    <option value="gaj">Square Yard (वर्ग गज/गज)</option>
+                    <option value="sqm">Square Meter (वर्ग मीटर)</option>
+                    <option value="acre">Acre (एकड़)</option>
+                    <option value="hectare">Hectare (हेक्टेयर)</option>
+                    <option value="bigha">Bigha (बीघा)</option>
+                    <option value="biswa">Biswa / Katha (बिस्वा/कट्ठा)</option>
+                    <option value="dhur">Dhur / Biswansi (धुर)</option>
+                </select>
+            </div>
         </div>
 
-        <div class="input-box">
-            <label>लठ्ठा/लाठा का साइज चुनें:</label>
-            <select id="lathaSelect" onchange="checkCustomLatha()">
-                <option value="99">99 इंच या 8 फीट 3 इंच (Standard UP)</option>
-                <option value="104">104 इंच (पश्चिमी उत्तर प्रदेश)</option>
-                <option value="custom">Custom (अपना माप डालें)</option>
-            </select>
+        <div class="input-row">
+            <div>
+                <label>लठ्ठा/लाठा साइज (Inch):</label>
+                <select id="lathaSelect" onchange="checkCustom()">
+                    <option value="99">99 इंच (Std - 8ft 3in)</option>
+                    <option value="94">94 इंच (पूर्वी यूपी)</option>
+                    <option value="104">104 इंच (पश्चिमी यूपी)</option>
+                    <option value="108">108 इंच (6 हाथ का लठ्ठा)</option>
+                    <option value="120">120 इंच (10 फिट लठ्ठा)</option>
+                    <option value="custom">Custom (अपना माप डालें)</option>
+                </select>
+            </div>
+            <div id="customInputDiv" style="display:none;">
+                <label>Custom Inch:</label>
+                <input type="number" id="customLatha" value="99">
+            </div>
         </div>
 
-        <div id="customBox" style="display:none;" class="input-box">
-            <label style="color: var(--primary);">Custom Latha (Inch):</label>
-            <input type="number" id="customInput" value="99">
-        </div>
-
-        <button class="btn" onclick="masterCalculate()">सटीक गणना करें</button>
+        <button class="btn" onclick="universalCalculate()">गणना करें (Calculate All)</button>
 
         <div id="results">
             <div class="main-card">
-                <small>आपका सटीक रकबा (Bigha Details):</small>
-                <h2 id="finalText" style="margin: 10px 0; color: #d35400;">0 बीघा, 0 बिस्वा...</h2>
-                <p id="localDeoria" style="font-weight: 600; color: var(--accent); margin: 0;"></p>
+                <small style="color: #666;">आपका मुख्य रकबा:</small>
+                <h2 id="resPrimary" style="margin: 8px 0; color: #d35400;">0 Bigha, 0 Biswa</h2>
+                <span id="localLabel" class="badge">देवरिया/पूर्वांचल स्पेशल</span>
+                <p id="resSecondary" style="margin: 10px 0 0; font-weight: 600; color: var(--accent);"></p>
             </div>
 
             <div class="grid">
-                <div class="card"><span>एकड़ (Acre)</span><b id="resAcre">0</b></div>
-                <div class="card"><span>हेक्टेयर (Hectare)</span><b id="resHect">0</b></div>
-                <div class="card"><span>वर्ग गज (Gaj)</span><b id="resGaj">0</b></div>
-                <div class="card"><span>वर्ग मीटर (Sqm)</span><b id="resSqm">0</b></div>
-                <div class="card"><span>गज-ए-इलाही (33")</span><b id="resIlahi">0</b></div>
-                <div class="card"><span>कुल उनवांसी</span><b id="resUnwansi">0</b></div>
-            </div>
-
-            <div style="margin-top: 30px; background: #f2f2f2; padding: 15px; border-radius: 10px;">
-                <h4 style="margin: 0 0 10px; font-size: 14px; color: #444;">📜 सरकारी पैमाना (Sarkari Unit Guide):</h4>
-                <table class="units-table">
-                    <tr><td>1 लाठा = 99 इंच</td><td>20 कचवांसी = 1 बिस्वांसी</td></tr>
-                    <tr><td>20 उनवांसी = 1 कचवांसी</td><td>20 बिस्वांसी = 1 बिस्वा</td></tr>
-                    <tr><td>20 बिस्वा = 1 बीघा</td><td>1 बीघा = 3025 वर्ग गज</td></tr>
-                    <tr><td>8 बीघा = 5 एकड़</td><td>1 गज इलाही = 33 इंच</td></tr>
-                </table>
+                <div class="card"><span>एकड़ (Acre)</span><b id="outAcre">0</b></div>
+                <div class="card"><span>हेक्टेयर (Hectare)</span><b id="outHect">0</b></div>
+                <div class="card"><span>वर्ग गज (Gaj)</span><b id="outGaj">0</b></div>
+                <div class="card"><span>वर्ग मीटर (Sqm)</span><b id="outSqm">0</b></div>
+                <div class="card"><span>वर्ग फुट (Sqft)</span><b id="outSqft">0</b></div>
+                <div class="card"><span>कनाल (Kanal)</span><b id="outKanal">0</b></div>
+                <div class="card"><span>मरला (Marla)</span><b id="outMarla">0</b></div>
+                <div class="card"><span>उनवांसी (Unwansi)</span><b id="outUnw">0</b></div>
             </div>
         </div>
     </div>
 
-    <footer style="background: #2c3e50; color: #aaa; text-align: center; padding: 20px; font-size: 13px;">
-        © 2026 Jameenseva.in | Deoria - Rudrapur Special
+    <footer style="background: #2c3e50; color: #888; text-align: center; padding: 15px; font-size: 13px;">
+        Data Powered by Jameenseva.in | सरकारी पैमाना आधारित गणना
     </footer>
 </div>
 
 <script>
-    function checkCustomLatha() {
-        document.getElementById('customBox').style.display = (document.getElementById('lathaSelect').value === 'custom') ? 'block' : 'none';
+    function checkCustom() {
+        document.getElementById('customInputDiv').style.display = (document.getElementById('lathaSelect').value === 'custom') ? 'block' : 'none';
     }
 
-    function masterCalculate() {
-        let sqft = parseFloat(document.getElementById('sqftValue').value);
-        let lathaInch = (document.getElementById('lathaSelect').value === 'custom') ? parseFloat(document.getElementById('customInput').value) : parseFloat(document.getElementById('lathaSelect').value);
+    function universalCalculate() {
+        let val = parseFloat(document.getElementById('inputValue').value);
+        let inUnit = document.getElementById('inputUnit').value;
+        let lathaInch = (document.getElementById('lathaSelect').value === 'custom') ? parseFloat(document.getElementById('customLatha').value) : parseFloat(document.getElementById('lathaSelect').value);
 
-        if(!sqft || sqft <= 0) { alert("भैया, सही माप भरें!"); return; }
+        if(!val || val <= 0) { alert("भैया, पहले माप (Value) तो भरिए!"); return; }
 
-        // Logic based on Image: 1 Latha = 99 inch. 
-        // 20 Biswansi (1 Sq Latha) = 1 Biswa
+        // Step 1: Convert everything to Sqft first (Base Unit)
         let lathaFt = lathaInch / 12;
-        let oneDhurSqft = lathaFt * lathaFt; // 1 Biswansi / Dhur
-        let oneKachwansiSqft = oneDhurSqft / 20;
-        let oneUnwansiSqft = oneKachwansiSqft / 20;
-        let oneBiswaSqft = oneDhurSqft * 20;
-        let oneBighaSqft = oneBiswaSqft * 20;
-
-        // Breakdown Logic
-        let bigha = Math.floor(sqft / oneBighaSqft);
-        let remBigha = sqft % oneBighaSqft;
-        let biswa = Math.floor(remBigha / oneBiswaSqft);
-        let remBiswa = remBigha % oneBiswaSqft;
-        let dhur = Math.floor(remBiswa / oneDhurSqft);
-        let remDhur = remBiswa % oneDhurSqft;
-        let kachwansi = Math.floor(remDhur / oneKachwansiSqft);
-        let unwansi = (remDhur % oneKachwansiSqft / oneUnwansiSqft).toFixed(0);
-
-        // Standard Units
-        document.getElementById('finalText').innerText = `${bigha} बीघा, ${biswa} बिस्वा, ${dhur} धुर`;
-        document.getElementById('localDeoria').innerText = `स्थानीय (देवरिया): ${bigha} बीघा, ${biswa} कट्ठा, ${dhur} धुर, ${kachwansi} कचवांसी`;
+        let oneDhur = lathaFt * lathaFt;
+        let oneBiswa = oneDhur * 20;
+        let oneBigha = oneBiswa * 20;
         
-        document.getElementById('resAcre').innerText = (sqft / 43560).toFixed(4);
-        document.getElementById('resHect').innerText = (sqft / 107639).toFixed(4);
-        document.getElementById('resGaj').innerText = (sqft / 9).toFixed(2);
-        document.getElementById('resSqm').innerText = (sqft / 10.764).toFixed(2);
-        document.getElementById('resIlahi').innerText = (sqft / 7.5625).toFixed(2); // Based on 33 inch yard
-        document.getElementById('resUnwansi').innerText = (sqft / oneUnwansiSqft).toFixed(0);
+        let baseSqft = 0;
+        if(inUnit === "sqft") baseSqft = val;
+        else if(inUnit === "gaj") baseSqft = val * 9;
+        else if(inUnit === "sqm") baseSqft = val * 10.7639;
+        else if(inUnit === "acre") baseSqft = val * 43560;
+        else if(inUnit === "hectare") baseSqft = val * 107639;
+        else if(inUnit === "bigha") baseSqft = val * oneBigha;
+        else if(inUnit === "biswa") baseSqft = val * oneBiswa;
+        else if(inUnit === "dhur") baseSqft = val * oneDhur;
+
+        // Step 2: Calculate All Units from baseSqft
+        let b = Math.floor(baseSqft / oneBigha);
+        let remB = baseSqft % oneBigha;
+        let bi = Math.floor(remB / oneBiswa);
+        let remBi = remB % oneBiswa;
+        let dh = (remBi / oneDhur).toFixed(2);
+
+        // Display results
+        document.getElementById('resPrimary').innerText = `${b} बीघा, ${bi} बिस्वा, ${dh} धुर`;
+        document.getElementById('resSecondary').innerText = `स्थानीय भाषा: ${b} बीघा, ${bi} कट्ठा, ${dh} धुर (धुरकी)`;
+        
+        document.getElementById('outAcre').innerText = (baseSqft / 43560).toFixed(4);
+        document.getElementById('outHect').innerText = (baseSqft / 107639).toFixed(4);
+        document.getElementById('outGaj').innerText = (baseSqft / 9).toFixed(2);
+        document.getElementById('outSqm').innerText = (baseSqft / 10.7639).toFixed(2);
+        document.getElementById('outSqft').innerText = baseSqft.toFixed(2);
+        document.getElementById('outKanal').innerText = (baseSqft / 5445).toFixed(2);
+        document.getElementById('outMarla').innerText = (baseSqft / 272.25).toFixed(2);
+        document.getElementById('outUnw').innerText = (baseSqft / (oneDhur/400)).toFixed(0);
 
         document.getElementById('results').style.display = 'block';
     }
