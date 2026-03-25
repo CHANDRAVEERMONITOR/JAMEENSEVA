@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal UP Land Converter: Any Unit to All Units | Jameenseva.in</title>
+    <title>Master UP Land Calculator: Latha, Gatha, Dismil & More | Jameenseva.in</title>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
 
@@ -18,32 +18,44 @@
         @media (max-width: 600px) { .input-row { grid-template-columns: 1fr; } }
         label { font-weight: bold; color: #444; display: block; margin-bottom: 8px; font-size: 14px; }
         input, select { width: 100%; padding: 14px; border: 2px solid #ddd; border-radius: 8px; font-size: 16px; box-sizing: border-box; transition: 0.3s; background: #fff; }
-        input:focus, select:focus { border-color: var(--primary); outline: none; }
-        .btn { width: 100%; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        .btn:hover { background: #ba4a00; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3); }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { flex: 1; padding: 18px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-secondary { background: #3498db; }
+        .btn-print { background: #2c3e50; }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
         /* Results Display */
-        #results { display: none; margin-top: 30px; animation: slideUp 0.4s ease-out; }
+        #results { display: none; margin-top: 30px; }
         .main-card { background: #ebf9f1; border: 2px solid var(--accent); padding: 20px; border-radius: 15px; text-align: center; margin-bottom: 25px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #eee; border-bottom: 4px solid var(--primary); transition: 0.3s; }
-        .card:hover { transform: scale(1.02); }
+        .card { background: #fff; padding: 12px; border-radius: 8px; border: 1px solid #eee; border-bottom: 4px solid var(--primary); }
         .card span { font-size: 11px; color: #777; display: block; text-transform: uppercase; margin-bottom: 4px; }
-        .card b { font-size: 15px; color: var(--secondary); }
         
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .badge { background: #eee; padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #555; vertical-align: middle; }
+        /* Notice & Process Info */
+        .notice-box { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin: 20px 0; font-size: 14px; border-radius: 5px; }
+        .process-guide { background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #ddd; margin-top: 30px; }
+        .process-guide h3 { margin-top: 0; color: var(--secondary); font-size: 18px; }
+        
+        @media print {
+            .header, .body-content button, .process-guide, .input-row { display: none !important; }
+            .wrapper { box-shadow: none; border: none; }
+            #results { display: block !important; }
+        }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
+<div class="wrapper" id="printableArea">
     <div class="header">
-        <h1>Universal UP Land Converter 2.0</h1>
-        <p style="margin: 5px 0 0; opacity: 0.8;">किसी भी यूनिट से पैमाइश करें (Bigha, Acre, Hectare...)</p>
+        <h1>Universal Master Land Calculator (UP Special)</h1>
+        <p style="margin: 5px 0 0; opacity: 0.8;">लाठा, गट्ठा, बीघा, कट्ठा और डिसमिल की सटीक गणना</p>
     </div>
 
     <div class="body-content">
+        <div class="notice-box">
+            <strong>⚠️ महत्वपूर्ण सूचना:</strong> उत्तर प्रदेश में मानक के अनुसार <strong>1 हाथ = 18 इंच</strong> माना जाता है। इसी आधार पर लाठा (गट्ठा) की पैमाइश की जाती है।
+        </div>
+
         <div class="input-row">
             <div>
                 <label>माप (Value) डालें:</label>
@@ -53,27 +65,26 @@
                 <label>यूनिट चुनें (Input Unit):</label>
                 <select id="inputUnit">
                     <option value="sqft">Square Feet (वर्ग फुट)</option>
+                    <option value="dismil">Dismil (डिसमिल)</option>
                     <option value="gaj">Square Yard (वर्ग गज/गज)</option>
                     <option value="sqm">Square Meter (वर्ग मीटर)</option>
                     <option value="acre">Acre (एकड़)</option>
                     <option value="hectare">Hectare (हेक्टेयर)</option>
                     <option value="bigha">Bigha (बीघा)</option>
-                    <option value="biswa">Biswa / Katha (बिस्वा/कट्ठा)</option>
-                    <option value="dhur">Dhur / Biswansi (धुर)</option>
+                    <option value="biswa">Biswa / Katha (बिस्वा)</option>
                 </select>
             </div>
         </div>
 
         <div class="input-row">
             <div>
-                <label>लठ्ठा/लाठा साइज (Inch):</label>
+                <label>लाठा / गट्ठा साइज इंच में(1 हाथ =18 इंच ):</label>
                 <select id="lathaSelect" onchange="checkCustom()">
-                    <option value="99">99 इंच (Std - 8ft 3in)</option>
-                    <option value="94">94 इंच (पूर्वी यूपी)</option>
-                    <option value="104">104 इंच (पश्चिमी यूपी)</option>
+                    <option value="99">99 इंच (5.5 हाथ - Standard)</option>
+                    <option value="94">94 इंच (पूर्वी उत्तर प्रदेश)</option>
+                    <option value="104">104 इंच (पश्चिमी उत्तर प्रदेश)</option>
                     <option value="108">108 इंच (6 हाथ का लठ्ठा)</option>
-                    <option value="120">120 इंच (10 फिट लठ्ठा)</option>
-                    <option value="custom">Custom (अपना माप डालें)</option>
+                    <option value="custom">Custom (अपना इंच डालें)</option>
                 </select>
             </div>
             <div id="customInputDiv" style="display:none;">
@@ -82,31 +93,46 @@
             </div>
         </div>
 
-        <button class="btn" onclick="universalCalculate()">गणना करें (Calculate All)</button>
+        <button class="btn" onclick="universalCalculate()">गणना करें (Calculate)</button>
 
         <div id="results">
             <div class="main-card">
-                <small style="color: #666;">आपका मुख्य रकबा:</small>
+                <small style="color: #666;">आपका कुल रकबा (Bigha Details):</small>
                 <h2 id="resPrimary" style="margin: 8px 0; color: #d35400;">0 Bigha, 0 Biswa</h2>
-                <span id="localLabel" class="badge">देवरिया/पूर्वांचल स्पेशल</span>
-                <p id="resSecondary" style="margin: 10px 0 0; font-weight: 600; color: var(--accent);"></p>
+                <p id="resSecondary" style="margin: 5px 0; font-weight: 600; color: var(--accent);"></p>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="copyResult()">📋 Copy Result</button>
+                    <button class="btn btn-print" onclick="window.print()">🖨️ Print Report</button>
+                </div>
             </div>
 
             <div class="grid">
+                <div class="card"><span>कुल डिसमिल (Dismil)</span><b id="outDismil">0</b></div>
                 <div class="card"><span>एकड़ (Acre)</span><b id="outAcre">0</b></div>
                 <div class="card"><span>हेक्टेयर (Hectare)</span><b id="outHect">0</b></div>
                 <div class="card"><span>वर्ग गज (Gaj)</span><b id="outGaj">0</b></div>
-                <div class="card"><span>वर्ग मीटर (Sqm)</span><b id="outSqm">0</b></div>
                 <div class="card"><span>वर्ग फुट (Sqft)</span><b id="outSqft">0</b></div>
-                <div class="card"><span>कनाल (Kanal)</span><b id="outKanal">0</b></div>
-                <div class="card"><span>मरला (Marla)</span><b id="outMarla">0</b></div>
                 <div class="card"><span>उनवांसी (Unwansi)</span><b id="outUnw">0</b></div>
             </div>
+        </div>
+
+        <div class="process-guide">
+            <h3>📖 कैलकुलेटर उपयोग करने की प्रक्रिया:</h3>
+            <ol style="font-size: 14px; line-height: 1.8; color: #555;">
+                <li>सबसे पहले <strong>'माप (Value)'</strong> बॉक्स में अपनी जमीन का एरिया भरें।</li>
+                <li>फिर <strong>'यूनिट'</strong> में चुनें कि वह वैल्यू फुट, डिसमिल या हेक्टेयर किसमें है।</li>
+                <li>अपने क्षेत्र का <strong>'लाठा (गट्ठा)'</strong> साइज चुनें (देवरिया/पूर्वांचल के लिए 99 इंच चुनें)।</li>
+                <li>'गणना करें' बटन दबाते ही आपको बीघा-बिस्वा और डिसमिल का सही हिसाब मिल जाएगा।</li>
+            </ol>
+            <hr>
+            <p style="font-size: 13px; color: #d35400; font-weight: bold;">
+                💡 याद रखें: 100 डिसमिल = 1 एकड़ | 1 लाठा = 5.5 हाथ (स्टैंडर्ड)
+            </p>
         </div>
     </div>
 
     <footer style="background: #2c3e50; color: #888; text-align: center; padding: 15px; font-size: 13px;">
-        Data Powered by Jameenseva.in | सरकारी पैमाना आधारित गणना
+        © 2026 Jameenseva.in | जमीन की सटीक पैमाइश का भरोसा
     </footer>
 </div>
 
@@ -120,9 +146,8 @@
         let inUnit = document.getElementById('inputUnit').value;
         let lathaInch = (document.getElementById('lathaSelect').value === 'custom') ? parseFloat(document.getElementById('customLatha').value) : parseFloat(document.getElementById('lathaSelect').value);
 
-        if(!val || val <= 0) { alert("भैया, पहले माप (Value) तो भरिए!"); return; }
+        if(!val || val <= 0) { alert("भैया, पहले माप तो भरिए!"); return; }
 
-        // Step 1: Convert everything to Sqft first (Base Unit)
         let lathaFt = lathaInch / 12;
         let oneDhur = lathaFt * lathaFt;
         let oneBiswa = oneDhur * 20;
@@ -130,35 +155,38 @@
         
         let baseSqft = 0;
         if(inUnit === "sqft") baseSqft = val;
+        else if(inUnit === "dismil") baseSqft = val * 435.6;
         else if(inUnit === "gaj") baseSqft = val * 9;
         else if(inUnit === "sqm") baseSqft = val * 10.7639;
         else if(inUnit === "acre") baseSqft = val * 43560;
         else if(inUnit === "hectare") baseSqft = val * 107639;
         else if(inUnit === "bigha") baseSqft = val * oneBigha;
         else if(inUnit === "biswa") baseSqft = val * oneBiswa;
-        else if(inUnit === "dhur") baseSqft = val * oneDhur;
 
-        // Step 2: Calculate All Units from baseSqft
         let b = Math.floor(baseSqft / oneBigha);
         let remB = baseSqft % oneBigha;
         let bi = Math.floor(remB / oneBiswa);
         let remBi = remB % oneBiswa;
         let dh = (remBi / oneDhur).toFixed(2);
 
-        // Display results
         document.getElementById('resPrimary').innerText = `${b} बीघा, ${bi} बिस्वा, ${dh} धुर`;
-        document.getElementById('resSecondary').innerText = `स्थानीय भाषा: ${b} बीघा, ${bi} कट्ठा, ${dh} धुर (धुरकी)`;
+        document.getElementById('resSecondary').innerText = `देवरिया/पूर्वांचल: ${b} बीघा, ${bi} कट्ठा, ${dh} धुरकी`;
         
+        document.getElementById('outDismil').innerText = (baseSqft / 435.6).toFixed(2);
         document.getElementById('outAcre').innerText = (baseSqft / 43560).toFixed(4);
         document.getElementById('outHect').innerText = (baseSqft / 107639).toFixed(4);
         document.getElementById('outGaj').innerText = (baseSqft / 9).toFixed(2);
-        document.getElementById('outSqm').innerText = (baseSqft / 10.7639).toFixed(2);
         document.getElementById('outSqft').innerText = baseSqft.toFixed(2);
-        document.getElementById('outKanal').innerText = (baseSqft / 5445).toFixed(2);
-        document.getElementById('outMarla').innerText = (baseSqft / 272.25).toFixed(2);
         document.getElementById('outUnw').innerText = (baseSqft / (oneDhur/400)).toFixed(0);
 
         document.getElementById('results').style.display = 'block';
+    }
+
+    function copyResult() {
+        let text = document.getElementById('resPrimary').innerText + "\n" + document.getElementById('resSecondary').innerText + "\nCheck on Jameenseva.in";
+        navigator.clipboard.writeText(text).then(() => {
+            alert("Result कॉपी हो गया है! अब आप इसे कहीं भी शेयर कर सकते हैं।");
+        });
     }
 </script>
 </body>
