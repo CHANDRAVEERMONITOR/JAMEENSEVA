@@ -120,7 +120,7 @@
         </marquee>
     </div>
 
-   <div style="display: flex; justify-content: space-between; align-items: stretch; gap: 15px; padding: 10px 3%;">
+ <div style="display: flex; justify-content: space-between; align-items: stretch; gap: 15px; padding: 10px 3%;">
     
     <div style="flex: 1; text-align: left; background-color: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd;">
         <h2 style="color: #333; font-size: 18px; margin-top: 0;">बिहार जमीन मापी कैलकुलेटर</h2>
@@ -135,10 +135,10 @@
         <p style="color: #666; font-size: 13px;">होम डिलीवरी के लिए व्हाट्सएप करें:</p>
         <b style="color: #005689; font-size: 16px;">9142075859</b>
     </div>
-
 </div>
-<div style="text-align: center; margin: 10px;">
-    <button id="installApp" style="display:none; background:#ffc107; color:#000; font-weight:bold; border:none; padding:12px 20px; border-radius:50px; cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+
+<div style="text-align: center; margin: 10px 0;">
+    <button id="installApp" style="display:none; background:#ffc107; color:#000; font-weight:bold; border:none; padding:15px 25px; border-radius:50px; cursor:pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2); font-size: 16px; width: 90%; max-width: 400px;">
         📲 JameenSeva App Install Karein
     </button>
 </div>
@@ -146,10 +146,9 @@
 <script>
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
-  // Browser ka default prompt roko
   e.preventDefault();
   deferredPrompt = e;
-  // Apna custom button dikhao
+  // Button tabhi dikhega jab install possible ho
   document.getElementById('installApp').style.display = 'inline-block';
 });
 
@@ -158,7 +157,6 @@ document.getElementById('installApp').addEventListener('click', async () => {
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     if (outcome === 'accepted') {
-      console.log('User ne app install kar li');
       document.getElementById('installApp').style.display = 'none';
     }
     deferredPrompt = null;
