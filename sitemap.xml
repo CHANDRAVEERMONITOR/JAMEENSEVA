@@ -1,147 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://jameenseva.in/</loc><lastmod>2026-03-01</lastmod><priority>1.00</priority></url>
+
+  <url><loc>https://jameenseva.in/</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
+  <url><loc>https://jameenseva.in/up.html</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
   <url><loc>https://jameenseva.in/blog.html</loc><lastmod>2026-03-17</lastmod><priority>0.90</priority></url>
-  <url><loc>https://jameenseva.in/khatiyan.html</loc><lastmod>2026-02-20</lastmod><priority>0.9</priority></url>
-  <url><loc>https://jameenseva.in/sarkari.html</loc><lastmod>2026-03-01</lastmod><priority>0.9</priority></url>
+  <url><loc>https://jameenseva.in/khatiyan.html</loc><lastmod>2026-02-20</lastmod><priority>0.90</priority></url>
+  <url><loc>https://jameenseva.in/panchnama.html</loc><lastmod>2026-03-23</lastmod><priority>0.98</priority></url>
+  <url><loc>https://jameenseva.in/ragister2.html</loc><lastmod>2026-02-20</lastmod><priority>0.90</priority></url>
 
-<url><loc>https://jameenseva.in/madhubani.html</loc><lastmod>2026-03-20</lastmod>
-  <priority>0.9</priority></url>
+  <url><loc>https://jameenseva.in/land-calculator.html</loc><lastmod>2026-03-27</lastmod><priority>0.90</priority></url>
+  <url><loc>https://jameenseva.in/up-land-calculator.html</loc><lastmod>2026-03-27</lastmod><priority>0.85</priority></url>
+  <url><loc>https://jameenseva.in/mp-land-calculator.html</loc><lastmod>2026-03-27</lastmod><priority>0.85</priority></url>
+  <url><loc>https://jameenseva.in/uk-land-calculator.html</loc><lastmod>2026-03-27</lastmod><priority>0.85</priority></url>
 
-<url><loc>https://jameenseva.in/pm-kisan-13march.html</loc><lastmod>2026-03-11</lastmod><priority>0.9</priority></url>
+  <url><loc>https://jameenseva.in/batwara-format.html</loc><lastmod>2026-03-23</lastmod><priority>0.95</priority></url>
+  <url><loc>https://jameenseva.in/panchnama-batwara-download.html</loc><lastmod>2026-03-22</lastmod><priority>0.98</priority></url>
+  <url><loc>https://jameenseva.in/track.html</loc><lastmod>2026-03-04</lastmod><priority>0.90</priority></url>
+  <url><loc>https://jameenseva.in/bihar-district-land-record.html</loc><lastmod>2026-03-20</lastmod><priority>0.90</priority></url>
 
-
-<url><loc>https://jameenseva.in/darbhanga-blog.html</loc>
-  <lastmod>2026-03-20</lastmod>
-  <priority>0.9</priority>
-</url>
-<url><loc>https://jameenseva.in/patna.html</loc>
-  <lastmod>2026-03-20</lastmod>
-  <priority>0.9</priority>
-</url>
-
-<url><loc>https://jameenseva.in/muzaffarpur.html</loc>
-  <lastmod>2026-03-20</lastmod>
-  <priority>0.9</priority>
-</url>
- <url>
-    <loc>https://jameenseva.in/batwara-format.html</loc><lastmod>2026-03-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority></url>
-<url>
- <loc>https://jameenseva.in/panchnama-batwara-download.html</loc>
-    <lastmod>2026-03-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.98</priority> 
-  </url>
-
-
-
-  <url><loc>https://jameenseva.in/panchnama.html</loc><lastmod>2026-02-22</lastmod><priority>0.9</priority></url>
-
-<url><loc>https://jameenseva.in/registry-news.html</loc><lastmod>2026-03-10</lastmod><priority>0.9</priority></url>
-
-  <url><loc>https://jameenseva.in/ragister2.html</loc><lastmod>2026-02-20</lastmod><priority>0.9</priority></url>
-  <url><loc>https://jameenseva.in/track.html</loc><lastmod>2026-03-04</lastmod><priority>0.9</priority></url>
-  <url><loc>https://jameenseva.in/land-calculator.html</loc><lastmod>2026-03-04</lastmod><priority>0.9</priority></url>
-
-<url><loc>https://jameenseva.in/bihar-district-land-record.html</loc><lastmod>2026-03-20</lastmod><priority>0.9</priority></url>
-  
-  <url><loc>https://jameenseva.in/calculator-blog.html</loc><lastmod>2026-03-04</lastmod><priority>0.80</priority></url>
- <url><loc>https://jameenseva.in/bihar-rcms-guide.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/bihar-naksha-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/lpc-guide-bihar.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/e-mapi-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
   <url><loc>https://jameenseva.in/bihar-survey-guide-2026.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/jamabandiblog.html</loc><lastmod>2026-03-23</lastmod><priority>0.80</priority></url>
   <url><loc>https://jameenseva.in/parimarjan-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/dakhil-kharij-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/blog-dakhil-kharij2.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/panchnamablog.html</loc><lastmod>2026-03-23</lastmod><priority>0.80</priority></url>
 
-  <url><loc>https://jameenseva.in/araria.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/arwal.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/aurangabad.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/banka.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/begusarai.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/bhagalpur.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/bhojpur.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/buxar.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/darbhanga-blog.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/east-champaran.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/gaya.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/gopalganj.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/jamui.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/jehanabad.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/kaimur.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/katihar.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/khagaria.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/kishanganj.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/lakhisarai.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/madhepura.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/madhubani.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/munger.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/muzaffarpur.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/nalanda.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/nawada.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/patna.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/purnia.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/rohtas.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/saharsa.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/samastipur.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/saran.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/sheikhpura.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/sheohar.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/sitamarhi.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/siwan.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/supaul.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/vaishali.html</loc><priority>0.8</priority></url>
-  <url><loc>https://jameenseva.in/west-champaran.html</loc><priority>0.8</priority></url>
+  <url><loc>https://jameenseva.in/patna.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/muzaffarpur.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/darbhanga-blog.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/madhubani.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/gaya.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/purnia.html</loc><priority>0.80</priority></url>
+  <url><loc>https://jameenseva.in/about-us.html</loc><lastmod>2026-03-27</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/contact.html</loc><lastmod>2026-03-27</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/terms-and-conditions.html</loc><lastmod>2026-03-27</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/privacy-policy.html</loc><lastmod>2026-03-27</lastmod><priority>0.50</priority></url>
+  <url><loc>https://jameenseva.in/disclaimer.html</loc><lastmod>2026-03-27</lastmod><priority>0.50</priority></url>
 
-  <url><loc>https://jameenseva.in/kewalablog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/khatiyan-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-  <url><loc>https://jameenseva.in/area-antar-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
-   <url><loc>https://jameenseva.in/jamabandiblog.html</loc><lastmod>2026-03-23</lastmod><priority>0.80</priority></url>
-
-
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://jameenseva.in/up.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>1.00</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.90</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/up-land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/mp-land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://jameenseva.in/uk-land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <priority>0.85</priority>
-  </url>
-
-  <url><loc>https://jameenseva.in/about-us.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
-  <url><loc>https://jameenseva.in/contact.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
-  <url><loc>https://jameenseva.in/disclaimer.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
-
-  <url>
-    <loc>https://jameenseva.in/terms-and-conditions.html</loc><priority>0.50</priority>
-  </url>
-  <url><loc>https://jameenseva.in/privacy-policy.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
 </urlset>
