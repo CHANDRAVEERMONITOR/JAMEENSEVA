@@ -102,8 +102,46 @@
   <url><loc>https://jameenseva.in/area-antar-blog.html</loc><lastmod>2026-03-01</lastmod><priority>0.80</priority></url>
    <url><loc>https://jameenseva.in/jamabandiblog.html</loc><lastmod>2026-03-23</lastmod><priority>0.80</priority></url>
 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://jameenseva.in/up.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://jameenseva.in/land-calculator.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://jameenseva.in/up-land-calculator.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://jameenseva.in/mp-land-calculator.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://jameenseva.in/uk-land-calculator.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <priority>0.85</priority>
+  </url>
+
   <url><loc>https://jameenseva.in/about-us.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
   <url><loc>https://jameenseva.in/contact.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
   <url><loc>https://jameenseva.in/disclaimer.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
+
+  <url>
+    <loc>https://jameenseva.in/terms-and-conditions.html</loc><priority>0.50</priority>
+  </url>
   <url><loc>https://jameenseva.in/privacy-policy.html</loc><lastmod>2026-03-01</lastmod><priority>0.50</priority></url>
 </urlset>
