@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829"
-     crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ऑर्डर खतियान - JameenSeva.in</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; }
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 5px solid #005689; }
@@ -21,35 +22,13 @@
         .payment-box { background:#fff9e6; border:1px solid #ffeeba; padding:15px; border-radius:10px; margin-top: 20px; text-align: center; }
         .btn-cod { background-color: #28a745; margin-top: 10px; }
         #razorpay-form { display: flex; justify-content: center; margin: 15px 0; min-height: 50px; }
+        .navbar { position: sticky; top: 0; width: 100%; background-color: #28a745; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
+        .navbar a:hover { color: #ffc107; }
+        @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
     </style>
 </head>
 <body>
-    <style>
-    .navbar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        background-color: #28a745;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 12px 0;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .navbar a:hover { color: #ffc107; }
-    @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
-</style>
 
 <nav class="navbar">
     <a href="index.html">🏠 Home</a>
@@ -103,7 +82,11 @@
 </div>
 
 <script>
-// (Bihar Data object yahan pura paste karein...)
+// Supabase Configuration
+const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
     "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -165,7 +148,7 @@ function loadBlocks() {
     }
 }
 
-function submitOrder() {
+async function submitOrder() {
     const btn = document.getElementById("submit-btn");
     const mobile = document.getElementById("mobile").value;
     const dist = document.getElementById("district").value;
@@ -180,35 +163,35 @@ function submitOrder() {
     const trackingID = "JS-" + Math.floor(1000 + Math.random() * 9000);
     const khatiyanType = document.querySelector('input[name="khatiyan_type"]:checked').value;
 
-    const formData = {
-        "ORDER ID": trackingID,
-        "DATE": new Date().toLocaleDateString('hi-IN'),
-        "जिला चुनें (District)": dist,
-        "प्रखंड चुनें (Block)": document.getElementById("block").value,
-        "थाना नंबर": document.getElementById("thana_no").value,
-        "मौजा/गाँव": document.getElementById("village").value,
-        "खाता (यदि हो)": document.getElementById("khata_no").value,
-        "खेसरा (यदि हो)": document.getElementById("khesra_no").value,
-        "खतियान का प्रकार": khatiyanType,
-        "रैयत का नाम(यदि हो)": document.getElementById("raiyat_name").value,
-        "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
-        "पिन कोड": document.getElementById("pincode").value,
-        "अपना मोबाइल नंबर": mobile
-    };
+    // Supabase Insert Call
+    const { data, error } = await _supabase
+      .from('khatiyan order')
+      .insert([
+        { 
+            order_id: trackingID,
+            order_date: new Date().toLocaleDateString('hi-IN'),
+            district: dist,
+            block: document.getElementById("block").value,
+            thana_no: document.getElementById("thana_no").value,
+            village: document.getElementById("village").value,
+            khata_no: document.getElementById("khata_no").value,
+            khesra_no: document.getElementById("khesra_no").value,
+            khatiyan_type: khatiyanType,
+            raiyat_name: document.getElementById("raiyat_name").value,
+            full_address: document.getElementById("full_address").value,
+            pincode: document.getElementById("pincode").value,
+            mobile: mobile,
+            status: 'Order Received'
+        }
+      ]);
 
-    fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: [formData] })
-    })
-    .then(res => {
-        showSuccessPage(trackingID);
-    })
-    .catch(err => {
-        alert("Error! डेटा भेजने में समस्या हुई।");
+    if (error) {
+        alert("Error! डेटा सुरक्षित नहीं हुआ: " + error.message);
         btn.disabled = false;
         btn.innerText = "ऑर्डर बुक करें (Confirm Order)";
-    });
+    } else {
+        showSuccessPage(trackingID);
+    }
 }
 
 function showSuccessPage(id) {
@@ -216,35 +199,27 @@ function showSuccessPage(id) {
         <div style="text-align:center; padding:10px;">
             <div style="font-size:50px; color:#28a745;">✅</div>
             <h2 style="color:#005689; margin-top:0;">ऑर्डर सफलतापूर्वक बुक हुआ!</h2>
-            
             <p>आपकी ट्रैकिंग ID:</p>
             <div style="font-size:24px; font-weight:bold; color:#d9534f; background:#f9f9f9; padding:10px; border-radius:8px; display:inline-block; border:1px dashed #ccc; margin-bottom:15px;">
                 ${id}
             </div>
-
             <div class="payment-box">
                 <p style="color:#856404; font-weight:bold; margin-bottom:10px;">पेमेंट विकल्प</p>
-                
                 <div id="razorpay-form"></div>
-                
                 <p style="margin:15px 0; font-weight:bold; color:#aaa;">──────── OR ────────</p>
-
                 <button onclick="confirmCOD('${id}')" class="btn-cod">Cash on Delivery (COD)</button>
             </div>
-
-            <a href="https://jameenseva.in/track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-top:20px;">
+            <a href="track.html" style="display:block; background:#005689; color:white; text-decoration:none; padding:12px; border-radius:6px; font-weight:bold; margin-top:20px;">
                 📦 ऑर्डर ट्रैक करें
             </a>
         </div>
     `;
 
-    // Razorpay Script Injection inside a Form
     const myForm = document.createElement("form");
     const rpScript = document.createElement("script");
     rpScript.src = "https://checkout.razorpay.com/v1/payment-button.js";
     rpScript.setAttribute("data-payment_button_id", "pl_SCKTQmKjqJ35JV");
     rpScript.async = true;
-    
     myForm.appendChild(rpScript);
     document.getElementById("razorpay-form").appendChild(myForm);
 }
