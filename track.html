@@ -1,159 +1,158 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829"
-     crossorigin="anonymous"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ऑर्डर ट्रैकिंग | Jameen Seva</title>
+    <title>ऑर्डर ट्रैक करें - JameenSeva.in</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; margin: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 15px; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #005689; text-align: center; margin-bottom: 25px; }
+        .search-box { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; background: #eef2f3; padding: 15px; border-radius: 10px; }
+        input { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+        button { padding: 12px; background: #005689; color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #003d61; }
         
-        /* Navbar Styling */
-        .navbar {
-            position: sticky; top: 0; width: 100%; background-color: #28a745;
-            display: flex; justify-content: space-around; align-items: center;
-            padding: 15px 0; box-shadow: 0 6px 14px rgba(0,0,0,0.1); z-index: 1000;
-        }
-        .navbar a {
-            color: white; text-decoration: none; font-weight: bold; font-size: 16px;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .navbar a:hover { color: #ffc107; }
-        @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
+        /* Details Section */
+        #order-details { display: none; margin-top: 20px; border-top: 2px solid #eee; padding-top: 20px; }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .info-item { background: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #eee; }
+        .label { font-size: 12px; color: #666; font-weight: bold; }
+        .value { font-size: 15px; color: #333; margin-top: 5px; }
 
-        /* Tracking Box */
-        .main-container { max-width: 600px; margin: 30px auto; padding: 20px; }
-        .track-card {
-            background: white; padding: 30px; border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;
-            border-top: 6px solid #28a745;
-        }
-        
-        .input-group { display: flex; gap: 10px; margin-top: 20px; }
-        input[type="text"] {
-            flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 8px;
-            font-size: 16px; outline: none; transition: 0.3s;
-        }
-        input[type="text"]:focus { border-color: #28a745; }
-        
-        .btn-search {
-            background: #005689; color: white; border: none; padding: 14px 25px;
-            border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;
-        }
-        .btn-search:hover { background: #003d63; }
-
-        /* Result Section */
-        #status_result {
-            display: none; margin-top: 25px; text-align: left;
-            background: #ffffff; border-radius: 12px; border: 1px solid #eee;
-            overflow: hidden; animation: fadeIn 0.5s ease;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .status-header { background: #f8f9fa; padding: 15px; border-bottom: 2px solid #eee; text-align: center; }
-        .status-badge {
-            background: #28a745; color: white; padding: 5px 15px;
-            border-radius: 20px; font-size: 18px; display: inline-block; margin-top: 5px;
-        }
-        .detail-row {
-            display: flex; justify-content: space-between; padding: 10px 20px;
-            border-bottom: 1px solid #f1f1f1; font-size: 14px;
-        }
-        .detail-row span:first-child { color: #666; font-weight: 500; }
-        .detail-row span:last-child { color: #333; font-weight: bold; text-align: right; }
-        
-        .footer-note { padding: 15px; font-size: 12px; color: #888; text-align: center; background: #fffdf5; }
+        /* Status Timeline */
+        .status-tracker { display: flex; justify-content: space-between; margin: 30px 0; position: relative; }
+        .status-step { text-align: center; z-index: 1; flex: 1; }
+        .status-dot { width: 25px; height: 25px; background: #ccc; border-radius: 50%; margin: 0 auto 5px; border: 3px solid #fff; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .status-label { font-size: 11px; font-weight: bold; color: #888; }
+        .status-step.active .status-dot { background: #28a745; }
+        .status-step.active .status-label { color: #28a745; }
+        .progress-line { position: absolute; top: 12px; left: 10%; right: 10%; height: 3px; background: #ccc; z-index: 0; }
+        .navbar { background: #28a745; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<nav class="navbar">
-    <a href="index.html">🏠 Home</a>
-    <a href="index.html#services">📄 Services</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="track.html">🚚 Tracking</a>
-    <a href="contact.html">📞 Contact</a>
-</nav>
+<div class="navbar"><a href="index.html">🏠 होम पेज पर वापस जाएं</a></div>
 
-<div class="main-container">
-    <div class="track-card">
-        <h2 style="color: #005689; margin: 0;">ऑर्डर ट्रैकिंग सिस्टम</h2>
-        <p style="color: #666; font-size: 14px;">अपना Tracking ID दर्ज करें (उदा: JS-101)</p>
-        
-        <div class="input-group">
-            <input type="text" id="order_id_input" placeholder="ऑर्डर आईडी यहाँ लिखें...">
-            <button class="btn-search" onclick="checkStatus()">खोजें</button>
-        </div>
-        <p style="font-size: 11px; color: #999; margin-top: 10px;">अपडेट होने में 24 घंटे का समय लग सकता है।</p>
+<div class="container">
+    <h2>🚚 अपना ऑर्डर ट्रैक करें</h2>
+    
+    <div class="search-box">
+        <label>ट्रैकिंग ID (उदा. JS-1234):</label>
+        <input type="text" id="track-id" placeholder="JS-XXXX">
+        <p style="text-align: center; margin: 0; font-weight: bold;">या</p>
+        <label>रजिस्टर्ड मोबाइल नंबर:</label>
+        <input type="tel" id="track-mobile" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10">
+        <button onclick="trackOrder()">ऑर्डर की जानकारी देखें</button>
     </div>
 
-    <div id="status_result"></div>
+    <div id="loader" style="display:none; text-align:center;">डेटा खोजा जा रहा है...</div>
+
+    <div id="order-details">
+        <h3 style="color: #28a745; text-align: center;">ऑर्डर मिल गया!</h3>
+        
+        <div class="status-tracker">
+            <div class="progress-line" id="progress-bar"></div>
+            <div class="status-step" id="step-received"><div class="status-dot"></div><div class="status-label">प्राप्त हुआ</div></div>
+            <div class="status-step" id="step-processing"><div class="status-dot"></div><div class="status-label">काम जारी</div></div>
+            <div class="status-step" id="step-dispatched"><div class="status-dot"></div><div class="status-label">भेज दिया</div></div>
+            <div class="status-step" id="step-delivered"><div class="status-dot"></div><div class="status-label">पहुँच गया</div></div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item"><div class="label">ऑर्डर ID</div><div class="value" id="res-id"></div></div>
+            <div class="info-item"><div class="label">ऑर्डर की तारीख</div><div class="value" id="res-date"></div></div>
+            <div class="info-item"><div class="label">जिला</div><div class="value" id="res-dist"></div></div>
+            <div class="info-item"><div class="label">ब्लॉक</div><div class="value" id="res-block"></div></div>
+            <div class="info-item"><div class="label">गाँव/मौज</div><div class="value" id="res-village"></div></div>
+            <div class="info-item"><div class="label">खतियान प्रकार</div><div class="value" id="res-type"></div></div>
+            <div class="info-item" style="grid-column: span 2;"><div class="label">वर्तमान स्थिति (Status)</div><div class="value" style="color:#d9534f; font-weight:bold;" id="res-status"></div></div>
+        </div>
+        
+        <p class="note" style="text-align: center; font-size: 13px; color: #555;">किसी भी सहायता के लिए हमें <b>nainasighchauhan@email.com</b> पर मेल करें।</p>
+    </div>
 </div>
 
 <script>
-function checkStatus() {
-    const inputId = document.getElementById("order_id_input").value.trim().toUpperCase();
-    const resultDiv = document.getElementById("status_result");
+// Supabase Connection
+const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-    if (!inputId) {
-        alert("कृपया अपना ऑर्डर आईडी (ORDER ID) दर्ज करें!");
+async function trackOrder() {
+    const trackID = document.getElementById("track-id").value.trim();
+    const mobile = document.getElementById("track-mobile").value.trim();
+    const detailsBox = document.getElementById("order-details");
+    const loader = document.getElementById("loader");
+
+    if (!trackID && !mobile) {
+        alert("कृपया ट्रैकिंग ID या मोबाइल नंबर भरें!");
         return;
     }
 
-    resultDiv.style.display = "block";
-    resultDiv.innerHTML = "<div style='padding:40px; text-align:center;'>🔍 डेटा खोजा जा रहा है, कृपया प्रतीक्षा करें...</div>";
+    loader.style.display = "block";
+    detailsBox.style.display = "none";
 
-    // SheetDB API URL
-    fetch(`https://sheetdb.io/api/v1/tethdim34qjsy/search?ORDER%20ID=${inputId}`)
-    .then(response => response.json())
-    .then(data => {
-        if (data.length > 0) {
-            const order = data[0];
-            
-            // Status color logic
-            let statusColor = "#28a745"; 
-            if(order["Status"] === "Pending") statusColor = "#ffc107";
-            if(order["Status"] === "Cancelled") statusColor = "#dc3545";
+    let query = _supabase.from('khatiyan order').select('*');
 
-            resultDiv.innerHTML = `
-                <div class="status-header">
-                    <div style="font-size:14px; color:#666;">वर्तमान स्थिति</div>
-                    <div class="status-badge" style="background:${statusColor}">${order["Status"]}</div>
-                </div>
-                
-                <div class="detail-row"><span>ऑर्डर आईडी</span> <span>${order["ORDER ID"]}</span></div>
-                <div class="detail-row"><span>ऑर्डर तिथि</span> <span>${order["DATE"]}</span></div>
-                <div class="detail-row"><span>रैयत का नाम</span> <span>${order["रैयत का नाम(यदि हो)"] || 'N/A'}</span></div>
-                <div class="detail-row"><span>मौजा/गाँव</span> <span>${order["मौजा/गाँव"]}</span></div>
-                <div class="detail-row"><span>जिला/प्रखंड</span> <span>${order["जिला चुनें (District)"]} / ${order["प्रखंड चुनें (Block)"]}</span></div>
-                <div class="detail-row"><span>खाता/खेसरा</span> <span>${order["खाता (यदि हो)"]} / ${order["खेसरा (यदि हो)"]}</span></div>
-                <div class="detail-row"><span>खतियान प्रकार</span> <span>${order["खतियान का प्रकार"]}</span></div>
-                <div class="detail-row"><span>जमाबंदी नंबर</span> <span>${order["जमाबंदी नंबर"] || 'N/A'}</span></div>
-                <div class="detail-row"><span>मोबाइल नंबर</span> <span>${order["अपना मोबाइल नंबर"]}</span></div>
-                <div class="detail-row"><span>पेमेंट मोड</span> <span>${order["भुगतान का तरीका चुनें"]}</span></div>
-                
-                <div style="padding: 15px; background: #fff9e6; border-top: 1px solid #ffeeba;">
-                    <strong style="font-size:13px; color:#856404;">डिलीवरी पता:</strong>
-                    <p style="margin:5px 0 0; font-size:13px; line-height:1.5;">${order["अपना नाम के साथ पूरा पता"]}, पिन: ${order["पिन कोड"]}</p>
-                </div>
+    if (trackID) {
+        query = query.eq('order_id', trackID);
+    } else {
+        query = query.eq('mobile', mobile);
+    }
 
-                <div class="footer-note">
-                    Jameen Seva - आपके दस्तावेजों की सुरक्षा हमारी जिम्मेदारी है।
-                </div>
-            `;
-        } else {
-            resultDiv.innerHTML = `
-                <div style="padding:40px; text-align:center;">
-                    <p style="color:red; font-weight:bold;">ID "${inputId}" नहीं मिली!</p>
-                    <p style="font-size:13px; color:#666;">कृपया अपनी सही ID जांचें या 24 घंटे बाद प्रयास करें।</p>
-                </div>`;
-        }
-    })
-    .catch(err => {
-        resultDiv.innerHTML = "<div style='padding:40px; text-align:center; color:red;'>सर्वर से संपर्क नहीं हो पा रहा है। कृपया बाद में प्रयास करें।</div>";
-    });
+    const { data, error } = await query;
+
+    loader.style.display = "none";
+
+    if (error || !data || data.length === 0) {
+        alert("कोई ऑर्डर नहीं मिला। कृपया सही जानकारी भरें।");
+        return;
+    }
+
+    const order = data[0]; // Latest order fetch
+    
+    // UI mein data bharna
+    document.getElementById("res-id").innerText = order.order_id;
+    document.getElementById("res-date").innerText = order.order_date;
+    document.getElementById("res-dist").innerText = order.district;
+    document.getElementById("res-block").innerText = order.block;
+    document.getElementById("res-village").innerText = order.village;
+    document.getElementById("res-type").innerText = order.khatiyan_type;
+    document.getElementById("res-status").innerText = order.status || "Order Received";
+
+    updateTimeline(order.status);
+    detailsBox.style.display = "block";
+}
+
+function updateTimeline(status) {
+    // Reset classes
+    document.querySelectorAll('.status-step').forEach(s => s.classList.remove('active'));
+    const bar = document.getElementById("progress-bar");
+    
+    const s = status ? status.toLowerCase() : "";
+
+    document.getElementById("step-received").classList.add('active');
+    bar.style.background = "linear-gradient(to right, #28a745 0%, #ccc 0%)";
+
+    if (s.includes('process') || s.includes('working')) {
+        document.getElementById("step-processing").classList.add('active');
+        bar.style.background = "linear-gradient(to right, #28a745 33%, #ccc 33%)";
+    } else if (s.includes('dispatch') || s.includes('sent')) {
+        document.getElementById("step-processing").classList.add('active');
+        document.getElementById("step-dispatched").classList.add('active');
+        bar.style.background = "linear-gradient(to right, #28a745 66%, #ccc 66%)";
+    } else if (s.includes('deliver')) {
+        document.getElementById("step-processing").classList.add('active');
+        document.getElementById("step-dispatched").classList.add('active');
+        document.getElementById("step-delivered").classList.add('active');
+        bar.style.background = "#28a745";
+    }
 }
 </script>
 
