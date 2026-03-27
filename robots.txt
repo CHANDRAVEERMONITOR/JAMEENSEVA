@@ -1,3 +1,10 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemaps (Dono ko yahan link karein fast indexing ke liye)
 Sitemap: https://jameenseva.in/sitemap.xml
+Sitemap: https://jameenseva.in/sitemap.html
+
+# Technical Note: Jameenseva.in Indexing Roadmap
