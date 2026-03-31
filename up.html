@@ -3,67 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UP Jameen Seva - Khatauni, Khasra aur Jamabandi</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        :root { --up-color: #ff9933; --bihar-color: #008000; }
-        .state-header { background: var(--up-color); color: white; padding: 40px 20px; text-align: center; border-radius: 0 0 20px 20px; }
-        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
-        .service-card { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; text-align: center; border-radius: 10px; text-decoration: none; color: #333; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .service-card:hover { transform: translateY(-5px); border-color: var(--up-color); }
-        .service-card img { width: 40px; margin-bottom: 10px; }
-        .blog-section { padding: 20px; }
-        .blog-card { display: flex; background: white; margin-bottom: 15px; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .blog-card img { width: 120px; object-fit: cover; }
-        .blog-info { padding: 15px; }
-        .blog-info h3 { margin: 0 0 10px; font-size: 18px; color: #d35400; }
-        .btn-main { display: block; width: 200px; margin: 20px auto; padding: 10px; text-align: center; background: #333; color: white; border-radius: 5px; text-decoration: none; }
+    <title>उत्तर प्रदेश जमीन सेवा - घर बैठे खतौनी और जानकारी प्राप्त करें</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: #f4f7f6; }
+        .header { background: #c0392b; color: white; padding: 15px; text-align: center; }
+        .nav-icons { display: flex; justify-content: space-around; background: #e67e22; padding: 10px; color: white; font-size: 14px; }
+        .container { padding: 15px; }
+        
+        /* Blue Blocks Style (As per your Bihar Image) */
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
+        .grid-item { background: #1a5f7a; color: white; padding: 20px; text-align: center; border-radius: 8px; font-weight: bold; font-size: 14px; text-decoration: none; cursor: pointer; }
+        
+        /* Service Cards */
+        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px; }
+        .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; text-align: center; }
+        .card img { width: 100%; height: 120px; object-fit: cover; }
+        .card h3 { font-size: 16px; padding: 10px; color: #333; }
+        .btn-read { background: #27ae60; color: white; padding: 8px 15px; border: none; border-radius: 5px; margin-bottom: 15px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <header class="state-header">
-        <h1>उत्तर प्रदेश जमीन सेवा (UP)</h1>
-        <p>खतौनी, खसरा और भूलेख की जानकारी एक जगह</p>
-    </header>
+    <div class="header">
+        <h1>उत्तर प्रदेश जमीन सेवा</h1>
+        <p>घर बैठे अपनी जमीन का असली भूलेख और खतौनी प्राप्त करें</p>
+    </div>
 
-    <section class="service-grid">
-        <a href="https://upbhulekh.gov.in" class="service-card" target="_blank">
-            <img src="https://img.icons8.com/color/48/document.png" alt="icon">
-            <div>भूलेख खतौनी</div>
-        </a>
-        <a href="#" class="service-card">
-            <img src="https://img.icons8.com/color/48/calculator.png" alt="icon">
-            <div>रजिस्ट्री कैलकुलेटर</div>
-        </a>
-        <a href="#" class="service-card">
-            <img src="https://img.icons8.com/color/48/search-property.png" alt="icon">
-            <div>खोजें अपना खाता</div>
-        </a>
-    </section>
 
-    <section class="blog-section">
-        <h2>UP जमीन से जुड़े ताजा लेख (Blogs)</h2>
+    <div class="container">
+        <div style="background: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin-bottom: 10px; font-size: 13px;">
+            <strong>नया अपडेट:</strong> उत्तर प्रदेश भूलेख पोर्टल पर 'रोशन' ऐप के जरिए नई खतौनी अपडेट हो गई है।
+        </div>
+
+        <div class="grid-container">
+            <a href="up-land-calculator.html" class="grid-item">jamin calculator</a>
+            <a href="track.html" class="grid-item">ऑर्डर ट्रैक करें</a>
+            <a href="contact.html" class="grid-item">हेल्पलाइन एवं संपर्क</a>
+        </div>
+
+        <div style="background: #27ae60; color: white; padding: 10px; text-align: center; margin-top: 20px; border-radius: 5px; font-size: 12px;">
+          ✅भारत की नंबर 1 जमीन सेवा वेबसाईट | ✅ UP के सभी 75 जिलों की जमीन के पेपर की सही जानकारी  | ✅ आसान प्रकिया के तहत सही जानकारी 
+        </div>
+
+        <h2 style="text-align: center; color: #1a5f7a; margin-top: 40px;">जमीन संबंधित ताज़ा जानकारी (UP Special)</h2>
+
         
-        <div class="blog-card">
-            <img src="thumb1.jpg" alt="UP Land">
-            <div class="blog-info">
-                <h3>UP में खतौनी कैसे निकालें? 2026 नया तरीका</h3>
-                <p>इस लेख में हमने बताया है कि कैसे आप अपने मोबाइल से 2 मिनट में...</p>
-                <a href="up-khatauni-blog.html">पढ़ें विस्तार से →</a>
-            </div>
         </div>
-
-        <div class="blog-card">
-            <img src="thumb2.jpg" alt="UP Registry">
-            <div class="blog-info">
-                <h3>उत्तर प्रदेश रजिस्ट्री फीस चार्ट 2026</h3>
-                <p>नई दरों के अनुसार अब कितनी लगेगी रजिस्ट्री फीस, यहाँ देखें...</p>
-                <a href="up-registry-chart.html">पढ़ें विस्तार से →</a>
-            </div>
-        </div>
-    </section>
-
-    <a href="index.html" class="btn-main">मुख्य पेज पर वापस जाएं</a>
+    </div>
 
 </body>
 </html>
