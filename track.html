@@ -1,86 +1,3 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ट्रैकिंग - JameenSeva.in</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 0; }
-        .navbar { position: sticky; top: 0; width: 100%; background-color: #28a745; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
-        
-        .container { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { color: #005689; text-align: center; }
-        
-        .search-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 14px; background: #005689; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
-
-        /* Order Info Styling */
-        #order-details { display: none; border-top: 3px solid #28a745; margin-top: 20px; padding-top: 20px; }
-        .data-card { background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
-        .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f1f1; }
-        .data-label { font-weight: bold; color: #555; font-size: 14px; }
-        .data-value { color: #333; font-size: 14px; text-align: right; font-weight: 500; }
-        
-        /* Status Badge */
-        .status-badge { display: inline-block; padding: 6px 12px; border-radius: 20px; background: #d9534f; color: white; font-weight: bold; font-size: 14px; margin-bottom: 15px; }
-
-        /* Mobile Adjustments */
-        @media (max-width: 600px) { .navbar a { font-size: 11px; } .data-row { flex-direction: column; } .data-value { text-align: left; margin-top: 2px; } }
-    </style>
-</head>
-<body>
-
-<nav class="navbar">
-    <a href="index.html">🏠 Home</a>
-    <a href="index.html#services">📄 Our Services</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="contact.html">📞 Contact Us</a>
-</nav>
-
-<div class="container">
-    <h2>🚚 ऑर्डर ट्रैकिंग सिस्टम</h2>
-    
-    <div class="search-box">
-        <label><b>ट्रैकिंग ID या मोबाइल नंबर डालें:</b></label>
-        <input type="text" id="track-input" placeholder="उदा. JS-1234 या 9876543210">
-        <button onclick="trackOrder()">चेक करें (Track Order)</button>
-    </div>
-
-    <div id="loader" style="display:none; text-align:center;">🔍 डेटा खोजा जा रहा है...</div>
-
-    <div id="order-details">
-        <div style="text-align:center;">
-            <div id="status-tag" class="status-badge">Order Received</div>
-        </div>
-
-        <div class="data-card">
-            <h4 style="margin-top:0; color:#005689; border-bottom:1px solid #005689;">👤 ग्राहक की जानकारी</h4>
-            <div class="data-row"><span class="data-label">रैयत का नाम:</span><span class="data-value" id="res-name"></span></div>
-            <div class="data-row"><span class="data-label">मोबाइल नंबर:</span><span class="data-value" id="res-mobile"></span></div>
-            <div class="data-row"><span class="data-label">पूरा पता:</span><span class="data-value" id="res-address"></span></div>
-            <div class="data-row"><span class="data-label">पिन कोड:</span><span class="data-value" id="res-pincode"></span></div>
-        </div>
-
-        <div class="data-card">
-            <h4 style="margin-top:0; color:#005689; border-bottom:1px solid #005689;">📜 जमीन की जानकारी</h4>
-            <div class="data-row"><span class="data-label">ट्रैकिंग ID:</span><span class="data-value" id="res-id" style="color:red; font-weight:bold;"></span></div>
-            <div class="data-row"><span class="data-label">जिला:</span><span class="data-value" id="res-dist"></span></div>
-            <div class="data-row"><span class="data-label">ब्लॉक:</span><span class="data-value" id="res-block"></span></div>
-            <div class="data-row"><span class="data-label">गाँव/मौजा:</span><span class="data-value" id="res-village"></span></div>
-            <div class="data-row"><span class="data-label">खाता नंबर:</span><span class="data-value" id="res-khata"></span></div>
-            <div class="data-row"><span class="data-label">खेसरा नंबर:</span><span class="data-value" id="res-khesra"></span></div>
-            <div class="data-row"><span class="data-label">खतियान टाइप:</span><span class="data-value" id="res-type"></span></div>
-        </div>
-        
-        <p style="text-align:center; font-size:12px; color:#777;">सहायता के लिए संपर्क करें: <b>nainasighchauhan@email.com</b></p>
-    </div>
-</div>
-
 <script>
 // Supabase Setup
 const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
@@ -97,46 +14,75 @@ async function trackOrder() {
     loader.style.display = "block";
     detailsBox.style.display = "none";
 
-    // Search query for both ID and Mobile
-    let { data, error } = await _supabase
-        .from('khatiyan order')
-        .select('*')
-        .or(`order_id.eq.${input},mobile.eq.${input}`)
-        .order('id', { ascending: false });
+    try {
+        // 1. Pehle 'khatiyan order' table mein check karein
+        let { data: khatiyanData, error: kError } = await _supabase
+            .from('khatiyan order')
+            .select('*')
+            .or(`order_id.eq.${input},mobile.eq.${input}`)
+            .limit(1);
 
-    loader.style.display = "none";
+        let order = null;
+        let isPanchnama = false;
 
-    if (error || !data || data.length === 0) {
-        alert("माफ़ी चाहते हैं, कोई रिकॉर्ड नहीं मिला।");
-        return;
+        if (khatiyanData && khatiyanData.length > 0) {
+            order = khatiyanData[0];
+        } else {
+            // 2. Agar khatiyan mein nahi mila, toh 'panchnama batwara' mein check karein
+            let { data: panchnamaData, error: pError } = await _supabase
+                .from('panchnama batwara')
+                .select('*')
+                .or(`order_id.eq.${input},mobile.eq.${input}`)
+                .limit(1);
+
+            if (panchnamaData && panchnamaData.length > 0) {
+                order = panchnamaData[0];
+                isPanchnama = true;
+            }
+        }
+
+        loader.style.display = "none";
+
+        if (!order) {
+            alert("माफ़ी चाहते हैं, कोई रिकॉर्ड नहीं मिला। कृपया सही ID या मोबाइल नंबर डालें।");
+            return;
+        }
+
+        // --- Data Filling Logic ---
+        document.getElementById("res-id").innerText = order.order_id;
+        document.getElementById("res-name").innerText = order.raiyat_name || "N/A";
+        document.getElementById("res-mobile").innerText = order.mobile;
+        document.getElementById("res-address").innerText = order.full_address;
+        document.getElementById("res-pincode").innerText = order.pincode;
+        document.getElementById("res-dist").innerText = order.district;
+        document.getElementById("res-block").innerText = order.block;
+        document.getElementById("res-village").innerText = order.village;
+
+        // Agar Panchnama hai toh Khata/Khesra ki jagah Thana No dikhayein
+        if (isPanchnama) {
+            document.getElementById("res-khata").innerHTML = `<b>थाना नंबर:</b> ${order.thana_no || "N/A"}`;
+            document.getElementById("res-khesra").innerText = "पंचनामा बटवारा";
+            document.getElementById("res-type").innerText = "Panchnama Service";
+        } else {
+            document.getElementById("res-khata").innerText = order.khata_no || "N/A";
+            document.getElementById("res-khesra").innerText = order.khesra_no || "N/A";
+            document.getElementById("res-type").innerText = order.khatiyan_type || "Khatiyan Service";
+        }
+        
+        // Status Badge Logic
+        const statusTag = document.getElementById("status-tag");
+        const currentStatus = order.status || "Order Received";
+        statusTag.innerText = currentStatus;
+
+        if(currentStatus === "Delivered") statusTag.style.background = "#28a745";
+        else if(currentStatus === "Processing") statusTag.style.background = "#ffc107";
+        else statusTag.style.background = "#d9534f";
+
+        detailsBox.style.display = "block";
+
+    } catch (err) {
+        loader.style.display = "none";
+        alert("कुछ तकनीकी समस्या आई है: " + err.message);
     }
-
-    const order = data[0]; // Latest record
-    
-    // Filling Information
-    document.getElementById("res-id").innerText = order.order_id;
-    document.getElementById("res-name").innerText = order.raiyat_name || "N/A";
-    document.getElementById("res-mobile").innerText = order.mobile;
-    document.getElementById("res-address").innerText = order.full_address;
-    document.getElementById("res-pincode").innerText = order.pincode;
-    document.getElementById("res-dist").innerText = order.district;
-    document.getElementById("res-block").innerText = order.block;
-    document.getElementById("res-village").innerText = order.village;
-    document.getElementById("res-khata").innerText = order.khata_no || "N/A";
-    document.getElementById("res-khesra").innerText = order.khesra_no || "N/A";
-    document.getElementById("res-type").innerText = order.khatiyan_type;
-    
-    // Status Logic
-    const statusTag = document.getElementById("status-tag");
-    statusTag.innerText = order.status || "Order Received";
-    if(order.status === "Delivered") statusTag.style.background = "#28a745";
-    else if(order.status === "Processing") statusTag.style.background = "#ffc107";
-    else statusTag.style.background = "#d9534f";
-
-    detailsBox.style.display = "block";
 }
 </script>
-
-</body>
-</html>
-<script src="footer.js"></script>
