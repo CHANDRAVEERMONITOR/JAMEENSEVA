@@ -21,7 +21,6 @@
         .upload-box { background: #eefbff; border: 1px dashed #005689; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         #status-msg { display:none; text-align: center; font-weight: bold; color: #d35400; margin-top: 10px; padding: 10px; background: #fff4e5; border-radius: 5px; }
         
-        /* Navbar Style */
         .navbar { position: sticky; top: 0; width: 100%; background-color: #28a745; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
         .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
         .navbar a:hover { color: #ffc107; }
@@ -76,40 +75,62 @@
     </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
-    <div id="status-msg">प्रोसेसिंग... कृपया फाइल अपलोड होने तक इंतज़ार करें।</div>
-</div>
-
-<div style="background: #ffffff; padding: 20px; border: 1px solid #ddd; border-radius: 10px; margin: 30px auto; max-width: 500px;">
-    <h2 style="color: #2c3e50; border-bottom: 2px solid #e67e22; padding-bottom: 10px; font-size: 18px;">
-        Bihar Zameen Survey 2026: Panchnama Jankari
-    </h2>
-    <p style="font-size: 14px;">Bihar survey mein aapsi batwara manya hai. Hamare expert dwara taiyar Panchnama format aapke kaam ko aasan banata hai.</p>
-    <div style="text-align: center; background: #fff4e5; padding: 15px; border-radius: 8px;">
-        <a href="https://jameenseva.in/panchnama-batwara-download.html" style="color: #e67e22; font-weight: bold; text-decoration: none;">📥 Download Format (₹49/-)</a>
-    </div>
+    <div id="status-msg">प्रोसेसिंग... कृपया फाइल अपलोड और नोटिफिकेशन भेजने तक इंतज़ार करें।</div>
 </div>
 
 <script>
-// Supabase Configuration
+// Supabase & Telegram Configuration
 const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
 const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
-const supabase = Toolflyer_Supabase.createClient(SB_URL, SB_KEY); // Using a global variable check if needed, but standard is below
-const _supabase = supabasejs.createClient(SB_URL, SB_KEY);
+const TELEGRAM_TOKEN = "8743500340:AAHUtS3_KzSsXY8JbWnKvTeZ94qCT8e6hYc";
+const TELEGRAM_CHAT_ID = "960592327";
 
-// Data for Districts and Blocks
+const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+// Full Bihar Districts and Blocks Data
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
-    "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Singhwara", "Tardih"],
+    "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
+    "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
+    "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
+    "Begusarai": ["Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
+    "Bhagalpur": ["Bariarpur", "Bauxi", "Bhagalpur", "Colgong", "Gopalpur", "Ismailpur", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangrachowk", "Sabour", "Shahkund", "Sultanganj"],
+    "Bhojpur": ["Agiaon", "Arrah", "Barhara", "Behea", "Charpokhari", "Gadhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
+    "Buxar": ["Brahmpur", "Buxar", "Chakki", "Chausa", "Chougain", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],
+    "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],
+    "East Champaran": ["Adapur", "Areraj", "Banjaria", "Bankatwa", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Turkaulia"],
+    "Gaya": ["Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumararia", "Fatehpur", "Gaya Town", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Manpur", "Mohanpur", "Muhali", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tikari", "Wazirganj"],
+    "Gopalganj": ["Baikunthpur", "Barauli", "Bhorey", "Gopalganj", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwariya", "Sidhwalia", "Thawe", "Uchka Gaon", "Vijayipur"],
+    "Jamui": ["Barhat", "Chakai", "Gidhaur", "Islamnagar Aliganj", "Jamui", "Jhajha", "Khaira", "Laxmipur", "Sikandra", "Sono"],
+    "Jehanabad": ["Ghosi", "Hulasganj", "Jehanabad", "Kako", "Makhdumpur", "Modanganj", "Ratni Faridpur"],
+    "Kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"],
+    "Katihar": ["Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Katihar", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
+    "Khagaria": ["Alauli", "Beldaur", "Chautham", "Gogri", "Khagaria", "Mansi", "Parbatta"],
+    "Kishanganj": ["Bahadurganj", "Dighalbank", "Kishanganj", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
+    "Lakhisarai": ["Barahiya", "Halsi", "Lakhisarai", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
+    "Madhepura": ["Alamnagar", "Bihariganj", "Chausa", "Gwalpara", "Kishunganj", "Kumarkhand", "Madhepura", "Murliganj", "Puraini", "Singheshwar", "Udakishunganj"],
+    "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
+    "Munger": ["Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Munger", "Sadaipur", "Sangrampur", "Tarapur"],
+    "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
+    "Nalanda": ["Asthawan", "Ben", "Biharsharif", "Binda", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajgir", "Sarabera", "Silao", "Tharthari"],
+    "Nawada": ["Akbarpur", "Govindpur", "Hisua", "Kashi Chak", "Kauwakoal", "Meskaur", "Narayanganj", "Narihat", "Nawada", "Pakribarawan", "Rajauli", "Roh", "Sirdala", "Warisaliganj"],
+    "Patna": ["Bakhtiarpur", "Barh", "Belchi", "Bihta", "Bikram", "Danapur", "Daniyanwan", "Dullhin Bazar", "Fatwah", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Patna Sadar", "Phulwari Sharif", "Punpun", "Sampatchak"],
     "Purnia": ["Amour", "Baisa", "Banmankhi", "Barhara", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Purnia East", "Rupauli", "Srinagar"],
-    "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Pusa", "Rosera", "Samastipur", "Tajpur", "Warisnagar"],
-    "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Dumra", "Majorganj", "Nanpur", "Parihar", "Riga", "Runnisaidpur", "Sursand"],
-    "Gaya": ["Amas", "Atri", "Bankey Bazar", "Belaganj", "Bodh Gaya", "Dobhi", "Gaya Town", "Sherghati", "Tikari", "Wazirganj"]
-    // Add more as per your requirement
+    "Rohtas": ["Akot", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sasaram", "Sheosagar", "Surajpura", "Tilauthu"],
+    "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
+    "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Morwa", "Patori", "Pusa", "Rosera", "Samastipur", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
+    "Saran": ["Amnour", "Baniapur", "Chhapra", "Dariyapur", "Digwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Sonepur", "Taraiya"],
+    "Sheikhpura": ["Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Sheikhopur Sarai", "Sheikhpura"],
+    "Sheohar": ["Dumri Katsari", "Piprarhi", "Puranahiya", "Sheohar", "Tariyani"],
+    "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Surand"],
+    "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
+    "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
+    "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
+    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
 };
 
-// Initialize District Dropdown
 const dSelect = document.getElementById("district");
-Object.keys(biharData).forEach(d => {
+Object.keys(biharData).sort().forEach(d => {
     let o = document.createElement("option"); o.value = d; o.innerHTML = d;
     dSelect.appendChild(o);
 });
@@ -118,7 +139,7 @@ function loadBlocks() {
     const bSelect = document.getElementById("block");
     bSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
     if (dSelect.value) {
-        biharData[dSelect.value].forEach(b => {
+        biharData[dSelect.value].sort().forEach(b => {
             let o = document.createElement("option"); o.value = b; o.innerHTML = b;
             bSelect.appendChild(o);
         });
@@ -168,7 +189,7 @@ async function submitOrder() {
             "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
             "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
             "पिन कोड": document.getElementById("pincode").value,
-            "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": fileLink,
+            "फाइल लिंक": fileLink,
             "अपना मोबाइल नंबर": mobile
         };
 
@@ -178,11 +199,28 @@ async function submitOrder() {
             body: JSON.stringify({ data: [formData] })
         });
 
+        // 4. TELEGRAM NOTIFICATION
+        const message = `🚀 *New Panchnama Order!* \n\n` +
+                        `🆔 *ID:* ${trackingID}\n` +
+                        `📍 *Dist:* ${formData["जिला"]}\n` +
+                        `🏢 *Block:* ${formData["प्रखंड"]}\n` +
+                        `🏡 *Village:* ${formData["मौजा/गाँव"]}\n` +
+                        `📞 *Mobile:* ${mobile}\n\n` +
+                        `📄 *File Link:* ${fileLink}`;
+
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'Markdown'
+            })
+        });
+
         if(sheetResponse.ok) {
-            alert("✅ सफलता! ऑर्डर सबमिट हो गया। आपकी Tracking ID: " + trackingID);
+            alert("✅ सफलता! ऑर्डर डेटाबेस में सेव हो गया और टेलीग्राम नोटिफिकेशन मिल गया। ID: " + trackingID);
             location.reload();
-        } else {
-            throw new Error("SheetDB Error");
         }
 
     } catch (err) {
@@ -191,12 +229,6 @@ async function submitOrder() {
         status.style.display = "none";
     }
 }
-</script>
-
-<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script>
-    // Re-initialize to ensure it uses the unpkg version correctly
-    const supabasejs = window.supabase;
 </script>
 <script src="footer.js"></script>
 </body>
