@@ -80,95 +80,105 @@
         <p style="text-align:center; font-size:12px; color:#777;">सहायता के लिए संपर्क करें: <b>nainasighchauhan@email.com</b></p>
     </div>
 </div>
+<div id="order-list-container" style="display:none; margin-top:20px;">
+    <h4 style="color:#005689;">📋 आपके सभी ऑर्डर (क्लिक करें):</h4>
+    <div id="order-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+</div>
+
+<div id="order-details">
+    </div>
+
 <script>
-// Supabase Setup
-const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
-const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
-const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+let globalOrders = []; // Sabhi orders store karne ke liye
 
 async function trackOrder() {
     const input = document.getElementById("track-input").value.trim();
     const detailsBox = document.getElementById("order-details");
+    const listContainer = document.getElementById("order-list-container");
+    const orderList = document.getElementById("order-list");
     const loader = document.getElementById("loader");
 
-    if (!input) { alert("कृपया ID या मोबाइल नंबर भरें!"); return; }
+    if (!input) { alert("ID या मोबाइल नंबर भरें!"); return; }
 
     loader.style.display = "block";
     detailsBox.style.display = "none";
+    listContainer.style.display = "none";
+    orderList.innerHTML = "";
 
     try {
-        // 1. Pehle 'khatiyan order' table mein check karein
-        let { data: khatiyanData, error: kError } = await _supabase
-            .from('khatiyan order')
-            .select('*')
-            .or(`order_id.eq.${input},mobile.eq.${input}`)
-            .limit(1);
+        // 1. Dono tables se data lana
+        const [khatiyanRes, panchnamaRes] = await Promise.all([
+            _supabase.from('khatiyan order').select('*').or(`order_id.eq.${input},mobile.eq.${input}`),
+            _supabase.from('panchnama batwara').select('*').or(`order_id.eq.${input},mobile.eq.${input}`)
+        ]);
 
-        let order = null;
-        let isPanchnama = false;
-
-        if (khatiyanData && khatiyanData.length > 0) {
-            order = khatiyanData[0];
-        } else {
-            // 2. Agar khatiyan mein nahi mila, toh 'panchnama batwara' mein check karein
-            let { data: panchnamaData, error: pError } = await _supabase
-                .from('panchnama batwara')
-                .select('*')
-                .or(`order_id.eq.${input},mobile.eq.${input}`)
-                .limit(1);
-
-            if (panchnamaData && panchnamaData.length > 0) {
-                order = panchnamaData[0];
-                isPanchnama = true;
-            }
-        }
+        let allOrders = [];
+        if (khatiyanRes.data) khatiyanRes.data.forEach(item => allOrders.push({ ...item, type: 'KHATIYAN' }));
+        if (panchnamaRes.data) panchnamaRes.data.forEach(item => allOrders.push({ ...item, type: 'PANCHNAMA' }));
 
         loader.style.display = "none";
 
-        if (!order) {
-            alert("माफ़ी चाहते हैं, कोई रिकॉर्ड नहीं मिला। कृपया सही ID या मोबाइल नंबर डालें।");
+        if (allOrders.length === 0) {
+            alert("कोई रिकॉर्ड नहीं मिला।");
             return;
         }
 
-        // --- Data Filling Logic ---
-        document.getElementById("res-id").innerText = order.order_id;
-        document.getElementById("res-name").innerText = order.raiyat_name || "N/A";
-        document.getElementById("res-mobile").innerText = order.mobile;
-        document.getElementById("res-address").innerText = order.full_address;
-        document.getElementById("res-pincode").innerText = order.pincode;
-        document.getElementById("res-dist").innerText = order.district;
-        document.getElementById("res-block").innerText = order.block;
-        document.getElementById("res-village").innerText = order.village;
+        globalOrders = allOrders; // Data ko global save kiya
 
-        // Agar Panchnama hai toh Khata/Khesra ki jagah Thana No dikhayein
-        if (isPanchnama) {
-            document.getElementById("res-khata").innerHTML = `<b>थाना नंबर:</b> ${order.thana_no || "N/A"}`;
-            document.getElementById("res-khesra").innerText = "पंचनामा बटवारा";
-            document.getElementById("res-type").innerText = "Panchnama Service";
+        // 2. Agar 1 se zyada order hain toh List dikhao
+        if (allOrders.length > 1) {
+            listContainer.style.display = "block";
+            allOrders.reverse().forEach((order, index) => {
+                const btn = document.createElement("button");
+                btn.style.cssText = "background:#fff; color:#333; border:1px solid #005689; padding:10px; text-align:left; border-radius:5px; cursor:pointer;";
+                btn.innerHTML = `<b>${order.order_id}</b> - ${order.type === 'PANCHNAMA' ? 'पंचनामा' : 'खतियान'} (${order.order_date || 'N/A'})`;
+                btn.onclick = () => showDetail(allOrders.length - 1 - index);
+                orderList.appendChild(btn);
+            });
         } else {
-            document.getElementById("res-khata").innerText = order.khata_no || "N/A";
-            document.getElementById("res-khesra").innerText = order.khesra_no || "N/A";
-            document.getElementById("res-type").innerText = order.khatiyan_type || "Khatiyan Service";
+            // Agar sirf ek hi order hai toh direct detail dikhao
+            showDetail(0);
         }
-        
-        // Status Badge Logic
-        const statusTag = document.getElementById("status-tag");
-        const currentStatus = order.status || "Order Received";
-        statusTag.innerText = currentStatus;
-
-        if(currentStatus === "Delivered") statusTag.style.background = "#28a745";
-        else if(currentStatus === "Processing") statusTag.style.background = "#ffc107";
-        else statusTag.style.background = "#d9534f";
-
-        detailsBox.style.display = "block";
 
     } catch (err) {
         loader.style.display = "none";
-        alert("कुछ तकनीकी समस्या आई है: " + err.message);
+        alert("Error: " + err.message);
     }
 }
-</script>
 
+function showDetail(index) {
+    const order = globalOrders[index];
+    const detailsBox = document.getElementById("order-details");
+
+    // Data Filling
+    document.getElementById("res-id").innerText = order.order_id;
+    document.getElementById("res-name").innerText = order.raiyat_name || "N/A";
+    document.getElementById("res-mobile").innerText = order.mobile;
+    document.getElementById("res-address").innerText = order.full_address;
+    document.getElementById("res-pincode").innerText = order.pincode;
+    document.getElementById("res-dist").innerText = order.district;
+    document.getElementById("res-block").innerText = order.block;
+    document.getElementById("res-village").innerText = order.village;
+
+    if (order.type === 'PANCHNAMA') {
+        document.getElementById("res-khata").innerHTML = `<b>थाना नंबर:</b> ${order.thana_no || "N/A"}`;
+        document.getElementById("res-khesra").innerText = "पंचनामा बटवारा सेवा";
+        document.getElementById("res-type").innerText = "Panchnama Service";
+    } else {
+        document.getElementById("res-khata").innerText = order.khata_no || "N/A";
+        document.getElementById("res-khesra").innerText = order.khesra_no || "N/A";
+        document.getElementById("res-type").innerText = order.khatiyan_type || "Khatiyan Service";
+    }
+
+    // Status UI
+    const statusTag = document.getElementById("status-tag");
+    statusTag.innerText = order.status || "Order Received";
+    statusTag.style.background = order.status === "Delivered" ? "#28a745" : (order.status === "Processing" ? "#ffc107" : "#d9534f");
+
+    detailsBox.style.display = "block";
+    detailsBox.scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
 <script src="footer.js"></script>
