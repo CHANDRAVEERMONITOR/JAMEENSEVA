@@ -163,68 +163,46 @@ async function submitOrder() {
     const fileName = `${trackingID}_${Date.now()}.pdf`;
 
     try {
-        // 1. UPLOAD TO SUPABASE STORAGE
+        // 1. UPLOAD TO STORAGE (Ye ho raha hai)
         const { data: uploadData, error: uploadError } = await _supabase.storage
             .from('panchnama-order-files')
             .upload(fileName, file);
 
         if (uploadError) throw uploadError;
 
-        // 2. GET PUBLIC URL
         const { data: urlData } = _supabase.storage
             .from('panchnama-order-files')
             .getPublicUrl(fileName);
-
         const fileLink = urlData.publicUrl;
 
-        // 3. SEND TO SHEETDB
-        const formData = {
-            "ORDER ID": trackingID,
-            "Status": "PENDING",
-            "DATE": new Date().toLocaleDateString('hi-IN'),
-            "जिला": document.getElementById("district").value,
-            "प्रखंड": document.getElementById("block").value,
-            "मौजा/गाँव": document.getElementById("village").value,
-            "थाना नंबर": document.getElementById("thana_no").value,
-            "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
-            "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
-            "पिन कोड": document.getElementById("pincode").value,
-            "फाइल लिंक": fileLink,
-            "अपना मोबाइल नंबर": mobile
-        };
+        // 2. INSERT INTO SUPABASE TABLE (Ye missing tha shayad)
+        const { error: dbError } = await _supabase
+            .from('panchnama batwara') // Table ka naam wahi rakhein jo screenshot mein hai
+            .insert([
+                { 
+                    order_id: trackingID, 
+                    order_date: new Date().toLocaleDateString('hi-IN'),
+                    district: document.getElementById("district").value,
+                    // Baki columns jo aapne table mein banaye hain unhe yahan jod dein
+                }
+            ]);
 
-        const sheetResponse = await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: [formData] })
-        });
+        if (dbError) throw dbError;
 
-        // 4. TELEGRAM NOTIFICATION
-        const message = `🚀 *New Panchnama Order!* \n\n` +
-                        `🆔 *ID:* ${trackingID}\n` +
-                        `📍 *Dist:* ${formData["जिला"]}\n` +
-                        `🏢 *Block:* ${formData["प्रखंड"]}\n` +
-                        `🏡 *Village:* ${formData["मौजा/गाँव"]}\n` +
-                        `📞 *Mobile:* ${mobile}\n\n` +
-                        `📄 *File Link:* ${fileLink}`;
-
+        // 3. TELEGRAM NOTIFICATION
+        const message = `🚀 *New Order!* \nID: ${trackingID}\nDist: ${document.getElementById("district").value}\nMob: ${mobile}\nLink: ${fileLink}`;
+        
         await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: message,
-                parse_mode: 'Markdown'
-            })
+            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' })
         });
 
-        if(sheetResponse.ok) {
-            alert("✅ सफलता! ऑर्डर डेटाबेस में सेव हो गया और टेलीग्राम नोटिफिकेशन मिल गया। ID: " + trackingID);
-            location.reload();
-        }
+        alert("✅ Order Success! ID: " + trackingID);
+        location.reload();
 
     } catch (err) {
-        alert("त्रुटि: " + err.message);
+        alert("Error: " + err.message);
         btn.disabled = false;
         status.style.display = "none";
     }
