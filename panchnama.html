@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829"
-     crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>पंचनामा बटवारा - JameenSeva.in</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f4f8; margin: 0; padding: 15px; }
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); border-top: 5px solid #005689; }
@@ -19,36 +19,16 @@
         button { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         button:disabled { background-color: #ccc; cursor: not-allowed; }
         .upload-box { background: #eefbff; border: 1px dashed #005689; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        #status-msg { display:none; text-align: center; font-weight: bold; color: #d9534f; margin-top: 10px; }
+        #status-msg { display:none; text-align: center; font-weight: bold; color: #d35400; margin-top: 10px; padding: 10px; background: #fff4e5; border-radius: 5px; }
+        
+        /* Navbar Style */
+        .navbar { position: sticky; top: 0; width: 100%; background-color: #28a745; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 5px; }
+        .navbar a:hover { color: #ffc107; }
+        @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
     </style>
 </head>
 <body>
-    <style>
-    .navbar {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        background-color: #28a745;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        padding: 12px 0;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        z-index: 1000;
-    }
-    .navbar a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-    .navbar a:hover { color: #ffc107; }
-    @media (max-width: 600px) { .navbar a { font-size: 11px; gap: 3px; } }
-</style>
 
 <nav class="navbar">
     <a href="index.html">🏠 Home</a>
@@ -84,7 +64,7 @@
     </div>
 
     <div class="upload-box">
-        <label>📄 अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें:</label>
+        <label>📄 अमीन रौफ शेड्यूल, आधार और वंशावली की एक PDF अपलोड करें:</label>
         <input type="file" id="user_file" accept="application/pdf">
     </div>
 
@@ -96,115 +76,43 @@
     </div>
 
     <button id="submit-btn" onclick="submitOrder()">ऑर्डर सबमिट करें</button>
-    <div id="status-msg">प्रोसेसिंग... कृपया पेज न छोड़ें, लिंक जनरेट हो रहा है।</div>
+    <div id="status-msg">प्रोसेसिंग... कृपया फाइल अपलोड होने तक इंतज़ार करें।</div>
 </div>
 
-<div style="background: #ffffff; padding: 20px; border: 1px solid #ddd; border-radius: 10px; margin-top: 30px;">
-    <h2 style="color: #2c3e50; border-bottom: 2px solid #e67e22; padding-bottom: 10px;">
-        Bihar Zameen Survey 2026: Panchnama Batwara ki Poori Jankari
+<div style="background: #ffffff; padding: 20px; border: 1px solid #ddd; border-radius: 10px; margin: 30px auto; max-width: 500px;">
+    <h2 style="color: #2c3e50; border-bottom: 2px solid #e67e22; padding-bottom: 10px; font-size: 18px;">
+        Bihar Zameen Survey 2026: Panchnama Jankari
     </h2>
-
-    <p>Agar aap Bihar mein <strong>Jameen Batwara (जमीन बंटवारा)</strong> ke liye sahi format dhoond rahe hain, toh ye PDF aapke liye hai. Survey (सर्वे) ke dauran Amin aur Kanungo niche diye gaye vishayon par dhyan dete hain:</p>
-
-    <ul style="list-style-type: none; padding: 0;">
-        <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-            <span style="position: absolute; left: 0; color: #e67e22;">✔</span>
-            <strong>Sarpanch Batwara (सरपंच बंटवारा):</strong> Panchayat ke madhyam se kiya gaya aapsi batwara, jo survey mein manya hai.
-        </li>
-        <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-            <span style="position: absolute; left: 0; color: #e67e22;">✔</span>
-            <strong>Batwara Schedule (बंटवारा शेड्यूल):</strong> Har hissedar ka rakba (area) aur chauhaddi ka saaf-saaf vivran.
-        </li>
-        <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-            <span style="position: absolute; left: 0; color: #e67e22;">✔</span>
-            <strong>Panchnama Form (पंचनामा फॉर्म):</strong> Sabhi hissedaro ke hastakshar (signature) ke saath legal document.
-        </li>
-        <li style="margin-bottom: 15px; padding-left: 25px; position: relative;">
-            <span style="position: absolute; left: 0; color: #e67e22;">✔</span>
-            <strong>Survey Batwara Bihar (सर्वे बंटवारा बिहार):</strong> Naye niyam ke anusar Vanshvali ke saath lagne wala batwara patra.
-        </li>
-    </ul>
-
-    <div style="background: #fff4e5; padding: 15px; border-radius: 8px; margin-top: 20px;">
-        <h4 style="margin-top: 0; color: #d35400;">अक्सर पूछे जाने वाले सवाल (FAQ):</h4>
-<div style="background: linear-gradient(135deg, #fff9f0 0%, #fff1e0 100%); border: 2px solid #e67e22; border-radius: 12px; padding: 25px; margin: 30px 0; box-shadow: 0 4px 15px rgba(230,126,34,0.15); font-family: sans-serif;">
-    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-        <span style="font-size: 30px; margin-right: 15px;">📄</span>
-        <h3 style="margin: 0; color: #2c3e50; font-size: 1.3em;">Aapsi Panchnama Batwara Format (Bihar Survey 2026)</h3>
-    </div>
-    
-    <p style="color: #4a4a4a; margin-bottom: 20px; font-size: 1.1em;">
-        Kya aapka <strong>Khanapuri ya Kishtwar</strong> hone wala hai? Sahi batwara format nahi hone par zameen survey mein phass sakti hai. Abhi download karein expert dwara taiyar format.
-    </p>
-
-    <div style="text-align: center;">
-        <a href="https://jameenseva.in/panchnama-batwara-download.html" style="display: inline-block; background: #e67e22; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 1.1em; box-shadow: 0 4px 10px rgba(230,126,34,0.3); transition: 0.3s;">
-            📥 Download Now (₹49/-)
-        </a>
-    </div>
-
-    <p style="text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 15px;">
-        ⚠️ Note: Ye format sirf Bihar Zameen Survey ke liye vishesh roop se taiyar hai.
-    </p>
-</div>
-
-        <p><strong>1. क्या यह सरपंच बंटवारा (Sarpanch Batwara pdf) सर्वे में काम करेगा?</strong><br>
-        Ji haan, agar sabhi hissedar raazi hain toh sarpanch aur pancho ke sign wala aapsi batwara manya hota hai.</p>
-        
-        <p><strong>2. जमीन बंटवारा pdf (Jameen Bantwara pdf) के लिए कौन सा फॉर्म भरें?</strong><br>
-        Aapko hamara professional Panchnama Format use karna chahiye jisme Khata, Khesra aur Rakba ka column pehle se bana hai.</p>
+    <p style="font-size: 14px;">Bihar survey mein aapsi batwara manya hai. Hamare expert dwara taiyar Panchnama format aapke kaam ko aasan banata hai.</p>
+    <div style="text-align: center; background: #fff4e5; padding: 15px; border-radius: 8px;">
+        <a href="https://jameenseva.in/panchnama-batwara-download.html" style="color: #e67e22; font-weight: bold; text-decoration: none;">📥 Download Format (₹49/-)</a>
     </div>
 </div>
-
 
 <script>
-// BIHAR DATA (Full List you provided)
+// Supabase Configuration
+const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+const supabase = Toolflyer_Supabase.createClient(SB_URL, SB_KEY); // Using a global variable check if needed, but standard is below
+const _supabase = supabasejs.createClient(SB_URL, SB_KEY);
+
+// Data for Districts and Blocks
 const biharData = {
     "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
-    "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
-    "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
-    "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
-    "Begusarai": ["Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
-    "Bhagalpur": ["Bariarpur", "Bauxi", "Bhagalpur", "Colgong", "Gopalpur", "Ismailpur", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangrachowk", "Sabour", "Shahkund", "Sultanganj"],
-    "Bhojpur": ["Agiaon", "Arrah", "Barhara", "Behea", "Charpokhari", "Gadhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
-    "Buxar": ["Brahmpur", "Buxar", "Chakki", "Chausa", "Chougain", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],
-    "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],
-    "East Champaran": ["Adapur", "Areraj", "Banjaria", "Bankatwa", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Turkaulia"],
-    "Gaya": ["Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumararia", "Fatehpur", "Gaya Town", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Manpur", "Mohanpur", "Muhali", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tikari", "Wazirganj"],
-    "Gopalganj": ["Baikunthpur", "Barauli", "Bhorey", "Gopalganj", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwariya", "Sidhwalia", "Thawe", "Uchka Gaon", "Vijayipur"],
-    "Jamui": ["Barhat", "Chakai", "Gidhaur", "Islamnagar Aliganj", "Jamui", "Jhajha", "Khaira", "Laxmipur", "Sikandra", "Sono"],
-    "Jehanabad": ["Ghosi", "Hulasganj", "Jehanabad", "Kako", "Makhdumpur", "Modanganj", "Ratni Faridpur"],
-    "Kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"],
-    "Katihar": ["Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Katihar", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
-    "Khagaria": ["Alauli", "Beldaur", "Chautham", "Gogri", "Khagaria", "Mansi", "Parbatta"],
-    "Kishanganj": ["Bahadurganj", "Dighalbank", "Kishanganj", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
-    "Lakhisarai": ["Barahiya", "Halsi", "Lakhisarai", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
-    "Madhepura": ["Alamnagar", "Bihariganj", "Chausa", "Gwalpara", "Kishunganj", "Kumarkhand", "Madhepura", "Murliganj", "Puraini", "Singheshwar", "Udakishunganj"],
-    "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
-    "Munger": ["Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Munger", "Sadaipur", "Sangrampur", "Tarapur"],
-    "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
-    "Nalanda": ["Asthawan", "Ben", "Biharsharif", "Binda", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajgir", "Sarabera", "Silao", "Tharthari"],
-    "Nawada": ["Akbarpur", "Govindpur", "Hisua", "Kashi Chak", "Kauwakoal", "Meskaur", "Narayanganj", "Narihat", "Nawada", "Pakribarawan", "Rajauli", "Roh", "Sirdala", "Warisaliganj"],
-    "Patna": ["Bakhtiarpur", "Barh", "Belchi", "Bihta", "Bikram", "Danapur", "Daniyanwan", "Dullhin Bazar", "Fatwah", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Patna Sadar", "Phulwari Sharif", "Punpun", "Sampatchak"],
+    "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Singhwara", "Tardih"],
     "Purnia": ["Amour", "Baisa", "Banmankhi", "Barhara", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Purnia East", "Rupauli", "Srinagar"],
-    "Rohtas": ["Akot", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sasaram", "Sheosagar", "Surajpura", "Tilauthu"],
-    "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
-    "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Morwa", "Patori", "Pusa", "Rosera", "Samastipur", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
-    "Saran": ["Amnour", "Baniapur", "Chhapra", "Dariyapur", "Digwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Sonepur", "Taraiya"],
-    "Sheikhpura": ["Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Sheikhopur Sarai", "Sheikhpura"],
-    "Sheohar": ["Dumri Katsari", "Piprarhi", "Puranahiya", "Sheohar", "Tariyani"],
-    "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Surand"],
-    "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
-    "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
-    "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
-    "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+    "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Pusa", "Rosera", "Samastipur", "Tajpur", "Warisnagar"],
+    "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Dumra", "Majorganj", "Nanpur", "Parihar", "Riga", "Runnisaidpur", "Sursand"],
+    "Gaya": ["Amas", "Atri", "Bankey Bazar", "Belaganj", "Bodh Gaya", "Dobhi", "Gaya Town", "Sherghati", "Tikari", "Wazirganj"]
+    // Add more as per your requirement
 };
 
+// Initialize District Dropdown
 const dSelect = document.getElementById("district");
-for (let d in biharData) {
+Object.keys(biharData).forEach(d => {
     let o = document.createElement("option"); o.value = d; o.innerHTML = d;
     dSelect.appendChild(o);
-}
+});
 
 function loadBlocks() {
     const bSelect = document.getElementById("block");
@@ -224,66 +132,72 @@ async function submitOrder() {
     const mobile = document.getElementById("mobile").value;
 
     if(!mobile || mobile.length < 10) { alert("सही मोबाइल नंबर भरें!"); return; }
-    if(fileIn.files.length === 0) { alert("कृपया फाइल चुनें!"); return; }
+    if(fileIn.files.length === 0) { alert("कृपया PDF फाइल चुनें!"); return; }
 
     btn.disabled = true;
     status.style.display = "block";
 
     const file = fileIn.files[0];
     const trackingID = "PAN-" + Math.floor(1000 + Math.random() * 9000);
-    
-    const reader = new FileReader();
-    reader.onload = async function(e) {
-        const base64Data = e.target.result.split(',')[1];
-        const scriptURL = "YOUR_APPS_SCRIPT_URL_HERE"; // यहाँ अपना नया Apps Script URL डालें
-        
-        try {
-            // 1. UPLOAD TO DRIVE AND GET LINK
-            const driveResp = await fetch(scriptURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `data=${encodeURIComponent(base64Data)}&mimetype=${encodeURIComponent(file.type)}&filename=${encodeURIComponent(file.name)}`
-            });
+    const fileName = `${trackingID}_${Date.now()}.pdf`;
 
-            const driveData = await driveResp.json();
-            const driveLink = driveData.url;
+    try {
+        // 1. UPLOAD TO SUPABASE STORAGE
+        const { data: uploadData, error: uploadError } = await _supabase.storage
+            .from('panchnama-order-files')
+            .upload(fileName, file);
 
-            // 2. UPLOAD TO SHEETDB
-            const formData = {
-                "ORDER ID": trackingID,
-                "Status": "PENDING",
-                "DATE": new Date().toLocaleDateString('hi-IN'),
-                "जिला": document.getElementById("district").value,
-                "प्रखंड": document.getElementById("block").value,
-                "मौजा/गाँव": document.getElementById("village").value,
-                "थाना नंबर": document.getElementById("thana_no").value,
-                "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
-                "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
-                "पिन कोड": document.getElementById("pincode").value,
-                "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": driveLink,
-                "अपना मोबाइल नंबर": mobile
-            };
+        if (uploadError) throw uploadError;
 
-            const sheetResponse = await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: [formData] })
-            });
+        // 2. GET PUBLIC URL
+        const { data: urlData } = _supabase.storage
+            .from('panchnama-order-files')
+            .getPublicUrl(fileName);
 
-            if(sheetResponse.ok) {
-                alert("✅ सफलता! लिंक शीट में सेव हो गया। ID: " + trackingID);
-                location.reload();
-            }
+        const fileLink = urlData.publicUrl;
 
-        } catch (err) {
-            alert("त्रुटि: " + err.message);
-            btn.disabled = false;
-            status.style.display = "none";
+        // 3. SEND TO SHEETDB
+        const formData = {
+            "ORDER ID": trackingID,
+            "Status": "PENDING",
+            "DATE": new Date().toLocaleDateString('hi-IN'),
+            "जिला": document.getElementById("district").value,
+            "प्रखंड": document.getElementById("block").value,
+            "मौजा/गाँव": document.getElementById("village").value,
+            "थाना नंबर": document.getElementById("thana_no").value,
+            "रैयत का नाम(यदि हो)": document.getElementById("raiyatname").value,
+            "अपना नाम के साथ पूरा पता": document.getElementById("full_address").value,
+            "पिन कोड": document.getElementById("pincode").value,
+            "अमीन या खुद के द्वारा बनाया हुआ रौफ शेड्यूल,सभी हिस्सेदार का आधार और सादे कागज पर वंशावली बनाकर सभी का एक pdf अपलोड करें": fileLink,
+            "अपना मोबाइल नंबर": mobile
+        };
+
+        const sheetResponse = await fetch('https://sheetdb.io/api/v1/tethdim34qjsy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: [formData] })
+        });
+
+        if(sheetResponse.ok) {
+            alert("✅ सफलता! ऑर्डर सबमिट हो गया। आपकी Tracking ID: " + trackingID);
+            location.reload();
+        } else {
+            throw new Error("SheetDB Error");
         }
-    };
-    reader.readAsDataURL(file);
+
+    } catch (err) {
+        alert("त्रुटि: " + err.message);
+        btn.disabled = false;
+        status.style.display = "none";
+    }
 }
 </script>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+    // Re-initialize to ensure it uses the unpkg version correctly
+    const supabasejs = window.supabase;
+</script>
+<script src="footer.js"></script>
 </body>
 </html>
-<script src="footer.js"></script>
