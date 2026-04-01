@@ -163,7 +163,7 @@ async function submitOrder() {
     const fileName = `${trackingID}_${Date.now()}.pdf`;
 
     try {
-        // 1. UPLOAD TO STORAGE (Ye ho raha hai)
+        // 1. UPLOAD TO STORAGE
         const { data: uploadData, error: uploadError } = await _supabase.storage
             .from('panchnama-order-files')
             .upload(fileName, file);
@@ -175,34 +175,52 @@ async function submitOrder() {
             .getPublicUrl(fileName);
         const fileLink = urlData.publicUrl;
 
-        // 2. INSERT INTO SUPABASE TABLE (Ye missing tha shayad)
+        // 2. INSERT INTO SUPABASE TABLE (Column names fixed as per your screenshot)
         const { error: dbError } = await _supabase
-            .from('panchnama batwara') // Table ka naam wahi rakhein jo screenshot mein hai
+            .from('panchnama batwara')
             .insert([
                 { 
                     order_id: trackingID, 
                     order_date: new Date().toLocaleDateString('hi-IN'),
                     district: document.getElementById("district").value,
-                    // Baki columns jo aapne table mein banaye hain unhe yahan jod dein
+                    block: document.getElementById("block").value,
+                    thana_no: document.getElementById("thana_no").value,
+                    village: document.getElementById("village").value,
+                    raiyat_name: document.getElementById("raiyatname").value, // Fixed name
+                    full_address: document.getElementById("full_address").value,
+                    pincode: document.getElementById("pincode").value,
+                    mobile: mobile,
+                    status: "PENDING",
+                    file_url: fileLink // Fixed name as per screenshot
                 }
             ]);
 
         if (dbError) throw dbError;
 
         // 3. TELEGRAM NOTIFICATION
-        const message = `🚀 *New Order!* \nID: ${trackingID}\nDist: ${document.getElementById("district").value}\nMob: ${mobile}\nLink: ${fileLink}`;
-        
+        const message = `🚀 *New Panchnama Order!* \n\n` +
+                        `🆔 *ID:* ${trackingID}\n` +
+                        `📍 *Dist:* ${document.getElementById("district").value}\n` +
+                        `🏢 *Block:* ${document.getElementById("block").value}\n` +
+                        `🏡 *Village:* ${document.getElementById("village").value}\n` +
+                        `📞 *Mobile:* ${mobile}\n\n` +
+                        `📄 *File Link:* ${fileLink}`;
+
         await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'Markdown' })
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'Markdown'
+            })
         });
 
-        alert("✅ Order Success! ID: " + trackingID);
+        alert("✅ सफलता! ऑर्डर डेटाबेस में सेव हो गया और टेलीग्राम पर भेज दिया गया। ID: " + trackingID);
         location.reload();
 
     } catch (err) {
-        alert("Error: " + err.message);
+        alert("त्रुटि: " + err.message);
         btn.disabled = false;
         status.style.display = "none";
     }
