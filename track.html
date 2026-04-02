@@ -17,7 +17,12 @@
         
         .search-box { background: #f9f9f9; padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 20px; }
         input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
-        button { width: 100%; padding: 14px; background: #005689; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+        button#track-btn { width: 100%; padding: 14px; background: #005689; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; }
+
+        /* Order List Styling */
+        #order-list-container { display:none; margin-top:20px; border-top: 2px solid #eee; padding-top: 15px; }
+        .order-item-btn { width:100%; background:#fff; color:#333; border:1px solid #005689; padding:12px; text-align:left; border-radius:6px; cursor:pointer; margin-bottom:10px; transition: 0.2s; }
+        .order-item-btn:hover { background: #eefbff; border-width: 2px; }
 
         /* Order Info Styling */
         #order-details { display: none; border-top: 3px solid #28a745; margin-top: 20px; padding-top: 20px; }
@@ -26,10 +31,8 @@
         .data-label { font-weight: bold; color: #555; font-size: 14px; }
         .data-value { color: #333; font-size: 14px; text-align: right; font-weight: 500; }
         
-        /* Status Badge */
         .status-badge { display: inline-block; padding: 6px 12px; border-radius: 20px; background: #d9534f; color: white; font-weight: bold; font-size: 14px; margin-bottom: 15px; }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) { .navbar a { font-size: 11px; } .data-row { flex-direction: column; } .data-value { text-align: left; margin-top: 2px; } }
     </style>
 </head>
@@ -48,10 +51,15 @@
     <div class="search-box">
         <label><b>ट्रैकिंग ID या मोबाइल नंबर डालें:</b></label>
         <input type="text" id="track-input" placeholder="उदा. JS-1234 या 9876543210">
-        <button onclick="trackOrder()">चेक करें (Track Order)</button>
+        <button id="track-btn" onclick="trackOrder()">चेक करें (Track Order)</button>
     </div>
 
     <div id="loader" style="display:none; text-align:center;">🔍 डेटा खोजा जा रहा है...</div>
+
+    <div id="order-list-container">
+        <h4 style="color:#005689; margin-bottom:10px;">📋 आपके नंबर पर मिले ऑर्डर (क्लिक करें):</h4>
+        <div id="order-list"></div>
+    </div>
 
     <div id="order-details">
         <div style="text-align:center;">
@@ -67,29 +75,27 @@
         </div>
 
         <div class="data-card">
-            <h4 style="margin-top:0; color:#005689; border-bottom:1px solid #005689;">📜 जमीन की जानकारी</h4>
+            <h4 style="margin-top:0; color:#005689; border-bottom:1px solid #005689;">📜 जमीन/ऑर्डर की जानकारी</h4>
             <div class="data-row"><span class="data-label">ट्रैकिंग ID:</span><span class="data-value" id="res-id" style="color:red; font-weight:bold;"></span></div>
             <div class="data-row"><span class="data-label">जिला:</span><span class="data-value" id="res-dist"></span></div>
             <div class="data-row"><span class="data-label">ब्लॉक:</span><span class="data-value" id="res-block"></span></div>
             <div class="data-row"><span class="data-label">गाँव/मौजा:</span><span class="data-value" id="res-village"></span></div>
-            <div class="data-row"><span class="data-label">खाता नंबर:</span><span class="data-value" id="res-khata"></span></div>
-            <div class="data-row"><span class="data-label">खेसरा नंबर:</span><span class="data-value" id="res-khesra"></span></div>
-            <div class="data-row"><span class="data-label">खतियान टाइप:</span><span class="data-value" id="res-type"></span></div>
+            <div class="data-row"><span class="data-label" id="label-khata">खाता नंबर:</span><span class="data-value" id="res-khata"></span></div>
+            <div class="data-row"><span class="data-label" id="label-khesra">खेसरा नंबर:</span><span class="data-value" id="res-khesra"></span></div>
+            <div class="data-row"><span class="data-label">सर्विस टाइप:</span><span class="data-value" id="res-type"></span></div>
         </div>
         
-        <p style="text-align:center; font-size:12px; color:#777;">सहायता के लिए संपर्क करें: <b>nainasighchauhan@email.com</b></p>
+        <p style="text-align:center; font-size:12px; color:#777;">सहायता के लिए संपर्क करें: <b>support@jameenseva.in</b></p>
     </div>
 </div>
-<div id="order-list-container" style="display:none; margin-top:20px;">
-    <h4 style="color:#005689;">📋 आपके सभी ऑर्डर (क्लिक करें):</h4>
-    <div id="order-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
-</div>
-
-<div id="order-details">
-    </div>
 
 <script>
-let globalOrders = []; // Sabhi orders store karne ke liye
+// Supabase Setup
+const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+let globalOrders = []; 
 
 async function trackOrder() {
     const input = document.getElementById("track-input").value.trim();
@@ -98,7 +104,7 @@ async function trackOrder() {
     const orderList = document.getElementById("order-list");
     const loader = document.getElementById("loader");
 
-    if (!input) { alert("ID या मोबाइल नंबर भरें!"); return; }
+    if (!input) { alert("कृपया ID या मोबाइल नंबर भरें!"); return; }
 
     loader.style.display = "block";
     detailsBox.style.display = "none";
@@ -106,51 +112,53 @@ async function trackOrder() {
     orderList.innerHTML = "";
 
     try {
-        // 1. Dono tables se data lana
+        // 1. Dono Tables se ek saath data fetch karein
         const [khatiyanRes, panchnamaRes] = await Promise.all([
-            _supabase.from('khatiyan order').select('*').or(`order_id.eq.${input},mobile.eq.${input}`),
-            _supabase.from('panchnama batwara').select('*').or(`order_id.eq.${input},mobile.eq.${input}`)
+            _supabase.from('khatiyan order').select('*').or(`order_id.eq."${input}",mobile.eq."${input}"`),
+            _supabase.from('panchnama batwara').select('*').or(`order_id.eq."${input}",mobile.eq."${input}"`)
         ]);
 
         let allOrders = [];
-        if (khatiyanRes.data) khatiyanRes.data.forEach(item => allOrders.push({ ...item, type: 'KHATIYAN' }));
-        if (panchnamaRes.data) panchnamaRes.data.forEach(item => allOrders.push({ ...item, type: 'PANCHNAMA' }));
+        if (khatiyanRes.data) khatiyanRes.data.forEach(item => allOrders.push({ ...item, tableType: 'KHATIYAN' }));
+        if (panchnamaRes.data) panchnamaRes.data.forEach(item => allOrders.push({ ...item, tableType: 'PANCHNAMA' }));
 
         loader.style.display = "none";
 
         if (allOrders.length === 0) {
-            alert("कोई रिकॉर्ड नहीं मिला।");
+            alert("माफ़ी चाहते हैं, कोई रिकॉर्ड नहीं मिला।");
             return;
         }
 
-        globalOrders = allOrders; // Data ko global save kiya
+        globalOrders = allOrders;
 
-        // 2. Agar 1 se zyada order hain toh List dikhao
+        // 2. Agar 1 se zyada order hain toh List dikhao, warna direct detail
         if (allOrders.length > 1) {
             listContainer.style.display = "block";
             allOrders.reverse().forEach((order, index) => {
                 const btn = document.createElement("button");
-                btn.style.cssText = "background:#fff; color:#333; border:1px solid #005689; padding:10px; text-align:left; border-radius:5px; cursor:pointer;";
-                btn.innerHTML = `<b>${order.order_id}</b> - ${order.type === 'PANCHNAMA' ? 'पंचनामा' : 'खतियान'} (${order.order_date || 'N/A'})`;
+                btn.className = "order-item-btn";
+                const typeText = order.tableType === 'PANCHNAMA' ? 'पंचनामा' : 'खतियान';
+                btn.innerHTML = `<b>${order.order_id}</b> | ${typeText} <br> <small>जिला: ${order.district} | तारीख: ${order.order_date || 'N/A'}</small>`;
+                // Reverse array index fix
                 btn.onclick = () => showDetail(allOrders.length - 1 - index);
                 orderList.appendChild(btn);
             });
         } else {
-            // Agar sirf ek hi order hai toh direct detail dikhao
             showDetail(0);
         }
 
     } catch (err) {
         loader.style.display = "none";
-        alert("Error: " + err.message);
+        alert("त्रुटि: " + err.message);
     }
 }
 
 function showDetail(index) {
     const order = globalOrders[index];
     const detailsBox = document.getElementById("order-details");
+    const listContainer = document.getElementById("order-list-container");
 
-    // Data Filling
+    // UI elements update
     document.getElementById("res-id").innerText = order.order_id;
     document.getElementById("res-name").innerText = order.raiyat_name || "N/A";
     document.getElementById("res-mobile").innerText = order.mobile;
@@ -160,26 +168,31 @@ function showDetail(index) {
     document.getElementById("res-block").innerText = order.block;
     document.getElementById("res-village").innerText = order.village;
 
-    if (order.type === 'PANCHNAMA') {
-        document.getElementById("res-khata").innerHTML = `<b>थाना नंबर:</b> ${order.thana_no || "N/A"}`;
-        document.getElementById("res-khesra").innerText = "पंचनामा बटवारा सेवा";
+    // Table specific logic
+    if (order.tableType === 'PANCHNAMA') {
+        document.getElementById("label-khata").innerText = "थाना नंबर:";
+        document.getElementById("res-khata").innerText = order.thana_no || "N/A";
+        document.getElementById("label-khesra").innerText = "सेवा का नाम:";
+        document.getElementById("res-khesra").innerText = "पंचनामा बटवारा";
         document.getElementById("res-type").innerText = "Panchnama Service";
     } else {
+        document.getElementById("label-khata").innerText = "खाता नंबर:";
         document.getElementById("res-khata").innerText = order.khata_no || "N/A";
+        document.getElementById("label-khesra").innerText = "खेसरा नंबर:";
         document.getElementById("res-khesra").innerText = order.khesra_no || "N/A";
         document.getElementById("res-type").innerText = order.khatiyan_type || "Khatiyan Service";
     }
 
-    // Status UI
+    // Status logic
     const statusTag = document.getElementById("status-tag");
-    statusTag.innerText = order.status || "Order Received";
-    statusTag.style.background = order.status === "Delivered" ? "#28a745" : (order.status === "Processing" ? "#ffc107" : "#d9534f");
+    const s = order.status || "Order Received";
+    statusTag.innerText = s;
+    statusTag.style.background = s === "Delivered" ? "#28a745" : (s === "Processing" ? "#ffc107" : "#d9534f");
 
     detailsBox.style.display = "block";
     detailsBox.scrollIntoView({ behavior: 'smooth' });
 }
 </script>
-
+<script src="footer.js"></script>
 </body>
 </html>
-<script src="footer.js"></script>
