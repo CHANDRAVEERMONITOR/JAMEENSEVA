@@ -2,108 +2,104 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>JameenSeva - Professional Panchnama</title>
+    <title>JameenSeva - Professional Batwara Panchnama</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: 'Arial', sans-serif; background: #f0f0f0; padding: 20px; }
-        .no-print { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; }
-        input, select { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-        th, td { border: 1px solid #000; padding: 5px; text-align: center; font-size: 12px; }
+        body { font-family: 'Arial', sans-serif; background: #555; padding: 20px; }
+        .input-form { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .input-group { margin-bottom: 10px; }
+        input { width: 100%; padding: 8px; box-sizing: border-box; }
         
-        /* PDF Template Styling */
-        #pdf-content { background: white; width: 210mm; margin: auto; display: none; color: black; }
-        .pdf-page { padding: 20mm; height: 297mm; position: relative; box-sizing: border-box; font-size: 14px; line-height: 1.5; page-break-after: always; }
-        .header-court { text-align: center; font-weight: bold; }
-        .footer-sig { position: absolute; bottom: 30mm; width: 80%; display: flex; justify-content: space-between; font-weight: bold; }
+        /* --- ASLI PDF KA DESIGN (DO NOT CHANGE) --- */
+        #pdf-render { width: 210mm; margin: auto; background: white; display: none; color: #000; }
+        .pdf-page { width: 210mm; height: 296mm; padding: 20mm; box-sizing: border-box; position: relative; font-size: 15px; line-height: 1.6; page-break-after: always; }
+        .pg-no { text-align: right; font-weight: bold; }
+        .header { text-align: center; font-weight: bold; margin-top: 10px; }
+        .legal-text { text-align: justify; margin-top: 15px; }
+        .signature-section { position: absolute; bottom: 30mm; width: 80%; display: flex; justify-content: space-between; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid black; padding: 6px; text-align: center; }
+        .box { border: 1px solid black; padding: 10px; display: inline-block; min-width: 150px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="no-print">
-    <h2 style="text-align:center">नया पंचनामा फॉर्म (Darbhanga Style)</h2>
-    
-    <div class="section">
-        <h3>1. न्यायालय/पंचायत विवरण</h3>
-        <input id="court_name" value="सरपंच ग्राम कचहरी, पंचायत भवानीपुर, अंचल सिंहवाड़ा, दरभंगा">
-        <input id="vad_no" placeholder="वाद संख्या (जैसे: 05/2026)">
+<div class="input-form">
+    <h2 style="text-align:center">Darbhanga Panchayati Batwara Form</h2>
+    <div class="input-group">
+        <label>पंचायत/अंचल का नाम:</label>
+        <input id="in_panchayat" value="ग्राम कचहरी, पंचायत भवानीपुर, अंचल सिंहवाड़ा, दरभंगा">
     </div>
-
-    <div class="section">
-        <h3>2. लेख्यकारी (प्रथम फरीक)</h3>
-        <input id="f1_name" placeholder="नाम">
-        <input id="f1_father" placeholder="पिता/पति का नाम">
-        <input id="f1_age" placeholder="उम्र">
-        <input id="f1_aadhar" placeholder="आधार">
-        <input id="f1_caste" placeholder="जाति">
+    <div class="input-group">
+        <label>प्रथम फरीक (लेख्यकारी) का नाम:</label>
+        <input id="in_f1_name" placeholder="नाम">
+        <input id="in_f1_father" placeholder="पिता का नाम">
     </div>
-
-    <div class="section">
-        <h3>3. सम्पति विवरण (Table)</h3>
-        <table id="landTable">
-            <tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th></tr>
-            <tr>
-                <td><input class="m-mauza" value="भवानीपुर"></td>
-                <td><input class="m-khata"></td>
-                <td><input class="m-khesra"></td>
-                <td><input class="m-rakwa"></td>
-            </tr>
-        </table>
-        <button onclick="addRow()">+ प्लॉट जोड़ें</button>
+    <div class="input-group">
+        <label>कुल सम्पति विवरण (खाता, खेसरा, रकवा):</label>
+        <input id="in_khata" placeholder="खाata">
+        <input id="in_khesra" placeholder="खेसरा">
+        <input id="in_rakwa" placeholder="रकवा (डिसमिल)">
     </div>
-
-    <div class="section">
-        <h3>4. वंशावली</h3>
-        <input id="v_ancestor" placeholder="मुख्य पूर्वज (स्व० मौजे साह)">
-        <input id="v_son1" placeholder="पुत्र 1">
-        <input id="v_son2" placeholder="पुत्र 2">
+    <div class="input-group">
+        <label>मुख्य पूर्वज (स्व०):</label>
+        <input id="in_anc" placeholder="उदा: स्व० मौजे साह">
     </div>
-
-    <button style="width:100%; padding:15px; background:green; color:white; font-weight:bold" onclick="generatePDF()">💾 DOWNLOAD FINAL PDF</button>
+    <button onclick="makePDF()" style="width:100%; padding:15px; background:green; color:white; cursor:pointer">💾 DOWNLOAD SAME AS MY PDF</button>
 </div>
 
-<div id="pdf-content">
+<div id="pdf-render">
     <div class="pdf-page">
-        <div style="text-align:right">Page:-1</div>
-        <div class="header-court">
-            <p>न्यायालय,<br><span id="p_court">सरपंच ग्राम कचहरी, पंचायत भवानीपुर</span></p>
-            <p>सहमति पंचनामा बटवारा</p>
+        <div class="pg-no">Page:-1</div>
+        <div class="header">
+            न्यायालय,<br>
+            <span id="p_panchayat">ग्राम कचहरी, पंचायत भवानीपुर...</span><br><br>
+            सहमति पंचनामा बटवारा
         </div>
-        <p><b>1. लेख्यकारी :-</b> फरीक नं0-1 <span id="p_f1"></span> पिता- <span id="p_f1f"></span> उम्र- <span id="p_f1a"></span> वर्ष, आधार- <span id="p_f1ad"></span>, जाति- <span id="p_f1c"></span>, पेशा- काश्तकारी।</p>
-        <p style="margin-top:20px">हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से... </p>
-        <div class="footer-sig">
+        <div class="legal-text">
+            <p><b>1. लेख्यकारी :-</b> फरीक नं0-1 <span id="p_f1"></span> पिता- <span id="p_f1_f"></span> पेशा काश्तकारी, जिला- दरभंगा, राज्य बिहार।</p>
+            <p><b>2. लेख्यधारी :-</b> एक दूसरे के पक्ष में (लेख्यकारी ही लेख्यधारी है)।</p>
+            <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव में आकर निश्चित किया है।</p>
+        </div>
+        <div class="signature-section">
             <span>सरपंच</span>
             <span>फरिकेन</span>
         </div>
     </div>
 
     <div class="pdf-page">
-        <div style="text-align:right">Page:-2</div>
-        <h4>कुल पैत्रिक भूमि सम्पति विवरण:- [cite: 64]</h4>
-        <table id="p_table">
-            <tr style="background:#eee">
-                <th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th>
-            </tr>
+        <div class="pg-no">Page:-2</div>
+        <h4 style="text-decoration: underline;">कुल पैत्रिक भूमि सम्पति विवरण:-</h4>
+        <table>
+            <tr style="background:#eee"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>
+            <tr><td>भवानीपुर</td><td><span id="p_khata"></span></td><td><span id="p_khesra"></span></td><td><span id="p_rakwa"></span></td></tr>
         </table>
-        <p style="margin-top:20px">मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद नहीं हो। </p>
-        <div class="footer-sig">
+        <div class="legal-text">
+            <p>मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में समिलात जमीन का विवाद नहीं हो एवं सरकारी राजस्व का भुगतान भी समय-समय पर अपने हिस्सा के अनुसार किया करेंगे।</p>
+        </div>
+        <div class="signature-section">
             <span>सरपंच</span>
             <span>फरिकेन</span>
         </div>
     </div>
 
     <div class="pdf-page">
-        <div style="text-align:right">Page:-3</div>
-        <h3 style="text-align:center">वंशवृक्ष [cite: 152]</h3>
-        <div style="margin:50px auto; width:200px; border:1px solid #000; text-align:center; padding:10px;">
-            <span id="p_v_anc"></span>
+        <div class="pg-no">Page:-3</div>
+        <h3 style="text-align: center;">🌳 वंशवृक्ष</h3>
+        <div style="text-align: center; margin-top: 50px;">
+            <div class="box" id="p_anc">पूर्वज</div>
+            <div style="height: 40px; width: 2px; background: black; margin: auto;"></div>
+            <div style="width: 300px; height: 2px; background: black; margin: auto;"></div>
+            <div style="display: flex; justify-content: space-between; width: 300px; margin: auto;">
+                <div style="height: 20px; width: 2px; background: black;"></div>
+                <div style="height: 20px; width: 2px; background: black;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-around; width: 400px; margin: auto;">
+                <div class="box">हिस्सेदार 1</div>
+                <div class="box">हिस्सेदार 2</div>
+            </div>
         </div>
-        <div style="display:flex; justify-content:space-around">
-            <div style="border:1px solid #000; padding:10px;"><span id="p_v_s1"></span></div>
-            <div style="border:1px solid #000; padding:10px;"><span id="p_v_s2"></span></div>
-        </div>
-        <div class="footer-sig">
+        <div class="signature-section">
             <span>गवाह</span>
             <span>सरपंच</span>
             <span>फरिकेन</span>
@@ -112,45 +108,30 @@
 </div>
 
 <script>
-function addRow() {
-    let table = document.getElementById("landTable");
-    let row = table.insertRow(-1);
-    row.innerHTML = '<td><input class="m-mauza" value="भवानीपुर"></td><td><input class="m-khata"></td><td><input class="m-khesra"></td><td><input class="m-rakwa"></td>';
-}
+function makePDF() {
+    // 1. Data Bharo Template Mein
+    document.getElementById('p_panchayat').innerText = document.getElementById('in_panchayat').value;
+    document.getElementById('p_f1').innerText = document.getElementById('in_f1_name').value;
+    document.getElementById('p_f1_f').innerText = document.getElementById('in_f1_father').value;
+    document.getElementById('p_khata').innerText = document.getElementById('in_khata').value;
+    document.getElementById('p_khesra').innerText = document.getElementById('in_khesra').value;
+    document.getElementById('p_rakwa').innerText = document.getElementById('in_rakwa').value;
+    document.getElementById('p_anc').innerText = document.getElementById('in_anc').value;
 
-function generatePDF() {
-    // Fill Data into PDF Template
-    document.getElementById("p_court").innerText = document.getElementById("court_name").value;
-    document.getElementById("p_f1").innerText = document.getElementById("f1_name").value;
-    document.getElementById("p_f1f").innerText = document.getElementById("f1_father").value;
-    document.getElementById("p_f1ad").innerText = document.getElementById("f1_aadhar").value;
-    document.getElementById("p_f1c").innerText = document.getElementById("f1_caste").value;
-    document.getElementById("p_v_anc").innerText = document.getElementById("v_ancestor").value;
-    document.getElementById("p_v_s1").innerText = document.getElementById("v_son1").value;
-    document.getElementById("p_v_s2").innerText = document.getElementById("v_son2").value;
+    // 2. PDF Generate Karo
+    const element = document.getElementById('pdf-render');
+    element.style.display = 'block'; // Render ke liye dikhao
 
-    // Table Data
-    let pTable = document.getElementById("p_table");
-    pTable.innerHTML = '<tr style="background:#eee"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>';
-    document.querySelectorAll("#landTable tr").forEach((tr, i) => {
-        if(i==0) return;
-        let row = pTable.insertRow(-1);
-        row.innerHTML = `<td>${tr.cells[0].firstChild.value}</td><td>${tr.cells[1].firstChild.value}</td><td>${tr.cells[2].firstChild.value}</td><td>${tr.cells[3].firstChild.value}</td>`;
-    });
-
-    // Generate PDF
-    const element = document.getElementById('pdf-content');
-    element.style.display = 'block';
     const opt = {
         margin: 0,
-        filename: 'Final_Panchnama.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
+        filename: 'JameenSeva_Panchnama.pdf',
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 3, useCORS: true }, // High Quality Scale
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
-    
+
     html2pdf().from(element).set(opt).save().then(() => {
-        element.style.display = 'none';
+        element.style.display = 'none'; // Download ke baad chhupa do
     });
 }
 </script>
