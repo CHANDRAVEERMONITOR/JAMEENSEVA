@@ -2,219 +2,158 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JameenSeva - Professional Panchnama</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
-        .section-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd; }
-        h3 { color: #1a5928; border-left: 6px solid #0a7f3f; padding-left: 12px; margin-bottom: 20px; }
-        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
-        input, select { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 100%; box-sizing: border-box; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; }
-        th, td { border: 1px solid #aaa; padding: 10px; text-align: left; }
-        th { background: #f8f9fa; font-size: 13px; }
-        .total-box { background: #e8f5e9; font-weight: bold; padding: 10px; border: 1px solid #0a7f3f; margin-top: -1px; text-align: right; }
-        .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-add { background: #0a7f3f; color: white; }
-        .btn-remove { background: #d32f2f; color: white; font-size: 11px; padding: 5px 10px; }
-        .fariq-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: #fff; }
+        body { font-family: 'Arial', sans-serif; background: #f0f0f0; padding: 20px; }
+        .no-print { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; }
+        input, select { padding: 8px; margin: 5px 0; width: 100%; box-sizing: border-box; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #000; padding: 5px; text-align: center; font-size: 12px; }
         
-        /* PDF Preview Styling (Hidden on Screen) */
-        #pdf-template { display: none; }
-        .pdf-page { width: 210mm; padding: 20mm; background: white; font-size: 14px; line-height: 1.6; position: relative; box-sizing: border-box; }
-        .stamp-space { height: 100mm; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px; color: #ccc; }
-        .footer-sigs { display: flex; justify-content: space-between; margin-top: 50px; font-weight: bold; }
-        .page-break { page-break-after: always; }
+        /* PDF Template Styling */
+        #pdf-content { background: white; width: 210mm; margin: auto; display: none; color: black; }
+        .pdf-page { padding: 20mm; height: 297mm; position: relative; box-sizing: border-box; font-size: 14px; line-height: 1.5; page-break-after: always; }
+        .header-court { text-align: center; font-weight: bold; }
+        .footer-sig { position: absolute; bottom: 30mm; width: 80%; display: flex; justify-content: space-between; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center; color: #0a7f3f;">⚖️ JameenSeva: Professional Panchnama Generator</h2>
+<div class="no-print">
+    <h2 style="text-align:center">नया पंचनामा फॉर्म (Darbhanga Style)</h2>
+    
+    <div class="section">
+        <h3>1. न्यायालय/पंचायत विवरण</h3>
+        <input id="court_name" value="सरपंच ग्राम कचहरी, पंचायत भवानीपुर, अंचल सिंहवाड़ा, दरभंगा">
+        <input id="vad_no" placeholder="वाद संख्या (जैसे: 05/2026)">
+    </div>
 
-    <div id="mainForm">
-        <div class="section-box">
-            <h3>👥 फरीकेन का विवरण</h3>
-            <div id="fariqContainer"></div>
-            <button type="button" class="btn btn-add" onclick="addFariqRow()">+ नया फरीक जोड़ें</button>
+    <div class="section">
+        <h3>2. लेख्यकारी (प्रथम फरीक)</h3>
+        <input id="f1_name" placeholder="नाम">
+        <input id="f1_father" placeholder="पिता/पति का नाम">
+        <input id="f1_age" placeholder="उम्र">
+        <input id="f1_aadhar" placeholder="आधार">
+        <input id="f1_caste" placeholder="जाति">
+    </div>
+
+    <div class="section">
+        <h3>3. सम्पति विवरण (Table)</h3>
+        <table id="landTable">
+            <tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th></tr>
+            <tr>
+                <td><input class="m-mauza" value="भवानीपुर"></td>
+                <td><input class="m-khata"></td>
+                <td><input class="m-khesra"></td>
+                <td><input class="m-rakwa"></td>
+            </tr>
+        </table>
+        <button onclick="addRow()">+ प्लॉट जोड़ें</button>
+    </div>
+
+    <div class="section">
+        <h3>4. वंशावली</h3>
+        <input id="v_ancestor" placeholder="मुख्य पूर्वज (स्व० मौजे साह)">
+        <input id="v_son1" placeholder="पुत्र 1">
+        <input id="v_son2" placeholder="पुत्र 2">
+    </div>
+
+    <button style="width:100%; padding:15px; background:green; color:white; font-weight:bold" onclick="generatePDF()">💾 DOWNLOAD FINAL PDF</button>
+</div>
+
+<div id="pdf-content">
+    <div class="pdf-page">
+        <div style="text-align:right">Page:-1</div>
+        <div class="header-court">
+            <p>न्यायालय,<br><span id="p_court">सरपंच ग्राम कचहरी, पंचायत भवानीपुर</span></p>
+            <p>सहमति पंचनामा बटवारा</p>
         </div>
-
-        <div class="section-box">
-            <h3>📄 कुल पैतृक सम्पति</h3>
-            <table>
-                <thead>
-                    <tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>Action</th></tr>
-                </thead>
-                <tbody id="landBody"></tbody>
-            </table>
-            <div class="total-box">कुल रकवा: <span id="total_land_val">0</span></div>
-            <button type="button" class="btn btn-add" onclick="addLandRow()" style="margin-top:10px;">+ नया प्लॉट जोड़ें</button>
-        </div>
-
-        <div class="section-box">
-            <h3>📐 बँटवारा शेड्यूल</h3>
-            <div id="allocationContainer"></div>
-            <button type="button" class="btn btn-add" onclick="addAllocationBox()">+ नया शेड्यूल जोड़ें</button>
-        </div>
-
-        <div class="section-box">
-            <h3>🌳 वंशावली वृक्ष</h3>
-            <input id="ancestor_name" placeholder="मुख्य पूर्वज (उदा: स्व० सीताराम यादव)" style="margin-bottom:15px; font-weight: bold; border: 2px solid #0a7f3f;">
-            <div id="treeMemberContainer"></div>
-            <button type="button" class="btn btn-add" onclick="addTreeMember()">+ वंशज जोड़ें</button>
-        </div>
-
-        <div style="text-align: center; margin: 50px;">
-            <button id="finalBtn" class="btn btn-add" style="background: #2c3e50; padding: 20px 60px; font-size: 20px;" onclick="generatePDF()">💾 DOWNLOAD HINDI PDF</button>
+        <p><b>1. लेख्यकारी :-</b> फरीक नं0-1 <span id="p_f1"></span> पिता- <span id="p_f1f"></span> उम्र- <span id="p_f1a"></span> वर्ष, आधार- <span id="p_f1ad"></span>, जाति- <span id="p_f1c"></span>, पेशा- काश्तकारी।</p>
+        <p style="margin-top:20px">हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से... </p>
+        <div class="footer-sig">
+            <span>सरपंच</span>
+            <span>फरिकेन</span>
         </div>
     </div>
 
-    <div id="pdf-template"></div>
+    <div class="pdf-page">
+        <div style="text-align:right">Page:-2</div>
+        <h4>कुल पैत्रिक भूमि सम्पति विवरण:- [cite: 64]</h4>
+        <table id="p_table">
+            <tr style="background:#eee">
+                <th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th>
+            </tr>
+        </table>
+        <p style="margin-top:20px">मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद नहीं हो। </p>
+        <div class="footer-sig">
+            <span>सरपंच</span>
+            <span>फरिकेन</span>
+        </div>
+    </div>
+
+    <div class="pdf-page">
+        <div style="text-align:right">Page:-3</div>
+        <h3 style="text-align:center">वंशवृक्ष [cite: 152]</h3>
+        <div style="margin:50px auto; width:200px; border:1px solid #000; text-align:center; padding:10px;">
+            <span id="p_v_anc"></span>
+        </div>
+        <div style="display:flex; justify-content:space-around">
+            <div style="border:1px solid #000; padding:10px;"><span id="p_v_s1"></span></div>
+            <div style="border:1px solid #000; padding:10px;"><span id="p_v_s2"></span></div>
+        </div>
+        <div class="footer-sig">
+            <span>गवाह</span>
+            <span>सरपंच</span>
+            <span>फरिकेन</span>
+        </div>
+    </div>
+</div>
 
 <script>
-    const _supabaseUrl = 'https://nkhthnkngt410q9xfqis.supabase.co';
-    const _supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
-    const _supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
+function addRow() {
+    let table = document.getElementById("landTable");
+    let row = table.insertRow(-1);
+    row.innerHTML = '<td><input class="m-mauza" value="भवानीपुर"></td><td><input class="m-khata"></td><td><input class="m-khesra"></td><td><input class="m-rakwa"></td>';
+}
 
-    // FORM LOGIC
-    function addFariqRow() {
-        const div = document.createElement('div');
-        div.className = 'fariq-card';
-        div.innerHTML = `<div class="input-grid"><input placeholder="नाम" class="f-name"><input placeholder="पिता/पति" class="f-guardian"><input placeholder="आधार" class="f-aadhar"><input placeholder="जाति" class="f-caste"></div><button type="button" class="btn btn-remove" onclick="this.parentElement.remove()">❌</button>`;
-        document.getElementById('fariqContainer').appendChild(div);
-    }
+function generatePDF() {
+    // Fill Data into PDF Template
+    document.getElementById("p_court").innerText = document.getElementById("court_name").value;
+    document.getElementById("p_f1").innerText = document.getElementById("f1_name").value;
+    document.getElementById("p_f1f").innerText = document.getElementById("f1_father").value;
+    document.getElementById("p_f1ad").innerText = document.getElementById("f1_aadhar").value;
+    document.getElementById("p_f1c").innerText = document.getElementById("f1_caste").value;
+    document.getElementById("p_v_anc").innerText = document.getElementById("v_ancestor").value;
+    document.getElementById("p_v_s1").innerText = document.getElementById("v_son1").value;
+    document.getElementById("p_v_s2").innerText = document.getElementById("v_son2").value;
 
-    function addLandRow() {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td><input></td><td><input></td><td><input></td><td><input type="number" class="calc-rakwa" oninput="updateTotal()"></td><td><button type="button" class="btn btn-remove" onclick="this.parentElement.parentElement.remove(); updateTotal()">✕</button></td>`;
-        document.getElementById('landBody').appendChild(tr);
-    }
+    // Table Data
+    let pTable = document.getElementById("p_table");
+    pTable.innerHTML = '<tr style="background:#eee"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>';
+    document.querySelectorAll("#landTable tr").forEach((tr, i) => {
+        if(i==0) return;
+        let row = pTable.insertRow(-1);
+        row.innerHTML = `<td>${tr.cells[0].firstChild.value}</td><td>${tr.cells[1].firstChild.value}</td><td>${tr.cells[2].firstChild.value}</td><td>${tr.cells[3].firstChild.value}</td>`;
+    });
 
-    function updateTotal() {
-        let t = 0;
-        document.querySelectorAll('#landBody .calc-rakwa').forEach(i => t += (parseFloat(i.value) || 0));
-        document.getElementById('total_land_val').innerText = t.toFixed(3);
-    }
-
-    function addAllocationBox() {
-        const id = Date.now();
-        const div = document.createElement('div');
-        div.className = 'fariq-card';
-        div.id = 'alloc_'+id;
-        div.innerHTML = `<h4>अनुसूची (Schedule)</h4><input placeholder="हिस्सेदार का नाम" class="h-name" style="font-weight:bold; margin-bottom:10px;"><table><thead><tr><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th></tr></thead><tbody class="alloc-body"></tbody></table><div class="total-box">कुल हिस्सा: <span class="sub-total">0</span></div><button type="button" class="btn btn-add" style="background:#666; font-size:11px;" onclick="addAllocRow(this, '${id}')">+ प्लॉट</button>`;
-        document.getElementById('allocationContainer').appendChild(div);
-        addAllocRow(div.querySelector('.btn-add'), id);
-    }
-
-    function addAllocRow(btn, id) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td><input></td><td><input></td><td><input type="number" class="sub-calc" oninput="updateSub('${id}')"></td><td><input placeholder="उत्तर, दक्षिण, पूर्व, पश्चिम"></td>`;
-        btn.parentElement.querySelector('.alloc-body').appendChild(tr);
-    }
-
-    function updateSub(id) {
-        let t = 0;
-        document.querySelectorAll('#alloc_'+id+' .sub-calc').forEach(i => t += (parseFloat(i.value) || 0));
-        document.querySelector('#alloc_'+id+' .sub-total').innerText = t.toFixed(3);
-    }
-
-    function addTreeMember() {
-        const div = document.createElement('div');
-        div.className = 'fariq-card';
-        div.innerHTML = `<div style="display:flex; gap:10px;"><select class="v-status"><option value="स्व०">स्व०</option><option value="✅">✅ जीवित</option></select><input placeholder="नाम" class="v-name"></div><div class="son-sec" style="margin-top:10px;"><div class="s-list"></div><button type="button" onclick="const i=document.createElement('input'); i.placeholder='पुत्र का नाम'; i.className='son-input'; this.previousElementSibling.appendChild(i)">+ पुत्र जोड़ें</button></div>`;
-        document.getElementById('treeMemberContainer').appendChild(div);
-    }
-
-    // PDF GENERATION LOGIC (HINDI FIXED)
-    async function generatePDF() {
-        const btn = document.getElementById('finalBtn');
-        btn.innerText = "PDF Taiyar ho rahi hai...";
-        btn.disabled = true;
-
-        const anc = document.getElementById('ancestor_name').value || "__________";
-        const tRakwa = document.getElementById('total_land_val').innerText;
-        const tempContainer = document.getElementById('pdf-template');
-        tempContainer.innerHTML = ''; // Clear purana data
-        tempContainer.style.display = 'block';
-
-        // 1. Page 1: Intro & Total Land
-        let page1 = `
-            <div class="pdf-page page-break">
-                <div class="stamp-space"><br><br>स्टैम्प पेपर हेतु स्थान (100mm)</div>
-                <h2 style="text-align: center;">सहमति पंचनामा बँटवारा</h2>
-                <p style="text-align: justify; text-indent: 50px;">हम फरीकेन आपस में सगे सम्बन्धी हैं। हमारे पूर्वज <b>स्व० ${anc}</b> की कुल पैतृक सम्पति जिसका कुल रकवा <b>${tRakwa}</b> डिसमिल है, उसे हम सभी अपनी स्वेच्छा और आपसी सहमति से निम्नलिखित विवरण के अनुसार आपस में बाँट रहे हैं। ताकि भविष्य में कोई विवाद न हो।</p>
-                <h4>1. कुल सम्पति का विवरण:</h4>
-                <table border="1" style="width: 100%; border-collapse: collapse;">
-                    <tr style="background:#eee;"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>
-                    ${Array.from(document.querySelectorAll('#landBody tr')).map(tr => `
-                        <tr><td>${tr.cells[0].querySelector('input').value}</td><td>${tr.cells[1].querySelector('input').value}</td><td>${tr.cells[2].querySelector('input').value}</td><td>${tr.cells[3].querySelector('input').value}</td></tr>
-                    `).join('')}
-                </table>
-                <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
-            </div>
-        `;
-        tempContainer.innerHTML += page1;
-
-        // 2. Schedule Pages
-        document.querySelectorAll('[id^="alloc_"]').forEach((box, i) => {
-            let sPage = `
-                <div class="pdf-page page-break">
-                    <h3 style="text-align: center;">अनुसूची (Schedule) - ${i+1}</h3>
-                    <p><b>आवंटित फरीक का नाम:</b> ${box.querySelector('.h-name').value}</p>
-                    <table border="1" style="width: 100%; border-collapse: collapse;">
-                        <tr style="background:#eee;"><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th></tr>
-                        ${Array.from(box.querySelectorAll('.alloc-body tr')).map(tr => `
-                            <tr><td>${tr.cells[0].querySelector('input').value}</td><td>${tr.cells[1].querySelector('input').value}</td><td>${tr.cells[2].querySelector('input').value}</td><td>${tr.cells[3].querySelector('input').value}</td></tr>
-                        `).join('')}
-                    </table>
-                    <p style="text-align:right;"><b>कुल हिस्सा: ${box.querySelector('.sub-total').innerText} डिसमिल</b></p>
-                    <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
-                </div>
-            `;
-            tempContainer.innerHTML += sPage;
-        });
-
-        // 3. Last Page: Vanshavali
-        let vPage = `
-            <div class="pdf-page">
-                <h3 style="text-align: center;">🌳 वंशावली वृक्ष</h3>
-                <div style="border: 1px solid #000; padding: 20px;">
-                    ${Array.from(document.querySelectorAll('#treeMemberContainer .fariq-card')).map(c => `
-                        <div style="margin-bottom:10px;">
-                            <b>${c.querySelector('.v-status').value} ${c.querySelector('.v-name').value}</b><br>
-                            ${Array.from(c.querySelectorAll('.son-input')).map(s => `&nbsp;&nbsp;&nbsp;&nbsp;|_ पुत्र: ${s.value}<br>`).join('')}
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
-            </div>
-        `;
-        tempContainer.innerHTML += vPage;
-
-        // PDF Create Options
-        const opt = {
-            margin:       0,
-            filename:     `Panchnama_${anc}.pdf`,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-
-        // Download Action
-        html2pdf().from(tempContainer).set(opt).save().then(() => {
-            tempContainer.style.display = 'none';
-            btn.innerText = "💾 DOWNLOAD HINDI PDF";
-            btn.disabled = false;
-        });
-
-        // Supabase Save (Optional)
-        try { _supabase.from('panchnama_pro').insert([{ full_data: { ancestor: anc, total: tRakwa } }]); } catch(e){}
-    }
-
-    window.onload = () => { addFariqRow(); addLandRow(); addAllocationBox(); addTreeMember(); };
+    // Generate PDF
+    const element = document.getElementById('pdf-content');
+    element.style.display = 'block';
+    const opt = {
+        margin: 0,
+        filename: 'Final_Panchnama.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    
+    html2pdf().from(element).set(opt).save().then(() => {
+        element.style.display = 'none';
+    });
+}
 </script>
+
 </body>
 </html>
