@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JameenSeva - Panchnama Pro Final</title>
+    <title>JameenSeva - Professional Panchnama</title>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; padding: 20px; color: #333; }
         .section-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd; }
         h3 { color: #1a5928; border-left: 6px solid #0a7f3f; padding-left: 12px; margin-bottom: 20px; }
-        h4 { color: #0a7f3f; border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 0; }
         .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px; }
         input, select { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 100%; box-sizing: border-box; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #fff; }
         th, td { border: 1px solid #aaa; padding: 10px; text-align: left; }
         th { background: #f8f9fa; font-size: 13px; }
         .total-box { background: #e8f5e9; font-weight: bold; padding: 10px; border: 1px solid #0a7f3f; margin-top: -1px; text-align: right; }
         .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-add { background: #0a7f3f; color: white; }
-        .btn-remove { background: #d32f2f; color: white; font-size: 12px; padding: 5px 10px; }
+        .btn-remove { background: #d32f2f; color: white; font-size: 11px; padding: 5px 10px; }
         .fariq-card { border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: #fff; }
-        .son-input { margin-top: 5px; width: 90% !important; margin-left: 25px; display: block; }
+        
+        /* PDF Preview Styling (Hidden on Screen) */
+        #pdf-template { display: none; }
+        .pdf-page { width: 210mm; padding: 20mm; background: white; font-size: 14px; line-height: 1.6; position: relative; box-sizing: border-box; }
+        .stamp-space { height: 100mm; text-align: center; border: 1px dashed #ccc; margin-bottom: 20px; color: #ccc; }
+        .footer-sigs { display: flex; justify-content: space-between; margin-top: 50px; font-weight: bold; }
+        .page-break { page-break-after: always; }
     </style>
 </head>
 <body>
@@ -32,16 +37,16 @@
 
     <div id="mainForm">
         <div class="section-box">
-            <h3>👥 फरीकेन का विवरण (Step 1)</h3>
+            <h3>👥 फरीकेन का विवरण</h3>
             <div id="fariqContainer"></div>
             <button type="button" class="btn btn-add" onclick="addFariqRow()">+ नया फरीक जोड़ें</button>
         </div>
 
         <div class="section-box">
-            <h3>📄 कुल पैतृक सम्पति (Step 2)</h3>
+            <h3>📄 कुल पैतृक सम्पति</h3>
             <table>
                 <thead>
-                    <tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (नंबर)</th><th>Action</th></tr>
+                    <tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>Action</th></tr>
                 </thead>
                 <tbody id="landBody"></tbody>
             </table>
@@ -50,30 +55,31 @@
         </div>
 
         <div class="section-box">
-            <h3>📐 बँटवारा शेड्यूल (Step 3)</h3>
+            <h3>📐 बँटवारा शेड्यूल</h3>
             <div id="allocationContainer"></div>
             <button type="button" class="btn btn-add" onclick="addAllocationBox()">+ नया शेड्यूल जोड़ें</button>
         </div>
 
         <div class="section-box">
-            <h3>🌳 वंशावली वृक्ष (Step 4)</h3>
-            <input id="ancestor_name" placeholder="मुख्य पूर्वज (उदा: स्व० रामलखन यादव)" style="margin-bottom:15px; font-weight: bold; border: 2px solid #0a7f3f;">
+            <h3>🌳 वंशावली वृक्ष</h3>
+            <input id="ancestor_name" placeholder="मुख्य पूर्वज (उदा: स्व० सीताराम यादव)" style="margin-bottom:15px; font-weight: bold; border: 2px solid #0a7f3f;">
             <div id="treeMemberContainer"></div>
             <button type="button" class="btn btn-add" onclick="addTreeMember()">+ वंशज जोड़ें</button>
         </div>
 
         <div style="text-align: center; margin: 50px;">
-            <button id="finalBtn" class="btn btn-add" style="background: #2c3e50; padding: 20px 60px; font-size: 20px;" onclick="generateFinalPDF()">💾 DOWNLOAD FINAL PDF</button>
+            <button id="finalBtn" class="btn btn-add" style="background: #2c3e50; padding: 20px 60px; font-size: 20px;" onclick="generatePDF()">💾 DOWNLOAD HINDI PDF</button>
         </div>
     </div>
 
+    <div id="pdf-template"></div>
+
 <script>
-    // --- SUPABASE CONFIG ---
     const _supabaseUrl = 'https://nkhthnkngt410q9xfqis.supabase.co';
     const _supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
     const _supabase = supabase.createClient(_supabaseUrl, _supabaseKey);
 
-    // --- FORM ACTIONS ---
+    // FORM LOGIC
     function addFariqRow() {
         const div = document.createElement('div');
         div.className = 'fariq-card';
@@ -105,7 +111,7 @@
 
     function addAllocRow(btn, id) {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td><input></td><td><input></td><td><input type="number" class="sub-calc" oninput="updateSub('${id}')"></td><td><input placeholder="N-S-E-W"></td>`;
+        tr.innerHTML = `<td><input></td><td><input></td><td><input type="number" class="sub-calc" oninput="updateSub('${id}')"></td><td><input placeholder="उत्तर, दक्षिण, पूर्व, पश्चिम"></td>`;
         btn.parentElement.querySelector('.alloc-body').appendChild(tr);
     }
 
@@ -118,104 +124,94 @@
     function addTreeMember() {
         const div = document.createElement('div');
         div.className = 'fariq-card';
-        div.innerHTML = `<div style="display:flex; gap:10px;"><select class="v-status" onchange="toggleSons(this)"><option value="स्व०">स्व०</option><option value="✅">✅ जीवित</option></select><input placeholder="नाम" class="v-name"></div><div class="son-sec" style="margin-top:10px;"><div class="s-list"></div><button type="button" onclick="addSon(this)">+ पुत्र जोड़ें</button></div>`;
+        div.innerHTML = `<div style="display:flex; gap:10px;"><select class="v-status"><option value="स्व०">स्व०</option><option value="✅">✅ जीवित</option></select><input placeholder="नाम" class="v-name"></div><div class="son-sec" style="margin-top:10px;"><div class="s-list"></div><button type="button" onclick="const i=document.createElement('input'); i.placeholder='पुत्र का नाम'; i.className='son-input'; this.previousElementSibling.appendChild(i)">+ पुत्र जोड़ें</button></div>`;
         document.getElementById('treeMemberContainer').appendChild(div);
     }
 
-    function addSon(btn) {
-        const inp = document.createElement('input');
-        inp.placeholder = "पुत्र का नाम";
-        inp.className = "son-input";
-        btn.previousElementSibling.appendChild(inp);
-    }
-
-    function toggleSons(sel) {
-        sel.parentElement.nextElementSibling.style.display = (sel.value==='✅'?'none':'block');
-    }
-
-    // --- PDF ENGINE ---
-    async function generateFinalPDF() {
+    // PDF GENERATION LOGIC (HINDI FIXED)
+    async function generatePDF() {
         const btn = document.getElementById('finalBtn');
-        btn.innerText = "Processing...";
+        btn.innerText = "PDF Taiyar ho rahi hai...";
         btn.disabled = true;
 
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        
         const anc = document.getElementById('ancestor_name').value || "__________";
         const tRakwa = document.getElementById('total_land_val').innerText;
+        const tempContainer = document.getElementById('pdf-template');
+        tempContainer.innerHTML = ''; // Clear purana data
+        tempContainer.style.display = 'block';
 
-        // PAGE 1: STAMP & INTRO
-        doc.setFontSize(20);
-        doc.text("सहमति पंचनामा बँटवारा", 105, 110, { align: 'center' });
-        
-        doc.setFontSize(12);
-        let intro = `हम फरीकेन आपस में सगे सम्बन्धी हैं। हमारे पूर्वज स्व० ${anc} की कुल सम्पति (रकवा ${tRakwa} डिसमिल) को हम सभी आपसी सहमति से निम्नलिखित विवरण के अनुसार आपस में बाँट रहे हैं।`;
-        doc.text(doc.splitTextToSize(intro, 170), 20, 125);
+        // 1. Page 1: Intro & Total Land
+        let page1 = `
+            <div class="pdf-page page-break">
+                <div class="stamp-space"><br><br>स्टैम्प पेपर हेतु स्थान (100mm)</div>
+                <h2 style="text-align: center;">सहमति पंचनामा बँटवारा</h2>
+                <p style="text-align: justify; text-indent: 50px;">हम फरीकेन आपस में सगे सम्बन्धी हैं। हमारे पूर्वज <b>स्व० ${anc}</b> की कुल पैतृक सम्पति जिसका कुल रकवा <b>${tRakwa}</b> डिसमिल है, उसे हम सभी अपनी स्वेच्छा और आपसी सहमति से निम्नलिखित विवरण के अनुसार आपस में बाँट रहे हैं। ताकि भविष्य में कोई विवाद न हो।</p>
+                <h4>1. कुल सम्पति का विवरण:</h4>
+                <table border="1" style="width: 100%; border-collapse: collapse;">
+                    <tr style="background:#eee;"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>
+                    ${Array.from(document.querySelectorAll('#landBody tr')).map(tr => `
+                        <tr><td>${tr.cells[0].querySelector('input').value}</td><td>${tr.cells[1].querySelector('input').value}</td><td>${tr.cells[2].querySelector('input').value}</td><td>${tr.cells[3].querySelector('input').value}</td></tr>
+                    `).join('')}
+                </table>
+                <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
+            </div>
+        `;
+        tempContainer.innerHTML += page1;
 
-        // PAGE 1 TABLE
-        let y = 145;
-        doc.text("1. कुल सम्पति विवरण:", 20, 140);
-        doc.rect(20, y, 170, 8); doc.text("मौजा", 22, y+6); doc.text("खाता", 60, y+6); doc.text("खेसरा", 100, y+6); doc.text("रकवा", 150, y+6);
-        document.querySelectorAll('#landBody tr').forEach(tr => {
-            y+=8; doc.rect(20, y, 170, 8);
-            doc.text(tr.cells[0].querySelector('input').value, 22, y+6);
-            doc.text(tr.cells[1].querySelector('input').value, 60, y+6);
-            doc.text(tr.cells[2].querySelector('input').value, 100, y+6);
-            doc.text(tr.cells[3].querySelector('input').value, 150, y+6);
-        });
-        addSigns(doc);
-
-        // SCHEDULE PAGES (Auto Page Break)
+        // 2. Schedule Pages
         document.querySelectorAll('[id^="alloc_"]').forEach((box, i) => {
-            doc.addPage();
-            doc.setFontSize(14);
-            doc.text(`अनुसूची (Schedule) - ${i+1}`, 105, 20, { align: 'center' });
-            doc.setFontSize(11);
-            doc.text(`आवंटित फरीक: ${box.querySelector('.h-name').value}`, 20, 35);
-            
-            let sy = 45;
-            doc.rect(20, sy, 170, 8); doc.text("खाता", 22, sy+6); doc.text("खेसरा", 50, sy+6); doc.text("रकवा", 80, sy+6); doc.text("चौहद्दी", 110, sy+6);
-            box.querySelectorAll('.alloc-body tr').forEach(tr => {
-                sy+=10; doc.rect(20, sy, 170, 10);
-                doc.text(tr.cells[0].querySelector('input').value, 22, sy+6);
-                doc.text(tr.cells[1].querySelector('input').value, 50, sy+6);
-                doc.text(tr.cells[2].querySelector('input').value, 80, sy+6);
-                doc.text(tr.cells[3].querySelector('input').value, 110, sy+6);
-            });
-            doc.text(`कुल हिस्सा: ${box.querySelector('.sub-total').innerText} डिसमिल`, 140, sy+20);
-            addSigns(doc);
+            let sPage = `
+                <div class="pdf-page page-break">
+                    <h3 style="text-align: center;">अनुसूची (Schedule) - ${i+1}</h3>
+                    <p><b>आवंटित फरीक का नाम:</b> ${box.querySelector('.h-name').value}</p>
+                    <table border="1" style="width: 100%; border-collapse: collapse;">
+                        <tr style="background:#eee;"><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th></tr>
+                        ${Array.from(box.querySelectorAll('.alloc-body tr')).map(tr => `
+                            <tr><td>${tr.cells[0].querySelector('input').value}</td><td>${tr.cells[1].querySelector('input').value}</td><td>${tr.cells[2].querySelector('input').value}</td><td>${tr.cells[3].querySelector('input').value}</td></tr>
+                        `).join('')}
+                    </table>
+                    <p style="text-align:right;"><b>कुल हिस्सा: ${box.querySelector('.sub-total').innerText} डिसमिल</b></p>
+                    <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
+                </div>
+            `;
+            tempContainer.innerHTML += sPage;
         });
 
-        // FINAL PAGE: VANSHAVALI
-        doc.addPage();
-        doc.text("🌳 वंशावली वृक्ष", 105, 20, { align: 'center' });
-        let vy = 40;
-        document.querySelectorAll('#treeMemberContainer .fariq-card').forEach(c => {
-            doc.text(`${c.querySelector('.v-status').value} ${c.querySelector('.v-name').value}`, 25, vy);
-            vy+=8;
-            c.querySelectorAll('.son-input').forEach(s => {
-                doc.text(`   |_ पुत्र: ${s.value}`, 30, vy); vy+=8;
-            });
-            vy+=5;
-        });
-        addSigns(doc);
+        // 3. Last Page: Vanshavali
+        let vPage = `
+            <div class="pdf-page">
+                <h3 style="text-align: center;">🌳 वंशावली वृक्ष</h3>
+                <div style="border: 1px solid #000; padding: 20px;">
+                    ${Array.from(document.querySelectorAll('#treeMemberContainer .fariq-card')).map(c => `
+                        <div style="margin-bottom:10px;">
+                            <b>${c.querySelector('.v-status').value} ${c.querySelector('.v-name').value}</b><br>
+                            ${Array.from(c.querySelectorAll('.son-input')).map(s => `&nbsp;&nbsp;&nbsp;&nbsp;|_ पुत्र: ${s.value}<br>`).join('')}
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="footer-sigs"><span>हस्ताक्षर सरपंच (मोहर)</span><span>हस्ताक्षर फरीकेन/गवाह</span></div>
+            </div>
+        `;
+        tempContainer.innerHTML += vPage;
 
-        doc.save(`Panchnama_${anc}.pdf`);
-        btn.innerText = "💾 DOWNLOAD FINAL PDF";
-        btn.disabled = false;
-        
-        // Supabase Save
+        // PDF Create Options
+        const opt = {
+            margin:       0,
+            filename:     `Panchnama_${anc}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Download Action
+        html2pdf().from(tempContainer).set(opt).save().then(() => {
+            tempContainer.style.display = 'none';
+            btn.innerText = "💾 DOWNLOAD HINDI PDF";
+            btn.disabled = false;
+        });
+
+        // Supabase Save (Optional)
         try { _supabase.from('panchnama_pro').insert([{ full_data: { ancestor: anc, total: tRakwa } }]); } catch(e){}
-    }
-
-    function addSigns(doc) {
-        const h = doc.internal.pageSize.height;
-        doc.setFontSize(10);
-        doc.line(20, h-30, 190, h-30);
-        doc.text("हस्ताक्षर सरपंच (Left)", 20, h-20);
-        doc.text("हस्ताक्षर फरीकेन / गवाह (Right)", 140, h-20);
-        doc.text("Page " + doc.internal.getNumberOfPages(), 105, h-10, {align: 'center'});
     }
 
     window.onload = () => { addFariqRow(); addLandRow(); addAllocationBox(); addTreeMember(); };
