@@ -2,136 +2,170 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>JameenSeva - Professional Batwara Panchnama</title>
+    <title>JameenSeva - Exact 8-Page Batwara Format</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: 'Arial', sans-serif; background: #555; padding: 20px; }
-        .input-form { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .input-group { margin-bottom: 10px; }
-        input { width: 100%; padding: 8px; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: #333; color: #000; padding: 20px; }
+        .form-ui { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; }
+        .input-box { margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; box-sizing: border-box; }
         
-        /* --- ASLI PDF KA DESIGN (DO NOT CHANGE) --- */
-        #pdf-render { width: 210mm; margin: auto; background: white; display: none; color: #000; }
-        .pdf-page { width: 210mm; height: 296mm; padding: 20mm; box-sizing: border-box; position: relative; font-size: 15px; line-height: 1.6; page-break-after: always; }
-        .pg-no { text-align: right; font-weight: bold; }
-        .header { text-align: center; font-weight: bold; margin-top: 10px; }
-        .legal-text { text-align: justify; margin-top: 15px; }
-        .signature-section { position: absolute; bottom: 30mm; width: 80%; display: flex; justify-content: space-between; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid black; padding: 6px; text-align: center; }
-        .box { border: 1px solid black; padding: 10px; display: inline-block; min-width: 150px; text-align: center; }
+        /* --- ASLI PDF LOOK --- */
+        #final-pdf-template { display: none; background: white; width: 210mm; margin: auto; }
+        .pdf-page { width: 210mm; height: 297mm; padding: 20mm; box-sizing: border-box; position: relative; page-break-after: always; font-size: 15px; line-height: 1.6; }
+        .stamp-gap { height: 100mm; border: 1px dashed #ddd; text-align: center; color: #ccc; padding-top: 40px; margin-bottom: 20px; }
+        .center-bold { text-align: center; font-weight: bold; text-decoration: underline; }
+        .pg-no { position: absolute; top: 15mm; right: 20mm; font-weight: bold; }
+        .sig-area { position: absolute; bottom: 25mm; width: 85%; display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid #000; padding-top: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #000; padding: 8px; text-align: center; }
     </style>
 </head>
 <body>
 
-<div class="input-form">
-    <h2 style="text-align:center">Darbhanga Panchayati Batwara Form</h2>
-    <div class="input-group">
-        <label>पंचायत/अंचल का नाम:</label>
-        <input id="in_panchayat" value="ग्राम कचहरी, पंचायत भवानीपुर, अंचल सिंहवाड़ा, दरभंगा">
+<div class="form-ui">
+    <h2 style="text-align:center; color: #0a7f3f;">Darbhanga Batwara (Exact Copy)</h2>
+    
+    <div class="input-box">
+        <h3>1. Court Details (Page 1 Header)</h3>
+        <input id="in_court" value="सरपंच ग्राम कचहरी, पंचायत भवानीपुर, अंचल सिंहवाड़ा, दरभंगा">
     </div>
-    <div class="input-group">
-        <label>प्रथम फरीक (लेख्यकारी) का नाम:</label>
-        <input id="in_f1_name" placeholder="नाम">
-        <input id="in_f1_father" placeholder="पिता का नाम">
+
+    <div class="input-box">
+        <h3>2. Hissedar (Fariq) Details</h3>
+        <div id="fariqInputs">
+            <div class="f-entry" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 5px;">
+                <input class="f-name" placeholder="हिस्सेदार का नाम (जैसे: अनीता देवी)">
+                <input class="f-father" placeholder="पिता/पति का नाम">
+                <input class="f-details" placeholder="उम्र, आधार, जाति, पता (पूरा एक साथ लिखें)">
+            </div>
+        </div>
+        <button onclick="addFariqInput()">+ और हिस्सेदार जोड़ें</button>
     </div>
-    <div class="input-group">
-        <label>कुल सम्पति विवरण (खाता, खेसरा, रकवा):</label>
-        <input id="in_khata" placeholder="खाata">
+
+    <div class="input-box">
+        <h3>3. Plot Details (Schedule)</h3>
+        <input id="in_khata" placeholder="खाता">
         <input id="in_khesra" placeholder="खेसरा">
         <input id="in_rakwa" placeholder="रकवा (डिसमिल)">
     </div>
-    <div class="input-group">
-        <label>मुख्य पूर्वज (स्व०):</label>
-        <input id="in_anc" placeholder="उदा: स्व० मौजे साह">
+
+    <div class="input-box">
+        <h3>4. Vanshavali</h3>
+        <input id="in_anc" placeholder="मुख्य पूर्वज (जैसे: स्व० मौजे साह)">
     </div>
-    <button onclick="makePDF()" style="width:100%; padding:15px; background:green; color:white; cursor:pointer">💾 DOWNLOAD SAME AS MY PDF</button>
+
+    <button onclick="buildAndDownload()" style="width:100%; padding:20px; background:#0a7f3f; color:white; font-size:18px; cursor:pointer;">💾 DOWNLOAD 8-PAGE PDF</button>
 </div>
 
-<div id="pdf-render">
-    <div class="pdf-page">
-        <div class="pg-no">Page:-1</div>
-        <div class="header">
-            न्यायालय,<br>
-            <span id="p_panchayat">ग्राम कचहरी, पंचायत भवानीपुर...</span><br><br>
-            सहमति पंचनामा बटवारा
-        </div>
-        <div class="legal-text">
-            <p><b>1. लेख्यकारी :-</b> फरीक नं0-1 <span id="p_f1"></span> पिता- <span id="p_f1_f"></span> पेशा काश्तकारी, जिला- दरभंगा, राज्य बिहार।</p>
-            <p><b>2. लेख्यधारी :-</b> एक दूसरे के पक्ष में (लेख्यकारी ही लेख्यधारी है)।</p>
-            <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव में आकर निश्चित किया है।</p>
-        </div>
-        <div class="signature-section">
-            <span>सरपंच</span>
-            <span>फरिकेन</span>
-        </div>
-    </div>
-
-    <div class="pdf-page">
-        <div class="pg-no">Page:-2</div>
-        <h4 style="text-decoration: underline;">कुल पैत्रिक भूमि सम्पति विवरण:-</h4>
-        <table>
-            <tr style="background:#eee"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>
-            <tr><td>भवानीपुर</td><td><span id="p_khata"></span></td><td><span id="p_khesra"></span></td><td><span id="p_rakwa"></span></td></tr>
-        </table>
-        <div class="legal-text">
-            <p>मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में समिलात जमीन का विवाद नहीं हो एवं सरकारी राजस्व का भुगतान भी समय-समय पर अपने हिस्सा के अनुसार किया करेंगे।</p>
-        </div>
-        <div class="signature-section">
-            <span>सरपंच</span>
-            <span>फरिकेन</span>
-        </div>
-    </div>
-
-    <div class="pdf-page">
-        <div class="pg-no">Page:-3</div>
-        <h3 style="text-align: center;">🌳 वंशवृक्ष</h3>
-        <div style="text-align: center; margin-top: 50px;">
-            <div class="box" id="p_anc">पूर्वज</div>
-            <div style="height: 40px; width: 2px; background: black; margin: auto;"></div>
-            <div style="width: 300px; height: 2px; background: black; margin: auto;"></div>
-            <div style="display: flex; justify-content: space-between; width: 300px; margin: auto;">
-                <div style="height: 20px; width: 2px; background: black;"></div>
-                <div style="height: 20px; width: 2px; background: black;"></div>
-            </div>
-            <div style="display: flex; justify-content: space-around; width: 400px; margin: auto;">
-                <div class="box">हिस्सेदार 1</div>
-                <div class="box">हिस्सेदार 2</div>
-            </div>
-        </div>
-        <div class="signature-section">
-            <span>गवाह</span>
-            <span>सरपंच</span>
-            <span>फरिकेन</span>
-        </div>
-    </div>
-</div>
+<div id="final-pdf-template"></div>
 
 <script>
-function makePDF() {
-    // 1. Data Bharo Template Mein
-    document.getElementById('p_panchayat').innerText = document.getElementById('in_panchayat').value;
-    document.getElementById('p_f1').innerText = document.getElementById('in_f1_name').value;
-    document.getElementById('p_f1_f').innerText = document.getElementById('in_f1_father').value;
-    document.getElementById('p_khata').innerText = document.getElementById('in_khata').value;
-    document.getElementById('p_khesra').innerText = document.getElementById('in_khesra').value;
-    document.getElementById('p_rakwa').innerText = document.getElementById('in_rakwa').value;
-    document.getElementById('p_anc').innerText = document.getElementById('in_anc').value;
+function addFariqInput() {
+    const div = document.createElement('div');
+    div.className = 'f-entry';
+    div.style = "border: 1px solid #ddd; padding: 10px; margin-bottom: 5px;";
+    div.innerHTML = `<input class="f-name" placeholder="नाम"><input class="f-father" placeholder="पिता/पति"><input class="f-details" placeholder="अन्य विवरण"><button onclick="this.parentElement.remove()">X</button>`;
+    document.getElementById('fariqInputs').appendChild(div);
+}
 
-    // 2. PDF Generate Karo
-    const element = document.getElementById('pdf-render');
-    element.style.display = 'block'; // Render ke liye dikhao
+async function buildAndDownload() {
+    const btn = event.target;
+    btn.innerText = "PDF Ban rahi hai...";
+    const container = document.getElementById('final-pdf-template');
+    container.innerHTML = ''; 
+    container.style.display = 'block';
 
+    const court = document.getElementById('in_court').value;
+    const khata = document.getElementById('in_khata').value;
+    const khesra = document.getElementById('in_khesra').value;
+    const rakwa = document.getElementById('in_rakwa').value;
+    const anc = document.getElementById('in_anc').value;
+    const fariqs = document.querySelectorAll('.f-entry');
+
+    let pageCounter = 1;
+
+    // PAGE 1: Introductory Page (Exactly like your PDF)
+    let p1 = `
+        <div class="pdf-page">
+            <div class="pg-no">Page:-${pageCounter++}</div>
+            <div class="stamp-gap">यहाँ स्टैम्प लगेगा (100mm Space)</div>
+            <div class="center-bold">न्यायालय, ${court}</div>
+            <h3 class="center-bold" style="margin-top:10px;">सहमति पंचनामा बटवारा</h3>
+            <div style="margin-top:20px;">
+                ${Array.from(fariqs).map((f, i) => `
+                    <p><b>लेख्यकारी फरीक नं0-${i+1}:</b> ${f.querySelector('.f-name').value} पिता- ${f.querySelector('.f-father').value}, ${f.querySelector('.f-details').value}</p>
+                `).join('')}
+                <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव में आकर निश्चित किया है।</p>
+            </div>
+            <div class="sig-area"><span>सरपंच</span><span>फरिकेन</span></div>
+        </div>
+    `;
+    container.innerHTML += p1;
+
+    // PAGE 2: Property Table
+    let p2 = `
+        <div class="pdf-page">
+            <div class="pg-no">Page:-${pageCounter++}</div>
+            <h3 class="center-bold">कुल पैतृक भूमि सम्पति विवरण</h3>
+            <table>
+                <tr style="background:#f2f2f2;"><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th></tr>
+                <tr><td>भवानीपुर</td><td>${khata}</td><td>${khesra}</td><td>${rakwa}</td></tr>
+            </table>
+            <p>मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद नहीं हो एवं सरकारी राजस्व का भुगतान भी समय-समय पर किया करेंगे।</p>
+            <div class="sig-area"><span>सरपंच</span><span>फरिकेन</span></div>
+        </div>
+    `;
+    container.innerHTML += p2;
+
+    // SCHEDULE PAGES (Ek-Ek karke sabka)
+    fariqs.forEach((f, index) => {
+        let ps = `
+            <div class="pdf-page">
+                <div class="pg-no">Page:-${pageCounter++}</div>
+                <h3 class="center-bold">अनुसूची - हिस्सा फरीक नं0-${index+1}</h3>
+                <p><b>नाम:</b> ${f.querySelector('.f-name').value}</p>
+                <table border="1">
+                    <tr><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>
+                    <tr><td>${khata}</td><td>${khesra}</td><td>${(rakwa / fariqs.length).toFixed(2)}</td></tr>
+                </table>
+                <p>यह हिस्सा उपरोक्त फरीक के दखल कब्जे में रहेगा।</p>
+                <div class="sig-area"><span>सरपंच</span><span>फरिकेन</span></div>
+            </div>
+        `;
+        container.innerHTML += ps;
+    });
+
+    // LAST PAGE: Vanshavali
+    let pv = `
+        <div class="pdf-page">
+            <div class="pg-no">Page:-${pageCounter}</div>
+            <h3 class="center-bold">🌳 वंशवृक्ष (Vanshavali)</h3>
+            <div style="text-align:center; margin-top:50px;">
+                <div style="border:2px solid #000; padding:15px; display:inline-block; font-weight:bold;">${anc}</div>
+                <div style="height:50px; width:2px; background:#000; margin:auto;"></div>
+                <div style="width:400px; height:2px; background:#000; margin:auto;"></div>
+                <div style="display:flex; justify-content:space-around; width:450px; margin:auto; margin-top:10px;">
+                    ${Array.from(fariqs).map(f => `<div style="border:1px solid #000; padding:10px;">${f.querySelector('.f-name').value}</div>`).join('')}
+                </div>
+            </div>
+            <div class="sig-area"><span>गवाह</span><span>सरपंच</span><span>फरिकेन</span></div>
+        </div>
+    `;
+    container.innerHTML += pv;
+
+    // EXPORT TO PDF
     const opt = {
         margin: 0,
-        filename: 'JameenSeva_Panchnama.pdf',
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 3, useCORS: true }, // High Quality Scale
+        filename: `Panchnama_${anc}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
-
-    html2pdf().from(element).set(opt).save().then(() => {
-        element.style.display = 'none'; // Download ke baad chhupa do
+    
+    html2pdf().from(container).set(opt).save().then(() => {
+        container.style.display = 'none';
+        btn.innerText = "💾 DOWNLOAD 8-PAGE PDF";
     });
 }
 </script>
