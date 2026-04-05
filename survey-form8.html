@@ -3,140 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bihar Jameen Survey: Dava Aapatti Form 8 Online Kaise Bhare (दावा आपत्ति फार्म)</title>
+    <title>Bihar Jameen Survey: Dava Aapatti Form 8 Online Kaise Bhare | JameenSeva.in</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; color: #333; }
-        h1, h2, h3 { color: #2c3e50; }
-        .highlight { background-color: #f1c40f; padding: 2px 5px; font-weight: bold; }
-        .alert { background-color: #e74c3c; color: white; padding: 10px; border-radius: 5px; }
-        .info-box { background-color: #e8f8f5; border-left: 5px solid #1abc9c; padding: 15px; margin: 20px 0; }
-        .step-list { margin-bottom: 20px; }
-        .step-list li { margin-bottom: 10px; }
-        a { color: #2980b9; text-decoration: none; font-weight: bold; }
-        a:hover { text-decoration: underline; }
-        .footer { background-color: #34495e; color: white; padding: 20px; text-align: center; margin-top: 40px; }
-        .footer a { color: #f39c12; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #1abc9c;
+            --accent-color: #e67e22;
+            --alert-color: #e74c3c;
+            --bg-light: #f4f7f6;
+        }
+
+        body { 
+            font-family: 'Hind', sans-serif; 
+            line-height: 1.8; 
+            padding: 0; 
+            margin: 0; 
+            color: #444; 
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+
+        h1 { 
+            color: var(--primary-color); 
+            font-size: 2.2rem;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary-color);
+            padding-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        h2 { 
+            color: var(--primary-color); 
+            border-left: 6px solid var(--accent-color);
+            padding-left: 15px;
+            margin-top: 35px;
+            font-size: 1.6rem;
+        }
+
+        p { margin-bottom: 20px; font-size: 1.1rem; }
+
+        .highlight { 
+            background-color: #fff3cd; 
+            color: #856404;
+            padding: 2px 8px; 
+            border-radius: 4px;
+            font-weight: bold; 
+        }
+
+        .alert { 
+            background-color: var(--alert-color); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 8px; 
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .info-box { 
+            background: linear-gradient(135deg, #e8f8f5 0%, #d1f2eb 100%);
+            border: 1px solid var(--secondary-color);
+            padding: 25px; 
+            border-radius: 10px; 
+            margin: 30px 0; 
+        }
+
+        .info-box h3 { margin-top: 0; color: #16a085; }
+
+        .step-list { 
+            padding-left: 20px;
+        }
+
+        .step-list li { 
+            background: #fff;
+            margin-bottom: 15px; 
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            transition: transform 0.2s;
+        }
+
+        .step-list li:hover {
+            transform: translateX(5px);
+            border-color: var(--secondary-color);
+        }
+
+        a.btn-link { 
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: 0.3s;
+            margin: 5px 0;
+        }
+
+        a.btn-link:hover { background-color: var(--primary-color); transform: translateY(-2px); }
+
+        .faq-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .important-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .important-links li {
+            padding: 10px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .important-links a { color: var(--primary-color); text-decoration: none; }
+        .important-links a:hover { color: var(--accent-color); }
+
+        .footer { 
+            background-color: var(--primary-color); 
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center; 
+            margin-top: 60px; 
+            border-top: 8px solid var(--accent-color);
+        }
+
+        .footer a { color: #f39c12; margin: 0 10px; }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; margin: 10px; }
+            h1 { font-size: 1.6rem; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>बिहार जमीन सर्वे 2026: दावा आपत्ति फार्म 8 ऑनलाइन कैसे भरें? (Dava Aapatti Form 8)</h1>
-    <p>प्रणाम भईया लोग! का हाल बा रउआ सभे के? बिहार सरकार जमीन सर्वे के लेके बहुत ही तेजी से काम कर रहल बा। अगर रउआ बिहार के निवासी बानी और अउर राउर जमीन के सर्वे हो रहल बा, तो ई पोस्ट राउर खातिर बहुत ही ज्यादा महत्वपूर्ण बा। आज हमनी के बात करे वाला बानी जा <strong>"दावा आपत्ति फार्म 8" (Dava Aapatti Form 8)</strong> के बारे में।</p>
+<div class="container">
+    <h1>बिहार जमीन सर्वे 2026: दावा आपत्ति फार्म 8 ऑनलाइन कैसे भरें?</h1>
     
-    <p>कई बार अईसन होला कि सर्वे वाला अमीन आके जमीन नाप के चल जाला, लेकिन रउआ लागता कि उ गलत नाप देले बा या फिर राउर जमीन पर कउनो दोसर आदमी दावा कर रहल बा। [span_0](start_span)अईसन स्थिति में बिहार सरकार एक ठो नई सुविधा जारी कइले बा – <strong>भूमि सर्वे दावा-आपत्ति फॉर्म</strong>[span_0](end_span)। [span_1](start_span)ई फॉर्म का ह, एकरा के ऑनलाइन कइसे भरे के बा, अउर केकरा-केकरा ई फॉर्म भरे के चाहीं, ई सब जानकारी हम रउआ के अपनी ठेठ और आसान भाषा में बतावे जा रहल बा!</p>
+    <p>प्रणाम भईया लोग! का हाल बा रउआ सभे के? बिहार सरकार जमीन सर्वे के लेके बहुत ही तेजी से काम कर रहल बा। आज हमनी के बात करे वाला बानी जा <strong>"दावा आपत्ति फार्म 8" (Dava Aapatti Form 8)</strong> के बारे में।</p>
+    
+    <p>कई बार अईसन होला कि सर्वे वाला अमीन आके जमीन नाप के चल जाला, लेकिन रउआ लागता कि उ गलत नाप देले बा। अईसन स्थिति में बिहार सरकार एक ठो नई सुविधा जारी कइले बा – <span class="highlight">भूमि सर्वे दावा-आपत्ति फॉर्म</span>।</p>
 
     <div class="info-box">
-        <h3>📌 Quick Info (महत्वपूर्ण जानकारी)</h3>
-        <p>अधिक जानकारी के लिए आप इस YouTube वीडियो को भी देख सकते हैं: <a href="https://youtu.be/ZZSXMhly1y8?si=ctd4CtkL-_tPWco3" target="_blank">भूमि सर्वे दावा आपत्ति फार्म ऑनलाइन कैसे भरे</a></p>
-        <p><strong>क्या आप अपनी जमीन का क्षेत्रफल मापना चाहते हैं?</strong> हमारे फ्री टूल का उपयोग करें: <a href="https://jemeenseva.in/land-calculator.html" target="_blank">Land Calculator (जमीन नापने वाला कैलकुलेटर)</a> </p>
+        <h3>📌 Quick Resources (महत्वपूर्ण लिंक्स)</h3>
+        <p>🎥 <strong>वीडियो गाइड:</strong> <a class="btn-link" href="https://youtu.be/ZZSXMhly1y8?si=ctd4CtkL-_tPWco3" target="_blank">YouTube पर देखें</a></p>
+        <p>📏 <strong>फ्री टूल:</strong> <a class="btn-link" href="https://jemeenseva.in/land-calculator.html" target="_blank">जमीन नापने वाला कैलकुलेटर</a> </p>
     </div>
 
-    <hr>
-
-    <h2>दावा आपत्ति फॉर्म 8 क्या है और किसे भरना चाहिए? (Who should fill Dava Aapatti Form?)</h2>
-    <p>बिहार भूमि सर्वे के दौरान, अगर आपको अपने जमीन के सर्वे रिपोर्ट से कोई असहमति है, तो आपको यह फॉर्म भरना होता है। मुख्य रूप से यह फॉर्म इन लोगों को भरना चाहिए:</p>
-    <ul>
-        <li>अगर सर्वे के दौरान आपके जमीन का खाता, खसरा या रकबा गलत दर्ज हो गया है और आपको डाउट लग रहा है।</li>
-       <li>अगर आपको लगता है कि सर्वे गलत हुआ है और उसे एक बार फिर से चेक करना चाहिए।</li>
-        <li>अगर एक ही जमीन पर दो या उससे अधिक व्यक्ति अपना दावा कर रहे हैं (जैसे आप भी कह रहे हैं कि जमीन आपकी है, और कोई दूसरा व्यक्ति भी दावा कर रहा है)।</li>
-        <li>अगर आपके पास जमीन के सही कागजात (डॉक्यूमेंट) हैं और सामने वाले का दावा बिल्कुल गलत है।</li>
+    <h2>दावा आपत्ति फॉर्म 8 क्या है और किसे भरना चाहिए?</h2>
+    <p>बिहार भूमि सर्वे के दौरान, अगर आपको अपने जमीन के सर्वे रिपोर्ट से कोई असहमति है, तो आपको यह फॉर्म भरना होता है:</p>
+    <ul style="list-style-type: square; padding-left: 25px;">
+        <li>अगर खाता, खसरा या रकबा गलत दर्ज हो गया है।</li>
+        <li>अगर आपको लगता है कि सर्वे गलत हुआ है और दोबारा जांच होनी चाहिए।</li>
+        <li>अगर एक ही जमीन पर दो या उससे अधिक व्यक्ति अपना दावा कर रहे हैं।</li>
+        <li>अगर आपके पास सही कागजात हैं और किसी दूसरे ने गलत दावा किया है।</li>
     </ul>
 
-    <h2>दावा-आपत्ति फॉर्म भरने के लिए जरूरी कागजात (Required Documents)</h2>
-    <p>फॉर्म भरने से पहले आपके पास आपके जमीन के सही कागजात होने चाहिए।</p>
-    <ul>
-        <li>जमीन का केवाला, खतियान, या लगान रसीद।</li>
-        <li>एक वैलिड mobile number।</li>
-        <li><strong>सबसे जरूरी:</strong> सर्वे के बाद मिला <strong>नया खेसरा नंबर (New Khesra Number)</strong> ।</li>
-        <li>जमीन से जुड़े जो भी डॉक्यूमेंट आपके पास हैं, उनका एक PDF फाइल बना लें। </li>
-        <li><strong>नोट:</strong> जो PDF फाइल आप अपलोड करेंगे, उसका साइज मैक्सिमम 3MB तक होना चाहिए।</li>
-    </ul>
+    <h2>जरूरी कागजात (Required Documents)</h2>
+    <div style="background: #fff8f2; padding: 20px; border-radius: 10px; border: 1px solid #ffeeba;">
+        <ul>
+            <li>जमीन का केवाला, खतियान, या लगान रसीद।</li>
+            <li>एक चालू मोबाइल नंबर।</li>
+            <li><strong>सबसे जरूरी:</strong> सर्वे के बाद मिला <span class="highlight">नया खेसरा नंबर (New Khesra Number)</span>।</li>
+            <li>सभी डॉक्यूमेंट का PDF फाइल (मैक्सिमम साइज 3MB)।</li>
+        </ul>
+    </div>
 
-    <hr>
-
-    <h2>स्टेप-बाय-स्टेप गाइड: दावा आपत्ति फार्म ऑनलाइन कैसे भरें? (Step-by-Step Online Process)</h2>
-    <p>अब हम रउआ के बतावत तानी कि मोबाइल या कंप्यूटर से ई फॉर्म कइसे भरे के बा। धयान से पढ़ीं:</p>
-
+    <h2>स्टेप-बाय-स्टेप ऑनलाइन प्रोसेस</h2>
     <ol class="step-list">
-        <li><strong>वेबसाइट पर जाएं:</strong> सबसे पहले अपने मोबाइल के क्रोम ब्राउज़र (Chrome Browser) या गूगल को ओपन करें और सम्बंधित आधिकारिक वेबसाइट या पोर्टल पर जाएं। हां आपको <em>"सर्वे दावा आपत्ति फॉर्म (Survey Objection Form)"</em> या "दावा-आपत्ति फॉर्म ऑनलाइन" का लिंक मिलेगा, उस पर क्लिक करें।</li>
-        
-       <li><strong>अपनी जगह का चयन करें (Select Location):</strong> फॉर्म खुलने के बाद सबसे पहले अपने <strong>डिस्ट्रिक्ट (जिले)</strong> का नाम चुनें[span_12](end_span)/फिर अपने अंचल/सर्कल का नाम और अपने <strong>मौजा (Mauza)</strong> का नाम सेलेक्ट करें।</li>
-        
-        <li><strong>शिविर चुनें (Select Shivir):</strong> मौजा सेलेक्ट करने के बाद, आपके मौजा में जहां भी सर्वे का शिविर (Camp) लगा होगा, आपको उस शिविर को सेलेक्ट करना होगा।</li>
-
-        <li><strong>नया खेसरा नंबर डालें (Enter New Khesra Number):</strong> यहाँ आपको सबसे ज्यादा ध्यान देना है! आपको सिर्फ सर्वे द्वारा दिया गया <strong>न्यू खेसरा नंबर</strong> ही डालना है। 
-      <br><span class="alert">चेतावनी: अगर आप पुराना खसरा नंबर (Old Khesra Number) या कोई और खाता नंबर डालेंगे, तो यह 101% वर्क नहीं करेगा!</span>
+        <li><strong>आधिकारिक पोर्टल पर जाएं:</strong> बिहार भूमि की ऑफिशियल वेबसाइट पर "सर्वे दावा आपत्ति फॉर्म" लिंक पर क्लिक करें।</li>
+        <li><strong>जगह का चयन (Location):</strong> अपने जिला, अंचल और <strong>मौजा (Mauza)</strong> का नाम चुनें।</li>
+        <li><strong>शिविर चुनें (Select Shivir):</strong> अपने मौजा से सम्बंधित सर्वे कैंप का चुनाव करें।</li>
+        <li><strong>नया खेसरा नंबर डालें:</strong> 
+            <div class="alert">⚠️ ध्यान दें: यहाँ सिर्फ 'नया खेसरा नंबर' ही डालें, पुराना नंबर काम नहीं करेगा!</div>
         </li>
-        
-       <li><strong>डिटेल्स प्राप्त करें:</strong> खेसरा नंबर डालने के बाद <strong>"Get Khesra Details"</strong> बटन पर क्लिक करें। क्लिक करते ही उस खेसरा का रकबा (Area) और जमीन की पूरी जानकारी ऑटोमैटिक (अपने आप) भर जाएगी।</li>
-
-        <li><strong>दावा कर्ता का विवरण (Claimant Details):</strong> 
-            <ul>
-                <li>अगर आप दावा कर रहे हैं कि जमीन आपकी है, तो "दावा कर्ता का नाम" में अपना नाम लिखें।</li>
-                <li>अगर किसी महिला के नाम से दावा कर रहे हैं तो उनके पति का नाम लिखें। पुरुष के नाम पर है तो पिता का नाम लिखें।</li>
-              <li>अपना मोबाइल नंबर और पूरा पता (Full Address) भरे/।</li>
-            </ul>
-        </li>
-
-       )<li><strong>प्रतिवादी का विवरण (Respondent Details):</strong> प्रतिवादी वह व्यक्ति है जो आपके अलावा उस जमीन पर दावा कर रहा है]।
-            <ul>
-               )<li>उस दूसरे व्यक्ति (प्रतिवादी) का नाम लिखें</li>
-               )<li>उनके पिता/पति का नाम, मोबाइल नंबर और उनका पूरा पता (Full Address) लिखें]।</li>
-                )<li>अगर एक जमीन पर 3-4 लोग दावा कर रहे हैं, तो आप "प्रतिवादी जोड़ें" (Add Respondent) पर क्लिक करके उन सबका डिटेल्स भी भर सकते हैं]।</li>
-            </ul>
-        </li>
-
-        <li><strong>डॉक्यूमेंट अपलोड और सेव (Upload Documents & Save):</strong> 
-            <ul>
-                )<li>चूज फाइल (Choose file) ऑप्शन पर क्लिक करके अपने जमीन से जुड़े कागजात का PDF फाइल (Max 3MB) अपलोड करें]।</li>
-               )<li>सब कुछ सही से भरने के बाद <strong>"Save" (सेव)</strong> बटन पर क्लिक कर दें]।</li>
-            </ul>
-        </li>
-        
-        )<li><strong>रिसीविंग प्राप्त करें (Get Receipt):</strong> सेव करते ही आपको एक रिसीविंग (Receiving) दे दी जाएगी)इस रिसीविंग को संभाल कर रखें क्योंकि इसी की मदद से आप भविष्य में अपने फॉर्म का स्टेटस (Status) चेक कर पाएंगे]।</li>
+        <li><strong>दावा कर्ता विवरण:</strong> अपना नाम, पिता/पति का नाम और मोबाइल नंबर भरें।</li>
+        <li><strong>प्रतिवादी का विवरण:</strong> जो व्यक्ति आपकी जमीन पर दावा कर रहा है, उसका नाम और पता भरें।</li>
+        <li><strong>PDF अपलोड करें:</strong> अपने कागजात अपलोड करें और <strong>Save</strong> बटन पर क्लिक करें।</li>
+        <li><strong>रसीद (Receipt):</strong> फॉर्म जमा होते ही रिसीविंग डाउनलोड कर लें, यह स्टेटस चेक करने के काम आएगा।</li>
     </ol>
 
-    )<p>आवेदन करने के बाद सर्वे अधिकारी फिर से आपकी जमीन का चेकअप करेंगे )जिसके पास उचित और सही कागजात होंगे (Proper documents), जमीन उसी के नाम पर दर्ज हो जाएगी!</p>
-
-    <hr>
-
-    <h2>अक्सर पूछे जाने वाले प्रश्न (FAQs - Frequently Asked Questions)</h2>
-    
-    <p><strong>प्रश्न 1: क्या मैं दावा आपत्ति फॉर्म में अपना पुराना खसरा नंबर डाल सकता हूँ?</strong><br>
-    <strong>उत्तर:</strong> नहीं! आपको फॉर्म में केवल सर्वे के बाद मिला 'नया खेसरा नंबर (New Khesra Number)' ही डालना होगा। )पुराना खसरा नंबर डालने पर पोर्टल काम नहीं करेगा !</p>
-
-    <p><strong>प्रश्न 2: दावा आपत्ति फॉर्म के साथ जो PDF डॉक्यूमेंट अपलोड करना है, उसका साइज कितना होना चाहिए?</strong><br>
-    )<strong>उत्तर:</strong> आप जो भी जमीन का डॉक्यूमेंट अपलोड करेंगे, वह PDF फाइल में होना चाहिए और उसका अधिकतम साइज 3MB (Max 3MB) तक ही होना चाहिए]!</p>
-
-    <p><strong>प्रश्न 3: फॉर्म सेव करने के बाद मुझे क्या मिलेगा?</strong><br>
-    )<strong>उत्तर:</strong> जैसे ही आप फॉर्म सेव करेंगे, आपको एक रिसीविंग (Receiving) प्राप्त होगी, जिसकी मदद से आप अपने आवेदन का स्टेटस (Status) ट्रैक कर सकते हैं]!</p>
-
-    <hr>
-
-    <h2>Important Links (टॉप 5 ब्लॉग लिंक्स)</h2>
-    <p>बिहार जमीन सर्वे और भूमि सुधार से जुड़ी और भी महत्वपूर्ण जानकारी के लिए नीचे दिए गए लिंक्स को जरूर पढ़ें (Read our top 5 blogs in Hindi and English):</p>
-    <ul>
-        <li>👉 <a href="https://jameenseva.in/bihar-survey-guide-2026.html" target="_blank">Bihar Survey 2026 Guide / बिहार सर्वे 2026 की पूरी जानकारी</a> </li>
-        <li>👉 <a href="https://jameenseva.in/parimarjan-blog.html" target="_blank">Parimarjan Guide / परिमार्जन कैसे करें (Error Correction)</a> </li>
-        <li>👉 <a href="https://jameenseva.in/jamabandiblog.html" target="_blank">Jamabandi Register Details / जमाबंदी रजिस्टर की जानकारी</a> </li>
-        <li>👉 <a href="https://jameenseva.in/khatiyanblog.html" target="_blank">Khatiyan Info / खतियान कैसे निकालें (Land Records Search)</a> </li>
-        <li>👉 <a href="https://jameenseva.in/dakhil-kharij-blog.html" target="_blank">Dakhil-Kharij Guide / दाखिल-खारिज (Mutation) की पूरी प्रक्रिया</a> </li>
-    </ul>
-
-    <div class="footer">
-        <p><strong>JameenSeva.in - बिहार की अपनी जमीन जानकारी वेबसाइट</strong></p>
-        <p>
-            <a href="https://jameenseva.in/about.html">About Us</a> | 
-            <a href="https://jameenseva.in/contact.html">Contact Us</a> | 
-            <a href="https://jameenseva.in/privacy-policy.html">Privacy Policy</a> | 
-            <a href="https://jameenseva.in/disclaimer.html">Disclaimer</a> 
-        </p>
-        <p>Disclaimer: यह ब्लॉग पोस्ट केवल जानकारी (Educational Purpose) के लिए है। किसी भी कानूनी प्रक्रिया के लिए बिहार सरकार के राजस्व एवं भूमि सुधार विभाग की ऑफिसियल वेबसाइट पर जरूर विजिट करें।</p>
-        <p><em>© 2026 JameenSeva. All Rights Reserved.</em></p>
+    <h2>अक्सर पूछे जाने वाले प्रश्न (FAQs)</h2>
+    <div class="faq-card">
+        <strong>Q1: क्या मैं पुराना खसरा नंबर डाल सकता हूँ?</strong><br>
+        नहीं! केवल नया खेसरा नंबर ही पोर्टल पर मान्य है।
+    </div>
+    <div class="faq-card">
+        <strong>Q2: PDF फाइल का साइज कितना होना चाहिए?</strong><br>
+        फाइल का अधिकतम साइज 3MB तक होना चाहिए।
     </div>
 
+    <h2>Important Links (टॉप 5 ब्लॉग)</h2>
+    <ul class="important-links">
+        <li>👉 <a href="https://jameenseva.in/bihar-survey-guide-2026.html">Bihar Survey 2026 की पूरी जानकारी</a> </li>
+        <li>👉 <a href="https://jameenseva.in/parimarjan-blog.html">Parimarjan (गलती सुधार) कैसे करें</a> </li>
+        <li>👉 <a href="https://jameenseva.in/jamabandiblog.html">जमाबंदी रजिस्टर की जानकारी</a> </li>
+        <li>👉 <a href="https://jameenseva.in/khatiyanblog.html">खतियान ऑनलाइन कैसे निकालें</a> </li>
+        <li>👉 <a href="https://jameenseva.in/dakhil-kharij-blog.html">दाखिल-खारिज (Mutation) की पूरी प्रक्रिया</a> </li>
+    </ul>
+</div>
+
+<div class="footer">
+    <p><strong>JameenSeva.in - बिहार की अपनी जमीन जानकारी वेबसाइट</strong></p>
+    
+    <p style="font-size: 0.8rem; opacity: 0.8; max-width: 700px; margin: 20px auto;">
+        Disclaimer: यह ब्लॉग केवल शैक्षणिक उद्देश्य के लिए है। सटीक जानकारी के लिए राजस्व विभाग की वेबसाइट जरूर देखें।
+    </p>
+    <p><em>© 2026 JameenSeva. All Rights Reserved.</em></p>
+</div>
+<script src="footer.js"></script>
 </body>
 </html>
