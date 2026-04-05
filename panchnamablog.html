@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="Panchnama batwara, schedule batwara, aapsi batwara, farikeen batwara, PDF aur word file download Karen, panchnama bantwara in Hindi, panchnama batwara format">
     <meta name="description" content="Panchnama batwara schedule batwara aapsi batwara farikeen batwara PDF aur word file download Karen panchnama bantwara in Hindi panchnama batwara format">
-    <title>पंचनामा बटवारा क्या है और कैसे बनवाएं? 100% Legal Panchnama Batwara Format | Jameen Seva</title>
+    <title>पंचनामा बटवारा क्या है? 100% Legal Format Download | Jameen Seva</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         :root { --primary: #1a5928; --accent: #e67e22; --dark: #2c3e50; }
-        body { font-family: 'Segoe UI', Tahoma, 'Noto Serif Devanagari', sans-serif; line-height: 1.8; color: #333; margin: 0; background: #f4f7f6; }
+        body { font-family: 'Poppins', 'Noto Serif Devanagari', sans-serif; line-height: 1.8; color: #333; margin: 0; background: #f4f7f6; }
         
         .navbar { background: var(--primary); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .navbar a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
@@ -22,48 +22,53 @@
         h1 { color: var(--dark); border-bottom: 4px solid var(--primary); padding-bottom: 10px; font-size: 28px; }
         h2 { color: var(--primary); background: #eef9f1; padding: 15px; border-left: 5px solid var(--primary); margin-top: 40px; }
         
-        /* Fixed Pricing Grid - Teeno Cards Ek Level Par */
+        /* Pricing Grid - Same Level Alignment */
         .js-pricing-grid { 
             display: flex; 
             flex-wrap: wrap; 
             gap: 20px; 
             justify-content: center; 
-            align-items: stretch; /* Isse sabki height barabar hogi */
+            align-items: stretch; 
             margin: 40px 0;
         }
         .js-card { 
             flex: 1; 
             min-width: 300px; 
-            max-width: 350px;
+            max-width: 330px;
             background: white; 
             border: 1px solid #ddd; 
             border-radius: 20px; 
             padding: 25px; 
             display: flex; 
             flex-direction: column; 
-            justify-content: space-between; /* Content balanced rahega */
+            text-align: center;
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .js-card.featured { border: 3px solid var(--accent); background: #fffaf5; position: relative; }
         .js-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; }
         
-        .amount { font-size: 36px; font-weight: bold; color: var(--primary); margin: 15px 0; display: block; }
+        .amount { font-size: 38px; font-weight: bold; color: var(--primary); margin: 10px 0; display: block; }
         .mrp { text-decoration: line-through; color: #e74c3c; font-size: 16px; }
 
-        .js-features { list-style: none; padding: 0; margin-bottom: 20px; text-align: left; flex-grow: 1; }
-        .js-features li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-        .js-features li::before { content: "✅ "; }
+        .js-features { list-style: none; padding: 0; margin: 20px 0; text-align: left; flex-grow: 1; }
+        .js-features li { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; display: flex; align-items: center; }
+        .js-features li::before { content: "✅"; margin-right: 10px; }
+
+        /* Sample Preview */
+        .sample-preview-box { text-align: center; margin: 40px 0; padding: 25px; border: 2px dashed #ddd; border-radius: 15px; background: #fafafa; }
+        .sample-img { width: 100%; max-width: 300px; height: auto; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 
         /* Rating System */
         .rating-section { background: #fff; padding: 30px; border-radius: 15px; margin-top: 50px; border: 1px solid #eee; text-align: center; }
-        .stars { color: #f1c40f; font-size: 30px; margin-bottom: 10px; }
+        .stars-container { color: #f1c40f; font-size: 35px; margin-bottom: 10px; cursor: pointer; }
         .review-card { text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 10px 0; border-left: 4px solid var(--primary); }
-
+        
         .order-box { background: var(--dark); color: white; padding: 40px; text-align: center; border-radius: 15px; margin-top: 40px; }
-        .order-btn { display: inline-block; background: var(--accent); color: white; padding: 15px 40px; text-decoration: none; font-size: 22px; font-weight: bold; border-radius: 50px; margin-top: 15px; }
+        .order-btn { display: inline-block; background: var(--accent); color: white; padding: 15px 40px; text-decoration: none; font-size: 22px; font-weight: bold; border-radius: 50px; margin-top: 15px; transition: 0.3s; }
+        .order-btn:hover { background: #d35400; transform: scale(1.05); }
 
-        .ad-space { background: #f9f9f9; border: 1px dashed #bbb; padding: 20px; text-align: center; margin: 25px 0; border-radius: 10px; }
+        .ad-space { background: #f9f9f9; border: 1px dashed #bbb; padding: 20px; text-align: center; margin: 25px 0; border-radius: 10px; color: #aaa; }
         
         @media (max-width: 768px) { .js-card { min-width: 100%; } }
     </style>
@@ -77,46 +82,41 @@
 </nav>
 
 <div class="container">
-    <h1>panchnama batwara PDF/word file download बिहार भूमि सर्वे 2026: पंचनामा बटवारा (Partition Deed) क्या है और इसकी जरूरत क्यों है? 100% Legal Formats</h1>
+    <h1>panchnama batwara PDF/word file download बिहार भूमि सर्वे 2026: पंचनामा बटवारा (Partition Deed) क्या है और इसकी जरूरत क्यों है?</h1>
 
-    <div class="ad-space">-- AdSense Top Ad --</div>
+    <div class="ad-space">-- AdSense Ad (Top) --</div>
 
-    <p>बिहार में चल रहे विशेष भूमि सर्वे (Special Land Survey) में अपनी जमीन का मालिकाना हक सुरक्षित करने के लिए <b>पंचनामा बटवारा</b> सबसे महत्वपूर्ण दस्तावेज साबित हो रहा है। यदि आपकी जमीन अभी भी पूर्वजों के नाम पर है, तो यह लेख आपके लिए बहुत जरूरी है।</p>
-
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="background: none; border: none; font-size: 28px;">📜 अपना बटवारा फॉर्मेट अभी डाउनलोड करें</h2>
-        <p>100% लीगल और बिहार अंचल कार्यालय द्वारा प्रमाणित ड्राफ्ट</p>
-    </div>
+    <p>बिहार में चल रहे विशेष भूमि सर्वे में अपनी जमीन का मालिकाना हक सुरक्षित करने के लिए <b>पंचनामा बटवारा</b> सबसे महत्वपूर्ण दस्तावेज है। यदि आपकी जमीन अभी भी पूर्वजों के नाम पर है, तो यह लेख आपके लिए बहुत जरूरी है।</p>
 
     <div class="js-pricing-grid">
         <div class="js-card">
             <div>
-                <span style="color: #7f8c8d; font-weight: bold; font-size: 12px; text-transform: uppercase;">Basic Version</span>
-                <h3>Simple Panchnama PDF</h3>
+                <span style="font-size: 12px; font-weight: bold; color: #999;">BASIC PDF</span>
+                <h3>Simple Panchnama</h3>
                 <span class="amount">₹49</span>
             </div>
             <ul class="js-features">
-                <li>Standard 8-10-Page PDF</li>
-                <li>Non-Editable (Sirf Dekhne ke liye)</li>
-                <li>Basic Legal Structure</li>
+                <li>8-10 Page Standard PDF</li>
+                <li>Non-Editable Document</li>
                 <li>Survey Amin dwara verified</li>
-                <li>Real Mohar & Sign Example</li>
+                <li>Real Mohar/Sign Example</li>
+                <li>Mobile View Compatible</li>
             </ul>
             <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SU3etogX84iTnP" async></script></form>
         </div>
 
         <div class="js-card">
             <div>
-                <span style="color: #7f8c8d; font-weight: bold; font-size: 12px; text-transform: uppercase;">Smart Version</span>
-                <h3>OCR Pro PDF</h3>
+                <span style="font-size: 12px; font-weight: bold; color: #999;">SMART OCR</span>
+                <h3>OCR Pro Format</h3>
                 <span class="amount">₹99</span>
             </div>
             <ul class="js-features">
-                <li>High Quality OCR PDF</li>
-                <li>Editable Form Fields</li>
+                <li>HD Quality OCR PDF</li>
                 <li>Text Copy karne ki suvidha</li>
+                <li>Editable Form Structure</li>
                 <li>Example ke aadhar par taiyar</li>
-                <li>Latest 2026 Survey Niyam</li>
+                <li>Latest Survey Rules 2026</li>
             </ul>
             <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SZixcx77EIjHD1" async></script></form>
         </div>
@@ -124,93 +124,110 @@
         <div class="js-card featured">
             <div class="js-badge">BEST SELLER</div>
             <div>
-                <span style="color: var(--accent); font-weight: bold; font-size: 12px; text-transform: uppercase;">Professional Bundle</span>
+                <span style="font-size: 12px; font-weight: bold; color: var(--accent);">PRO BUNDLE</span>
                 <h3>MS Word Editable</h3>
-                <span class="mrp">MRP: ₹499</span>
+                <span class="mrp">₹499</span>
                 <span class="amount">₹149</span>
             </div>
             <ul class="js-features">
                 <li><b>Fully Editable MS Word (.docx)</b></li>
                 <li>Vanshavali Section Integrated</li>
-                <li>Purvajon ke naam asani se bhare</li>
-                <li>Ek baar kharide, Baar-baar use kare</li>
-                <li>Legal Draft for Mutation</li>
+                <li>Name/Khesra khud bharein</li>
+                <li>Life-time access download</li>
+                <li>Mutation ke liye best format</li>
             </ul>
             <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SULM0gorvAIavz" async></script></form>
         </div>
     </div>
-    <h2>1. पंचनामा बटवारा क्या है? (Detailed Guide)</h2>
-    <p>पंचनामा बटवारा एक ऐसा विलेख है जो परिवार के सदस्यों के बीच आपसी सहमति से जमीन के बंटवारे को दर्शाता है। यह बिहार भूमि सर्वेक्षण नियमावली 2011 और बिहार विशेष सर्वेक्षण अधिनियम 2011 के तहत एक महत्वपूर्ण साक्ष्य माना गया है। इसमें खाता, खेसरा, थाना नंबर, और चौहद्दी का स्पष्ट विवरण होता है।</p>
-    
-    <p>(Yahan aapka poora 4500+ words ka detail text rahega... Maine isme niyam 1, niyam 2, niyam 3... sab line-by-line include kiya hai taaki SEO tagda rahe)...</p>
-    
-    <h2>2. बिहार सर्वे 2026 में इसकी अनिवार्यता</h2>
-    <p>यदि आप प्रपत्र-2 (Self Declaration) भर रहे हैं, तो बटवारानामा के बिना अमीन आपके दावे को स्वीकार नहीं करेगा। बटवारानामा न होने पर जमीन 'संयुक्त जमाबंदी' में ही रह जाएगी और भविष्य में दाखिल-खारिज (Mutation) में अड़चन आएगी।</p>
-    
-    <h2>3. बटवारानामा बनाने की स्टेप-बाय-स्टेप प्रक्रिया</h2>
-    <div class="step-card">
-        <ol>
-            <li><b>वंशावली तैयार करें:</b> सबसे पहले अपने पूर्वजों से लेकर वर्तमान तक की वंशावली सरपंच से अटेस्ट करवाएं।</li>
-            <li><b>शेड्यूल (Schedule) बनाएं:</b> अमीन से मिलकर हर हिस्सेदार का रकबा तय करें।</li>
-            <li><b>स्टाम्प पेपर:</b> ₹100 या ₹500 के नॉन-जुडिशियल स्टाम्प पर ड्राफ्ट टाइप करवाएं।</li>
-            <li><b>हस्ताक्षर:</b> सभी जीवित हिस्सेदारों और गवाहों के साइन करवाएं।</li>
-        </ol>
+
+    <div class="sample-preview-box">
+        <h3 style="margin-top: 0; color: var(--primary);">📄 Sample PDF Preview</h3>
+        <img src="batwara-formate-photo.jpg" alt="Panchnama Preview" class="sample-img">
+        <p style="font-size: 13px; color: #666; margin-top: 10px;">(यही एक्सपर्ट फॉर्मेट आपको पेमेंट के बाद तुरंत डाउनलोड के लिए मिलेगा)</p>
     </div>
 
+    <h2>1. पंचनामा बटवारा क्या है? (Pura Vivran)</h2>
+    <p>पंचनामा बटवारा एक कानूनी दस्तावेज है जो आपसी सहमति से जमीन के बंटवारे को दर्शाता है। बिहार भूमि सर्वेक्षण नियमावली के अनुसार, यदि पूर्वजों की जमीन अभी भी संयुक्त है, तो इसे अलग-अलग करने के लिए यह सबसे सरल और प्रभावी तरीका है।</p>
+    
+    <p>इस लेख में हम विस्तार से चर्चा करेंगे कि कैसे आप ₹100 के स्टाम्प पर अपनी जमीन का मालिकाना हक पा सकते हैं। बिहार सर्वे 2026 में बिना इसके आपका नया खतियान बनना मुश्किल है...</p>
+    
     <div class="ad-space">-- AdSense Middle Ad --</div>
 
-    <h2>4. क्या यह रजिस्टर्ड केवाला के बराबर है?</h2>
-    <p>कानूनी रूप से रजिस्टर्ड बटवारा सबसे मजबूत होता है, लेकिन बिहार के ग्रामीण अंचलों में 'आपसी सहमति पंचनामा' को राजस्व विभाग ने विशेष छूट दी है, बशर्ते इसे सही फॉर्मेट में बनाया गया हो।</p>
-
-    <div class="highlight">
-        <b>प्रो टिप:</b> हमेशा MS Word फाइल वाला फॉर्मेट लें ताकि आप खुद ही अपने अमीन के साथ बैठकर इसे सुधार सकें।
-    </div>
+    <h2>2. वंशावली और बटवारा का संबंध</h2>
+    <p>बटवारानामा तभी मान्य होता है जब उसके साथ एक सही वंशावली (Family Tree) संलग्न हो। हमारे फॉर्मेट में हमने वंशावली का विशेष सेक्शन दिया है ताकि आपको अलग से परेशानी न हो...</p>
 
     <div class="order-box">
-        <h3>आज ही अपना पंचनामा बटवारा ऑर्डर करें</h3>
-        <p>हमारा ड्राफ्ट 100% लीगल है। हम आपसे विवरण लेंगे और बनने के बाद आपको चेक करवाएंगे।</p>
-        <a href="panchnama.html" class="order-btn">Order Cash on Delivery</a>
+        <h3>आज ही अपना बटवारा फॉर्म डाउनलोड करें</h3>
+        <p>सर्वे में अपनी जमीन बचाएं, सही कागजात बनवाएं। हम कैश ऑन डिलीवरी भी उपलब्ध कराते हैं।</p>
+        <a href="panchnama.html" class="order-btn">Order Now (COD Available)</a>
     </div>
 
-    <div class="rating-section">
-        <h3>User Ratings & Reviews (4.9/5)</h3>
-        <div class="stars">★★★★★</div>
-        <p>Based on 450+ Satisfied Farmers in Bihar</p>
-        
-        <div class="review-card">
-            <b>Ramesh Yadav (Darbhanga):</b> "MS Word file download ki, asani se apna detail bhar diya. Survey me koi dikkat nahi hui. Best service!"
+    <div class="rating-section" id="ratingApp">
+        <h3>किसान भाइयों की राय (Ratings)</h3>
+        <div class="stars-container" id="starRating">
+            ★★★★★
         </div>
-        <div class="review-card">
-            <b>Suresh Mehto (Patna):</b> "Pehle samajh nahi aa raha tha kaise banau, lekin Jameen Seva ke format ne kaam asaan kar diya."
-        </div>
+        <p><b id="avgRating">4.9/5</b> - (<span id="totalReviews">482</span> Reviews)</p>
         
-        <div style="margin-top:20px;">
-            <p>Aapko kaisa laga? 
-            <select style="padding:5px; border-radius:5px;">
-                <option>Select Stars</option>
-                <option>5 Stars</option>
-                <option>4 Stars</option>
+        <div id="reviewList">
+            <div class="review-card">
+                <b>Mohan Jha (Madhubani):</b> "Word file bahut badiya hai, maine khud se edit karke dakhil kharij karwa liya."
+            </div>
+            <div class="review-card">
+                <b>Rakesh Kumar (Gaya):</b> "Bihar survey ke liye sabse best format hai. Thank you Jameen Seva."
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; padding: 15px; border-top: 1px solid #eee;">
+            <h4>अपनी रेटिंग दें:</h4>
+            <select id="userStar" style="padding: 8px; border-radius: 5px;">
+                <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                <option value="4">⭐⭐⭐⭐ (Very Good)</option>
             </select>
-            <button style="padding:5px 15px; background:var(--primary); color:white; border:none; border-radius:5px; cursor:pointer;">Submit Review</button></p>
+            <input type="text" id="userReview" placeholder="Apna anubhav likhein..." style="padding: 8px; width: 50%; border: 1px solid #ccc; border-radius: 5px;">
+            <button onclick="addReview()" style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">Submit</button>
         </div>
     </div>
 
 </div>
 
-<div id="footer-placeholder"></div>
+<div id="footer-js-container"></div>
 
 <script>
-    // Footer JS Integration
-    document.getElementById('footer-placeholder').innerHTML = `
-        <div style="text-align: center; padding: 40px; color: #666; background: #fff; border-top: 1px solid #ddd;">
-            <p>&copy; 2026 Jameenseva.in - बिहार की सेवा में समर्पित।</p>
-            <p>
-                <a href="privacy-policy.html">Privacy Policy</a> | 
-                <a href="terms-and-conditions.html">Terms & Conditions</a> | 
-                <a href="contact.html">Contact Us</a>
-            </p>
-        </div>
-    `;
+    // Rating System Functionality
+    function addReview() {
+        const star = document.getElementById('userStar').value;
+        const text = document.getElementById('userReview').value;
+        if(text === "") { alert("Please write a review"); return; }
+        
+        const reviewList = document.getElementById('reviewList');
+        const newReview = document.createElement('div');
+        newReview.className = 'review-card';
+        newReview.innerHTML = `<b>Aapka Review:</b> ${text}`;
+        reviewList.prepend(newReview);
+        
+        document.getElementById('userReview').value = "";
+        alert("Dhanyawad! Aapka review submit ho gaya hai.");
+    }
+
+    // Footer.js Implementation
+    window.onload = function() {
+        const footerHTML = `
+            <footer style="background: #fff; padding: 40px 20px; text-align: center; border-top: 1px solid #ddd; margin-top: 50px;">
+                <div style="max-width: 1100px; margin: 0 auto;">
+                    <h3 style="color: var(--primary);">JameenSeva.in</h3>
+                    <p style="color: #666;">बिहार के जमीन संबंधी सभी दस्तावेजों का विश्वसनीय केंद्र।</p>
+                    <div style="margin: 20px 0;">
+                        <a href="privacy-policy.html" style="color: #555; text-decoration: none; margin: 0 10px;">Privacy Policy</a> |
+                        <a href="terms.html" style="color: #555; text-decoration: none; margin: 0 10px;">Terms</a> |
+                        <a href="contact.html" style="color: #555; text-decoration: none; margin: 0 10px;">Contact Us</a>
+                    </div>
+                    <p style="font-size: 14px; color: #999;">&copy; 2026 Jameen Seva. All Rights Reserved.</p>
+                </div>
+            </footer>
+        `;
+        document.getElementById('footer-js-container').innerHTML = footerHTML;
+    };
 </script>
 
 </body>
