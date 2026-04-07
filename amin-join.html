@@ -20,21 +20,22 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
-        input, select, textarea { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        input, select, textarea { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; }
         .btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; margin-top: 10px; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
+        .btn:hover:not(:disabled) { background: #144520; transform: translateY(-2px); }
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .timer-circle { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: #e74c3c; }
         .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; }
+        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; font-weight: 600; }
         .option:hover { border-color: var(--primary); background: #f0fdf4; }
         #idCard { width: 350px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px auto; border: 2px solid var(--primary); position: relative; }
         .id-header { background: var(--primary); color: white; padding: 15px; text-align: center; }
         .id-body { padding: 20px; text-align: center; }
-        .user-photo { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; }
+        .user-photo-preview { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; background: #eee; }
         .id-info { text-align: left; font-size: 14px; margin-top: 10px; }
-        .id-info div { margin-bottom: 5px; border-bottom: 1px inset #eee; }
-        .temp-badge { position: absolute; top: 50px; right: -30px; background: #e74c3c; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; }
+        .id-info div { margin-bottom: 5px; border-bottom: 1px inset #eee; padding-bottom: 2px; }
+        .temp-badge { position: absolute; top: 30px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; z-index: 1; }
     </style>
 </head>
 <body>
@@ -51,7 +52,7 @@
     <div class="container">
         <div class="header-banner">
             <h1>अमीन पार्टनर प्रोग्राम</h1>
-            <p>बिहार अमीन पात्रता परीक्षा</p>
+            <p>बिहार अमीन पात्रता परीक्षा एवं पंजीकरण</p>
         </div>
 
         <div class="content-area">
@@ -62,16 +63,16 @@
                         <input type="text" id="userName" placeholder="आपका पूरा नाम" required>
                         <input type="tel" id="userMobile" placeholder="WhatsApp नंबर" required>
                         <select id="district" onchange="populateBlocks()" required><option value="">जिला चुनें</option></select>
-                        <select id="block" style="margin-top: 10px;" required><option value="">ब्लॉक चुनें</option></select>
+                        <select id="block" required><option value="">ब्लॉक चुनें</option></select>
                     </div>
-                    <button type="button" class="btn" onclick="startTest()">टेस्ट शुरू करें (रैंडम 15 प्रश्न)</button>
+                    <button type="button" class="btn" onclick="startTest()">योग्यता टेस्ट शुरू करें</button>
                 </form>
             </div>
 
             <div id="step2" class="step">
                 <div class="quiz-header">
                     <div><b>प्रश्न: <span id="qNumDisplay">1</span>/15</b></div>
-                    <div class="timer-circle" id="timeLeft">30</div>
+                    <div class="timer-circle" id="timeLeftDisplay">30</div>
                 </div>
                 <div id="questionText" style="font-size: 18px; font-weight: 600; margin-bottom: 20px;"></div>
                 <div class="option-grid" id="optionsBox"></div>
@@ -79,28 +80,70 @@
 
             <div id="step3" class="step" style="text-align: center;">
                 <h2 id="resultMsg"></h2>
+                <div id="uploadSection" style="display: none; text-align: left; background: #fff8f0; padding: 20px; border-radius: 15px; margin-top: 20px;">
+                    <label>अपनी फोटो (Selfie)</label>
+                    <input type="file" id="selfPhoto" accept="image/*" required>
+                    <label>आधार कार्ड (दोनों साइड एक फोटो में या मुख्य साइड)</label>
+                    <input type="file" id="aadharPhoto" accept="image/*" required>
+                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">फाइनल सबमिट करें</button>
+                </div>
                 <div id="idCardContainer"></div>
-                <button class="btn" id="printBtn" onclick="window.print()" style="max-width: 350px;">ID कार्ड प्रिंट करें</button>
-                <button class="btn" onclick="location.reload()" style="max-width: 350px; background: #666; margin-top: 10px;">Home पर जाएं</button>
+                <div id="postActionButtons" style="display:none;">
+                    <button class="btn" onclick="window.print()" style="max-width: 350px;">ID कार्ड प्रिंट करें</button>
+                    <button class="btn" onclick="location.reload()" style="max-width: 350px; background: #666; margin-top: 10px;">Home पर जाएं</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Supabase Initialization
+        // SUPABASE CONFIG
         const _supabase = supabase.createClient('https://jameenseva.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
 
-        const biharData = { 
+        const biharData = {
+            "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
+            "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],
+            "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
             "Banka": ["Banka", "Amarkant", "Barahat", "Belhar", "Bounsi", "Chandan", "Dhoraiya", "Fullidumar", "Katoria", "Panchrukhi", "Rajaun", "Shambhuganj"],
+            "Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Bhagwanpur", "Cheria Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Teghra"],
+            "Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangra Chowk", "Sabour", "Shahkund", "Sultanganj"],
+            "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
+            "Buxar": ["Buxar", "Brahmpur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Kesath", "Nawanagar", "Rajpur", "Simri"],
+            "Darbhanga": ["Darbhanga Sadar", "Alinagar", "Bahadurpur", "Baheri", "Biraul", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Manigachhi", "Singhwara", "Tardih"],
+            "Gaya": ["Gaya Sadar", "Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumaria", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Muhra", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tickari", "Wazirganj"],
+            "Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwaria", "Sidhwalia", "Thawe", "Uchkagaon", "Vijayipur"],
+            "Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "I some", "Khaira", "Laxmipur", "Sikandra", "Sono"],
+            "Jehanabad": ["Jehanabad", "Kako", "Modanganj", "Makhdumpur", "Ratni Faridpur"],
+            "Kaimur": ["Bhabua", "Adhaura", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas"],
+            "Katihar": ["Katihar", "Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
+            "Khagaria": ["Khagaria", "Alauli", "Beldaur", "Chautham", "Gogri", "Mansi", "Parbatta"],
+            "Kishanganj": ["Kishanganj", "Bahadurganj", "Dighalbank", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
+            "Lakhisarai": ["Lakhisarai", "Barahiya", "Halsi", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
+            "Madhepura": ["Madhepura", "Alamnagar", "Behariganj", "Chausa", "Gailard", "Gwalpara", "Kumarkhand", "Murliganj", "Puraini", "Singheshwar"],
+            "Madhubani": ["Madhubani Sadar", "Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladania", "Lakhnaur", "Laukahi", "Madhepur", "Pandaul", "Phulparas", "Rajnagar"],
+            "Munger": ["Munger Sadar", "Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Sangrampur", "Tarapur"],
+            "Muzaffarpur": ["Muzaffarpur Sadar", "Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muraul", "Mushahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
+            "Nalanda": ["Biharsharif", "Asthawan", "Ben", "Bind", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajauli", "Rastipur", "Sarmera", "Silao", "Tharthari"],
+            "Nawada": ["Nawada", "Akbarpur", "Govindpur", "Hisua", "Kashichak", "Kauwakoal", "Meskaur", "Nardiganj", "Narhat", "Pakribarawan", "Rajaulii", "Roh", "Sirdala", "Warisaliganj"],
+            "Pashchim Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhithaha", "Gaunaha", "Jogapatti", "Lauriya", "Madhuwan", "Mainatand", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakaraha", "Yogapatti"],
             "Patna": ["Patna Sadar", "Athmalgola", "Bakhtiarpur", "Barh", "Belchhi", "Bihta", "Bikram", "Daniawan", "Danapur", "Dulhin Bazar", "Fatwah", "Ghoswari", "Khagaul", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Phulwari Sharif", "Punpun", "Sampatchak"],
-            // Note: Baki districts aapne biharData object mein pehle se hi daal diye hain, maine wahi logic rakha hai.
+            "Purbi Champaran": ["Motihari", "Adapur", "Areraj", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari Sadar", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Tetaria", "Turkaulia"],
+            "Purnia": ["Purnia Sadar", "Amour", "Baisa", "Banmankhi", "Barhara Kothi", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Nanndlalpur", "Rupauli", "Srinagar"],
+            "Rohtas": ["Sasaram", "Akodhi Gola", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kargahar", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sheosagar", "Surajpura", "Tilouthu"],
+            "Saharsa": ["Saharsa", "Banma Itahri", "Kahara", "Mahishi", "Nauhatta", "Patarghat", "Salkhua", "Simri Bakhtiarpur", "Sonbarsa"],
+            "Samastipur": ["Samastipur", "Bibhutipur", "Bithan", "Dalsinghsarai", "Hasanpur", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Moraun", "Patori", "Pusa", "Rosera", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
+            "Saran": ["Chapra", "Amnour", "Baniapur", "Dariyapur", "Dighwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Rivilganj", "Sonepur", "Taraiya"],
+            "Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],
+            "Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],
+            "Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Choraut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Sursand"],
+            "Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Ziradei"],
+            "Supaul": ["Supaul", "Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],
+            "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"]
         };
 
         function populateDistricts() {
             const distSelect = document.getElementById('district');
-            // Yahan biharData se districts load hote hain
-            const distList = ["Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar", "Darbhanga", "Gaya", "Gopalganj", "Jamui", "Jehanabad", "Kaimur", "Katihar", "Khagaria", "Kishanganj", "Lakhisarai", "Madhepura", "Madhubani", "Munger", "Muzaffarpur", "Nalanda", "Nawada", "Pashchim Champaran", "Patna", "Purbi Champaran", "Purnia", "Rohtas", "Saharsa", "Samastipur", "Saran", "Sheikhpura", "Sheohar", "Sitamarhi", "Siwan", "Supaul", "Vaishali"];
-            distList.forEach(d => { distSelect.innerHTML += `<option value="${d}">${d}</option>`; });
+            Object.keys(biharData).forEach(d => { distSelect.innerHTML += `<option value="${d}">${d}</option>`; });
         }
         populateDistricts();
 
@@ -108,10 +151,7 @@
             const dist = document.getElementById('district').value;
             const blockSelect = document.getElementById('block');
             blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>';
-            // Example data based on Banka/Patna
-            const sampleBlocks = ["Sadar", "Block-1", "Block-2", "Block-3"]; 
-            const list = biharData[dist] || sampleBlocks;
-            list.forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
+            if(dist) biharData[dist].forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
         }
 
         const questionBank = [
@@ -150,9 +190,7 @@
         let currentQ = 0, score = 0, timer, selectedQuestions = [];
 
         function startTest() {
-            if(!document.getElementById('userName').value || !document.getElementById('district').value || !document.getElementById('block').value) {
-                return alert("कृपया नाम, जिला और ब्लॉक सही से भरें!");
-            }
+            if(!document.getElementById('userName').value || !document.getElementById('userMobile').value || !document.getElementById('district').value) return alert("सभी जानकारी भरें!");
             selectedQuestions = questionBank.sort(() => 0.5 - Math.random()).slice(0, 15);
             document.getElementById('step1').classList.remove('active');
             document.getElementById('step2').classList.add('active');
@@ -164,18 +202,17 @@
             document.getElementById('qNumDisplay').innerText = currentQ + 1;
             let q = selectedQuestions[currentQ];
             document.getElementById('questionText').innerText = q.q;
-            document.getElementById('optionsBox').innerHTML = q.a.map((opt, i) => 
-                `<div class="option" onclick="checkAnswer(${i})">${opt}</div>`).join('');
+            document.getElementById('optionsBox').innerHTML = q.a.map((opt, i) => `<div class="option" onclick="checkAnswer(${i})">${opt}</div>`).join('');
             startTimer();
         }
 
         function startTimer() {
             let time = 30;
-            document.getElementById('timeLeft').innerText = time;
+            document.getElementById('timeLeftDisplay').innerText = time;
             clearInterval(timer);
             timer = setInterval(() => {
                 time--;
-                document.getElementById('timeLeft').innerText = time;
+                document.getElementById('timeLeftDisplay').innerText = time;
                 if(time <= 0) checkAnswer(-1);
             }, 1000);
         }
@@ -187,61 +224,87 @@
             loadQuestion();
         }
 
-        async function finishTest() {
+        function finishTest() {
             document.getElementById('step2').classList.remove('active');
             document.getElementById('step3').classList.add('active');
-            
-            const name = document.getElementById('userName').value;
-            const mobile = document.getElementById('userMobile').value;
-            const dist = document.getElementById('district').value;
-            const block = document.getElementById('block').value;
-            const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
-            const isPassed = score >= 11;
-
-            // Database Save Logic (Using your Column Names)
-            const { error } = await _supabase.from('amins').insert([{
-                reg_no: regNo,
-                name: name,
-                mobile: mobile,
-                district: dist,
-                block: block,
-                experience: score, // Store quiz score as experience
-                status: isPassed ? 'Verified' : 'Failed'
-            }]);
-
-            if(isPassed) {
-                document.getElementById('resultMsg').innerHTML = "✅ परीक्षा उत्तीर्ण! आपका ID कार्ड तैयार है।";
-                generateIDCard(name, mobile, dist, block, regNo, score);
+            if(score >= 11) {
+                document.getElementById('resultMsg').innerHTML = `✅ परीक्षा उत्तीर्ण! (स्कोर: ${score}/15)<br><span style="font-size:14px;color:#666;">अब ID कार्ड के लिए फोटो और आधार अपलोड करें।</span>`;
+                document.getElementById('uploadSection').style.display = "block";
             } else {
-                document.getElementById('resultMsg').innerHTML = "❌ परीक्षा विफल! आपका स्कोर: " + score + "/15.";
-                document.getElementById('idCardContainer').innerHTML = "<p>ID कार्ड के लिए कम से कम 11 सही उत्तर चाहिए। कृपया दोबारा प्रयास करें।</p>";
-                document.getElementById('printBtn').style.display = 'none';
+                document.getElementById('resultMsg').innerHTML = `❌ परीक्षा विफल! स्कोर: ${score}/15<br><button class="btn" onclick="location.reload()">दोबारा प्रयास करें</button>`;
             }
         }
 
-        function generateIDCard(name, mobile, dist, block, regNo, finalScore) {
-            const cardHtml = `
-                <div id="idCard">
-                    <div class="temp-badge">QUALIFIED</div>
-                    <div class="id-header">
-                        <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
-                        <div style="font-size:10px;">Official Amin Partner</div>
-                    </div>
-                    <div class="id-body">
-                        <img src="https://via.placeholder.com/100" class="user-photo" alt="Photo">
-                        <div style="font-weight:700; font-size:18px; color:var(--primary);">${name}</div>
-                        <div class="id-info">
-                            <div><b>Reg No:</b> ${regNo}</div>
-                            <div><b>Mobile:</b> ${mobile}</div>
-                            <div><b>District:</b> ${dist}</div>
-                            <div><b>Block:</b> ${block}</div>
-                            <div><b>Exam Score:</b> ${finalScore}/15</div>
+        async function uploadAndSave() {
+            const finalBtn = document.getElementById('finalSubmitBtn');
+            const selfFile = document.getElementById('selfPhoto').files[0];
+            const aadharFile = document.getElementById('aadharPhoto').files[0];
+
+            if(!selfFile || !aadharFile) return alert("कृपया दोनों फोटो चुनें!");
+
+            finalBtn.disabled = true;
+            finalBtn.innerText = "Processing... (Data Saving)";
+
+            try {
+                // 1. Upload Photos to Supabase Storage
+                const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
+                const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
+
+                await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
+                await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
+
+                const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
+                const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
+
+                // 2. Generate Reg No & Save Data to Table
+                const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
+                const { error } = await _supabase.from('amins').insert([{
+                    reg_no: regNo,
+                    name: document.getElementById('userName').value,
+                    mobile: document.getElementById('userMobile').value,
+                    district: document.getElementById('district').value,
+                    block: document.getElementById('block').value,
+                    experience: score,
+                    self_photo_url: selfUrl,
+                    aadhar_photo_url: aadharUrl,
+                    status: 'Qualified'
+                }]);
+
+                if(error) throw error;
+
+                // 3. Success! Show ID Card
+                document.getElementById('uploadSection').style.display = "none";
+                document.getElementById('resultMsg').innerHTML = "✅ सफलतापूर्वक पंजीकृत! आपका स्थाई ID कार्ड नीचे है।";
+                
+                const cardHtml = `
+                    <div id="idCard">
+                        <div class="temp-badge">QUALIFIED</div>
+                        <div class="id-header">
+                            <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
+                            <div style="font-size:10px;">Verified Amin Partner</div>
                         </div>
+                        <div class="id-body">
+                            <img src="${selfUrl}" class="user-photo-preview">
+                            <div style="font-weight:700; font-size:18px; color:var(--primary);">${document.getElementById('userName').value}</div>
+                            <div class="id-info">
+                                <div><b>Reg No:</b> ${regNo}</div>
+                                <div><b>Mobile:</b> ${document.getElementById('userMobile').value}</div>
+                                <div><b>Block:</b> ${document.getElementById('block').value}</div>
+                                <div><b>District:</b> ${document.getElementById('district').value}</div>
+                                <div><b>Score:</b> ${score}/15</div>
+                            </div>
+                        </div>
+                        <div style="background:#eee; font-size:9px; padding:5px;">यह कार्ड ऑनलाइन डेटाबेस से सत्यापित है।</div>
                     </div>
-                    <div style="background:#eee; font-size:9px; padding:5px; text-align:center;">यह कार्ड JameenSeva.in द्वारा प्रमाणित है।</div>
-                </div>
-            `;
-            document.getElementById('idCardContainer').innerHTML = cardHtml;
+                `;
+                document.getElementById('idCardContainer').innerHTML = cardHtml;
+                document.getElementById('postActionButtons').style.display = "block";
+
+            } catch (err) {
+                alert("Error: " + err.message);
+                finalBtn.disabled = false;
+                finalBtn.innerText = "फाइनल सबमिट करें";
+            }
         }
     </script>
 </body>
