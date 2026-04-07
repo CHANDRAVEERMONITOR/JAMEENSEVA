@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अमीन पार्टनर प्रोग्राम | Jameen Seva</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root { --primary: #2c3e50; --accent: #27ae60; --error: #e74c3c; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 0; }
+        .navbar { background: var(--primary); padding: 15px; display: flex; justify-content: center; gap: 20px; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; }
+        .container { max-width: 800px; margin: 30px auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .step { display: none; }
+        .step.active { display: block; }
+        h2 { color: var(--primary); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .btn { background: var(--accent); color: white; padding: 15px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; width: 100%; transition: 0.3s; }
+        .btn:hover { background: #219150; }
+        .timer { font-size: 24px; color: var(--error); text-align: center; font-weight: bold; margin: 20px 0; }
+        .question-box { background: #f9f9f9; padding: 25px; border-radius: 10px; border-left: 5px solid var(--accent); }
+        .option { display: block; padding: 15px; border: 2px solid #eee; margin: 10px 0; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .option:hover { border-color: var(--accent); background: #f0fff4; }
+        .terms { font-size: 14px; background: #fff3cd; padding: 15px; border-radius: 8px; color: #856404; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html">🏠 Home</a>
+        <a href="land-calculator.html">📐 कैलकुलेटर</a>
+        <a href="track.html">🚚 Tracking</a>
+        <a href="contact.html">📞 Contact</a>
+    </nav>
+
+    <div class="container">
+        <div id="step1" class="step active">
+            <h2>👷 अमीन पार्टनर रजिस्ट्रेशन</h2>
+            <div class="terms">
+                <b>नियम एवं शर्तें:</b><br>
+                1. आपके क्षेत्र से ऑर्डर आने पर ही आपको काम मिलेगा। [cite: 58, 30]<br>
+                2. नापी के बाद आपको अनिवार्य रूप से रिपोर्ट साइट पर अपलोड करनी होगी।<br>
+                3. कस्टमर से आपके काम का रिव्यू लिया जाएगा, रेटिंग खराब होने पर आईडी ब्लॉक होगी।<br>
+                4. नापी शुरू होने से पहले ही आप किसान/मालिक से तय पैसा ले सकते हैं।
+            </div>
+            <form id="detailsForm">
+                <input type="text" id="name" placeholder="पूरा नाम (आधार के अनुसार)" required>
+                <input type="tel" id="mobile" placeholder="WhatsApp नंबर (OTP के लिए)" required>
+                
+                <select id="district" onchange="loadBlocks()" required>
+                    <option value="">अपना जिला चुनें</option>
+                    <option value="Banka">Banka</option>
+                    <option value="Patna">Patna</option>
+                    <option value="Gaya">Gaya</option>
+                    <option value="Bhagalpur">Bhagalpur</option>
+                    </select>
+
+                <select id="block" required>
+                    <option value="">पहले जिला चुनें</option>
+                </select>
+
+                <textarea id="address" placeholder="पूरा पता लिखें..." required></textarea>
+                <button type="button" class="btn" onclick="startTest()">टेस्ट शुरू करें (30 प्रश्न)</button>
+            </form>
+        </div>
+
+        <div id="step2" class="step">
+            <div class="timer">समय शेष: <span id="timeLeft">30</span>s</div>
+            <div id="quiz">
+                <div class="question-box">
+                    <h3 id="questionText">प्रश्न लोड हो रहा है...</h3>
+                    <div id="optionsBox"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="step3" class="step">
+            <h2>✅ टेस्ट पास! दस्तावेज़ अपलोड करें</h2>
+            <p>आपका स्कोर: <span id="finalScore"></span>/30</p>
+            <form id="uploadForm">
+                <label>अपनी फोटो (Selfie):</label>
+                <input type="file" id="photo" accept="image/*" required>
+                
+                <label>आधार कार्ड (Front Side):</label>
+                <input type="file" id="aadharFront" accept="image/*" required>
+
+                <label>आधार कार्ड (Back Side):</label>
+                <input type="file" id="aadharBack" accept="image/*" required>
+
+                <button type="submit" class="btn">फाइनल सबमिट करें</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const _supabase = supabase.createClient('https://jameenseva.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
+
+        // Bihar Blocks Data (Sample)
+        const blockData = {
+            "Banka": ["Banka", "Katoria", "Bounsi", "Fullidumar", "Belhar"],
+            "Patna": ["Patna Sadar", "Danapur", "Phulwari", "Barh", "Bakhtiarpur"],
+            "Gaya": ["Gaya Sadar", "Bodh Gaya", "Sherghati", "Dobhi"]
+        };
+
+        function loadBlocks() {
+            const dist = document.getElementById('district').value;
+            const blockSelect = document.getElementById('block');
+            blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>';
+            if(blockData[dist]) {
+                blockData[dist].forEach(b => {
+                    blockSelect.innerHTML += `<option value="${b}">${b}</option>`;
+                });
+            }
+        }
+
+        // 30 Questions from PDF Data [cite: 4, 12, 16, 20, 127, 162]
+        const questionBank = [
+            {q: "1 जरीब में कितनी कड़ियाँ होती हैं?", a: ["50", "100", "150", "200"], c: 1}, // 
+            {q: "1 जरीब कितने फीट के बराबर होती है?", a: ["60 फीट", "66 फीट", "70 फीट", "80 फीट"], c: 1}, // 
+            {q: "1 बीघा में कितने कठ्ठा होते हैं?", a: ["10", "15", "20", "25"], c: 2}, // [cite: 20, 27]
+            {q: "1 हेक्टेयर में कितने वर्ग मीटर होते हैं?", a: ["1000", "5000", "10000", "20000"], c: 2}, // 
+            {q: "1 डिसमिल में कितनी वर्ग कड़ियाँ होती हैं?", a: ["500", "1000", "1500", "2000"], c: 1}, // [cite: 128]
+            {q: "जरीब कितने गज की होती है?", a: ["20", "22", "25", "30"], c: 1}, // [cite: 51, 127, 264]
+            {q: "1 हाथ कितने मीटर के बराबर माना जाता है?", a: ["0.454 मी", "0.5 मी", "0.6 मी"], c: 0}, // [cite: 10]
+            {q: "लग्गी को लग्गी से गुणा करने पर क्या निकलता है?", a: ["धुर", "कठ्ठा", "बीघा"], c: 0}, // [cite: 16]
+            {q: "1 कठ्ठा में कितने धुर होते हैं?", a: ["10", "20", "30"], c: 1}, // [cite: 21, 26, 52]
+            {q: "1 एकड़ में कितने डिसमिल होते हैं?", a: ["50", "100", "150", "200"], c: 1}, // [cite: 130, 149]
+            {q: "1 जरीब में कितने हाथ होते हैं?", a: ["40", "44", "48"], c: 1}, // [cite: 12, 127, 274]
+            {q: "1 एकड़ में कितनी वर्ग कड़ियाँ होती हैं?", a: ["50000", "100000", "150000"], c: 1}, // [cite: 131, 143, 308]
+            {q: "1 एयर (Are) में कितने वर्ग मीटर होते हैं?", a: ["10", "100", "1000"], c: 1}, // [cite: 166, 178]
+            {q: "एक जरीब में कितने मीटर होते हैं?", a: ["15", "20", "25"], c: 1}, // [cite: 8, 127, 194, 274]
+            {q: "1 हाथ में कितने इंच होते हैं?", a: ["12", "18", "24"], c: 1}, // [cite: 11]
+            {q: "1 जरीब में कितने बीता (Span) होते हैं?", a: ["80", "88", "90"], c: 1}, // [cite: 12, 127, 274]
+            {q: "गुनिया (Guniya) का उपयोग किस पर होता है?", a: ["खेत", "नक्शा", "कागज"], c: 1}, // [cite: 315, 332]
+            {q: "66 फीट की जरीब को क्या कहते हैं?", a: ["गन्टरी जरीब", "सहारनपुरी", "फतेहपुरी"], c: 0}, // [cite: 263, 271]
+            {q: "1 डिसमिल में कितने वर्ग फीट होते हैं?", a: ["400", "435.6", "450"], c: 1}, // [cite: 129, 138]
+            {q: "एक हेक्टेयर में कितने एयर होते हैं?", a: ["10", "100", "1000"], c: 1}, // [cite: 175, 182]
+            {q: "1 बीघा में कितने वर्ग कड़ी होते हैं (7 हाथ लग्गी)?", a: ["101200", "50000", "80000"], c: 0}, // [cite: 31]
+            {q: "शाहजहानी जरीब कितने गज की होती है?", a: ["44", "55", "22"], c: 1}, // [cite: 259]
+            {q: "1 जरीब में कितने इंच होते हैं?", a: ["700", "792", "800"], c: 1}, // [cite: 13, 127, 271, 280]
+            {q: "1 धुर में कितने वर्ग हाथ होते हैं (लग्गी अनुसार)?", a: ["(लग्गी)²", "लग्गी×2", "लग्गी+1"], c: 0}, // [cite: 18, 62]
+            {q: "4.5 हाथ की लग्गी से 1 धुर कितने वर्ग गज का होगा?", a: ["5.0625", "6.25", "4.5"], c: 0}, // [cite: 40]
+            {q: "1 हेक्टेयर में कितने डिसमिल होते हैं?", a: ["200", "247", "250"], c: 2}, // [cite: 184]
+            {q: "गुनिया आमतौर पर किस सामग्री की बनी होती है?", a: ["लोहा", "प्लास्टिक/हाथी दांत", "कपड़ा"], c: 1}, // [cite: 316, 320]
+            {q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 इंच", "6 इंच"], c: 0}, // [cite: 271, 272, 273]
+            {q: "नक्शा का पैमाना आमतौर पर क्या होता है?", a: ["16\"=1 मील", "10\"=1 मील", "32\"=1 मील"], c: 0}, // [cite: 334, 482, 498]
+            {q: "जरीब में 10 कड़ी पर क्या लगा होता है?", a: ["नोक वाली फूलिया", "छल्ला", "हैंडल"], c: 0} // [cite: 300]
+        ];
+
+        let currentQ = 0, score = 0, timer;
+        let shuffledQuestions = [];
+
+        function startTest() {
+            if(!document.getElementById('district').value || !document.getElementById('block').value) return alert("कृपया जिला और ब्लॉक चुनें");
+            shuffledQuestions = questionBank.sort(() => 0.5 - Math.random());
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            if(currentQ >= 30) return finishTest();
+            let q = shuffledQuestions[currentQ];
+            document.getElementById('questionText').innerText = `प्रश्न ${currentQ+1}: ${q.q}`;
+            document.getElementById('optionsBox').innerHTML = q.a.map((opt, i) => 
+                `<div class="option" onclick="checkAnswer(${i})">${opt}</div>`).join('');
+            startTimer();
+        }
+
+        function startTimer() {
+            let time = 30;
+            document.getElementById('timeLeft').innerText = time;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                time--;
+                document.getElementById('timeLeft').innerText = time;
+                if(time <= 0) checkAnswer(-1);
+            }, 1000);
+        }
+
+        function checkAnswer(i) {
+            clearInterval(timer);
+            if(i === shuffledQuestions[currentQ].c) score++;
+            currentQ++;
+            loadQuestion();
+        }
+
+        function finishTest() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+            document.getElementById('finalScore').innerText = score;
+            if(score < 21) { // 70% passing
+                document.getElementById('step3').innerHTML = `<h2>❌ आप फेल हो गए</h2><p>पास होने के लिए 21 सही उत्तर चाहिए थे। आपका स्कोर: ${score}</p><button onclick="location.reload()" class="btn">दोबारा प्रयास करें</button>`;
+            }
+        }
+
+        // Storage & Database logic yahan insert karein (Aapke purane code ki tarah)
+    </script>
+    <script src="footer.js"></script>
+</body>
+</html>
