@@ -97,8 +97,10 @@
     </div>
 
     <script>
-        // SUPABASE CONFIG
-        const _supabase = supabase.createClient('https://jameenseva.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
+        // --- ERROR FIX: SUPABASE INITIALIZATION ---
+        const supabaseUrl = 'https://jameenseva.supabase.co';
+        const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         const biharData = {
             "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
@@ -176,7 +178,7 @@
             {q: "1 डिसमिल में कितने वर्ग फीट होते हैं?", a: ["400", "435.6", "450"], c: 1},
             {q: "एक हेक्टेयर में कितने एयर होते हैं?", a: ["10", "100", "1000"], c: 1},
             {q: "1 बीघा में कितने वर्ग कड़ी (7 हाथ लग्गी)?", a: ["101200", "50000", "80000"], c: 0},
-            {q: "शाहजहानी जरीब कितने गज की होती है?", a: ["44", "55", "22"], c: 1},
+            {q: "Shahjahan जरीब कितने गज की होती है?", a: ["44", "55", "22"], c: 1},
             {q: "1 जरीब में कितने इंच होते हैं?", a: ["700", "792", "800"], c: 1},
             {q: "1 धुर में कितने वर्ग हाथ होते हैं?", a: ["(लग्गी)²", "लग्गी×2", "लग्गी+1"], c: 0},
             {q: "4.5 हाथ की लग्गी से 1 धुर कितने वर्ग गज?", a: ["5.0625", "6.25", "4.5"], c: 0},
@@ -246,19 +248,22 @@
             finalBtn.innerText = "Processing... (Data Saving)";
 
             try {
-                // 1. Upload Photos to Supabase Storage
+                // 1. Storage Upload
                 const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
                 const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
 
-                await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
-                await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
+                const { error: uploadError1 } = await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
+                if (uploadError1) throw uploadError1;
+
+                const { error: uploadError2 } = await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
+                if (uploadError2) throw uploadError2;
 
                 const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
                 const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
 
-                // 2. Generate Reg No & Save Data to Table
+                // 2. Data Insertion
                 const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
-                const { error } = await _supabase.from('amins').insert([{
+                const { error: dbError } = await _supabase.from('amins').insert([{
                     reg_no: regNo,
                     name: document.getElementById('userName').value,
                     mobile: document.getElementById('userMobile').value,
@@ -270,9 +275,9 @@
                     status: 'Qualified'
                 }]);
 
-                if(error) throw error;
+                if(dbError) throw dbError;
 
-                // 3. Success! Show ID Card
+                // 3. Success
                 document.getElementById('uploadSection').style.display = "none";
                 document.getElementById('resultMsg').innerHTML = "✅ सफलतापूर्वक पंजीकृत! आपका स्थाई ID कार्ड नीचे है।";
                 
