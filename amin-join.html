@@ -100,8 +100,11 @@
         // Supabase Setup - Sahi Keys (Purane code se li gayi)
         const SB_URL = "https://efgvsdclcnbmwqbtily.supabase.co";
         const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
-        const _supabase = supabase.createClient(SB_URL, SB_KEY);
-
+       const _supabase = supabase.createClient(SB_URL, SB_KEY, {
+  auth: {
+    persistSession: false
+  }
+});
         const biharData = {
             "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
             "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],
