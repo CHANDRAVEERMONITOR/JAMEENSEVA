@@ -255,17 +255,13 @@
                 const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
                 const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
 
-                // Uploading selfies
-                const { error: up1 } = await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
-                if(up1) throw up1;
+         // 'amin-documents' ki jagah purana wala bucket name 'panchnama-order-files' use karein
+const { error: up1 } = await _supabase.storage.from('panchnama-order-files').upload(selfPath, selfFile);
+const { error: up2 } = await _supabase.storage.from('panchnama-order-files').upload(aadharPath, aadharFile);
 
-                // Uploading aadhar
-                const { error: up2 } = await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
-                if(up2) throw up2;
-
-                const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
-                const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
-
+// Niche Public URL waali line mein bhi wahi naam kar dein
+const selfUrl = _supabase.storage.from('panchnama-order-files').getPublicUrl(selfPath).data.publicUrl;
+const aadharUrl = _supabase.storage.from('panchnama-order-files').getPublicUrl(aadharPath).data.publicUrl;
                 const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
                 
                 // Saving data to 'amins' table
