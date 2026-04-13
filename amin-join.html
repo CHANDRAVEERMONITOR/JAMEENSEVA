@@ -97,21 +97,21 @@
     </div>
 
     <script>
-        // Supabase Setup
-        const supabaseUrl = 'https://efgvsdclcnbmwqbtily.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI';
-        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        // Supabase Setup - Sahi Keys (Purane code se li gayi)
+        const SB_URL = "https://efgvsdclcnbmwqbtily.supabase.co";
+        const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
         const biharData = {
             "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
             "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],
             "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
             "Banka": ["Banka", "Amarkant", "Barahat", "Belhar", "Bounsi", "Chandan", "Dhoraiya", "Fullidumar", "Katoria", "Panchrukhi", "Rajaun", "Shambhuganj"],
-            "Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Bhagwanpur", "Cheria Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Teghra"],
+            "Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
             "Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangra Chowk", "Sabour", "Shahkund", "Sultanganj"],
             "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
             "Buxar": ["Buxar", "Brahmpur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Kesath", "Nawanagar", "Rajpur", "Simri"],
-            "Darbhanga": ["Darbhanga Sadar", "Alinagar", "Bahadurpur", "Baheri", "Biraul", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Manigachhi", "Singhwara", "Tardih"],
+            "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],
             "Gaya": ["Gaya Sadar", "Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumaria", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Muhra", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tickari", "Wazirganj"],
             "Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwaria", "Sidhwalia", "Thawe", "Uchkagaon", "Vijayipur"],
             "Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "I some", "Khaira", "Laxmipur", "Sikandra", "Sono"],
@@ -145,7 +145,7 @@
 
         function populateDistricts() {
             const distSelect = document.getElementById('district');
-            Object.keys(biharData).forEach(d => { distSelect.innerHTML += `<option value="${d}">${d}</option>`; });
+            Object.keys(biharData).sort().forEach(d => { distSelect.innerHTML += `<option value="${d}">${d}</option>`; });
         }
         populateDistricts();
 
@@ -153,7 +153,7 @@
             const dist = document.getElementById('district').value;
             const blockSelect = document.getElementById('block');
             blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>';
-            if(dist) biharData[dist].forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
+            if(dist) biharData[dist].sort().forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
         }
 
         const questionBank = [
@@ -161,7 +161,7 @@
             {q: "1 जरीब कितने फीट के बराबर होती है?", a: ["60 फीट", "66 फीट", "70 फीट", "80 फीट"], c: 1},
             {q: "1 बीघा में कितने कठ्ठा होते हैं?", a: ["10", "15", "20", "25"], c: 2},
             {q: "1 हेक्टेयर में कितने वर्ग मीटर होते हैं?", a: ["1000", "5000", "10000", "20000"], c: 2},
-            {q: "1 डिसमिल में कितनी वर्ग कड़ियाँ होती हैं?", a: ["500", "1000", "1500", "2000"], c: 1},
+            {q: "1 डिसmil में कितनी वर्ग कड़ियाँ होती हैं?", a: ["500", "1000", "1500", "2000"], c: 1},
             {q: "जरीब कितने गज की होती है?", a: ["20", "22", "25", "30"], c: 1},
             {q: "1 हाथ कितने मीटर के बराबर माना जाता है?", a: ["0.454 मी", "0.5 मी", "0.6 मी"], c: 0},
             {q: "लग्गी को लग्गी से गुणा करने पर क्या निकलता है?", a: ["धुर", "कठ्ठा", "बीघा"], c: 0},
@@ -184,7 +184,7 @@
             {q: "4.5 हाथ की लग्गी से 1 धुर कितने वर्ग गज?", a: ["5.0625", "6.25", "4.5"], c: 0},
             {q: "1 हेक्टेयर में कितने डिसमिल?", a: ["200", "247", "250"], c: 2},
             {q: "गुनिया किस सामग्री की बनी होती है?", a: ["लोहा", "प्लास्टिक/हाथी दांत", "कपड़ा"], c: 1},
-            {q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 इंच", "6 इंच"], c: 0},
+            {q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 inch", "6 inch"], c: 0},
             {q: "नक्शा का पैमाना आमतौर पर?", a: ["16\"=1 मील", "10\"=1 मील", "32\"=1 मील"], c: 0},
             {q: "जरीब में 10 कड़ी पर क्या होता है?", a: ["नोक वाली फूलिया", "छल्ला", "हैंडल"], c: 0}
         ];
@@ -248,12 +248,15 @@
             finalBtn.innerText = "Processing... (Data Saving)";
 
             try {
+                // Sahi paths (Storage folder names check karein)
                 const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
                 const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
 
+                // Uploading selfies
                 const { error: up1 } = await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
                 if(up1) throw up1;
 
+                // Uploading aadhar
                 const { error: up2 } = await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
                 if(up2) throw up2;
 
@@ -261,6 +264,8 @@
                 const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
 
                 const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
+                
+                // Saving data to 'amins' table
                 const { error: dbError } = await _supabase.from('amins').insert([{
                     reg_no: regNo,
                     name: document.getElementById('userName').value,
