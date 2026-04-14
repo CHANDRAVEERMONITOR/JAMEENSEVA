@@ -12,23 +12,35 @@
         .navbar { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 700; color: var(--primary); font-size: 22px; text-decoration: none; }
         .nav-links a { color: var(--dark); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 600; }
+        
         .container { max-width: 900px; margin: 40px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .header-banner { background: linear-gradient(135deg, var(--primary), #2d8a41); color: white; padding: 40px; text-align: center; }
         .content-area { padding: 40px; }
+
+        /* Step Guide Styling */
+        .how-it-works { background: #fdfdfd; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin-bottom: 30px; }
+        .how-it-works h3 { color: var(--primary); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 15px; }
+        .step-box { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
+        .step-num { background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold; }
+        .step-text b { color: var(--dark); display: block; }
+        .step-text p { margin: 5px 0; font-size: 14px; color: #666; }
+
+        .rules-box { background: #fff5f5; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .rules-box h4 { margin: 0 0 10px 0; color: #c0392b; }
+        .rules-box ul { margin: 0; padding-left: 20px; font-size: 14px; }
+
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
         input, select, textarea { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; }
         .btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; margin-top: 10px; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
         .btn:hover:not(:disabled) { background: #144520; transform: translateY(-2px); }
-        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .timer-circle { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: #e74c3c; }
-        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; font-weight: 600; }
-        .option:hover { border-color: var(--primary); background: #f0fdf4; }
+
+        /* ID Card & Preview */
         #idCard { width: 350px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px auto; border: 2px solid var(--primary); position: relative; }
         .id-header { background: var(--primary); color: white; padding: 15px; text-align: center; }
         .id-body { padding: 20px; text-align: center; }
@@ -36,6 +48,12 @@
         .id-info { text-align: left; font-size: 14px; margin-top: 10px; }
         .id-info div { margin-bottom: 5px; border-bottom: 1px inset #eee; padding-bottom: 2px; }
         .temp-badge { position: absolute; top: 30px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; z-index: 1; }
+
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .timer-circle { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: #e74c3c; }
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; font-weight: 600; }
+        .option:hover { border-color: var(--primary); background: #f0fdf4; }
     </style>
 </head>
 <body>
@@ -52,20 +70,67 @@
     <div class="container">
         <div class="header-banner">
             <h1>अमीन पार्टनर प्रोग्राम</h1>
-            <p>बिहार अमीन पात्रता परीक्षा</p>
+            <p>बिहार अमीन पात्रता परीक्षा एवं डिजिटल आईडी कार्ड</p>
         </div>
 
         <div class="content-area">
+            
             <div id="step1" class="step active">
+                
+                <div class="how-it-works">
+                    <h3>सिस्टम कैसे काम करता है?</h3>
+                    
+                    <div class="step-box">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <b>रजिस्ट्रेशन और टेस्ट</b>
+                            <p>अपनी जानकारी भरें और 15 सवालों का नापी योग्यता टेस्ट पास करें।</p>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <b>क्षेत्र अनुसार ऑर्डर</b>
+                            <p>आपके द्वारा चुने गए ब्लॉक/जिले से जब भी किसान नापी का ऑर्डर देंगे, वह सीधे आपको WhatsApp या Call पर मिलेगा।</p>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <b>फीस और रिपोर्ट</b>
+                            <p>नापी का रेट पहले से तय कर लें। नापी के बाद नक्शा/रिपोर्ट Jameen Seva को पोर्टल पर भेजना अनिवार्य है।</p>
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <div class="step-num">4</div>
+                        <div class="step-text">
+                            <b>कमीशन और रेटिंग</b>
+                            <p>काम सफल होने के बाद अमीन को एक छोटी सी सेवा शुल्क Jameen Seva को देनी होगी। किसान का रिव्यू खराब होने पर आईडी ब्लॉक कर दी जाएगी।</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rules-box">
+                    <h4>⚠️ महत्वपूर्ण नियम एवं शर्तें</h4>
+                    <ul>
+                        <li>आपकी डिजिटल आईडी को कोई भी 'Jameen Seva' पर डालकर सत्यापित कर सकता है।</li>
+                        <li>गलत रिपोर्ट या किसान से बदतमीजी होने पर अमीन को हमेशा के लिए ब्लैकलिस्ट कर दिया जाएगा।</li>
+                        <li>नापी के दौरान सरकारी मापदंडों का पालन करना अनिवार्य है।</li>
+                    </ul>
+                </div>
+
                 <form id="detailsForm">
                     <div class="form-group">
-                        <label>बुनियादी जानकारी</label>
+                        <label>अपनी जानकारी भरें</label>
                         <input type="text" id="userName" placeholder="आपका पूरा नाम" required>
                         <input type="tel" id="userMobile" placeholder="WhatsApp नंबर" required>
                         <select id="district" onchange="populateBlocks()" required><option value="">जिला चुनें</option></select>
                         <select id="block" required><option value="">ब्लॉक चुनें</option></select>
                     </div>
-                    <button type="button" class="btn" onclick="startTest()">टेस्ट शुरू करें (रैंडम 15 प्रश्न)</button>
+                    <button type="button" class="btn" onclick="startTest()">योग्यता परीक्षा शुरू करें</button>
                 </form>
             </div>
 
@@ -81,15 +146,15 @@
             <div id="step3" class="step" style="text-align: center;">
                 <h2 id="resultMsg"></h2>
                 <div id="uploadSection" style="display: none; text-align: left; background: #fff8f0; padding: 20px; border-radius: 15px; margin-top: 20px;">
-                    <label>अपनी फोटो (Selfie)</label>
+                    <label>अपनी फोटो (Selfie - ID कार्ड के लिए)</label>
                     <input type="file" id="selfPhoto" accept="image/*" required>
-                    <label>आधार कार्ड (मुख्य साइड)</label>
+                    <label>आधार कार्ड (सत्यापन के लिए)</label>
                     <input type="file" id="aadharPhoto" accept="image/*" required>
-                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">फाइनल सबमिट करें</button>
+                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">आईडी कार्ड जनरेट करें</button>
                 </div>
                 <div id="idCardContainer"></div>
                 <div id="postActionButtons" style="display:none;">
-                    <button class="btn" onclick="window.print()" style="max-width: 350px;">ID कार्ड प्रिंट करें</button>
+                    <button class="btn" onclick="window.print()" style="max-width: 350px;">अपना ID कार्ड डाउनलोड/प्रिंट करें</button>
                     <button class="btn" onclick="location.reload()" style="max-width: 350px; background: #666; margin-top: 10px;">Home पर जाएं</button>
                 </div>
             </div>
@@ -97,13 +162,14 @@
     </div>
 
     <script>
-        // ✅ CORRECT SUPABASE CONFIG
+        // Supabase Initialization
         const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
         const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
         const _supabase = supabase.createClient(SB_URL, SB_KEY, {
             auth: { persistSession: false }
         });
 
+        // Bihar Districts & Blocks (Aapka original data)
         const biharData = {
             "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
             "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],
@@ -140,9 +206,10 @@
             "Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],
             "Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],
             "Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Choraut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Sursand"],
-            "Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Ziradei"],
+            "Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
             "Supaul": ["Supaul", "Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],
-            "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"]
+            "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"],
+            "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
         };
 
         function populateDistricts() {
@@ -239,7 +306,6 @@
             }
         }
 
-        // ✅ FINAL UPLOAD FUNCTION
         async function uploadAndSave() {
             const finalBtn = document.getElementById('finalSubmitBtn');
             const selfFile = document.getElementById('selfPhoto').files[0];
@@ -254,54 +320,35 @@
             finalBtn.innerText = "Uploading...";
 
             try {
-                // ✅ Unique file names
                 const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
                 const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
 
-                // ✅ Upload Selfie
-                const { error: err1 } = await _supabase.storage
-                    .from('amin-documents')
-                    .upload(selfPath, selfFile);
-
+                // Uploading
+                const { error: err1 } = await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
                 if (err1) throw err1;
 
-                // ✅ Upload Aadhar
-                const { error: err2 } = await _supabase.storage
-                    .from('amin-documents')
-                    .upload(aadharPath, aadharFile);
-
+                const { error: err2 } = await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
                 if (err2) throw err2;
 
-                // ✅ Get public URLs
-                const selfUrl = _supabase.storage
-                    .from('amin-documents')
-                    .getPublicUrl(selfPath).data.publicUrl;
+                const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
+                const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
 
-                const aadharUrl = _supabase.storage
-                    .from('amin-documents')
-                    .getPublicUrl(aadharPath).data.publicUrl;
-
-                // ✅ Registration number
                 const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
 
-                // ✅ Save to database
-                const { error: dbError } = await _supabase
-                    .from('amins')
-                    .insert([{
-                        reg_no: regNo,
-                        name: document.getElementById('userName').value,
-                        mobile: document.getElementById('userMobile').value,
-                        district: document.getElementById('district').value,
-                        block: document.getElementById('block').value,
-                        experience: score,
-                        self_photo_url: selfUrl,
-                        aadhar_photo_url: aadharUrl,
-                        status: 'Qualified'
-                    }]);
+                const { error: dbError } = await _supabase.from('amins').insert([{
+                    reg_no: regNo,
+                    name: document.getElementById('userName').value,
+                    mobile: document.getElementById('userMobile').value,
+                    district: document.getElementById('district').value,
+                    block: document.getElementById('block').value,
+                    experience: score,
+                    self_photo_url: selfUrl,
+                    aadhar_photo_url: aadharUrl,
+                    status: 'Qualified'
+                }]);
 
                 if (dbError) throw dbError;
 
-                // ✅ SUCCESS UI
                 document.getElementById('uploadSection').style.display = "none";
                 document.getElementById('resultMsg').innerHTML = "✅ सफलतापूर्वक पंजीकृत! आपका स्थाई ID कार्ड नीचे है।";
                 
@@ -333,7 +380,7 @@
                 console.error(err);
                 alert("❌ Error: " + err.message);
                 finalBtn.disabled = false;
-                finalBtn.innerText = "फाइनल सबमिट करें";
+                finalBtn.innerText = "आईडी कार्ड जनरेट करें";
             }
         }
     </script>
