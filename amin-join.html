@@ -241,13 +241,25 @@
         }
 
     
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+// ✅ FINAL CORRECT CONFIG
+const supabaseUrl = "https://efgvsddclcnbmwqbtily.supabase.co";
+
+// ✔ publishable key (safe)
+const supabaseKey = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+
+const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+
+// ✅ FINAL UPLOAD FUNCTION
 async function uploadAndSave() {
     const finalBtn = document.getElementById('finalSubmitBtn');
     const selfFile = document.getElementById('selfPhoto').files[0];
     const aadharFile = document.getElementById('aadharPhoto').files[0];
 
-    if(!selfFile || !aadharFile) {
-        alert("कृपया दोनों फोटो चुनें!");
+    if (!selfFile || !aadharFile) {
+        alert("कृपया दोनों फोटो अपलोड करें!");
         return;
     }
 
@@ -255,16 +267,13 @@ async function uploadAndSave() {
     finalBtn.innerText = "Uploading...";
 
     try {
-        // ✅ Unique file name
-        const fileName1 = Date.now() + "_self.jpg";
-        const fileName2 = Date.now() + "_aadhar.jpg";
-
-        const selfPath = `selfies/${fileName1}`;
-        const aadharPath = `aadhar/${fileName2}`;
+        // ✅ Unique file names
+        const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
+        const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
 
         // ✅ Upload Selfie
         const { error: err1 } = await _supabase.storage
-            .from('amin-documents')  // ⚠️ bucket name FIXED
+            .from('amin-documents')
             .upload(selfPath, selfFile);
 
         if (err1) throw err1;
@@ -276,7 +285,7 @@ async function uploadAndSave() {
 
         if (err2) throw err2;
 
-        // ✅ Get Public URLs
+        // ✅ Get public URLs
         const selfUrl = _supabase.storage
             .from('amin-documents')
             .getPublicUrl(selfPath).data.publicUrl;
@@ -285,10 +294,10 @@ async function uploadAndSave() {
             .from('amin-documents')
             .getPublicUrl(aadharPath).data.publicUrl;
 
-        // ✅ Registration Number
+        // ✅ Registration number
         const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
 
-        // ✅ Insert into DB
+        // ✅ Save to database
         const { error: dbError } = await _supabase
             .from('amins')
             .insert([{
@@ -305,35 +314,10 @@ async function uploadAndSave() {
 
         if (dbError) throw dbError;
 
-        // ✅ Success UI
+        // ✅ SUCCESS UI
+        alert("✅ Registration Successful!");
+
         document.getElementById('uploadSection').style.display = "none";
-        document.getElementById('resultMsg').innerHTML = "✅ पंजीकरण सफल!";
-
-        const cardHtml = `
-        <div id="idCard">
-            <div class="temp-badge">QUALIFIED</div>
-            <div class="id-header">
-                <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
-                <div style="font-size:10px;">Verified Amin Partner</div>
-            </div>
-            <div class="id-body">
-                <img src="${selfUrl}" class="user-photo-preview">
-                <div style="font-weight:700; font-size:18px; color:#1a5928;">
-                    ${document.getElementById('userName').value}
-                </div>
-                <div class="id-info">
-                    <div><b>Reg No:</b> ${regNo}</div>
-                    <div><b>Mobile:</b> ${document.getElementById('userMobile').value}</div>
-                    <div><b>Block:</b> ${document.getElementById('block').value}</div>
-                    <div><b>District:</b> ${document.getElementById('district').value}</div>
-                    <div><b>Score:</b> ${score}/15</div>
-                </div>
-            </div>
-        </div>
-        `;
-
-        document.getElementById('idCardContainer').innerHTML = cardHtml;
-        document.getElementById('postActionButtons').style.display = "block";
 
     } catch (err) {
         console.error(err);
@@ -343,6 +327,6 @@ async function uploadAndSave() {
         finalBtn.innerText = "फाइनल सबमिट करें";
     }
 }
-    </script>
+</script>
 </body>
 </html>
