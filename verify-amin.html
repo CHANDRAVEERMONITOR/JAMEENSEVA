@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अमीन सत्यापन पोर्टल | Jameen Seva</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1a5928; --dark: #2c3e50; --bg: #f0f2f5; }
+        body { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; background: var(--bg); margin: 0; padding: 20px; text-align: center; }
+        .verify-box { max-width: 450px; margin: 40px auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h2 { color: var(--primary); margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 18px; box-sizing: border-box; text-align: center; text-transform: uppercase; }
+        .btn { background: var(--primary); color: white; padding: 15px; border: none; border-radius: 10px; width: 100%; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        
+        #resultArea { margin-top: 30px; display: none; }
+        #idCard { width: 320px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px auto; border: 2px solid var(--primary); position: relative; }
+        .id-header { background: var(--primary); color: white; padding: 12px; font-weight: bold; }
+        .id-body { padding: 20px; }
+        .user-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; }
+        .id-info { text-align: left; font-size: 14px; line-height: 1.8; }
+        .status-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; background: #27ae60; color: white; font-size: 12px; font-weight: bold; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="verify-box">
+        <h2>🔍 अमीन सत्यापन</h2>
+        <p>अमीन का रजिस्ट्रेशन नंबर दर्ज करें (उदा: JSA-1234)</p>
+        <input type="text" id="regInput" placeholder="JSA-XXXX">
+        <button class="btn" onclick="checkAmin()">पहचान सत्यापित करें</button>
+        
+        <div id="loader" style="display:none; margin-top:20px;">जांच की जा रही है...</div>
+
+        <div id="resultArea">
+            <div id="idCard">
+                <div class="id-header">JAMEEN SEVA BIHAR</div>
+                <div class="id-body">
+                    <div class="status-badge" id="vStatus">VERIFIED</div>
+                    <img src="" id="vImg" class="user-img">
+                    <h3 id="vName" style="margin:5px 0;"></h3>
+                    <div class="id-info">
+                        <div><b>Reg No:</b> <span id="vReg"></span></div>
+                        <div><b>District:</b> <span id="vDist"></span></div>
+                        <div><b>Block:</b> <span id="vBlock"></span></div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" onclick="window.print()" style="background:#2c3e50;">ID कार्ड प्रिंट करें</button>
+        </div>
+    </div>
+
+    <script>
+        const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+        const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+        // Agar URL mein pehle se ID ho toh auto-check kare
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(id) {
+                document.getElementById('regInput').value = id;
+                checkAmin();
+            }
+        }
+
+        async function checkAmin() {
+            const regNo = document.getElementById('regInput').value.toUpperCase().trim();
+            if(!regNo) return alert("कृपया रजिस्ट्रेशन नंबर डालें!");
+
+            document.getElementById('loader').style.display = "block";
+            document.getElementById('resultArea').style.display = "none";
+
+            try {
+                const { data, error } = await _supabase
+                    .from('amins')
+                    .select('*')
+                    .eq('reg_no', regNo)
+                    .single();
+
+                if (error || !data) {
+                    alert("❌ इस नंबर का कोई अमीन रिकॉर्ड नहीं मिला!");
+                } else {
+                    // Data bharo
+                    document.getElementById('vName').innerText = data.name;
+                    document.getElementById('vReg').innerText = data.reg_no;
+                    document.getElementById('vDist').innerText = data.district;
+                    document.getElementById('vBlock').innerText = data.block;
+                    document.getElementById('vImg').src = data.self_photo_url;
+                    
+                    document.getElementById('resultArea').style.display = "block";
+                }
+            } catch (err) {
+                alert("सर्वर एरर!");
+            } finally {
+                document.getElementById('loader').style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
