@@ -12,12 +12,12 @@
         .navbar { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         .logo { font-weight: 700; color: var(--primary); font-size: 22px; text-decoration: none; }
         .nav-links a { color: var(--dark); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 600; }
+        .verify-btn { background: var(--accent); color: white !important; padding: 8px 15px; border-radius: 8px; transition: 0.3s; }
         
         .container { max-width: 900px; margin: 40px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
         .header-banner { background: linear-gradient(135deg, var(--primary), #2d8a41); color: white; padding: 40px; text-align: center; }
         .content-area { padding: 40px; }
 
-        /* Step Guide Styling */
         .how-it-works { background: #fdfdfd; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin-bottom: 30px; }
         .how-it-works h3 { color: var(--primary); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 15px; }
         .step-box { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
@@ -27,7 +27,7 @@
 
         .rules-box { background: #fff5f5; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 5px; }
         .rules-box h4 { margin: 0 0 10px 0; color: #c0392b; }
-        .rules-box ul { margin: 0; padding-left: 20px; font-size: 14px; }
+        .rules-box ul { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6; }
 
         .step { display: none; }
         .step.active { display: block; animation: fadeIn 0.5s ease; }
@@ -35,24 +35,21 @@
 
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
-        input, select, textarea { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; margin-bottom: 10px; }
-        .btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; margin-top: 10px; }
+        input, select { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        .btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; }
         .btn:disabled { background: #ccc; cursor: not-allowed; }
-        .btn:hover:not(:disabled) { background: #144520; transform: translateY(-2px); }
 
-        /* ID Card & Preview */
         #idCard { width: 350px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px auto; border: 2px solid var(--primary); position: relative; }
         .id-header { background: var(--primary); color: white; padding: 15px; text-align: center; }
         .id-body { padding: 20px; text-align: center; }
-        .user-photo-preview { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; background: #eee; }
+        .user-photo-preview { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; }
         .id-info { text-align: left; font-size: 14px; margin-top: 10px; }
         .id-info div { margin-bottom: 5px; border-bottom: 1px inset #eee; padding-bottom: 2px; }
-        .temp-badge { position: absolute; top: 30px; right: -35px; background: #e74c3c; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; z-index: 1; }
+        .temp-badge { position: absolute; top: 30px; right: -35px; background: #27ae60; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; z-index: 1; }
 
-        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .timer-circle { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: #e74c3c; }
-        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; transition: 0.2s; font-weight: 600; }
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.2s; }
         .option:hover { border-color: var(--primary); background: #f0fdf4; }
     </style>
 </head>
@@ -61,64 +58,47 @@
     <nav class="navbar">
         <a href="index.html" class="logo">Jameen Seva</a>
         <div class="nav-links">
+            <a href="verify-amin.html" class="verify-btn">✅ अमीन सत्यापन</a>
             <a href="land-calculator.html">कैलकुलेटर</a>
             <a href="track.html">ट्रैकिंग</a>
-            <a href="contact.html">संपर्क</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="header-banner">
             <h1>अमीन पार्टनर प्रोग्राम</h1>
-            <p>बिहार अमीन पात्रता परीक्षा एवं डिजिटल आईडी कार्ड</p>
+            <p>बिहार अमीन पात्रता परीक्षा एवं डिजिटल पंजीकरण</p>
         </div>
 
         <div class="content-area">
             
             <div id="step1" class="step active">
-                
                 <div class="how-it-works">
                     <h3>सिस्टम कैसे काम करता है?</h3>
-                    
                     <div class="step-box">
                         <div class="step-num">1</div>
-                        <div class="step-text">
-                            <b>रजिस्ट्रेशन और टेस्ट</b>
-                            <p>अपनी जानकारी भरें और 15 सवालों का नापी योग्यता टेस्ट पास करें।</p>
-                        </div>
+                        <div class="step-text"><b>योग्यता टेस्ट:</b> अपनी जानकारी भरें और 20 सेकंड प्रति सवाल वाला नापी टेस्ट पास करें।</div>
                     </div>
-
                     <div class="step-box">
                         <div class="step-num">2</div>
-                        <div class="step-text">
-                            <b>क्षेत्र अनुसार ऑर्डर</b>
-                            <p>आपके द्वारा चुने गए ब्लॉक/जिले से जब भी किसान नापी का ऑर्डर देंगे, वह सीधे आपको WhatsApp या Call पर मिलेगा।</p>
-                        </div>
+                        <div class="step-text"><b>एरिया आर्डर:</b> आपके ब्लॉक से ऑर्डर आने पर Jameen Seva आपको WhatsApp पर सूचित करेगा।</div>
                     </div>
-
                     <div class="step-box">
                         <div class="step-num">3</div>
-                        <div class="step-text">
-                            <b>फीस और रिपोर्ट</b>
-                            <p>नापी का रेट पहले से तय कर लें। नापी के बाद नक्शा/रिपोर्ट Jameen Seva को पोर्टल पर भेजना अनिवार्य है।</p>
-                        </div>
+                        <div class="step-text"><b>नापी और रिपोर्ट:</b> रेट पहले तय करें। नापी के बाद रिपोर्ट/नक्शा Jameen Seva को भेजना अनिवार्य है।</div>
                     </div>
-
                     <div class="step-box">
                         <div class="step-num">4</div>
-                        <div class="step-text">
-                            <b>कमीशन और रेटिंग</b>
-                            <p>काम सफल होने के बाद अमीन को एक छोटी सी सेवा शुल्क Jameen Seva को देनी होगी। किसान का रिव्यू खराब होने पर आईडी ब्लॉक कर दी जाएगी।</p>
-                        </div>
+                        <div class="step-text"><b>कमीशन:</b> काम पूरा होने पर एक छोटी सी तय सेवा शुल्क Jameen Seva को देनी होगी।</div>
                     </div>
                 </div>
 
                 <div class="rules-box">
-                    <h4>⚠️ महत्वपूर्ण नियम एवं शर्तें</h4>
+                    <h4>⚠️ नियम एवं शर्तें</h4>
                     <ul>
-                        <li>आपकी डिजिटल आईडी को कोई भी 'Jameen Seva' पर डालकर सत्यापित कर सकता है।</li>
-                        <li>गलत रिपोर्ट या किसान से बदतमीजी होने पर अमीन को हमेशा के लिए ब्लैकलिस्ट कर दिया जाएगा।</li>
-                        <li>नापी के दौरान सरकारी मापदंडों का पालन करना अनिवार्य है।</li>
+                        <li>किसान के खराब रिव्यू या गलत नापी रिपोर्ट पर आपकी आईडी तुरंत **Block** कर दी जाएगी।</li>
+                        <li>कोई भी आपकी ID को Jameen Seva पर डालकर आपकी पहचान जांच (Verify) कर सकता है।</li>
+                        <li>नापी के समय Jameen Seva का डिजिटल आईडी कार्ड साथ रखना अनिवार्य है।</li>
                     </ul>
                 </div>
 
@@ -130,31 +110,31 @@
                         <select id="district" onchange="populateBlocks()" required><option value="">जिला चुनें</option></select>
                         <select id="block" required><option value="">ब्लॉक चुनें</option></select>
                     </div>
-                    <button type="button" class="btn" onclick="startTest()">योग्यता परीक्षा शुरू करें</button>
+                    <button type="button" class="btn" onclick="startTest()">टेस्ट शुरू करें (20 Sec Per Q)</button>
                 </form>
             </div>
 
             <div id="step2" class="step">
-                <div class="quiz-header">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div><b>प्रश्न: <span id="qNumDisplay">1</span>/15</b></div>
-                    <div class="timer-circle" id="timeLeftDisplay">30</div>
+                    <div class="timer-circle" id="timeLeftDisplay">20</div>
                 </div>
-                <div id="questionText" style="font-size: 18px; font-weight: 600; margin-bottom: 20px;"></div>
+                <div id="questionText" style="font-size: 18px; font-weight: 600; margin-top: 20px;"></div>
                 <div class="option-grid" id="optionsBox"></div>
             </div>
 
             <div id="step3" class="step" style="text-align: center;">
                 <h2 id="resultMsg"></h2>
                 <div id="uploadSection" style="display: none; text-align: left; background: #fff8f0; padding: 20px; border-radius: 15px; margin-top: 20px;">
-                    <label>अपनी फोटो (Selfie - ID कार्ड के लिए)</label>
+                    <label>अपनी फोटो (ID कार्ड के लिए)</label>
                     <input type="file" id="selfPhoto" accept="image/*" required>
-                    <label>आधार कार्ड (सत्यापन के लिए)</label>
+                    <label>आधार कार्ड (मुख्य साइड)</label>
                     <input type="file" id="aadharPhoto" accept="image/*" required>
-                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">आईडी कार्ड जनरेट करें</button>
+                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">फाइनल सबमिट एवं आईडी जनरेट</button>
                 </div>
                 <div id="idCardContainer"></div>
                 <div id="postActionButtons" style="display:none;">
-                    <button class="btn" onclick="window.print()" style="max-width: 350px;">अपना ID कार्ड डाउनलोड/प्रिंट करें</button>
+                    <button class="btn" onclick="window.print()" style="max-width: 350px;">ID कार्ड प्रिंट करें</button>
                     <button class="btn" onclick="location.reload()" style="max-width: 350px; background: #666; margin-top: 10px;">Home पर जाएं</button>
                 </div>
             </div>
@@ -162,55 +142,11 @@
     </div>
 
     <script>
-        // Supabase Initialization
         const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
         const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
-        const _supabase = supabase.createClient(SB_URL, SB_KEY, {
-            auth: { persistSession: false }
-        });
+        const _supabase = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false } });
 
-        // Bihar Districts & Blocks (Aapka original data)
-        const biharData = {
-            "Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],
-            "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],
-            "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
-            "Banka": ["Banka", "Amarkant", "Barahat", "Belhar", "Bounsi", "Chandan", "Dhoraiya", "Fullidumar", "Katoria", "Panchrukhi", "Rajaun", "Shambhuganj"],
-            "Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
-            "Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangra Chowk", "Sabour", "Shahkund", "Sultanganj"],
-            "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
-            "Buxar": ["Buxar", "Brahmpur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Kesath", "Nawanagar", "Rajpur", "Simri"],
-            "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],
-            "Gaya": ["Gaya Sadar", "Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumaria", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Muhra", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tickari", "Wazirganj"],
-            "Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwaria", "Sidhwalia", "Thawe", "Uchkagaon", "Vijayipur"],
-            "Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "I some", "Khaira", "Laxmipur", "Sikandra", "Sono"],
-            "Jehanabad": ["Jehanabad", "Kako", "Modanganj", "Makhdumpur", "Ratni Faridpur"],
-            "Kaimur": ["Bhabua", "Adhaura", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas"],
-            "Katihar": ["Katihar", "Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
-            "Khagaria": ["Khagaria", "Alauli", "Beldaur", "Chautham", "Gogri", "Mansi", "Parbatta"],
-            "Kishanganj": ["Kishanganj", "Bahadurganj", "Dighalbank", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
-            "Lakhisarai": ["Lakhisarai", "Barahiya", "Halsi", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
-            "Madhepura": ["Madhepura", "Alamnagar", "Behariganj", "Chausa", "Gailard", "Gwalpara", "Kumarkhand", "Murliganj", "Puraini", "Singheshwar"],
-            "Madhubani": ["Madhubani Sadar", "Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladania", "Lakhnaur", "Laukahi", "Madhepur", "Pandaul", "Phulparas", "Rajnagar"],
-            "Munger": ["Munger Sadar", "Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Sangrampur", "Tarapur"],
-            "Muzaffarpur": ["Muzaffarpur Sadar", "Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muraul", "Mushahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
-            "Nalanda": ["Biharsharif", "Asthawan", "Ben", "Bind", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajauli", "Rastipur", "Sarmera", "Silao", "Tharthari"],
-            "Nawada": ["Nawada", "Akbarpur", "Govindpur", "Hisua", "Kashichak", "Kauwakoal", "Meskaur", "Nardiganj", "Narhat", "Pakribarawan", "Rajauli", "Roh", "Sirdala", "Warisaliganj"],
-            "Pashchim Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhithaha", "Gaunaha", "Jogapatti", "Lauriya", "Madhuwan", "Mainatand", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakaraha", "Yogapatti"],
-            "Patna": ["Patna Sadar", "Athmalgola", "Bakhtiarpur", "Barh", "Belchhi", "Bihta", "Bikram", "Daniawan", "Danapur", "Dulhin Bazar", "Fatwah", "Ghoswari", "Khagaul", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Phulwari Sharif", "Punpun", "Sampatchak"],
-            "Purbi Champaran": ["Motihari", "Adapur", "Areraj", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari Sadar", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Tetaria", "Turkaulia"],
-            "Purnia": ["Purnia Sadar", "Amour", "Baisa", "Banmankhi", "Barhara Kothi", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Nanndlalpur", "Rupauli", "Srinagar"],
-            "Rohtas": ["Sasaram", "Akodhi Gola", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kargahar", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sheosagar", "Surajpura", "Tilouthu"],
-            "Saharsa": ["Saharsa", "Banma Itahri", "Kahara", "Mahishi", "Nauhatta", "Patarghat", "Salkhua", "Simri Bakhtiarpur", "Sonbarsa"],
-            "Samastipur": ["Samastipur", "Bibhutipur", "Bithan", "Dalsinghsarai", "Hasanpur", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Moraun", "Patori", "Pusa", "Rosera", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
-            "Saran": ["Chapra", "Amnour", "Baniapur", "Dariyapur", "Dighwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Rivilganj", "Sonepur", "Taraiya"],
-            "Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],
-            "Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],
-            "Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Choraut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Sursand"],
-            "Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
-            "Supaul": ["Supaul", "Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],
-            "Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"],
-            "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
-        };
+        const biharData = {"Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],"Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],"Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],"Banka": ["Banka", "Amarkant", "Barahat", "Belhar", "Bounsi", "Chandan", "Dhoraiya", "Fullidumar", "Katoria", "Panchrukhi", "Rajaun", "Shambhuganj"],"Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],"Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangra Chowk", "Sabour", "Shahkund", "Sultanganj"],"Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],"Buxar": ["Buxar", "Brahmpur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],"Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],"Gaya": ["Gaya Sadar", "Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumaria", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Muhra", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tickari", "Wazirganj"],"Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwaria", "Sidhwalia", "Thawe", "Uchkagaon", "Vijayipur"],"Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "I some", "Khaira", "Laxmipur", "Sikandra", "Sono"],"Jehanabad": ["Jehanabad", "Kako", "Modanganj", "Makhdumpur", "Ratni Faridpur"],"Kaimur": ["Bhabua", "Adhaura", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas"],"Katihar": ["Katihar", "Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],"Khagaria": ["Khagaria", "Alauli", "Beldaur", "Chautham", "Gogri", "Mansi", "Parbatta"],"Kishanganj": ["Kishanganj", "Bahadurganj", "Dighalbank", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],"Lakhisarai": ["Lakhisarai", "Barahiya", "Halsi", "Pipariya", "Ramgarh Chowk", "Surajgarha"],"Madhepura": ["Madhepura", "Alamnagar", "Behariganj", "Chausa", "Gailard", "Gwalpara", "Kumarkhand", "Murliganj", "Puraini", "Singheshwar"],"Madhubani": ["Madhubani Sadar", "Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladania", "Lakhnaur", "Laukahi", "Madhepur", "Pandaul", "Phulparas", "Rajnagar"],"Munger": ["Munger Sadar", "Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Sangrampur", "Tarapur"],"Muzaffarpur": ["Muzaffarpur Sadar", "Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muraul", "Mushahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],"Nalanda": ["Biharsharif", "Asthawan", "Ben", "Bind", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rastipur", "Sarmera", "Silao", "Tharthari"],"Nawada": ["Nawada", "Akbarpur", "Govindpur", "Hisua", "Kashichak", "Kauwakoal", "Meskaur", "Nardiganj", "Narhat", "Pakribarawan", "Rajauli", "Roh", "Sirdala", "Warisaliganj"],"Pashchim Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhithaha", "Gaunaha", "Jogapatti", "Lauriya", "Madhuwan", "Mainatand", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakaraha", "Yogapatti"],"Patna": ["Patna Sadar", "Athmalgola", "Bakhtiarpur", "Barh", "Belchhi", "Bihta", "Bikram", "Daniawan", "Danapur", "Dulhin Bazar", "Fatwah", "Ghoswari", "Khagaul", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Phulwari Sharif", "Punpun", "Sampatchak"],"Purbi Champaran": ["Motihari", "Adapur", "Areraj", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari Sadar", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Tetaria", "Turkaulia"],"Purnia": ["Purnia Sadar", "Amour", "Baisa", "Banmankhi", "Barhara Kothi", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Nanndlalpur", "Rupauli", "Srinagar"],"Rohtas": ["Sasaram", "Akodhi Gola", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kargahar", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sheosagar", "Surajpura", "Tilouthu"],"Saharsa": ["Saharsa", "Banma Itahri", "Kahara", "Mahishi", "Nauhatta", "Patarghat", "Salkhua", "Simri Bakhtiarpur", "Sonbarsa"],"Samastipur": ["Samastipur", "Bibhutipur", "Bithan", "Dalsinghsarai", "Hasanpur", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Moraun", "Patori", "Pusa", "Rosera", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],"Saran": ["Chapra", "Amnour", "Baniapur", "Dariyapur", "Dighwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Rivilganj", "Sonepur", "Taraiya"],"Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],"Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],"Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Choraut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Sursand"],"Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Ziradei"],"Supaul": ["Supaul", "Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],"Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"]};
 
         function populateDistricts() {
             const distSelect = document.getElementById('district');
@@ -225,38 +161,7 @@
             if(dist) biharData[dist].sort().forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
         }
 
-        const questionBank = [
-            {q: "1 जरीब में कितनी कड़ियाँ होती हैं?", a: ["50", "100", "150", "200"], c: 1},
-            {q: "1 जरीब कितने फीट के बराबर होती है?", a: ["60 फीट", "66 फीट", "70 फीट", "80 फीट"], c: 1},
-            {q: "1 बीघा में कितने कठ्ठा होते हैं?", a: ["10", "15", "20", "25"], c: 2},
-            {q: "1 हेक्टेयर में कितने वर्ग मीटर होते हैं?", a: ["1000", "5000", "10000", "20000"], c: 2},
-            {q: "1 डिसmil में कितनी वर्ग कड़ियाँ होती हैं?", a: ["500", "1000", "1500", "2000"], c: 1},
-            {q: "जरीब कितने गज की होती है?", a: ["20", "22", "25", "30"], c: 1},
-            {q: "1 हाथ कितने मीटर के बराबर माना जाता है?", a: ["0.454 मी", "0.5 मी", "0.6 मी"], c: 0},
-            {q: "लग्गी को लग्गी से गुणा करने पर क्या निकलता है?", a: ["धुर", "कठ्ठा", "बीघा"], c: 0},
-            {q: "1 कठ्ठा में कितने धुर होते हैं?", a: ["10", "20", "30"], c: 1},
-            {q: "1 एकड़ में कितने डिसमिल होते हैं?", a: ["50", "100", "150", "200"], c: 1},
-            {q: "1 जरीब में कितने हाथ होते हैं?", a: ["40", "44", "48"], c: 1},
-            {q: "1 एकड़ में कितनी वर्ग कड़ियाँ होती हैं?", a: ["50000", "100000", "150000"], c: 1},
-            {q: "1 एयर (Are) में कितने वर्ग मीटर होते हैं?", a: ["10", "100", "1000"], c: 1},
-            {q: "एक जरीब में कितने मीटर होते हैं?", a: ["15", "20", "25"], c: 1},
-            {q: "1 हाथ में कितने इंच होते हैं?", a: ["12", "18", "24"], c: 1},
-            {q: "1 जरीब में कितने बीता (Span) होते हैं?", a: ["80", "88", "90"], c: 1},
-            {q: "गुनिया (Guniya) का उपयोग किस पर होता है?", a: ["खेत", "नक्शा", "कागज"], c: 1},
-            {q: "66 फीट की जरीब को कहते हैं?", a: ["गन्टरी जरीब", "सहारनपुरी", "फतेहपुरी"], c: 0},
-            {q: "1 डिसमिल में कितने वर्ग फीट होते हैं?", a: ["400", "435.6", "450"], c: 1},
-            {q: "एक हेक्टेयर में कितने एयर होते हैं?", a: ["10", "100", "1000"], c: 1},
-            {q: "1 बीघा में कितने वर्ग कड़ी (7 हाथ लग्गी)?", a: ["101200", "50000", "80000"], c: 0},
-            {q: "शाहजहानी जरीब कितने गज की होती है?", a: ["44", "55", "22"], c: 1},
-            {q: "1 जरीब में कितने इंच होते हैं?", a: ["700", "792", "800"], c: 1},
-            {q: "1 धुर में कितने वर्ग हाथ होते हैं?", a: ["(लग्गी)²", "लग्गी×2", "लग्गी+1"], c: 0},
-            {q: "4.5 हाथ की लग्गी से 1 धुर कितने वर्ग गज?", a: ["5.0625", "6.25", "4.5"], c: 0},
-            {q: "1 हेक्टेयर में कितने डिसमिल?", a: ["200", "247", "250"], c: 2},
-            {q: "गुनिया किस सामग्री की बनी होती है?", a: ["लोहा", "प्लास्टिक/हाथी दांत", "कपड़ा"], c: 1},
-            {q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 inch", "6 inch"], c: 0},
-            {q: "नक्शा का पैमाना आमतौर पर?", a: ["16\"=1 मील", "10\"=1 मील", "32\"=1 मील"], c: 0},
-            {q: "जरीब में 10 कड़ी पर क्या होता है?", a: ["नोक वाली फूलिया", "छल्ला", "हैंडल"], c: 0}
-        ];
+        const questionBank = [{q: "1 जरीब में कितनी कड़ियाँ होती हैं?", a: ["50", "100", "150", "200"], c: 1},{q: "1 जरीब कितने फीट के बराबर होती है?", a: ["60 फीट", "66 फीट", "70 फीट", "80 फीट"], c: 1},{q: "1 बीघा में कितने कठ्ठा होते हैं?", a: ["10", "20", "25"], c: 1},{q: "1 हेक्टेयर में कितने वर्ग मीटर होते हैं?", a: ["1000", "10000", "20000"], c: 1},{q: "जरीब कितने गज की होती है?", a: ["20", "22", "30"], c: 1},{q: "1 कठ्ठा में कितने धुर होते हैं?", a: ["10", "20", "30"], c: 1},{q: "1 एकड़ में कितने डिसमिल होते हैं?", a: ["50", "100", "150"], c: 1},{q: "1 जरीब में कितने हाथ होते हैं?", a: ["40", "44", "48"], c: 1},{q: "एक जरीब में कितने मीटर होते हैं?", a: ["15", "20", "25"], c: 1},{q: "1 हाथ में कितने इंच होते हैं?", a: ["12", "18", "24"], c: 1},{q: "गुनिया (Guniya) का उपयोग किस पर होता है?", a: ["खेत", "नक्शा", "कागज"], c: 1},{q: "1 डिसमिल में कितने वर्ग फीट होते हैं?", a: ["400", "435.6", "450"], c: 1},{q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 इंच", "6 इंच"], c: 0},{q: "नक्शा का पैमाना आमतौर पर?", a: ["16\"=1 मील", "10\"=1 मील", "32\"=1 मील"], c: 0},{q: "जरीब में 10 कड़ी पर क्या होता है?", a: ["नोक वाली फूलिया", "छल्ला", "हैंडल"], c: 0}];
 
         let currentQ = 0, score = 0, timer, selectedQuestions = [];
 
@@ -278,7 +183,7 @@
         }
 
         function startTimer() {
-            let time = 30;
+            let time = 20; // 20 Seconds Updated
             document.getElementById('timeLeftDisplay').innerText = time;
             clearInterval(timer);
             timer = setInterval(() => {
@@ -298,8 +203,8 @@
         function finishTest() {
             document.getElementById('step2').classList.remove('active');
             document.getElementById('step3').classList.add('active');
-            if(score >= 11) {
-                document.getElementById('resultMsg').innerHTML = `✅ परीक्षा उत्तीर्ण! (स्कोर: ${score}/15)`;
+            if(score >= 10) {
+                document.getElementById('resultMsg').innerHTML = `✅ परीक्षा उत्तीर्ण! (स्कोर: ${score}/15)<br><span style="font-size:14px;">अब ID कार्ड के लिए फोटो अपलोड करें।</span>`;
                 document.getElementById('uploadSection').style.display = "block";
             } else {
                 document.getElementById('resultMsg').innerHTML = `❌ परीक्षा विफल! स्कोर: ${score}/15<br><button class="btn" onclick="location.reload()">दोबारा प्रयास करें</button>`;
@@ -311,30 +216,27 @@
             const selfFile = document.getElementById('selfPhoto').files[0];
             const aadharFile = document.getElementById('aadharPhoto').files[0];
 
-            if (!selfFile || !aadharFile) {
-                alert("कृपया दोनों फोटो अपलोड करें!");
-                return;
-            }
+            if (!selfFile || !aadharFile) return alert("कृपया दोनों फोटो चुनें!");
 
             finalBtn.disabled = true;
-            finalBtn.innerText = "Uploading...";
+            finalBtn.innerText = "Processing...";
 
             try {
-                const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
-                const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
+                // 1. Generate Reg No (JSA-xxxx)
+                const regNo = "JSA-" + Math.floor(Math.random() * 9000 + 1000);
 
-                // Uploading
-                const { error: err1 } = await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
-                if (err1) throw err1;
+                // 2. Format File Names with Reg No
+                const selfPath = `selfies/${regNo}_profile.${selfFile.name.split('.').pop()}`;
+                const aadharPath = `aadhar/${regNo}_aadhar.${aadharFile.name.split('.').pop()}`;
 
-                const { error: err2 } = await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
-                if (err2) throw err2;
+                // 3. Upload to Storage
+                await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
+                await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
 
                 const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
                 const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
 
-                const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
-
+                // 4. Save to Database
                 const { error: dbError } = await _supabase.from('amins').insert([{
                     reg_no: regNo,
                     name: document.getElementById('userName').value,
@@ -344,7 +246,7 @@
                     experience: score,
                     self_photo_url: selfUrl,
                     aadhar_photo_url: aadharUrl,
-                    status: 'Qualified'
+                    status: 'Active'
                 }]);
 
                 if (dbError) throw dbError;
@@ -354,30 +256,28 @@
                 
                 const cardHtml = `
                     <div id="idCard">
-                        <div class="temp-badge">QUALIFIED</div>
+                        <div class="temp-badge">VERIFIED</div>
                         <div class="id-header">
                             <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
-                            <div style="font-size:10px;">Verified Amin Partner</div>
+                            <div style="font-size:10px;">Official Amin Partner</div>
                         </div>
                         <div class="id-body">
                             <img src="${selfUrl}" class="user-photo-preview">
                             <div style="font-weight:700; font-size:18px; color:var(--primary);">${document.getElementById('userName').value}</div>
                             <div class="id-info">
                                 <div><b>Reg No:</b> ${regNo}</div>
-                                <div><b>Mobile:</b> ${document.getElementById('userMobile').value}</div>
                                 <div><b>Block:</b> ${document.getElementById('block').value}</div>
                                 <div><b>District:</b> ${document.getElementById('district').value}</div>
-                                <div><b>Score:</b> ${score}/15</div>
+                                <div><b>Status:</b> <span style="color:green; font-weight:bold;">Active</span></div>
                             </div>
+                            <a href="verify-amin.html?id=${regNo}" style="font-size:11px; color:#666; text-decoration:none; display:block; margin-top:10px; border:1px solid #ddd; padding:5px; border-radius:5px;">🔍 प्रोफाइल सत्यापित करें</a>
                         </div>
-                        <div style="background:#eee; font-size:9px; padding:5px;">यह कार्ड ऑनलाइन डेटाबेस से सत्यापित है।</div>
                     </div>
                 `;
                 document.getElementById('idCardContainer').innerHTML = cardHtml;
                 document.getElementById('postActionButtons').style.display = "block";
 
             } catch (err) {
-                console.error(err);
                 alert("❌ Error: " + err.message);
                 finalBtn.disabled = false;
                 finalBtn.innerText = "आईडी कार्ड जनरेट करें";
