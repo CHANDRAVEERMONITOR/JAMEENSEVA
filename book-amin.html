@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>अमीन बुकिंग | Jameen Seva</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1a5928; --bg: #f4f7f6; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+        .booking-card { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 6px solid var(--primary); }
+        h2 { color: var(--primary); text-align: center; margin-bottom: 10px; }
+        .form-group { margin-bottom: 12px; }
+        label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px; color: #333; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 15px; }
+        .row { display: flex; gap: 10px; }
+        .row .form-group { flex: 1; }
+        .btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
+        .btn:hover { background: #144520; }
+        .notice { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 12px; margin-bottom: 15px; text-align: center; border: 1px solid #ffeeba; }
+    </style>
+</head>
+<body>
+
+<div class="booking-card">
+    <h2>📐 अमीन बुकिंग सेवा</h2>
+    <div class="notice">अभी केवल **दरभंगा** जिले के लिए सर्विस चालू है।</div>
+    
+    <div class="form-group">
+        <label>किसान/आवेदक का नाम:</label>
+        <input type="text" id="rName" placeholder="पूरा नाम लिखें" required>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>जिला:</label>
+            <select id="dist"><option value="Darbhanga">Darbhanga</option></select>
+        </div>
+        <div class="form-group">
+            <label>ब्लॉक:</label>
+            <select id="block">
+                <option value="Darbhanga Sadar">Darbhanga Sadar</option>
+                <option value="Benipur">Benipur</option>
+                <option value="Baheri">Baheri</option>
+                <option value="Biraul">Biraul</option>
+                <option value="Singhwara">Singhwara</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>थाना नंबर:</label>
+            <input type="text" id="thana" placeholder="उदा. 145">
+        </div>
+        <div class="form-group">
+            <label>मौजा/गाँव:</label>
+            <input type="text" id="village" placeholder="गाँव का नाम">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <label>खाता नंबर:</label>
+            <input type="text" id="khata" placeholder="खाता नं">
+        </div>
+        <div class="form-group">
+            <label>खेसरा नंबर:</label>
+            <input type="text" id="khesra" placeholder="खेसरा नं">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>पूरा पता और मोबाइल नंबर:</label>
+        <input type="text" id="addr" placeholder="ग्राम + पोस्ट + जिला">
+        <input type="tel" id="mobile" placeholder="WhatsApp नंबर" style="margin-top:10px;" maxlength="10">
+    </div>
+
+    <button class="btn" id="bookBtn" onclick="submitBooking()">ऑर्डर सबमिट करें</button>
+</div>
+
+<script>
+    const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+    const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+    const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+    async function submitBooking() {
+        const btn = document.getElementById('bookBtn');
+        const mobile = document.getElementById('mobile').value;
+        const name = document.getElementById('rName').value;
+        
+        if(!name || mobile.length < 10) return alert("नाम और सही मोबाइल नंबर भरें!");
+
+        btn.disabled = true;
+        btn.innerText = "Processing...";
+
+        const orderID = "BK-" + Math.floor(1000 + Math.random() * 9000);
+        const today = new Date().toLocaleDateString('hi-IN');
+
+        try {
+            const { error } = await _supabase.from('amin-booking').insert([{
+                order_id: orderID,
+                order_date: today,
+                district: document.getElementById('dist').value,
+                block: document.getElementById('block').value,
+                thana_no: document.getElementById('thana').value,
+                village: document.getElementById('village').value,
+                khata_no: document.getElementById('khata').value,
+                khesra_no: document.getElementById('khesra').value,
+                raiyat_name: name,
+                full_address: document.getElementById('addr').value,
+                mobile: mobile,
+                status: 'Pending'
+            }]);
+
+            if(error) throw error;
+
+            alert("✅ बुकिंग सफल! आपकी ऑर्डर आईडी है: " + orderID);
+            window.location.href = "track-booking.html?id=" + orderID;
+
+        } catch (err) {
+            alert("Error: " + err.message);
+            btn.disabled = false;
+            btn.innerText = "ऑर्डर सबमिट करें";
+        }
+    }
+</script>
+</body>
+</html>
