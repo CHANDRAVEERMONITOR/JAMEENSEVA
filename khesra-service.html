@@ -3,70 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khesra Converter Online - Jameenseva.in</title>
+    <title>Khesra Converter - Jameenseva.in</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        :root { --primary: #28a745; --secondary: #007bff; --light: #f8f9fa; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: var(--primary); margin-bottom: 10px; }
-        .badge { display: block; text-align: center; background: #fff3cd; color: #856404; padding: 5px; border-radius: 5px; font-size: 14px; margin-bottom: 20px; border: 1px solid #ffeeba; }
-        
-        .option-box { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: var(--light); }
-        label { font-weight: bold; display: block; margin-bottom: 8px; }
-        select, input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        
-        .payment-section { text-align: center; border-top: 2px dashed #ddd; padding-top: 20px; margin-top: 20px; }
-        .status-btn { display: block; text-align: center; margin-top: 15px; color: var(--secondary); text-decoration: none; font-weight: bold; }
-        
-        .trust-icons { display: flex; justify-content: space-around; margin-top: 20px; font-size: 12px; color: #666; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+        .card { max-width: 450px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #28a745; text-align: center; margin-top: 0; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        #paymentSection { display: none; text-align: center; background: #e8f5e9; padding: 20px; border-radius: 8px; border: 1px solid #c8e6c9; }
+        .summary { text-align: left; font-size: 14px; background: white; padding: 10px; border-radius: 5px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Khesra Converter (Online)</h2>
-    <span class="badge">Bihar Survey 2026 Special Service</span>
+<div class="card">
+    <h2>Khesra Converter</h2>
+    <p style="text-align: center; font-size: 14px; color: #666;">Pehle details bharein, fir payment karein</p>
 
-    <div class="option-box">
-        <label>Seva Chunein (Select Service):</label>
-        <select id="conversionType">
-            <option value="old_to_new">Purana Khesra se Naya Khesra</option>
-            <option value="new_to_old">Naya Khesra se Purana Khesra</option>
+    <div id="formSection">
+        <label>Seva Chunein:</label>
+        <select id="type">
+            <option value="Old to New">Purana se Naya Khesra</option>
+            <option value="New to Old">Naya se Purana Khesra</option>
         </select>
 
         <label>Zila (District):</label>
-        <input type="text" placeholder="Zila ka naam likhein" id="dist">
+        <input type="text" id="district" placeholder="District ka naam" required>
 
-        <label>Mauja/Gaon ka naam:</label>
-        <input type="text" placeholder="Gaon ka naam likhein" id="village">
+        <label>Mauja (Village):</label>
+        <input type="text" id="village" placeholder="Gaon ka naam" required>
 
-        <label>Khesra Number (Plot No):</label>
-        <input type="text" placeholder="Khesra number bharein" id="khesra_no">
+        <label>Khesra Number:</label>
+        <input type="text" id="khesra" placeholder="Plot No." required>
 
-        <label>WhatsApp Number (Details paane ke liye):</label>
-        <input type="tel" placeholder="Mobile Number" id="mobile_no">
+        <label>WhatsApp Number:</label>
+        <input type="tel" id="mobile" placeholder="Contact No." required>
+
+        <button onclick="showPayment()">Aage Badhein (Next)</button>
     </div>
 
-    <div class="payment-section">
-        <p style="font-weight: bold;">Seva Sulk: ₹29 (Single Request)</p>
+    <div id="paymentSection">
+        <h3 style="color: #1b5e20;">Details Confirm Karein</h3>
+        <div class="summary" id="reviewData"></div>
+        <p style="font-weight: bold; color: #333;">Seva Sulk: ₹29</p>
         
-        <form>
+        <form id="rzpForm">
             <script src="https://checkout.razorpay.com/v1/payment-button.js" 
-                    data-payment_button_id="pl_SdQsZaGPmkik6H" async> 
-            </script> 
+                data-payment_button_id="pl_SdQsZaGPmkik6H" async> </script>
         </form>
         
-        <p style="font-size: 12px; color: #888; margin-top: 10px;">Payment ke baad details 2 ghante mein WhatsApp par bhej di jayegi.</p>
-    </div>
-
-    <a href="track.html" class="status-btn">Track Order / Check Status</a>
-
-    <div class="trust-icons">
-        <span>✅ Safe Payment</span>
-        <span>✅ Official Records</span>
-        <span>✅ WhatsApp Support</span>
+        <p style="font-size: 12px; color: #555; margin-top: 15px;">⚠️ Payment hote hi aapka data hamare pas pahunch jayega.</p>
     </div>
 </div>
+
+<script>
+    const SUPABASE_URL = 'https://efgvsdclcnbmwqbtily.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'; // Note: Use Anon Key in production
+    const supabase = lib.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    function showPayment() {
+        // Form details fetch karna
+        const d = document.getElementById('district').value;
+        const v = document.getElementById('village').value;
+        const k = document.getElementById('khesra').value;
+        const m = document.getElementById('mobile').value;
+        const t = document.getElementById('type').value;
+
+        if(!d || !v || !k || !m) { alert("Kripya saari details bharein!"); return; }
+
+        // Data ko local storage mein save karna (ताकि payment के बाद use कर सकें)
+        const userData = { district: d, village: v, khesra_old: k, mobile: m, status: 'Pending', type: t };
+        localStorage.setItem('temp_order', JSON.stringify(userData));
+
+        // Review dikhana
+        document.getElementById('reviewData').innerHTML = `
+            <b>Type:</b> ${t}<br>
+            <b>Zila:</b> ${d}<br>
+            <b>Gaon:</b> ${v}<br>
+            <b>Khesra:</b> ${k}<br>
+            <b>Mobile:</b> ${m}
+        `;
+
+        // Switch Screen
+        document.getElementById('formSection').style.display = 'none';
+        document.getElementById('paymentSection').style.display = 'block';
+    }
+
+    // Note: Payment success logic ko Razorpay Redirect URL (Success Page) par lagana hoga
+</script>
 
 </body>
 </html>
