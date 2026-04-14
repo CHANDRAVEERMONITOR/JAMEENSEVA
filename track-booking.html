@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ट्रैक बुकिंग | Jameen Seva</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; background: #f0f2f5; padding: 20px; text-align: center; }
+        .track-box { max-width: 400px; margin: 40px auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; text-align: center; }
+        .status-tag { padding: 10px 20px; border-radius: 20px; font-weight: bold; display: inline-block; margin-top: 10px; }
+        .pending { background: #fff3cd; color: #856404; }
+        .approved { background: #d4edda; color: #155724; }
+        .btn { background: #1a5928; color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="track-box">
+    <h3>🔍 बुकिंग स्थिति जांचें</h3>
+    <input type="text" id="orderID" placeholder="ऑर्डर आईडी (उदा: BK-1234)">
+    <button class="btn" onclick="track()">ट्रैक करें</button>
+    
+    <div id="result" style="display:none; margin-top:20px; text-align: left; padding: 15px; background: #fafafa; border-radius: 10px;">
+        <p><b>नाम:</b> <span id="sName"></span></p>
+        <p><b>दिनांक:</b> <span id="sDate"></span></p>
+        <p><b>स्टेटस:</b> <span id="sStatus" class="status-tag"></span></p>
+        <p id="msg" style="color:#666; font-size:13px; margin-top:10px; border-top:1px solid #eee; padding-top:10px;"></p>
+    </div>
+</div>
+
+<script>
+    const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+    const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+    const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+    async function track() {
+        const id = document.getElementById('orderID').value.trim();
+        const { data, error } = await _supabase.from('amin-booking').select('*').eq('order_id', id).single();
+
+        if(data) {
+            document.getElementById('result').style.display = "block";
+            document.getElementById('sName').innerText = data.raiyat_name;
+            document.getElementById('sDate').innerText = data.order_date;
+            document.getElementById('sStatus').innerText = data.status;
+            document.getElementById('sStatus').className = "status-tag " + data.status.toLowerCase();
+            
+            if(data.status === 'Pending') {
+                document.getElementById('msg').innerText = "आपकी बुकिंग मिल गई है। वेरिफिकेशन के बाद अमीन अलॉट किया जाएगा।";
+            } else if(data.status === 'Approved') {
+                document.getElementById('msg').innerText = "बधाई हो! आपकी बुकिंग स्वीकार कर ली गई है। अमीन जल्द ही आपसे संपर्क करेंगे।";
+            }
+        } else {
+            alert("ऑर्डर आईडी नहीं मिली!");
+        }
+    }
+</script>
+</body>
+</html>
