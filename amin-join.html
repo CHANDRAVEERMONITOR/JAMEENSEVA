@@ -240,78 +240,109 @@
             }
         }
 
-        async function uploadAndSave() {
-            const finalBtn = document.getElementById('finalSubmitBtn');
-            const selfFile = document.getElementById('selfPhoto').files[0];
-            const aadharFile = document.getElementById('aadharPhoto').files[0];
+    
+async function uploadAndSave() {
+    const finalBtn = document.getElementById('finalSubmitBtn');
+    const selfFile = document.getElementById('selfPhoto').files[0];
+    const aadharFile = document.getElementById('aadharPhoto').files[0];
 
-            if(!selfFile || !aadharFile) return alert("कृपया दोनों फोटो चुनें!");
+    if(!selfFile || !aadharFile) {
+        alert("कृपया दोनों फोटो चुनें!");
+        return;
+    }
 
-            finalBtn.disabled = true;
-            finalBtn.innerText = "Processing... (Data Saving)";
+    finalBtn.disabled = true;
+    finalBtn.innerText = "Uploading...";
 
-            try {
-                // Sahi paths (Storage folder names check karein)
-                const selfPath = `selfies/${Date.now()}_${selfFile.name}`;
-                const aadharPath = `aadhar/${Date.now()}_${aadharFile.name}`;
+    try {
+        // ✅ Unique file name
+        const fileName1 = Date.now() + "_self.jpg";
+        const fileName2 = Date.now() + "_aadhar.jpg";
 
-         // 'amin-documents' ki jagah purana wala bucket name 'panchnama-order-files' use karein
-const { error: up1 } = await _supabase.storage.from('panchnama-order-files').upload(selfPath, selfFile);
-const { error: up2 } = await _supabase.storage.from('panchnama-order-files').upload(aadharPath, aadharFile);
+        const selfPath = `selfies/${fileName1}`;
+        const aadharPath = `aadhar/${fileName2}`;
 
-// Niche Public URL waali line mein bhi wahi naam kar dein
-const selfUrl = _supabase.storage.from('panchnama-order-files').getPublicUrl(selfPath).data.publicUrl;
-const aadharUrl = _supabase.storage.from('panchnama-order-files').getPublicUrl(aadharPath).data.publicUrl;
-                const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
-                
-                // Saving data to 'amins' table
-                const { error: dbError } = await _supabase.from('amins').insert([{
-                    reg_no: regNo,
-                    name: document.getElementById('userName').value,
-                    mobile: document.getElementById('userMobile').value,
-                    district: document.getElementById('district').value,
-                    block: document.getElementById('block').value,
-                    experience: score,
-                    self_photo_url: selfUrl,
-                    aadhar_photo_url: aadharUrl,
-                    status: 'Qualified'
-                }]);
+        // ✅ Upload Selfie
+        const { error: err1 } = await _supabase.storage
+            .from('amin-documents')  // ⚠️ bucket name FIXED
+            .upload(selfPath, selfFile);
 
-                if(dbError) throw dbError;
+        if (err1) throw err1;
 
-                document.getElementById('uploadSection').style.display = "none";
-                document.getElementById('resultMsg').innerHTML = "✅ पंजीकरण सफल! आपका ID कार्ड नीचे है।";
-                
-                const cardHtml = `
-                    <div id="idCard">
-                        <div class="temp-badge">QUALIFIED</div>
-                        <div class="id-header">
-                            <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
-                            <div style="font-size:10px;">Verified Amin Partner</div>
-                        </div>
-                        <div class="id-body">
-                            <img src="${selfUrl}" class="user-photo-preview">
-                            <div style="font-weight:700; font-size:18px; color:var(--primary);">${document.getElementById('userName').value}</div>
-                            <div class="id-info">
-                                <div><b>Reg No:</b> ${regNo}</div>
-                                <div><b>Mobile:</b> ${document.getElementById('userMobile').value}</div>
-                                <div><b>Block:</b> ${document.getElementById('block').value}</div>
-                                <div><b>District:</b> ${document.getElementById('district').value}</div>
-                                <div><b>Score:</b> ${score}/15</div>
-                            </div>
-                        </div>
-                        <div style="background:#eee; font-size:9px; padding:5px;">यह कार्ड ऑनलाइन डेटाबेस से सत्यापित है।</div>
-                    </div>
-                `;
-                document.getElementById('idCardContainer').innerHTML = cardHtml;
-                document.getElementById('postActionButtons').style.display = "block";
+        // ✅ Upload Aadhar
+        const { error: err2 } = await _supabase.storage
+            .from('amin-documents')
+            .upload(aadharPath, aadharFile);
 
-            } catch (err) {
-                alert("Error: " + err.message);
-                finalBtn.disabled = false;
-                finalBtn.innerText = "फाइनल सबमिट करें";
-            }
-        }
+        if (err2) throw err2;
+
+        // ✅ Get Public URLs
+        const selfUrl = _supabase.storage
+            .from('amin-documents')
+            .getPublicUrl(selfPath).data.publicUrl;
+
+        const aadharUrl = _supabase.storage
+            .from('amin-documents')
+            .getPublicUrl(aadharPath).data.publicUrl;
+
+        // ✅ Registration Number
+        const regNo = "JS-" + Math.floor(Math.random() * 9000 + 1000);
+
+        // ✅ Insert into DB
+        const { error: dbError } = await _supabase
+            .from('amins')
+            .insert([{
+                reg_no: regNo,
+                name: document.getElementById('userName').value,
+                mobile: document.getElementById('userMobile').value,
+                district: document.getElementById('district').value,
+                block: document.getElementById('block').value,
+                experience: score,
+                self_photo_url: selfUrl,
+                aadhar_photo_url: aadharUrl,
+                status: 'Qualified'
+            }]);
+
+        if (dbError) throw dbError;
+
+        // ✅ Success UI
+        document.getElementById('uploadSection').style.display = "none";
+        document.getElementById('resultMsg').innerHTML = "✅ पंजीकरण सफल!";
+
+        const cardHtml = `
+        <div id="idCard">
+            <div class="temp-badge">QUALIFIED</div>
+            <div class="id-header">
+                <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
+                <div style="font-size:10px;">Verified Amin Partner</div>
+            </div>
+            <div class="id-body">
+                <img src="${selfUrl}" class="user-photo-preview">
+                <div style="font-weight:700; font-size:18px; color:#1a5928;">
+                    ${document.getElementById('userName').value}
+                </div>
+                <div class="id-info">
+                    <div><b>Reg No:</b> ${regNo}</div>
+                    <div><b>Mobile:</b> ${document.getElementById('userMobile').value}</div>
+                    <div><b>Block:</b> ${document.getElementById('block').value}</div>
+                    <div><b>District:</b> ${document.getElementById('district').value}</div>
+                    <div><b>Score:</b> ${score}/15</div>
+                </div>
+            </div>
+        </div>
+        `;
+
+        document.getElementById('idCardContainer').innerHTML = cardHtml;
+        document.getElementById('postActionButtons').style.display = "block";
+
+    } catch (err) {
+        console.error(err);
+        alert("❌ Error: " + err.message);
+
+        finalBtn.disabled = false;
+        finalBtn.innerText = "फाइनल सबमिट करें";
+    }
+}
     </script>
 </body>
 </html>
