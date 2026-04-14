@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful - Jameenseva</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; background: #e8f5e9; }
+        .box { background: white; padding: 30px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2e7d32; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>✅ Payment Safal Raha!</h1>
+    <p id="msg">Aapka data save kiya ja raha hai, kripya intezar karein...</p>
+    <br>
+    <a href="track.html" style="color: #007bff; font-weight: bold;">Status Check Karein</a>
+</div>
+
+<script>
+    // 1. Supabase Connect Karein
+    const SUPABASE_URL = 'https://efgvsdclcnbmwqbtily.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+    const supabase = lib.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function finalStep() {
+        // 2. Local Storage se data uthayein
+        const savedData = JSON.parse(localStorage.getItem('temp_order'));
+
+        if (savedData) {
+            // 3. Supabase mein Insert karein
+            const { error } = await supabase
+                .from('khesra_requests') 
+                .insert([savedData]);
+
+            if (!error) {
+                document.getElementById('msg').innerHTML = "Aapka order mil gaya hai! 2 ghante mein WhatsApp par details mil jayegi.";
+                localStorage.removeItem('temp_order'); // Data saaf karein
+            } else {
+                document.getElementById('msg').innerHTML = "Data save karne mein error aaya, kripya screenshot bhejien.";
+                console.log(error);
+            }
+        } else {
+            document.getElementById('msg').innerHTML = "Koi purana data nahi mila.";
+        }
+    }
+
+    finalStep();
+</script>
+
+</body>
+</html>
