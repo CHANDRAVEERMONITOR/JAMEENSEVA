@@ -7,6 +7,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        
+        body { margin: 0; background-color: #f4f4f4; font-family: 'Verdana', sans-serif; line-height: 1.8; color: #333; }
+        .navbar { position: sticky; top: 0; width: 100%; background-color: #1a5276; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; }
+        @media (max-width: 600px) { .navbar a { font-size: 11px; } }
+        .dl-box { background: #fff5f5; border: 1px dashed #e74c3c; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; }
+        .dl-btn { background: #27ae60; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 13px; font-weight: bold; display: inline-block; margin: 5px; }
         :root { --primary: #1e7e34; --secondary: #0056b3; --accent: #ffc107; --bg: #f8f9fa; }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #333; }
         .container { max-width: 650px; margin: 20px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); }
@@ -26,7 +33,13 @@
     </style>
 </head>
 <body>
-
+<nav class="navbar">
+    <a href="index.html">🏠 Home</a>
+    <a href="index.html#services">📄 Our Services</a>
+    <a href="blog.html">✍️ Blog</a>
+    <a href="track.html">🚚 Order Tracking</a>
+    <a href="contact.html">📞 Contact Us</a>
+</nav>
 <div class="container">
     <div class="header">
         <h2>बिहार सर्वे 2026 - खेसरा कनवर्टर</h2>
