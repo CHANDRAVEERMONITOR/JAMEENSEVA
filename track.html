@@ -116,12 +116,12 @@ async function trackOrder() {
         const [khatiyanRes, panchnamaRes] = await Promise.all([
             _supabase.from('khatiyan order').select('*').or(`order_id.eq."${input}",mobile.eq."${input}"`),
             _supabase.from('panchnama batwara').select('*').or(`order_id.eq."${input}",mobile.eq."${input}"`)
+            _supabase.from('khesra to khesra').select('*').or(`order_id.eq."${input}",mobile.eq."${input}"`)
         ]);
 
         let allOrders = [];
         if (khatiyanRes.data) khatiyanRes.data.forEach(item => allOrders.push({ ...item, tableType: 'KHATIYAN' }));
         if (panchnamaRes.data) panchnamaRes.data.forEach(item => allOrders.push({ ...item, tableType: 'PANCHNAMA' }));
-
         loader.style.display = "none";
 
         if (allOrders.length === 0) {
