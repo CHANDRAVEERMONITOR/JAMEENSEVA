@@ -10,29 +10,19 @@
         :root { --primary: #1e7e34; --secondary: #0056b3; --accent: #ffc107; --bg: #f8f9fa; }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #333; }
         .container { max-width: 650px; margin: 20px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); }
-        
         .header { background: #fff; padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
-        .header h2 { color: var(--primary); margin: 0; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
-        .header p { color: #666; margin-top: 5px; font-weight: 500; }
-
-        .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; background: #e9f5ec; margin: 15px; border-radius: 12px; font-size: 12px; text-align: center; }
+        .header h2 { color: var(--primary); margin: 0; font-size: 24px; text-transform: uppercase; }
+        .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; background: #e9f5ec; margin: 15px; border-radius: 12px; font-size: 11px; text-align: center; }
         .step i { font-size: 20px; color: var(--primary); margin-bottom: 5px; }
-
         .form-body { padding: 25px; }
-        .section-title { background: #f1f1f1; padding: 8px 15px; font-size: 14px; font-weight: bold; margin: 20px 0 15px; border-left: 5px solid var(--primary); border-radius: 4px; }
-        
+        .section-title { background: #f1f1f1; padding: 8px 15px; font-size: 14px; font-weight: bold; margin: 20px 0 15px; border-left: 5px solid var(--primary); }
         label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
-        input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; font-size: 15px; transition: 0.3s; }
-        input:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 8px rgba(30,126,52,0.2); }
-        
+        input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 10px; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .hidden { display: none; }
-
-        #submitBtn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 30px; box-shadow: 0 5px 15px rgba(30,126,52,0.3); transition: 0.3s; }
-        #submitBtn:hover { background: #155d27; transform: translateY(-2px); }
-
+        #submitBtn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+        #submitBtn:disabled { background: #ccc; }
         #paymentArea { display: none; text-align: center; padding: 30px; background: #fffdf0; border: 2px dashed #fbc02d; margin: 20px; border-radius: 15px; }
-        .warning-box { background: #fff3cd; color: #856404; padding: 15px; border-radius: 8px; font-size: 13px; margin-top: 20px; border: 1px solid #ffeeba; }
     </style>
 </head>
 <body>
@@ -40,69 +30,66 @@
 <div class="container">
     <div class="header">
         <h2>बिहार सर्वे 2026 - खेसरा कनवर्टर</h2>
-        <p><i class="fas fa-file-invoice"></i> ज़मीन सेवा ऑनलाइन डिजिटल पोर्टल</p>
+        <p><i class="fas fa-shield-alt"></i> Jameenseva Official Verification Portal</p>
     </div>
 
     <div class="process-steps">
-        <div class="step"><i class="fas fa-edit"></i><br>Data Sahi Bharen</div>
-        <div class="step"><i class="fas fa-map-marked-alt"></i><br>Team Naksha Check Karegi</div>
-        <div class="step"><i class="fas fa-print"></i><br>24h Me Print Karein</div>
+        <div class="step"><i class="fas fa-database"></i><br>Details Save Karein</div>
+        <div class="step"><i class="fas fa-map"></i><br>Team Naksha Dekhegi</div>
+        <div class="step"><i class="fas fa-clock"></i><br>24h Me Report</div>
     </div>
 
     <div id="mainForm" class="form-body">
-        <label>कनवर्टर का प्रकार चुनें:</label>
-        <select id="conv_type" onchange="toggleFields()" style="border-color: var(--secondary);">
-            <option value="old_to_new">Purana Khesra (पुराना) → Naya Khesra (नया)</option>
-            <option value="new_to_old">Naya Khesra (नया) → Purana Khesra (पुराना)</option>
+        <label>Seva Chunein:</label>
+        <select id="conv_type" onchange="toggleFields()">
+            <option value="old_to_new">Purana Khesra → Naya Khesra</option>
+            <option value="new_to_old">Naya Khesra → Purana Khesra</option>
         </select>
 
-        <div class="section-title">📍 स्थान की जानकारी (Location Details)</div>
+        <div class="section-title">📍 Location Details</div>
         <div class="grid">
             <div>
-                <label>ज़िला (District):</label>
-                <select id="district" onchange="loadBlocks()"><option value="">ज़िला चुनें</option></select>
+                <label>Zila:</label>
+                <select id="district" onchange="loadBlocks()"><option value="">Select District</option></select>
             </div>
             <div>
-                <label>अंचल (Block):</label>
-                <select id="block"><option value="">पहले ज़िला चुनें</option></select>
+                <label>Anchal:</label>
+                <select id="block"><option value="">Select Block</option></select>
             </div>
         </div>
         
         <div class="grid">
-            <div><label>मौजा (Village):</label><input type="text" id="village" placeholder="गाँव का नाम"></div>
-            <div><label>थाना नंबर:</label><input type="text" id="thana_no" placeholder="Thana No"></div>
+            <div><label>Village:</label><input type="text" id="village"></div>
+            <div><label>Thana No:</label><input type="text" id="thana_no"></div>
         </div>
 
-        <div class="section-title">📄 ज़मीन का विवरण (Land Details)</div>
+        <div class="section-title">📄 Land Details</div>
         <div id="old_fields">
-            <label>पुराना खेसरा (Old Plot Number):</label>
-            <input type="text" id="khesra_old" placeholder="पुराना खेसरा नंबर भरें">
+            <label>Purana Khesra:</label>
+            <input type="text" id="khesra_old" placeholder="Purana Plot No">
         </div>
         <div id="new_fields" class="hidden">
             <div class="grid">
-                <div><label>नया खाता:</label><input type="text" id="khata_new" placeholder="नया खाता"></div>
-                <div><label>नया खेसरा:</label><input type="text" id="khesra_new" placeholder="नया खेसरा"></div>
+                <div><label>Naya Khata:</label><input type="text" id="khata_new"></div>
+                <div><label>Naya Khesra:</label><input type="text" id="khesra_new"></div>
             </div>
         </div>
 
-        <label>रैयत का नाम (Owner Name):</label>
-        <input type="text" id="raiyat_name" placeholder="रैयत का नाम लिखें">
+        <label>Owner Name:</label>
+        <input type="text" id="raiyat_name">
 
-        <label>व्हाट्सएप नंबर (WhatsApp No):</label>
-        <input type="tel" id="mobile" placeholder="जिस पर रिपोर्ट चाहिए">
+        <label>WhatsApp Number:</label>
+        <input type="tel" id="mobile">
 
-        <button id="submitBtn" onclick="saveData()">विवरण सुरक्षित करें और भुगतान करें</button>
+        <button id="submitBtn" onclick="saveData()">Details Safe Karein & Pay ₹29</button>
     </div>
 
     <div id="paymentArea">
         <i class="fas fa-check-circle" style="font-size: 50px; color: var(--primary);"></i>
-        <h3>डेटा सुरक्षित हो गया है!</h3>
-        <p>हमारी टीम आपके गाँव का नक्शा और खतियान जाँच कर 24 घंटे में रिपोर्ट तैयार करेगी।</p>
-        <div class="warning-box">
-            भुगतान के बाद आप इसी वेबसाइट से अपनी रिपोर्ट <b>Print</b> कर पाएंगे।
-        </div>
+        <h3>Aapka Data Save Ho Gaya Hai!</h3>
+        <p>Report tayyar karne ke liye ₹29 ka bhugtan karein.</p>
         <br>
-        <form id="rzp_form">
+        <form>
             <script src="https://checkout.razorpay.com/v1/payment-button.js" 
                 data-payment_button_id="pl_SdQsZaGPmkik6H" async> </script>
         </form>
@@ -110,10 +97,10 @@
 </div>
 
 <script>
+    // UPDATED CONFIGURATION
     const { createClient } = supabase;
-    const _supabase = createClient('https://efgvsdclcnbmwqbtily.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
+    const _supabase = createClient('https://efgvsddclcnbmwqbtily.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
 
-    // ALL 38 DISTRICTS & BLOCKS DATA
     const biharData = {
         "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
         "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
@@ -155,21 +142,13 @@
         "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
     };
 
-    // Initialize Districts
     const distSelect = document.getElementById('district');
-    Object.keys(biharData).sort().forEach(d => {
-        distSelect.options.add(new Option(d, d));
-    });
+    Object.keys(biharData).sort().forEach(d => distSelect.options.add(new Option(d, d)));
 
     function loadBlocks() {
         const blockSelect = document.getElementById('block');
-        const selectedDist = distSelect.value;
         blockSelect.innerHTML = '<option value="">Block Chunein</option>';
-        if(selectedDist) {
-            biharData[selectedDist].sort().forEach(b => {
-                blockSelect.options.add(new Option(b, b));
-            });
-        }
+        if(distSelect.value) biharData[distSelect.value].sort().forEach(b => blockSelect.options.add(new Option(b, b)));
     }
 
     function toggleFields() {
@@ -194,24 +173,18 @@
             order_date: new Date().toLocaleString('hi-IN')
         };
 
-        if(!data.district || !data.mobile || !data.village) {
-            alert("Kripya Zila, Mauja aur Mobile number sahi se bharen.");
-            return;
-        }
+        if(!data.district || !data.mobile || !data.village) { alert("Please fill all details."); return; }
 
-        btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Saving Data...";
-        btn.disabled = true;
+        btn.innerHTML = "Saving..."; btn.disabled = true;
 
         const { error } = await _supabase.from('khesra to khesra').insert([data]);
 
         if (error) {
-            alert("Error: " + error.message);
-            btn.disabled = false;
-            btn.innerHTML = "विवरण सुरक्षित करें और भुगतान करें";
+            alert("Connection Error: " + error.message);
+            btn.disabled = false; btn.innerHTML = "विवरण सुरक्षित करें";
         } else {
             document.getElementById('mainForm').style.display = "none";
             document.getElementById('paymentArea').style.display = "block";
-            window.scrollTo(0,0);
         }
     }
 </script>
