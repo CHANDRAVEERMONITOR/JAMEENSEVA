@@ -3,40 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JameenSeva - Professional Batwara Generator</title>
+    <title>Jameenseva - Professional Batwara Generator</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- UI DESIGN (TOOLFLYER STYLE) --- */
-        :root { --primary: #1a5928; --gold: #ffd700; --bg: #f4f7f6; }
-        body { font-family: 'Noto Serif Devanagari', serif; background-color: var(--bg); padding: 20px; }
-        .no-print { max-width: 1100px; margin: auto; }
-        .section-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 6px solid var(--primary); }
-        h3 { color: var(--primary); border-bottom: 2px solid var(--gold); display: inline-block; margin-bottom: 20px; }
-        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 10px; }
-        input, select, textarea { padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; width: 100%; box-sizing: border-box; }
+        :root { --primary: #1a5928; --gold: #ffd700; --bg: #f4f7f6; --text: #333; }
+        body { font-family: 'Noto Serif Devanagari', serif; background-color: var(--bg); color: var(--text); padding: 20px; margin: 0; }
         
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; background: #fff; }
-        th, td { border: 1px solid #aaa; padding: 10px; text-align: center; }
-        th { background: #f8f9fa; color: var(--primary); }
+        /* UI Design */
+        .no-print { max-width: 1000px; margin: auto; }
+        .header-ui { text-align: center; background: var(--primary); color: white; padding: 20px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .section-box { background: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-left: 5px solid var(--primary); }
+        h3 { color: var(--primary); margin-top: 0; border-bottom: 2px solid var(--gold); display: inline-block; padding-bottom: 5px; }
         
-        .btn { padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        .btn-add { background: var(--primary); color: white; }
-        .btn-remove { background: #d32f2f; color: white; font-size: 11px; }
-        .fariq-card { border: 1.5px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 8px; background: #fafafa; }
-        .total-box { background: #e8f5e9; font-weight: bold; padding: 10px; border: 1px solid var(--primary); text-align: right; }
+        .input-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 10px; }
+        input, select, textarea { padding: 12px; border: 1.5px solid #ddd; border-radius: 6px; font-size: 14px; width: 100%; box-sizing: border-box; }
+        input:focus { border-color: var(--primary); outline: none; background: #f0fdf4; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #fff; font-size: 14px; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: center; }
+        th { background: #f1f5f9; color: var(--primary); font-weight: bold; }
+        
+        .btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; font-size: 14px; }
+        .btn-add { background: var(--primary); color: white; margin-top: 10px; }
+        .btn-add:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-remove { background: #ef4444; color: white; font-size: 12px; padding: 8px 12px; }
+        .fariq-card { border: 1px solid #e2e8f0; padding: 20px; margin-bottom: 15px; border-radius: 8px; background: #fcfcfc; position: relative; }
+        .total-box { background: #dcfce7; font-weight: bold; padding: 12px; border: 1.5px solid var(--primary); text-align: right; border-radius: 6px; }
 
-        /* --- PRINT LAYOUT (HU-BA-HU PDF) --- */
+        /* Print Layout Rules */
         #print-area { display: none; }
         .page { 
-            width: 210mm; height: 296mm; padding: 20mm 15mm; position: relative; 
-            page-break-after: always; box-sizing: border-box; color: black; line-height: 1.8; font-size: 14px; background: white;
+            width: 210mm; min-height: 296mm; padding: 25mm 20mm; position: relative; 
+            page-break-after: always; box-sizing: border-box; color: black; line-height: 1.6; font-size: 15px; background: white;
         }
-        .stamp-gap { height: 100mm; border: 1px dashed #eee; margin-bottom: 10px; }
-        .sig-gawah { position: absolute; right: 10mm; top: 10mm; border: 1.5px solid black; padding: 5px 15px; font-weight: bold; }
-        .sig-sarpanch { position: absolute; left: 10mm; bottom: 15mm; border-top: 1.5px solid black; width: 40mm; text-align: center; font-weight: bold; }
-        .sig-farikh { position: absolute; right: 10mm; bottom: 15mm; border-top: 1.5px solid black; width: 50mm; text-align: center; font-weight: bold; }
-        .pg-num { position: absolute; top: 8mm; left: 50%; transform: translateX(-50%); font-weight: bold; }
-        .legal-para { text-align: justify; text-indent: 40px; margin: 15px 0; }
+        .stamp-space { height: 80mm; border: 1px dashed #ddd; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #999; font-style: italic; }
+        .sig-box { border: 1.5px solid black; padding: 5px 15px; font-weight: bold; font-size: 13px; }
+        .sig-gawah { position: absolute; right: 20mm; top: 15mm; }
+        .sig-sarpanch { position: absolute; left: 20mm; bottom: 20mm; border-top: 1px solid black; width: 45mm; text-align: center; padding-top: 5px; }
+        .sig-farikh { position: absolute; right: 20mm; bottom: 20mm; border-top: 1px solid black; width: 55mm; text-align: center; padding-top: 5px; }
+        .pg-footer { position: absolute; bottom: 10mm; left: 50%; transform: translateX(-50%); font-size: 12px; font-weight: bold; }
+        .legal-text { text-align: justify; text-indent: 50px; margin: 20px 0; line-height: 1.8; }
 
         @media print {
             .no-print { display: none; }
@@ -48,12 +54,16 @@
 <body>
 
 <div class="no-print">
-    <h2 style="text-align: center; color: var(--primary);">⚖️ JAMEENSEVA - PRO BATWARA GENERATOR</h2>
+    <div class="header-ui">
+        <h1 style="margin:0;">⚖️ JAMEENSEVA.IN</h1>
+        <p style="margin:5px 0 0 0; opacity: 0.9;">प्रोफेशनल सहमति पंचनामा बँटवारा जनरेटर</p>
+    </div>
 
     <div class="section-box">
-        <h3>👥 1. फरीकेन का विवरण (Parties)</h3>
+        <h3>👥 1. फरीकेन (हिस्सेदारों) का विवरण</h3>
+        <p style="font-size: 12px; color: #666; margin-bottom: 15px;">* सभी हिस्सेदारों के नाम, पिता का नाम और पता सही-सही भरें।</p>
         <div id="fariqContainer"></div>
-        <button type="button" class="btn btn-add" onclick="addFariqRow()">+ नया फरीक जोड़ें</button>
+        <button class="btn btn-add" onclick="addFariqRow()">+ नया हिस्सेदार जोड़ें</button>
     </div>
 
     <div class="section-box">
@@ -62,35 +72,39 @@
             <thead><tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th><th>Action</th></tr></thead>
             <tbody id="landBody"></tbody>
         </table>
-        <div class="total-box">कुल रकवा: <span id="total_land_val">0.00</span></div>
-        <button type="button" class="btn btn-add" onclick="addLandRow()">+ नया प्लॉट जोड़ें</button>
+        <div class="total-box">कुल रकवा: <span id="total_land_val">0.000</span> डिसमिल</div>
+        <button class="btn btn-add" onclick="addLandRow()">+ नया प्लॉट जोड़ें</button>
     </div>
 
     <div class="section-box">
-        <h3>📐 3. बँटवारा शेड्यूल (Individual Allocation)</h3>
+        <h3>📐 3. बँटवारा शेड्यूल (Allocation)</h3>
+        <p style="font-size: 12px; color: #666; margin-bottom: 15px;">* यहाँ तय करें कि किस हिस्सेदार को कौन सा खाता-खेसरा और कितनी जमीन मिल रही है।</p>
         <div id="allocationContainer"></div>
-        <button type="button" class="btn btn-add" onclick="addAllocationBox()">+ नया शेड्यूल जोड़ें</button>
+        <button class="btn btn-add" onclick="addAllocationBox()">+ नया शेड्यूल बॉक्स जोड़ें</button>
     </div>
 
     <div class="section-box">
-        <h3>🌳 4. वंशावली वृक्ष (Vanshavali)</h3>
+        <h3>🌳 4. वंशावली (Vanshavali)</h3>
         <div class="input-grid">
-            <input id="v_head" placeholder="मुख्य पूर्वज (उदा: स्व० मौजे साह)">
-            <input id="v_head_f" placeholder="पूर्वज के पिता (उदा: स्व० बच्चे लाल साह)">
+            <input id="v_head" placeholder="मुख्य पूर्वज का नाम">
+            <input id="v_head_f" placeholder="पूर्वज के पिता का नाम">
         </div>
         <div id="treeMemberContainer"></div>
-        <button type="button" class="btn btn-add" onclick="addTreeMember()">+ वंशज (पुत्र) जोड़ें</button>
+        <button class="btn btn-add" onclick="addTreeMember()">+ वंशज (पुत्र) जोड़ें</button>
     </div>
 
-    <div style="text-align: center; margin: 50px;">
-        <button class="btn btn-add" style="background: #2c3e50; padding: 20px 60px; font-size: 20px;" onclick="window.print()">📄 GENERATE PDF / PRINT</button>
+    <div style="text-align: center; margin: 60px 0;">
+        <button class="btn" style="background: #2c3e50; color: white; padding: 20px 50px; font-size: 22px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.1);" onclick="window.print()">
+            📄 GENERATE PANCHNAMA (FREE)
+        </button>
+        <p style="color: #666; margin-top: 15px;">Tip: Print karte waqt 'Save as PDF' chunein.</p>
     </div>
 </div>
 
 <div id="print-area"></div>
 
 <script>
-    // --- 1. Fariq Management ---
+    // Logic for Fariq
     function addFariqRow() {
         const container = document.getElementById('fariqContainer');
         const div = document.createElement('div');
@@ -100,23 +114,24 @@
                 <input placeholder="नाम" class="f-name">
                 <input placeholder="पिता/पति" class="f-guardian">
                 <input placeholder="उम्र" class="f-age" style="width:70px">
-                <input placeholder="आधार" class="f-aadhar">
                 <input placeholder="जाति" class="f-caste">
             </div>
-            <input placeholder="पूरा पता" class="f-address">
-            <button type="button" class="btn btn-remove" style="margin-top:10px;" onclick="this.parentElement.remove()">❌ हटाएं</button>
+            <div class="input-grid" style="margin-top:10px;">
+                <input placeholder="पूरा पता (Village, PO, PS, Dist)" class="f-address">
+            </div>
+            <button class="btn btn-remove" style="margin-top:10px;" onclick="this.parentElement.remove()">❌ Remove</button>
         `;
         container.appendChild(div);
     }
 
-    // --- 2. Total Property ---
+    // Land Logic
     function addLandRow() {
         const tbody = document.getElementById('landBody');
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td><input class="tl-mauja"></td><td><input class="tl-khata"></td>
-            <td><input class="tl-khesra"></td><td><input type="number" class="tl-rakwa" oninput="calculateTotal()"></td>
-            <td><button type="button" class="btn btn-remove" onclick="this.parentElement.parentElement.remove(); calculateTotal()">✕</button></td>
+            <td><input class="tl-khesra"></td><td><input type="number" class="tl-rakwa" step="0.001" oninput="calculateTotal()"></td>
+            <td><button class="btn btn-remove" onclick="this.parentElement.parentElement.remove(); calculateTotal()">✕</button></td>
         `;
         tbody.appendChild(tr);
     }
@@ -127,22 +142,20 @@
         document.getElementById('total_land_val').innerText = total.toFixed(3);
     }
 
-    // --- 3. Individual Allocation ---
+    // Allocation Logic
     function addAllocationBox() {
         const container = document.getElementById('allocationContainer');
-        const id = Date.now();
         const div = document.createElement('div');
         div.className = 'fariq-card';
-        div.id = 'alloc_' + id;
         div.innerHTML = `
-            <h4>हिस्सेदार का शेड्यूल</h4>
-            <input class="al-name" placeholder="हिस्सेदार का नाम (उदा: अनीता देवी)" style="font-weight:bold; margin-bottom:10px;">
+            <h4 style="margin-top:0; color:var(--primary);">हिस्सेदार का शेड्यूल</h4>
+            <input class="al-name" placeholder="हिस्सेदार का नाम लिखें" style="font-weight:bold; margin-bottom:10px; border-color:var(--primary);">
             <table>
-                <thead><tr><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th><th>Action</th></tr></thead>
+                <thead><tr><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी (N-S-E-W)</th><th>✕</th></tr></thead>
                 <tbody class="alloc-body"></tbody>
             </table>
-            <button type="button" class="btn btn-add" style="background:#666; font-size:11px;" onclick="addAllocRow(this)">+ प्लॉट जोड़ें</button>
-            <button type="button" class="btn btn-remove" style="float:right;" onclick="this.parentElement.remove()">❌ हटाएं</button>
+            <button class="btn btn-add" style="font-size:11px; background:#64748b;" onclick="addAllocRow(this)">+ प्लॉट जोड़ें</button>
+            <button class="btn btn-remove" style="float:right;" onclick="this.parentElement.remove()">❌ हटाएँ</button>
         `;
         container.appendChild(div);
         addAllocRow(div.querySelector('.btn-add'));
@@ -151,72 +164,144 @@
     function addAllocRow(btn) {
         const tbody = btn.parentElement.querySelector('.alloc-body');
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td><input class="al-khata"></td><td><input class="al-khesra"></td><td><input class="al-rakwa"></td><td><input class="al-chauhadi" placeholder="N-S-E-W"></td><td><button type="button" class="btn btn-remove" onclick="this.parentElement.parentElement.remove()">✕</button></td>`;
+        tr.innerHTML = `<td><input class="al-khata"></td><td><input class="al-khesra"></td><td><input class="al-rakwa"></td><td><input class="al-chauhadi"></td><td><button class="btn btn-remove" onclick="this.parentElement.parentElement.remove()">✕</button></td>`;
         tbody.appendChild(tr);
     }
 
-    // --- 4. Vanshavali Logic ---
+    // Vanshavali Logic
     function addTreeMember() {
         const container = document.getElementById('treeMemberContainer');
         const div = document.createElement('div');
         div.className = 'fariq-card';
         div.innerHTML = `
             <div style="display:flex; gap:10px;">
-                <select style="width:120px;" class="v-status">
-                    <option value="स्व०">स्व० (Mrit)</option>
-                    <option value="जीवित">✅ जीवित</option>
-                </select>
+                <select style="width:120px;" class="v-status"><option value="स्व०">स्व०</option><option value="जीवित">जीवित</option></select>
                 <input class="v-name" placeholder="पुत्र का नाम">
-                <button type="button" class="btn btn-remove" onclick="this.parentElement.parentElement.remove()">❌</button>
+                <button class="btn btn-remove" onclick="this.parentElement.parentElement.remove()">✕</button>
             </div>
-            <div class="son-section" style="margin-top:10px; margin-left:30px;">
+            <div class="son-section" style="margin-top:10px; margin-left:30px; border-left: 2px dashed #ccc; padding-left:15px;">
                 <div class="son-list"></div>
-                <button type="button" class="btn" style="background:#eee; color:#333; font-size:11px;" onclick="addGrandSon(this)">+ पोता जोड़ें (Grandson)</button>
+                <button class="btn" style="background:#f1f5f9; color:#475569; font-size:11px;" onclick="addGrandSon(this)">+ पोता जोड़ें</button>
             </div>
         `;
         container.appendChild(div);
     }
 
     function addGrandSon(btn) {
-        const input = document.createElement('input');
-        input.placeholder = "पोते का नाम";
-        input.className = "gs-name";
-        input.style = "margin-bottom:5px; width:80%; display:block;";
-        btn.previousElementSibling.appendChild(input);
+        const div = document.createElement('div');
+        div.style.marginBottom = "5px";
+        div.innerHTML = `<input class="gs-name" placeholder="पोते का नाम" style="width:80%; display:inline-block;"> <button onclick="this.parentElement.remove()" style="border:none; background:none; cursor:pointer;">✕</button>`;
+        btn.previousElementSibling.appendChild(div);
     }
 
-    // --- PRINT GENERATION ---
+    // PRINT GENERATION
     window.onbeforeprint = function() {
         const area = document.getElementById('print-area'); area.innerHTML = "";
         const fNames = document.querySelectorAll('.f-name');
+        const fGuardians = document.querySelectorAll('.f-guardian');
+        const fAges = document.querySelectorAll('.f-age');
+        const fCastes = document.querySelectorAll('.f-caste');
+        const fAddrs = document.querySelectorAll('.f-address');
 
-        // Page 1: Intro
-        area.innerHTML += `<div class="page"><div class="pg-num">Page:-1</div><div class="sig-gawah">गवाह</div><div class="stamp-gap"></div><center><h3>सहमति पंचनामा बटवारा</h3></center><p><b>1. लेख्यकारी :-</b><br>${Array.from(fNames).map((n, i) => `<b>फरीक नं०-${i+1}:</b> ${n.value}, पिता/पति- ${document.querySelectorAll('.f-guardian')[i].value}, उम्र- ${document.querySelectorAll('.f-age')[i].value}, जाति- ${document.querySelectorAll('.f-caste')[i].value}, निवासी- ${document.querySelectorAll('.f-address')[i].value}<br>`).join('')}</p><p><b>2. लेख्यधारी :-</b> एक दूसरे के पक्ष में।</p><div class="sig-sarpanch">सरपंच</div><div class="sig-farikh">फरिकेन का हस्ताक्षर</div></div>`;
+        // Page 1: Introduction
+        let introHTML = `<div class="page">
+            <div class="sig-box sig-gawah">गवाह</div>
+            <div class="stamp-space">Non-Judicial Stamp Paper Ke Liye Jagah</div>
+            <center><h2 style="text-decoration:underline;">सहमति पंचनामा बँटवारा</h2></center>
+            <p><b>1. लेख्यकारी (प्रथम पक्ष):-</b><br>
+            ${Array.from(fNames).map((n, i) => `<b>(${i+1}) ${n.value}</b>, पिता/पति- ${fGuardians[i].value}, उम्र- ${fAges[i].value}, जाति- ${fCastes[i].value}, निवासी- ${fAddrs[i].value}<br>`).join('')}
+            </p>
+            <p><b>2. लेख्यधारी (द्वितीय पक्ष):-</b> उपरोक्त सभी प्रथम पक्ष एक-दूसरे के पक्ष में।</p>
+            <div class="legal-text">
+                आगे यह कि हम सभी हिस्सेदार एक ही खानदान के वंशज हैं। हमारे पूर्वजों द्वारा अर्जित एवं खतियानी पैतृक संपत्ति जो कि नीचे वर्णित है, उसे हम अपनी आपसी सहमति और बिना किसी दबाव के, गांव के प्रतिष्ठित पंचों के समक्ष बँटवारा कर रहे हैं ताकि भविष्य में कोई विवाद न हो।
+            </div>
+            <div class="sig-sarpanch">सरपंच/पंच का हस्ताक्षर</div>
+            <div class="sig-farikh">सभी हिस्सेदारों का हस्ताक्षर</div>
+            <div class="pg-footer">Jameenseva.in | Page: 1</div>
+        </div>`;
+        area.innerHTML += introHTML;
 
-        // Page 2: Kul Bhumi
-        let tlRows = Array.from(document.querySelectorAll('#landBody tr')).map(tr => `<tr><td>${tr.querySelector('.tl-mauja').value}</td><td>${tr.querySelector('.tl-khata').value}</td><td>${tr.querySelector('.tl-khesra').value}</td><td>${tr.querySelector('.tl-rakwa').value}</td></tr>`).join('');
-        area.innerHTML += `<div class="page"><div class="pg-num">Page:-2</div><div class="sig-gawah">गवाह</div><h3 style="margin-top:50px;">कुल पैतृक भूमि सम्पत्ति विवरण:-</h3><table><tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा</th></tr>${tlRows}</table><div class="total-box">कुल रकवा: ${document.getElementById('total_land_val').innerText}</div><div class="sig-sarpanch">सरपंच</div><div class="sig-farikh">फरिकेन का हस्ताक्षर</div></div>`;
+        // Page 2: Total Land Property
+        let landRows = Array.from(document.querySelectorAll('#landBody tr')).map(tr => `
+            <tr><td>${tr.querySelector('.tl-mauja').value}</td><td>${tr.querySelector('.tl-khata').value}</td><td>${tr.querySelector('.tl-khesra').value}</td><td>${tr.querySelector('.tl-rakwa').value}</td></tr>
+        `).join('');
+        area.innerHTML += `<div class="page">
+            <div class="sig-box sig-gawah">गवाह</div>
+            <h3 style="margin-top:40px;">3. कुल पैतृक भूमि सम्पत्ति का विवरण:-</h3>
+            <table><tr><th>मौजा</th><th>खाता</th><th>खेसरा</th><th>रकवा (डिसमिल)</th></tr>${landRows}</table>
+            <div class="total-box">कुल रकवा: ${document.getElementById('total_land_val').innerText} डिसमिल</div>
+            <div class="legal-text" style="margin-top:30px;">
+                उपरोक्त वर्णित भूमि हम सभी हिस्सेदारों की संयुक्त संपत्ति है जिसका उपयोग हम अब तक सम्मिलित रूप से करते आ रहे थे। आज से इस बँटवारे के अनुसार हम अपने-अपने आवंटित हिस्से पर काबिज होंगे।
+            </div>
+            <div class="sig-sarpanch">सरपंच/पंच का हस्ताक्षर</div>
+            <div class="sig-farikh">सभी हिस्सेदारों का हस्ताक्षर</div>
+            <div class="pg-footer">Jameenseva.in | Page: 2</div>
+        </div>`;
 
-        // Page 3+: Hissedar Schedules
+        // Page 3+: Allocation Schedules
         document.querySelectorAll('#allocationContainer .fariq-card').forEach((card, i) => {
-            let rows = Array.from(card.querySelectorAll('.alloc-body tr')).map(tr => `<tr><td>${tr.querySelector('.al-khata').value}</td><td>${tr.querySelector('.al-khesra').value}</td><td>${tr.querySelector('.al-rakwa').value}</td><td>${tr.querySelector('.al-chauhadi').value}</td></tr>`).join('');
-            area.innerHTML += `<div class="page"><div class="pg-num">Page:-${i+3}</div><div class="sig-gawah">गवाह</div><h3 style="margin-top:50px;">विवरण हिस्सा: फरीक नं०-${i+1} (${card.querySelector('.al-name').value})</h3><table><tr><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th></tr>${rows}</table><div class="sig-sarpanch">सरपंच</div><div class="sig-farikh">हिस्सेदार का हस्ताक्षर</div></div>`;
+            let rows = Array.from(card.querySelectorAll('.alloc-body tr')).map(tr => `
+                <tr><td>${tr.querySelector('.al-khata').value}</td><td>${tr.querySelector('.al-khesra').value}</td><td>${tr.querySelector('.al-rakwa').value}</td><td>${tr.querySelector('.al-chauhadi').value}</td></tr>
+            `).join('');
+            area.innerHTML += `<div class="page">
+                <div class="sig-box sig-gawah">गवाह</div>
+                <h3 style="margin-top:40px;">विवरण हिस्सा: फरीक नं०-${i+1} (${card.querySelector('.al-name').value})</h3>
+                <p>इस हिस्सेदार के नाम आवंटित जमीन का विवरण नीचे दिया गया है:</p>
+                <table><tr><th>खाता</th><th>खेसरा</th><th>रकवा</th><th>चौहद्दी</th></tr>${rows}</table>
+                <div class="legal-text">
+                    यह हिस्सेदार अपने आवंटित हिस्से पर आज से पूर्णतः दखलकार होगा और अपने नाम से दाखिल-खारिज (Mutation) कराकर सरकार को लगान देने का अधिकारी होगा।
+                </div>
+                <div class="sig-sarpanch">सरपंच/पंच</div>
+                <div class="sig-farikh">हिस्सेदार का हस्ताक्षर</div>
+                <div class="pg-footer">Jameenseva.in | Page: ${i+3}</div>
+            </div>`;
         });
 
-        // Page 6: Legal (Hu-ba-hu)
-        area.innerHTML += `<div class="page"><div class="pg-num">Page:-6</div><div class="sig-gawah">गवाह</div><div style="margin-top:60px;" class="legal-para">आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव, भडकाव व धमकाव में आकर निश्चित किया कि गांव समाज के कुछ प्रतिष्ठित पंचों व सरपंच के समक्ष समिलात खतियानी जमीन व समिलात खरीदारी केवाला की जमीन है। मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में समिलात जमीन कि विवाद नहीं हो एवं सरकारी राजस्व का भुगतान भी समय-समय पर अपने हक हिस्सा के अनुसार किया करेंगे।</div><div class="legal-para">यह कि अपने-अपने सिडूल की संपत्ति पर इस बटवारा के अनुसार दखलकार होकर सभी तरह का सुखभोग.. आदि किया करेंगे। आज दिनांक- &nbsp;&nbsp; / &nbsp;&nbsp; / 20&nbsp;&nbsp; से सभी फरिक अपने हिस्से का दाखिल खारिज कराकर राजस्व लगान रसीद काटा सकता है या सर्वे में अपने नाम से खाता खुलवा सकता है। यह की उपर्युक्त पंचनामा बंटवारा के सभी हिस्सेदार व सिडूल धारी सही वह दूरस्थ मानकर अपना हस्ताक्षर एवं निशान बना दिया ताकि भविष्य में विवाद न हो।</div><div class="sig-sarpanch">सरपंच</div><div class="sig-farikh">फरिकेन का हस्ताक्षर</div></div>`;
+        // Final Legal Page
+        area.innerHTML += `<div class="page">
+            <div class="sig-box sig-gawah">गवाह</div>
+            <h3 style="margin-top:40px;">4. कानूनी घोषणा एवं इकरारनामा</h3>
+            <div class="legal-text">
+                यह कि हम सभी हिस्सेदार एक ही खूंट खानदान के हैं और इस बँटवारे को अपनी मानसिक और शारीरिक स्वस्थता में स्वीकार करते हैं। किसी भी पक्ष को आवंटित हिस्से पर अन्य किसी पक्ष का कोई दावा भविष्य में मान्य नहीं होगा।
+            </div>
+            <div class="legal-text">
+                यह कि आज दिनांक ________ से सभी फरीक अपने-अपने हिस्से का दाखिल-खारिज करा सकते हैं और सर्वे के दौरान अपने नाम से अलग खाता खुलवा सकते हैं। यह पंचनामा भविष्य में प्रमाण के रूप में कार्य करेगा।
+            </div>
+            <p style="margin-top:50px;"><b>दिनांक:</b> ___/___/20___</p>
+            <p><b>स्थान:</b> ____________________</p>
+            <div class="sig-sarpanch">सरपंच/मुखिया का हस्ताक्षर</div>
+            <div class="sig-farikh">सभी हिस्सेदारों का हस्ताक्षर/निशान</div>
+            <div class="pg-footer">Jameenseva.in | Final Page</div>
+        </div>`;
 
-        // Page 7: Vanshavali
+        // Vanshavali Page
         let treeData = Array.from(document.querySelectorAll('#treeMemberContainer .fariq-card')).map(card => {
             let name = card.querySelector('.v-name').value;
             let status = card.querySelector('.v-status').value;
-            let sons = Array.from(card.querySelectorAll('.gs-name')).map(gs => gs.value).join(', ');
-            return `<p>● ${status} ${name} ${sons ? `(पुत्र: ${sons})` : ''}</p>`;
+            let sons = Array.from(card.querySelectorAll('.gs-name')).map(gs => gs.value).filter(v => v).join(', ');
+            return `<div style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:5px;">● <b>${status} ${name}</b> ${sons ? `<br>&nbsp;&nbsp;&nbsp;└─ (पुत्र: ${sons})` : ''}</div>`;
         }).join('');
-        area.innerHTML += `<div class="page"><div class="pg-num">Page:-7</div><div class="sig-gawah">गवाह</div><h2 style="text-align:center; margin-top:50px;">वंशवृक्ष (वंशावली)</h2><div style="border:2px solid black; padding:20px; text-align:center;"><h3>${document.getElementById('v_head').value}</h3><p>पिता- ${document.getElementById('v_head_f').value}</p><hr><div style="text-align:left;">${treeData}</div></div><div class="sig-sarpanch">सरपंच</div><div class="sig-farikh">सभों का हस्ताक्षर</div></div>`;
+
+        area.innerHTML += `<div class="page">
+            <div class="sig-box sig-gawah">गवाह</div>
+            <center><h2 style="margin-top:40px;">वंशावली (Genealogy)</h2></center>
+            <div style="border:2px solid black; padding:30px; margin-top:20px; background:#fafafa;">
+                <center>
+                    <h3 style="border:none;">${document.getElementById('v_head').value}</h3>
+                    <p>(पिता: ${document.getElementById('v_head_f').value})</p>
+                </center>
+                <hr style="border:1px solid #000;">
+                <div style="margin-top:20px;">${treeData}</div>
+            </div>
+            <div class="legal-text" style="font-size:12px;">*यह वंशावली केवल आपसी बँटवारे के उद्देश्य से तैयार की गई है।</div>
+            <div class="sig-sarpanch">सरपंच का हस्ताक्षर एवं मुहर</div>
+            <div class="sig-farikh">हिस्सेदारों का हस्ताक्षर</div>
+            <div class="pg-footer">Jameenseva.in | Vanshavali</div>
+        </div>`;
     };
 
     window.onload = () => { addFariqRow(); addLandRow(); addAllocationBox(); };
 </script>
+
 </body>
 </html>
