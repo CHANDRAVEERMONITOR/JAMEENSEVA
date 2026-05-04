@@ -228,6 +228,163 @@ function confirmCOD(id) {
     window.location.reload(); 
 }
 </script>
+    <!-- ✅ KHATIYAN.HTML ke beech mein yeh section daalo — order form ke NEECHE -->
+<!-- ✅ Mobile aur Desktop dono ke liye fully responsive hai -->
+
+<style>
+  .js-info-section { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 15px; box-sizing: border-box; }
+  .js-info-section h2 { color: #28a745; font-size: clamp(18px, 4vw, 24px); margin-bottom: 12px; }
+  .js-info-section h3 { color: #1a5c2e; font-size: clamp(16px, 3vw, 20px); margin-top: 28px; margin-bottom: 10px; }
+  .js-info-section p, .js-info-section li { color: #333; font-size: clamp(13px, 2.5vw, 15px); line-height: 1.85; }
+  .js-table { width: 100%; border-collapse: collapse; font-size: clamp(12px, 2.2vw, 14px); margin-top: 10px; overflow-x: auto; display: block; }
+  .js-table th { background: #28a745; color: white; padding: 10px 12px; text-align: left; white-space: nowrap; }
+  .js-table td { padding: 10px 12px; border-bottom: 1px solid #ddd; vertical-align: top; }
+  .js-table tr:nth-child(even) { background: #f5f5f5; }
+  .js-table tr:nth-child(odd) { background: #fff; }
+  .js-card { background: #fff; border-left: 4px solid #28a745; padding: 12px 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .js-card p { margin: 0; }
+  .js-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+  .js-grid-item { background: #fff; border: 1px solid #e0e0e0; border-radius: 6px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.07); }
+  .js-grid-item h4 { color: #28a745; margin: 0 0 6px 0; font-size: clamp(13px, 2.5vw, 15px); }
+  .js-grid-item p { margin: 0; font-size: clamp(12px, 2.2vw, 14px); color: #555; }
+  .js-cta { text-align: center; margin-top: 28px; }
+  .js-cta a { display: inline-block; background: #25D366; color: white; padding: 13px 28px; border-radius: 30px; font-size: clamp(14px, 3vw, 16px); font-weight: bold; text-decoration: none; box-shadow: 0 3px 8px rgba(0,0,0,0.2); }
+  .js-highlight { background: #e8f5e9; border: 1px solid #28a745; border-radius: 6px; padding: 14px 16px; margin-top: 16px; }
+</style>
+
+<section class="js-info-section" style="background:#f9f9f9; border-top:3px solid #28a745; padding:30px 15px;">
+
+  <h2>📜 खतियान क्या होता है? — पूरी जानकारी</h2>
+  <p>
+    <strong>खतियान</strong> बिहार सरकार का एक आधिकारिक भूमि रिकॉर्ड दस्तावेज है जिसमें किसी रैयत (भूमि मालिक) की जमीन का पूरा विवरण दर्ज होता है — खाता नंबर, खेसरा नंबर, रकबा, चौहद्दी और जमीन की प्रकृति। यह दस्तावेज बिहार के <strong>विशेष भूमि सर्वेक्षण 2026</strong> में सबसे जरूरी कागज है।
+  </p>
+
+  <h3>📂 खतियान के प्रकार</h3>
+  <div class="js-grid">
+    <div class="js-grid-item">
+      <h4>📘 नया खतियान (R.S.)</h4>
+      <p>Revisional Survey के समय तैयार किया गया। अधिकांश जिलों में यही सबसे नया और मान्य खतियान है।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>📗 पुराना खतियान (C.S.)</h4>
+      <p>Cadastral Survey — अंग्रेजों के समय तैयार हुआ। पुरानी जमीन का मूल रिकॉर्ड यहाँ मिलता है।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>📙 चकबंदी खतियान</h4>
+      <p>जहाँ जमीन की चकबंदी हुई वहाँ यह खतियान लागू होता है। बिहार के कुछ क्षेत्रों में मान्य।</p>
+    </div>
+  </div>
+
+  <h3>✅ खतियान की जरूरत कब होती है?</h3>
+  <table class="js-table">
+    <tr>
+      <th>काम</th>
+      <th>खतियान क्यों जरूरी है</th>
+    </tr>
+    <tr>
+      <td>बिहार सर्वे 2026</td>
+      <td>अमीन को जमीन का पुराना रिकॉर्ड दिखाना पड़ता है</td>
+    </tr>
+    <tr>
+      <td>दाखिल-खारिज (Mutation)</td>
+      <td>नाम दर्ज कराने के लिए खतियान अनिवार्य है</td>
+    </tr>
+    <tr>
+      <td>बैंक लोन / KCC</td>
+      <td>बैंक खतियान देखकर जमीन की मालियत तय करता है</td>
+    </tr>
+    <tr>
+      <td>पंचनामा बटवारा</td>
+      <td>बटवारे में सभी हिस्सेदारों का खतियान लगता है</td>
+    </tr>
+    <tr>
+      <td>कोर्ट केस / विवाद</td>
+      <td>जमीन पर मालिकाना हक साबित करने के लिए</td>
+    </tr>
+    <tr>
+      <td>जमीन खरीद-बिक्री</td>
+      <td>रजिस्ट्री से पहले खतियान की जाँच होती है</td>
+    </tr>
+  </table>
+
+  <h3>🚀 JameenSeva से खतियान मंगवाने के फायदे</h3>
+  <div class="js-grid">
+    <div class="js-grid-item">
+      <h4>🏠 घर बैठे</h4>
+      <p>सरकारी दफ्तर के चक्कर नहीं — ऑर्डर करें और दस्तावेज घर पर पाएं।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>📦 Cash on Delivery</h4>
+      <p>दस्तावेज मिलने के बाद भुगतान — पहले पैसे देने की जरूरत नहीं।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>🔍 ओरिजिनल नकल</h4>
+      <p>सरकारी पोर्टल से निकाली गई असली नकल — नकली नहीं।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>🚚 Speed Post</h4>
+      <p>बिहार के सभी 38 जिलों में Speed Post / Courier से डिलीवरी।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>📲 Tracking</h4>
+      <p>Tracking ID से ऑर्डर की स्थिति घर बैठे जानें।</p>
+    </div>
+    <div class="js-grid-item">
+      <h4>⚡ तेज़ सेवा</h4>
+      <p>ऑर्डर के 24-48 घंटे में दस्तावेज तैयार — 5-12 दिन में डिलीवरी।</p>
+    </div>
+  </div>
+
+  <h3>📋 ऑर्डर करते समय यह जानकारी तैयार रखें</h3>
+  <ul style="padding-left:18px;">
+    <li><strong>जिला और प्रखंड (Block)</strong> का नाम</li>
+    <li><strong>थाना नंबर</strong> — पुराने खतियान पर लिखा मिलता है</li>
+    <li><strong>मौजा / गाँव</strong> का नाम</li>
+    <li><strong>खाता नंबर</strong> — यदि पता हो</li>
+    <li><strong>खेसरा नंबर</strong> — यदि पता हो</li>
+    <li><strong>रैयत का नाम</strong> — जमीन मालिक का नाम</li>
+    <li><strong>खतियान का प्रकार</strong> — R.S., C.S. या चकबंदी</li>
+  </ul>
+
+  <div class="js-highlight">
+    <p><strong>💡 नोट नया खतियान के लियें :</strong> अगर आपको खाता या खेसरा नंबर नहीं पता, तो सिर्फ रैयत का नाम और गाँव का नाम डालकर भी ऑर्डर कर सकते हैं। हमारी टीम खोजकर निकालेगी।</p>
+  </div>
+
+  <h3>❓ अक्सर पूछे जाने वाले सवाल</h3>
+
+  <div class="js-card">
+    <p><strong>Q: खतियान निकलने में कितना समय लगता है?</strong><br>
+    ऑर्डर के बाद 24-48 घंटे में दस्तावेज तैयार हो जाता है। Speed Post से 3-7 दिन में घर पहुँच जाता है।</p>
+  </div>
+
+  <div class="js-card">
+    <p><strong>Q: क्या यह खतियान सरकारी रूप से मान्य है?</strong><br>
+    हाँ, हम सरकारी पोर्टल (bhuabhilekh.bihar.gov.in) से ओरिजिनल नकल निकालते हैं जो हर जगह मान्य है।</p>
+  </div>
+
+  <div class="js-card">
+    <p><strong>Q: R.S. और C.S. खतियान में क्या फर्क है?</strong><br>
+    R.S. नया सर्वे है — अधिकांश कामों में यही लगता है। C.S. पुराना है — जब पुराना मालिकाना हक साबित करना हो तब जरूरी होता है।</p>
+  </div>
+
+  <div class="js-card">
+    <p><strong>Q: अगर खतियान न मिले तो पैसे वापस होंगे?</strong><br>
+    हाँ, अगर हम खतियान नहीं निकाल पाए तो कोई चार्ज नहीं लिया जाएगा।</p>
+  </div>
+
+  <div class="js-card">
+    <p><strong>Q: क्या एक साथ कई खतियान मंगवा सकते हैं?</strong><br>
+    हाँ, WhatsApp पर 9142075859 पर संपर्क करें — बल्क ऑर्डर पर विशेष छूट मिलती है।</p>
+  </div>
+
+  <div class="js-cta">
+    <a href="https://wa.me/919142075859">📲 कोई सवाल? WhatsApp करें</a>
+  </div>
+  <p style="color:#888; font-size:12px; text-align:center; margin-top:12px;">
+    सोमवार से शनिवार | सुबह 9 बजे से शाम 6 बजे तक | बिहार के सभी 38 जिलों में सेवा उपलब्ध
+  </p>
+
+</section>
 </body>
 </html>
 <script src="footer.js"></script>
