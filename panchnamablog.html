@@ -194,31 +194,6 @@
         <a href="panchnama.html" class="order-btn">अभी आर्डर करें (Order Now)</a>
     </div>
 
-    <div class="rating-section" id="ratingApp">
-        <h3>किसान भाइयों की राय (Ratings)</h3>
-        <div class="stars-container">★★★★★</div>
-        <p><b id="avgRating">4.9/5</b> - (482 Reviews)</p>
-        
-        <div id="reviewList">
-            <div class="review-card"><b>Mohan Jha (Madhubani):</b> "Word file bahut badiya hai, maine khud se edit karke dakhil kharij karwa liya."</div>
-            <div class="review-card"><b>Rakesh Kumar (Gaya):</b> "Bihar survey ke liye sabse best format hai. Thank you Jameen Seva."</div>
-        </div>
-<div id="footer-placeholder"></div>
-
-<script>
-    // Rating System Logic
-    function addReview() {
-        const text = document.getElementById('userReview').value;
-        if(text === "") { alert("Please write something!"); return; }
-        const list = document.getElementById('reviewList');
-        const div = document.createElement('div');
-        div.className = 'review-card';
-        div.innerHTML = `<b>Aapka Review:</b> ${text}`;
-        list.prepend(div);
-        document.getElementById('userReview').value = "";
-        alert("Dhanyawad! Review add ho gaya.");
-    }
-
    <div class="footer">
     <p><strong>JameenSeva.in - बिहार की अपनी जमीन जानकारी वेबसाइट</strong></p>
     
@@ -245,21 +220,7 @@
   </div>
  
 </div><!-- /wrapper -->
-    <!-- ===== FOOTER ===== -->
-<footer>
-  <div>
-    <strong style="color:#fff;font-size:1rem;">JameenSeva.in</strong><br>
-    बिहार का भरोसेमंद जमीन दस्तावेज़ सेवा पोर्टल<br>
-    <a href="https://jameenseva.in/about.html">हमारे बारे में</a> &nbsp;|&nbsp;
-    <a href="https://jameenseva.in/terms-and-conditions.html">नियम व शर्तें</a> &nbsp;|&nbsp;
-    <a href="https://jameenseva.in/privacy-policy.html">गोपनीयता नीति</a> &nbsp;|&nbsp;
-    <a href="https://jameenseva.in/disclaimer.html">डिस्क्लेमर</a> &nbsp;|&nbsp;
-    <a href="https://jameenseva.in/contact.html">संपर्क करें</a> &nbsp;|&nbsp;
-    <a href="https://jameenseva.in/sitemap.html">साइटमैप</a><br>
-    © 2026 JameenSeva.in – All Rights Reserved.<br>
-    <small style="opacity:.55;">यह वेबसाइट केवल सूचनात्मक और सहायक सेवा प्रदान करती है। सरकारी कागजात की प्रामाणिकता की जिम्मेदारी संबंधित विभाग की है।</small>
-  </div>
-</footer>
+
 </body>
 </html>
-
+<script src="footer.js"></script>
