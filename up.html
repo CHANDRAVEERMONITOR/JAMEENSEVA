@@ -1,55 +1,713 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>उत्तर प्रदेश जमीन सेवा - घर बैठे खतौनी और जानकारी प्राप्त करें</title>
-    <style>
-        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: #f4f7f6; }
-        .header { background: #c0392b; color: white; padding: 15px; text-align: center; }
-        .nav-icons { display: flex; justify-content: space-around; background: #e67e22; padding: 10px; color: white; font-size: 14px; }
-        .container { padding: 15px; }
-        
-        /* Blue Blocks Style (As per your Bihar Image) */
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 20px; }
-        .grid-item { background: #1a5f7a; color: white; padding: 20px; text-align: center; border-radius: 8px; font-weight: bold; font-size: 14px; text-decoration: none; cursor: pointer; }
-        
-        /* Service Cards */
-        .card-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 30px; }
-        .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); overflow: hidden; text-align: center; }
-        .card img { width: 100%; height: 120px; object-fit: cover; }
-        .card h3 { font-size: 16px; padding: 10px; color: #333; }
-        .btn-read { background: #27ae60; color: white; padding: 8px 15px; border: none; border-radius: 5px; margin-bottom: 15px; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>उत्तर प्रदेश भूलेख – खतौनी, दाखिल खारिज, बैनामा और नक्शा ऑनलाइन देखें | JameenSeva.in</title>
+  <meta name="description" content="उत्तर प्रदेश में खतौनी कैसे देखें, दाखिल खारिज कैसे करें, बैनामा कैसे निकालें और जमीन का नक्शा कैसे देखें – पूरी जानकारी हिंदी में। UP Bhulekh 2026 गाइड।" />
+  <meta name="keywords" content="UP bhulekh khatauni, उत्तर प्रदेश खतौनी ऑनलाइन, up jameen ki jankari, dakhil kharij up, bainama up, up land records 2026, भूलेख यूपी, upbhulekh.gov.in" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://jameenseva.in/up.html" />
+  <meta property="og:title" content="उत्तर प्रदेश भूलेख – खतौनी, नक्शा और जमीन जानकारी | JameenSeva.in" />
+  <meta property="og:description" content="UP में खतौनी, दाखिल खारिज, बैनामा और जमीन का नक्शा ऑनलाइन देखने की पूरी गाइड।" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jameenseva.in/up.html" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "उत्तर प्रदेश भूलेख – खतौनी, दाखिल खारिज, बैनामा और नक्शा की पूरी जानकारी",
+    "description": "UP में जमीन से जुड़े सभी दस्तावेज़ ऑनलाइन कैसे देखें और निकालें – स्टेप-बाय-स्टेप गाइड।",
+    "publisher": { "@type": "Organization", "name": "JameenSeva.in", "url": "https://jameenseva.in" },
+    "inLanguage": "hi"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #222; line-height: 1.75; font-size: 15px; }
+    a { color: #7b2e8e; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---- Navbar ---- */
+    .navbar {
+      background: #7b2e8e;
+      padding: 0 16px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; min-height: 52px; gap: 8px;
+      position: sticky; top: 0; z-index: 999;
+      box-shadow: 0 2px 8px rgba(0,0,0,.22);
+    }
+    .navbar .brand { color: #fff; font-size: 1.15rem; font-weight: 700; }
+    .navbar .brand span { color: #f0c040; }
+    .nav-links { display: flex; gap: 4px; flex-wrap: wrap; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.9); font-size: .82rem; padding: 6px 10px; border-radius: 4px; transition: background .2s; }
+    .nav-links a:hover { background: rgba(255,255,255,.15); text-decoration: none; }
+
+    /* ---- Hero ---- */
+    .hero {
+      background: linear-gradient(135deg, #7b2e8e 0%, #4a1a55 100%);
+      color: #fff; text-align: center; padding: 42px 16px 32px;
+    }
+    .hero .tag {
+      display: inline-block; background: #f0c040; color: #3d2b00;
+      font-size: .72rem; font-weight: 700; padding: 3px 14px;
+      border-radius: 20px; margin-bottom: 12px; letter-spacing: .8px; text-transform: uppercase;
+    }
+    .hero h1 { font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+    .hero p { font-size: .95rem; opacity: .88; max-width: 660px; margin: 0 auto 18px; }
+    .hero-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .btn-gold { background: #f0c040; color: #3d2b00; padding: 10px 22px; border-radius: 6px; font-weight: 700; font-size: .9rem; }
+    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); padding: 10px 20px; border-radius: 6px; font-size: .9rem; }
+
+    /* ---- Breadcrumb ---- */
+    .breadcrumb { font-size: .78rem; padding: 10px 16px; color: #888; background: #fff; border-bottom: 1px solid #e5e5e5; }
+    .breadcrumb a { color: #7b2e8e; }
+
+    /* ---- Wrapper ---- */
+    .wrapper { max-width: 1040px; margin: 0 auto; padding: 26px 14px 52px; }
+
+    /* ---- Quick Links Bar ---- */
+    .quick-bar {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+      gap: 10px; margin-bottom: 28px;
+    }
+    .quick-item {
+      background: #fff; border: 1.5px solid #d8b4e2; border-radius: 10px;
+      padding: 14px 16px; text-align: center; transition: box-shadow .2s;
+    }
+    .quick-item:hover { box-shadow: 0 4px 14px rgba(123,46,142,.15); }
+    .quick-item .qi { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+    .quick-item strong { display: block; color: #7b2e8e; font-size: .88rem; margin-bottom: 3px; }
+    .quick-item span { font-size: .78rem; color: #666; }
+
+    /* ---- Section Cards ---- */
+    .section-card {
+      background: #fff; border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      border: 1px solid #e0cceb; padding: 26px 24px; margin-bottom: 24px;
+    }
+    .section-card h2 {
+      font-size: 1.2rem; color: #7b2e8e; font-weight: 700;
+      border-bottom: 2px solid #f3e8f8; padding-bottom: 10px; margin-bottom: 16px; line-height: 1.4;
+    }
+    .section-card h3 { font-size: 1rem; color: #7b2e8e; font-weight: 700; margin: 16px 0 7px; }
+    .section-card p { color: #444; margin-bottom: 10px; font-size: .94rem; }
+
+    /* Boxes */
+    .info-box { background: #fdf6e3; border-left: 4px solid #c89a2e; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .9rem; color: #5a4000; }
+    .alert-box { background: #fff3cd; border-left: 4px solid #e0a800; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .9rem; color: #664d03; }
+    .success-box { background: #eaf7ef; border-left: 4px solid #27ae60; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .9rem; color: #1a5c32; }
+    .purple-box { background: #f8f0fc; border-left: 4px solid #7b2e8e; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .9rem; color: #4a1a55; }
+
+    /* Steps */
+    .steps { list-style: none; counter-reset: sc; }
+    .steps li {
+      counter-increment: sc; display: flex; gap: 14px; align-items: flex-start;
+      background: #f8f0fc; border: 1px solid #d8b4e2; border-radius: 10px;
+      padding: 14px 16px; margin-bottom: 12px;
+    }
+    .steps li::before {
+      content: counter(sc); background: #7b2e8e; color: #fff;
+      min-width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .95rem; flex-shrink: 0;
+    }
+    .st { font-weight: 700; color: #7b2e8e; font-size: .95rem; display: block; margin-bottom: 3px; }
+    .sd { font-size: .88rem; color: #555; line-height: 1.65; }
+
+    /* Table */
+    .data-table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-top: 10px; }
+    .data-table th { background: #7b2e8e; color: #fff; padding: 10px 13px; text-align: left; }
+    .data-table td { padding: 9px 13px; border-bottom: 1px solid #ead5f5; color: #444; vertical-align: top; }
+    .data-table tr:nth-child(even) td { background: #f8f0fc; }
+    .ok { color: #1a7a3c; font-weight: 700; }
+    .no { color: #c0392b; font-weight: 700; }
+
+    /* Doc list */
+    .doc-list { list-style: none; }
+    .doc-list li { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px dashed #d8b4e2; font-size: .9rem; color: #444; align-items: flex-start; }
+    .doc-list li:last-child { border: none; }
+    .doc-list li .di { color: #7b2e8e; font-size: 1.05rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* Portal cards */
+    .portal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 12px; margin-top: 12px; }
+    .portal-card {
+      background: #f8f0fc; border: 1.5px solid #d8b4e2; border-radius: 10px;
+      padding: 16px; text-align: center;
+    }
+    .portal-card .picon { font-size: 2rem; display: block; margin-bottom: 8px; }
+    .portal-card strong { display: block; color: #4a1a55; font-size: .9rem; margin-bottom: 5px; }
+    .portal-card p { font-size: .8rem; color: #666; margin-bottom: 10px; }
+    .portal-card a {
+      display: inline-block; background: #7b2e8e; color: #fff;
+      padding: 6px 16px; border-radius: 6px; font-size: .8rem; font-weight: 700;
+    }
+
+    /* District grid */
+    .d-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 7px; margin-top: 10px; }
+    .d-tag { background: #f8f0fc; border: 1px solid #d8b4e2; border-radius: 6px; padding: 6px 8px; font-size: .8rem; color: #7b2e8e; text-align: center; }
+
+    /* FAQ */
+    .faq-item { border: 1px solid #d8b4e2; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+    .faq-q { background: #f8f0fc; padding: 13px 16px; font-weight: 700; font-size: .9rem; color: #7b2e8e; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .faq-q .arrow { font-size: .72rem; transition: transform .2s; }
+    .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 13px 16px; font-size: .88rem; color: #555; line-height: 1.75; background: #fff; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* Related links */
+    .rel-list { list-style: none; }
+    .rel-list li { padding: 8px 0; border-bottom: 1px dashed #d8b4e2; font-size: .9rem; }
+    .rel-list li:last-child { border: none; }
+    .rel-list a { color: #7b2e8e; font-weight: 600; }
+
+    /* Footer */
+    footer { background: #2e0f38; color: rgba(255,255,255,.75); text-align: center; padding: 28px 16px; font-size: .84rem; line-height: 2; }
+    footer a { color: #d8a8f0; }
+
+    @media (max-width: 600px) {
+      .section-card { padding: 18px 14px; }
+      .portal-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>उत्तर प्रदेश जमीन सेवा</h1>
-        <p>घर बैठे अपनी जमीन का असली भूलेख और खतौनी प्राप्त करें</p>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="brand">Jameen<span>Seva</span>.in</div>
+  <ul class="nav-links">
+    <li><a href="https://jameenseva.in/index.html">🏠 Home</a></li>
+    <li><a href="https://jameenseva.in/index.html#services">📄 Services</a></li>
+    <li><a href="https://jameenseva.in/blog.html">✍️ Blog</a></li>
+    <li><a href="https://jameenseva.in/track.html">🚚 Tracking</a></li>
+    <li><a href="https://jameenseva.in/contact.html">📞 Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="tag">🏛️ उत्तर प्रदेश जमीन सेवा</div>
+  <h1>UP भूलेख – खतौनी, दाखिल खारिज,<br>बैनामा और नक्शा ऑनलाइन देखें</h1>
+  <p>उत्तर प्रदेश के सभी 75 जिलों में जमीन से जुड़े हर दस्तावेज़ की पूरी जानकारी — स्टेप-बाय-स्टेप गाइड।</p>
+  <div class="hero-btns">
+    <a href="https://jameenseva.in/up-land-calculator.html" class="btn-gold">📏 जमीन कैलकुलेटर</a>
+    <a href="#portals" class="btn-outline">🌐 सरकारी पोर्टल देखें</a>
+  </div>
+</div>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <a href="https://jameenseva.in/">होम</a> ›
+  <a href="https://jameenseva.in/index.html#services">सेवाएं</a> ›
+  उत्तर प्रदेश जमीन जानकारी
+</div>
+
+<div class="wrapper">
+
+  <!-- Quick Links -->
+  <div class="quick-bar">
+    <div class="quick-item">
+      <span class="qi">📋</span>
+      <strong>खतौनी देखें</strong>
+      <span>UP भूलेख पोर्टल से</span>
+    </div>
+    <div class="quick-item">
+      <span class="qi">🗺️</span>
+      <strong>भू-नक्शा देखें</strong>
+      <span>जमीन का नक्शा ऑनलाइन</span>
+    </div>
+    <div class="quick-item">
+      <span class="qi">📝</span>
+      <strong>दाखिल खारिज</strong>
+      <span>म्यूटेशन प्रक्रिया जानें</span>
+    </div>
+    <div class="quick-item">
+      <span class="qi">📜</span>
+      <strong>बैनामा देखें</strong>
+      <span>IGRSUP पोर्टल से</span>
+    </div>
+    <div class="quick-item">
+      <span class="qi">📏</span>
+      <strong>जमीन कैलकुलेटर</strong>
+      <span>बीघा-बिस्वा-धुर</span>
+    </div>
+  </div>
+
+  <!-- 1. UP Bhulekh kya hai -->
+  <div class="section-card">
+    <h2>📌 उत्तर प्रदेश भूलेख क्या है और यह क्यों जरूरी है?</h2>
+    <p>
+      <strong>उत्तर प्रदेश भूलेख (UP Bhulekh)</strong> राज्य सरकार का वह ऑनलाइन पोर्टल है
+      जिस पर UP के सभी 75 जिलों, 826 तहसीलों और 1 लाख से अधिक गाँवों की जमीन का
+      डिजिटल रिकॉर्ड रखा जाता है। इसे <strong>upbhulekh.gov.in</strong> के माध्यम से देखा जा सकता है।
+    </p>
+    <p>
+      भूलेख पोर्टल पर मुख्य रूप से <strong>खतौनी (Record of Rights)</strong> देखी जाती है —
+      यानी किसी जमीन पर किसका अधिकार है, कितना रकबा है और क्या उस पर कोई बंधक या विवाद है।
+      इसके अलावा जमीन का नक्शा, दाखिल खारिज की स्थिति और अन्य जानकारी भी यहाँ उपलब्ध है।
+    </p>
+    <div class="info-box">
+      💡 <strong>नया अपडेट 2026:</strong> UP भूलेख पोर्टल पर अब <strong>'रोशन' ऐप</strong> के ज़रिए
+      खतौनी ऑटो-अपडेट होती है। अगर आपकी खतौनी पुरानी दिख रही है तो रोशन पोर्टल पर
+      अपडेट की स्थिति जांचें।
     </div>
 
+    <h3>UP भूलेख में क्या-क्या देख सकते हैं?</h3>
+    <table class="data-table">
+      <thead>
+        <tr><th>दस्तावेज़</th><th>पोर्टल</th><th>मुफ्त / शुल्क</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>खतौनी (Record of Rights)</td><td>upbhulekh.gov.in</td><td class="ok">✔ मुफ्त (online देखें)</td></tr>
+        <tr><td>भू-नक्शा (Land Map)</td><td>upbhunaksha.gov.in</td><td class="ok">✔ मुफ्त</td></tr>
+        <tr><td>बैनामा / केवाला</td><td>igrsup.gov.in</td><td class="ok">✔ मुफ्त</td></tr>
+        <tr><td>दाखिल खारिज स्टेटस</td><td>upbhulekh.gov.in</td><td class="ok">✔ मुफ्त</td></tr>
+        <tr><td>प्रमाणित खतौनी (Certified)</td><td>तहसील / CSC Center</td><td><span style="color:#c0392b">₹15–₹30 प्रति पृष्ठ</span></td></tr>
+        <tr><td>जमीन की रजिस्ट्री</td><td>igrsup.gov.in</td><td class="ok">✔ मुफ्त देखें</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="container">
-        <div style="background: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin-bottom: 10px; font-size: 13px;">
-            <strong>नया अपडेट:</strong> उत्तर प्रदेश भूलेख पोर्टल पर 'रोशन' ऐप के जरिए नई खतौनी अपडेट हो गई है।
+  <!-- 2. Khatauni kaise dekhe -->
+  <div class="section-card">
+    <h2>📋 UP खतौनी ऑनलाइन कैसे देखें? — स्टेप-बाय-स्टेप</h2>
+    <p>
+      उत्तर प्रदेश में खतौनी देखने के लिए <strong>upbhulekh.gov.in</strong> पर जाएं।
+      नीचे पूरी प्रक्रिया बताई गई है:
+    </p>
+    <ol class="steps">
+      <li>
+        <div>
+          <span class="st">upbhulekh.gov.in खोलें</span>
+          <span class="sd">अपने मोबाइल या कंप्यूटर में upbhulekh.gov.in टाइप करें। होम पेज पर
+          <strong>"खतौनी (अधिकार अभिलेख) की नकल देखें"</strong> विकल्प पर क्लिक करें।</span>
         </div>
-
-        <div class="grid-container">
-            <a href="up-land-calculator.html" class="grid-item">jamin calculator</a>
-            <a href="track.html" class="grid-item">ऑर्डर ट्रैक करें</a>
-            <a href="contact.html" class="grid-item">हेल्पलाइन एवं संपर्क</a>
+      </li>
+      <li>
+        <div>
+          <span class="st">कैप्चा भरें</span>
+          <span class="sd">स्क्रीन पर दिखाया गया कैप्चा कोड भरें और Submit बटन दबाएं।</span>
         </div>
-
-        <div style="background: #27ae60; color: white; padding: 10px; text-align: center; margin-top: 20px; border-radius: 5px; font-size: 12px;">
-          ✅भारत की नंबर 1 जमीन सेवा वेबसाईट | ✅ UP के सभी 75 जिलों की जमीन के पेपर की सही जानकारी  | ✅ आसान प्रकिया के तहत सही जानकारी 
+      </li>
+      <li>
+        <div>
+          <span class="st">जिला और तहसील चुनें</span>
+          <span class="sd">अपना जिला (जैसे — लखनऊ, वाराणसी, आगरा) और उसके अंतर्गत तहसील चुनें।</span>
         </div>
-
-        <h2 style="text-align: center; color: #1a5f7a; margin-top: 40px;">जमीन संबंधित ताज़ा जानकारी (UP Special)</h2>
-
-        
+      </li>
+      <li>
+        <div>
+          <span class="st">ग्राम / गाँव चुनें</span>
+          <span class="sd">ग्राम पंचायत या हल्के के अंतर्गत अपना गाँव ढूंढें। गाँव का पहला अक्षर टाइप करने पर सूची आ जाएगी।</span>
         </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">खोज का तरीका चुनें</span>
+          <span class="sd">आप इनमें से किसी एक से खोज सकते हैं: <br>
+          • <strong>खसरा / गाटा संख्या</strong> से (सबसे सटीक)<br>
+          • <strong>खाता संख्या</strong> से<br>
+          • <strong>खातेदार के नाम</strong> से</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">नंबर / नाम दर्ज करें और खोजें</span>
+          <span class="sd">जानकारी भरकर "खोजें" बटन दबाएं। आपकी खतौनी की जानकारी स्क्रीन पर आ जाएगी।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">खतौनी देखें / डाउनलोड करें</span>
+          <span class="sd">खतौनी की ऑनलाइन कॉपी मुफ्त में देख सकते हैं। <strong>प्रमाणित कॉपी</strong>
+          (जो सरकारी कामों में चले) के लिए नजदीकी <strong>तहसील या CSC Center</strong> जाना होगा।</span>
+        </div>
+      </li>
+    </ol>
+    <div class="alert-box">
+      ⚠️ <strong>ध्यान दें:</strong> ऑनलाइन दिखाई गई खतौनी की नकल <strong>प्रमाणित नहीं होती</strong>।
+      बैंक लोन, कोर्ट केस और सरकारी योजनाओं के लिए तहसील से
+      <strong>अधिकृत हस्ताक्षर वाली प्रमाणित नकल</strong> ही मान्य होती है।
+    </div>
+  </div>
+
+  <!-- 3. Bhu Naksha -->
+  <div class="section-card">
+    <h2>🗺️ UP भू-नक्शा ऑनलाइन कैसे देखें?</h2>
+    <p>
+      उत्तर प्रदेश में जमीन का नक्शा देखने के लिए <strong>upbhunaksha.gov.in</strong> पोर्टल उपयोग करें।
+      इस पर किसी भी खसरा/गाटा नंबर का नक्शा देखा और डाउनलोड किया जा सकता है।
+    </p>
+    <ol class="steps">
+      <li>
+        <div>
+          <span class="st">upbhunaksha.gov.in खोलें</span>
+          <span class="sd">पोर्टल का होम पेज खुलते ही बाईं तरफ District, Tehsil और Village के
+          ड्रॉपडाउन दिखेंगे।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">जिला, तहसील और गाँव चुनें</span>
+          <span class="sd">अपनी जगह की जानकारी क्रमश: चुनें। चुनते ही उस गाँव का डिजिटल नक्शा
+          दाईं तरफ स्क्रीन पर दिखने लगेगा।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">खसरा/गाटा नंबर डालें या नक्शे पर क्लिक करें</span>
+          <span class="sd">Search Box में खसरा नंबर डालने पर वह खेत नक्शे पर हाइलाइट हो जाएगा।
+          नक्शे पर सीधे क्लिक करके भी खेत की जानकारी देख सकते हैं।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">नक्शा डाउनलोड करें</span>
+          <span class="sd">"Map Report" बटन पर क्लिक करके खेत का नक्शा PDF में डाउनलोड करें।
+          यह नक्शा व्यक्तिगत उपयोग के लिए मुफ्त है।</span>
+        </div>
+      </li>
+    </ol>
+    <div class="purple-box">
+      💜 <strong>काम की बात:</strong> यदि नक्शे में आपकी जमीन की सीमा गलत दिख रही है या
+      रकबा अलग है, तो अपने जिले के भू-अभिलेख कार्यालय में सुधार के लिए आवेदन दें।
+    </div>
+  </div>
+
+  <!-- 4. Dakhil Kharij UP -->
+  <div class="section-card">
+    <h2>⚙️ UP में दाखिल खारिज (Mutation) कैसे करें?</h2>
+    <p>
+      उत्तर प्रदेश में जमीन खरीदने, उत्तराधिकार मिलने या बंटवारे के बाद
+      खतौनी में नाम बदलवाने की प्रक्रिया को <strong>दाखिल खारिज (म्यूटेशन)</strong> कहते हैं।
+      यह अब ऑनलाइन भी किया जा सकता है।
+    </p>
+
+    <h3>दाखिल खारिज के लिए जरूरी दस्तावेज़</h3>
+    <ul class="doc-list">
+      <li><span class="di">📜</span><div><strong>बैनामा / रजिस्ट्री की कॉपी</strong> — जमीन खरीदी है तो रजिस्ट्री दस्तावेज़।</div></li>
+      <li><span class="di">📋</span><div><strong>पुरानी खतौनी</strong> — पुराने मालिक के नाम की खतौनी।</div></li>
+      <li><span class="di">🌳</span><div><strong>वंशावली / उत्तराधिकार प्रमाण</strong> — अगर उत्तराधिकार से मिली है तो।</div></li>
+      <li><span class="di">🪪</span><div><strong>आधार कार्ड</strong> — आवेदक का।</div></li>
+      <li><span class="di">📸</span><div><strong>पासपोर्ट साइज फोटो</strong> — आवेदक की।</div></li>
+      <li><span class="di">📑</span><div><strong>शपथ पत्र (Affidavit)</strong> — नोटरी द्वारा प्रमाणित।</div></li>
+    </ul>
+
+    <h3>ऑनलाइन दाखिल खारिज की प्रक्रिया</h3>
+    <ol class="steps">
+      <li>
+        <div>
+          <span class="st">upbhulekh.gov.in पर जाएं</span>
+          <span class="sd">"दाखिल खारिज / वाद ग्रस्त प्रकरण" सेक्शन में जाएं।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">जिला और तहसील चुनें</span>
+          <span class="sd">अपने क्षेत्र की जानकारी भरें।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">आवेदन फॉर्म भरें</span>
+          <span class="sd">खसरा/गाटा नंबर, पुराने मालिक का नाम, नए मालिक का नाम और दस्तावेज़ नंबर भरें।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">दस्तावेज़ अपलोड करें</span>
+          <span class="sd">बैनामा, आधार और अन्य दस्तावेज़ PDF में अपलोड करें।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">Application Number नोट करें</span>
+          <span class="sd">सबमिट के बाद मिले नंबर को सुरक्षित रखें — इससे स्थिति ट्रैक होगी।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">तहसील में सुनवाई और अपडेट</span>
+          <span class="sd">तहसीलदार की स्वीकृति के बाद 30 से 60 दिन में खतौनी में नाम अपडेट हो जाता है।</span>
+        </div>
+      </li>
+    </ol>
+    <div class="success-box">
+      ✅ <strong>टिप:</strong> दाखिल खारिज की स्थिति जानने के लिए upbhulekh.gov.in पर
+      "दाखिल खारिज की स्थिति देखें" विकल्प में Application Number डालें।
+    </div>
+  </div>
+
+  <!-- 5. Bainama -->
+  <div class="section-card">
+    <h2>📜 UP में बैनामा (Sale Deed) ऑनलाइन कैसे देखें?</h2>
+    <p>
+      बैनामा जमीन की रजिस्ट्री का दस्तावेज़ होता है जो <strong>IGRSUP पोर्टल</strong>
+      (igrsup.gov.in) पर ऑनलाइन देखा जा सकता है। यह UP के सभी जिलों की
+      पंजीकृत संपत्तियों का रिकॉर्ड रखता है।
+    </p>
+    <ol class="steps">
+      <li>
+        <div>
+          <span class="st">igrsup.gov.in खोलें</span>
+          <span class="sd">"संपत्ति खोजें" या "Property Search" विकल्प पर जाएं।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">जिला और SRO चुनें</span>
+          <span class="sd">अपने जिले का Sub-Registrar Office (SRO) चुनें।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">विवरण दर्ज करें</span>
+          <span class="sd">रजिस्ट्री नंबर, वर्ष या पार्टी का नाम डालकर खोजें।</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <span class="st">बैनामा देखें</span>
+          <span class="sd">सूची में से अपना बैनामा चुनें — मुख्य जानकारी ऑनलाइन दिख जाएगी।
+          पूरी प्रमाणित कॉपी के लिए SRO ऑफिस जाएं।</span>
+        </div>
+      </li>
+    </ol>
+    <div class="info-box">
+      💡 <strong>नई सुविधा:</strong> IGRSUP पोर्टल पर अब <strong>स्टैम्प ड्यूटी कैलकुलेटर</strong>
+      भी उपलब्ध है — रजिस्ट्री से पहले देखें कि कितना टैक्स देना होगा।
+    </div>
+  </div>
+
+  <!-- 6. UP Land Documents -->
+  <div class="section-card">
+    <h2>📑 UP जमीन के मुख्य दस्तावेज़ और उनका उपयोग</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>दस्तावेज़</th><th>क्या होता है</th><th>कहाँ काम आता है</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>खतौनी</strong></td>
+          <td>वर्तमान भू-स्वामित्व रिकॉर्ड</td>
+          <td>बैंक लोन, कोर्ट, दाखिल खारिज</td>
+        </tr>
+        <tr>
+          <td><strong>खसरा / गाटा</strong></td>
+          <td>जमीन के टुकड़े की पहचान संख्या</td>
+          <td>खतौनी, नक्शा, रजिस्ट्री में</td>
+        </tr>
+        <tr>
+          <td><strong>बैनामा (Sale Deed)</strong></td>
+          <td>जमीन खरीद-बिक्री का रजिस्टर्ड दस्तावेज़</td>
+          <td>स्वामित्व प्रमाण, बैंक, कोर्ट</td>
+        </tr>
+        <tr>
+          <td><strong>भू-नक्शा</strong></td>
+          <td>जमीन की सीमाओं का सरकारी नक्शा</td>
+          <td>सीमा विवाद, निर्माण अनुमति</td>
+        </tr>
+        <tr>
+          <td><strong>आबादी पट्टा</strong></td>
+          <td>गाँव की आबादी भूमि का आवंटन पत्र</td>
+          <td>ग्रामीण घर के मालिकाना हक में</td>
+        </tr>
+        <tr>
+          <td><strong>विरासत / उत्तराधिकार</strong></td>
+          <td>मृत व्यक्ति की जमीन उत्तराधिकारियों को मिलने का दस्तावेज़</td>
+          <td>पुश्तैनी जमीन के बंटवारे में</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7. Portals -->
+  <div class="section-card" id="portals">
+    <h2>🌐 UP जमीन के मुख्य सरकारी पोर्टल</h2>
+    <p>उत्तर प्रदेश में जमीन से जुड़े काम के लिए ये आधिकारिक पोर्टल उपयोग करें:</p>
+    <div class="portal-grid">
+      <div class="portal-card">
+        <span class="picon">📋</span>
+        <strong>UP Bhulekh</strong>
+        <p>खतौनी और दाखिल खारिज</p>
+        <a href="https://upbhulekh.gov.in" target="_blank" rel="noopener">पोर्टल खोलें</a>
+      </div>
+      <div class="portal-card">
+        <span class="picon">🗺️</span>
+        <strong>Bhu-Naksha UP</strong>
+        <p>जमीन का डिजिटल नक्शा</p>
+        <a href="https://upbhunaksha.gov.in" target="_blank" rel="noopener">पोर्टल खोलें</a>
+      </div>
+      <div class="portal-card">
+        <span class="picon">📜</span>
+        <strong>IGRSUP</strong>
+        <p>बैनामा और रजिस्ट्री</p>
+        <a href="https://igrsup.gov.in" target="_blank" rel="noopener">पोर्टल खोलें</a>
+      </div>
+      <div class="portal-card">
+        <span class="picon">🏘️</span>
+        <strong>SVAMITVA / e-Dharti</strong>
+        <p>आबादी भूमि मालिकाना</p>
+        <a href="https://svamitva.nic.in" target="_blank" rel="noopener">पोर्टल खोलें</a>
+      </div>
+      <div class="portal-card">
+        <span class="picon">🌾</span>
+        <strong>PM Kisan / Kisan Portal</strong>
+        <p>किसान योजनाएं</p>
+        <a href="https://pmkisan.gov.in" target="_blank" rel="noopener">पोर्टल खोलें</a>
+      </div>
+      <div class="portal-card">
+        <span class="picon">📏</span>
+        <strong>UP Land Calculator</strong>
+        <p>बीघा-बिस्वा-धुर गणना</p>
+        <a href="https://jameenseva.in/up-land-calculator.html">कैलकुलेटर खोलें</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. UP Land Units -->
+  <div class="section-card">
+    <h2>📏 उत्तर प्रदेश में जमीन की माप — बीघा, बिस्वा और धुर</h2>
+    <p>
+      उत्तर प्रदेश में जमीन की माप के लिए <strong>बीघा, बिस्वा और धुर/बिस्वांसी</strong> प्रणाली
+      उपयोग होती है। हालांकि UP के अलग-अलग क्षेत्रों में माप थोड़ी अलग हो सकती है।
+    </p>
+    <table class="data-table">
+      <thead>
+        <tr><th>इकाई</th><th>बराबर</th><th>डेसिमल में</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 बिस्वांसी</td><td>1/20 बिस्वा</td><td>≈ 1.008 sq. ft (approx)</td></tr>
+        <tr><td>1 बिस्वा</td><td>20 बिस्वांसी</td><td>≈ 1,350 sq. ft (approx)</td></tr>
+        <tr><td>1 बीघा</td><td>20 बिस्वा</td><td>≈ 27,000 sq. ft / 0.27 एकड़</td></tr>
+        <tr><td>1 एकड़</td><td>≈ 3.63 बीघा (UP)</td><td>43,560 sq. ft</td></tr>
+        <tr><td>1 हेक्टेयर</td><td>≈ 8.97 बीघा (UP)</td><td>10,000 sq. meter</td></tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:14px;">
+      💡 UP में बीघा का माप क्षेत्र अनुसार बदलता है — पक्का बीघा (Pakka Bigha) और
+      कच्चा बीघा (Kachcha Bigha) अलग-अलग होते हैं।
+      <a href="https://jameenseva.in/up-land-calculator.html" style="color:#7b2e8e;font-weight:700;">
+      हमारे UP Land Calculator से सटीक गणना करें →</a>
+    </div>
+  </div>
+
+  <!-- 9. UP Districts -->
+  <div class="section-card">
+    <h2>📍 उत्तर प्रदेश के प्रमुख जिले — जमीन रिकॉर्ड जानकारी</h2>
+    <p>UP के सभी 75 जिलों में upbhulekh.gov.in के माध्यम से जमीन रिकॉर्ड ऑनलाइन उपलब्ध है:</p>
+    <div class="d-grid">
+      <div class="d-tag">लखनऊ</div><div class="d-tag">कानपुर</div><div class="d-tag">आगरा</div>
+      <div class="d-tag">वाराणसी</div><div class="d-tag">प्रयागराज</div><div class="d-tag">मेरठ</div>
+      <div class="d-tag">गाजियाबाद</div><div class="d-tag">नोएडा</div><div class="d-tag">बरेली</div>
+      <div class="d-tag">अलीगढ़</div><div class="d-tag">मुरादाबाद</div><div class="d-tag">गोरखपुर</div>
+      <div class="d-tag">झांसी</div><div class="d-tag">सहारनपुर</div><div class="d-tag">फैजाबाद</div>
+      <div class="d-tag">मथुरा</div><div class="d-tag">बस्ती</div><div class="d-tag">फर्रुखाबाद</div>
+      <div class="d-tag">अयोध्या</div><div class="d-tag">बलिया</div><div class="d-tag">देवरिया</div>
+      <div class="d-tag">सोनभद्र</div><div class="d-tag">मिर्जापुर</div><div class="d-tag">बुलंदशहर</div>
+      <div class="d-tag">एटा</div><div class="d-tag">मैनपुरी</div><div class="d-tag">फिरोजाबाद</div>
+      <div class="d-tag">इटावा</div><div class="d-tag">औरैया</div><div class="d-tag">कन्नौज</div>
+      <div class="d-tag">रायबरेली</div><div class="d-tag">उन्नाव</div><div class="d-tag">हरदोई</div>
+      <div class="d-tag">सीतापुर</div><div class="d-tag">लखीमपुर</div><div class="d-tag">बाराबंकी</div>
+      <div class="d-tag">अंबेडकरनगर</div><div class="d-tag">सुल्तानपुर</div><div class="d-tag">अमेठी</div>
+      <div class="d-tag">जौनपुर</div><div class="d-tag">गाजीपुर</div><div class="d-tag">चंदौली</div>
+      <div class="d-tag">भदोही</div><div class="d-tag">आजमगढ़</div><div class="d-tag">मऊ</div>
+      <div class="d-tag">बलरामपुर</div><div class="d-tag">श्रावस्ती</div><div class="d-tag">बहराइच</div>
+      <div class="d-tag">गोंडा</div><div class="d-tag">सिद्धार्थनगर</div><div class="d-tag">महाराजगंज</div>
+      <div class="d-tag">कुशीनगर</div><div class="d-tag">पडरौना</div><div class="d-tag">बांदा</div>
+      <div class="d-tag">चित्रकूट</div><div class="d-tag">महोबा</div><div class="d-tag">हमीरपुर</div>
+      <div class="d-tag">जालौन</div><div class="d-tag">ललितपुर</div><div class="d-tag">रामपुर</div>
+      <div class="d-tag">अमरोहा</div><div class="d-tag">बिजनौर</div><div class="d-tag">संभल</div>
+      <div class="d-tag">हापुड़</div><div class="d-tag">शामली</div><div class="d-tag">मुजफ्फरनगर</div>
+      <div class="d-tag">बागपत</div><div class="d-tag">पीलीभीत</div><div class="d-tag">शाहजहांपुर</div>
+      <div class="d-tag">खीरी</div><div class="d-tag">हाथरस</div><div class="d-tag">कासगंज</div>
+      <div class="d-tag">प्रतापगढ़</div>
+    </div>
+  </div>
+
+  <!-- 10. FAQ -->
+  <div class="section-card">
+    <h2>❓ अक्सर पूछे जाने वाले सवाल — UP भूलेख FAQ</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">UP में खतौनी और खसरा में क्या अंतर है? <span class="arrow">▼</span></div>
+      <div class="faq-a"><strong>खतौनी</strong> एक व्यक्ति (खातेदार) की सभी जमीन का सारांश रिकॉर्ड है — यह बताती है कि उस व्यक्ति के पास कितनी जमीन है और उसका खसरा नंबर क्या है।<br><br>
+      <strong>खसरा/गाटा</strong> जमीन के एक विशेष टुकड़े की पहचान संख्या है। एक खतौनी में कई खसरा नंबर हो सकते हैं।</div>
     </div>
 
+    <div class="faq-item">
+      <div class="faq-q">क्या UP में ऑनलाइन खतौनी बैंक लोन में चलती है? <span class="arrow">▼</span></div>
+      <div class="faq-a">नहीं। upbhulekh.gov.in से निकाली गई ऑनलाइन खतौनी केवल जानकारी के लिए है। बैंक लोन, कोर्ट या सरकारी योजनाओं के लिए <strong>तहसील या CSC Center से प्रमाणित नकल</strong> (जिस पर तहसीलदार के हस्ताक्षर और मोहर हो) लेना अनिवार्य है।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">UP में दाखिल खारिज में कितना समय लगता है? <span class="arrow">▼</span></div>
+      <div class="faq-a">UP में दाखिल खारिज की प्रक्रिया आमतौर पर <strong>30 से 60 दिन</strong> में पूरी होती है। यदि कोई आपत्ति न हो तो तहसीलदार आवेदन स्वीकार करते हैं और खतौनी अपडेट हो जाती है। ऑनलाइन आवेदन के बाद आप Application Number से स्थिति ट्रैक कर सकते हैं।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">UP में पुरानी रजिस्ट्री (बैनामा) कैसे निकालें? <span class="arrow">▼</span></div>
+      <div class="faq-a">पुराना बैनामा निकालने के दो तरीके हैं:<br>
+      1. <strong>ऑनलाइन:</strong> igrsup.gov.in पर जाकर "संपत्ति खोजें" से रजिस्ट्री नंबर या पार्टी के नाम से खोजें।<br>
+      2. <strong>ऑफलाइन:</strong> संबंधित Sub-Registrar Office (SRO) में जाकर निर्धारित शुल्क देकर नकल प्राप्त करें।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">UP में आबादी भूमि का पट्टा कैसे मिलता है? <span class="arrow">▼</span></div>
+      <div class="faq-a">ग्रामीण क्षेत्रों में आबादी भूमि पर मकान बने हैं लेकिन पट्टा नहीं है, तो <strong>SVAMITVA योजना</strong> के तहत ड्रोन सर्वे के बाद पट्टा दिया जा रहा है। अपने ग्राम प्रधान या तहसील से संपर्क करें। PM SVAMITVA पोर्टल (svamitva.nic.in) पर स्थिति देखें।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">UP में खतौनी में नाम गलत होने पर क्या करें? <span class="arrow">▼</span></div>
+      <div class="faq-a">खतौनी में नाम, रकबा या खसरा में कोई गलती होने पर तहसील में <strong>त्रुटि सुधार आवेदन (Correction Application)</strong> दें। इसके साथ बैनामा, पुरानी खतौनी और आधार कार्ड की कॉपी लगाएं। तहसीलदार जांच के बाद सुधार करते हैं।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">UP भूलेख पोर्टल पर गाँव का रिकॉर्ड नहीं मिल रहा, क्या करें? <span class="arrow">▼</span></div>
+      <div class="faq-a">कुछ पुराने गाँवों का डेटा अभी पूरी तरह डिजिटाइज़ नहीं हुआ है। ऐसे में अपने जिले के <strong>भू-अभिलेख कार्यालय</strong> या तहसील में जाकर मैन्युअल रिकॉर्ड से खतौनी निकलवाएं। UP Revenue Department Helpline: <strong>0522-2217145</strong> पर भी संपर्क कर सकते हैं।</div>
+    </div>
+  </div>
+
+  <!-- 11. Related Links -->
+  <div class="section-card">
+    <h2>🔗 संबंधित सेवाएं और उपयोगी जानकारी</h2>
+    <ul class="rel-list">
+      <li>📏 <a href="https://jameenseva.in/up-land-calculator.html">UP जमीन कैलकुलेटर — बीघा, बिस्वा, धुर की गणना</a></li>
+      <li>🏔️ <a href="https://jameenseva.in/uk-land-calculator.html">उत्तराखंड जमीन कैलकुलेटर — नाली, मुट्ठी, तराई बीघा</a></li>
+      <li>🌾 <a href="https://jameenseva.in/mp-land-calculator.html">मध्य प्रदेश भू-अभिलेख — हेक्टेयर, बीघा और कट्ठा</a></li>
+      <li>📄 <a href="https://jameenseva.in/khatiyan.html">बिहार ओरिजनल खतियान ऑनलाइन ऑर्डर करें</a></li>
+      <li>📋 <a href="https://jameenseva.in/ragister2.html">बिहार रजिस्टर 2 (जमाबंदी पंजी) ऑर्डर करें</a></li>
+      <li>⚖️ <a href="https://jameenseva.in/panchnama.html">बिहार पंचनामा बटवारा ऑनलाइन ऑर्डर करें</a></li>
+      <li>📏 <a href="https://jameenseva.in/land-calculator.html">बिहार जमीन कैलकुलेटर — धुर, कट्ठा, बीघा, डेसिमल</a></li>
+      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें — WhatsApp सहायता</a></li>
+    </ul>
+  </div>
+
+</div><!-- /wrapper -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div>
+    <strong style="color:#fff;font-size:1rem;">JameenSeva.in</strong><br>
+    भारत का भरोसेमंद जमीन दस्तावेज़ और जानकारी पोर्टल<br>
+    <a href="https://jameenseva.in/about.html">हमारे बारे में</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/terms-and-conditions.html">नियम व शर्तें</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/privacy-policy.html">गोपनीयता नीति</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/disclaimer.html">डिस्क्लेमर</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/contact.html">संपर्क करें</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/sitemap.html">साइटमैप</a><br>
+    © 2026 JameenSeva.in – All Rights Reserved.<br>
+    <small style="opacity:.55;">यह वेबसाइट केवल सूचनात्मक उद्देश्य के लिए है। सरकारी पोर्टल की जानकारी समय-समय पर बदल सकती है।</small>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
+</script>
 </body>
 </html>
