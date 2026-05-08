@@ -1,10 +1,31 @@
   <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Land Calculator: UP & Uttarakhand | Jameenseva.in</title>
-    
+    <title>Uttarakhand Master Land Calculator: Nali, Mutthi, Bigha to Sq Ft | Jameenseva.in</title>
+<meta name="title" content="Uttarakhand Master Land Calculator: Nali, Mutthi, Bigha to Sq Ft | Jameenseva.in">
+<meta name="description" content="उत्तराखंड जमीन कैलकुलेटर: नाली, मुट्ठी, बीघा और हेक्टेयर को स्क्वायर फीट में बदलें। Accurate land unit converter for Uttarakhand Bhulekh (Devbhoomi) records.">
+<meta name="keywords" content="Uttarakhand Land Calculator, Nali to Square Feet, Mutthi to Sq Ft Converter, Uttarakhand Bigha size, Devbhoomi Land Calculator, Jameenseva Uttarakhand, Nali Mutthi Calculation">
+<meta name="author" content="Jameenseva.in">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jameenseva.in/uttarakhand-land-calculator">
+<meta property="og:title" content="Uttarakhand Master Land Calculator - Jameenseva">
+<meta property="og:description" content="पहाड़ी और मैदानी क्षेत्रों के लिए सटीक जमीन कैलकुलेटर। नाली और मुट्ठी का हिसाब अब मिनटों में।">
+<meta property="og:image" content="https://jameenseva.in/images/uk-land-calc-preview.jpg">
+
+<link rel="canonical" href="https://jameenseva.in/uttarakhand-land-calculator" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Uttarakhand Master Land Calculator",
+  "url": "https://jameenseva.in/uttarakhand-land-calculator",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All",
+  "description": "Specialized land measurement tool for Uttarakhand. Converts traditional units like Nali and Mutthi into Square Feet and Hectares."
+}
+</script>
     <style>
         :root { --primary: #e67e22; --dark: #2c3e50; --success: #27ae60; --bg: #f4f7f6; --white: #ffffff; --uk-green: #1b5e20; }
         body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: #333; line-height: 1.6; }
@@ -258,10 +279,61 @@
         });
     }
 </script
-    <hr>
-<h1>BLOCK 3 — UK Calculator Content (uk-land-calculator.html के लिए)</h1>
-<hr>
+   
+ <style>
+.calc-content-wrap{max-width:960px;margin:0 auto;padding:28px 14px 52px;font-family:'Segoe UI',Arial,sans-serif}
+.cc-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e0daf5;padding:26px 24px;margin-bottom:24px}
+.cc-card.up{border-color:#d4c8f5}.cc-card.mp{border-color:#f0c3b0}.cc-card.uk{border-color:#b5d9c5}
+.cc-card h2{font-size:1.15rem;font-weight:700;padding-bottom:10px;margin-bottom:16px;border-bottom:2px solid;line-height:1.4}
+.cc-card.up h2{color:#5b21b6;border-color:#ede9fe}
+.cc-card.mp h2{color:#b5451b;border-color:#fef0ea}
+.cc-card.uk h2{color:#1a5c35;border-color:#e8f5ee}
+.cc-card h3{font-size:.97rem;font-weight:700;margin:16px 0 7px}
+.cc-card.up h3{color:#5b21b6}.cc-card.mp h3{color:#b5451b}.cc-card.uk h3{color:#1a5c35}
+.cc-card p{color:#444;font-size:.93rem;margin-bottom:10px;line-height:1.75}
+.ibox{border-left:4px solid #c89a2e;background:#fdf6e3;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#5a4000}
+.abox{border-left:4px solid #e0a800;background:#fff3cd;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#664d03}
+.sbox{border-left:4px solid #27ae60;background:#eaf7ef;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#1a5c32}
+.pbox.up{border-left:4px solid #5b21b6;background:#ede9fe;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#3b1694}
+.pbox.mp{border-left:4px solid #b5451b;background:#fff5f0;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#6e2a10}
+.pbox.uk{border-left:4px solid #2e7d4f;background:#e8f5ee;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#0a3320}
+.dt{width:100%;border-collapse:collapse;font-size:.87rem;margin-top:10px}
+.dt th{padding:9px 12px;text-align:left;color:#fff}
+.cc-card.up .dt th{background:#5b21b6}
+.cc-card.mp .dt th{background:#b5451b}
+.cc-card.uk .dt th{background:#2e7d4f}
+.dt td{padding:8px 12px;border-bottom:1px solid #eee;color:#444;vertical-align:top}
+.dt tr:nth-child(even) td{background:#fafafa}
+.faq-w .fi{border:1px solid #e2e2e2;border-radius:8px;margin-bottom:9px;overflow:hidden}
+.faq-w .fq{padding:12px 15px;font-weight:700;font-size:.88rem;cursor:pointer;display:flex;justify-content:space-between;user-select:none}
+.cc-card.up .faq-w .fq{background:#ede9fe;color:#5b21b6}
+.cc-card.mp .faq-w .fq{background:#fff5f0;color:#b5451b}
+.cc-card.uk .faq-w .fq{background:#e8f5ee;color:#1a5c35}
+.faq-w .fq .ar{font-size:.7rem;transition:transform .2s}
+.faq-w .fi.open .fq .ar{transform:rotate(180deg)}
+.faq-w .fa{display:none;padding:12px 15px;font-size:.87rem;color:#555;line-height:1.72;background:#fff}
+.faq-w .fi.open .fa{display:block}
+.rl{list-style:none;padding:0}
+.rl li{padding:8px 0;border-bottom:1px dashed #e2e2e2;font-size:.9rem}
+.rl li:last-child{border:none}
+.cc-card.up .rl a{color:#5b21b6;font-weight:600}
+.cc-card.mp .rl a{color:#b5451b;font-weight:600}
+.cc-card.uk .rl a{color:#2e7d4f;font-weight:600}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+.uc{border-radius:10px;padding:13px 15px;border:1px solid #e2e2e2}
+.cc-card.up .uc{background:#ede9fe;border-color:#d4c8f5}
+.cc-card.mp .uc{background:#fff5f0;border-color:#f0c3b0}
+.cc-card.uk .uc{background:#e8f5ee;border-color:#b5d9c5}
+.uc .ui{font-size:1.4rem;display:block;margin-bottom:5px}
+.uc strong{display:block;font-size:.88rem;margin-bottom:3px}
+.cc-card.up .uc strong{color:#5b21b6}
+.cc-card.mp .uc strong{color:#b5451b}
+.cc-card.uk .uc strong{color:#1a5c35}
+.uc span{font-size:.8rem;color:#666;line-height:1.5}
+@media(max-width:600px){.cc-card{padding:18px 13px}}
+</style>
  
+<div class="calc-content-wrap" id="up-content">
 <!-- ===== START COPY FROM HERE FOR UK ===== -->
 <div class="calc-content-wrap" id="uk-content">
  
@@ -356,5 +428,10 @@
 </div>
 
 </body>
+  <script>
+document.querySelectorAll('.fq').forEach(q=>{
+  q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+});
+</script>
 </html>
 <script src="footer.js"></script>
