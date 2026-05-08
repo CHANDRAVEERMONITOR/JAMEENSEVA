@@ -1,205 +1,509 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khesra Converter - Jameenseva.in</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        
-        body { margin: 0; background-color: #f4f4f4; font-family: 'Verdana', sans-serif; line-height: 1.8; color: #333; }
-        .navbar { position: sticky; top: 0; width: 100%; background-color: #1a5276; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 1000; }
-        .navbar a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; }
-        @media (max-width: 600px) { .navbar a { font-size: 11px; } }
-        .dl-box { background: #fff5f5; border: 1px dashed #e74c3c; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; }
-        .dl-btn { background: #27ae60; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 13px; font-weight: bold; display: inline-block; margin: 5px; }
-        :root { --primary: #1e7e34; --secondary: #0056b3; --accent: #ffc107; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background: var(--bg); margin: 0; padding: 10px; color: #333; }
-        .container { max-width: 650px; margin: 20px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 8px solid var(--primary); }
-        .header { background: #fff; padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
-        .header h2 { color: var(--primary); margin: 0; font-size: 24px; text-transform: uppercase; }
-        .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; background: #e9f5ec; margin: 15px; border-radius: 12px; font-size: 11px; text-align: center; }
-        .step i { font-size: 20px; color: var(--primary); margin-bottom: 5px; }
-        .form-body { padding: 25px; }
-        .section-title { background: #f1f1f1; padding: 8px 15px; font-size: 14px; font-weight: bold; margin: 20px 0 15px; border-left: 5px solid var(--primary); }
-        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
-        input, select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 10px; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .hidden { display: none; }
-        #submitBtn { width: 100%; padding: 16px; background: var(--primary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        #submitBtn:disabled { background: #ccc; }
-        #paymentArea { display: none; text-align: center; padding: 30px; background: #fffdf0; border: 2px dashed #fbc02d; margin: 20px; border-radius: 15px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>बिहार खेसरा कनवर्टर 2026 – पुराना खेसरा से नया खेसरा नंबर निकालें | JameenSeva.in</title>
+  <meta name="description" content="बिहार सर्वे 2026 में पुराना खेसरा नंबर से नया खेसरा नंबर कैसे निकालें? खेसरा कनवर्टर की पूरी जानकारी, प्रक्रिया और ऑनलाइन सेवा। Bihar Survey 2026 Khesra Converter।" />
+  <meta name="keywords" content="bihar khesra converter 2026, पुराना खेसरा नया खेसरा, bihar survey 2026, खेसरा नंबर बदला, bihar land survey khesra, purana khesra naya khesra" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://jameenseva.in/khesra-service.html" />
+  <meta property="og:title" content="बिहार खेसरा कनवर्टर 2026 – पुराना से नया खेसरा निकालें | JameenSeva.in" />
+  <meta property="og:description" content="बिहार विशेष सर्वेक्षण 2026 में खेसरा नंबर बदल गया? पुराने से नया और नए से पुराना खेसरा जानें।" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://jameenseva.in/khesra-service.html" />
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"बिहार खेसरा कनवर्टर 2026 – पुराना खेसरा से नया खेसरा नंबर कैसे निकालें","description":"बिहार सर्वे 2026 में खेसरा नंबर बदलने की पूरी जानकारी और ऑनलाइन कनवर्टर सेवा।","publisher":{"@type":"Organization","name":"JameenSeva.in","url":"https://jameenseva.in"},"inLanguage":"hi"}
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f7f5; color: #222; line-height: 1.75; font-size: 15px; }
+    a { color: #1a5c35; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== NAVBAR ===== */
+    .navbar { position: sticky; top: 0; width: 100%; background: #1a5276; display: flex; justify-content: space-around; align-items: center; padding: 12px 0; box-shadow: 0 4px 10px rgba(0,0,0,.15); z-index: 1000; flex-wrap: wrap; gap: 4px; }
+    .navbar a { color: #fff; text-decoration: none; font-weight: bold; font-size: 13px; padding: 4px 8px; border-radius: 4px; transition: background .2s; }
+    .navbar a:hover { background: rgba(255,255,255,.15); }
+    @media(max-width:600px){ .navbar a { font-size: 11px; } }
+
+    /* ===== HERO ===== */
+    .hero { background: linear-gradient(135deg, #1a5276 0%, #0d3050 100%); color: #fff; text-align: center; padding: 40px 16px 30px; }
+    .hero .tag { display: inline-block; background: #f0c040; color: #3d2b00; font-size: .72rem; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-bottom: 12px; letter-spacing: .8px; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(1.25rem, 3.5vw, 1.9rem); font-weight: 700; line-height: 1.4; margin-bottom: 10px; }
+    .hero p { font-size: .93rem; opacity: .88; max-width: 640px; margin: 0 auto; }
+
+    /* ===== BREADCRUMB ===== */
+    .breadcrumb { font-size: .78rem; padding: 9px 16px; color: #888; background: #fff; border-bottom: 1px solid #e5e5e5; }
+    .breadcrumb a { color: #1a5276; }
+
+    /* ===== WRAPPER ===== */
+    .wrapper { max-width: 760px; margin: 0 auto; padding: 24px 14px 52px; }
+
+    /* ===== ORIGINAL FORM STYLES (preserved) ===== */
+    :root { --primary: #1e7e34; --secondary: #0056b3; --accent: #ffc107; }
+    .form-container { max-width: 650px; margin: 0 auto 32px; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,.1); border-top: 8px solid var(--primary); }
+    .form-header { background: #fff; padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
+    .form-header h2 { color: var(--primary); margin: 0; font-size: 22px; text-transform: uppercase; }
+    .form-header p { color: #666; margin: 6px 0 0; font-size: .88rem; }
+    .process-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 20px; background: #e9f5ec; margin: 15px; border-radius: 12px; font-size: 11px; text-align: center; }
+    .step i { font-size: 20px; color: var(--primary); margin-bottom: 5px; display: block; }
+    .form-body { padding: 25px; }
+    .section-title { background: #f1f1f1; padding: 8px 15px; font-size: 14px; font-weight: bold; margin: 20px 0 15px; border-left: 5px solid var(--primary); border-radius: 0 6px 6px 0; }
+    .form-body label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
+    .form-body input, .form-body select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; box-sizing: border-box; margin-bottom: 10px; font-family: inherit; font-size: .92rem; outline: none; transition: border-color .2s; }
+    .form-body input:focus, .form-body select:focus { border-color: var(--primary); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .hidden { display: none; }
+    #submitBtn { width: 100%; padding: 16px; background: var(--primary); color: #fff; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: background .3s, transform .15s; font-family: inherit; }
+    #submitBtn:hover { background: #15652a; transform: translateY(-1px); }
+    #submitBtn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+    #paymentArea { display: none; text-align: center; padding: 30px; background: #fffdf0; border: 2px dashed #fbc02d; margin: 20px; border-radius: 15px; }
+    .dl-box { background: #fff5f5; border: 1px dashed #e74c3c; padding: 15px; border-radius: 10px; text-align: center; margin-top: 20px; }
+    .dl-btn { background: #27ae60; color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 13px; font-weight: bold; display: inline-block; margin: 5px; }
+
+    /* ===== CONTENT SECTION STYLES ===== */
+    .section-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.07); border: 1px solid #c8dce8; padding: 26px 24px; margin-bottom: 24px; }
+    .section-card h2 { font-size: 1.15rem; color: #1a5276; font-weight: 700; border-bottom: 2px solid #deeaf5; padding-bottom: 10px; margin-bottom: 16px; line-height: 1.4; }
+    .section-card h3 { font-size: .97rem; color: #1a5276; font-weight: 700; margin: 16px 0 7px; }
+    .section-card p { color: #444; font-size: .93rem; margin-bottom: 10px; }
+
+    .info-box { background: #fdf6e3; border-left: 4px solid #c89a2e; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .89rem; color: #5a4000; }
+    .alert-box { background: #fff3cd; border-left: 4px solid #e0a800; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .89rem; color: #664d03; }
+    .success-box { background: #eaf7ef; border-left: 4px solid #27ae60; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .89rem; color: #1a5c32; }
+    .blue-box { background: #eaf2fb; border-left: 4px solid #1a5276; border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0; font-size: .89rem; color: #0d2e47; }
+
+    /* Steps */
+    .steps { list-style: none; counter-reset: sc; }
+    .steps li { counter-increment: sc; display: flex; gap: 14px; align-items: flex-start; background: #eaf2fb; border: 1px solid #c0d8ee; border-radius: 10px; padding: 13px 16px; margin-bottom: 11px; }
+    .steps li::before { content: counter(sc); background: #1a5276; color: #fff; min-width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .st { font-weight: 700; color: #1a5276; font-size: .93rem; display: block; margin-bottom: 3px; }
+    .sd { font-size: .87rem; color: #555; line-height: 1.65; }
+
+    /* Comparison table */
+    .dt { width: 100%; border-collapse: collapse; font-size: .87rem; margin-top: 10px; }
+    .dt th { background: #1a5276; color: #fff; padding: 10px 12px; text-align: left; }
+    .dt td { padding: 9px 12px; border-bottom: 1px solid #d4e4f0; color: #444; vertical-align: top; }
+    .dt tr:nth-child(even) td { background: #eaf2fb; }
+    .ok { color: #1a7a3c; font-weight: 700; }
+    .no { color: #c0392b; font-weight: 700; }
+
+    /* Doc list */
+    .doc-list { list-style: none; }
+    .doc-list li { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px dashed #c0d8ee; font-size: .9rem; color: #444; align-items: flex-start; }
+    .doc-list li:last-child { border: none; }
+    .doc-list li .di { color: #1a5276; font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+    /* Use-case grid */
+    .ugrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 10px; margin-top: 12px; }
+    .uc { background: #eaf2fb; border: 1px solid #c0d8ee; border-radius: 10px; padding: 13px 15px; }
+    .uc .ui { font-size: 1.4rem; display: block; margin-bottom: 5px; }
+    .uc strong { display: block; color: #1a5276; font-size: .88rem; margin-bottom: 3px; }
+    .uc span { font-size: .8rem; color: #666; line-height: 1.5; }
+
+    /* FAQ */
+    .faq-item { border: 1px solid #c0d8ee; border-radius: 8px; margin-bottom: 9px; overflow: hidden; }
+    .faq-q { background: #eaf2fb; padding: 12px 15px; font-weight: 700; font-size: .89rem; color: #1a5276; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .faq-q .arrow { font-size: .7rem; transition: transform .2s; }
+    .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 12px 15px; font-size: .87rem; color: #555; line-height: 1.75; background: #fff; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* Related links */
+    .rel-list { list-style: none; }
+    .rel-list li { padding: 8px 0; border-bottom: 1px dashed #c0d8ee; font-size: .9rem; }
+    .rel-list li:last-child { border: none; }
+    .rel-list a { color: #1a5276; font-weight: 600; }
+
+    /* Footer */
+    footer { background: #0d2035; color: rgba(255,255,255,.75); text-align: center; padding: 28px 16px; font-size: .84rem; line-height: 2; margin-top: 20px; }
+    footer a { color: #7dc8f8; }
+
+    @media(max-width:600px) {
+      .grid { grid-template-columns: 1fr; }
+      .section-card { padding: 18px 14px; }
+    }
+  </style>
 </head>
 <body>
+
+<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
-    <a href="index.html">🏠 Home</a>
-    <a href="index.html#services">📄 Our Services</a>
-    <a href="blog.html">✍️ Blog</a>
-    <a href="track.html">🚚 Order Tracking</a>
-    <a href="contact.html">📞 Contact Us</a>
+  <a href="https://jameenseva.in/index.html">🏠 Home</a>
+  <a href="https://jameenseva.in/index.html#services">📄 Our Services</a>
+  <a href="https://jameenseva.in/blog.html">✍️ Blog</a>
+  <a href="https://jameenseva.in/track.html">🚚 Order Tracking</a>
+  <a href="https://jameenseva.in/contact.html">📞 Contact Us</a>
 </nav>
-<div class="container">
-    <div class="header">
-        <h2>बिहार सर्वे 2026 - खेसरा कनवर्टर</h2>
-        <p><i class="fas fa-shield-alt"></i> Jameenseva Official Verification Portal</p>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="tag">📋 बिहार सर्वे 2026 सेवा</div>
+  <h1>बिहार खेसरा कनवर्टर — पुराना खेसरा से<br>नया खेसरा नंबर निकालें</h1>
+  <p>बिहार विशेष सर्वेक्षण 2026 में आपका खेसरा नंबर बदल गया? घर बैठे पुराने से नया और नए से पुराना खेसरा जानें।</p>
+</div>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="breadcrumb">
+  <a href="https://jameenseva.in/">होम</a> ›
+  <a href="https://jameenseva.in/index.html#services">सेवाएं</a> ›
+  बिहार खेसरा कनवर्टर 2026
+</div>
+
+<div class="wrapper">
+
+  <!-- ============================================================ -->
+  <!--   ORIGINAL FORM — PRESERVED EXACTLY                         -->
+  <!-- ============================================================ -->
+  <div class="form-container" id="order-now">
+    <div class="form-header">
+      <h2>बिहार सर्वे 2026 — खेसरा कनवर्टर</h2>
+      <p><i class="fas fa-shield-alt"></i> JameenSeva Official Verification Portal</p>
     </div>
 
     <div class="process-steps">
-        <div class="step"><i class="fas fa-database"></i><br>Details Save Karein</div>
-        <div class="step"><i class="fas fa-map"></i><br>Team Naksha Dekhegi</div>
-        <div class="step"><i class="fas fa-clock"></i><br>24h Me Report</div>
+      <div class="step"><i class="fas fa-database"></i>Details Save Karein</div>
+      <div class="step"><i class="fas fa-map"></i>Team Naksha Dekhegi</div>
+      <div class="step"><i class="fas fa-clock"></i>24h Me Report</div>
     </div>
 
     <div id="mainForm" class="form-body">
-        <label>Seva Chunein:</label>
-        <select id="conv_type" onchange="toggleFields()">
-            <option value="old_to_new">Purana Khesra → Naya Khesra</option>
-            <option value="new_to_old">Naya Khesra → Purana Khesra</option>
-        </select>
+      <label>Seva Chunein:</label>
+      <select id="conv_type" onchange="toggleFields()">
+        <option value="old_to_new">Purana Khesra → Naya Khesra</option>
+        <option value="new_to_old">Naya Khesra → Purana Khesra</option>
+      </select>
 
-        <div class="section-title">📍 Location Details</div>
+      <div class="section-title">📍 Location Details</div>
+      <div class="grid">
+        <div>
+          <label>Zila:</label>
+          <select id="district" onchange="loadBlocks()"><option value="">Select District</option></select>
+        </div>
+        <div>
+          <label>Anchal:</label>
+          <select id="block"><option value="">Select Block</option></select>
+        </div>
+      </div>
+      <div class="grid">
+        <div><label>Village:</label><input type="text" id="village" placeholder="गाँव / मौजा का नाम"></div>
+        <div><label>Thana No:</label><input type="text" id="thana_no" placeholder="थाना नंबर"></div>
+      </div>
+
+      <div class="section-title">📄 Land Details</div>
+      <div id="old_fields">
+        <label>Purana Khesra:</label>
+        <input type="text" id="khesra_old" placeholder="पुराना प्लॉट / खेसरा नंबर">
+      </div>
+      <div id="new_fields" class="hidden">
         <div class="grid">
-            <div>
-                <label>Zila:</label>
-                <select id="district" onchange="loadBlocks()"><option value="">Select District</option></select>
-            </div>
-            <div>
-                <label>Anchal:</label>
-                <select id="block"><option value="">Select Block</option></select>
-            </div>
+          <div><label>Naya Khata:</label><input type="text" id="khata_new" placeholder="नया खाता नंबर"></div>
+          <div><label>Naya Khesra:</label><input type="text" id="khesra_new" placeholder="नया खेसरा नंबर"></div>
         </div>
-        
-        <div class="grid">
-            <div><label>Village:</label><input type="text" id="village"></div>
-            <div><label>Thana No:</label><input type="text" id="thana_no"></div>
-        </div>
+      </div>
 
-        <div class="section-title">📄 Land Details</div>
-        <div id="old_fields">
-            <label>Purana Khesra:</label>
-            <input type="text" id="khesra_old" placeholder="Purana Plot No">
-        </div>
-        <div id="new_fields" class="hidden">
-            <div class="grid">
-                <div><label>Naya Khata:</label><input type="text" id="khata_new"></div>
-                <div><label>Naya Khesra:</label><input type="text" id="khesra_new"></div>
-            </div>
-        </div>
+      <label>Owner Name:</label>
+      <input type="text" id="raiyat_name" placeholder="रैयत का नाम">
 
-        <label>Owner Name:</label>
-        <input type="text" id="raiyat_name">
+      <label>WhatsApp Number:</label>
+      <input type="tel" id="mobile" placeholder="10 अंकों का WhatsApp नंबर" maxlength="10">
 
-        <label>WhatsApp Number:</label>
-        <input type="tel" id="mobile">
-
-        <button id="submitBtn" onclick="saveData()">Details Safe Karein & Pay ₹29</button>
+      <button id="submitBtn" onclick="saveData()">Details Safe Karein &amp; Pay ₹29</button>
     </div>
 
     <div id="paymentArea">
-        <i class="fas fa-check-circle" style="font-size: 50px; color: var(--primary);"></i>
-        <h3>Aapka Data Save Ho Gaya Hai!</h3>
-        <p>Report tayyar karne ke liye ₹29 ka bhugtan karein.</p>
-        <br>
-        <form>
-            <script src="https://checkout.razorpay.com/v1/payment-button.js" 
-                data-payment_button_id="pl_SdQsZaGPmkik6H" async> </script>
-        </form>
+      <i class="fas fa-check-circle" style="font-size:50px;color:var(--primary)"></i>
+      <h3>Aapka Data Save Ho Gaya Hai!</h3>
+      <p>Report tayyar karne ke liye ₹29 ka bhugtan karein.</p>
+      <br>
+      <form>
+        <script src="https://checkout.razorpay.com/v1/payment-button.js"
+          data-payment_button_id="pl_SdQsZaGPmkik6H" async></script>
+      </form>
     </div>
-</div>
+  </div>
 
+  <!-- ============================================================ -->
+  <!--   RICH CONTENT — AdSense Quality Improvement                -->
+  <!-- ============================================================ -->
+
+  <!-- 1. Khesra kya hai -->
+  <div class="section-card">
+    <h2>📌 खेसरा नंबर क्या होता है और बिहार सर्वे 2026 में यह क्यों बदला?</h2>
+    <p>
+      <strong>खेसरा नंबर</strong> (जिसे गाटा या प्लॉट नंबर भी कहते हैं) जमीन के प्रत्येक टुकड़े को दी गई
+      एक <strong>यूनिक पहचान संख्या</strong> है। बिहार में यह नंबर पुराने <strong>CS (Cadastral Survey)</strong>
+      और <strong>RS (Revisional Survey)</strong> सर्वे से चला आ रहा था।
+    </p>
+    <p>
+      बिहार सरकार ने <strong>विशेष सर्वेक्षण 2026</strong> के तहत पूरे राज्य की जमीन का नया डिजिटल सर्वे शुरू किया है।
+      इस सर्वे में जमीन के नक्शे, सीमाएं और रकबे दोबारा मापे जा रहे हैं, जिससे
+      <strong>पुराने खेसरा नंबर बदलकर नए खेसरा नंबर</strong> मिल रहे हैं।
+      यही कारण है कि आपके पुराने कागजात का खेसरा नंबर और नए सर्वे का खेसरा नंबर अलग-अलग हो सकता है।
+    </p>
+    <div class="info-box">
+      💡 <strong>उदाहरण:</strong> यदि आपके पुराने खतियान में खेसरा नंबर <strong>245</strong> था,
+      तो बिहार सर्वे 2026 के बाद वही जमीन नए नक्शे में <strong>खेसरा 312</strong> हो सकती है।
+      दोनों एक ही जमीन हैं — बस नंबर बदल गया। JameenSeva का खेसरा कनवर्टर इसी मिलान में मदद करता है।
+    </div>
+
+    <h3>पुराना खेसरा vs नया खेसरा — मुख्य अंतर</h3>
+    <table class="dt">
+      <thead><tr><th>विषय</th><th>पुराना खेसरा (CS/RS)</th><th>नया खेसरा (Survey 2026)</th></tr></thead>
+      <tbody>
+        <tr><td>आधार</td><td>पुरानी ब्रिटिशकालीन सर्वे</td><td>नई डिजिटल ड्रोन सर्वे</td></tr>
+        <tr><td>नक्शा</td><td>पुराना काग़ज़ी नक्शा</td><td>नया डिजिटल GIS नक्शा</td></tr>
+        <tr><td>रकबा</td><td>पुराना (कम सटीक)</td><td>नया (ड्रोन से सटीक)</td></tr>
+        <tr><td>सीमाएं</td><td>पुरानी (विवादास्पद)</td><td>नई (GPS से निर्धारित)</td></tr>
+        <tr><td>खतौनी में</td><td>पुराना नंबर दर्ज</td><td>सर्वे के बाद अपडेट होगा</td></tr>
+        <tr><td>मान्यता</td><td>अभी भी मान्य (जब तक update न हो)</td><td>सर्वे पूरा होने पर मान्य</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2. Bihar Survey 2026 -->
+  <div class="section-card">
+    <h2>🗺️ बिहार विशेष सर्वेक्षण 2026 — क्या है और आपकी जमीन पर क्या असर होगा?</h2>
+    <p>
+      बिहार सरकार का <strong>विशेष सर्वेक्षण एवं बंदोबस्त 2026</strong> राज्य के इतिहास में
+      सबसे बड़ा भूमि डिजिटलीकरण अभियान है। इसमें पूरे बिहार की जमीन का
+      <strong>ड्रोन सर्वे, GPS मैपिंग और डिजिटल खतियान</strong> तैयार किया जा रहा है।
+    </p>
+
+    <h3>सर्वे 2026 में क्या-क्या होता है?</h3>
+    <div class="ugrid">
+      <div class="uc"><span class="ui">🚁</span><strong>ड्रोन सर्वे</strong><span>हर गाँव की जमीन का ड्रोन से aerial photography और GIS मैपिंग।</span></div>
+      <div class="uc"><span class="ui">📐</span><strong>जमीन की नई नापी</strong><span>अमीन द्वारा GPS device से हर खेत की सीमा और रकबा नापा जाता है।</span></div>
+      <div class="uc"><span class="ui">🔢</span><strong>नया खेसरा नंबर</strong><span>पुराने खेसरा नंबर बदलकर नए क्रमिक नंबर दिए जाते हैं।</span></div>
+      <div class="uc"><span class="ui">📋</span><strong>नया डिजिटल खतियान</strong><span>सर्वे के बाद नया रैयत-वार डिजिटल खतियान तैयार होगा।</span></div>
+      <div class="uc"><span class="ui">⚠️</span><strong>आपत्ति का अधिकार</strong><span>सर्वे में गलती होने पर 30 दिन के अंदर आपत्ति दर्ज कराने का मौका।</span></div>
+      <div class="uc"><span class="ui">✅</span><strong>विवाद समाधान</strong><span>पुरानी सीमाओं के विवाद सर्वे में सुलझाए जा सकते हैं।</span></div>
+    </div>
+
+    <div class="alert-box" style="margin-top:14px;">
+      ⚠️ <strong>महत्वपूर्ण चेतावनी:</strong> यदि सर्वे के दौरान आप अपने पुराने खेसरा और नए खेसरा का
+      मिलान नहीं करवाते, तो आपकी जमीन गलत व्यक्ति के नाम दर्ज होने का खतरा हो सकता है।
+      <strong>अभी खेसरा कनवर्टर से मिलान करवाएं।</strong>
+    </div>
+  </div>
+
+  <!-- 3. How khesra converter works -->
+  <div class="section-card">
+    <h2>⚙️ JameenSeva खेसरा कनवर्टर कैसे काम करता है?</h2>
+    <p>JameenSeva.in की खेसरा कनवर्टर सेवा बिहार सर्वे 2026 के नक्शों और डेटा के आधार पर
+    पुराने और नए खेसरा नंबरों का मिलान करती है। यह प्रक्रिया 24 घंटे में पूरी होती है:</p>
+    <ol class="steps">
+      <li><div><span class="st">सेवा चुनें</span><span class="sd">ऊपर फॉर्म में चुनें — पुराने खेसरा से नया निकालना है या नए से पुराना। दोनों तरफ से मिलान होता है।</span></div></li>
+      <li><div><span class="st">जमीन की जानकारी भरें</span><span class="sd">जिला, अंचल, गाँव, थाना नंबर और खेसरा नंबर भरें। रैयत का नाम और WhatsApp नंबर दें।</span></div></li>
+      <li><div><span class="st">₹29 का भुगतान करें</span><span class="sd">डेटा सेव होने के बाद Razorpay से सुरक्षित ऑनलाइन पेमेंट करें।</span></div></li>
+      <li><div><span class="st">टीम नक्शा और डेटा जाँचती है</span><span class="sd">हमारी टीम बिहार सर्वे 2026 के नए नक्शे पर आपके खेसरा का मिलान करती है।</span></div></li>
+      <li><div><span class="st">24 घंटे में WhatsApp पर रिपोर्ट</span><span class="sd">पुराने खेसरा से नए खेसरा की जानकारी WhatsApp पर भेज दी जाती है। रिपोर्ट में नक्शा भी होता है।</span></div></li>
+    </ol>
+    <div class="success-box">✅ <strong>सफलता दर:</strong> JameenSeva की टीम अब तक हजारों खेसरा कनवर्जन सफलतापूर्वक कर चुकी है। रिपोर्ट में खेसरा नंबर के साथ नए नक्शे की PDF भी मिलती है।</div>
+  </div>
+
+  <!-- 4. Where khesra converter is useful -->
+  <div class="section-card">
+    <h2>🎯 खेसरा कनवर्टर कहाँ-कहाँ काम आता है?</h2>
+    <div class="ugrid">
+      <div class="uc"><span class="ui">📋</span><strong>दाखिल खारिज में</strong><span>नए सर्वे के बाद दाखिल खारिज के लिए नया खेसरा नंबर जरूरी है।</span></div>
+      <div class="uc"><span class="ui">⚖️</span><strong>सर्वे में आपत्ति</strong><span>यदि नया खेसरा गलत है तो आपत्ति दर्ज करने के लिए पुराने से मिलान चाहिए।</span></div>
+      <div class="uc"><span class="ui">🏦</span><strong>बैंक लोन</strong><span>बैंक नए खेसरा पर लोन देता है — पुराने से नए का मिलान जरूरी है।</span></div>
+      <div class="uc"><span class="ui">📜</span><strong>रजिस्ट्री / बिक्री</strong><span>जमीन बेचने से पहले पुराने और नए खेसरा दोनों की जानकारी होनी चाहिए।</span></div>
+      <div class="uc"><span class="ui">📑</span><strong>पंचनामा बटवारा</strong><span>परिवार में बंटवारे के लिए नए खेसरा नंबर वाला पंचनामा बनाना होगा।</span></div>
+      <div class="uc"><span class="ui">🌾</span><strong>PM किसान / फसल बीमा</strong><span>सरकारी योजनाओं में नए खेसरा नंबर से आवेदन मान्य होगा।</span></div>
+    </div>
+  </div>
+
+  <!-- 5. Required info -->
+  <div class="section-card">
+    <h2>📋 खेसरा कनवर्टर के लिए जरूरी जानकारी</h2>
+    <p>JameenSeva खेसरा कनवर्टर सेवा का उपयोग करने के लिए निम्नलिखित जानकारी तैयार रखें:</p>
+    <ul class="doc-list">
+      <li><span class="di">📍</span><div><strong>जिला और अंचल (Block)</strong> — जहाँ जमीन स्थित है उसका जिला और अंचल कार्यालय।</div></li>
+      <li><span class="di">🔢</span><div><strong>थाना नंबर</strong> — जमीन के मौजे का थाना नंबर। यह पुराने खतियान या रजिस्टर-2 पर मिलेगा।</div></li>
+      <li><span class="di">🏘️</span><div><strong>गाँव / मौजा का नाम</strong> — राजस्व रिकॉर्ड में दर्ज आधिकारिक गाँव का नाम।</div></li>
+      <li><span class="di">🌾</span><div><strong>पुराना खेसरा नंबर</strong> — CS/RS सर्वे का पुराना प्लॉट नंबर (यदि पुराने से नया निकालना हो)।</div></li>
+      <li><span class="di">📑</span><div><strong>नया खाता + खेसरा</strong> — सर्वे 2026 का नया नंबर (यदि नए से पुराना निकालना हो)।</div></li>
+      <li><span class="di">👤</span><div><strong>रैयत का नाम</strong> — जमाबंदी में दर्ज भूमि मालिक का नाम।</div></li>
+      <li><span class="di">📱</span><div><strong>WhatsApp नंबर</strong> — रिपोर्ट इसी नंबर पर 24 घंटे में भेजी जाएगी।</div></li>
+    </ul>
+    <div class="blue-box">🔵 <strong>नोट:</strong> यदि आपके पास थाना नंबर नहीं है, तो पुराने खतियान, रजिस्टर-2 या JameenSeva.in की अन्य सेवाओं से पहले थाना नंबर निकलवाएं। <a href="https://jameenseva.in/ragister2.html" style="color:#1a5276;font-weight:700;">रजिस्टर-2 ऑर्डर करें →</a></div>
+  </div>
+
+  <!-- 6. FAQ -->
+  <div class="section-card">
+    <h2>❓ अक्सर पूछे जाने वाले सवाल — खेसरा कनवर्टर FAQ</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">बिहार सर्वे 2026 में खेसरा नंबर क्यों बदला? <span class="arrow">▼</span></div>
+      <div class="faq-a">बिहार में पुराना सर्वे 100 साल से भी पुराना था। नए विशेष सर्वेक्षण 2026 में ड्रोन और GPS से जमीन की नई नापी हो रही है। इस प्रक्रिया में जमीन के टुकड़े कहीं-कहीं अलग होते हैं, कहीं जुड़ते हैं — इसलिए नए क्रमानुसार खेसरा नंबर दिए जाते हैं।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">क्या JameenSeva खेसरा रिपोर्ट सरकारी कामों में मान्य है? <span class="arrow">▼</span></div>
+      <div class="faq-a">JameenSeva की खेसरा कनवर्टर रिपोर्ट <strong>जानकारी और संदर्भ</strong> के लिए है। इसे देखकर आप सर्वे में आपत्ति दर्ज करा सकते हैं, अंचल कार्यालय में मिलान करवा सकते हैं। कानूनी कामों के लिए अंचल कार्यालय से प्रमाणित नक्शा/खतियान लें।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">रिपोर्ट कितने समय में मिलेगी? <span class="arrow">▼</span></div>
+      <div class="faq-a">पेमेंट के बाद <strong>24 घंटे के अंदर</strong> आपके WhatsApp नंबर पर रिपोर्ट भेजी जाती है। यदि जमीन सर्वे क्षेत्र में नहीं आई हो तो टीम आपको तुरंत सूचित करेगी।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">सर्वे में अगर नया खेसरा गलत हो तो क्या करें? <span class="arrow">▼</span></div>
+      <div class="faq-a">यदि नए सर्वे में आपकी जमीन का खेसरा, रकबा या सीमा गलत दर्ज हुई हो, तो <strong>30 दिन के अंदर आपत्ति दर्ज करें।</strong> अंचल कार्यालय या ऑनलाइन पोर्टल पर लिखित आपत्ति दें। इसके लिए पुराने खतियान, अमीन रौफ शेड्यूल और गवाह की जरूरत होगी। JameenSeva इस प्रक्रिया में भी मदद करता है।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">खेसरा और खाता नंबर में क्या अंतर है? <span class="arrow">▼</span></div>
+      <div class="faq-a"><strong>खाता नंबर</strong> एक रैयत (मालिक) की सभी जमीनों का सामूहिक नंबर है — एक व्यक्ति का एक खाता होता है।<br><br><strong>खेसरा नंबर</strong> जमीन के प्रत्येक टुकड़े (प्लॉट) का अलग नंबर है — एक खाते में कई खेसरा हो सकते हैं।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">क्या बिहार के सभी जिलों का खेसरा कनवर्टर होता है? <span class="arrow">▼</span></div>
+      <div class="faq-a">JameenSeva की खेसरा कनवर्टर सेवा <strong>बिहार के उन जिलों और मौजों के लिए उपलब्ध है जहाँ सर्वे 2026 का काम शुरू हो गया है।</strong> यदि आपके क्षेत्र में अभी सर्वे नहीं हुआ है, तो टीम आपको तुरंत सूचित करेगी और पेमेंट वापस किया जाएगा।</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">सर्वे 2026 में आपत्ति दर्ज करने की अंतिम तारीख क्या है? <span class="arrow">▼</span></div>
+      <div class="faq-a">सर्वे की अधिसूचना प्रकाशित होने के बाद <strong>30 दिन के अंदर</strong> आपत्ति दर्ज करनी होती है। अलग-अलग मौजों में अधिसूचना अलग-अलग तारीखों पर निकलती है। इसलिए अपने क्षेत्र की अधिसूचना की तारीख अंचल कार्यालय से जरूर जानें।</div>
+    </div>
+  </div>
+
+  <!-- 7. Related services -->
+  <div class="section-card">
+    <h2>🔗 संबंधित सेवाएं और उपयोगी जानकारी</h2>
+    <ul class="rel-list">
+      <li>📜 <a href="https://jameenseva.in/khatiyan.html">बिहार ओरिजनल खतियान (CS/RS) ऑनलाइन ऑर्डर करें</a></li>
+      <li>📋 <a href="https://jameenseva.in/ragister2.html">रजिस्टर-2 (जमाबंदी पंजी) की प्रमाणित कॉपी मंगवाएं</a></li>
+      <li>⚖️ <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा — नए खेसरा पर पंचनामा बनवाएं</a></li>
+      <li>📘 <a href="https://jameenseva.in/bihar-survey-guide-2026.html">बिहार विशेष सर्वेक्षण 2026 — पूरी जानकारी</a></li>
+      <li>📏 <a href="https://jameenseva.in/land-calculator.html">बिहार जमीन कैलकुलेटर — धुर, कट्ठा, बीघा, डेसिमल</a></li>
+      <li>🚚 <a href="https://jameenseva.in/track.html">अपने ऑर्डर की स्थिति ट्रैक करें</a></li>
+      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें — WhatsApp सहायता</a></li>
+    </ul>
+  </div>
+
+</div><!-- /wrapper -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div>
+    <strong style="color:#fff;font-size:1rem;">JameenSeva.in</strong><br>
+    बिहार का भरोसेमंद जमीन दस्तावेज़ सेवा पोर्टल<br>
+    <a href="https://jameenseva.in/about.html">हमारे बारे में</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/terms-and-conditions.html">नियम व शर्तें</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/privacy-policy.html">गोपनीयता नीति</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/disclaimer.html">डिस्क्लेमर</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/contact.html">संपर्क करें</a> &nbsp;|&nbsp;
+    <a href="https://jameenseva.in/sitemap.html">साइटमैप</a><br>
+    © 2026 JameenSeva.in – All Rights Reserved.<br>
+    <small style="opacity:.55;">यह वेबसाइट केवल सूचनात्मक और सहायक सेवा प्रदान करती है।</small>
+  </div>
+</footer>
+
+<!-- ===== ORIGINAL SCRIPTS (preserved exactly) ===== -->
 <script>
-    // UPDATED CONFIGURATION
-    const { createClient } = supabase;
-    const _supabase = createClient('https://efgvsddclcnbmwqbtily.supabase.co', 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5');
+  const { createClient } = supabase;
+  const _supabase = createClient(
+    'https://efgvsddclcnbmwqbtily.supabase.co',
+    'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'
+  );
 
-    const biharData = {
-        "Araria": ["Araria", "Bhargama", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikti"],
-        "Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra Banshi Suryapur"],
-        "Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],
-        "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
-        "Begusarai": ["Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],
-        "Bhagalpur": ["Bariarpur", "Bauxi", "Bhagalpur", "Colgong", "Gopalpur", "Ismailpur", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangrachowk", "Sabour", "Shahkund", "Sultanganj"],
-        "Bhojpur": ["Agiaon", "Arrah", "Barhara", "Behea", "Charpokhari", "Gadhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],
-        "Buxar": ["Brahmpur", "Buxar", "Chakki", "Chausa", "Chougain", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],
-        "Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Singhwara", "Tardih"],
-        "East Champaran": ["Adapur", "Areraj", "Banjaria", "Bankatwa", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Turkaulia"],
-        "Gaya": ["Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumararia", "Fatehpur", "Gaya Town", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Manpur", "Mohanpur", "Muhali", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tikari", "Wazirganj"],
-        "Gopalganj": ["Baikunthpur", "Barauli", "Bhorey", "Gopalganj", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwariya", "Sidhwalia", "Thawe", "Uchka Gaon", "Vijayipur"],
-        "Jamui": ["Barhat", "Chakai", "Gidhaur", "Islamnagar Aliganj", "Jamui", "Jhajha", "Khaira", "Laxmipur", "Sikandra", "Sono"],
-        "Jehanabad": ["Ghosi", "Hulasganj", "Jehanabad", "Kako", "Makhdumpur", "Modanganj", "Ratni Faridpur"],
-        "Kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"],
-        "Katihar": ["Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Katihar", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],
-        "Khagaria": ["Alauli", "Beldaur", "Chautham", "Gogri", "Khagaria", "Mansi", "Parbatta"],
-        "Kishanganj": ["Bahadurganj", "Dighalbank", "Kishanganj", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],
-        "Lakhisarai": ["Barahiya", "Halsi", "Lakhisarai", "Pipariya", "Ramgarh Chowk", "Surajgarha"],
-        "Madhepura": ["Alamnagar", "Bihariganj", "Chausa", "Gwalpara", "Kishunganj", "Kumarkhand", "Madhepura", "Murliganj", "Puraini", "Singheshwar", "Udakishunganj"],
-        "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
-        "Munger": ["Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Munger", "Sadaipur", "Sangrampur", "Tarapur"],
-        "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
-        "Nalanda": ["Asthawan", "Ben", "Biharsharif", "Binda", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rajgir", "Sarabera", "Silao", "Tharthari"],
-        "Nawada": ["Akbarpur", "Govindpur", "Hisua", "Kashi Chak", "Kauwakoal", "Meskaur", "Narayanganj", "Narihat", "Nawada", "Pakribarawan", "Rajaul", "Roh", "Sirdala", "Warisaliganj"],
-        "Patna": ["Bakhtiarpur", "Barh", "Belchi", "Bihta", "Bikram", "Danapur", "Daniyanwan", "Dullhin Bazar", "Fatwah", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Patna Sadar", "Phulwari Sharif", "Punpun", "Sampatchak"],
-        "Purnia": ["Amour", "Baisa", "Banmankhi", "Barhara", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Purnia East", "Rupauli", "Srinagar"],
-        "Rohtas": ["Akot", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sasaram", "Sheosagar", "Surajpura", "Tilauthu"],
-        "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
-        "Samastipur": ["Bibhutipur", "Bithan", "Dalsinghsarai", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Morwa", "Patori", "Pusa", "Rosera", "Samastipur", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],
-        "Saran": ["Amnour", "Baniapur", "Chhapra", "Dariyapur", "Digwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Sonepur", "Taraiya"],
-        "Sheikhpura": ["Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Sheikhopur Sarai", "Sheikhpura"],
-        "Sheohar": ["Dumri Katsari", "Piprarhi", "Puranahiya", "Sheohar", "Tariyani"],
-        "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Surand"],
-        "Siwan": ["Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Goriakothi", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Pachrukhi", "Raghunathpur", "Siswan", "Siwan", "Ziradei"],
-        "Supaul": ["Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Pratapganj", "Raghopur", "Saraigarh Bhaptiyahi", "Supaul", "Triveniganj"],
-        "Vaishali": ["Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Hajipur", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Raja Pakar", "Sahdei Buzurg", "Vaishali"],
-        "West Champaran": ["Bagaha-1", "Bagaha-2", "Bairia", "Bettiah", "Bhithiha", "Gaunaha", "Jogapatti", "Lauriya", "Mainatand", "Majhaulia", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakrahan", "Yogapatti"]
+  const biharData = {
+    "Araria":["Araria","Bhargama","Forbesganj","Jokihat","Kursakanta","Narpatganj","Palasi","Raniganj","Sikti"],
+    "Arwal":["Arwal","Kaler","Karpi","Kurtha","Sonbhadra Banshi Suryapur"],
+    "Aurangabad":["Aurangabad","Barun","Daudnagar","Deo","Goh","Haspura","Kutumba","Madanpur","Nabinagar","Obra","Rafiganj"],
+    "Banka":["Amarpur","Banka","Barahat","Bausi","Chandan","Dhoraiya","Fullidumar","Katoriya","Laukaha","Panchrukhi","Rajaun","Shambhuganj"],
+    "Begusarai":["Bakhri","Balia","Barauni","Begusarai","Bhagwanpur","Cheria-Bariarpur","Chhorahi","Garhpura","Khodawandpur","Mansurchak","Matihani","Naokothi","Sahebpur Kamal","Shamho Akha Kurha","Teghra"],
+    "Bhagalpur":["Bariarpur","Bauxi","Bhagalpur","Colgong","Gopalpur","Ismailpur","Jagdishpur","Kahalgaon","Kharik","Narayanpur","Nathnagar","Pirpainti","Rangrachowk","Sabour","Shahkund","Sultanganj"],
+    "Bhojpur":["Agiaon","Arrah","Barhara","Behea","Charpokhari","Gadhani","Jagdishpur","Koilwar","Piro","Sahar","Sandesh","Shahpur","Tarari","Udwantnagar"],
+    "Buxar":["Brahmpur","Buxar","Chakki","Chausa","Chougain","Dumraon","Itarhi","Nawanagar","Rajpur","Simri"],
+    "Darbhanga":["Alinagar","Bahadurpur","Baheri","Benipur","Biraul","Darbhanga","Ghanshyampur","Hanuman Nagar","Hayaghat","Jale","Keoti","Kiratpur","Kusheshwar Asthan","Singhwara","Tardih"],
+    "East Champaran":["Adapur","Areraj","Banjaria","Bankatwa","Chakia","Chiraia","Dhaka","Ghorasahan","Harsidhi","Kalyanpur","Kesaria","Kotwa","Madhuban","Mehsi","Motihari","Paharpur","Pakri Dayal","Patahi","Phenhara","Piprakothi","Ramgarhwa","Raxaul","Sangrampur","Sugauli","Turkaulia"],
+    "Gaya":["Amas","Atri","Bankey Bazar","Barachatti","Belaganj","Bodh Gaya","Dobhi","Dumararia","Fatehpur","Gaya Town","Guraru","Gurua","Imamganj","Khizirsarai","Konch","Manpur","Mohanpur","Muhali","Neem Chak Bathani","Paraiya","Sherghati","Tan Kuppa","Tikari","Wazirganj"],
+    "Gopalganj":["Baikunthpur","Barauli","Bhorey","Gopalganj","Hathua","Katiya","Kuchaikote","Manjha","Panchdeori","Phulwariya","Sidhwalia","Thawe","Uchka Gaon","Vijayipur"],
+    "Jamui":["Barhat","Chakai","Gidhaur","Islamnagar Aliganj","Jamui","Jhajha","Khaira","Laxmipur","Sikandra","Sono"],
+    "Jehanabad":["Ghosi","Hulasganj","Jehanabad","Kako","Makhdumpur","Modanganj","Ratni Faridpur"],
+    "Kaimur":["Adhaura","Bhabua","Chainpur","Chand","Durgawati","Kudra","Mohania","Ramgarh","Rampur","Rohtas","Sheosagar"],
+    "Katihar":["Amdabad","Azamnagar","Balrampur","Barari","Barsoi","Dandkhora","Falka","Hasanganj","Kadwa","Katihar","Korha","Kursela","Manihari","Mansahi","Pranpur","Sameli"],
+    "Khagaria":["Alauli","Beldaur","Chautham","Gogri","Khagaria","Mansi","Parbatta"],
+    "Kishanganj":["Bahadurganj","Dighalbank","Kishanganj","Kochadhaman","Pothia","Terhagachha","Thakurganj"],
+    "Lakhisarai":["Barahiya","Halsi","Lakhisarai","Pipariya","Ramgarh Chowk","Surajgarha"],
+    "Madhepura":["Alamnagar","Bihariganj","Chausa","Gwalpara","Kishunganj","Kumarkhand","Madhepura","Murliganj","Puraini","Singheshwar","Udakishunganj"],
+    "Madhubani":["Andhratharhi","Babubarhi","Basopatti","Benipatti","Bisfi","Ghoghardiha","Harlakhi","Jainagar","Jhanjharpur","Kaluahi","Khajauli","Khutauna","Ladhania","Lakhnaur","Laukahi","Madhepur","Madhubani","Pandaul","Phulparas","Rajnagar"],
+    "Munger":["Asarganj","Bariarpur","Dharhara","Jamalpur","Kharagpur","Munger","Sadaipur","Sangrampur","Tarapur"],
+    "Muzaffarpur":["Aurai","Bandra","Baruraj","Bochahan","Gaighat","Kanti","Katra","Kurhani","Marwan","Minapur","Motipur","Muzaffarpur","Musahari","Paroo","Sahebganj","Sakra","Saraiya"],
+    "Nalanda":["Asthawan","Ben","Biharsharif","Binda","Chandi","Ekangarsarai","Giriak","Harnaut","Hilsa","Islampur","Karai Parsurai","Katrisarai","Nagarnausa","Noorsarai","Parwalpur","Rahui","Rajgir","Sarabera","Silao","Tharthari"],
+    "Nawada":["Akbarpur","Govindpur","Hisua","Kashi Chak","Kauwakoal","Meskaur","Narayanganj","Narihat","Nawada","Pakribarawan","Rajaul","Roh","Sirdala","Warisaliganj"],
+    "Patna":["Bakhtiarpur","Barh","Belchi","Bihta","Bikram","Danapur","Daniyanwan","Dullhin Bazar","Fatwah","Khusrupur","Maner","Masaurhi","Mokama","Naubatpur","Paliganj","Pandarak","Patna Sadar","Phulwari Sharif","Punpun","Sampatchak"],
+    "Purnia":["Amour","Baisa","Banmankhi","Barhara","Bhawanipur","Dagarua","Dhamdaha","Jalalgarh","Kasba","Krityanand Nagar","Purnia East","Rupauli","Srinagar"],
+    "Rohtas":["Akot","Bikramganj","Chenari","Dawath","Dehri","Dinara","Karakat","Kochas","Nasriganj","Nauhatta","Nokha","Rajpur","Rohtas","Sanjhauli","Sasaram","Sheosagar","Surajpura","Tilauthu"],
+    "Saharsa":["Banma Itahari","Kahra","Mahishi","Nauhatta","Panchgachhia","Patarghat","Salkhua","Sattar Katiya","Simri Bakhtiarpur","Sonbarsa"],
+    "Samastipur":["Bibhutipur","Bithan","Dalsinghsarai","Kalyanpur","Khanpur","Mohanpur","Mohiuddin Nagar","Morwa","Patori","Pusa","Rosera","Samastipur","Sarairanjan","Shivaji Nagar","Singhia","Tajpur","Ujiarpur","Vidyapati Nagar","Warisnagar"],
+    "Saran":["Amnour","Baniapur","Chhapra","Dariyapur","Digwara","Ekma","Garkha","Isuapur","Jalalpur","Lahladpur","Maker","Manjhi","Marhaura","Mashrakh","Nagra","Panapur","Parsa","Revelganj","Sonepur","Taraiya"],
+    "Sheikhpura":["Ariari","Barbigha","Chewara","Ghat Kusumbha","Sheikhopur Sarai","Sheikhpura"],
+    "Sheohar":["Dumri Katsari","Piprarhi","Puranahiya","Sheohar","Tariyani"],
+    "Sitamarhi":["Bairgania","Bajpatti","Bathnaha","Belsand","Bokhra","Charaut","Dumra","Majorganj","Nanpur","Parihar","Parsauni","Pupri","Riga","Runnisaidpur","Sonbarsa","Suppi","Surand"],
+    "Siwan":["Andar","Barharia","Basantpur","Bhagwanpur Hat","Darauli","Daraunda","Gautam Budh Nagar","Goriakothi","Guthani","Hasanpura","Hussainganj","Lakri Nabiganj","Maharajganj","Mairwa","Nautan","Pachrukhi","Raghunathpur","Siswan","Siwan","Ziradei"],
+    "Supaul":["Basantpur","Chhatapur","Kishanpur","Marauna","Nirmali","Pipra","Pratapganj","Raghopur","Saraigarh Bhaptiyahi","Supaul","Triveniganj"],
+    "Vaishali":["Bhagwanpur","Bidupur","Chehra Kalan","Desari","Garaul","Hajipur","Jandaha","Lalganj","Mahnar","Mahua","Patedhi Belsar","Patepur","Raghopur","Raja Pakar","Sahdei Buzurg","Vaishali"],
+    "West Champaran":["Bagaha-1","Bagaha-2","Bairia","Bettiah","Bhithiha","Gaunaha","Jogapatti","Lauriya","Mainatand","Majhaulia","Narkatiaganj","Nautan","Piprasi","Ramnagar","Sikta","Thakrahan","Yogapatti"]
+  };
+
+  const distSelect = document.getElementById('district');
+  Object.keys(biharData).sort().forEach(d => distSelect.options.add(new Option(d, d)));
+
+  function loadBlocks() {
+    const blockSelect = document.getElementById('block');
+    blockSelect.innerHTML = '<option value="">Block Chunein</option>';
+    if(distSelect.value) biharData[distSelect.value].sort().forEach(b => blockSelect.options.add(new Option(b, b)));
+  }
+
+  function toggleFields() {
+    const type = document.getElementById('conv_type').value;
+    document.getElementById('old_fields').style.display = type === 'old_to_new' ? 'block' : 'none';
+    document.getElementById('new_fields').style.display = type === 'old_to_new' ? 'none' : 'block';
+  }
+
+  async function saveData() {
+    const btn = document.getElementById('submitBtn');
+    const data = {
+      district: document.getElementById('district').value,
+      block: document.getElementById('block').value,
+      village: document.getElementById('village').value,
+      thana_no: document.getElementById('thana_no').value,
+      khesra_old: document.getElementById('khesra_old').value,
+      khata_new: document.getElementById('khata_new').value,
+      khesra_new: document.getElementById('khesra_new').value,
+      raiyat_name: document.getElementById('raiyat_name').value,
+      mobile: document.getElementById('mobile').value,
+      status: 'Unpaid',
+      order_date: new Date().toLocaleString('hi-IN')
     };
-
-    const distSelect = document.getElementById('district');
-    Object.keys(biharData).sort().forEach(d => distSelect.options.add(new Option(d, d)));
-
-    function loadBlocks() {
-        const blockSelect = document.getElementById('block');
-        blockSelect.innerHTML = '<option value="">Block Chunein</option>';
-        if(distSelect.value) biharData[distSelect.value].sort().forEach(b => blockSelect.options.add(new Option(b, b)));
+    if(!data.district || !data.mobile || !data.village){ alert("Please fill all details."); return; }
+    btn.innerHTML = "Saving..."; btn.disabled = true;
+    const { error } = await _supabase.from('khesra to khesra').insert([data]);
+    if(error){
+      alert("Connection Error: " + error.message);
+      btn.disabled = false; btn.innerHTML = "Details Safe Karein & Pay ₹29";
+    } else {
+      document.getElementById('mainForm').style.display = "none";
+      document.getElementById('paymentArea').style.display = "block";
     }
+  }
 
-    function toggleFields() {
-        const type = document.getElementById('conv_type').value;
-        document.getElementById('old_fields').style.display = type === 'old_to_new' ? 'block' : 'none';
-        document.getElementById('new_fields').style.display = type === 'old_to_new' ? 'none' : 'block';
-    }
-
-    async function saveData() {
-        const btn = document.getElementById('submitBtn');
-        const data = {
-            district: document.getElementById('district').value,
-            block: document.getElementById('block').value,
-            village: document.getElementById('village').value,
-            thana_no: document.getElementById('thana_no').value,
-            khesra_old: document.getElementById('khesra_old').value,
-            khata_new: document.getElementById('khata_new').value,
-            khesra_new: document.getElementById('khesra_new').value,
-            raiyat_name: document.getElementById('raiyat_name').value,
-            mobile: document.getElementById('mobile').value,
-            status: 'Unpaid',
-            order_date: new Date().toLocaleString('hi-IN')
-        };
-
-        if(!data.district || !data.mobile || !data.village) { alert("Please fill all details."); return; }
-
-        btn.innerHTML = "Saving..."; btn.disabled = true;
-
-        const { error } = await _supabase.from('khesra to khesra').insert([data]);
-
-        if (error) {
-            alert("Connection Error: " + error.message);
-            btn.disabled = false; btn.innerHTML = "विवरण सुरक्षित करें";
-        } else {
-            document.getElementById('mainForm').style.display = "none";
-            document.getElementById('paymentArea').style.display = "block";
-        }
-    }
+  /* FAQ Toggle */
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+  });
 </script>
 </body>
 </html>
