@@ -1,29 +1,32 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uttarakhand Master Land Calculator: Nali, Mutthi, Bigha to Sq Ft | Jameenseva.in</title>
-<meta name="title" content="Uttarakhand Master Land Calculator: Nali, Mutthi, Bigha to Sq Ft | Jameenseva.in">
-<meta name="description" content="उत्तराखंड जमीन कैलकुलेटर: नाली, मुट्ठी, बीघा और हेक्टेयर को स्क्वायर फीट में बदलें। Accurate land unit converter for Uttarakhand Bhulekh (Devbhoomi) records.">
-<meta name="keywords" content="Uttarakhand Land Calculator, Nali to Square Feet, Mutthi to Sq Ft Converter, Uttarakhand Bigha size, Devbhoomi Land Calculator, Jameenseva Uttarakhand, Nali Mutthi Calculation">
-<meta name="author" content="Jameenseva.in">
+    <meta name="title" content="Uttarakhand Master Land Calculator: Nali, Mutthi, Bigha to Sq Ft | Jameenseva.in">
+    <meta name="description" content="उत्तराखंड जमीन कैलकुलेटर: नाली, मुट्ठी, बीघा और हेक्टेयर को स्क्वायर फीट में बदलें। Accurate land unit converter for Uttarakhand Bhulekh (Devbhoomi) records.">
+    <meta name="keywords" content="Uttarakhand Land Calculator, Nali to Square Feet, Mutthi to Sq Ft Converter, Uttarakhand Bigha size, Devbhoomi Land Calculator, Jameenseva Uttarakhand, Nali Mutthi Calculation">
+    <meta name="author" content="Jameenseva.in">
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://jameenseva.in/uttarakhand-land-calculator">
-<meta property="og:title" content="Uttarakhand Master Land Calculator - Jameenseva">
-<meta property="og:description" content="पहाड़ी और मैदानी क्षेत्रों के लिए सटीक जमीन कैलकुलेटर। नाली और मुट्ठी का हिसाब अब मिनटों में।">
-<meta property="og:image" content="https://jameenseva.in/images/logo.png">
-  <link rel="canonical" href="https://jameenseva.in/uttarakhand-land-calculator" />
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Uttarakhand Master Land Calculator",
-  "url": "https://jameenseva.in/uttarakhand-land-calculator",
-  "applicationCategory": "EducationalApplication",
-  "operatingSystem": "All",
-  "description": "Specialized land measurement tool for Uttarakhand. Converts traditional units like Nali and Mutthi into Square Feet and Hectares."
-}
-</script>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jameenseva.in/uttarakhand-land-calculator">
+    <meta property="og:title" content="Uttarakhand Master Land Calculator - Jameenseva">
+    <meta property="og:description" content="पहाड़ी और मैदानी क्षेत्रों के लिए सटीक जमीन कैलकुलेटर। नाली और मुट्ठी का हिसाब अब मिनटों में।">
+    <meta property="og:image" content="https://jameenseva.in/images/logo.png">
+    <link rel="canonical" href="https://jameenseva.in/uttarakhand-land-calculator" />
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Uttarakhand Master Land Calculator",
+      "url": "https://jameenseva.in/uttarakhand-land-calculator",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "description": "Specialized land measurement tool for Uttarakhand. Converts traditional units like Nali and Mutthi into Square Feet and Hectares."
+    }
+    </script>
 
     <style>
         :root { --primary: #e67e22; --dark: #2c3e50; --success: #27ae60; --bg: #f4f7f6; --white: #ffffff; --uk-green: #1b5e20; }
@@ -35,11 +38,8 @@
         .header h1 { margin: 0; font-size: 28px; text-transform: uppercase; letter-spacing: 1px; }
         
         .body-content { padding: 30px; }
-        
-        /* Professional Notice */
         .notice-box { background: #fff9db; border-left: 6px solid #f1c40f; padding: 15px; border-radius: 8px; margin-bottom: 25px; font-weight: 500; color: #856404; font-size: 14px; }
 
-        /* Input Controls */
         .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
         @media (max-width: 650px) { .input-row { grid-template-columns: 1fr; } }
         
@@ -50,7 +50,6 @@
         .btn-calculate { width: 100%; padding: 20px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 22px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; box-shadow: 0 5px 20px rgba(230, 126, 34, 0.4); }
         .btn-calculate:hover { background: #d35400; transform: translateY(-2px); }
 
-        /* Results Section */
         #result-display { display: none; margin-top: 40px; border-top: 3px solid #eee; padding-top: 30px; }
         .result-banner { background: #f0fff4; border: 2px solid var(--success); border-radius: 15px; padding: 30px; text-align: center; margin-bottom: 30px; position: relative; }
         .result-banner h2 { margin: 10px 0; color: var(--success); font-size: 34px; }
@@ -60,29 +59,41 @@
         .btn-action { padding: 14px 25px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
         .copy-btn { background: #3498db; }
         .print-btn { background: #444; }
-        .btn-action:hover { opacity: 0.9; transform: scale(0.97); }
 
         .unit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; }
         .unit-card { background: #f9f9f9; padding: 18px; border: 1px solid #eee; border-radius: 10px; border-bottom: 5px solid var(--dark); text-align: center; }
         .unit-card small { color: #888; font-size: 11px; display: block; margin-bottom: 5px; text-transform: uppercase; font-weight: bold; }
         .unit-card b { font-size: 19px; color: var(--dark); }
 
-        /* Guide Section */
-        .guide-box { margin-top: 40px; background: #fff; border: 1px solid #ddd; padding: 25px; border-radius: 12px; }
-        .guide-box h3 { margin-top: 0; color: var(--dark); border-bottom: 3px solid var(--primary); display: inline-block; padding-bottom: 5px; }
-        .guide-content { font-size: 15px; color: #555; }
-        .imp-alert { background: var(--dark); color: #fff; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center; font-weight: bold; }
-
-        /* Print Media */
-        @media print {
-            body { background: white; padding: 0; }
-            .wrapper { box-shadow: none; border: 2px solid #000; width: 100%; max-width: 100%; }
-            .action-btns, .btn-calculate, .input-row, select, input { display: none !important; }
-            #result-display { display: block !important; }
-            .header { background: #000 !important; color: #fff !important; }
-            .result-banner { border: 3px solid #000 !important; }
-            .guide-box { border: 1px solid #000 !important; }
-        }
+        /* Additional Information Styles */
+        .calc-content-wrap{max-width:900px; margin:20px auto; padding:0; font-family:'Segoe UI',Arial,sans-serif}
+        .cc-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e0daf5;padding:26px 24px;margin-bottom:24px}
+        .cc-card.uk {border-color:#b5d9c5}
+        .cc-card h2{font-size:1.15rem;font-weight:700;padding-bottom:10px;margin-bottom:16px;border-bottom:2px solid;line-height:1.4}
+        .cc-card.uk h2{color:#1a5c35;border-color:#e8f5ee}
+        .cc-card h3{font-size:.97rem;font-weight:700;margin:16px 0 7px}
+        .cc-card.uk h3{color:#1a5c35}
+        .cc-card p{color:#444;font-size:.93rem;margin-bottom:10px;line-height:1.75}
+        .abox{border-left:4px solid #e0a800;background:#fff3cd;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#664d03}
+        .pbox.uk{border-left:4px solid #2e7d4f;background:#e8f5ee;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#0a3320}
+        .dt{width:100%;border-collapse:collapse;font-size:.87rem;margin-top:10px}
+        .dt th{padding:9px 12px;text-align:left;color:#fff; background:#2e7d4f}
+        .dt td{padding:8px 12px;border-bottom:1px solid #eee;color:#444;vertical-align:top}
+        .dt tr:nth-child(even) td{background:#fafafa}
+        .faq-w .fi{border:1px solid #e2e2e2;border-radius:8px;margin-bottom:9px;overflow:hidden}
+        .faq-w .fq{padding:12px 15px;font-weight:700;font-size:.88rem;cursor:pointer;display:flex;justify-content:space-between;user-select:none;background:#e8f5ee;color:#1a5c35}
+        .faq-w .fq .ar{font-size:.7rem;transition:transform .2s}
+        .faq-w .fi.open .fq .ar{transform:rotate(180deg)}
+        .faq-w .fa{display:none;padding:12px 15px;font-size:.87rem;color:#555;line-height:1.72;background:#fff}
+        .faq-w .fi.open .fa{display:block}
+        .rl{list-style:none;padding:0}
+        .rl li{padding:8px 0;border-bottom:1px dashed #e2e2e2;font-size:.9rem}
+        .rl li a{color:#2e7d4f;font-weight:600; text-decoration: none;}
+        .ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
+        .uc{border-radius:10px;padding:13px 15px;border:1px solid #b5d9c5; background:#e8f5ee}
+        .uc .ui{font-size:1.4rem;display:block;margin-bottom:5px}
+        .uc strong{display:block;font-size:.88rem;margin-bottom:3px; color:#1a5c35}
+        .uc span{font-size:.8rem;color:#666;line-height:1.5}
     </style>
 </head>
 <body>
@@ -121,7 +132,7 @@
                     <option value="nali">Nali (नाली - UK Hills)</option>
                     <option value="mutthi">Mutthi (मुट्ठी - UK Hills)</option>
                     <option value="gaj">Square Yard (वर्ग गज)</option>
-                    <option value="acre">Acre (एकड़)</option>
+                    <option value="acre">Acre (एकड़)</option>
                     <option value="hectare">Hectare (हेक्टेयर)</option>
                     <option value="bigha">Bigha (बीघा)</option>
                     <option value="biswa">Biswa / Katha (बिस्वा)</option>
@@ -162,32 +173,50 @@
                 <div class="unit-card"><small>डिसमिल (Dismil)</small><b id="outDismil">0</b></div>
                 <div class="unit-card"><small>नाली (Nali)</small><b id="outNali">0</b></div>
                 <div class="unit-card"><small>मुट्ठी (Mutthi)</small><b id="outMutthi">0</b></div>
-                <div class="unit-card"><small>एकड़ (Acre)</small><b id="outAcre">0</b></div>
+                <div class="unit-card"><small>एकड़ (Acre)</small><b id="outAcre">0</b></div>
                 <div class="unit-card"><small>हेक्टेयर (Hectare)</small><b id="outHect">0</b></div>
                 <div class="unit-card"><small>वर्ग गज (Gaj)</small><b id="outGaj">0</b></div>
                 <div class="unit-card"><small>वर्ग फुट (Sqft)</small><b id="outSqft">0</b></div>
                 <div class="unit-card"><small>उनवांसी (Unwansi)</small><b id="outUnw">0</b></div>
             </div>
-
-            <div class="guide-box">
-                <h3>📖 कैलकुलेशन का आधार और प्रक्रिया:</h3>
-                <div class="guide-content">
-                    • <b>प्रक्रिया:</b> सबसे पहले अपना क्षेत्र चुनें, फिर अपनी जमीन का नाप और यूनिट भरें। 'Calculate' बटन दबाते ही आपको रिपोर्ट मिल जाएगी।<br>
-                    • <b>यूपी/तराई मानक:</b> 1 लाठा = 99 इंच, 1 बीघा = 20 बिस्वा, 1 बिस्वा = 20 धुर।<br>
-                    • <b>उत्तराखंड पहाड़ी मानक:</b> 1 नाली = 2160 वर्ग फुट, 1 नाली = 16 मुट्ठी।<br>
-                    • <b>यूनिट्स:</b> 100 डिसमिल = 1 एकड़ | 1 एकड़ = 43,560 वर्ग फुट।
-                </div>
-                <div class="imp-alert">
-                    यह रिपोर्ट Jameenseva.in द्वारा सरकारी डेटा के आधार पर तैयार की गई है।
-                </div>
-            </div>
         </div>
     </div>
 
+    <div class="calc-content-wrap" id="uk-content">
+        <div class="cc-card uk">
+            <h2>📏 उत्तराखंड में जमीन की माप — नाली, मुट्ठी, बीघा और हेक्टेयर</h2>
+            <p>उत्तराखंड में जमीन मापने की दो अलग प्रणालियाँ हैं — <strong>पहाड़ी क्षेत्र</strong> (कुमाऊँ और गढ़वाल मंडल) में <strong>नाली-मुट्ठी</strong>, और <strong>तराई क्षेत्र</strong> (हरिद्वार, ऊधम सिंह नगर, देहरादून मैदान) में <strong>बीघा-बिस्वा</strong> प्रचलित है। सरकारी खतौनी में रकबा <strong>हेक्टेयर</strong> में दर्ज होता है।</p>
+            <h3>🏔️ पहाड़ी माप — नाली और मुट्ठी (कुमाऊँ / गढ़वाल)</h3>
+            <table class="dt">
+                <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग मीटर</th><th>हेक्टेयर</th></tr></thead>
+                <tbody>
+                    <tr><td>1 मुट्ठी</td><td>1/20 नाली</td><td>≈ 10.07 sq m</td><td>≈ 0.001007</td></tr>
+                    <tr><td>1 नाली</td><td>20 मुट्ठी</td><td>≈ 201.17 sq m</td><td>≈ 0.020117</td></tr>
+                    <tr><td>1 एकड़</td><td>≈ 20.1 नाली</td><td>4,047 sq m</td><td>0.4047</td></tr>
+                    <tr><td>1 हेक्टेयर</td><td>≈ 49.7 naali</td><td>10,000 sq m</td><td>1.0</td></tr>
+                </tbody>
+            </table>
+            <div class="abox">⚠️ <strong>क्षेत्र के अनुसार माप बदलती है:</strong> ऊपर Calculator से सटीक local माप के लिए अपना क्षेत्र चुनें।</div>
+        </div>
+
+        <div class="cc-card uk">
+            <h2>❓ UK जमीन माप — अक्सर पूछे जाने वाले सवाल</h2>
+            <div class="faq-w">
+                <div class="fi"><div class="fq">उत्तराखंड में 1 नाली कितने वर्ग मीटर होती है? <span class="ar">▼</span></div><div class="fa"><strong>1 नाली ≈ 201.17 वर्ग मीटर</strong> (लगभग 2,165 वर्ग फुट) होती है।</div></div>
+                <div class="fi"><div class="fq">devbhoomi खतौनी में हेक्टेयर को नाली में कैसे बदलें? <span class="ar">▼</span></div><div class="fa">सूत्र: <strong>हेक्टेयर × 49.7 = नाली</strong>।</div></div>
+            </div>
+        </div>
+
+        <div class="cc-card uk">
+            <h2>🔗 संबंधित जानकारी</h2>
+            <ul class="rl">
+                <li>🏔️ <a href="https://jameenseva.in/uk.html">उत्तराखंड भूलेख गाइड</a></li>
+                <li>📋 <a href="https://bhulekh.uk.gov.in" target="_blank">bhulekh.uk.gov.in — ऑनलाइन खतौनी</a></li>
+            </ul>
+        </div>
+    </div>
     <footer style="background: var(--dark); color: #bdc3c7; text-align: center; padding: 25px; font-size: 13px;">
-        © 2026 Jameenseva.in | यह रिपोर्ट Jameenseva.in द्वारा जनहित में जारी की गई है।
-सटीक पैमाइश के लिए हमेशा सरकारी लेखपाल/अमीन से संपर्क करें। <br>
-        <small>Land Records, Mapping & Survey Professionals</small>
+        © 2026 Jameenseva.in | Land Records, Mapping & Survey Professionals
     </footer>
 </div>
 
@@ -210,7 +239,6 @@
 
         if(!val || val <= 0) { alert("भैया, कृपया सही नाप भरें!"); return; }
 
-        // Core Constants
         let lathaFt = lathaInch / 12;
         let oneDhur = lathaFt * lathaFt;
         let oneBiswa = oneDhur * 20;
@@ -218,7 +246,6 @@
         let oneNali = 2160;
         let oneMutthi = 135;
 
-        // Convert to Base Sqft
         let sqft = 0;
         if(unit === "sqft") sqft = val;
         else if(unit === "dismil") sqft = val * 435.6;
@@ -230,22 +257,19 @@
         else if(unit === "bigha") sqft = val * oneBigha;
         else if(unit === "biswa") sqft = val * oneBiswa;
 
-        // Results Logic
         let b = Math.floor(sqft / oneBigha);
         let remB = sqft % oneBigha;
         let bi = Math.floor(remB / oneBiswa);
         let dh = ((remB % oneBiswa) / oneDhur).toFixed(1);
-
         let nali_res = Math.floor(sqft / oneNali);
         let mutthi_res = ((sqft % oneNali) / oneMutthi).toFixed(1);
 
-        // UI Update
         if(region === "uk_hills") {
             document.getElementById('primaryResult').innerText = `${nali_res} नाली, ${mutthi_res} मुट्ठी`;
             document.getElementById('secondaryResult').innerText = `मैदानी पैमाना: ${b} बीघा, ${bi} बिस्वा, ${dh} धुर`;
         } else {
             document.getElementById('primaryResult').innerText = `${b} बीघा, ${bi} बिस्वा, ${dh} धुर`;
-            document.getElementById('secondaryResult').innerText = `उत्तराखंड पहाड़ी: ${nali_res} नाली, ${mutthi_res} मुट्ठी`;
+            document.getElementById('secondaryResult').innerText = `उत्तराखंड पहाड़ी: ${nali_res} नाली, ${mutthi_res} मुट्ठी`;
         }
 
         document.getElementById('outDismil').innerText = (sqft / 435.6).toFixed(2);
@@ -261,174 +285,14 @@
     }
 
     function copyFullData() {
-        let inputVal = document.getElementById('mainValue').value;
-        let inputUnit = document.getElementById('unitType').value;
-        let res1 = document.getElementById('primaryResult').innerText;
-        let res2 = document.getElementById('secondaryResult').innerText;
-        
-        let report = `--- JAMEENSEVA MASTER REPORT ---\n`;
-        report += `Input: ${inputVal} ${inputUnit}\n`;
-        report += `Main Result: ${res1}\n`;
-        report += `Alternate: ${res2}\n`;
-        report += `Hectare: ${document.getElementById('outHect').innerText}\n`;
-        report += `Visit Jameenseva.in for accurate land records.`;
-
-        navigator.clipboard.writeText(report).then(() => {
-            alert("पूरी पैमाइश रिपोर्ट कॉपी हो गई है!");
-        });
+        let report = `--- JAMEENSEVA MASTER REPORT ---\nResult: ${document.getElementById('primaryResult').innerText}\nVisit Jameenseva.in`;
+        navigator.clipboard.writeText(report).then(() => alert("रिपोर्ट कॉपी हो गई है!"));
     }
-</script
-   
- <style>
-.calc-content-wrap{max-width:960px;margin:0 auto;padding:28px 14px 52px;font-family:'Segoe UI',Arial,sans-serif}
-.cc-card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08);border:1px solid #e0daf5;padding:26px 24px;margin-bottom:24px}
-.cc-card.up{border-color:#d4c8f5}.cc-card.mp{border-color:#f0c3b0}.cc-card.uk{border-color:#b5d9c5}
-.cc-card h2{font-size:1.15rem;font-weight:700;padding-bottom:10px;margin-bottom:16px;border-bottom:2px solid;line-height:1.4}
-.cc-card.up h2{color:#5b21b6;border-color:#ede9fe}
-.cc-card.mp h2{color:#b5451b;border-color:#fef0ea}
-.cc-card.uk h2{color:#1a5c35;border-color:#e8f5ee}
-.cc-card h3{font-size:.97rem;font-weight:700;margin:16px 0 7px}
-.cc-card.up h3{color:#5b21b6}.cc-card.mp h3{color:#b5451b}.cc-card.uk h3{color:#1a5c35}
-.cc-card p{color:#444;font-size:.93rem;margin-bottom:10px;line-height:1.75}
-.ibox{border-left:4px solid #c89a2e;background:#fdf6e3;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#5a4000}
-.abox{border-left:4px solid #e0a800;background:#fff3cd;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#664d03}
-.sbox{border-left:4px solid #27ae60;background:#eaf7ef;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#1a5c32}
-.pbox.up{border-left:4px solid #5b21b6;background:#ede9fe;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#3b1694}
-.pbox.mp{border-left:4px solid #b5451b;background:#fff5f0;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#6e2a10}
-.pbox.uk{border-left:4px solid #2e7d4f;background:#e8f5ee;border-radius:0 8px 8px 0;padding:11px 15px;margin:12px 0;font-size:.88rem;color:#0a3320}
-.dt{width:100%;border-collapse:collapse;font-size:.87rem;margin-top:10px}
-.dt th{padding:9px 12px;text-align:left;color:#fff}
-.cc-card.up .dt th{background:#5b21b6}
-.cc-card.mp .dt th{background:#b5451b}
-.cc-card.uk .dt th{background:#2e7d4f}
-.dt td{padding:8px 12px;border-bottom:1px solid #eee;color:#444;vertical-align:top}
-.dt tr:nth-child(even) td{background:#fafafa}
-.faq-w .fi{border:1px solid #e2e2e2;border-radius:8px;margin-bottom:9px;overflow:hidden}
-.faq-w .fq{padding:12px 15px;font-weight:700;font-size:.88rem;cursor:pointer;display:flex;justify-content:space-between;user-select:none}
-.cc-card.up .faq-w .fq{background:#ede9fe;color:#5b21b6}
-.cc-card.mp .faq-w .fq{background:#fff5f0;color:#b5451b}
-.cc-card.uk .faq-w .fq{background:#e8f5ee;color:#1a5c35}
-.faq-w .fq .ar{font-size:.7rem;transition:transform .2s}
-.faq-w .fi.open .fq .ar{transform:rotate(180deg)}
-.faq-w .fa{display:none;padding:12px 15px;font-size:.87rem;color:#555;line-height:1.72;background:#fff}
-.faq-w .fi.open .fa{display:block}
-.rl{list-style:none;padding:0}
-.rl li{padding:8px 0;border-bottom:1px dashed #e2e2e2;font-size:.9rem}
-.rl li:last-child{border:none}
-.cc-card.up .rl a{color:#5b21b6;font-weight:600}
-.cc-card.mp .rl a{color:#b5451b;font-weight:600}
-.cc-card.uk .rl a{color:#2e7d4f;font-weight:600}
-.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:12px}
-.uc{border-radius:10px;padding:13px 15px;border:1px solid #e2e2e2}
-.cc-card.up .uc{background:#ede9fe;border-color:#d4c8f5}
-.cc-card.mp .uc{background:#fff5f0;border-color:#f0c3b0}
-.cc-card.uk .uc{background:#e8f5ee;border-color:#b5d9c5}
-.uc .ui{font-size:1.4rem;display:block;margin-bottom:5px}
-.uc strong{display:block;font-size:.88rem;margin-bottom:3px}
-.cc-card.up .uc strong{color:#5b21b6}
-.cc-card.mp .uc strong{color:#b5451b}
-.cc-card.uk .uc strong{color:#1a5c35}
-.uc span{font-size:.8rem;color:#666;line-height:1.5}
-@media(max-width:600px){.cc-card{padding:18px 13px}}
-</style>
- 
-<!-- ===== START COPY FROM HERE FOR UK ===== -->
-<div class="calc-content-wrap" id="uk-content">
- 
-  <!-- UK: Measurement Tables -->
-  <div class="cc-card uk">
-    <h2>📏 उत्तराखंड में जमीन की माप — नाली, मुट्ठी, बीघा और हेक्टेयर</h2>
-    <p>उत्तराखंड में जमीन मापने की दो अलग प्रणालियाँ हैं — <strong>पहाड़ी क्षेत्र</strong> (कुमाऊँ और गढ़वाल मंडल) में <strong>नाली-मुट्ठी</strong>, और <strong>तराई क्षेत्र</strong> (हरिद्वार, ऊधम सिंह नगर, देहरादून मैदान) में <strong>बीघा-बिस्वा</strong> प्रचलित है। सरकारी खतौनी में रकबा <strong>हेक्टेयर</strong> में दर्ज होता है।</p>
- 
-    <h3>🏔️ पहाड़ी माप — नाली और मुट्ठी (कुमाऊँ / गढ़वाल)</h3>
-    <table class="dt">
-      <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग मीटर</th><th>हेक्टेयर</th></tr></thead>
-      <tbody>
-        <tr><td>1 मुट्ठी</td><td>1/20 नाली</td><td>≈ 10.07 sq m</td><td>≈ 0.001007</td></tr>
-        <tr><td>1 नाली</td><td>20 मुट्ठी</td><td>≈ 201.17 sq m</td><td>≈ 0.020117</td></tr>
-        <tr><td>1 बीघा (पहाड़ी)</td><td>≈ 12 नाली</td><td>≈ 2,414 sq m</td><td>≈ 0.2414</td></tr>
-        <tr><td>1 एकड़</td><td>≈ 20.1 नाली</td><td>4,047 sq m</td><td>0.4047</td></tr>
-        <tr><td>1 हेक्टेयर</td><td>≈ 49.7 नाली</td><td>10,000 sq m</td><td>1.0</td></tr>
-      </tbody>
-    </table>
- 
-    <h3>🌾 तराई माप — बीघा और बिस्वा (हरिद्वार / ऊधम सिंह नगर)</h3>
-    <table class="dt" style="margin-top:6px">
-      <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग मीटर</th><th>हेक्टेयर</th></tr></thead>
-      <tbody>
-        <tr><td>1 बिस्वांसी</td><td>1/20 बिस्वा</td><td>≈ 13.0 sq m</td><td>≈ 0.0013</td></tr>
-        <tr><td>1 बिस्वा</td><td>20 बिस्वांसी</td><td>≈ 260 sq m</td><td>≈ 0.026</td></tr>
-        <tr><td>1 बीघा (तराई)</td><td>20 बिस्वा</td><td>≈ 5,200 sq m</td><td>≈ 0.52 (approx)</td></tr>
-        <tr><td>1 एकड़</td><td>≈ 1.6 बीघा (तराई)</td><td>4,047 sq m</td><td>0.4047</td></tr>
-        <tr><td>1 हेक्टेयर</td><td>≈ 1.93 बीघा (तराई)</td><td>10,000 sq m</td><td>1.0</td></tr>
-      </tbody>
-    </table>
-    <div class="abox">⚠️ <strong>क्षेत्र के अनुसार माप बदलती है:</strong> कुमाऊँ (अल्मोड़ा, नैनीताल, पिथौरागढ़ आदि) और गढ़वाल (पौड़ी, टिहरी, चमोली आदि) में नाली का माप थोड़ा अलग हो सकता है। ऊपर Calculator में सटीक local माप के लिए अपना क्षेत्र चुनें।</div>
-  </div>
- 
-  <!-- UK: Pahadi vs Tarai -->
-  <div class="cc-card uk">
-    <h2>🏔️ उत्तराखंड पहाड़ी vs तराई — माप प्रणाली तुलना</h2>
-    <p>उत्तराखंड के दो अलग-अलग भौगोलिक क्षेत्रों में जमीन मापने की अलग परंपरा है। यह जानना बहुत जरूरी है:</p>
-    <table class="dt">
-      <thead><tr><th>विषय</th><th>पहाड़ी क्षेत्र (कुमाऊँ / गढ़वाल)</th><th>तराई क्षेत्र (हरिद्वार / ऊधम सिंह नगर)</th></tr></thead>
-      <tbody>
-        <tr><td>मुख्य इकाई</td><td><strong>नाली और मुट्ठी</strong></td><td><strong>बीघा और बिस्वा</strong></td></tr>
-        <tr><td>जिले</td><td>अल्मोड़ा, नैनीताल, पिथौरागढ़, पौड़ी, टिहरी, चमोली, रुद्रप्रयाग, उत्तरकाशी, बागेश्वर, चम्पावत</td><td>हरिद्वार, ऊधम सिंह नगर, देहरादून (मैदानी)</td></tr>
-        <tr><td>1 मुख्य इकाई</td><td>1 नाली ≈ 201 sq m</td><td>1 बीघा ≈ 2,500–5,200 sq m</td></tr>
-        <tr><td>सरकारी रिकॉर्ड</td><td colspan="2">दोनों में खतौनी का रकबा <strong>हेक्टेयर</strong> में</td></tr>
-      </tbody>
-    </table>
-    <div class="pbox uk">🟢 <strong>कैसे पहचानें:</strong> यदि आपकी खतौनी में रकबा बहुत कम हेक्टेयर (जैसे 0.02, 0.05) में है — तो संभवतः पहाड़ी क्षेत्र की जमीन है। यदि 0.25, 0.50 हेक्टेयर या उससे अधिक है — तो तराई की हो सकती है। Calculator में सही इकाई चुनें।</div>
-  </div>
- 
-  <!-- UK: Where measurement is used -->
-  <div class="cc-card uk">
-    <h2>🎯 उत्तराखंड में जमीन माप कहाँ-कहाँ काम आती है?</h2>
-    <div class="ugrid">
-      <div class="uc"><span class="ui">📋</span><strong>खतौनी जांच</strong><span>खतौनी में हेक्टेयर दर्ज होता है — नाली या बीघा में convert करें।</span></div>
-      <div class="uc"><span class="ui">🏦</span><strong>बैंक लोन / KCC</strong><span>पहाड़ी जमीन नाली में और बैंक हेक्टेयर में चाहता है — दोनों convert करें।</span></div>
-      <div class="uc"><span class="ui">🏗️</span><strong>भवन निर्माण</strong><span>Plot का क्षेत्रफल sq ft से नाली में बदलकर नगर पंचायत को दें।</span></div>
-      <div class="uc"><span class="ui">⚖️</span><strong>जमीन खरीद-बिक्री</strong><span>रजिस्ट्री से पहले नाली/बीघा और हेक्टेयर दोनों मिलाएं।</span></div>
-      <div class="uc"><span class="ui">🌾</span><strong>PM किसान / PMFBY</strong><span>किसान योजनाओं में जमीन का सही रकबा हेक्टेयर में भरें।</span></div>
-      <div class="uc"><span class="ui">📝</span><strong>दाखिल खारिज</strong><span>म्यूटेशन फॉर्म में सही नाली और हेक्टेयर दोनों में रकबा भरें।</span></div>
-    </div>
-  </div>
- 
-  <!-- UK: FAQ -->
-  <div class="cc-card uk">
-    <h2>❓ UK जमीन माप — अक्सर पूछे जाने वाले सवाल</h2>
-    <div class="faq-w">
-      <div class="fi"><div class="fq">उत्तराखंड में 1 नाली कितने वर्ग मीटर होती है? <span class="ar">▼</span></div><div class="fa"><strong>1 नाली ≈ 201.17 वर्ग मीटर</strong> (लगभग 2,165 वर्ग फुट) होती है। 1 नाली = 20 मुट्ठी। अलग-अलग क्षेत्रों में यह माप थोड़ी भिन्न हो सकती है — ऊपर Calculator से सटीक गणना करें।</div></div>
-      <div class="fi"><div class="fq">खतौनी में 0.10 हेक्टेयर है — यह कितने नाली है? <span class="ar">▼</span></div><div class="fa"><strong>0.10 हेक्टेयर ≈ 4.97 नाली</strong> (लगभग 5 नाली)। सूत्र: हेक्टेयर × 49.7 = नाली। ऊपर Calculator में 0.10 Hectare डालें — सटीक नाली और मुट्ठी मिलेगी।</div></div>
-      <div class="fi"><div class="fq">UK में 1 बीघा कितने नाली होता है? <span class="ar">▼</span></div><div class="fa">पहाड़ी क्षेत्र में <strong>1 बीघा ≈ 12 नाली</strong> होता है (≈ 2,414 sq m)। तराई क्षेत्र में बीघा अलग होता है — वहाँ बिस्वा प्रणाली चलती है।</div></div>
-      <div class="fi"><div class="fq">UK में 1 एकड़ कितने नाली है? <span class="ar">▼</span></div><div class="fa"><strong>1 एकड़ ≈ 20.1 नाली</strong> होता है। यानी 1 नाली ≈ 0.0497 एकड़। Calculator में Acre चुनकर सटीक नाली जानें।</div></div>
-      <div class="fi"><div class="fq">हरिद्वार में जमीन नाली में है या बीघा में? <span class="ar">▼</span></div><div class="fa">हरिद्वार और ऊधम सिंह नगर <strong>तराई क्षेत्र</strong> हैं — यहाँ जमीन <strong>बीघा और बिस्वा</strong> में मापी जाती है, नाली में नहीं। नाली-मुट्ठी केवल पहाड़ी जिलों (अल्मोड़ा, नैनीताल, पौड़ी, चमोली आदि) में प्रचलित है।</div></div>
-      <div class="fi"><div class="fq">devbhoomi खतौनी में हेक्टेयर को नाली में कैसे बदलें? <span class="ar">▼</span></div><div class="fa">सूत्र बहुत आसान है: <strong>हेक्टेयर × 49.7 = नाली</strong>। उदाहरण: 0.25 हेक्टेयर × 49.7 = 12.42 नाली ≈ 12 नाली 8 मुट्ठी। या ऊपर Calculator में Hectare डालें — तुरंत नाली-मुट्ठी मिलेगी।</div></div>
-    </div>
-  </div>
- 
-  <!-- UK: Related Links -->
-  <div class="cc-card uk">
-    <h2>🔗 उत्तराखंड जमीन — संबंधित जानकारी</h2>
-    <ul class="rl">
-      <li>🏔️ <a href="https://jameenseva.in/uk.html">उत्तराखंड भूलेख देवभूमि — खतौनी, नक्शा और दाखिल खारिज गाइड</a></li>
-      <li>📋 <a href="https://bhulekh.uk.gov.in" target="_blank" rel="noopener">bhulekh.uk.gov.in — UK खतौनी (RoR) ऑनलाइन देखें</a></li>
-      <li>🗺️ <a href="https://bhunaksha.uk.gov.in" target="_blank" rel="noopener">bhunaksha.uk.gov.in — UK भू-नक्शा देखें</a></li>
-      <li>📏 <a href="https://jameenseva.in/up-land-calculator.html">UP जमीन कैलकुलेटर — बीघा, बिस्वा, डिसमिल</a></li>
-      <li>📏 <a href="https://jameenseva.in/mp-land-calculator.html">MP जमीन कैलकुलेटर — बीघा, कट्ठा, हेक्टेयर</a></li>
-      <li>📄 <a href="https://jameenseva.in/khatiyan.html">बिहार ओरिजनल खतियान ऑनलाइन ऑर्डर करें</a></li>
-      <li>📏 <a href="https://jameenseva.in/land-calculator.html">बिहार जमीन कैलकुलेटर — धुर, कट्ठा, बीघा</a></li>
-      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें</a></li>
-    </ul>
-  </div>
- 
-</div>
- <script>
-document.querySelectorAll('.fq').forEach(q=>{
-  q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
-});
+
+    document.querySelectorAll('.fq').forEach(q=>{
+        q.addEventListener('click',()=>q.parentElement.classList.toggle('open'));
+    });
 </script>
+
 </body>
 </html>
-<script src="footer.js"></script>
