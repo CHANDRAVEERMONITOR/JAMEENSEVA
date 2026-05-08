@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
@@ -257,7 +257,104 @@
             alert("पूरी पैमाइश रिपोर्ट कॉपी हो गई है!");
         });
     }
-</script>
+</script
+    <hr>
+<h1>BLOCK 3 — UK Calculator Content (uk-land-calculator.html के लिए)</h1>
+<hr>
+ 
+<!-- ===== START COPY FROM HERE FOR UK ===== -->
+<div class="calc-content-wrap" id="uk-content">
+ 
+  <!-- UK: Measurement Tables -->
+  <div class="cc-card uk">
+    <h2>📏 उत्तराखंड में जमीन की माप — नाली, मुट्ठी, बीघा और हेक्टेयर</h2>
+    <p>उत्तराखंड में जमीन मापने की दो अलग प्रणालियाँ हैं — <strong>पहाड़ी क्षेत्र</strong> (कुमाऊँ और गढ़वाल मंडल) में <strong>नाली-मुट्ठी</strong>, और <strong>तराई क्षेत्र</strong> (हरिद्वार, ऊधम सिंह नगर, देहरादून मैदान) में <strong>बीघा-बिस्वा</strong> प्रचलित है। सरकारी खतौनी में रकबा <strong>हेक्टेयर</strong> में दर्ज होता है।</p>
+ 
+    <h3>🏔️ पहाड़ी माप — नाली और मुट्ठी (कुमाऊँ / गढ़वाल)</h3>
+    <table class="dt">
+      <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग मीटर</th><th>हेक्टेयर</th></tr></thead>
+      <tbody>
+        <tr><td>1 मुट्ठी</td><td>1/20 नाली</td><td>≈ 10.07 sq m</td><td>≈ 0.001007</td></tr>
+        <tr><td>1 नाली</td><td>20 मुट्ठी</td><td>≈ 201.17 sq m</td><td>≈ 0.020117</td></tr>
+        <tr><td>1 बीघा (पहाड़ी)</td><td>≈ 12 नाली</td><td>≈ 2,414 sq m</td><td>≈ 0.2414</td></tr>
+        <tr><td>1 एकड़</td><td>≈ 20.1 नाली</td><td>4,047 sq m</td><td>0.4047</td></tr>
+        <tr><td>1 हेक्टेयर</td><td>≈ 49.7 नाली</td><td>10,000 sq m</td><td>1.0</td></tr>
+      </tbody>
+    </table>
+ 
+    <h3>🌾 तराई माप — बीघा और बिस्वा (हरिद्वार / ऊधम सिंह नगर)</h3>
+    <table class="dt" style="margin-top:6px">
+      <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग मीटर</th><th>हेक्टेयर</th></tr></thead>
+      <tbody>
+        <tr><td>1 बिस्वांसी</td><td>1/20 बिस्वा</td><td>≈ 13.0 sq m</td><td>≈ 0.0013</td></tr>
+        <tr><td>1 बिस्वा</td><td>20 बिस्वांसी</td><td>≈ 260 sq m</td><td>≈ 0.026</td></tr>
+        <tr><td>1 बीघा (तराई)</td><td>20 बिस्वा</td><td>≈ 5,200 sq m</td><td>≈ 0.52 (approx)</td></tr>
+        <tr><td>1 एकड़</td><td>≈ 1.6 बीघा (तराई)</td><td>4,047 sq m</td><td>0.4047</td></tr>
+        <tr><td>1 हेक्टेयर</td><td>≈ 1.93 बीघा (तराई)</td><td>10,000 sq m</td><td>1.0</td></tr>
+      </tbody>
+    </table>
+    <div class="abox">⚠️ <strong>क्षेत्र के अनुसार माप बदलती है:</strong> कुमाऊँ (अल्मोड़ा, नैनीताल, पिथौरागढ़ आदि) और गढ़वाल (पौड़ी, टिहरी, चमोली आदि) में नाली का माप थोड़ा अलग हो सकता है। ऊपर Calculator में सटीक local माप के लिए अपना क्षेत्र चुनें।</div>
+  </div>
+ 
+  <!-- UK: Pahadi vs Tarai -->
+  <div class="cc-card uk">
+    <h2>🏔️ उत्तराखंड पहाड़ी vs तराई — माप प्रणाली तुलना</h2>
+    <p>उत्तराखंड के दो अलग-अलग भौगोलिक क्षेत्रों में जमीन मापने की अलग परंपरा है। यह जानना बहुत जरूरी है:</p>
+    <table class="dt">
+      <thead><tr><th>विषय</th><th>पहाड़ी क्षेत्र (कुमाऊँ / गढ़वाल)</th><th>तराई क्षेत्र (हरिद्वार / ऊधम सिंह नगर)</th></tr></thead>
+      <tbody>
+        <tr><td>मुख्य इकाई</td><td><strong>नाली और मुट्ठी</strong></td><td><strong>बीघा और बिस्वा</strong></td></tr>
+        <tr><td>जिले</td><td>अल्मोड़ा, नैनीताल, पिथौरागढ़, पौड़ी, टिहरी, चमोली, रुद्रप्रयाग, उत्तरकाशी, बागेश्वर, चम्पावत</td><td>हरिद्वार, ऊधम सिंह नगर, देहरादून (मैदानी)</td></tr>
+        <tr><td>1 मुख्य इकाई</td><td>1 नाली ≈ 201 sq m</td><td>1 बीघा ≈ 2,500–5,200 sq m</td></tr>
+        <tr><td>सरकारी रिकॉर्ड</td><td colspan="2">दोनों में खतौनी का रकबा <strong>हेक्टेयर</strong> में</td></tr>
+      </tbody>
+    </table>
+    <div class="pbox uk">🟢 <strong>कैसे पहचानें:</strong> यदि आपकी खतौनी में रकबा बहुत कम हेक्टेयर (जैसे 0.02, 0.05) में है — तो संभवतः पहाड़ी क्षेत्र की जमीन है। यदि 0.25, 0.50 हेक्टेयर या उससे अधिक है — तो तराई की हो सकती है। Calculator में सही इकाई चुनें।</div>
+  </div>
+ 
+  <!-- UK: Where measurement is used -->
+  <div class="cc-card uk">
+    <h2>🎯 उत्तराखंड में जमीन माप कहाँ-कहाँ काम आती है?</h2>
+    <div class="ugrid">
+      <div class="uc"><span class="ui">📋</span><strong>खतौनी जांच</strong><span>खतौनी में हेक्टेयर दर्ज होता है — नाली या बीघा में convert करें।</span></div>
+      <div class="uc"><span class="ui">🏦</span><strong>बैंक लोन / KCC</strong><span>पहाड़ी जमीन नाली में और बैंक हेक्टेयर में चाहता है — दोनों convert करें।</span></div>
+      <div class="uc"><span class="ui">🏗️</span><strong>भवन निर्माण</strong><span>Plot का क्षेत्रफल sq ft से नाली में बदलकर नगर पंचायत को दें।</span></div>
+      <div class="uc"><span class="ui">⚖️</span><strong>जमीन खरीद-बिक्री</strong><span>रजिस्ट्री से पहले नाली/बीघा और हेक्टेयर दोनों मिलाएं।</span></div>
+      <div class="uc"><span class="ui">🌾</span><strong>PM किसान / PMFBY</strong><span>किसान योजनाओं में जमीन का सही रकबा हेक्टेयर में भरें।</span></div>
+      <div class="uc"><span class="ui">📝</span><strong>दाखिल खारिज</strong><span>म्यूटेशन फॉर्म में सही नाली और हेक्टेयर दोनों में रकबा भरें।</span></div>
+    </div>
+  </div>
+ 
+  <!-- UK: FAQ -->
+  <div class="cc-card uk">
+    <h2>❓ UK जमीन माप — अक्सर पूछे जाने वाले सवाल</h2>
+    <div class="faq-w">
+      <div class="fi"><div class="fq">उत्तराखंड में 1 नाली कितने वर्ग मीटर होती है? <span class="ar">▼</span></div><div class="fa"><strong>1 नाली ≈ 201.17 वर्ग मीटर</strong> (लगभग 2,165 वर्ग फुट) होती है। 1 नाली = 20 मुट्ठी। अलग-अलग क्षेत्रों में यह माप थोड़ी भिन्न हो सकती है — ऊपर Calculator से सटीक गणना करें।</div></div>
+      <div class="fi"><div class="fq">खतौनी में 0.10 हेक्टेयर है — यह कितने नाली है? <span class="ar">▼</span></div><div class="fa"><strong>0.10 हेक्टेयर ≈ 4.97 नाली</strong> (लगभग 5 नाली)। सूत्र: हेक्टेयर × 49.7 = नाली। ऊपर Calculator में 0.10 Hectare डालें — सटीक नाली और मुट्ठी मिलेगी।</div></div>
+      <div class="fi"><div class="fq">UK में 1 बीघा कितने नाली होता है? <span class="ar">▼</span></div><div class="fa">पहाड़ी क्षेत्र में <strong>1 बीघा ≈ 12 नाली</strong> होता है (≈ 2,414 sq m)। तराई क्षेत्र में बीघा अलग होता है — वहाँ बिस्वा प्रणाली चलती है।</div></div>
+      <div class="fi"><div class="fq">UK में 1 एकड़ कितने नाली है? <span class="ar">▼</span></div><div class="fa"><strong>1 एकड़ ≈ 20.1 नाली</strong> होता है। यानी 1 नाली ≈ 0.0497 एकड़। Calculator में Acre चुनकर सटीक नाली जानें।</div></div>
+      <div class="fi"><div class="fq">हरिद्वार में जमीन नाली में है या बीघा में? <span class="ar">▼</span></div><div class="fa">हरिद्वार और ऊधम सिंह नगर <strong>तराई क्षेत्र</strong> हैं — यहाँ जमीन <strong>बीघा और बिस्वा</strong> में मापी जाती है, नाली में नहीं। नाली-मुट्ठी केवल पहाड़ी जिलों (अल्मोड़ा, नैनीताल, पौड़ी, चमोली आदि) में प्रचलित है।</div></div>
+      <div class="fi"><div class="fq">devbhoomi खतौनी में हेक्टेयर को नाली में कैसे बदलें? <span class="ar">▼</span></div><div class="fa">सूत्र बहुत आसान है: <strong>हेक्टेयर × 49.7 = नाली</strong>। उदाहरण: 0.25 हेक्टेयर × 49.7 = 12.42 नाली ≈ 12 नाली 8 मुट्ठी। या ऊपर Calculator में Hectare डालें — तुरंत नाली-मुट्ठी मिलेगी।</div></div>
+    </div>
+  </div>
+ 
+  <!-- UK: Related Links -->
+  <div class="cc-card uk">
+    <h2>🔗 उत्तराखंड जमीन — संबंधित जानकारी</h2>
+    <ul class="rl">
+      <li>🏔️ <a href="https://jameenseva.in/uk.html">उत्तराखंड भूलेख देवभूमि — खतौनी, नक्शा और दाखिल खारिज गाइड</a></li>
+      <li>📋 <a href="https://bhulekh.uk.gov.in" target="_blank" rel="noopener">bhulekh.uk.gov.in — UK खतौनी (RoR) ऑनलाइन देखें</a></li>
+      <li>🗺️ <a href="https://bhunaksha.uk.gov.in" target="_blank" rel="noopener">bhunaksha.uk.gov.in — UK भू-नक्शा देखें</a></li>
+      <li>📏 <a href="https://jameenseva.in/up-land-calculator.html">UP जमीन कैलकुलेटर — बीघा, बिस्वा, डिसमिल</a></li>
+      <li>📏 <a href="https://jameenseva.in/mp-land-calculator.html">MP जमीन कैलकुलेटर — बीघा, कट्ठा, हेक्टेयर</a></li>
+      <li>📄 <a href="https://jameenseva.in/khatiyan.html">बिहार ओरिजनल खतियान ऑनलाइन ऑर्डर करें</a></li>
+      <li>📏 <a href="https://jameenseva.in/land-calculator.html">बिहार जमीन कैलकुलेटर — धुर, कट्ठा, बीघा</a></li>
+      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें</a></li>
+    </ul>
+  </div>
+ 
+</div>
+
 </body>
 </html>
 <script src="footer.js"></script>
