@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url><loc>https://jameenseva.in/</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
+  <url><loc>https://jameenseva.in/</loc><lastmod>2026-05-8</lastmod><priority>1.00</priority></url>
   <url><loc>https://jameenseva.in/up.html</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
+    <url><loc>https://jameenseva.in/mp.html</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
+    <url><loc>https://jameenseva.in/uk.html</loc><lastmod>2026-03-27</lastmod><priority>1.00</priority></url>
   <url><loc>https://jameenseva.in/blog.html</loc><lastmod>2026-03-27</lastmod><priority>0.90</priority></url>
   <url><loc>https://jameenseva.in/sarkari.html</loc><priority>0.90</priority></url>
   <url><loc>https://jameenseva.in/track.html</loc><priority>0.90</priority></url>
@@ -23,10 +25,10 @@
 
 <url>
     <loc>https://jameenseva.in/sitemap.html</loc>
-    <lastmod>2026-05-02</lastmod>
+    <lastmod>2026-05-08</lastmod>
     <priority>0.90</priority>
   </url>
- 
+  <url><loc>https://jameenseva.in/khesra-service.html</loc><priority>0.90</priority></url>
   <url><loc>https://jameenseva.in/khatiyan.html</loc><priority>0.90</priority></url>
   <url><loc>https://jameenseva.in/panchnama.html</loc><priority>0.90</priority></url>
   <url><loc>https://jameenseva.in/ragister2.html</loc><priority>0.90</priority></url>
