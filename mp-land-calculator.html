@@ -186,6 +186,89 @@
         navigator.clipboard.writeText(t).then(() => alert("रिपोर्ट कॉपी हो गई!"));
     }
 </script>
+    <hr>
+<h1>BLOCK 2 — MP Calculator Content (mp-land-calculator.html के लिए)</h1>
+<hr>
+ 
+<!-- ===== START COPY FROM HERE FOR MP ===== -->
+<div class="calc-content-wrap" id="mp-content">
+ 
+  <!-- MP: Measurement Table -->
+  <div class="cc-card mp">
+    <h2>📏 मध्य प्रदेश में जमीन की माप — बीघा, कट्ठा, धुर और हेक्टेयर</h2>
+    <p>मध्य प्रदेश में जमीन मापने के लिए <strong>बीघा, कट्ठा और धुर</strong> की परंपरागत प्रणाली उपयोग होती है। सरकारी खसरे में रकबा <strong>हेक्टेयर</strong> में दर्ज होता है। MP में <strong>1 बीघा = 20 कट्ठा</strong> और <strong>1 कट्ठा = 20 धुर</strong> होता है।</p>
+    <h3>MP मानक माप चार्ट (99 इंच / 5.5 हाथ लाठा)</h3>
+    <table class="dt">
+      <thead><tr><th>इकाई</th><th>बराबर</th><th>वर्ग फुट</th><th>हेक्टेयर</th></tr></thead>
+      <tbody>
+        <tr><td>1 धुर</td><td>1/20 कट्ठा</td><td>≈ 68.06 sq ft</td><td>≈ 0.00063</td></tr>
+        <tr><td>1 कट्ठा</td><td>20 धुर</td><td>≈ 1,361 sq ft</td><td>≈ 0.01265</td></tr>
+        <tr><td>1 बीघा</td><td>20 कट्ठा (400 धुर)</td><td>≈ 27,225 sq ft</td><td>≈ 0.253 (99 इंच)</td></tr>
+        <tr><td>1 बीघा (मानक MP)</td><td>—</td><td>≈ 72,900 sq ft (पक्का बीघा)</td><td>≈ 0.677</td></tr>
+        <tr><td>1 एकड़</td><td>—</td><td>43,560 sq ft</td><td>0.4047</td></tr>
+        <tr><td>1 हेक्टेयर</td><td>≈ 1.48 बीघा (MP पक्का)</td><td>1,07,639 sq ft</td><td>1.0</td></tr>
+      </tbody>
+    </table>
+    <div class="abox">⚠️ <strong>MP में दो तरह के बीघा:</strong> MP में <strong>कच्चा बीघा</strong> (99 इंच लाठा — ≈ 0.253 हेक्टेयर) और <strong>पक्का बीघा</strong> (≈ 0.677 हेक्टेयर) दोनों प्रचलित हैं। सरकारी रिकॉर्ड में हेक्टेयर को convert करते समय ऊपर Calculator में सही लाठा साइज चुनें।</div>
+  </div>
+ 
+  <!-- MP: Latha Comparison -->
+  <div class="cc-card mp">
+    <h2>📐 MP में लाठा/लग्गा साइज — क्षेत्र अनुसार तुलना</h2>
+    <p>मध्य प्रदेश के अलग-अलग क्षेत्रों में <strong>लाठे का साइज</strong> अलग होता है। इससे एक ही जमीन का बीघा में नाप अलग-अलग आता है:</p>
+    <table class="dt">
+      <thead><tr><th>लाठा साइज</th><th>क्षेत्र / उपयोग</th><th>1 बीघा (sq ft)</th><th>1 हेक्टेयर में बीघा</th></tr></thead>
+      <tbody>
+        <tr><td><strong>99 इंच (5.5 हाथ)</strong></td><td>MP Standard — अधिकतर क्षेत्र</td><td>≈ 27,225</td><td>≈ 3.95 (कच्चा बीघा)</td></tr>
+        <tr><td><strong>108 इंच (6 हाथ)</strong></td><td>कुछ स्थानीय क्षेत्र</td><td>≈ 32,400</td><td>≈ 3.32</td></tr>
+        <tr><td><strong>94 इंच (Custom)</strong></td><td>विशेष स्थानीय माप</td><td>≈ 24,556</td><td>≈ 4.38</td></tr>
+        <tr><td><strong>पक्का बीघा (MP)</strong></td><td>सरकारी संदर्भ</td><td>≈ 72,900</td><td>≈ 1.48 बीघा/हेक्टेयर</td></tr>
+      </tbody>
+    </table>
+    <div class="pbox mp">🟠 <strong>खसरे में हेक्टेयर दिखा तो क्या करें:</strong> खसरे में हेक्टेयर को बीघा में बदलने के लिए ऊपर Calculator में <strong>Hectare</strong> चुनें, मान डालें और अपने क्षेत्र का लाठा साइज चुनें — सटीक बीघा-कट्ठा-धुर मिल जाएगा।</div>
+  </div>
+ 
+  <!-- MP: Where measurement is used -->
+  <div class="cc-card mp">
+    <h2>🎯 MP में जमीन माप कहाँ-कहाँ काम आती है?</h2>
+    <div class="ugrid">
+      <div class="uc"><span class="ui">📋</span><strong>खसरा जांच</strong><span>सरकारी खसरे में हेक्टेयर दर्ज होता है — इसे बीघा में convert करें।</span></div>
+      <div class="uc"><span class="ui">🏦</span><strong>बैंक लोन / KCC</strong><span>जमीन का सही रकबा बीघा और हेक्टेयर दोनों में बैंक को दें।</span></div>
+      <div class="uc"><span class="ui">⚖️</span><strong>नामांतरण फॉर्म</strong><span>दाखिल खारिज आवेदन में सही रकबा हेक्टेयर और बीघा में भरें।</span></div>
+      <div class="uc"><span class="ui">🏗️</span><strong>डायवर्जन आवेदन</strong><span>कृषि भूमि को गैर-कृषि में बदलने के आवेदन में सटीक माप।</span></div>
+      <div class="uc"><span class="ui">🌾</span><strong>PM किसान / फसल बीमा</strong><span>योजनाओं में जमीन का सही रकबा भरने के लिए।</span></div>
+      <div class="uc"><span class="ui">📜</span><strong>रजिस्ट्री से पहले</strong><span>बैनामा में रकबा हेक्टेयर और बीघा दोनों में सही होना चाहिए।</span></div>
+    </div>
+  </div>
+ 
+  <!-- MP: FAQ -->
+  <div class="cc-card mp">
+    <h2>❓ MP जमीन माप — अक्सर पूछे जाने वाले सवाल</h2>
+    <div class="faq-w">
+      <div class="fi"><div class="fq">MP में 1 बीघा कितने हेक्टेयर का होता है? <span class="ar">▼</span></div><div class="fa">MP में दो प्रकार के बीघा प्रचलित हैं:<br>• <strong>कच्चा बीघा (99 इंच लाठा):</strong> ≈ 0.253 हेक्टेयर<br>• <strong>पक्का बीघा (MP मानक):</strong> ≈ 0.677 हेक्टेयर<br>सरकारी खसरे में रकबा हेक्टेयर में होता है — ऊपर Calculator में लाठा साइज चुनकर सटीक बीघा जानें।</div></div>
+      <div class="fi"><div class="fq">MP में 1 हेक्टेयर कितने कट्ठा होता है? <span class="ar">▼</span></div><div class="fa">99 इंच के लाठे पर: <strong>1 हेक्टेयर ≈ 79 कट्ठा</strong> (3.95 बीघा × 20 कट्ठा)। पक्का बीघा के हिसाब से: <strong>1 हेक्टेयर ≈ 29.6 कट्ठा</strong>। Calculator में Hectare चुनकर सही लाठा सेलेक्ट करें।</div></div>
+      <div class="fi"><div class="fq">खसरे में 0.50 हेक्टेयर लिखा है — यह कितने बीघा है? <span class="ar">▼</span></div><div class="fa">99 इंच लाठे पर: <strong>0.50 हेक्टेयर ≈ 1 बीघा 19 कट्ठा 4 धुर</strong>। पक्का MP बीघा में: <strong>0.50 हेक्टेयर ≈ 0.74 बीघा</strong>। ऊपर Calculator में 0.50 हेक्टेयर डालकर सटीक रिजल्ट लें।</div></div>
+      <div class="fi"><div class="fq">MP में 1 एकड़ कितने बीघा होता है? <span class="ar">▼</span></div><div class="fa">99 इंच लाठे पर: <strong>1 एकड़ ≈ 1.60 बीघा</strong> (कच्चा)। पक्का MP बीघा में: <strong>1 एकड़ ≈ 0.60 बीघा</strong>। अपने क्षेत्र का लाठा चुनकर Calculator से सटीक जानें।</div></div>
+      <div class="fi"><div class="fq">MP में पक्का और कच्चा बीघा में क्या अंतर है? <span class="ar">▼</span></div><div class="fa"><strong>कच्चा बीघा:</strong> स्थानीय 99 इंच लाठे पर आधारित — ≈ 0.253 हेक्टेयर।<br><strong>पक्का बीघा:</strong> बड़ा मानक बीघा — ≈ 0.677 हेक्टेयर।<br>MP के कुछ जिलों में पक्का बीघा ही मान्य है। अपने पटवारी से पुष्टि करें।</div></div>
+    </div>
+  </div>
+ 
+  <!-- MP: Related Links -->
+  <div class="cc-card mp">
+    <h2>🔗 मध्य प्रदेश जमीन — संबंधित जानकारी</h2>
+    <ul class="rl">
+      <li>🌾 <a href="https://jameenseva.in/mp.html">मध्य प्रदेश भूलेख — खसरा, खतौनी, नक्शा और नामांतरण गाइड</a></li>
+      <li>📋 <a href="https://mpbhulekh.gov.in" target="_blank" rel="noopener">mpbhulekh.gov.in — MP खसरा-खतौनी ऑनलाइन देखें</a></li>
+      <li>🗺️ <a href="https://mpbhunaksha.gov.in" target="_blank" rel="noopener">mpbhunaksha.gov.in — MP भू-नक्शा देखें</a></li>
+      <li>📏 <a href="https://jameenseva.in/up-land-calculator.html">UP जमीन कैलकुलेटर — बीघा, बिस्वा, डिसमिल</a></li>
+      <li>📏 <a href="https://jameenseva.in/uk-land-calculator.html">UK जमीन कैलकुलेटर — नाली, मुट्ठी, बीघा</a></li>
+      <li>📄 <a href="https://jameenseva.in/khatiyan.html">बिहार ओरिजनल खतियान ऑनलाइन ऑर्डर करें</a></li>
+      <li>📏 <a href="https://jameenseva.in/land-calculator.html">बिहार जमीन कैलकुलेटर — धुर, कट्ठा, बीघा</a></li>
+      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें</a></li>
+    </ul>
+  </div>
+ 
+</div>
 </body>
 </html>
 <script src="footer.js"></script>
