@@ -3,400 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>सहमती पंचनामा बटवारा</title>
+    <title>सहमति पंचनामा बटवारा - बिहार लीगल फॉर्मेट</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
-        /* Google Font for Hindi */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&display=swap');
-
-        body {
-            font-family: 'Noto Serif Devanagari', serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
+        :root {
+            --primary: #1a237e;
+            --secondary: #0d47a1;
+            --success: #1b5e20;
+            --danger: #b71c1c;
         }
 
-        /* Input Form Styling - Hidden during print */
-        #input-form {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #f0f2f5; 
+            padding: 20px; 
+        }
+
+        /* Dashboard UI */
+        .container { max-width: 1200px; margin: auto; }
+        .form-section { 
+            background: white; 
+            padding: 30px; 
+            margin-bottom: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        h2 { text-align: center; color: var(--primary); margin-bottom: 25px; }
+        h3 { background: #f1f5f9; padding: 12px; border-radius: 8px; margin: 20px 0 15px; color: var(--secondary); font-size: 17px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--secondary); }
+        .input-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px; }
+        .input-group label { font-weight: 600; margin-bottom: 5px; font-size: 13px; color: #666; display: block; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-blue { background: var(--secondary); color: white; }
+        .btn-green { background: var(--success); color: white; }
+        .btn-red { background: var(--danger); color: white; }
+        .farik-box { border: 1px solid #ddd; background: #fcfcfc; padding: 20px; margin-bottom: 20px; border-radius: 12px; }
+        .hidden { display: none; }
+
+        /* ===== PRINT / PDF SYSTEM (The Most Important Part) ===== */
+        #printArea { 
+            font-family: 'Noto Serif Devanagari', serif; 
+            background: #ddd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page { 
             background: white;
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        input {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        label { font-weight: bold; }
-
-        /* Print Area Styling */
-        .page {
             width: 210mm;
-            min-height: 297mm;
-            padding: 15mm;
-            margin: 10mm auto;
-            background: white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+            height: 297mm;
+            padding: 20mm;
+            margin: 10mm 0;
             position: relative;
-            box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
             page-break-after: always;
-            border: 2px solid black; /* Main border as per image */
+            border: 1px solid #000; /* Page Border as per images */
+            box-sizing: border-box;
+            overflow: hidden;
         }
+        .page-no { text-align: center; font-weight: bold; margin-bottom: 10px; font-size: 14px; }
+        .stamp-area { 
+            position: absolute; top: 15mm; right: 15mm; 
+            width: 40mm; height: 40mm; 
+            border: 1px dashed #000; 
+            text-align: center; font-size: 12px; padding-top: 10px;
+        }
+        .vertical-text { 
+            position: absolute; 
+            writing-mode: vertical-rl; 
+            text-orientation: mixed; 
+            font-weight: bold; 
+            font-size: 14px; 
+            text-transform: uppercase;
+        }
+        .v-sarpanch { left: 10mm; top: 40%; }
+        .v-gawah { right: 10mm; top: 30%; }
+        .v-fariken { right: 10mm; top: 60%; }
 
-        .page-header {
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+        .page h3 { background: none; padding: 0; border: none; text-align: center; text-decoration: underline; margin: 15px 0; font-size: 18px; color: #000; }
+        .page p { text-align: justify; margin-bottom: 10px; line-height: 1.8; }
+        .page table { width: 100%; border-collapse: collapse; margin: 15px 0; border: 1px solid #000; }
+        .page th, .page td { border: 1px solid #000; padding: 8px; text-align: center; font-size: 13px; }
+        .page th { background: #f2f2f2; }
 
-        .content {
-            position: relative;
-            height: 100%;
-        }
+        .sign-area { display: flex; justify-content: space-between; margin-top: 80px; font-weight: bold; text-align: center; }
+        .sign-area div { width: 30%; border-top: 1px solid #000; padding-top: 5px; }
 
-        /* Side Text Styling (Sarpanch, Gawah, etc) */
-        .side-text {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%) rotate(-90deg);
-            font-weight: bold;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-        .left-side { left: 10px; }
-        .right-side { right: 10px; }
+        /* Visual Family Tree (Vanshavali) */
+        .tree-container { text-align: center; margin-top: 30px; }
+        .tree ul { padding-top: 20px; position: relative; display: flex; justify-content: center; align-items: flex-start; }
+        .tree li { list-style-type: none; position: relative; padding: 20px 5px 0 5px; }
+        .tree li::before, .tree li::after { content: ''; position: absolute; top: 0; right: 50%; border-top: 1px solid #000; width: 50%; height: 20px; }
+        .tree li::after { right: auto; left: 50%; border-left: 1px solid #000; }
+        .tree li:only-child::after, .tree li:only-child::before { display: none; }
+        .tree li:only-child { padding-top: 0; }
+        .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+        .tree li:last-child::before { border-right: 1px solid #000; border-radius: 0 5px 0 0; }
+        .tree li:first-child::after { border-radius: 5px 0 0 0; }
+        .tree ul ul::before { content: ''; position: absolute; top: 0; left: 50%; border-left: 1px solid #000; width: 0; height: 20px; }
+        .tree li div { border: 1px solid #000; padding: 5px 10px; border-radius: 4px; background: #fff; display: inline-block; font-weight: bold; font-size: 13px; min-width: 100px; }
 
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-            font-size: 13px;
-        }
-        .text-left { text-align: left; }
-
-        /* Family Tree Styling */
-        .tree {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .tree-node {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-            min-width: 150px;
-            background: #fff;
-            position: relative;
-        }
-        .tree-children {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-            position: relative;
-        }
-        .tree-children::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            width: 80%;
-            height: 2px;
-            background: black;
-        }
-        .child-branch {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .child-branch::before {
-            content: "";
-            width: 2px;
-            height: 20px;
-            background: black;
-        }
-
-        /* Print Specifics */
         @media print {
-            #input-form, .print-btn {
-                display: none !important;
-            }
-            body { background: white; }
-            .page {
-                margin: 0;
-                box-shadow: none;
-            }
-        }
-
-        .print-btn {
-            display: block;
-            width: 200px;
-            margin: 20px auto;
-            padding: 15px;
-            background: #28a745;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
+            body { background: none; padding: 0; }
+            .no-print { display: none !important; }
+            #printArea { background: none; }
+            .page { margin: 0; box-shadow: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Input Form Section -->
-    <div id="input-form">
-        <h2>📝 दस्तावेज़ विवरण भरें (Personal Info)</h2>
-        <div class="form-group">
-            <div>
-                <label>फरीक 1 का नाम:</label><br>
-                <input type="text" id="in_f1_name" oninput="updateDoc()" value="अनीता देवी">
-            </div>
-            <div>
-                <label>पिता/पति का नाम:</label><br>
-                <input type="text" id="in_f1_father" oninput="updateDoc()" value="स्व० रामवहादुर साह">
-            </div>
-        </div>
-        <div class="form-group">
-            <div>
-                <label>फरीक 2 का नाम:</label><br>
-                <input type="text" id="in_f2_name" oninput="updateDoc()" value="मीना देवी">
-            </div>
-            <div>
-                <label>पिता/पति का नाम:</label><br>
-                <input type="text" id="in_f2_father" oninput="updateDoc()" value="स्व० बिन्दु साह">
-            </div>
-        </div>
-        <div class="form-group">
-            <div>
-                <label>फरीक 3 का नाम:</label><br>
-                <input type="text" id="in_f3_name" oninput="updateDoc()" value="रामजुलुम साह">
-            </div>
-            <div>
-                <label>पिता का नाम:</label><br>
-                <input type="text" id="in_f3_father" oninput="updateDoc()" value="स्व० माँजे साह">
-            </div>
-        </div>
-        <p style="color: red;">* बाकी की जानकारी जैसे खसरा/खाता आप सीधे HTML कोड में बदल सकते हैं या डेटाबेस से जोड़ सकते हैं।</p>
-    </div>
-
-    <button class="print-btn" onclick="window.print()">🖨️ Print Document</button>
-
-    <!-- PAGE 1 -->
-    <div class="page">
-        <div class="page-header">Page:-1</div>
-        <div class="content">
-            <div class="side-text left-side">सरपंच</div>
-            <div class="side-text right-side">गवाह <br> फरीकेन</div>
-
-            <div style="text-align: left;">
-                न्यायालय, सरपंच ग्राम कचहरी,<br>
-                पंचायत भवनपुर, अंचल सिहबाड़ा, जिला दरभंगा।
-            </div>
-            <br>
-            <div style="text-align: left;">
-                वाद सं० ____________________ &nbsp;&nbsp;&nbsp;&nbsp; दिनांक- ........................
-            </div>
+<div class="container">
+    <!-- INPUT FORM -->
+    <div class="form-section no-print" id="inputFormBox">
+        <h2><i class="fas fa-file-signature"></i> बिहार सहमति पंचनामा बटवारा</h2>
+        <form id="batwaraForm">
             
-            <div style="text-align: center; font-size: 20px; font-weight: bold; margin: 30px 0;">
-                सहमति पंचनामा बटवारा
+            <h3><i class="fas fa-info-circle"></i> 1. न्यायालय एवं अंचल विवरण</h3>
+            <div class="input-row">
+                <div class="input-group"><label>न्यायालय:</label><input type="text" id="nyayalay" value="सरपंच ग्राम कचहरी"></div>
+                <div class="input-group"><label>पंचायत:</label><input type="text" id="panchayat" placeholder="उदा: भवानीपुर"></div>
+                <div class="input-group"><label>अंचल:</label><input type="text" id="anchal" placeholder="उदा: सिंहवाड़ा"></div>
+                <div class="input-group"><label>जिला:</label><input type="text" id="jila" placeholder="उदा: दरभंगा"></div>
+                <div class="input-group"><label>वाद संख्या:</label><input type="text" id="vadNo" placeholder="01/2024"></div>
+                <div class="input-group"><label>दिनांक:</label><input type="date" id="dinank"></div>
             </div>
 
-            <div style="text-align: justify; line-height: 1.6;">
-                <b>1. लेखयकारी :-</b> <br>
-                <b>फरीक नं०-1 <span class="dyn-f1">अनीता देवी</span></b> पिता- <span class="dyn-f1f">स्व० रामवहादुर साह</span> उम्र- 41 वर्ष आधार- 6354-2192 जाति- हलवाई, पेशा- कास्तकारी, ग्राम- xxx, पंचायत- भवनपुर, थाना- सिधवारा, जिला- दरभंगा, निबंधन कार्यालय- कमतलील राज्य- बिहार राष्ट्रीयता भारतीय वासी। <br><br>
-                <b>फरीक नं०-2 <span class="dyn-f2">मीना देवी</span></b> पति- <span class="dyn-f2f">स्व० बिन्दु साह</span> उम्र- 65 वर्ष आधार- xxxx-xxx जाति- हलवाई, पेशा-कास्तकारी, ग्राम- xxx, पंचायत- भवनपुर, थाना- सिधवारा, जिला- xxx, निबंधन कार्यालय- भवनपुर, थाना- सिधवारा, जिला- दरभंगा, निबंधन कार्यालय- कमतलील राज्य- बिहार राष्ट्रीयता भारतीय वासी। <br><br>
-                <b>फरीक नं०-3 <span class="dyn-f3">रामजुलुम साह</span></b> पिता- <span class="dyn-f3f">स्व० माँजे साह</span> उम्र- 59 वर्ष आधार- xxxxxx जाति- हलवाई, पेशा- कास्तकारी, ग्राम- xxx, पंचायत- भवनपुर, थाना- सिधवारा, जिला- दरभंगा, निबंधन कार्यालय- कमतलील राज्य- बिहार राष्ट्रीयता भारतीय वासी।
-            </div>
-        </div>
-    </div>
+            <h3><i class="fas fa-users"></i> 2. लेख्यकारी (फरीक) विवरण 
+                <button type="button" class="btn btn-blue" onclick="addFariken()"><i class="fas fa-plus"></i> फरीक जोड़ें</button>
+            </h3>
+            <div id="farikenContainer"></div>
 
-    <!-- PAGE 2 -->
-    <div class="page">
-        <div class="page-header">Page:-2</div>
-        <div class="content">
-            <div class="side-text left-side">सरपंच</div>
-            <div class="side-text right-side">गवाह <br> फरीकेन</div>
-
-            <div style="text-align: justify; line-height: 1.8;">
-                2. लेखयधारी:- एक दूसरे के पक्ष में (लेखयकारी ही लेखयधारी है)।<br>
-                3. लेखयप्रकार:- आपसी सहमति पंचनामा बटवारा।<br>
-                4. लेखयमूल्य:- XXX<br>
-                5. सम्पत्ति भूमि:- पैतृक जमीन जायदाद।
-            </div>
-
-            <div style="text-align: center; font-weight: bold; margin-top: 20px;">
-                <u>कुल पैतृक भूमि सम्पत्ति विवरण:-</u>
-            </div>
-
+            <h3><i class="fas fa-map-marked-alt"></i> 3. कुल पैत्रिक भूमि विवरण
+                <button type="button" class="btn btn-blue" onclick="addBhumi('bhumiTbody')"><i class="fas fa-plus"></i> जमीन जोड़ें</button>
+            </h3>
             <table>
-                <thead>
-                    <tr>
-                        <th>मोजा का नाम</th>
-                        <th>थाना नं०</th>
-                        <th>खाता नं०</th>
-                        <th>खेसरा नं०</th>
-                        <th>रकवा (डिसीमिल)</th>
-                        <th>रकवा (कट्ठा-धुर)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>2996</td><td>15.26</td><td>3 - 10</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>2978</td><td>32.1</td><td>7 - 7</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>2979</td><td>12</td><td>2 - 15</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>3000</td><td>16.75</td><td>3 - 16</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>3020</td><td>15.02</td><td>3 - 9</td></tr>
-                    <tr><td>बहेरी</td><td>87</td><td>115</td><td>374</td><td>4.36</td><td>1 - 0</td></tr>
-                    <tr><td>कलवारा</td><td>88</td><td>120</td><td>1278</td><td>23.96</td><td>5 - 10</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>3004</td><td>3</td><td>0 - 13.5</td></tr>
-                    <tr><td>भवानलपुर</td><td>85</td><td>596</td><td>3017</td><td>12</td><td>2 - 15</td></tr>
-                </tbody>
+                <thead><tr><th>मौजा</th><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th><th class="no-print">S</th></tr></thead>
+                <tbody id="bhumiTbody"></tbody>
+                <tfoot><tr style="background: #eee; font-weight: bold;"><td colspan="4">कुल रकवा (डिसमील) =</td><td id="totalRakwa" colspan="2">0.000</td></tr></tfoot>
             </table>
-            <div style="text-align: left; font-weight: bold; margin-top: 10px;">
-                कुल पैतृक भूमि रकवा (डिसीमिल)= ________________
+
+            <h3><i class="fas fa-sitemap"></i> 4. वंशावली (Family Tree)</h3>
+            <div class="farik-box">
+                <div class="input-row">
+                    <div class="input-group"><label>मूल पूर्वज:</label><input type="text" id="v_purvaj" placeholder="स्व० मौजे साह"></div>
+                    <div class="input-group"><label>पूर्वज के पिता:</label><input type="text" id="v_purvaj_pita" placeholder="स्व० बच्चे लाल साह"></div>
+                </div>
+                <div id="vanshavaliChild"></div>
+                <button type="button" class="btn btn-blue" onclick="addVanshNode('vanshavaliChild')"><i class="fas fa-child"></i> सदस्य जोड़ें</button>
             </div>
-        </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <button type="button" class="btn btn-green" style="padding: 15px 40px; font-size: 18px;" onclick="generatePreview()">
+                    <i class="fas fa-eye"></i> दस्तावेज़ प्रिव्यू देखें
+                </button>
+            </div>
+        </form>
     </div>
 
-    <!-- PAGE 3-5 (Repeat format for each fariq) -->
-    <div class="page">
-        <div class="page-header">Page:-3</div>
-        <div class="content">
-            <div class="side-text left-side">सरपंच</div>
-            <div class="side-text right-side">गवाह <br> फरीकेन</div>
-
-            <div style="text-align: center; font-weight: bold;">
-                सभी फरीकेन का भूमि सम्पत्ति हिस्सा विवरण
+    <!-- PREVIEW SECTION -->
+    <div class="form-section hidden" id="previewSection">
+        <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2><i class="fas fa-file-pdf"></i> दस्तावेज़ प्रिव्यू</h2>
+            <div>
+                <button class="btn btn-green" onclick="window.print()"><i class="fas fa-print"></i> प्रिंट</button>
+                <button class="btn btn-red" onclick="downloadPDF()"><i class="fas fa-download"></i> PDF</button>
+                <button class="btn btn-blue" onclick="editForm()"><i class="fas fa-edit"></i> एडिट</button>
             </div>
-            <div style="text-align: left; margin-bottom: 10px;">
-                <b>प्रथम हिस्सेदार:- (फरीक नं०-1) <span class="dyn-f1">अनीता देवी</span> पिता- <span class="dyn-f1f">स्व० रामवहादुर साह</span> <br>
-                निवासी- मिलिनक, अंचल- सिधवारा |</b>
-            </div>
+        </div>
+        <div id="printArea"></div>
+    </div>
+</div>
 
+<script>
+    let farikCount = 0;
+
+    function addFariken() {
+        farikCount++;
+        const html = `
+        <div class="farik-box" id="farik_${farikCount}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <strong>फरीक नंo-${farikCount}</strong>
+                <button type="button" class="btn btn-red" style="padding:2px 8px;" onclick="removeEl('farik_${farikCount}')">X</button>
+            </div>
+            <div class="input-row">
+                <div class="input-group"><label>नाम:</label><input type="text" class="f_name"></div>
+                <div class="input-group"><label>पिता/पति:</label><input type="text" class="f_pita"></div>
+                <div class="input-group"><label>उम्र:</label><input type="number" class="f_umar"></div>
+                <div class="input-group"><label>आधार:</label><input type="text" class="f_aadhar"></div>
+                <div class="input-group"><label>ग्राम:</label><input type="text" class="f_gram"></div>
+            </div>
+            <h4 style="margin:10px 0; font-size:14px;">हिस्सा भूमि विवरण <button type="button" class="btn btn-blue" style="padding:2px 8px; font-size:11px;" onclick="addBhumi('f_bhumi_${farikCount}')">+ जोड़ें</button></h4>
             <table>
-                <thead>
-                    <tr>
-                        <th>थाना नं०</th>
-                        <th>खाता नं०</th>
-                        <th>खेसरा नं०</th>
-                        <th>रकवा (डिसीमिल)</th>
-                        <th>रकवा (कट्ठा-धुर)</th>
-                        <th>चौहद्दी</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>85</td><td>596</td><td>2997</td><td>7.63</td><td>1 - 15</td>
-                        <td class="text-left">उ०- सिमान बहेरी<br>द०- मीना देवी<br>पू०- जोगी साह<br>प०- अनिल साह</td>
-                    </tr>
-                    <tr>
-                        <td>85</td><td>596</td><td>2978</td><td>2.78</td><td>0 - 13</td>
-                        <td class="text-left">उ०- अनिल साह<br>द०- निज<br>पू०- मीना देवी<br>प०- नंदु साह</td>
-                    </tr>
-                </tbody>
+                <thead><tr><th>खेसरा</th><th>रकवा(डि०)</th><th>रकवा(क०-धु०)</th><th>चौहद्दी</th><th class="no-print">X</th></tr></thead>
+                <tbody id="f_bhumi_${farikCount}"></tbody>
+                <tfoot><tr><td colspan="1">कुल हिस्सा:</td><td class="f_total" style="font-weight:bold">0.000</td><td colspan="3"></td></tr></tfoot>
             </table>
-            <div style="text-align: left; font-weight: bold;">
-                कुल भूमि हिस्सा, रकवा (डिसीमिल)= ________________
+        </div>`;
+        document.getElementById('farikenContainer').insertAdjacentHTML('beforeend', html);
+        addBhumi(`f_bhumi_${farikCount}`);
+    }
+
+    function addBhumi(tbodyId) {
+        const tr = document.createElement('tr');
+        const uid = Date.now() + Math.random();
+        tr.id = `row_${uid}`;
+        let isMain = (tbodyId === 'bhumiTbody');
+        tr.innerHTML = `
+            ${isMain ? '<td class="b_mauja"><input type="text"></td><td class="b_thana"><input type="text"></td><td class="b_khata"><input type="text"></td>' : ''}
+            <td class="b_khesra"><input type="text"></td>
+            <td class="b_rakwa"><input type="number" step="0.001" oninput="calcTotal('${tbodyId}')"></td>
+            <td class="b_kd"><input type="text"></td>
+            ${!isMain ? '<td><textarea class="b_chauhaddi" rows="1"></textarea></td>' : ''}
+            <td class="no-print"><button type="button" class="btn btn-red" style="padding:2px 5px;" onclick="removeRow('${uid}', '${tbodyId}')">X</button></td>
+        `;
+        document.getElementById(tbodyId).appendChild(tr);
+    }
+
+    function removeRow(id, tbodyId) { document.getElementById(`row_${id}`).remove(); calcTotal(tbodyId); }
+    function removeEl(id) { document.getElementById(id).remove(); }
+
+    function calcTotal(tbodyId) {
+        let total = 0;
+        document.querySelectorAll(`#${tbodyId} .b_rakwa input`).forEach(input => {
+            total += parseFloat(input.value) || 0;
+        });
+        if (tbodyId === 'bhumiTbody') document.getElementById('totalRakwa').innerText = total.toFixed(3);
+        else document.querySelector(`#${tbodyId}`).closest('table').querySelector('.f_total').innerText = total.toFixed(3);
+    }
+
+    function addVanshNode(parentId) {
+        const parent = document.getElementById(parentId);
+        const nodeId = 'vnode_' + Date.now();
+        const div = document.createElement('div');
+        div.id = nodeId;
+        div.style.cssText = 'margin-left: 20px; border-left: 2px solid #ddd; padding-left: 15px; margin-bottom: 10px;';
+        div.innerHTML = `
+            <div class="input-row" style="background:#f9f9f9; padding:10px; border-radius:5px;">
+                <input type="text" class="v_name" placeholder="नाम">
+                <select class="v_rel"><option>पुत्र</option><option>पुत्री</option><option>पत्नी</option></select>
+                <select class="v_stat" onchange="toggleVChild('${nodeId}', this.value)"><option value="जीवित">जीवित</option><option value="मृत">स्व०</option></select>
+                <button type="button" class="btn btn-red" onclick="removeEl('${nodeId}')">X</button>
             </div>
-        </div>
-    </div>
+            <div id="${nodeId}_child"></div>
+            <button type="button" class="btn btn-blue hidden" id="${nodeId}_btn" style="font-size:11px;" onclick="addVanshNode('${nodeId}_child')">+ संतान</button>
+        `;
+        parent.appendChild(div);
+    }
 
-    <!-- PAGE 6 (Declaration) -->
-    <div class="page">
-        <div class="page-header">Page:-6</div>
-        <div class="content">
-            <div class="side-text left-side">सरपंच</div>
-            <div class="side-text right-side">गवाह <br> फरीकेन</div>
+    function toggleVChild(id, val) {
+        document.getElementById(id + '_btn').classList.toggle('hidden', val === 'जीवित');
+    }
 
-            <div style="text-align: justify; line-height: 1.8;">
-                आगे यह कि हम लोग एक ही खूँट खानदान के हैं और संयुक्त सम्पत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वस्थता में बिना किसी के दबाव, भड़काव व धमकाव में आकर निश्चित किया कि गांव समाज के कुछ प्रतिष्ठित पंचों व सरपंच के समक्ष सम्मिलित खतियानी जमीन व समिलात खरीदारी केवाला की जमीन है। मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूँ ताकि वर्तमान पीढ़ी के वंशज को भविष्य में समिलात जमीन की विवाद नहीं हो। <br><br>
-                यह कि अपने-अपने सिड्यूल की सम्पत्ति पर इस बटवारा के अनुसार दखलकार होकर सभी तरह का सुखभोग.. आदि करेंगे। और आज दिनांक- ____ / ____ / ________ से सभी अपने हिस्से का दाखिल खारिज ਕਰाकर राजस्व लगान रसीद काटा सकता है या सर्व में अपने नाम से खाता खुलवा सकता है। <br><br>
-                <b>यह वह दुरूष्ट मानकर अपना हस्ताक्षर एवं निशान बना दिया ताकि भविष्य में विवाद न हो।</b>
-            </div>
-
-            <div style="margin-top: 100px; display: flex; justify-content: space-between; font-weight: bold;">
-                <span>फरीकेन का हस्ताक्षर</span>
-                <span>गवाह</span>
-                <span>सरपंच</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- PAGE 7 (Vanshavali - Family Tree) -->
-    <div class="page">
-        <div class="page-header">Page:-7</div>
-        <div class="content">
-            <div style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 40px;">वंशवृक्ष</div>
-
-            <div class="tree">
-                <!-- Grandfather -->
-                <div class="tree-node">
-                    <b>स्व० माँजे साह</b><br>
-                    <small>पिता-स्व० बच्चे लाल साह</small>
-                </div>
-
-                <!-- Children -->
-                <div class="tree-children">
-                    <div class="child-branch">
-                        <div class="tree-node">स्व० रामवहादुर साह</div>
-                        <div class="tree-children" style="margin-top: 20px; gap: 0;">
-                            <div class="child-branch">
-                                <div class="tree-node">पुत्री- <span class="dyn-f1">अनीता देवी</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="child-branch">
-                        <div class="tree-node">स्व० बिन्दु साह</div>
-                        <div class="tree-children" style="margin-top: 20px; gap: 0;">
-                            <div class="child-branch">
-                                <div class="tree-node">पत्नी- <span class="dyn-f2">मीना देवी</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="child-branch">
-                        <div class="tree-node"><b>रामजुलुम साह</b></div>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 150px; display: flex; justify-content: space-between; font-weight: bold;">
-                <span>गवाह का हस्ताक्षर</span>
-                <span>सरपंच</span>
-                <span>फरीकेन/हिस्सेदार का हस्ताक्षर</span>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function updateDoc() {
-            // Mapping inputs to document elements
-            document.querySelectorAll('.dyn-f1').forEach(el => el.innerText = document.getElementById('in_f1_name').value);
-            document.querySelectorAll('.dyn-f1f').forEach(el => el.innerText = document.getElementById('in_f1_father').value);
-            
-            document.querySelectorAll('.dyn-f2').forEach(el => el.innerText = document.getElementById('in_f2_name').value);
-            document.querySelectorAll('.dyn-f2f').forEach(el => el.innerText = document.getElementById('in_f2_father').value);
-            
-            document.querySelectorAll('.dyn-f3').forEach(el => el.innerText = document.getElementById('in_f3_name').value);
-            document.querySelectorAll('.dyn-f3f').forEach(el => el.innerText = document.getElementById('in_f3_father').value);
-        }
+    function generatePreview() {
+        let printHTML = '';
         
-        // Initialize
-        updateDoc();
-    </script>
+        // PAGE 1
+        printHTML += `<div class="page">
+            <div class="page-no">Page:-1</div>
+            <div class="stamp-area">न्याय शुल्क टिकट<br>(Stamps Area)</div>
+            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+            <center><h3>सहमति पंचनामा बटवारा</h3></center>
+            <p><strong>न्यायालय:</strong> ${val('nyayalay')}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}</p>
+            <p><strong>वाद सं०:</strong> ${val('vadNo')} &nbsp;&nbsp;&nbsp;&nbsp; <strong>दिनांक:</strong> ${formatDate(val('dinank'))}</p>
+            <br>
+            <p style="text-align:center; font-weight:bold; font-size:16px; text-decoration:underline;">लेख्यकारी विवरण</p>`;
+        
+        document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
+            printHTML += `<p><strong>${i+1}. फरीक नं०-${i+1} :-</strong> ${div.querySelector('.f_name').value} पिता- ${div.querySelector('.f_pita').value}, उम्र- ${div.querySelector('.f_umar').value} वर्ष, आधार- ${div.querySelector('.f_aadhar').value}, जाति- ${div.querySelector('.f_jati')?.value || '---'}, ग्राम- ${div.querySelector('.f_gram').value}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}।</p>`;
+        });
+        printHTML += `</div>`;
+
+        // PAGE 2
+        printHTML += `<div class="page">
+            <div class="page-no">Page:-2</div>
+            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+            <p><strong>2. लेख्यधारी:-</strong> एक दूसरे के पक्ष में (लेख्यकारी ही लेख्यधारी है)।</p>
+            <p><strong>3. लेख्यप्रकार:-</strong> ${val('lekhyaPrakar') || 'आपसी सहमति पंचनामा बटवारा'}।</p>
+            <p><strong>4. लेख्यमूल्य:-</strong> ${val('lekhyaMulya') || 'शून्य'}।</p>
+            <p><strong>5. सम्पत्ति भूमि:-</strong> ${val('sampatiBhumi') || 'पैत्रिक जमीन जाइदाद'}।</p>
+            <h3>कुल पैत्रिक भूमि सम्पत्ति विवरण:-</h3>
+            <table>
+                <thead><tr><th>मौजा</th><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th></tr></thead>
+                <tbody>`;
+        document.querySelectorAll('#bhumiTbody tr').forEach(tr => {
+            printHTML += `<tr><td>${tr.querySelector('.b_mauja input').value}</td><td>${tr.querySelector('.b_thana input').value}</td><td>${tr.querySelector('.b_khata input').value}</td><td>${tr.querySelector('.b_khesra input').value}</td><td>${tr.querySelector('.b_rakwa input').value}</td><td>${tr.querySelector('.b_kd input').value}</td></tr>`;
+        });
+        printHTML += `</tbody></table><p><strong>कुल पैत्रिक भूमि रकवा (डिसमील) = ${document.getElementById('totalRakwa').innerText}</strong></p></div>`;
+
+        // FARIKEN PAGES (3, 4, 5...)
+        document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
+            const fIdx = i+1;
+            const tbodyId = `f_bhumi_${div.id.split('_')[1]}`;
+            printHTML += `<div class="page">
+                <div class="page-no">Page:-${i+3}</div>
+                <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+                <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+                <h3>सभी फरीकेन का भूमि सम्पत्ति हिस्सा विवरण</h3>
+                <p><strong>${i==0?'प्रथम':i==1?'द्वितीय':'तृतीय'} हिस्सेदार:- (फरीक नंo-${fIdx}) ${div.querySelector('.f_name').value} पिता- ${div.querySelector('.f_pita').value} निवासी- ${div.querySelector('.f_gram').value}, अंचल- ${val('anchal')}।</strong></p>
+                <table>
+                    <thead><tr><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th><th>चौहद्दी</th></tr></thead>
+                    <tbody>`;
+            document.querySelectorAll(`#${tbodyId} tr`).forEach(tr => {
+                printHTML += `<tr>
+                    <td>${tr.querySelector('.b_khesra input').value}</td>
+                    <td>-</td><td>-</td>
+                    <td>${tr.querySelector('.b_rakwa input').value}</td>
+                    <td>${tr.querySelector('.b_kd input').value}</td>
+                    <td style="text-align:left;">${tr.querySelector('.b_chauhaddi').value}</td>
+                </tr>`;
+            });
+            printHTML += `</tbody></table><p><strong>कुल हिस्सा रकवा (डिसमील)= ${div.querySelector('.f_total').innerText}</strong></p></div>`;
+        });
+
+        // LEGAL DECLARATION PAGE
+        printHTML += `<div class="page">
+            <div class="page-no">Page:-${farikCount+3}</div>
+            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+            <div class="vertical-text v-fariken">हस्ताक्षर फरीकेन</div>
+            <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव, भड़काव व धमकाव में आकर निश्चित किया कि गांव समाज के कुछ प्रतिष्ठित पंचों व सरपंच के समक्ष समिलात खतियानी जमीन व समिलात खरीदारी केवाला की जमीन है। मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद न हो।</p>
+            <p>यह कि अपने-अपने सिड्यूल की संपत्ति पर इस बटवारा के अनुसार दखलकार होकर सभी तरह का सुखभोग करेंगे। और आज दिनांक ${formatDate(val('dinank'))} से सभी फरीक अपने हिस्से का दाखिल खारिज कराकर राजस्व लगान रसीद काटा सकते हैं।</p>
+            <p><strong>यह कि उपर्युक्त पंचनामा बंटवारा के सभी हिस्सेदार सही व दूरस्थ मानकर अपना हस्ताक्षर एवं निशान बना दिया ताकि भविष्य में विवाद न हो।</strong></p>
+            <div class="sign-area"><div>फरीकेन का हस्ताक्षर</div><div>गवाह</div><div>सरपंच</div></div>
+        </div>`;
+
+        // VANSHAVALI PAGE
+        printHTML += `<div class="page">
+            <div class="page-no">Page:-${farikCount+4}</div>
+            <h3>वंशवृक्ष (Vanshavali)</h3>
+            <div class="tree-container">
+                <div class="tree">
+                    <ul>
+                        <li><div>${val('v_purvaj')}<br><small>पिता- ${val('v_purvaj_pita')}</small></div>
+                        ${buildTreeHTML('vanshavaliChild')}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sign-area" style="margin-top:150px;"><div>गवाह</div><div>सरपंच</div><div>फरीकेन</div></div>
+        </div>`;
+
+        document.getElementById('printArea').innerHTML = printHTML;
+        document.getElementById('inputFormBox').classList.add('hidden');
+        document.getElementById('previewSection').classList.remove('hidden');
+    }
+
+    function buildTreeHTML(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container || !container.children.length) return '';
+        let html = '<ul>';
+        Array.from(container.children).forEach(child => {
+            const name = child.querySelector('.v_name').value;
+            const rel = child.querySelector('.v_rel').value;
+            const stat = child.querySelector('.v_stat').value;
+            const childId = child.id + '_child';
+            html += `<li><div>${rel}- ${name} ${stat === 'मृत' ? '(स्व०)' : ''}</div>${buildTreeHTML(childId)}</li>`;
+        });
+        html += '</ul>';
+        return html;
+    }
+
+    function editForm() {
+        document.getElementById('inputFormBox').classList.remove('hidden');
+        document.getElementById('previewSection').classList.add('hidden');
+    }
+
+    function val(id) { return document.getElementById(id).value; }
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('hi-IN') : '..../..../....'; }
+
+    function downloadPDF() {
+        const element = document.getElementById('printArea');
+        html2pdf().set({
+            margin: 0,
+            filename: 'Bihar_Batwara_Panchnama.pdf',
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        }).from(element).save();
+    }
+
+    // Init
+    addFariken();
+    addBhumi('bhumiTbody');
+</script>
+
 </body>
 </html>
