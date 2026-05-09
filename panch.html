@@ -23,7 +23,6 @@
             padding: 20px; 
         }
 
-        /* Dashboard UI */
         .container { max-width: 1200px; margin: auto; }
         .form-section { 
             background: white; 
@@ -42,9 +41,9 @@
         .btn-green { background: var(--success); color: white; }
         .btn-red { background: var(--danger); color: white; }
         .farik-box { border: 1px solid #ddd; background: #fcfcfc; padding: 20px; margin-bottom: 20px; border-radius: 12px; }
-        .hidden { display: none; }
+        .hidden { display: none !important; }
 
-        /* ===== PRINT / PDF SYSTEM (The Most Important Part) ===== */
+        /* ===== PRINT / PDF SYSTEM ===== */
         #printArea { 
             font-family: 'Noto Serif Devanagari', serif; 
             background: #ddd;
@@ -61,7 +60,7 @@
             position: relative;
             box-shadow: 0 0 15px rgba(0,0,0,0.2);
             page-break-after: always;
-            border: 1px solid #000; /* Page Border as per images */
+            border: 1px solid #000; 
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -93,7 +92,7 @@
         .sign-area { display: flex; justify-content: space-between; margin-top: 80px; font-weight: bold; text-align: center; }
         .sign-area div { width: 30%; border-top: 1px solid #000; padding-top: 5px; }
 
-        /* Visual Family Tree (Vanshavali) */
+        /* Visual Family Tree */
         .tree-container { text-align: center; margin-top: 30px; }
         .tree ul { padding-top: 20px; position: relative; display: flex; justify-content: center; align-items: flex-start; }
         .tree li { list-style-type: none; position: relative; padding: 20px 5px 0 5px; }
@@ -115,7 +114,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="initPage()">
 
 <div class="container">
     <!-- INPUT FORM -->
@@ -134,12 +133,12 @@
             </div>
 
             <h3><i class="fas fa-users"></i> 2. लेख्यकारी (फरीक) विवरण 
-                <button type="button" class="btn btn-blue" onclick="addFariken()"><i class="fas fa-plus"></i> फरीक जोड़ें</button>
+                <button type="button" class="btn btn-blue" onclick="addFariken()"><i class="fas fa-plus"></i> फरीक जोड़ें</button>
             </h3>
             <div id="farikenContainer"></div>
 
             <h3><i class="fas fa-map-marked-alt"></i> 3. कुल पैत्रिक भूमि विवरण
-                <button type="button" class="btn btn-blue" onclick="addBhumi('bhumiTbody')"><i class="fas fa-plus"></i> जमीन जोड़ें</button>
+                <button type="button" class="btn btn-blue" onclick="addBhumi('bhumiTbody')"><i class="fas fa-plus"></i> जमीन जोड़ें</button>
             </h3>
             <table>
                 <thead><tr><th>मौजा</th><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th><th class="no-print">S</th></tr></thead>
@@ -154,7 +153,7 @@
                     <div class="input-group"><label>पूर्वज के पिता:</label><input type="text" id="v_purvaj_pita" placeholder="स्व० बच्चे लाल साह"></div>
                 </div>
                 <div id="vanshavaliChild"></div>
-                <button type="button" class="btn btn-blue" onclick="addVanshNode('vanshavaliChild')"><i class="fas fa-child"></i> सदस्य जोड़ें</button>
+                <button type="button" class="btn btn-blue" onclick="addVanshNode('vanshavaliChild')"><i class="fas fa-child"></i> सदस्य जोड़ें</button>
             </div>
 
             <div style="text-align: center; margin-top: 40px;">
@@ -182,6 +181,11 @@
 <script>
     let farikCount = 0;
 
+    function initPage() {
+        addFariken();
+        addBhumi('bhumiTbody');
+    }
+
     function addFariken() {
         farikCount++;
         const html = `
@@ -195,9 +199,10 @@
                 <div class="input-group"><label>पिता/पति:</label><input type="text" class="f_pita"></div>
                 <div class="input-group"><label>उम्र:</label><input type="number" class="f_umar"></div>
                 <div class="input-group"><label>आधार:</label><input type="text" class="f_aadhar"></div>
+                <div class="input-group"><label>जाति:</label><input type="text" class="f_jati"></div>
                 <div class="input-group"><label>ग्राम:</label><input type="text" class="f_gram"></div>
             </div>
-            <h4 style="margin:10px 0; font-size:14px;">हिस्सा भूमि विवरण <button type="button" class="btn btn-blue" style="padding:2px 8px; font-size:11px;" onclick="addBhumi('f_bhumi_${farikCount}')">+ जोड़ें</button></h4>
+            <h4 style="margin:10px 0; font-size:14px;">हिस्सा भूमि विवरण <button type="button" class="btn btn-blue" style="padding:2px 8px; font-size:11px;" onclick="addBhumi('f_bhumi_${farikCount}')">+ जोड़ें</button></h4>
             <table>
                 <thead><tr><th>खेसरा</th><th>रकवा(डि०)</th><th>रकवा(क०-धु०)</th><th>चौहद्दी</th><th class="no-print">X</th></tr></thead>
                 <tbody id="f_bhumi_${farikCount}"></tbody>
@@ -218,7 +223,7 @@
             <td class="b_khesra"><input type="text"></td>
             <td class="b_rakwa"><input type="number" step="0.001" oninput="calcTotal('${tbodyId}')"></td>
             <td class="b_kd"><input type="text"></td>
-            ${!isMain ? '<td><textarea class="b_chauhaddi" rows="1"></textarea></td>' : ''}
+            ${!isMain ? '<td class="b_chauhaddi"><textarea rows="1"></textarea></td>' : ''}
             <td class="no-print"><button type="button" class="btn btn-red" style="padding:2px 5px;" onclick="removeRow('${uid}', '${tbodyId}')">X</button></td>
         `;
         document.getElementById(tbodyId).appendChild(tr);
@@ -233,7 +238,10 @@
             total += parseFloat(input.value) || 0;
         });
         if (tbodyId === 'bhumiTbody') document.getElementById('totalRakwa').innerText = total.toFixed(3);
-        else document.querySelector(`#${tbodyId}`).closest('table').querySelector('.f_total').innerText = total.toFixed(3);
+        else {
+            const table = document.getElementById(tbodyId).closest('table');
+            table.querySelector('.f_total').innerText = total.toFixed(3);
+        }
     }
 
     function addVanshNode(parentId) {
@@ -259,100 +267,115 @@
         document.getElementById(id + '_btn').classList.toggle('hidden', val === 'जीवित');
     }
 
+    function val(id) { return document.getElementById(id) ? document.getElementById(id).value : ''; }
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('hi-IN') : '..../..../....'; }
+
     function generatePreview() {
-        let printHTML = '';
-        
-        // PAGE 1
-        printHTML += `<div class="page">
-            <div class="page-no">Page:-1</div>
-            <div class="stamp-area">न्याय शुल्क टिकट<br>(Stamps Area)</div>
-            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
-            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
-            <center><h3>सहमति पंचनामा बटवारा</h3></center>
-            <p><strong>न्यायालय:</strong> ${val('nyayalay')}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}</p>
-            <p><strong>वाद सं०:</strong> ${val('vadNo')} &nbsp;&nbsp;&nbsp;&nbsp; <strong>दिनांक:</strong> ${formatDate(val('dinank'))}</p>
-            <br>
-            <p style="text-align:center; font-weight:bold; font-size:16px; text-decoration:underline;">लेख्यकारी विवरण</p>`;
-        
-        document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
-            printHTML += `<p><strong>${i+1}. फरीक नं०-${i+1} :-</strong> ${div.querySelector('.f_name').value} पिता- ${div.querySelector('.f_pita').value}, उम्र- ${div.querySelector('.f_umar').value} वर्ष, आधार- ${div.querySelector('.f_aadhar').value}, जाति- ${div.querySelector('.f_jati')?.value || '---'}, ग्राम- ${div.querySelector('.f_gram').value}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}।</p>`;
-        });
-        printHTML += `</div>`;
-
-        // PAGE 2
-        printHTML += `<div class="page">
-            <div class="page-no">Page:-2</div>
-            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
-            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
-            <p><strong>2. लेख्यधारी:-</strong> एक दूसरे के पक्ष में (लेख्यकारी ही लेख्यधारी है)।</p>
-            <p><strong>3. लेख्यप्रकार:-</strong> ${val('lekhyaPrakar') || 'आपसी सहमति पंचनामा बटवारा'}।</p>
-            <p><strong>4. लेख्यमूल्य:-</strong> ${val('lekhyaMulya') || 'शून्य'}।</p>
-            <p><strong>5. सम्पत्ति भूमि:-</strong> ${val('sampatiBhumi') || 'पैत्रिक जमीन जाइदाद'}।</p>
-            <h3>कुल पैत्रिक भूमि सम्पत्ति विवरण:-</h3>
-            <table>
-                <thead><tr><th>मौजा</th><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th></tr></thead>
-                <tbody>`;
-        document.querySelectorAll('#bhumiTbody tr').forEach(tr => {
-            printHTML += `<tr><td>${tr.querySelector('.b_mauja input').value}</td><td>${tr.querySelector('.b_thana input').value}</td><td>${tr.querySelector('.b_khata input').value}</td><td>${tr.querySelector('.b_khesra input').value}</td><td>${tr.querySelector('.b_rakwa input').value}</td><td>${tr.querySelector('.b_kd input').value}</td></tr>`;
-        });
-        printHTML += `</tbody></table><p><strong>कुल पैत्रिक भूमि रकवा (डिसमील) = ${document.getElementById('totalRakwa').innerText}</strong></p></div>`;
-
-        // FARIKEN PAGES (3, 4, 5...)
-        document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
-            const fIdx = i+1;
-            const tbodyId = `f_bhumi_${div.id.split('_')[1]}`;
+        try {
+            let printHTML = '';
+            
+            // PAGE 1
             printHTML += `<div class="page">
-                <div class="page-no">Page:-${i+3}</div>
+                <div class="page-no">Page:-1</div>
+                <div class="stamp-area">न्याय शुल्क टिकट<br>(Stamps Area)</div>
                 <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
                 <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
-                <h3>सभी फरीकेन का भूमि सम्पत्ति हिस्सा विवरण</h3>
-                <p><strong>${i==0?'प्रथम':i==1?'द्वितीय':'तृतीय'} हिस्सेदार:- (फरीक नंo-${fIdx}) ${div.querySelector('.f_name').value} पिता- ${div.querySelector('.f_pita').value} निवासी- ${div.querySelector('.f_gram').value}, अंचल- ${val('anchal')}।</strong></p>
-                <table>
-                    <thead><tr><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th><th>चौहद्दी</th></tr></thead>
-                    <tbody>`;
-            document.querySelectorAll(`#${tbodyId} tr`).forEach(tr => {
-                printHTML += `<tr>
-                    <td>${tr.querySelector('.b_khesra input').value}</td>
-                    <td>-</td><td>-</td>
-                    <td>${tr.querySelector('.b_rakwa input').value}</td>
-                    <td>${tr.querySelector('.b_kd input').value}</td>
-                    <td style="text-align:left;">${tr.querySelector('.b_chauhaddi').value}</td>
-                </tr>`;
+                <center><h3>सहमति पंचनामा बटवारा</h3></center>
+                <p><strong>न्यायालय:</strong> ${val('nyayalay')}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}</p>
+                <p><strong>वाद सं०:</strong> ${val('vadNo')} &nbsp;&nbsp;&nbsp;&nbsp; <strong>दिनांक:</strong> ${formatDate(val('dinank'))}</p>
+                <br>
+                <p style="text-align:center; font-weight:bold; font-size:16px; text-decoration:underline;">लेख्यकारी विवरण</p>`;
+            
+            document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
+                const name = div.querySelector('.f_name')?.value || '';
+                const pita = div.querySelector('.f_pita')?.value || '';
+                const umar = div.querySelector('.f_umar')?.value || '';
+                const aadhar = div.querySelector('.f_aadhar')?.value || '';
+                const jati = div.querySelector('.f_jati')?.value || '---';
+                const gram = div.querySelector('.f_gram')?.value || '';
+                printHTML += `<p><strong>${i+1}. फरीक नं०-${i+1} :-</strong> ${name} पिता- ${pita}, उम्र- ${umar} वर्ष, आधार- ${aadhar}, जाति- ${jati}, ग्राम- ${gram}, पंचायत- ${val('panchayat')}, अंचल- ${val('anchal')}, जिला- ${val('jila')}।</p>`;
             });
-            printHTML += `</tbody></table><p><strong>कुल हिस्सा रकवा (डिसमील)= ${div.querySelector('.f_total').innerText}</strong></p></div>`;
-        });
+            printHTML += `</div>`;
 
-        // LEGAL DECLARATION PAGE
-        printHTML += `<div class="page">
-            <div class="page-no">Page:-${farikCount+3}</div>
-            <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
-            <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
-            <div class="vertical-text v-fariken">हस्ताक्षर फरीकेन</div>
-            <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव, भड़काव व धमकाव में आकर निश्चित किया कि गांव समाज के कुछ प्रतिष्ठित पंचों व सरपंच के समक्ष समिलात खतियानी जमीन व समिलात खरीदारी केवाला की जमीन है। मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद न हो।</p>
-            <p>यह कि अपने-अपने सिड्यूल की संपत्ति पर इस बटवारा के अनुसार दखलकार होकर सभी तरह का सुखभोग करेंगे। और आज दिनांक ${formatDate(val('dinank'))} से सभी फरीक अपने हिस्से का दाखिल खारिज कराकर राजस्व लगान रसीद काटा सकते हैं।</p>
-            <p><strong>यह कि उपर्युक्त पंचनामा बंटवारा के सभी हिस्सेदार सही व दूरस्थ मानकर अपना हस्ताक्षर एवं निशान बना दिया ताकि भविष्य में विवाद न हो।</strong></p>
-            <div class="sign-area"><div>फरीकेन का हस्ताक्षर</div><div>गवाह</div><div>सरपंच</div></div>
-        </div>`;
+            // PAGE 2
+            printHTML += `<div class="page">
+                <div class="page-no">Page:-2</div>
+                <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+                <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+                <p><strong>2. लेख्यधारी:-</strong> एक दूसरे के पक्ष में (लेख्यकारी ही लेख्यधारी है)।</p>
+                <p><strong>3. लेख्यप्रकार:-</strong> आपसी सहमति पंचनामा बटवारा।</p>
+                <p><strong>4. लेख्यमूल्य:-</strong> शून्य।</p>
+                <p><strong>5. सम्पत्ति भूमि:-</strong> पैत्रिक जमीन जाइदाद।</p>
+                <h3>कुल पैत्रिक भूमि सम्पत्ति विवरण:-</h3>
+                <table>
+                    <thead><tr><th>मौजा</th><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th></tr></thead>
+                    <tbody>`;
+            document.querySelectorAll('#bhumiTbody tr').forEach(tr => {
+                printHTML += `<tr><td>${tr.querySelector('.b_mauja input')?.value || ''}</td><td>${tr.querySelector('.b_thana input')?.value || ''}</td><td>${tr.querySelector('.b_khata input')?.value || ''}</td><td>${tr.querySelector('.b_khesra input')?.value || ''}</td><td>${tr.querySelector('.b_rakwa input')?.value || ''}</td><td>${tr.querySelector('.b_kd input')?.value || ''}</td></tr>`;
+            });
+            printHTML += `</tbody></table><p><strong>कुल पैत्रिक भूमि रकवा (डिसमील) = ${document.getElementById('totalRakwa').innerText}</strong></p></div>`;
 
-        // VANSHAVALI PAGE
-        printHTML += `<div class="page">
-            <div class="page-no">Page:-${farikCount+4}</div>
-            <h3>वंशवृक्ष (Vanshavali)</h3>
-            <div class="tree-container">
-                <div class="tree">
-                    <ul>
-                        <li><div>${val('v_purvaj')}<br><small>पिता- ${val('v_purvaj_pita')}</small></div>
-                        ${buildTreeHTML('vanshavaliChild')}
-                        </li>
-                    </ul>
+            // FARIKEN PAGES
+            document.querySelectorAll('#farikenContainer > .farik-box').forEach((div, i) => {
+                const fIdx = i+1;
+                const tbodyId = `f_bhumi_${div.id.split('_')[1]}`;
+                printHTML += `<div class="page">
+                    <div class="page-no">Page:-${i+3}</div>
+                    <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+                    <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+                    <h3>सभी फरीकेन का भूमि सम्पत्ति हिस्सा विवरण</h3>
+                    <p><strong>${i==0?'प्रथम':i==1?'द्वितीय':'तृतीय'} हिस्सेदार:- (फरीक नंo-${fIdx}) ${div.querySelector('.f_name')?.value || ''} पिता- ${div.querySelector('.f_pita')?.value || ''} निवासी- ${div.querySelector('.f_gram')?.value || ''}, अंचल- ${val('anchal')}।</strong></p>
+                    <table>
+                        <thead><tr><th>थाना नं.</th><th>खाता नं.</th><th>खेसरा नं.</th><th>रकवा (डि.)</th><th>रकवा (क-धु)</th><th>चौहद्दी</th></tr></thead>
+                        <tbody>`;
+                document.querySelectorAll(`#${tbodyId} tr`).forEach(tr => {
+                    printHTML += `<tr>
+                        <td>${tr.querySelector('.b_khesra input')?.value || ''}</td>
+                        <td>-</td><td>-</td>
+                        <td>${tr.querySelector('.b_rakwa input')?.value || ''}</td>
+                        <td>${tr.querySelector('.b_kd input')?.value || ''}</td>
+                        <td style="text-align:left;">${tr.querySelector('.b_chauhaddi')?.value || ''}</td>
+                    </tr>`;
+                });
+                printHTML += `</tbody></table><p><strong>कुल हिस्सा रकवा (डिसमील)= ${div.querySelector('.f_total')?.innerText || '0.000'}</strong></p></div>`;
+            });
+
+            // FINAL LEGAL PAGE
+            printHTML += `<div class="page">
+                <div class="page-no">Page:-${farikCount+3}</div>
+                <div class="vertical-text v-sarpanch">हस्ताक्षर सरपंच</div>
+                <div class="vertical-text v-gawah">हस्ताक्षर गवाह</div>
+                <div class="vertical-text v-fariken">हस्ताक्षर फरीकेन</div>
+                <p>आगे यह कि हम लोग एक ही खूंट खानदान के हैं और संयुक्त संपत्ति के सहभागी हैं जिसका पंचनामा बटवारा आपसी सहमति से शारीरिक व मानसिक स्वास्थ्यता में बिना किसी के दबाव, भड़काव व धमकाव में आकर निश्चित किया कि गांव समाज के कुछ प्रतिष्ठित पंचों व सरपंच के समक्ष समिलात खतियानी जमीन व समिलात खरीदारी केवाला की जमीन है। मुख्य रूप से जमीन की बटवारा कर लेना सही व मुनासिब समझता हूं ताकि वर्तमान पीढ़ी के वंशज को भविष्य में विवाद न हो।</p>
+                <p>यह कि अपने-अपने सिड्यूल की संपत्ति पर इस बटवारा के अनुसार दखलकार होकर सभी तरह का सुखभोग करेंगे। और आज दिनांक ${formatDate(val('dinank'))} से सभी फरीक अपने हिस्से का दाखिल खारिज कराकर राजस्व लगान रसीद काटा सकते हैं।</p>
+                <p><strong>यह कि उपर्युक्त पंचनामा बंटवारा के सभी हिस्सेदार सही व दूरस्थ मानकर अपना हस्ताक्षर एवं निशान बना दिया ताकि भविष्य में विवाद न हो।</strong></p>
+                <div class="sign-area"><div>फरीकेन का हस्ताक्षर</div><div>गवाह</div><div>सरपंच</div></div>
+            </div>`;
+
+            // VANSHAVALI PAGE
+            printHTML += `<div class="page">
+                <div class="page-no">Page:-${farikCount+4}</div>
+                <h3>वंशवृक्ष (Vanshavali)</h3>
+                <div class="tree-container">
+                    <div class="tree">
+                        <ul>
+                            <li><div>${val('v_purvaj')}<br><small>पिता- ${val('v_purvaj_pita')}</small></div>
+                            ${buildTreeHTML('vanshavaliChild')}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="sign-area" style="margin-top:150px;"><div>गवाह</div><div>सरपंच</div><div>फरीकेन</div></div>
-        </div>`;
+                <div class="sign-area" style="margin-top:150px;"><div>गवाह</div><div>सरपंच</div><div>फरीकेन</div></div>
+            </div>`;
 
-        document.getElementById('printArea').innerHTML = printHTML;
-        document.getElementById('inputFormBox').classList.add('hidden');
-        document.getElementById('previewSection').classList.remove('hidden');
+            document.getElementById('printArea').innerHTML = printHTML;
+            document.getElementById('inputFormBox').classList.add('hidden');
+            document.getElementById('previewSection').classList.remove('hidden');
+            window.scrollTo(0,0);
+        } catch (err) {
+            console.error("Error generating preview:", err);
+            alert("प्रिव्यू जनरेट करने में समस्या आई। कृपया सभी विवरण सही से भरें।");
+        }
     }
 
     function buildTreeHTML(containerId) {
@@ -360,11 +383,11 @@
         if (!container || !container.children.length) return '';
         let html = '<ul>';
         Array.from(container.children).forEach(child => {
-            const name = child.querySelector('.v_name').value;
-            const rel = child.querySelector('.v_rel').value;
-            const stat = child.querySelector('.v_stat').value;
+            const name = child.querySelector('.v_name')?.value || 'अज्ञात';
+            const rel = child.querySelector('.v_rel')?.value || '';
+            const stat = child.querySelector('.v_stat')?.value || 'जीवित';
             const childId = child.id + '_child';
-            html += `<li><div>${rel}- ${name} ${stat === 'मृत' ? '(स्व०)' : ''}</div>${buildTreeHTML(childId)}</li>`;
+            html += `<li style="display:inline-block;"><div>${rel}- ${name} ${stat === 'मृत' ? '(स्व०)' : ''}</div>${buildTreeHTML(childId)}</li>`;
         });
         html += '</ul>';
         return html;
@@ -375,9 +398,6 @@
         document.getElementById('previewSection').classList.add('hidden');
     }
 
-    function val(id) { return document.getElementById(id).value; }
-    function formatDate(d) { return d ? new Date(d).toLocaleDateString('hi-IN') : '..../..../....'; }
-
     function downloadPDF() {
         const element = document.getElementById('printArea');
         html2pdf().set({
@@ -387,10 +407,6 @@
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         }).from(element).save();
     }
-
-    // Init
-    addFariken();
-    addBhumi('bhumiTbody');
 </script>
 
 </body>
