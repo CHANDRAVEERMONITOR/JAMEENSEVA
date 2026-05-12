@@ -3,148 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jameenseva - Photo to PDF Converter</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- SEO Meta Tags -->
+    <title>वंशावली क्या है? बिहार में जमीन के लिए वंशावली कैसे बनवाएं? | Jameenseva.in</title>
+    <meta name="description" content="जानें बिहार में जमीन के दाखिल खारिज (Mutation) और जमीन सर्वे के लिए वंशावली का महत्व, इसे बनाने की पूरी प्रक्रिया, आवश्यक दस्तावेज और कानूनी मान्यता।">
+    <meta name="keywords" content="Vanshavali Bihar, Bihar Land Survey, Dakhl Kharij, Family Tree for Land, वंशावली कैसे बनाये, बिहार जमीन सर्वे वंशावली">
+    <meta name="author" content="Jameenseva.in">
+    <link rel="canonical" href="https://jameenseva.in/vanshavali.html">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        :root { --primary: #2c3e50; --accent: #e74c3c; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 600px; text-align: center; }
-        h1 { color: var(--primary); margin-bottom: 5px; }
-        .subtitle { color: #7f8c8d; margin-bottom: 25px; font-size: 14px; }
-        
-        .upload-box { border: 2px dashed #bdc3c7; padding: 40px; border-radius: 12px; cursor: pointer; transition: 0.3s; background: #fafafa; margin-bottom: 20px; }
-        .upload-box:hover { border-color: var(--accent); background: #fdf2f1; }
-        
-        .controls { background: #f9f9f9; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: left; }
-        .control-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; color: #34495e; }
-        
-        input[type="range"] { width: 100%; cursor: pointer; }
-        .toggle-container { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        
-        #downloadBtn { background: var(--accent); color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; display: none; transition: 0.3s; }
-        #downloadBtn:hover { background: #c0392b; transform: translateY(-2px); }
-        
-        #previewArea { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-        .thumb { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; border: 2px solid #ddd; }
-        .status { margin-top: 10px; font-size: 13px; color: #27ae60; font-weight: bold; }
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+            --accent-color: #ffeb3b;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-gray: #f4f7f6;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-dark); 
+            background-color: var(--bg-gray);
+        }
+        h1, h2, h3 { font-family: 'Noto Serif Devanagari', serif; color: var(--primary-color); }
+
+        /* Navigation */
+        nav {
+            background: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo { color: var(--text-light); font-size: 24px; font-weight: bold; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { 
+            color: var(--text-light); 
+            text-decoration: none; 
+            font-size: 15px; 
+            transition: 0.3s;
+            font-weight: 400;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(26, 35, 126, 0.8), rgba(26, 35, 126, 0.8)), url('https://images.unsplash.com/photo-1500382008063-bd217db798e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 { color: white; font-size: 36px; margin-bottom: 20px; }
+        .hero p { font-size: 18px; max-width: 800px; margin: auto; }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        section { margin-bottom: 40px; }
+        h2 { font-size: 26px; border-bottom: 3px solid var(--accent-color); display: inline-block; margin-bottom: 20px; }
+        h3 { font-size: 22px; margin: 20px 0 10px; }
+        p { margin-bottom: 15px; text-align: justify; }
+
+        /* Info Box / Tables */
+        .info-box {
+            background: #e8eaf6;
+            padding: 20px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .step-list { list-style: none; }
+        .step-list li { margin-bottom: 12px; display: flex; gap: 10px; }
+        .step-list li i { color: var(--secondary-color); margin-top: 5px; }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th { background: var(--primary-color); color: white; }
+
+        /* Internal Linking Buttons */
+        .link-btn-container { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+        .link-btn {
+            background: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .link-btn:hover { background: var(--primary-color); transform: translateY(-2px); }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #ccc;
+            padding: 50px 20px 20px;
+            margin-top: 50px;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        .footer-section h4 { color: white; margin-bottom: 20px; font-size: 18px; }
+        .footer-section ul { list-style: none; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a { color: #aaa; text-decoration: none; transition: 0.3s; }
+        .footer-section ul li a:hover { color: white; }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Simple hide for mobile, normally a hamburger menu */
+            .main-content { padding: 20px; margin: 20px; }
+            .hero h1 { font-size: 28px; }
+        }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Jameen Seva PDF Tool</h1>
-    <p class="subtitle">Zameen ke documents ko PDF banayein (MB/KB control ke saath)</p>
-
-    <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-        <strong>📁 Photos Select Karein</strong>
-        <p style="font-size: 12px;">(JPG, PNG supported)</p>
-        <input type="file" id="fileInput" multiple accept="image/*" style="display:none" onchange="previewImages(this.files)">
-    </div>
-
-    <div class="controls">
-        <div class="control-group">
-            <label>File Size Control (Quality): <span id="qVal">80</span>%</label>
-            <input type="range" id="quality" min="10" max="100" value="80" oninput="document.getElementById('qVal').innerText=this.value">
-            <small style="color: #95a5a6;">Kam karne par KB size kam ho jayegi.</small>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Jameenseva.in</a>
+            <ul class="nav-links">
+                <li><a href="index.html">होम</a></li>
+                <li><a href="bhulekh.html">भूलेख बिहार</a></li>
+                <li><a href="mutation.html">दाखिल खारिज</a></li>
+                <li><a href="survey.html">जमीन सर्वे</a></li>
+                <li><a href="vanshavali.html" style="color: var(--accent-color);">वंशावली</a></li>
+                <li><a href="contact.html">संपर्क</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <div class="control-group">
-            <label class="toggle-container">
-                <input type="checkbox" id="bwToggle"> Black & White Mode (Sarkari Form ke liye)
-            </label>
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>वंशावली (Family Tree) क्या है और यह क्यों जरूरी है?</h1>
+        <p>बिहार में पैतृक संपत्ति के बंटवारे, दाखिल खारिज और जमीन सर्वे के लिए वंशावली सबसे महत्वपूर्ण कानूनी दस्तावेज है। पूरी जानकारी यहाँ प्राप्त करें।</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <section id="what-is-vanshavali">
+            <h2>वंशावली क्या होती है?</h2>
+            <p>वंशावली एक ऐसा कानूनी दस्तावेज है जिसे <strong>"Family Tree"</strong> या <strong>"वंशवृक्ष"</strong> भी कहा जाता है। इसमें परिवार के सभी सदस्यों का विवरण होता है, जिससे यह स्पष्ट हो जाता है कि कौन किसका पुत्र, पुत्री या पत्नी है। बिहार में जमीन के मालिकाना हक को साबित करने के लिए इसका उपयोग किया जाता है, खासकर जब जमीन के असली मालिक की मृत्यु हो चुकी हो।</p>
+            
+            <div class="info-box">
+                <strong>महत्वपूर्ण:</strong> वंशावली यह निर्धारित करती है कि मृत व्यक्ति की संपत्ति का कानूनी वारिस (Legal Heir) कौन है।
+            </div>
+        </section>
+
+        <section id="how-to-make">
+            <h2>वंशावली कैसे और कहाँ से बनवाएं?</h2>
+            <p>बिहार में वंशावली बनवाने के मुख्य रूप से तीन तरीके प्रचलित हैं:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>कहाँ से बनवाएं</th>
+                        <th>मान्यता</th>
+                        <th>प्रक्रिया</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>सरपंच / वार्ड सदस्य</strong></td>
+                        <td>स्थानीय / प्राथमिक</td>
+                        <td>ग्राम स्तर पर गवाहों के हस्ताक्षर के साथ।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>नोटरी पब्लिक</strong></td>
+                        <td>अर्ध-कानूनी</td>
+                        <td>एफिडेविट (Affidavit) के माध्यम से।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S.D.O / कोर्ट</strong></td>
+                        <td>पूर्ण कानूनी</td>
+                        <td>कोर्ट के आदेश या वारिस प्रमाण पत्र के जरिए।</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>वंशावली बनाने के चरण:</h3>
+            <ul class="step-list">
+                <li><i class="fas fa-check-circle"></i> एक सादे कागज या स्टाम्प पेपर पर परिवार का विवरण (वृक्ष के रूप में) लिखें।</li>
+                <li><i class="fas fa-check-circle"></i> परिवार के सभी जीवित सदस्यों के आधार कार्ड और फोटो संलग्न करें।</li>
+                <li><i class="fas fa-check-circle"></i> ग्राम प्रधान, सरपंच या वार्ड सदस्य से सत्यापन कराकर हस्ताक्षर और मुहर लगवाएं।</li>
+                <li><i class="fas fa-check-circle"></i> आवश्यकतानुसार इसे नोटरी से अटेस्ट कराएं।</li>
+            </ul>
+        </section>
+
+        <section id="mutation-survey">
+            <h2>दाखिल खारिज और सर्वे में वंशावली का उपयोग</h2>
+            
+            <h3>1. दाखिल खारिज (Mutation) में उपयोग:</h3>
+            <p>जब किसी व्यक्ति की मृत्यु हो जाती है, तो उसकी जमीन उसके नाम से हटाकर उसके वारिसों के नाम पर दर्ज करने की प्रक्रिया को <strong>दाखिल खारिज</strong> कहते हैं। इस समय अंचल अधिकारी (CO) यह मांग करता है कि आप यह साबित करें कि आप मृत व्यक्ति के असली वारिस हैं। यहाँ वंशावली एक प्रमाण के रूप में काम करती है।</p>
+
+            <h3>2. जमीन सर्वे (Land Survey) में उपयोग:</h3>
+            <p>बिहार सरकार द्वारा समय-समय पर चलने वाले विशेष सर्वेक्षण में वंशावली बहुत महत्वपूर्ण है। यदि आपके पास पुराना खतियान है लेकिन जमीन अब परिवार के कई सदस्यों में बंट चुकी है, तो सर्वे अधिकारी को वंशावली जमा करनी होती है ताकि सही व्यक्ति के नाम पर नया जमाबंदी या खतियान बन सके।</p>
+            
+            <div class="link-btn-container">
+                <a href="mutation.html" class="link-btn">दाखिल खारिज की प्रक्रिया जानें <i class="fas fa-arrow-right"></i></a>
+                <a href="survey.html" class="link-btn">बिहार सर्वे अपडेट्स देखें <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <section id="documents">
+            <h2>आवश्यक दस्तावेज (Required Documents)</h2>
+            <p>वंशावली बनवाने के लिए आपको निम्नलिखित दस्तावेजों की आवश्यकता हो सकती है:</p>
+            <ul class="step-list">
+                <li><i class="fas fa-id-card"></i> सभी वारिसों का आधार कार्ड।</li>
+                <li><i class="fas fa-file-alt"></i> मृत व्यक्ति का मृत्यु प्रमाण पत्र (Death Certificate)।</li>
+                <li><i class="fas fa-map-marker-alt"></i> निवास प्रमाण पत्र या वोटर आईडी।</li>
+                <li><i class="fas fa-university"></i> पुराना खतियान या जमीन के कागजात (संदर्भ के लिए)।</li>
+            </ul>
+        </section>
+
+        <section id="faq">
+            <h2>अक्सर पूछे जाने वाले सवाल (FAQs)</h2>
+            <div class="info-box">
+                <strong>Q: क्या सरपंच द्वारा बनाई गई वंशावली कोर्ट में मान्य है?</strong><br>
+                A: सरपंच द्वारा बनाई गई वंशावली प्राथमिक स्तर पर मान्य होती है, लेकिन बड़े विवादों या कोर्ट केस में आपको SDO द्वारा जारी वारिस प्रमाण पत्र की आवश्यकता पड़ सकती है।
+            </div>
+            <div class="info-box">
+                <strong>Q: वंशावली में किसी सदस्य का नाम छूट गया तो क्या करें?</strong><br>
+                A: ऐसी स्थिति में आपको एक संशोधित (Revised) वंशावली बनानी होगी और उसे दोबारा सरपंच या नोटरी से प्रमाणित कराना होगा।
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>Jameenseva.in</h4>
+                <p>बिहार और भारत के जमीन रिकॉर्ड्स से जुड़ी सटीक जानकारी और टूल्स प्रदान करने वाला एक विश्वसनीय पोर्टल।</p>
+            </div>
+            <div class="footer-section">
+                <h4>त्वरित लिंक (Quick Links)</h4>
+                <ul>
+                    <li><a href="index.html">होम पेज</a></li>
+                    <li><a href="bhulekh.html">भूलेख बिहार</a></li>
+                    <li><a href="mutation.html">दाखिल खारिज</a></li>
+                    <li><a href="survey.html">जमीन सर्वे</a></li>
+                    <li><a href="vanshavali.html">वंशावली गाइड</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>संपर्क और सहायता</h4>
+                <ul>
+                    <li><a href="contact.html">संपर्क करें</a></li>
+                    <li><a href="privacy.html">प्राइवेसी पॉलिसी</a></li>
+                    <li><a href="terms.html">नियम एवं शर्तें</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-    <div id="previewArea"></div>
-    <div id="statusMsg" class="status"></div>
-    
-    <button id="downloadBtn" onclick="generatePDF()">PDF Download Karein</button>
-    
-    <p style="font-size: 11px; color: #bdc3c7; margin-top: 20px;">Safe & Secure: Aapki files server par upload nahi hoti.</p>
-</div>
-
-<script>
-    let selectedFiles = [];
-
-    function previewImages(files) {
-        selectedFiles = Array.from(files);
-        const preview = document.getElementById('previewArea');
-        const btn = document.getElementById('downloadBtn');
-        const status = document.getElementById('statusMsg');
-        
-        preview.innerHTML = "";
-        if (selectedFiles.length > 0) {
-            btn.style.display = "block";
-            status.innerText = selectedFiles.length + " photos select hui hain.";
-            
-            selectedFiles.forEach(file => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'thumb';
-                    preview.appendChild(img);
-                };
-                reader.readAsDataURL(file);
-            });
-        }
-    }
-
-    async function processImage(file, quality, isBW) {
-        return new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-
-                    if (isBW) {
-                        ctx.filter = 'grayscale(100%) brightness(1.1) contrast(1.1)';
-                    }
-                    
-                    ctx.drawImage(img, 0, 0);
-                    // Quality range 0.1 to 1.0
-                    resolve(canvas.toDataURL('image/jpeg', quality / 100));
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    async function generatePDF() {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF('p', 'mm', 'a4');
-        const quality = document.getElementById('quality').value;
-        const isBW = document.getElementById('bwToggle').checked;
-        const btn = document.getElementById('downloadBtn');
-        
-        btn.innerText = "Processing...";
-        btn.disabled = true;
-
-        for (let i = 0; i < selectedFiles.length; i++) {
-            const processedImg = await processImage(selectedFiles[i], quality, isBW);
-            
-            if (i > 0) doc.addPage();
-            
-            // A4 size calculation (210mm x 297mm)
-            const imgProps = doc.getImageProperties(processedImg);
-            const pdfWidth = doc.internal.pageSize.getWidth();
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            
-            doc.addImage(processedImg, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-        }
-
-        doc.save("Jameenseva_Document.pdf");
-        btn.innerText = "PDF Download Karein";
-        btn.disabled = false;
-    }
-</script>
+        <div class="footer-bottom">
+            &copy; 2024 Jameenseva.in | सभी अधिकार सुरक्षित।
+        </div>
+    </footer>
 
 </body>
 </html>
-<script src="footer.js"></script>
