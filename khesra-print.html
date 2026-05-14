@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jameen Seva - Order Tracking & Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Sarabai:wght@400;700&display=swap');
+        
+        body { font-family: 'Poppins', sans-serif; }
+
+        /* Printing Styles */
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; }
+            .report-card { 
+                box-shadow: none !important; 
+                border: 2px solid #000 !important; 
+                margin: 0 !important; 
+                width: 100% !important;
+            }
+        }
+
+        .report-card {
+            background: #fff;
+            border: 10px double #1e3a8a;
+            position: relative;
+        }
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 5rem;
+            color: rgba(0, 0, 0, 0.05);
+            font-weight: bold;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+    <!-- Search Section (Hidden during print) -->
+    <div class="no-print container mx-auto py-10 px-4">
+        <div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-800">
+            <div class="text-center mb-6">
+                <h1 class="text-2xl font-bold text-blue-900">JAMEEN SEVA</h1>
+                <p class="text-gray-500 text-sm">Order Tracking & Report Generation</p>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Enter Order ID</label>
+                    <input type="text" id="orderIdInput" placeholder="e.g. ORD12345" 
+                           class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <button onclick="trackOrder()" 
+                        class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
+                    Track Order & Generate Report
+                </button>
+            </div>
+            <p id="errorMsg" class="text-red-500 text-sm mt-3 hidden text-center font-medium"></p>
+        </div>
+    </div>
+
+    <!-- Report Section (Hidden until data is found) -->
+    <div id="reportArea" class="hidden container mx-auto py-10 px-4">
+        <div class="flex justify-end mb-4 no-print">
+            <button onclick="window.print()" class="bg-green-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-green-700 transition">
+                🖨️ Print Professional Report
+            </button>
+        </div>
+
+        <!-- Professional Document Template -->
+        <div class="report-card max-w-4xl mx-auto p-8 shadow-2xl bg-white relative">
+            <div class="watermark">JAMEEN SEVA</div>
+            
+            <!-- Header -->
+            <div class="text-center border-b-2 border-blue-800 pb-6 mb-6">
+                <h1 class="text-4xl font-bold text-blue-900 uppercase tracking-widest">Jameen Seva</h1>
+                <p class="text-lg font-semibold text-gray-700">Digital Land Records Conversion Service</p>
+                <p class="text-sm text-gray-500 italic">Professional Report of Khesra Mapping</p>
+            </div>
+
+            <!-- Order Info Bar -->
+            <div class="flex justify-between text-sm mb-8 bg-gray-50 p-3 border rounded">
+                <div><strong>Order ID:</strong> <span id="r_order_id"></span></div>
+                <div><strong>Date:</strong> <span id="r_order_date"></span></div>
+                <div><strong>Status:</strong> <span id="r_status" class="font-bold"></span></div>
+            </div>
+
+            <!-- Main Details Table -->
+            <div class="grid grid-cols-1 gap-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse border border-gray-300">
+                        <thead>
+                            <tr class="bg-blue-900 text-white">
+                                <th class="border border-gray-300 p-3 uppercase text-sm">Field Description</th>
+                                <th class="border border-gray-300 p-3 uppercase text-sm">Details</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-800">
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">Raiyat Name (Owner)</td>
+                                <td class="border border-gray-300 p-3" id="r_raiyat_name"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">Mobile Number</td>
+                                <td class="border border-gray-300 p-3" id="r_mobile"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">District</td>
+                                <td class="border border-gray-300 p-3" id="r_district"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">Block</td>
+                                <td class="border border-gray-300 p-3" id="r_block"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">Thana No.</td>
+                                <td class="border border-gray-300 p-3" id="r_thana_no"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">Village</td>
+                                <td class="border border-gray-300 p-3" id="r_village"></td>
+                            </tr>
+                            <tr class="bg-yellow-50">
+                                <td class="border border-gray-300 p-3 font-bold text-blue-900">Old Khesra No.</td>
+                                <td class="border border-gray-300 p-3 font-bold text-red-600" id="r_khesra_old"></td>
+                            </tr>
+                            <tr class="bg-yellow-50">
+                                <td class="border border-gray-300 p-3 font-bold text-blue-900">New Khesra No.</td>
+                                <td class="border border-gray-300 p-3 font-bold text-green-700" id="r_khesra_new"></td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 p-3 font-semibold bg-gray-50">New Khata No.</td>
+                                <td class="border border-gray-300 p-3" id="r_khata_new"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Footer / Signature -->
+            <div class="mt-16 flex justify-between items-end">
+                <div class="text-center">
+                    <p class="text-xs text-gray-400 mb-10">Computer Generated Report</p>
+                    <div class="border-t border-black w-32 px-2">Digital Signature</div>
+                </div>
+                <div class="text-center">
+                    <p class="text-xs text-gray-400 mb-10">Authorized Seal</p>
+                    <div class="border-t border-black w-32 px-2">Jameen Seva Office</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase Config
+        const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+        const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function trackOrder() {
+            const orderId = document.getElementById('orderIdInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const reportArea = document.getElementById('reportArea');
+
+            if (!orderId) {
+                alert("Please enter an Order ID");
+                return;
+            }
+
+            errorMsg.classList.add('hidden');
+            
+            try {
+                // Querying the table 'khesra to khesra'
+                // Note: Since table name has spaces, it is handled by Supabase JS client automatically
+                const { data, error } = await _supabase
+                    .from('khesra to khesra') 
+                    .select('*')
+                    .eq('order_id', orderId)
+                    .single();
+
+                if (error || !data) {
+                    throw new Error("Order ID not found! Please check and try again.");
+                }
+
+                // Populate the report
+                document.getElementById('r_order_id').innerText = data.order_id;
+                document.getElementById('r_order_date').innerText = data.order_date || 'N/A';
+                document.getElementById('r_status').innerText = data.status || 'Processing';
+                document.getElementById('r_raiyat_name').innerText = data.raiyat_name;
+                document.getElementById('r_mobile').innerText = data.mobile;
+                document.getElementById('r_district').innerText = data.district;
+                document.getElementById('r_block').innerText = data.block;
+                document.getElementById('r_thana_no').innerText = data.thana_no;
+                document.getElementById('r_village').innerText = data.village;
+                document.getElementById('r_khesra_old').innerText = data.khesra_old;
+                document.getElementById('r_khesra_new').innerText = data.khesra_new;
+                document.getElementById('r_khata_new').innerText = data.khata_new;
+
+                // Update status color
+                const statusEl = document.getElementById('r_status');
+                if(data.status === 'Completed') statusEl.className = "font-bold text-green-600";
+                else statusEl.className = "font-bold text-orange-500";
+
+                // Show report, hide search
+                reportArea.classList.remove('hidden');
+                window.scrollTo(0, document.body.scrollHeight);
+
+            } catch (err) {
+                errorMsg.innerText = err.message;
+                errorMsg.classList.remove('hidden');
+                reportArea.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
