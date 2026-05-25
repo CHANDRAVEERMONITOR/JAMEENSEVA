@@ -1,116 +1,131 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>डाउनलोड फॉर्मेट | Jameen Seva</title>
-    <style>
-        body { 
-            font-family: 'Arial', sans-serif; 
-            background-color: #f1f5f9; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-        }
-        .download-card { 
-            background: white; 
-            padding: 40px 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
-            text-align: center; 
-            max-width: 420px; 
-            width: 100%; 
-            box-sizing: border-box; 
-        }
-        .success-icon { 
-            color: #22c55e; 
-            font-size: 48px; 
-            margin-bottom: 15px; 
-        }
-        h2 { color: #1e293b; margin: 0 0 10px 0; font-size: 1.6em; }
-        p { color: #64748b; font-size: 0.95em; line-height: 1.5; margin-bottom: 25px; }
-        .btn-download { 
-            display: block; 
-            background: #22c55e; 
-            color: white; 
-            padding: 14px; 
-            text-decoration: none; 
-            border-radius: 8px; 
-            font-weight: bold; 
-            font-size: 1.1em; 
-            transition: background 0.2s; 
-            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); 
-        }
-        .btn-download:hover { background: #16a34a; }
-        .error-box { display: none; color: #ef4444; }
-        .footer-text { margin-top: 25px; font-size: 0.8em; color: #94a3b8; }
-        .format-badge { 
-            background: #e0f2fe; 
-            color: #0369a1; 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            font-size: 0.85em; 
-            font-weight: bold; 
-            display: inline-block; 
-            margin-bottom: 15px; 
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>डाउनलोड फॉर्मेट | JameenSeva.in</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Arial',sans-serif;background:#f1f5f9;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+    .card{background:#fff;padding:40px 30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08);text-align:center;max-width:440px;width:100%}
+    .icon{font-size:52px;margin-bottom:14px}
+    h2{color:#1e293b;margin:0 0 10px;font-size:1.55em}
+    p{color:#64748b;font-size:.95em;line-height:1.6;margin-bottom:22px}
+    .badge{background:#e0f2fe;color:#0369a1;padding:5px 14px;border-radius:20px;font-size:.85em;font-weight:700;display:inline-block;margin-bottom:14px}
+    .btn{display:block;background:#22c55e;color:#fff;padding:14px;text-decoration:none;border-radius:8px;font-weight:700;font-size:1.05em;transition:.2s;box-shadow:0 4px 12px rgba(34,197,94,.25)}
+    .btn:hover{background:#16a34a;transform:translateY(-1px)}
+    .btn-wa{display:block;margin-top:12px;background:#25D366;color:#fff;padding:11px;text-decoration:none;border-radius:8px;font-weight:700;font-size:.95em;transition:.2s}
+    .btn-wa:hover{background:#1db954}
+    .error-box{display:none}
+    .error-box h2{color:#ef4444}
+    .footer{margin-top:22px;font-size:.78em;color:#94a3b8}
+    .loading{color:#64748b;font-size:.9em;padding:10px 0}
+    .steps{background:#f8fafc;border-radius:10px;padding:14px 16px;margin:16px 0;text-align:left}
+    .steps p{font-size:.85em;color:#475569;margin-bottom:6px}
+    .steps p:last-child{margin-bottom:0}
+    .pid{background:#f1f5f9;border-radius:6px;padding:6px 10px;font-size:.75em;color:#94a3b8;margin-top:14px;word-break:break-all}
+  </style>
 </head>
 <body>
+<div class="card">
 
-<div class="download-card">
-    <div id="success-content">
-        <div class="success-icon">✔</div>
-        <div class="format-badge" id="format-name">फाइल लोड हो रही है...</div>
-        <h2>भुगतान सफल रहा!</h2>
-        <p>आपका पंचनामा फॉर्मेट डाउनलोड के लिए तैयार है। नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
-        
-        <a href="#" class="btn-download" id="dynamic-download-btn">
-            📥 यहाँ क्लिक करके डाउनलोड करें
-        </a>
+  <!-- SUCCESS -->
+  <div id="success-content">
+    <div class="icon">✅</div>
+    <div class="badge" id="format-name">फाइल लोड हो रही है...</div>
+    <h2>भुगतान सफल रहा!</h2>
+    <p>आपका पंचनामा फॉर्मेट डाउनलोड के लिए तैयार है।<br>नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
+
+    <div class="steps">
+      <p>📌 <strong>PDF:</strong> Download होगी — सीधे Mobile/Computer पर खुलेगी</p>
+      <p>📌 <strong>Word File:</strong> 5-10 मिनट में WhatsApp पर भेजी जाएगी</p>
     </div>
 
-    <div id="error-content" class="error-box">
-        <h2 style="color: #ef4444;">पहुंच अस्वीकृत (Access Denied) ❌</h2>
-        <p>यह लिंक सुरक्षित है। आप बिना पेमेंट किए या सीधा लिंक कॉपी करके यहाँ नहीं आ सकते। कृपया पहले JameenSeva.in से फॉर्मेट खरीदें।</p>
-    </div>
+    <a href="#" class="btn" id="dl-btn">📥 यहाँ क्लिक करके डाउनलोड करें</a>
+    <a href="https://wa.me/919142075859?text=मैंने%20पंचनामा%20format%20खरीदा%20है%2C%20कृपया%20भेजें" class="btn-wa" target="_blank" rel="noopener">
+      📱 WhatsApp पर भी प्राप्त करें
+    </a>
+    <div class="pid" id="payment-ref"></div>
+  </div>
 
-    <div class="footer-text">JameenSeva.in — आपकी सेवा में समर्पित</div>
+  <!-- ERROR -->
+  <div id="error-content" class="error-box">
+    <div class="icon">❌</div>
+    <h2>पहुंच अस्वीकृत</h2>
+    <p>यह लिंक सुरक्षित है। कृपया पहले <a href="panchnamablog.html" style="color:#22c55e;font-weight:700">JameenSeva.in</a> से फॉर्मेट खरीदें।</p>
+    <a href="panchnamablog.html" class="btn" style="background:#0369a1;box-shadow:none">← वापस खरीदें</a>
+  </div>
+
+  <div class="footer">JameenSeva.in — आपकी सेवा में समर्पित</div>
 </div>
 
 <script>
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        
-        // 🛠️ संशोधन: अब यह दोनों प्रकार की पेमेंट आईडी (razorpay_payment_id और साधारण payment_id) को चेक करेगा
-        const hasPaymentId = urlParams.has('razorpay_payment_id') || urlParams.has('razorpay_payment_link_reference') || urlParams.has('payment_id');
-        const formatType = urlParams.get('type');
+window.onload = function() {
 
-        // आपकी तीनों सही आईडी यहाँ सेट हैं
-        const fileLinks = {
-            'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
-            'ocr': 'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
-            'word': 'https://docs.google.com/document/d/1SUlGfux5SgAHdwP_n_79Al_2PkGC0Z6S/export?format=docx'
-        };
+  // ══ STEP 1: पूरा URL string लेकर manually parse करें ══
+  // Razorpay कभी-कभी ?type=simple?razorpay_payment_id=... बना देता है
+  // इसलिए हम raw URL string को split करके पढ़ेंगे
+  var rawSearch = window.location.search;        // ?type=simple?payment_id=pay_xxx
+  var rawHash   = window.location.hash;
+  var fullStr   = rawSearch + rawHash;
 
-        const fileNames = {
-            'simple': 'Simple PDF फॉर्मेट (₹49)',
-            'ocr': 'OCR PDF फॉर्मेट (₹99)',
-            'word': 'MS Word Editable फाइल (₹149)'
-        };
+  // सभी ? को & से replace करो (पहले ? को छोड़कर) ताकि URL parse हो सके
+  // "?type=simple?payment_id=x" → "?type=simple&payment_id=x"
+  var fixedSearch = '?' + fullStr.replace(/^\?/, '').replace(/\?/g, '&');
 
-        // वेरिफिकेशन लॉजिक
-        if (hasPaymentId && formatType && fileLinks[formatType]) {
-            document.getElementById('dynamic-download-btn').href = fileLinks[formatType];
-            document.getElementById('format-name').innerText = fileNames[formatType];
-        } else {
-            document.getElementById('success-content').style.display = 'none';
-            document.getElementById('error-content').style.display = 'block';
-        }
-    };
+  var params = new URLSearchParams(fixedSearch);
+
+  // ══ STEP 2: type निकालो ══
+  var rawType = params.get('type') || '';
+  // अगर type में भी ? रह गया हो तो साफ करो
+  var formatType = rawType.split('?')[0].split('&')[0].trim().toLowerCase();
+
+  // ══ STEP 3: Payment ID check (किसी भी key से) ══
+  var paymentId =
+    params.get('razorpay_payment_id') ||
+    params.get('razorpay_payment_link_reference') ||
+    params.get('payment_id') ||
+    params.get('razorpay_order_id') ||
+    '';
+
+  // ══ STEP 4: File links ══
+  var fileLinks = {
+    'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
+    'ocr':    'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
+    'word':   'https://docs.google.com/document/d/1SUlGfux5SgAHdwP_n_79Al_2PkGC0Z6S/export?format=docx'
+  };
+
+  var fileNames = {
+    'simple': 'Simple PDF फॉर्मेट (₹49)',
+    'ocr':    'OCR PDF फॉर्मेट (₹99)',
+    'word':   'MS Word Editable फाइल (₹149)'
+  };
+
+  // ══ STEP 5: Access check ══
+  if (paymentId && formatType && fileLinks[formatType]) {
+    // SUCCESS ✅
+    document.getElementById('dl-btn').href = fileLinks[formatType];
+    document.getElementById('format-name').innerText = fileNames[formatType];
+    document.getElementById('payment-ref').innerText = 'Payment ID: ' + paymentId;
+
+    // Word file के लिए WhatsApp message में payment ID भेजो
+    if (formatType === 'word') {
+      var waMsg = 'मैंने MS Word पंचनामा format (₹149) खरीदा है। Payment ID: ' + paymentId + ' — कृपया file भेजें।';
+      document.querySelector('.btn-wa').href = 'https://wa.me/919142075859?text=' + encodeURIComponent(waMsg);
+    }
+
+  } else {
+    // ACCESS DENIED ❌
+    document.getElementById('success-content').style.display = 'none';
+    document.getElementById('error-content').style.display   = 'block';
+
+    // Debug info (console में — user को नहीं दिखेगा)
+    console.log('Debug | rawSearch:', rawSearch);
+    console.log('Debug | fixedSearch:', fixedSearch);
+    console.log('Debug | formatType:', formatType);
+    console.log('Debug | paymentId:', paymentId);
+  }
+};
 </script>
-
 </body>
 </html>
