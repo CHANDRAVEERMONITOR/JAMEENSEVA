@@ -5,16 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>डाउनलोड फॉर्मेट | Jameen Seva</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f1f5f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .download-card { background: white; padding: 40px 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; max-width: 420px; width: 100%; box-sizing: border-box; }
-        .success-icon { color: #22c55e; font-size: 48px; margin-bottom: 15px; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background-color: #f1f5f9; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .download-card { 
+            background: white; 
+            padding: 40px 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            text-align: center; 
+            max-width: 420px; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .success-icon { 
+            color: #22c55e; 
+            font-size: 48px; 
+            margin-bottom: 15px; 
+        }
         h2 { color: #1e293b; margin: 0 0 10px 0; font-size: 1.6em; }
         p { color: #64748b; font-size: 0.95em; line-height: 1.5; margin-bottom: 25px; }
-        .btn-download { display: block; background: #22c55e; color: white; padding: 14px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1em; transition: background 0.2s; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); }
+        .btn-download { 
+            display: block; 
+            background: #22c55e; 
+            color: white; 
+            padding: 14px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            font-size: 1.1em; 
+            transition: background 0.2s; 
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2); 
+        }
         .btn-download:hover { background: #16a34a; }
         .error-box { display: none; color: #ef4444; }
         .footer-text { margin-top: 25px; font-size: 0.8em; color: #94a3b8; }
-        .format-badge { background: #e0f2fe; color: #0369a1; padding: 5px 12px; border-radius: 20px; font-size: 0.85em; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .format-badge { 
+            background: #e0f2fe; 
+            color: #0369a1; 
+            padding: 5px 12px; 
+            border-radius: 20px; 
+            font-size: 0.85em; 
+            font-weight: bold; 
+            display: inline-block; 
+            margin-bottom: 15px; 
+        }
     </style>
 </head>
 <body>
@@ -47,11 +88,11 @@
         const hasPaymentId = urlParams.has('razorpay_payment_id') || urlParams.has('razorpay_payment_link_reference');
         const formatType = urlParams.get('type');
 
-        // 🛠️ यहाँ अपनी असली Google Drive ID बदलें
+        // चन्द्रवीर जी, मैंने यहाँ आपकी तीनों आईडी बिल्कुल सही सेट कर दी हैं
         const fileLinks = {
             'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
-            'ocr': 'https://drive.google.com/uc?export=download&id=यहाँ_OCR_PDF_की_आईडी_डालें',
-            'word': 'https://drive.google.com/uc?export=download&id=यहाँ_MS_Word_की_आईडी_डालें'
+            'ocr': 'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
+            'word': 'https://docs.google.com/document/d/1SUlGfux5SgAHdwP_n_79Al_2PkGC0Z6S/export?format=docx'
         };
 
         const fileNames = {
