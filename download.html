@@ -84,11 +84,11 @@
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         
-        // सुरक्षा जांच: रेज़रपे की पेमेंट आईडी और फाइल का टाइप दोनों होना जरूरी है
-        const hasPaymentId = urlParams.has('razorpay_payment_id') || urlParams.has('razorpay_payment_link_reference');
+        // 🛠️ संशोधन: अब यह दोनों प्रकार की पेमेंट आईडी (razorpay_payment_id और साधारण payment_id) को चेक करेगा
+        const hasPaymentId = urlParams.has('razorpay_payment_id') || urlParams.has('razorpay_payment_link_reference') || urlParams.has('payment_id');
         const formatType = urlParams.get('type');
 
-        // चन्द्रवीर जी, मैंने यहाँ आपकी तीनों आईडी बिल्कुल सही सेट कर दी हैं
+        // आपकी तीनों सही आईडी यहाँ सेट हैं
         const fileLinks = {
             'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
             'ocr': 'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
@@ -101,12 +101,11 @@
             'word': 'MS Word Editable फाइल (₹149)'
         };
 
-        // अगर यूजर पेमेंट करके सही लिंक से आया है
+        // वेरिफिकेशन लॉजिक
         if (hasPaymentId && formatType && fileLinks[formatType]) {
             document.getElementById('dynamic-download-btn').href = fileLinks[formatType];
             document.getElementById('format-name').innerText = fileNames[formatType];
         } else {
-            // अगर कोई डायरेक्ट लिंक खोलकर चोरी करने की कोशिश करे
             document.getElementById('success-content').style.display = 'none';
             document.getElementById('error-content').style.display = 'block';
         }
