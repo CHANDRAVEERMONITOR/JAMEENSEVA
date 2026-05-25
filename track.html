@@ -176,6 +176,8 @@ function showDetail(index) {
         document.getElementById("res-khesra").innerText = "पंचनामा बटवारा";
         document.getElementById("res-type").innerText = "Panchnama Service";
     } else {
+         document.getElementById("label-thana").innerText = "थाना नंबर:";
+        document.getElementById("res-thana").innerText = order.thana_no || "N/A";
         document.getElementById("label-khata").innerText = "खाता नंबर:";
         document.getElementById("res-khata").innerText = order.khata_no || "N/A";
         document.getElementById("label-khesra").innerText = "खेसरा नंबर:";
