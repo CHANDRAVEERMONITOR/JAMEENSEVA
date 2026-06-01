@@ -34,16 +34,16 @@
     <div class="icon">✅</div>
     <div class="badge" id="format-name">फाइल लोड हो रही है...</div>
     <h2>भुगतान सफल रहा!</h2>
-    <p>आपका पंचनामा फॉर्मेट डाउनलोड के लिए तैयार है।<br>नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
+    <p>आपका बदलनामा/पंचनामा फॉर्मेट डाउनलोड के लिए तैयार है।<br>नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
 
     <div class="steps">
-      <p>📌 <strong>PDF:</strong> Download होगी — सीधे Mobile/Computer पर खुलेगी</p>
-      <p>📌 <strong>Word File:</strong> 5-10 मिनट में WhatsApp पर भेजी जाएगी</p>
+      <p>📌 <strong>PDF / Word File:</strong> Download बटन पर क्लिक करते ही तुरंत आपके डिवाइस में सेव हो जाएगी।</p>
+      <p>📌 <strong>सपोर्ट:</strong> कोई समस्या होने पर तुरंत नीचे व्हाट्सएप बटन का उपयोग करें।</p>
     </div>
 
     <a href="#" class="btn" id="dl-btn">📥 यहाँ क्लिक करके डाउनलोड करें</a>
-    <a href="https://wa.me/919142075859?text=मैंने%20पंचनामा%20format%20खरीदा%20है%2C%20कृपया%20भेजें" class="btn-wa" target="_blank" rel="noopener">
-      📱 WhatsApp पर भी प्राप्त करें
+    <a href="https://wa.me/919142075859?text=मैंने%20बदलनामा%20format%20खरीदा%20है%2C%20कृपया%20मदद%20करें" class="btn-wa" target="_blank" rel="noopener">
+      📱 WhatsApp पर सहायता प्राप्त करें
     </a>
     <div class="pid" id="payment-ref"></div>
   </div>
@@ -52,8 +52,8 @@
   <div id="error-content" class="error-box">
     <div class="icon">❌</div>
     <h2>पहुंच अस्वीकृत</h2>
-    <p>यह लिंक सुरक्षित है। कृपया पहले <a href="panchnamablog.html" style="color:#22c55e;font-weight:700">JameenSeva.in</a> से फॉर्मेट खरीदें।</p>
-    <a href="panchnamablog.html" class="btn" style="background:#0369a1;box-shadow:none">← वापस खरीदें</a>
+    <p>यह लिंक सुरक्षित है। कृपया पहले <a href="badalnama.html" style="color:#22c55e;font-weight:700">JameenSeva.in</a> से फॉर्मेट खरीदें।</p>
+    <a href="badalnama.html" class="btn" style="background:#0369a1;box-shadow:none">← वापस खरीदें</a>
   </div>
 
   <div class="footer">JameenSeva.in — आपकी सेवा में समर्पित</div>
@@ -61,26 +61,15 @@
 
 <script>
 window.onload = function() {
-
-  // ══ STEP 1: पूरा URL string लेकर manually parse करें ══
-  // Razorpay कभी-कभी ?type=simple?razorpay_payment_id=... बना देता है
-  // इसलिए हम raw URL string को split करके पढ़ेंगे
-  var rawSearch = window.location.search;        // ?type=simple?payment_id=pay_xxx
+  var rawSearch = window.location.search;        
   var rawHash   = window.location.hash;
   var fullStr   = rawSearch + rawHash;
-
-  // सभी ? को & से replace करो (पहले ? को छोड़कर) ताकि URL parse हो सके
-  // "?type=simple?payment_id=x" → "?type=simple&payment_id=x"
   var fixedSearch = '?' + fullStr.replace(/^\?/, '').replace(/\?/g, '&');
-
   var params = new URLSearchParams(fixedSearch);
 
-  // ══ STEP 2: type निकालो ══
   var rawType = params.get('type') || '';
-  // अगर type में भी ? रह गया हो तो साफ करो
   var formatType = rawType.split('?')[0].split('&')[0].trim().toLowerCase();
 
-  // ══ STEP 3: Payment ID check (किसी भी key से) ══
   var paymentId =
     params.get('razorpay_payment_id') ||
     params.get('razorpay_payment_link_reference') ||
@@ -88,42 +77,27 @@ window.onload = function() {
     params.get('razorpay_order_id') ||
     '';
 
-  // ══ STEP 4: File links ══
+  // ══ UPDATED WITH YOUR NEW DRIVE LINKS ══
   var fileLinks = {
-    'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
-    'ocr':    'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
-    'word':   'https://docs.google.com/document/d/1SUlGfux5SgAHdwP_n_79Al_2PkGC0Z6S/export?format=docx'
+    'ocr':  'https://drive.google.com/uc?export=download&id=1OEIKFAsRJONxRkaHH_YrzVzzqazvuLdh',
+    'word': 'https://docs.google.com/document/d/1aGsK1tIynfR-jY-XcbfjGLBAhIE466MG/export?format=docx'
   };
 
   var fileNames = {
-    'simple': 'Simple PDF फॉर्मेट (₹49)',
-    'ocr':    'OCR PDF फॉर्मेट (₹99)',
-    'word':   'MS Word Editable फाइल (₹149)'
+    'ocr':  'बदलनामा (अदला-बदली) OCR PDF फॉर्मेट',
+    'word': 'बदलनामा MS Word Editable (.docx) फाइल'
   };
 
-  // ══ STEP 5: Access check ══
   if (paymentId && formatType && fileLinks[formatType]) {
-    // SUCCESS ✅
     document.getElementById('dl-btn').href = fileLinks[formatType];
     document.getElementById('format-name').innerText = fileNames[formatType];
     document.getElementById('payment-ref').innerText = 'Payment ID: ' + paymentId;
 
-    // Word file के लिए WhatsApp message में payment ID भेजो
-    if (formatType === 'word') {
-      var waMsg = 'मैंने MS Word पंचनामा format (₹149) खरीदा है। Payment ID: ' + paymentId + ' — कृपया file भेजें।';
-      document.querySelector('.btn-wa').href = 'https://wa.me/919142075859?text=' + encodeURIComponent(waMsg);
-    }
-
+    var waMsg = 'मैंने ' + fileNames[formatType] + ' खरीदा है। Payment ID: ' + paymentId + ' — कृपया बैकअप फाइल व्हाट्सएप पर भी भेजें।';
+    document.querySelector('.btn-wa').href = 'https://wa.me/919142075859?text=' + encodeURIComponent(waMsg);
   } else {
-    // ACCESS DENIED ❌
     document.getElementById('success-content').style.display = 'none';
     document.getElementById('error-content').style.display   = 'block';
-
-    // Debug info (console में — user को नहीं दिखेगा)
-    console.log('Debug | rawSearch:', rawSearch);
-    console.log('Debug | fixedSearch:', fixedSearch);
-    console.log('Debug | formatType:', formatType);
-    console.log('Debug | paymentId:', paymentId);
   }
 };
 </script>
