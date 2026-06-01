@@ -41,14 +41,38 @@
 </script>
 
 <!-- ══ BREADCRUMB SCHEMA ══ -->
+<!-- ══ UPDATED PRODUCT SCHEMA WITH IMAGE ══ -->
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jameenseva.in/"},{"@type":"ListItem","position":2,"name":"ब्लॉग","item":"https://jameenseva.in/blog.html"},{"@type":"ListItem","position":3,"name":"बदलनामा Format Download","item":"https://jameenseva.in/badalnama.html"}]}
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "जमीन बदलनामा (अदला-बदली) MS Word Editable Format",
+  "image": "https://jameenseva.in/logo.png", 
+  "description": "बिहार सर्वे 2026 के लिए जमीन की अदला-बदली का 100% Legal Editable Format।",
+  "brand": {
+    "@type": "Brand",
+    "name": "JameenSeva.in"
+  },
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Standard OCR PDF",
+      "price": "99",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": "https://jameenseva.in/badalnama.html"
+    },
+    {
+      "@type": "Offer",
+      "name": "MS Word Editable File",
+      "price": "149",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": "https://jameenseva.in/badalnama.html"
+    }
+  ]
+}
 </script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
 :root{
   --g:#1a7c3e;--gl:#22a352;--gp:#edfaf2;
   --n:#0c2340;--nm:#1a3a5c;
@@ -653,8 +677,3 @@ window.addEventListener('scroll',()=>document.getElementById('btt').classList.to
 </script>
 </body>
 </html>
-EOF
-echo "Done — $(wc -l < /mnt/user-data/outputs/badalnama.html) lines"
-Output
-
-Done — 654 lines
