@@ -19,10 +19,8 @@
     .error-box{display:none}
     .error-box h2{color:#ef4444}
     .footer{margin-top:22px;font-size:.78em;color:#94a3b8}
-    .loading{color:#64748b;font-size:.9em;padding:10px 0}
     .steps{background:#f8fafc;border-radius:10px;padding:14px 16px;margin:16px 0;text-align:left}
     .steps p{font-size:.85em;color:#475569;margin-bottom:6px}
-    .steps p:last-child{margin-bottom:0}
     .pid{background:#f1f5f9;border-radius:6px;padding:6px 10px;font-size:.75em;color:#94a3b8;margin-top:14px;word-break:break-all}
   </style>
 </head>
@@ -34,17 +32,15 @@
     <div class="icon">✅</div>
     <div class="badge" id="format-name">फाइल लोड हो रही है...</div>
     <h2>भुगतान सफल रहा!</h2>
-    <p>आपका बदलनामा/पंचनामा फॉर्मेट डाउनलोड के लिए तैयार है।<br>नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
+    <p>आपका फॉर्मेट डाउनलोड के लिए तैयार है।<br>नीचे बटन पर क्लिक करके तुरंत डाउनलोड करें।</p>
 
     <div class="steps">
-      <p>📌 <strong>PDF / Word File:</strong> Download बटन पर क्लिक करते ही तुरंत आपके डिवाइस में सेव हो जाएगी।</p>
-      <p>📌 <strong>सपोर्ट:</strong> कोई समस्या होने पर तुरंत नीचे व्हाट्सएप बटन का उपयोग करें।</p>
+      <p>📌 <strong>Download:</strong> बटन पर क्लिक करते ही फाइल आपके फोन या कंप्यूटर में सेव हो जाएगी।</p>
+      <p>📌 <strong>सहायता:</strong> कोई भी समस्या होने पर सीधे व्हाट्सएप बटन का उपयोग करें।</p>
     </div>
 
     <a href="#" class="btn" id="dl-btn">📥 यहाँ क्लिक करके डाउनलोड करें</a>
-    <a href="https://wa.me/919142075859?text=मैंने%20बदलनामा%20format%20खरीदा%20है%2C%20कृपया%20मदद%20करें" class="btn-wa" target="_blank" rel="noopener">
-      📱 WhatsApp पर सहायता प्राप्त करें
-    </a>
+    <a href="https://wa.me/919142075859" class="btn-wa" target="_blank" rel="noopener">📱 WhatsApp पर सहायता प्राप्त करें</a>
     <div class="pid" id="payment-ref"></div>
   </div>
 
@@ -52,8 +48,7 @@
   <div id="error-content" class="error-box">
     <div class="icon">❌</div>
     <h2>पहुंच अस्वीकृत</h2>
-    <p>यह लिंक सुरक्षित है। कृपया पहले <a href="panchnamablog.html" style="color:#22c55e;font-weight:700">JameenSeva.in</a> से फॉर्मेट खरीदें।</p>
-    <a href="panchnamablog.html" class="btn" style="background:#0369a1;box-shadow:none">← वापस खरीदें</a>
+    <p>यह लिंक सुरक्षित है। कृपया पहले <a href="https://jameenseva.in" style="color:#22c55e;font-weight:700">JameenSeva.in</a> से फॉर्मेट खरीदें।</p>
   </div>
 
   <div class="footer">JameenSeva.in — आपकी सेवा में समर्पित</div>
@@ -70,22 +65,26 @@ window.onload = function() {
   var rawType = params.get('type') || '';
   var formatType = rawType.split('?')[0].split('&')[0].trim().toLowerCase();
 
-  var paymentId =
-    params.get('razorpay_payment_id') ||
-    params.get('razorpay_payment_link_reference') ||
-    params.get('payment_id') ||
-    params.get('razorpay_order_id') ||
-    '';
+  var paymentId = params.get('razorpay_payment_id') || params.get('payment_id') || '';
 
-  // ══ UPDATED WITH YOUR NEW DRIVE LINKS ══
+  // ══ 5 DISTINCT DATABASE LINKS FOR ZERO ERROR ══
   var fileLinks = {
-    'ocr':  'https://drive.google.com/uc?export=download&id=1OEIKFAsRJONxRkaHH_YrzVzzqazvuLdh',
-    'word': 'https://docs.google.com/document/d/1aGsK1tIynfR-jY-XcbfjGLBAhIE466MG/export?format=docx'
+    // 📄 PANCHNAMA LINKS
+    'simple': 'https://drive.google.com/uc?export=download&id=1mxIDWGTiU_fGHe2hxWPc-gfd_927QIZM',
+    'ocr':    'https://drive.google.com/uc?export=download&id=1y3XjawZrWtdccxovPt7oc2CPdUuqOOmJ',
+    'word':   'https://docs.google.com/document/d/1SUlGfux5SgAHdwP_n_79Al_2PkGC0Z6S/export?format=docx',
+    
+    // 📝 BADALNAMA LINKS (NEW & SEPARATE KEYS)
+    'badalnama_ocr':  'https://drive.google.com/uc?export=download&id=1OEIKFAsRJONxRkaHH_YrzVzzqazvuLdh',
+    'badalnama_word': 'https://docs.google.com/document/d/1aGsK1tIynfR-jY-XcbfjGLBAhIE466MG/export?format=docx'
   };
 
   var fileNames = {
-    'ocr':  'बदलनामा (अदला-बदली) OCR PDF फॉर्मेट',
-    'word': 'बदलनामा MS Word Editable (.docx) फाइल'
+    'simple': 'पंचनामा Simple PDF फॉर्मेट (₹49)',
+    'ocr':    'पंचनामा OCR PDF फॉर्मेट (₹99)',
+    'word':   'पंचनामा MS Word Editable फाइल (₹149)',
+    'badalnama_ocr':  'बदलनामा OCR PDF फॉर्मेट (₹99)',
+    'badalnama_word': 'बदलनामा MS Word Editable फाइल (₹149)'
   };
 
   if (paymentId && formatType && fileLinks[formatType]) {
@@ -93,7 +92,7 @@ window.onload = function() {
     document.getElementById('format-name').innerText = fileNames[formatType];
     document.getElementById('payment-ref').innerText = 'Payment ID: ' + paymentId;
 
-    var waMsg = 'मैंने ' + fileNames[formatType] + ' खरीदा है। Payment ID: ' + paymentId + ' — कृपया बैकअप फाइल व्हाट्सएप पर भी भेजें।';
+    var waMsg = 'मैंने ' + fileNames[formatType] + ' खरीदा है। Payment ID: ' + paymentId + ' — कृपया बैकअप व्हाट्सएप पर भी एक्टिव रखें।';
     document.querySelector('.btn-wa').href = 'https://wa.me/919142075859?text=' + encodeURIComponent(waMsg);
   } else {
     document.getElementById('success-content').style.display = 'none';
