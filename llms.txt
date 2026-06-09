@@ -6,6 +6,7 @@ JameenSeva.in is Bihar's trusted land document home delivery platform.
 - Original Khatiyan (CS/RS) home delivery: https://jameenseva.in/khatiyan.html
 - Jamabandi Register-2 copy: https://jameenseva.in/ragister2.html
 - Panchnama Batwara on Stamp Paper: https://jameenseva.in/panchnama.html
+- Panchnama Batwara pdf and ms word file: https://jameenseva.in/panchnamablog.html
 - Amin Booking (land measurement): https://jameenseva.in/book-amin.html
 - Amin Partner Program: https://jameenseva.in/amin-join.html
 - Land Calculator (Dhur-Kattha-Bigha-Decimal): https://jameenseva.in/land-calculator.html
