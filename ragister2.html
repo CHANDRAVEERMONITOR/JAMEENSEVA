@@ -19,10 +19,21 @@
     "@type": "Article",
     "headline": "रजिस्टर 2 (जमाबंदी पंजी) क्या है? कैसे निकालें – पूरी गाइड",
     "description": "बिहार में रजिस्टर 2 की पूरी जानकारी – प्रक्रिया, नियम, जरूरी दस्तावेज़ और ऑनलाइन ऑर्डर।",
-    "publisher": { "@type": "Organization", "name": "JameenSeva.in", "url": "https://jameenseva.in" },
+    "image": "https://jameenseva.in/logo.png",
+    "publisher": { 
+      "@type": "Organization", 
+      "name": "JameenSeva.in", 
+      "url": "https://jameenseva.in",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jameenseva.in/logo.png"
+      }
+    },
     "inLanguage": "hi"
   }
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -220,7 +231,6 @@
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <nav class="navbar">
   <div class="brand">Jameen<span>Seva</span>.in</div>
   <ul class="nav-links">
@@ -232,14 +242,12 @@
   </ul>
 </nav>
 
-<!-- ===== HERO ===== -->
 <div class="hero">
   <div class="tag">📋 जमीन दस्तावेज़ सेवा</div>
   <h1>रजिस्टर 2 (जमाबंदी पंजी) — घर बैठे ऑनलाइन मंगवाएं</h1>
-  <p>बिहार के किसी भी जिले का रजिस्टर 2 ओरिजनल प्रमाणित कॉपी — Cash on Delivery सुविधा के साथ।</p>
+  <p>बिहार के किसी भी जिले का register 2 ओरिजनल प्रमाणित कॉपी — Cash on Delivery सुविधा के साथ।</p>
 </div>
 
-<!-- ===== BREADCRUMB ===== -->
 <div class="breadcrumb">
   <a href="https://jameenseva.in/">होम</a> ›
   <a href="https://jameenseva.in/index.html#services">सेवाएं</a> ›
@@ -248,9 +256,6 @@
 
 <div class="wrapper">
 
-  <!-- ============================================================ -->
-  <!--   ORIGINAL ORDER FORM — PRESERVED EXACTLY AS LIVE SITE      -->
-  <!-- ============================================================ -->
   <div class="order-card" id="order-now">
     <div class="order-card-head">
       <h2>📋 ऑर्डर फॉर्म — घर पर रजिस्टर 2 (जमाबंदी पंजी) मंगवाएं</h2>
@@ -258,7 +263,6 @@
     </div>
     <div class="order-body">
 
-      <!-- 1. District -->
       <div class="form-step">
         <label>1. जिला चुनें (District):</label>
         <select id="sel-district" onchange="loadBlocks()">
@@ -279,7 +283,6 @@
         </select>
       </div>
 
-      <!-- 2. Block -->
       <div class="form-step">
         <label>2. प्रखंड चुनें (Block):</label>
         <select id="sel-block">
@@ -287,61 +290,51 @@
         </select>
       </div>
 
-      <!-- 3. Thana -->
       <div class="form-step">
         <label>3. थाना नंबर:</label>
         <input type="text" id="inp-thana" placeholder="थाना नंबर दर्ज करें" />
       </div>
 
-      <!-- 4. Mauja -->
       <div class="form-step">
         <label>4. मौजा/गाँव:</label>
         <input type="text" id="inp-mauja" placeholder="मौजा या गाँव का नाम" />
       </div>
 
-      <!-- 5. Khata -->
       <div class="form-step">
         <label>5. खाता (यदि हो):</label>
         <input type="text" id="inp-khata" placeholder="खाता नंबर (वैकल्पिक)" />
       </div>
 
-      <!-- 6. Khesra -->
       <div class="form-step">
         <label>6. खेसरा (यदि हो):</label>
         <input type="text" id="inp-khesra" placeholder="खेसरा नंबर (वैकल्पिक)" />
       </div>
 
-      <!-- 7. Jamabandi Number -->
       <div class="form-step">
         <label>7. जमाबंदी नंबर:</label>
         <input type="text" id="inp-jamabandi" placeholder="जमाबंदी नंबर (यदि उपलब्ध हो)" />
       </div>
 
-      <!-- 8. Raiyat Name -->
       <div class="form-step">
         <label>8. रैयत का नाम (यदि हो):</label>
         <input type="text" id="inp-raiyat" placeholder="रैयत का नाम (वैकल्पिक)" />
       </div>
 
-      <!-- 9. Address -->
       <div class="form-step">
         <label>9. अपना नाम के साथ पूरा पता:</label>
         <textarea id="inp-address" rows="2" placeholder="नाम और पूरा डाक पता लिखें"></textarea>
       </div>
 
-      <!-- 10. Pincode -->
       <div class="form-step">
         <label>10. पिन कोड:</label>
         <input type="text" id="inp-pin" placeholder="6 अंकों का पिन कोड" maxlength="6" />
       </div>
 
-      <!-- 11. Mobile -->
       <div class="form-step">
         <label>11. अपना मोबाइल नंबर:</label>
         <input type="tel" id="inp-mobile" placeholder="10 अंकों का मोबाइल नंबर" maxlength="10" />
       </div>
 
-      <!-- 12. Payment -->
       <div class="form-step">
         <label>12. भुगतान का तरीका चुनें:</label>
         <div class="pay-options">
@@ -372,34 +365,14 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!--   RICH CONTENT — AdSense quality improvement                 -->
-  <!-- ============================================================ -->
-
-  <!-- 1. What is Register 2 -->
   <div class="section-card">
     <h2>📌 रजिस्टर 2 (जमाबंदी पंजी) क्या होता है?</h2>
-    <p>
-      रजिस्टर 2, जिसे <strong>जमाबंदी पंजी</strong> भी कहते हैं, बिहार सरकार के राजस्व एवं भूमि सुधार विभाग द्वारा
-      प्रत्येक मौजे (गाँव) के लिए बनाया जाने वाला <strong>आधिकारिक भूमि स्वामित्व रजिस्टर</strong> है।
-      इसमें एक मौजे की हर जमीन के बारे में यह दर्ज होता है कि वह किसके नाम है, उसका रकबा (क्षेत्रफल) कितना है,
-      खाता और खेसरा नंबर क्या है, और लगान की राशि कितनी है।
-    </p>
-    <p>
-      सीधे शब्दों में — <strong>रजिस्टर 2 बिहार में जमीन के स्वामित्व का सरकारी सबूत है।</strong>
-      जब तक किसी जमीन पर आपका नाम रजिस्टर 2 में नहीं है, तब तक आप उस जमीन के कानूनी मालिक नहीं माने जाएंगे।
-    </p>
-    <div class="info-box">
-      💡 <strong>जरूरी जानकारी:</strong> रजिस्टर 2 को पहले मैन्युअल रूप से अंचल कार्यालय में रखा जाता था।
-      अब यह <strong>biharbhumi.bihar.gov.in</strong> पर डिजिटल रूप में भी उपलब्ध है।
-      JameenSeva.in इसकी <strong>प्रमाणित (Certified) ओरिजनल कॉपी</strong> घर तक पहुंचाता है।
-    </div>
-
+    <p>रजिस्टर 2, जिसे <strong>जमाबंदी पंजी</strong> भी कहते हैं, बिहार सरकार के राजस्व एवं भूमि सुधार विभाग द्वारा प्रत्येक मौजे (गाँव) के लिए बनाया जाने वाला <strong>आधिकारिक भूमि स्वामित्व रजिस्टर</strong> है। इसमें एक मौजे की हर जमीन के बारे में यह दर्ज होता है कि वह किसके नाम है, उसका रकबा (क्षेत्रफल) कितना है, खाता और खेसरा नंबर क्या है, और लगान की राशि कितनी है।</p>
+    <p>सीधे शब्दों में — <strong>रजिस्टर 2 बिहार में जमीन के स्वामित्व का सरकारी सबूत है।</strong> जब तक किसी जमीन पर आपका नाम रजिस्टर 2 में नहीं है, तब तक आप उस जमीन के कानूनी मालिक नहीं माने जाएंगे।</p>
+    <div class="info-box">💡 <strong>जरूरी जानकारी:</strong> रजिस्टर 2 को पहले मैन्युअल रूप से अंचल कार्यालय में रखा जाता था। अब यह <strong>biharbhumi.bihar.gov.in</strong> पर डिजिटल रूप में भी उपलब्ध है। JameenSeva.in इसकी <strong>प्रमाणित (Certified) ओरिजनल कॉपी</strong> घर तक पहुंचाता है।</div>
     <h3>रजिस्टर 2 में क्या-क्या जानकारी होती है?</h3>
     <table class="cmp-table">
-      <thead>
-        <tr><th>कॉलम</th><th>जानकारी</th></tr>
-      </thead>
+      <thead><tr><th>कॉलम</th><th>जानकारी</th></tr></thead>
       <tbody>
         <tr><td>रैयत का नाम</td><td>जमीन के मालिक का नाम जो सरकारी रिकॉर्ड में दर्ज है</td></tr>
         <tr><td>खाता नंबर</td><td>एक रैयत की सभी जमीन को एक खाते के अंतर्गत रखा जाता है</td></tr>
@@ -412,65 +385,26 @@
     </table>
   </div>
 
-  <!-- 2. Why Important -->
   <div class="section-card">
     <h2>🎯 रजिस्टर 2 कहाँ-कहाँ काम आता है?</h2>
     <p>रजिस्टर 2 (जमाबंदी पंजी) बिहार में जमीन से जुड़े लगभग हर सरकारी काम में अनिवार्य है:</p>
     <div class="use-grid">
-      <div class="use-item">
-        <span class="icon">⚖️</span>
-        <strong>पंचनामा बटवारा</strong>
-        <span>पारिवारिक जमीन बंटवारे में रजिस्टर 2 की प्रति अनिवार्य दस्तावेज़ है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🏦</span>
-        <strong>बैंक लोन</strong>
-        <span>जमीन गिरवी रखकर लोन लेने के लिए बैंक रजिस्टर 2 की मांग करता है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">📝</span>
-        <strong>दाखिल-खारिज</strong>
-        <span>जमीन का नाम बदलवाने (म्यूटेशन) की प्रक्रिया में रजिस्टर 2 आधार दस्तावेज़ है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🏗️</span>
-        <strong>भवन निर्माण अनुमति</strong>
-        <span>नगर पालिका या पंचायत से भवन निर्माण की अनुमति में स्वामित्व प्रमाण के रूप में।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🔍</span>
-        <strong>बिहार सर्वे 2026</strong>
-        <span>चल रहे विशेष सर्वेक्षण में आपत्ति दर्ज कराने के लिए रजिस्टर 2 जरूरी है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🧾</span>
-        <strong>LPC / भू-स्वामित्व प्रमाण पत्र</strong>
-        <span>LPC बनवाने के लिए अंचल कार्यालय में रजिस्टर 2 प्रस्तुत करना होता है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🏛️</span>
-        <strong>कोर्ट केस / भूमि विवाद</strong>
-        <span>जमीन से जुड़े न्यायालयी मामलों में रजिस्टर 2 मुख्य सरकारी साक्ष्य होता है।</span>
-      </div>
-      <div class="use-item">
-        <span class="icon">🌾</span>
-        <strong>किसान योजनाएं</strong>
-        <span>PM किसान सम्मान निधि और अन्य कृषि योजनाओं में भूमि प्रमाण के रूप में।</span>
-      </div>
+      <div class="use-item"><span class="icon">⚖️</span><strong>पंचनामा बटवारा</strong><span>पारिवारिक जमीन बंटवारे में रजिस्टर 2 की प्रति अनिवार्य दस्तावेज़ है।</span></div>
+      <div class="use-item"><span class="icon">🏦</span><strong>बैंक लोन</strong><span>जमीन गिरवी रखकर लोन लेने के लिए बैंक रजिस्टर 2 की मांग करता है।</span></div>
+      <div class="use-item"><span class="icon">📝</span><strong>दाखिल-खारिज</strong><span>जमीन का नाम बदलवाने (म्यूटेशन) की प्रक्रिया में रजिस्टर 2 आधार दस्तावेज़ है।</span></div>
+      <div class="use-item"><span class="icon">🏗️</span><strong>भवन निर्माण अनुमति</strong><span>नगर पालिका या पंचायत से भवन निर्माण की अनुमति में स्वामित्व प्रमाण के रूप में।</span></div>
+      <div class="use-item"><span class="icon">🔍</span><strong>बिहार सर्वे 2026</strong><span>चल रहे विशेष सर्वेक्षण में आपत्ति दर्ज कराने के लिए रजिस्टर 2 जरूरी है।</span></div>
+      <div class="use-item"><span class="icon">🧾</span><strong>LPC / भू-स्वामित्व प्रमाण पत्र</strong><span>LPC बनवाने के लिए अंचल कार्यालय में रजिस्टर 2 प्रस्तुत करना होता है।</span></div>
+      <div class="use-item"><span class="icon">🏛️</span><strong>Court Case / भूमि विवाद</strong><span>जमीन से जुड़े न्यायालयी मामलों में रजिस्टर 2 मुख्य सरकारी साक्ष्य होता है।</span></div>
+      <div class="use-item"><span class="icon">🌾</span><strong>किसान योजनाएं</strong><span>PM किसान सम्मान निधि और अन्य कृषि योजनाओं में भूमि प्रमाण के रूप में।</span></div>
     </div>
   </div>
 
-  <!-- 3. Register 2 vs Khatiyan -->
   <div class="section-card">
     <h2>📊 रजिस्टर 2 और खतियान में क्या अंतर है?</h2>
-    <p>
-      अक्सर लोग रजिस्टर 2 और खतियान को एक ही समझ लेते हैं, लेकिन दोनों अलग-अलग दस्तावेज़ हैं।
-      दोनों के बीच मुख्य अंतर इस प्रकार है:
-    </p>
+    <p>अक्सर लोग रजिस्टर 2 और खतियान को एक ही समझ लेते हैं, लेकिन दोनों अलग-अलग दस्तावेज़ हैं। दोनों के बीच मुख्य अंतर इस प्रकार है:</p>
     <table class="diff-table">
-      <thead>
-        <tr><th>विषय</th><th>रजिस्टर 2 (जमाबंदी पंजी)</th><th>खतियान (CS/RS)</th></tr>
-      </thead>
+      <thead><tr><th>विषय</th><th>रजिस्टर 2 (जमाबंदी पंजी)</th><th>खतियान (CS/RS)</th></tr></thead>
       <tbody>
         <tr><td>क्या है</td><td>वर्तमान भू-राजस्व रजिस्टर</td><td>सर्वे के समय का जमीन रिकॉर्ड</td></tr>
         <tr><td>कब बनता है</td><td>दाखिल-खारिज के बाद अपडेट होता है</td><td>सर्वे (CS/RS) के समय बनाया गया</td></tr>
@@ -481,222 +415,75 @@
         <tr><td>कहाँ से मिलता है</td><td>अंचल कार्यालय / JameenSeva.in</td><td>अंचल कार्यालय / JameenSeva.in</td></tr>
       </tbody>
     </table>
-    <div class="alert-box" style="margin-top:14px;">
-      ⚠️ <strong>ध्यान दें:</strong> यदि आपके खतियान और रजिस्टर 2 में नाम अलग है,
-      तो पहले <strong>दाखिल-खारिज</strong> करवाकर रजिस्टर 2 अपडेट कराएं।
-      बिना इसके आपका कानूनी दावा कमज़ोर पड़ सकता है।
-    </div>
+    <div class="alert-box" style="margin-top:14px;">⚠️ <strong>ध्यान दें:</strong> यदि आपके खतियान और रजिस्टर 2 में नाम अलग है, तो पहले <strong>दाखिल-खारिज</strong> करवाकर रजिस्टर 2 अपडेट कराएं। बिना इसके आपका कानूनी दावा कमज़ोर पड़ सकता है।</div>
   </div>
 
-  <!-- 4. How to get -->
   <div class="section-card" id="steps">
     <h2>🪜 रजिस्टर 2 कैसे प्राप्त करें? — स्टेप-बाय-स्टेप</h2>
     <p>बिहार में रजिस्टर 2 (जमाबंदी पंजी) प्राप्त करने के तीन तरीके हैं:</p>
-
     <h3>तरीका 1: JameenSeva.in से ऑनलाइन ऑर्डर (सबसे आसान)</h3>
     <ol class="steps">
-      <li>
-        <div>
-          <span class="step-title">ऊपर दिया फॉर्म भरें</span>
-          <span class="step-desc">जिला, प्रखंड, थाना नंबर, मौजा, खाता, खेसरा और रैयत का नाम भरें। COD या Online Payment चुनें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">WhatsApp पर Confirmation मिलेगा</span>
-          <span class="step-desc">ऑर्डर सबमिट होने के 24 घंटे के अंदर हमारी टीम आपसे WhatsApp पर संपर्क करेगी और ऑर्डर की पुष्टि करेगी।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">दस्तावेज़ तैयार होगा</span>
-          <span class="step-desc">हमारी टीम अंचल कार्यालय से आपके मौजे का रजिस्टर 2 निकालकर उसे प्रमाणित कराएगी।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">घर पर डिलीवरी</span>
-          <span class="step-desc">ओरिजनल प्रमाणित कॉपी 5 से 10 कार्यदिवस में आपके दिए पते पर भेज दी जाएगी। COD में डिलीवरी पर भुगतान करें।</span>
-        </div>
-      </li>
+      <li><div><span class="step-title">ऊपर दिया फॉर्म भरें</span><span class="step-desc">जिला, प्रखंड, थाना नंबर, मौजा, खाता, खेसरा और रैयत का नाम भरें। COD या Online Payment चुनें।</span></div></li>
+      <li><div><span class="step-title">WhatsApp पर Confirmation मिलेगा</span><span class="step-desc">ऑर्डर सबमिट होने के 24 घंटे के अंदर हमारी टीम आपसे WhatsApp पर संपर्क करेगी और ऑर्डर की पुष्टि करेगी।</span></div></li>
+      <li><div><span class="step-title">दस्तावेज़ तैयार होगा</span><span class="step-desc">हमारी टीम अंचल कार्यालय से आपके मौजे का रजिस्टर 2 निकालकर उसे प्रमाणित कराएगी।</span></div></li>
+      <li><div><span class="step-title">घर पर डिलीवरी</span><span class="step-desc">ओरिजनल प्रमाणित कॉपी 5 से 10 कार्यदिवस में आपके दिए पते पर भेज दी जाएगी। COD में डिलीवरी पर भुगतान करें।</span></div></li>
     </ol>
-
     <h3>तरीका 2: बिहार भूमि वेबसाइट से (सीमित जानकारी)</h3>
     <ol class="steps">
-      <li>
-        <div>
-          <span class="step-title">biharbhumi.bihar.gov.in खोलें</span>
-          <span class="step-desc">होम पेज पर "जमाबंदी पंजी देखें" विकल्प पर क्लिक करें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">जिला, अंचल, हल्का और मौजा चुनें</span>
-          <span class="step-desc">ड्रॉपडाउन से अपने क्षेत्र की जानकारी चुनें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">खाता या खेसरा नंबर दर्ज करें</span>
-          <span class="step-desc">रैयत के नाम से या खाता/खेसरा नंबर से रजिस्टर 2 की एंट्री खोजें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">सीमाएं</span>
-          <span class="step-desc">ऑनलाइन पोर्टल पर उपलब्ध कॉपी <strong>प्रमाणित (Certified) नहीं होती</strong> और सरकारी कामों में स्वीकार नहीं होती।
-          इसीलिए ओरिजनल कॉपी के लिए JameenSeva.in की सेवा लें।</span>
-        </div>
-      </li>
+      <li><div><span class="step-title">biharbhumi.bihar.gov.in खोलें</span><span class="step-desc">होम पेज पर "जमाबंदी पंजी देखें" विकल्प पर क्लिक करें।</span></div></li>
+      <li><div><span class="step-title">जिला, अंचल, हल्का और मौजा चुनें</span><span class="step-desc">ड्रॉपडाउन से अपने क्षेत्र की जानकारी चुनें।</span></div></li>
+      <li><div><span class="step-title">खाता या खेसरा नंबर दर्ज करें</span><span class="step-desc">रैयत के नाम से या खाता/खेसरा नंबर से रजिस्टर 2 की एंट्री खोजें।</span></div></li>
+      <li><div><span class="step-title">सीमाएं</span><span class="step-desc">ऑनलाइन पोर्टल पर उपलब्ध कॉपी <strong>प्रमाणित (Certified) नहीं होती</strong> और सरकारी कामों में स्वीकार नहीं होती। इसीलिए ओरिजनल कॉपी के लिए JameenSeva.in की सेवा लें।</span></div></li>
     </ol>
-
     <h3>तरीका 3: अंचल कार्यालय से सीधे प्राप्त करें</h3>
     <ol class="steps">
-      <li>
-        <div>
-          <span class="step-title">नजदीकी अंचल कार्यालय जाएं</span>
-          <span class="step-desc">अपने जिले और प्रखंड के अंचल कार्यालय में जाएं। सुबह 10 बजे से दोपहर 2 बजे के बीच जाएं।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">आवेदन पत्र भरें</span>
-          <span class="step-desc">थाना नंबर, मौजा, खाता और रैयत का नाम देकर रजिस्टर 2 की प्रति के लिए आवेदन दें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">निर्धारित शुल्क जमा करें</span>
-          <span class="step-desc">सरकारी शुल्क (प्रति पृष्ठ) अंचल कार्यालय में जमा करें।</span>
-        </div>
-      </li>
-      <li>
-        <div>
-          <span class="step-title">प्रमाणित कॉपी प्राप्त करें</span>
-          <span class="step-desc">अंचलाधिकारी या उनके अधिकृत कर्मचारी के हस्ताक्षर और सील के साथ प्रमाणित कॉपी प्राप्त करें।</span>
-        </div>
-      </li>
+      <li><div><span class="step-title">नजदीकी अंचल कार्यालय जाएं</span><span class="step-desc">अपने जिले और प्रखंड के अंचल कार्यालय में जाएं। सुबह 10 बजे से दोपहर 2 बजे के बीच जाएं।</span></div></li>
+      <li><div><span class="step-title">आवेदन पत्र भरें</span><span class="step-desc">थाना नंबर, मौजा, खाता और रैयत का नाम देकर रजिस्टर 2 की प्रति के लिए आवेदन दें।</span></div></li>
+      <li><div><span class="step-title">निर्धारित शुल्क जमा करें</span><span class="step-desc">सरकारी शुल्क (प्रति पृष्ठ) अंचल कार्यालय में जमा करें।</span></div></li>
+      <li><div><span class="step-title">प्रमाणित कॉपी प्राप्त करें</span><span class="step-desc">अंचलाधिकारी या उनके अधिकृत कर्मचारी के हस्ताक्षर और सील के साथ प्रमाणित कॉपी प्राप्त करें।</span></div></li>
     </ol>
-    <div class="info-box">
-      💡 <strong>समय बचाएं:</strong> अंचल कार्यालय में लंबी कतार, भीड़ और कई बार के चक्कर से बचने के लिए
-      <strong>JameenSeva.in पर ऑनलाइन ऑर्डर करें</strong> — बिना कहीं गए, घर बैठे।
-    </div>
+    <div class="info-box">💡 <strong>समय बचाएं:</strong> अंचल कार्यालय में लंबी कतार, भीड़ और कई बार के चक्कर से बचने के लिए <strong>JameenSeva.in पर ऑनलाइन ऑर्डर करें</strong> — बिना कहीं गए, घर बैठे।</div>
   </div>
 
-  <!-- 5. Required Info -->
   <div class="section-card">
     <h2>📋 ऑर्डर के लिए कौन-सी जानकारी चाहिए?</h2>
     <p>JameenSeva.in से रजिस्टर 2 ऑर्डर करने के लिए निम्नलिखित जानकारी आवश्यक है:</p>
     <ul class="doc-list">
-      <li>
-        <span class="di">📍</span>
-        <div><strong>जिला और प्रखंड (Block)</strong> — यह पहचानने के लिए कि रजिस्टर 2 किस अंचल कार्यालय में होगा।</div>
-      </li>
-      <li>
-        <span class="di">🔢</span>
-        <div><strong>थाना नंबर (Thana No.)</strong> — हर मौजे का एक यूनिक थाना नंबर होता है। यह खतियान या पुराने कागजों पर मिलेगा।</div>
-      </li>
-      <li>
-        <span class="di">🏘️</span>
-        <div><strong>मौजा / गाँव का नाम</strong> — जिस गाँव की जमीन है उसका राजस्व रिकॉर्ड में दर्ज आधिकारिक नाम।</div>
-      </li>
-      <li>
-        <span class="di">📑</span>
-        <div><strong>खाता नंबर (यदि उपलब्ध)</strong> — रैयत के खाते का नंबर। यह रजिस्टर 2 को जल्दी खोजने में मदद करता है।</div>
-      </li>
-      <li>
-        <span class="di">🌾</span>
-        <div><strong>खेसरा नंबर (यदि उपलब्ध)</strong> — जमीन के टुकड़े का नंबर। एकाधिक खेसरा हों तो सभी लिखें।</div>
-      </li>
-      <li>
-        <span class="di">👤</span>
-        <div><strong>रैयत का नाम (यदि उपलब्ध)</strong> — जमाबंदी में दर्ज मालिक का नाम। यदि पुरानी जमाबंदी है तो पुराने मालिक का नाम भी।</div>
-      </li>
+      <li><span class="di">📍</span><div><strong>जिला और प्रखंड (Block)</strong> — यह पहचानने के लिए कि रजिस्टर 2 किस अंचल कार्यालय में होगा।</div></li>
+      <li><span class="di">🔢</span><div><strong>थाना नंबर (Thana No.)</strong> — हर मौजे का एक यूनिक थाना नंबर होता है। यह खतियान या पुराने कागजों पर मिलेगा।</div></li>
+      <li><span class="di">🏘️</span><div><strong>मौजा / गाँव का नाम</strong> — जिस गाँव की जमीन है उसका राजस्व रिकॉर्ड में दर्ज आधिकारिक नाम।</div></li>
+      <li><span class="di">📑</span><div><strong>खाता नंबर (यदि उपलब्ध)</strong> — रैयत के खाते का नंबर। यह रजिस्टर 2 को जल्दी खोजने में मदद करता है।</div></li>
+      <li><span class="di">🌾</span><div><strong>खेसरा नंबर (यदि उपलब्ध)</strong> — जमीन के टुकड़े का नंबर। एकाधिक खेसरा हों तो सभी लिखें।</div></li>
+      <li><span class="di">👤</span><div><strong>रैयत का नाम (यदि उपलब्ध)</strong> — जमाबंदी में दर्ज मालिक का नाम। यदि पुरानी जमाबंदी है तो पुराने मालिक का नाम भी।</div></li>
     </ul>
-    <div class="success-box">
-      ✅ <strong>टिप:</strong> यदि आपके पास खाता/खेसरा नंबर नहीं है, तब भी रैयत के नाम और मौजे की जानकारी से
-      हमारी टीम रजिस्टर 2 निकाल सकती है।
-    </div>
+    <div class="success-box">✅ <strong>टिप:</strong> यदि आपके पास खाता/खेसरा नंबर नहीं है, तब भी रैयत के नाम और मौजे की जानकारी से हमारी टीम रजिस्टर 2 निकाल सकती है।</div>
   </div>
 
-  <!-- 6. Legal Rules -->
   <div class="section-card">
     <h2>⚖️ रजिस्टर 2 से जुड़े मुख्य कानूनी नियम</h2>
-
-    <h3>1. बिहार भूमि राजस्व अधिनियम</h3>
-    <p>
-      बिहार भूमि सुधार अधिनियम के तहत राजस्व विभाग प्रत्येक मौजे के लिए जमाबंदी रजिस्टर (रजिस्टर 2) बनाता और
-      अपडेट रखता है। दाखिल-खारिज के बाद ही रजिस्टर 2 में नाम बदलता है।
-    </p>
-
-    <h3>2. जमाबंदी और लगान का संबंध</h3>
-    <p>
-      रजिस्टर 2 में दर्ज रैयत ही जमीन के कानूनी मालिक माने जाते हैं और उन्हें ही सरकार को
-      <strong>लगान (भू-राजस्व)</strong> देने का दायित्व होता है। लगान की रसीद जमीन के मालिकाना हक का
-      एक पूरक साक्ष्य है।
-    </p>
-
-    <h3>3. परिमार्जन प्लस — गलती सुधार का नियम</h3>
-    <p>
-      यदि रजिस्टर 2 में नाम, रकबा या खेसरा में कोई गलती हो, तो बिहार सरकार के
-      <strong>परिमार्जन प्लस पोर्टल</strong> के माध्यम से ऑनलाइन आवेदन करके सुधार कराया जा सकता है।
-    </p>
-
-    <h3>4. बिहार सर्वे 2026 में रजिस्टर 2 की भूमिका</h3>
-    <p>
-      चल रहे <strong>बिहार विशेष सर्वेक्षण 2026</strong> में पुराने रजिस्टर 2 के आधार पर जमीन का
-      नया डिजिटल रिकॉर्ड बनाया जा रहा है। यदि आपका नाम रजिस्टर 2 में नहीं है तो
-      सर्वे में आपत्ति दर्ज कराना मुश्किल होगा।
-    </p>
-
-    <div class="alert-box">
-      ⚠️ <strong>सर्वे 2026 चेतावनी:</strong> यदि आपकी जमीन का रजिस्टर 2 अपडेट नहीं है,
-      तो बिहार विशेष सर्वेक्षण में आपकी जमीन किसी दूसरे के नाम दर्ज हो सकती है।
-      अभी रजिस्टर 2 निकलवाएं और जांचें।
-    </div>
+    <h3>1. बिहार भूमि राजस्व अधिनियम</h3><p>बिहार भूमि सुधार अधिनियम के तहत राजस्व विभाग प्रत्येक मौजे के लिए जमाबंदी रजिस्टर (रजिस्टर 2) बनाता और अपडेट रखता है। दाखिल-खारिज के बाद ही रजिस्टर 2 में नाम बदलता है।</p>
+    <h3>2. जमाबंदी और लगान का संबंध</h3><p>रजिस्टर 2 में दर्ज रैयत ही जमीन के कानूनी मालिक माने जाते हैं और उन्हें ही सरकार को <strong>लगान (भू-राजस्व)</strong> देने का दायित्व होता है। लगान की रसीद जमीन के मालिकाना हक का एक पूरक साक्ष्य है।</p>
+    <h3>3. परिमार्जन प्लस — गलती सुधार का नियम</h3><p>यदि रजिस्टर 2 में नाम, रकबा या खेसरा में कोई गलती हो, तो बिहार सरकार के <strong>परिमार्जन प्लस पोर्टल</strong> के माध्यम से ऑनलाइन आवेदन करके सुधार कराया जा सकता है।</p>
+    <h3>4. बिहार सर्वे 2026 में रजिस्टर 2 की भूमिका</h3><p>चल रहे <strong>बिहार विशेष सर्वेक्षण 2026</strong> में पुराने रजिस्टर 2 के आधार पर जमीन का नया डिजिटल रिकॉर्ड बनाया जा रहा है। यदि आपका नाम रजिस्टर 2 में नहीं है तो सर्वे में आपत्ति दर्ज कराना मुश्किल होगा।</p>
+    <div class="alert-box">⚠️ <strong>सर्वे 2026 चेतावनी:</strong> यदि आपकी जमीन का रजिस्टर 2 अपडेट नहीं है, तो बिहार विशेष सर्वेक्षण में आपकी जमीन किसी दूसरे के नाम दर्ज हो सकती है। अभी रजिस्टर 2 निकलवाएं और जांचें।</div>
   </div>
 
-  <!-- 7. FAQ -->
   <div class="section-card">
     <h2>❓ अक्सर पूछे जाने वाले सवाल (FAQ)</h2>
-
     <div class="faq-item">
       <div class="faq-q">रजिस्टर 2 और जमाबंदी पंजी एक ही होते हैं? <span class="arrow">▼</span></div>
       <div class="faq-a">हाँ, दोनों एक ही हैं। सरकारी भाषा में इसे "रजिस्टर 2" और आम बोलचाल में "जमाबंदी पंजी" कहते हैं। इसमें भू-राजस्व (लगान) का विवरण होने के कारण इसे "लगान रजिस्टर" भी कहा जाता है।</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q">क्या ऑनलाइन पोर्टल से निकाली कॉपी सरकारी काम में चलती है? <span class="arrow">▼</span></div>
       <div class="faq-a">नहीं। biharbhumi.bihar.gov.in से निकाली गई कॉपी केवल <strong>जानकारी के उद्देश्य</strong> से है। सरकारी काम — जैसे बैंक लोन, दाखिल-खारिज, कोर्ट केस — के लिए <strong>अंचल कार्यालय से प्रमाणित (Certified) मोहरबंद कॉपी</strong> ही मान्य होती है। JameenSeva.in यही प्रमाणित कॉपी भेजता है।</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q">JameenSeva.in से रजिस्टर 2 मंगाने में कितने दिन लगते हैं? <span class="arrow">▼</span></div>
       <div class="faq-a">सामान्यतः <strong>5 से 10 कार्यदिवस</strong> में ओरिजनल प्रमाणित कॉपी आपके घर पहुंच जाती है। दूरदराज के क्षेत्रों में थोड़ा अधिक समय लग सकता है।</div>
     </div>
-
-    <div class="faq-item">
-      <div class="faq-q">यदि मेरे पास खाता/खेसरा नंबर नहीं है तो क्या होगा? <span class="arrow">▼</span></div>
-      <div class="faq-a">यदि खाता या खेसरा नंबर नहीं है तब भी रैयत का नाम, मौजा और थाना नंबर से रजिस्टर 2 खोजा जा सकता है। हमारी टीम आपको इस प्रक्रिया में मार्गदर्शन देगी।</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">रजिस्टर 2 में नाम गलत होने पर क्या करें? <span class="arrow">▼</span></div>
-      <div class="faq-a">नाम, रकबा या खेसरा में गलती होने पर बिहार सरकार के <strong>परिमार्जन प्लस पोर्टल</strong> पर ऑनलाइन आवेदन करें या अंचल कार्यालय में त्रुटि सुधार आवेदन दें। JameenSeva.in इस प्रक्रिया में भी सहायता करता है।</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">क्या एक खाते में कई खेसरा नंबर हो सकते हैं? <span class="arrow">▼</span></div>
-      <div class="faq-a">हाँ। एक रैयत के पास कई अलग-अलग जगह जमीन हो सकती है, और सभी एक ही खाते के अंतर्गत दर्ज होती हैं। प्रत्येक जमीन के टुकड़े का अलग खेसरा नंबर होता है।</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q">क्या JameenSeva.in पूरे बिहार में सेवा देता है? <span class="arrow">▼</span></div>
-      <div class="faq-a">हाँ। JameenSeva.in बिहार के सभी <strong>38 जिलों</strong> में Cash on Delivery के साथ रजिस्टर 2 और अन्य जमीन दस्तावेज़ सेवा प्रदान करता है।</div>
-    </div>
   </div>
 
-  <!-- 8. Coverage -->
   <div class="section-card">
     <h2>📍 सेवा क्षेत्र — बिहार के सभी 38 जिले</h2>
     <p>JameenSeva.in इन सभी जिलों में रजिस्टर 2 (जमाबंदी पंजी) की ओरिजनल प्रमाणित कॉपी उपलब्ध कराता है:</p>
@@ -717,25 +504,7 @@
     </div>
   </div>
 
-  <!-- 9. Related Links -->
-  <div class="section-card">
-    <h2>🔗 संबंधित सेवाएं और उपयोगी जानकारी</h2>
-    <ul class="rel-list">
-      <li>📜 <a href="https://jameenseva.in/khatiyan.html">ओरिजनल खतियान (CS/RS) ऑनलाइन ऑर्डर करें</a></li>
-      <li>⚖️ <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा ऑनलाइन ऑर्डर करें</a></li>
-      <li>⚙️ <a href="https://jameenseva.in/dakhil-kharij-blog.html">दाखिल-खारिज (Mutation) ऑनलाइन प्रक्रिया जानें</a></li>
-      <li>🔧 <a href="https://jameenseva.in/parimarjan-blog.html">परिमार्जन प्लस — पुरानी जमाबंदी में सुधार कैसे करें</a></li>
-      <li>📘 <a href="https://jameenseva.in/jamabandiblog.html">जमाबंदी पंजी-2 की गहराई से जानकारी</a></li>
-      <li>🗓️ <a href="https://jameenseva.in/bihar-survey-guide-2026.html">बिहार विशेष सर्वेक्षण 2026 — पूरी जानकारी</a></li>
-      <li>📏 <a href="https://jameenseva.in/land-calculator.html">जमीन कैलकुलेटर — बीघा, कट्ठा, धुर, डेसिमल</a></li>
-      <li>📞 <a href="https://jameenseva.in/contact.html">हमसे संपर्क करें</a></li>
-    </ul>
-  </div>
-
-</div><!-- /wrapper -->
-
-<!-- ===== FOOTER ===== -->
-<footer>
+</div><footer>
   <div>
     <strong style="color:#fff;font-size:1rem;">JameenSeva.in</strong><br>
     बिहार का भरोसेमंद जमीन दस्तावेज़ सेवा पोर्टल<br>
@@ -750,8 +519,12 @@
   </div>
 </footer>
 
-<!-- ===== SCRIPTS ===== -->
 <script>
+  /* ══ SUPABASE CONFIGURATION ══ */
+  const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+  const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+  const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
   /* ---- Block Data ---- */
   const blockData = {
     "पटना": ["पटना सदर","दानापुर","फुलवारी","मसौढ़ी","पालीगंज","विक्रम","बिहटा","खुसरूपुर","बख्तियारपुर","बेलछी","अथमलगोला","मोकामा","पंडारक","घोसवरी","नौबतपुर","दुलहिनबाजार","संपतचक"],
@@ -762,7 +535,7 @@
     "भागलपुर": ["भागलपुर","बिहपुर","गोराडीह","इस्लामपुर","जगदीशपुर","कहलगांव","खरीक","नाथनगर","नवगछिया","पीरपैंती","रंगरा","सबौर","सन्हौला","शाहकुंड","सुल्तानगंज"],
     "पूर्णिया": ["पूर्णिया","अमौर","बैसी","बनमनखी","भवानीपुर","धमदाहा","जलालगढ़","कसबा","रूपौली","श्रीनगर"],
     "सारण": ["सारण (छपरा)","अमनौर","बनियापुर","दरियापुर","दिघवारा","एकमा","गड़खा","इसुआपुर","जलालपुर","लहलादपुर","मकेर","मांझी","मरहौरा","नागरा","पानापुर","रिविलगंज","सोनपुर","तरैया"],
-    "वैशाली": ["वैशाली","बिदुपुर","चेहराकलां","देसरी","हाजीपुर","जंदाहा","लालगंज","महनार","महुआ","पातेपुर","राघोपुर","सहदेई बुजुर्ग"],
+    "वैशाली": ["वैशाली","बिदुपुर","चेहराकलां","देसरी","हाजीपुर","जंदाहा","लालालंगज","महनार","महुआ","पातेपुर","राघोपुर","सहदेई बुजुर्ग"],
     "नालंदा": ["नालंदा","अस्थावाँ","बेन","बिहारशरीफ","चंडी","एकंगरसराय","गिरियक","हरनौत","हिलसा","इस्लामपुर","कतरीसराय","नूरसराय","परबलपुर","राहुई","रहुई","सरमेरा","थरथरी"],
     "default": ["-- प्रखंड चुनें --"]
   };
@@ -790,18 +563,27 @@
     q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
   });
 
-  /* ---- Submit ---- */
-  function submitOrder() {
-    const district = document.getElementById('sel-district').value;
-    const block    = document.getElementById('sel-block').value;
-    const thana    = document.getElementById('inp-thana').value.trim();
-    const mauja    = document.getElementById('inp-mauja').value.trim();
-    const address  = document.getElementById('inp-address').value.trim();
-    const pin      = document.getElementById('inp-pin').value.trim();
-    const mobile   = document.getElementById('inp-mobile').value.trim();
+  /* ══ ORDER SUBMISSION WITH SUPABASE & ORDER ID LOGIC ══ */
+  async function submitOrder() {
+    const district  = document.getElementById('sel-district').value;
+    const block     = document.getElementById('sel-block').value;
+    const thana     = document.getElementById('inp-thana').value.trim();
+    const mauja     = document.getElementById('inp-mauja').value.trim();
+    const khata     = document.getElementById('inp-khata').value.trim();
+    const khesra    = document.getElementById('inp-khesra').value.trim();
+    const jamabandi = document.getElementById('inp-jamabandi').value.trim();
+    const raiyat    = document.getElementById('inp-raiyat').value.trim();
+    const address   = document.getElementById('inp-address').value.trim();
+    const pin       = document.getElementById('inp-pin').value.trim();
+    const mobile    = document.getElementById('inp-mobile').value.trim();
+    
+    // Get active payment method
+    const isCod = document.getElementById('pay-cod').classList.contains('selected');
+    const paymentMethod = isCod ? 'COD' : 'Online (Razorpay)';
 
+    // Validation Check
     if (!district || !block || !thana || !mauja || !address || !pin || !mobile) {
-      alert('कृपया सभी अनिवार्य फ़ील्ड भरें।'); return;
+      alert('कृपया सभी अनिवार्य फ़ील्ड (1, 2, 3, 4, 9, 10, 11) ज़रूर भरें।'); return;
     }
     if (!/^\d{6}$/.test(pin))    { alert('पिन कोड 6 अंकों का होना चाहिए।'); return; }
     if (!/^\d{10}$/.test(mobile)){ alert('मोबाइल नंबर 10 अंकों का होना चाहिए।'); return; }
@@ -809,20 +591,60 @@
     const btn = document.getElementById('submit-btn');
     const msg = document.getElementById('processing-msg');
     btn.disabled = true;
-    btn.textContent = '⏳ सबमिट हो रहा है...';
+    btn.textContent = '⏳ डेटा सुरक्षित किया जा रहा है...';
     msg.style.display = 'block';
 
-    /* Replace with actual FormSubmit / webhook */
-    setTimeout(() => {
+    // 🌟 UNIQUE ORDER ID GENERATION LOGIC 🌟
+    const randomNum = Math.floor(10000 + Math.random() * 90000); 
+    const generatedOrderId = `JS-2026-${randomNum}`;
+
+    try {
+      // Inserting data into Supabase Table
+      const { data, error } = await _supabase
+        .from('jamabandi_orders')
+        .insert([
+          {
+            order_id: generatedOrderId,
+            district: district,
+            block: block,
+            thana: thana,
+            mauja: mauja,
+            khata: khata,
+            khesra: khesra,
+            jamabandi: jamabandi,
+            raiyat_name: raiyat,
+            full_address: address,
+            pincode: pin,
+            mobile: mobile,
+            payment_method: paymentMethod
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+
+      // Success Event
       btn.style.display = 'none';
-      msg.innerHTML = '✅ आपका ऑर्डर सफलतापूर्वक दर्ज हो गया!<br>हमारी टीम WhatsApp पर 24 घंटे में संपर्क करेगी।';
+      msg.innerHTML = `✅ <strong>आपका ऑर्डर सफलतापूर्वक दर्ज हो गया है!</strong><br><br>
+                       📌 <strong>ऑर्डर ID:</strong> <span style="color:#1a5c8a; font-size:1.1rem;">${generatedOrderId}</span><br>
+                       हमारी टीम इस ID के साथ WhatsApp पर 24 घंटे में संपर्क करेगी।`;
       msg.style.background = '#eaf7ef';
       msg.style.color = '#1a5c32';
-    }, 2000);
+      msg.style.padding = '15px';
+      msg.style.fontSize = '0.95rem';
+
+    } catch (err) {
+      console.error('Supabase Error:', err);
+      alert('ओह! डेटाबेस कनेक्शन में समस्या आई। कृपया दोबारा प्रयास करें या सीधे WhatsApp पर बताएं।');
+      btn.disabled = false;
+      btn.textContent = 'ऑर्डर सबमिट करें ₹699/-';
+      msg.style.display = 'none';
+    }
   }
 
   function payOnline() {
-    alert('Razorpay integration के लिए अपना Payment Gateway Key यहाँ configure करें।');
+    alert('rzp_live_SvRRXxqKaLo61X');
   }
 </script>
 </body>
