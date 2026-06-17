@@ -90,57 +90,69 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 .type-p{background:var(--gp);color:var(--g)}
 .type-j{background:var(--ambp);color:#92400e}
 
-/* ══ ORDER DETAILS ══ */
-.detail-card{background:var(--w);border-radius:var(--r);padding:24px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:18px;display:none}
-
-/* Status Bar */
-.status-header{text-align:center;margin-bottom:22px}
-.status-badge{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:30px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;margin-bottom:12px}
-.s-received{background:#fee2e2;color:var(--red)}
-.s-processing{background:var(--ambp);color:#92400e}
-.s-dispatched{background:#dbeafe;color:#1d4ed8}
-.s-delivered{background:var(--gp);color:var(--g)}
-
-/* Progress Steps */
-.progress-steps{display:flex;align-items:center;justify-content:center;gap:0;margin:16px 0}
-.ps-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative}
-.ps-circle{width:34px;height:34px;border-radius:50%;border:2.5px solid var(--bdr);background:var(--w);display:flex;align-items:center;justify-content:center;font-size:14px;z-index:1;transition:.3s}
-.ps-circle.done{background:var(--g);border-color:var(--g);color:#fff}
-.ps-circle.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 0 0 4px rgba(245,158,11,.2)}
-.ps-label{font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:700;color:#94a3b8;margin-top:6px;text-align:center;line-height:1.3}
-.ps-label.done{color:var(--g)}
-.ps-label.active{color:var(--amber)}
-.ps-line{flex:1;height:2.5px;background:var(--bdr);margin-top:-18px;z-index:0;transition:.3s}
-.ps-line.done{background:var(--g)}
-
-/* Order ID Badge */
-.order-id-box{background:linear-gradient(135deg,var(--n),#1a3a5c);border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.oid-label{font-family:'Baloo 2',sans-serif;font-size:12px;color:rgba(255,255,255,.6);margin-bottom:3px}
-.oid-value{font-family:'Baloo 2',sans-serif;font-size:20px;font-weight:800;color:#7eeaa5}
-.oid-type{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;padding:3px 10px;border-radius:5px}
-
-/* Data sections */
-.dc-section{margin-bottom:16px}
-.dc-section-title{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;padding-bottom:8px;border-bottom:1.5px solid var(--bdr)}
-.dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dc-item{background:#f8fafc;border-radius:8px;padding:11px 13px}
-.dc-label{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.dc-value{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n)}
-.dc-value.empty{color:#cbd5e1;font-weight:400;font-style:italic;font-size:13px}
-.dc-full{grid-column:1/-1}
-
-/* Payment badge */
+/* ══ MODAL OVERLAY ══ */
+.modal-overlay{position:fixed;inset:0;background:rgba(12,35,64,.55);z-index:1100;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--w);border-radius:16px;width:100%;max-width:680px;box-shadow:0 24px 60px rgba(0,0,0,.3);overflow:hidden;margin:auto;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{padding:18px 20px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr)}
+.modal-header-left{display:flex;align-items:center;gap:10px}
+.modal-close{width:34px;height:34px;border:none;background:#f1f5f9;border-radius:50%;font-size:18px;cursor:pointer;color:#64748b;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
+.modal-close:hover{background:#fee2e2;color:var(--red)}
+.modal-body{padding:20px}
+/* Status Banner */
+.status-banner{border-radius:12px;padding:18px 20px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.sb-received{background:#fef2f2;border:1.5px solid #fecaca}
+.sb-processing{background:#fffbeb;border:1.5px solid #fde68a}
+.sb-dispatched{background:#eff6ff;border:1.5px solid #bfdbfe}
+.sb-delivered{background:var(--gp);border:1.5px solid #86efac}
+.status-big-icon{font-size:38px;flex-shrink:0}
+.status-text-block{}
+.status-main{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;margin-bottom:3px}
+.sr-received .status-main{color:var(--red)}
+.sb-processing .status-main,.sp-text{color:#92400e}
+.sb-dispatched .status-main{color:#1d4ed8}
+.sb-delivered .status-main{color:var(--g)}
+.status-desc{font-size:13px;color:#64748b}
+/* Progress Track */
+.prog-track{display:flex;align-items:center;margin-bottom:20px;padding:0 4px}
+.pt-step{display:flex;flex-direction:column;align-items:center;flex:1}
+.pt-dot{width:36px;height:36px;border-radius:50%;border:2.5px solid #e2e8f0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1;transition:.3s}
+.pt-dot.done{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 4px 10px rgba(26,124,62,.3)}
+.pt-dot.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 4px 10px rgba(245,158,11,.35);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 4px 10px rgba(245,158,11,.35)}50%{box-shadow:0 4px 16px rgba(245,158,11,.6)}}
+.pt-lbl{font-family:'Baloo 2',sans-serif;font-size:10px;font-weight:700;margin-top:5px;text-align:center;color:#94a3b8}
+.pt-lbl.done{color:var(--g)}
+.pt-lbl.active{color:var(--amber)}
+.pt-line{flex:1;height:3px;background:#e2e8f0;margin-bottom:20px;transition:.4s}
+.pt-line.done{background:var(--g)}
+/* Order ID strip */
+.oid-strip{background:linear-gradient(135deg,var(--n),#1a3a5c);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.oid-strip-lbl{font-family:'Baloo 2',sans-serif;font-size:11px;color:rgba(255,255,255,.55);margin-bottom:2px}
+.oid-strip-val{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:#7eeaa5;letter-spacing:.5px}
+/* Data rows */
+.drow-group{margin-bottom:16px}
+.drow-gtitle{font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--bdr);display:flex;align-items:center;gap:6px}
+.drow-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.drow-item{background:#f8fafc;border-radius:8px;padding:10px 12px;border:1px solid var(--bdr)}
+.drow-lbl{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.drow-val{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);word-break:break-word}
+.drow-val.empty{color:#cbd5e1;font-weight:400;font-style:italic;font-size:13px}
+.drow-full{grid-column:1/-1}
+/* Pay badge */
 .pay-badge{display:inline-flex;align-items:center;gap:5px;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:5px}
-.pay-cod{background:#fef3c7;color:#92400e}
+.pay-cod{background:#fef9c3;color:#854d0e}
 .pay-online{background:#dbeafe;color:#1d4ed8}
-
-/* Help box */
-.help-box{background:linear-gradient(135deg,#0c2340,#1a5c8a);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-top:16px;color:#fff}
-.hb-icon{font-size:28px;flex-shrink:0}
-.hb-text strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;margin-bottom:4px}
-.hb-text p{font-size:13px;opacity:.82;margin-bottom:8px}
-.hb-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;text-decoration:none;padding:7px 14px;border-radius:7px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;transition:.2s}
-.hb-btn:hover{background:#1db954}
+/* Bottom help */
+.modal-wa{background:linear-gradient(135deg,#075e54,#128c7e);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-top:16px;color:#fff;text-decoration:none;transition:.2s}
+.modal-wa:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(7,94,84,.3)}
+.wa-icon{font-size:26px;flex-shrink:0}
+.wa-txt strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700}
+.wa-txt span{font-size:12.5px;opacity:.88}
+.wa-arrow{margin-left:auto;font-size:20px;opacity:.7}
+/* Back btn */
+.back-to-list{display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;color:var(--n);border:1px solid var(--bdr);padding:8px 16px;border-radius:8px;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:16px;transition:.2s;border-style:none}
+.back-to-list:hover{background:var(--gp);color:var(--g)}
 
 /* ══ INFO SECTION ══ */
 .info-section{background:var(--w);border-radius:var(--r);padding:26px 22px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:18px}
@@ -264,89 +276,9 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
     <div id="order-list"></div>
   </div>
 
-  <!-- ORDER DETAIL -->
-  <div class="detail-card" id="detail-card">
+  <!-- ORDER DETAIL — hidden by default, shown as overlay -->
+  <div class="detail-card" id="detail-card" style="display:none"></div>
 
-    <!-- Order ID + Type -->
-    <div class="order-id-box">
-      <div>
-        <div class="oid-label">Tracking ID</div>
-        <div class="oid-value" id="d-orderid">—</div>
-      </div>
-      <div id="d-typebadge"></div>
-    </div>
-
-    <!-- Status Badge + Progress -->
-    <div class="status-header">
-      <div class="status-badge" id="d-statusbadge">— Order Received —</div>
-      <div class="progress-steps" id="progress-bar">
-        <div class="ps-step">
-          <div class="ps-circle" id="ps1">📥</div>
-          <div class="ps-label" id="pl1">Order<br>Received</div>
-        </div>
-        <div class="ps-line" id="pline1"></div>
-        <div class="ps-step">
-          <div class="ps-circle" id="ps2">🔄</div>
-          <div class="ps-label" id="pl2">Processing</div>
-        </div>
-        <div class="ps-line" id="pline2"></div>
-        <div class="ps-step">
-          <div class="ps-circle" id="ps3">📦</div>
-          <div class="ps-label" id="pl3">Dispatched</div>
-        </div>
-        <div class="ps-line" id="pline3"></div>
-        <div class="ps-step">
-          <div class="ps-circle" id="ps4">🏠</div>
-          <div class="ps-label" id="pl4">Delivered</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Customer Info -->
-    <div class="dc-section">
-      <div class="dc-section-title">👤 ग्राहक की जानकारी</div>
-      <div class="dc-grid">
-        <div class="dc-item">
-          <div class="dc-label">रैयत / ग्राहक का नाम</div>
-          <div class="dc-value" id="d-name">—</div>
-        </div>
-        <div class="dc-item">
-          <div class="dc-label">मोबाइल नंबर</div>
-          <div class="dc-value" id="d-mobile">—</div>
-        </div>
-        <div class="dc-item dc-full">
-          <div class="dc-label">पूरा पता</div>
-          <div class="dc-value" id="d-address">—</div>
-        </div>
-        <div class="dc-item">
-          <div class="dc-label">पिन कोड</div>
-          <div class="dc-value" id="d-pin">—</div>
-        </div>
-        <div class="dc-item">
-          <div class="dc-label">भुगतान का तरीका</div>
-          <div class="dc-value" id="d-payment">—</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Land Info -->
-    <div class="dc-section">
-      <div class="dc-section-title" id="d-land-section-title">📋 जमीन / ऑर्डर की जानकारी</div>
-      <div class="dc-grid" id="d-land-grid">
-        <!-- Filled dynamically -->
-      </div>
-    </div>
-
-    <!-- WhatsApp Help -->
-    <div class="help-box">
-      <div class="hb-icon">📱</div>
-      <div class="hb-text">
-        <strong>कोई सवाल है?</strong>
-        <p>24 घंटे के अंदर हमारी टीम से WhatsApp पर बात करें</p>
-        <a href="https://wa.me/919142075859?text=मेरा ऑर्डर ट्रैक करना है। ID:" class="hb-btn" id="wa-link" target="_blank" rel="noopener">📱 WhatsApp करें</a>
-      </div>
-    </div>
-  </div>
 
   <!-- ══ HOW IT WORKS ══ -->
   <div class="info-section">
@@ -411,6 +343,117 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
   </div>
 
 </div><!-- /pw -->
+
+<!-- ══ ORDER DETAIL MODAL ══ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal-box" id="modal-box">
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <span id="m-svc-icon" style="font-size:22px">📋</span>
+        <div>
+          <div style="font-family:'Baloo 2',sans-serif;font-size:11px;color:#94a3b8">सेवा</div>
+          <div style="font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:var(--n)" id="m-svc-label">—</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()" title="बंद करें">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <!-- Back to list button (shown only when multiple orders) -->
+      <button class="back-to-list" id="back-btn" onclick="closeModal()" style="display:none">
+        ← सभी Orders देखें
+      </button>
+
+      <!-- Status Banner -->
+      <div class="status-banner" id="m-status-banner">
+        <div class="status-big-icon" id="m-status-icon">📥</div>
+        <div class="status-text-block">
+          <div class="status-main" id="m-status-main">Order Received</div>
+          <div class="status-desc" id="m-status-desc">आपका ऑर्डर मिल गया है। जल्द ही processing शुरू होगी।</div>
+        </div>
+      </div>
+
+      <!-- Progress Track -->
+      <div class="prog-track">
+        <div class="pt-step">
+          <div class="pt-dot" id="pt1">📥</div>
+          <div class="pt-lbl" id="pl1">Order<br>Received</div>
+        </div>
+        <div class="pt-line" id="pline1"></div>
+        <div class="pt-step">
+          <div class="pt-dot" id="pt2">🔄</div>
+          <div class="pt-lbl" id="pl2">Processing</div>
+        </div>
+        <div class="pt-line" id="pline2"></div>
+        <div class="pt-step">
+          <div class="pt-dot" id="pt3">📦</div>
+          <div class="pt-lbl" id="pl3">Dispatched</div>
+        </div>
+        <div class="pt-line" id="pline3"></div>
+        <div class="pt-step">
+          <div class="pt-dot" id="pt4">🏠</div>
+          <div class="pt-lbl" id="pl4">Delivered</div>
+        </div>
+      </div>
+
+      <!-- Order ID Strip -->
+      <div class="oid-strip">
+        <div>
+          <div class="oid-strip-lbl">Tracking ID</div>
+          <div class="oid-strip-val" id="m-orderid">—</div>
+        </div>
+        <div id="m-type-badge"></div>
+      </div>
+
+      <!-- Customer Info -->
+      <div class="drow-group">
+        <div class="drow-gtitle">👤 ग्राहक की जानकारी</div>
+        <div class="drow-grid">
+          <div class="drow-item">
+            <div class="drow-lbl">नाम</div>
+            <div class="drow-val" id="m-name">—</div>
+          </div>
+          <div class="drow-item">
+            <div class="drow-lbl">मोबाइल</div>
+            <div class="drow-val" id="m-mobile">—</div>
+          </div>
+          <div class="drow-item drow-full">
+            <div class="drow-lbl">पूरा पता</div>
+            <div class="drow-val" id="m-address">—</div>
+          </div>
+          <div class="drow-item">
+            <div class="drow-lbl">पिन कोड</div>
+            <div class="drow-val" id="m-pin">—</div>
+          </div>
+          <div class="drow-item">
+            <div class="drow-lbl">भुगतान</div>
+            <div class="drow-val" id="m-pay">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Land Info (dynamic) -->
+      <div class="drow-group">
+        <div class="drow-gtitle" id="m-land-title">📋 जमीन की जानकारी</div>
+        <div class="drow-grid" id="m-land-grid"></div>
+      </div>
+
+      <!-- WhatsApp -->
+      <a class="modal-wa" id="m-wa-link" href="#" target="_blank" rel="noopener">
+        <div class="wa-icon">📱</div>
+        <div class="wa-txt">
+          <strong>WhatsApp पर Status पूछें</strong>
+          <span>9142075859 — 10 मिनट में जवाब</span>
+        </div>
+        <div class="wa-arrow">›</div>
+      </a>
+
+    </div><!-- /modal-body -->
+  </div>
+</div>
 
 <footer class="footer">
   <strong>JameenSeva.in — बिहार का भरोसेमंद जमीन दस्तावेज सेवा पोर्टल</strong>
