@@ -407,9 +407,8 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
   </div>
   <p style="font-size:11px;margin-top:6px;opacity:.5">© 2026 JameenSeva.in — All Rights Reserved.</p>
 </footer>
-
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<script>
+  <script>
 /* ══ SUPABASE CLIENT CONFIG ══ */
 const _sb = supabase.createClient(
   'https://efgvsddclcnbmwqbtily.supabase.co',
@@ -488,36 +487,64 @@ const TABLES = {
   }
 };
 
-/* ══ LIVE STATUS STATE MAP CONFIG ══ */
+/* ══ FAIL-PROOF LIVE STATUS MAP CONFIG ══ */
 const STATUS = {
-  'Order Received': {
+  'order received': {
     cls: 'sb-recv', icon: '📥',
     hindi: 'ऑर्डर प्राप्त हुआ',
     sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार करने की प्रक्रिया जल्द शुरू होगी।',
-    step: 0
+    step: 0,
+    matches: ['order received', 'received', 'ऑर्डर प्राप्त हुआ', 'ऑर्डर मिला']
   },
-  'Processing': {
+  'processing': {
     cls: 'sb-proc', icon: '🔄',
     hindi: 'प्रक्रिया में है',
     sub: 'हमारी टीम अंचल कार्यालय से आपका दस्तावेज निकाल रही है। 1-2 दिन में dispatch होगा।',
-    step: 1
+    step: 1,
+    matches: ['processing', 'in progress', 'प्रक्रिया में है', 'काम चल रहा है']
   },
-  'Dispatched': {
+  'dispatched': {
     cls: 'sb-disp', icon: '📦',
     hindi: 'भेज दिया गया',
     sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में पहुँचेगा।',
-    step: 2
+    step: 2,
+    matches: ['dispatched', 'shipped', 'भेज दिया गया', 'भेजा गया']
   },
-  'Delivered': {
+  'delivered': {
     cls: 'sb-dlvr', icon: '🏠',
     hindi: 'डिलीवर हो गया ✅',
     sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच गया है! JameenSeva.in को चुनने के लिए धन्यवाद।',
-    step: 3
+    step: 3,
+    matches: ['delivered', 'complete', 'डिलीवर हो गया', 'सफल']
   }
 };
 
 let allOrders = [];
 let selectedIdx = -1;
+
+/* Helper to safely map DB status to configuration keys */
+function getStatusConfig(dbValue) {
+  const cleanVal = String(dbValue || '').toLowerCase().trim();
+  if (!cleanVal) return STATUS['order received'];
+
+  // 1. First check absolute key match
+  if (STATUS[cleanVal]) return STATUS[cleanVal];
+
+  // 2. Scan internal matches array to support Hindi & English variants
+  for (const key in STATUS) {
+    if (STATUS[key].matches.some(m => cleanVal.includes(m.toLowerCase()) || m.toLowerCase().includes(cleanVal))) {
+      return STATUS[key];
+    }
+  }
+  
+  // 3. Dynamic custom fallback if some unmapped text is found in DB
+  return {
+    cls: 'sb-proc', icon: '📌',
+    hindi: dbValue,
+    sub: 'आपके ऑर्डर का स्टेटस अपडेट किया गया है। विस्तृत जानकारी के लिए WhatsApp करें।',
+    step: 1
+  };
+}
 
 /* ══ ORDER LOOKUP ENGINE ══ */
 async function doTrack() {
@@ -578,12 +605,7 @@ function buildList() {
 
   allOrders.forEach((order, idx) => {
     const cfg = TABLES[order.__type];
-    const rawStatus = order[cfg.status_col] || 'Order Received';
-    
-    const statusKey = Object.keys(STATUS).find(
-      k => k.toLowerCase().trim() === rawStatus.toLowerCase().trim()
-    ) || 'Order Received';
-    const sm = STATUS[statusKey];
+    const sm = getStatusConfig(order[cfg.status_col]);
     
     const btn = document.createElement('button');
     btn.className = 'ol-item';
@@ -627,21 +649,15 @@ function showDetail(idx) {
     ? 'ऑर्डर दिनांक: ' + new Date(dateRaw).toLocaleDateString('hi-IN',{day:'numeric',month:'short',year:'numeric'})
     : '';
 
-  /* ── 🌟 STABLE CASE-INSENSITIVE STATUS ENGINE ── */
-  let dbStatus = order[cfg.status_col] || 'Order Received';
-  
-  let statusKey = Object.keys(STATUS).find(
-    k => k.toLowerCase().trim() === dbStatus.toLowerCase().trim()
-  ) || 'Order Received';
-  
-  const sm = STATUS[statusKey];
+  /* ── 🌟 LIVE MAP LOADER ── */
+  const sm = getStatusConfig(order[cfg.status_col]);
 
   const badge = document.getElementById('d-sbadge');
   badge.className = 'sbadge ' + sm.cls;
   badge.innerHTML = `${sm.icon} &nbsp; ${sm.hindi}`;
   document.getElementById('d-sbadge-sub').textContent = sm.sub;
 
-  /* ── Line Timeline State Updates ── */
+  /* ── Timeline State Tracker ── */
   const curr = sm.step; 
   for (let i = 1; i <= 4; i++) {
     const isDone   = i - 1 < curr;
@@ -657,7 +673,7 @@ function showDetail(idx) {
     }
   }
 
-  /* ── Dynamic Layout Construction ── */
+  /* ── Layout Construction ── */
   const cg = document.getElementById('customer-grid');
   cg.innerHTML = makeItem('रैयत / ग्राहक का नाम', order[cfg.name_col])
     + makeItem('मोबाइल नंबर', order[cfg.mobile_col])
