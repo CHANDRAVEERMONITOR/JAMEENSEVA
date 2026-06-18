@@ -3,220 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Track Your Order | JameenSeva.in — खतियान, जमाबंदी, पंचनामा ऑर्डर ट्रैकिंग</title>
-<meta name="description" content="JameenSeva.in पर खतियान, रजिस्टर 2 (जमाबंदी पंजी), पंचनामा बटवारा का लाइव ऑर्डर स्टेटस ट्रैक करें। Order ID या Mobile Number से तुरंत जानकारी पाएं।">
-<meta name="keywords" content="jameenseva track order, check khatiyan order status, register 2 tracking online, jamabandi order tracking, panchnama delivery tracking, bihar land records order status">
+<title>Track Your Order | JameenSeva.in — खतियान, जमाबंदी, पंचनामा ट्रैकिंग</title>
+<meta name="description" content="JameenSeva.in पर खतियान, रजिस्टर 2 (जमाबंदी पंजी), पंचनामा बटवारा का लाइव ऑर्डर स्टेटस ट्रैक करें।">
+<meta name="keywords" content="jameenseva track order, khatiyan order status, register 2 tracking, jamabandi order tracking, panchnama delivery tracking">
 <link rel="canonical" href="https://jameenseva.in/track.html">
-<meta property="og:title" content="Track Order | JameenSeva.in">
-<meta property="og:description" content="खतियान, जमाबंदी पंजी और पंचनामा ऑर्डर का Live Status ट्रैक करें।">
-<meta property="og:url" content="https://jameenseva.in/track.html">
-<meta property="og:type" content="website">
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --g:#1a7c3e;--gl:#22a352;--gp:#edfaf2;
   --n:#0c2340;--blue:#1a5c8a;--bluep:#eaf3fb;
-  --sf:#e67e00;--red:#dc2626;
+  --sf:#e67e00;--red:#dc2626;--redp:#fef2f2;
   --amber:#f59e0b;--ambp:#fef3c7;
   --w:#fff;--bg:#f1f5f9;--bdr:#e2e8f0;
   --sh:0 2px 16px rgba(12,35,64,.08);
-  --shm:0 8px 32px rgba(12,35,64,.13);
+  --shm:0 8px 32px rgba(12,35,64,.14);
   --r:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);color:#1a202c;font-size:15px;line-height:1.8}
 
-/* ══ NAVBAR ══ */
+/* NAVBAR */
 .navbar{background:var(--w);border-bottom:3px solid var(--g);position:sticky;top:0;z-index:999;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.nav-in{max-width:1060px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nav-in{max-width:900px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
-.nav-logo img{height:36px;width:auto;border-radius:8px}
+.nav-logo img{height:36px;border-radius:8px}
 .nav-logo-txt{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--n)}
 .nav-logo-txt span{color:var(--g)}
-.nav-links{display:flex;align-items:center;gap:3px}
+.nav-links{display:flex;gap:3px}
 .nav-links a{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:600;color:var(--n);text-decoration:none;padding:6px 10px;border-radius:7px;transition:.2s}
 .nav-links a:hover{background:var(--gp);color:var(--g)}
 .nav-cta{background:var(--g)!important;color:#fff!important;padding:7px 14px!important;border-radius:7px!important}
-@media(max-width:680px){.nav-links{display:none}}
+@media(max-width:640px){.nav-links{display:none}}
 
-/* ══ HERO ══ */
-.hero{background:linear-gradient(135deg,var(--n) 0%,#163a60 50%,#1a5c35 100%);padding:38px 16px 30px;text-align:center}
-.hero-icon{font-size:48px;margin-bottom:10px}
-.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(19px,4vw,26px);font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--n) 0%,#163a60 50%,#1a5c35 100%);padding:36px 16px 28px;text-align:center}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(18px,4vw,26px);font-weight:800;color:#fff;line-height:1.3;margin-bottom:8px}
 .hero h1 em{color:#7eeaa5;font-style:normal}
-.hero-sub{color:rgba(255,255,255,.72);font-size:14px;max-width:540px;margin:0 auto}
+.hero-sub{color:rgba(255,255,255,.72);font-size:13.5px;max-width:520px;margin:0 auto}
 
-/* ══ BREADCRUMB ══ */
-.bc{background:var(--gp);padding:8px 16px;font-family:'Baloo 2',sans-serif;font-size:12px;color:#64748b;border-bottom:1px solid rgba(26,124,62,.12)}
-.bc-in{max-width:1060px;margin:0 auto}
+/* BC */
+.bc{background:var(--gp);padding:7px 16px;font-family:'Baloo 2',sans-serif;font-size:12px;color:#64748b;border-bottom:1px solid rgba(26,124,62,.12)}
+.bc-in{max-width:900px;margin:0 auto}
 .bc a{color:var(--g);text-decoration:none}
 
-/* ══ PAGE WRAP ══ */
-.pw{max-width:780px;margin:0 auto;padding:24px 14px 52px}
+/* WRAP */
+.pw{max-width:900px;margin:0 auto;padding:22px 14px 52px}
 
-/* ══ SEARCH BOX ══ */
-.search-card{background:var(--w);border-radius:var(--r);padding:28px 24px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:22px}
-.search-title{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--n);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.search-sub{font-size:13.5px;color:#64748b;margin-bottom:18px}
+/* SEARCH */
+.search-card{background:var(--w);border-radius:var(--r);padding:26px 22px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:20px}
+.search-title{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:var(--n);margin-bottom:5px}
+.search-sub{font-size:13px;color:#64748b;margin-bottom:16px}
 .search-row{display:flex;gap:10px}
-.search-input{flex:1;padding:12px 16px;border:1.5px solid var(--bdr);border-radius:9px;font-family:'Baloo 2',sans-serif;font-size:14.5px;color:var(--n);background:#f8fafc;outline:none;transition:.2s}
+.search-input{flex:1;padding:12px 16px;border:1.5px solid var(--bdr);border-radius:9px;font-family:'Baloo 2',sans-serif;font-size:14px;color:var(--n);background:#f8fafc;outline:none;transition:.2s}
 .search-input:focus{border-color:var(--g);background:#fff;box-shadow:0 0 0 3px rgba(26,124,62,.1)}
-.search-btn{padding:12px 22px;background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;border:none;border-radius:9px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;transition:.2s;white-space:nowrap;box-shadow:0 4px 14px rgba(26,124,62,.3)}
-.search-btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(26,124,62,.4)}
+.search-btn{padding:12px 22px;background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;border:none;border-radius:9px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:.2s;white-space:nowrap;box-shadow:0 4px 14px rgba(26,124,62,.3)}
+.search-btn:hover{transform:translateY(-1px)}
 .search-btn:disabled{opacity:.6;pointer-events:none}
-.search-tips{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-.tip{font-family:'Baloo 2',sans-serif;font-size:12px;color:var(--g);background:var(--gp);padding:4px 10px;border-radius:5px;border:1px solid rgba(26,124,62,.2)}
+.search-tips{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.tip{font-family:'Baloo 2',sans-serif;font-size:11.5px;color:var(--g);background:var(--gp);padding:3px 9px;border-radius:5px;border:1px solid rgba(26,124,62,.2)}
+@media(max-width:500px){.search-row{flex-direction:column}}
 
-/* ══ LOADER ══ */
-.loader{display:none;text-align:center;padding:24px;font-family:'Baloo 2',sans-serif;font-size:14px;color:var(--blue)}
-.loader-spin{display:inline-block;width:28px;height:28px;border:3px solid rgba(26,124,62,.2);border-top-color:var(--g);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px}
+/* LOADER */
+.loader{display:none;text-align:center;padding:22px;font-family:'Baloo 2',sans-serif;font-size:13.5px;color:var(--blue)}
+.spin{display:inline-block;width:26px;height:26px;border:3px solid rgba(26,124,62,.2);border-top-color:var(--g);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ══ ORDER LIST ══ */
-.order-list-card{background:var(--w);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:18px;display:none}
-.ol-title{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);margin-bottom:12px}
-.ol-item{width:100%;background:#f8fafc;border:1.5px solid var(--bdr);border-radius:9px;padding:13px 16px;text-align:left;cursor:pointer;margin-bottom:9px;transition:.2s;font-family:'Baloo 2',sans-serif;font-size:13.5px;color:var(--n);display:flex;align-items:center;justify-content:space-between;gap:10px}
+/* ══ TWO COLUMN LAYOUT ══ */
+.two-col{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+
+/* ORDER LIST PANEL */
+.list-panel{background:var(--w);border-radius:var(--r);border:1px solid var(--bdr);box-shadow:var(--sh);overflow:hidden;display:none}
+.lp-head{background:var(--n);color:#fff;padding:14px 16px}
+.lp-head-title{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800}
+.lp-head-sub{font-family:'Baloo 2',sans-serif;font-size:11.5px;color:rgba(255,255,255,.65);margin-top:2px}
+.lp-body{padding:10px}
+.ol-item{width:100%;background:#f8fafc;border:2px solid var(--bdr);border-radius:9px;padding:12px 14px;text-align:left;cursor:pointer;margin-bottom:8px;transition:all .2s;font-family:'Baloo 2',sans-serif;display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative}
+.ol-item:last-child{margin-bottom:0}
 .ol-item:hover{border-color:var(--g);background:var(--gp)}
-.ol-item-left strong{display:block;font-size:14px;color:var(--n);margin-bottom:3px}
-.ol-item-left span{font-size:12.5px;color:#64748b}
-.ol-arrow{color:var(--g);font-size:18px}
-.type-badge{display:inline-block;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700;font-family:'Baloo 2',sans-serif}
-.type-k{background:#dbeafe;color:#1d4ed8}
-.type-p{background:var(--gp);color:var(--g)}
-.type-j{background:var(--ambp);color:#92400e}
+.ol-item.selected{border-color:var(--g);background:var(--gp);box-shadow:0 0 0 3px rgba(26,124,62,.15)}
+.ol-item.selected::after{content:'देख रहे हैं →';position:absolute;bottom:6px;right:10px;font-size:10px;color:var(--g);font-weight:700}
+.ol-left strong{display:block;font-size:13.5px;color:var(--n);margin-bottom:3px}
+.ol-left span{font-size:11.5px;color:#64748b}
+.ol-arr{color:#94a3b8;font-size:16px;flex-shrink:0;transition:.2s}
+.ol-item.selected .ol-arr{color:var(--g)}
+.type-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10.5px;font-weight:700;font-family:'Baloo 2',sans-serif;margin-left:5px}
+.tb-k{background:#dbeafe;color:#1d4ed8}
+.tb-p{background:var(--gp);color:var(--g)}
+.tb-j{background:var(--ambp);color:#92400e}
 
-/* ══ MODAL OVERLAY ══ */
-.modal-overlay{position:fixed;inset:0;background:rgba(12,35,64,.55);z-index:1100;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;backdrop-filter:blur(3px)}
-.modal-overlay.open{display:flex}
-.modal-box{background:var(--w);border-radius:16px;width:100%;max-width:680px;box-shadow:0 24px 60px rgba(0,0,0,.3);overflow:hidden;margin:auto;animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-header{padding:18px 20px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--bdr)}
-.modal-header-left{display:flex;align-items:center;gap:10px}
-.modal-close{width:34px;height:34px;border:none;background:#f1f5f9;border-radius:50%;font-size:18px;cursor:pointer;color:#64748b;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0}
-.modal-close:hover{background:#fee2e2;color:var(--red)}
-.modal-body{padding:20px}
-/* Status Banner */
-.status-banner{border-radius:12px;padding:18px 20px;margin-bottom:18px;display:flex;align-items:center;gap:14px}
-.sb-received{background:#fef2f2;border:1.5px solid #fecaca}
-.sb-processing{background:#fffbeb;border:1.5px solid #fde68a}
-.sb-dispatched{background:#eff6ff;border:1.5px solid #bfdbfe}
-.sb-delivered{background:var(--gp);border:1.5px solid #86efac}
-.status-big-icon{font-size:38px;flex-shrink:0}
-.status-text-block{}
-.status-main{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;margin-bottom:3px}
-.sr-received .status-main{color:var(--red)}
-.sb-processing .status-main,.sp-text{color:#92400e}
-.sb-dispatched .status-main{color:#1d4ed8}
-.sb-delivered .status-main{color:var(--g)}
-.status-desc{font-size:13px;color:#64748b}
+/* ══ DETAIL PANEL ══ */
+.detail-panel{display:none}
+.detail-panel.visible{display:block}
+
+/* Viewing indicator */
+.viewing-bar{background:linear-gradient(135deg,var(--g),var(--gl));border-radius:10px 10px 0 0;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.vb-left{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.vb-oid{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;color:#7eeaa5}
+.vb-right{font-family:'Baloo 2',sans-serif;font-size:11px;color:rgba(255,255,255,.7)}
+
+/* Status Big Card */
+.status-big-card{background:var(--w);border:1px solid var(--bdr);border-top:none;border-radius:0 0 0 0;padding:22px;box-shadow:var(--sh)}
+.sbc-inner{text-align:center;margin-bottom:22px}
+
+/* Status badge */
+.sbadge{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:50px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:16px;margin-bottom:6px}
+.sbadge-sub{font-family:'Baloo 2',sans-serif;font-size:12.5px;color:#64748b}
+.sb-recv{background:#fee2e2;color:var(--red)}
+.sb-proc{background:var(--ambp);color:#92400e}
+.sb-disp{background:#dbeafe;color:#1d4ed8}
+.sb-dlvr{background:var(--gp);color:var(--g)}
+
 /* Progress Track */
-.prog-track{display:flex;align-items:center;margin-bottom:20px;padding:0 4px}
+.prog-track{display:flex;align-items:center;margin:18px 0 6px}
 .pt-step{display:flex;flex-direction:column;align-items:center;flex:1}
-.pt-dot{width:36px;height:36px;border-radius:50%;border:2.5px solid #e2e8f0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;position:relative;z-index:1;transition:.3s}
-.pt-dot.done{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 4px 10px rgba(26,124,62,.3)}
-.pt-dot.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 4px 10px rgba(245,158,11,.35);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 4px 10px rgba(245,158,11,.35)}50%{box-shadow:0 4px 16px rgba(245,158,11,.6)}}
-.pt-lbl{font-family:'Baloo 2',sans-serif;font-size:10px;font-weight:700;margin-top:5px;text-align:center;color:#94a3b8}
-.pt-lbl.done{color:var(--g)}
-.pt-lbl.active{color:var(--amber)}
-.pt-line{flex:1;height:3px;background:#e2e8f0;margin-bottom:20px;transition:.4s}
-.pt-line.done{background:var(--g)}
-/* Order ID strip */
-.oid-strip{background:linear-gradient(135deg,var(--n),#1a3a5c);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.oid-strip-lbl{font-family:'Baloo 2',sans-serif;font-size:11px;color:rgba(255,255,255,.55);margin-bottom:2px}
-.oid-strip-val{font-family:'Baloo 2',sans-serif;font-size:19px;font-weight:800;color:#7eeaa5;letter-spacing:.5px}
-/* Data rows */
-.drow-group{margin-bottom:16px}
-.drow-gtitle{font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid var(--bdr);display:flex;align-items:center;gap:6px}
-.drow-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.drow-item{background:#f8fafc;border-radius:8px;padding:10px 12px;border:1px solid var(--bdr)}
-.drow-lbl{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.drow-val{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);word-break:break-word}
-.drow-val.empty{color:#cbd5e1;font-weight:400;font-style:italic;font-size:13px}
-.drow-full{grid-column:1/-1}
-/* Pay badge */
-.pay-badge{display:inline-flex;align-items:center;gap:5px;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;padding:3px 10px;border-radius:5px}
-.pay-cod{background:#fef9c3;color:#854d0e}
+.pt-circle{width:40px;height:40px;border-radius:50%;border:2.5px solid #e2e8f0;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:16px;transition:.3s;position:relative;z-index:1}
+.pt-circle.done{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 4px 12px rgba(26,124,62,.3)}
+.pt-circle.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 4px 12px rgba(245,158,11,.35);animation:pulse-active 2s infinite}
+@keyframes pulse-active{0%,100%{box-shadow:0 4px 12px rgba(245,158,11,.35)}50%{box-shadow:0 4px 20px rgba(245,158,11,.6)}}
+.pt-label{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.3}
+.pt-label.done{color:var(--g)}
+.pt-label.active{color:var(--amber)}
+.pt-date{font-family:'Baloo 2',sans-serif;font-size:10px;color:#cbd5e1;margin-top:2px}
+.pt-date.done{color:rgba(26,124,62,.7)}
+.pt-line{flex:1;height:3px;background:#e2e8f0;margin-top:-22px;z-index:0;transition:.3s;border-radius:2px}
+.pt-line.done{background:linear-gradient(90deg,var(--g),var(--gl))}
+.pt-line.partial{background:linear-gradient(90deg,var(--g) 60%,#e2e8f0 100%)}
+
+/* Data Sections */
+.dc-box{background:var(--w);border:1px solid var(--bdr);border-top:none;padding:0 22px 22px;box-shadow:var(--sh)}
+.dc-divider{height:1px;background:var(--bdr);margin:0 0 18px}
+.dc-sec-title{font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;display:flex;align-items:center;gap:7px;padding-bottom:8px;border-bottom:1.5px solid var(--bdr)}
+.dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.dc-item{background:#f8fafc;border-radius:9px;padding:12px 14px;border:1px solid var(--bdr)}
+.dc-item.full{grid-column:1/-1}
+.dc-label{font-family:'Baloo 2',sans-serif;font-size:10.5px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.dc-value{font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);line-height:1.4}
+.dc-value.na{color:#cbd5e1;font-style:italic;font-weight:400;font-size:13px}
+.pay-tag{display:inline-flex;align-items:center;gap:5px;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:700;padding:4px 11px;border-radius:5px}
+.pay-cod{background:var(--ambp);color:#92400e}
 .pay-online{background:#dbeafe;color:#1d4ed8}
-/* Bottom help */
-.modal-wa{background:linear-gradient(135deg,#075e54,#128c7e);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-top:16px;color:#fff;text-decoration:none;transition:.2s}
-.modal-wa:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(7,94,84,.3)}
-.wa-icon{font-size:26px;flex-shrink:0}
-.wa-txt strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700}
-.wa-txt span{font-size:12.5px;opacity:.88}
-.wa-arrow{margin-left:auto;font-size:20px;opacity:.7}
-/* Back btn */
-.back-to-list{display:inline-flex;align-items:center;gap:6px;background:#f1f5f9;color:var(--n);border:1px solid var(--bdr);padding:8px 16px;border-radius:8px;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:16px;transition:.2s;border-style:none}
-.back-to-list:hover{background:var(--gp);color:var(--g)}
 
-/* ══ INFO SECTION ══ */
-.info-section{background:var(--w);border-radius:var(--r);padding:26px 22px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:18px}
-.is-title{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800;color:var(--n);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.stage-table{width:100%;border-collapse:collapse;font-size:13.5px}
-.stage-table th{background:var(--n);color:#fff;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:700;padding:11px 13px;text-align:left}
-.stage-table td{padding:10px 13px;border-bottom:1px solid var(--bdr);vertical-align:middle}
-.stage-table tr:nth-child(even) td{background:#f8fafc}
-.stage-table tr:last-child td{border-bottom:none}
-.stage-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
-.dot-red{background:var(--red)}
-.dot-amber{background:var(--amber)}
-.dot-blue{background:#3b82f6}
-.dot-green{background:var(--g)}
+/* Bottom CTA */
+.detail-bottom{background:linear-gradient(135deg,var(--n),#1a3a5c);border-radius:0 0 var(--r) var(--r);padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;border:1px solid var(--bdr);border-top:none}
+.db-text strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:#fff;margin-bottom:3px}
+.db-text p{font-family:'Baloo 2',sans-serif;font-size:12px;color:rgba(255,255,255,.65)}
+.db-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;text-decoration:none;padding:9px 18px;border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;transition:.2s;white-space:nowrap;flex-shrink:0}
+.db-btn:hover{background:#1db954;transform:translateY(-1px)}
+@media(max-width:500px){.dc-grid{grid-template-columns:1fr}.detail-bottom{flex-direction:column;text-align:center}}
 
-/* Service cards */
-.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
-.svc-card{background:#f8fafc;border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center}
-.svc-icon{font-size:24px;margin-bottom:6px}
-.svc-name{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:var(--n);margin-bottom:3px}
-.svc-desc{font-size:12px;color:#64748b}
+/* NOT FOUND */
+.not-found{background:var(--w);border-radius:var(--r);padding:32px;text-align:center;box-shadow:var(--sh);border:1px solid var(--bdr);display:none;margin-bottom:18px}
+.nf-icon{font-size:48px;margin-bottom:12px}
+.nf-title{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--n);margin-bottom:8px}
+.nf-sub{font-size:13.5px;color:#64748b;margin-bottom:18px}
+.nf-tips{text-align:left;background:#f8fafc;border-radius:9px;padding:16px;margin-bottom:16px;font-size:13.5px;color:#374151}
+.nf-tips li{margin-bottom:6px;padding-left:4px}
+.wa-btn{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;text-decoration:none;padding:11px 22px;border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;transition:.2s}
+.wa-btn:hover{background:#1db954}
+
+/* INFO SECTION */
+.info-sec{background:var(--w);border-radius:var(--r);padding:22px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:16px;margin-top:20px}
+.is-title{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;color:var(--n);margin-bottom:14px}
+.stage-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.stage-tbl th{background:var(--n);color:#fff;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;padding:10px 12px;text-align:left}
+.stage-tbl td{padding:10px 12px;border-bottom:1px solid var(--bdr);vertical-align:middle}
+.stage-tbl tr:nth-child(even) td{background:#f8fafc}
+.stage-tbl tr:last-child td{border-bottom:none}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
 
 /* FAQ */
-.faq-item{border:1px solid var(--bdr);border-radius:9px;margin-bottom:9px;overflow:hidden}
-.faq-q{background:#f8fafc;padding:13px 16px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13.5px;color:var(--n);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:.2s}
-.faq-q:hover{background:var(--gp);color:var(--g)}
-.faq-q.open{background:var(--gp);color:var(--g)}
-.farr{transition:transform .3s}
+.faq-item{border:1px solid var(--bdr);border-radius:9px;margin-bottom:8px;overflow:hidden}
+.faq-q{background:#f8fafc;padding:12px 15px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13.5px;color:var(--n);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:.2s;border:none;width:100%;text-align:left}
+.faq-q:hover,.faq-q.open{background:var(--gp);color:var(--g)}
+.farr{transition:transform .3s;font-size:14px;flex-shrink:0}
 .faq-q.open .farr{transform:rotate(180deg)}
-.faq-a{display:none;padding:13px 16px;font-size:13px;color:#374151;line-height:1.75;border-top:1px solid var(--bdr)}
+.faq-a{display:none;padding:12px 15px;font-size:13.5px;color:#374151;line-height:1.75;border-top:1px solid var(--bdr);background:var(--w)}
 .faq-a.open{display:block}
 
-/* Related */
-.rel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:13px}
-.rel-link{display:flex;align-items:center;gap:9px;background:#f8fafc;border:1px solid var(--bdr);border-radius:9px;padding:11px 13px;text-decoration:none;transition:.2s}
-.rel-link:hover{border-color:var(--g);background:var(--gp);transform:translateX(3px)}
+/* RELATED */
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
+.rel-link{display:flex;align-items:center;gap:9px;background:#f8fafc;border:1px solid var(--bdr);border-radius:9px;padding:11px 12px;text-decoration:none;transition:.2s}
+.rel-link:hover{border-color:var(--g);background:var(--gp)}
 .rl-icon{font-size:18px;flex-shrink:0}
-.rl-txt strong{display:block;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:var(--n)}
-.rl-txt span{font-size:11.5px;color:#64748b}
+.rl-txt strong{display:block;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:700;color:var(--n)}
+.rl-txt span{font-size:11px;color:#64748b}
+@media(max-width:600px){.rel-grid{grid-template-columns:1fr 1fr}}
 
 /* FOOTER */
-.footer{background:var(--n);color:rgba(255,255,255,.62);padding:24px 16px;text-align:center;font-family:'Baloo 2',sans-serif;font-size:12.5px;margin-top:10px}
-.footer strong{color:#fff;display:block;font-size:14px;margin-bottom:5px}
-.ftl{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:9px 0}
-.ftl a{color:rgba(255,255,255,.55);text-decoration:none}
+.footer{background:var(--n);color:rgba(255,255,255,.6);padding:22px 16px;text-align:center;font-family:'Baloo 2',sans-serif;font-size:12.5px;margin-top:8px}
+.footer strong{color:#fff;display:block;font-size:13.5px;margin-bottom:5px}
+.ftl{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:8px 0}
+.ftl a{color:rgba(255,255,255,.5);text-decoration:none}
 .ftl a:hover{color:#7eeaa5}
 
 /* BACK TOP */
 .btt{position:fixed;bottom:20px;right:16px;width:40px;height:40px;background:var(--g);color:#fff;border:none;border-radius:50%;font-size:16px;cursor:pointer;box-shadow:0 4px 14px rgba(26,124,62,.4);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;z-index:990}
 .btt.show{opacity:1;pointer-events:all}
-
-@media(max-width:600px){
-  .search-row{flex-direction:column}
-  .dc-grid{grid-template-columns:1fr}
-  .service-grid{grid-template-columns:1fr 1fr}
-  .rel-grid{grid-template-columns:1fr}
-  .progress-steps{gap:0}
-  .ps-label{font-size:9px}
-}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-in">
     <a href="index.html" class="nav-logo">
@@ -233,14 +222,11 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
   </div>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-icon">🚚</div>
-  <h1>ऑर्डर <em>ट्रैकिंग सिस्टम</em></h1>
-  <p class="hero-sub">खतियान · रजिस्टर 2 (जमाबंदी) · पंचनामा बटवारा — तीनों का Live Status एक जगह</p>
+  <h1>🚚 ऑर्डर <em>ट्रैकिंग सिस्टम</em></h1>
+  <p class="hero-sub">खतियान · रजिस्टर 2 (जमाबंदी) · पंचनामा बटवारा — तीनों का Live Status यहाँ</p>
 </div>
 
-<!-- BREADCRUMB -->
 <div class="bc">
   <div class="bc-in">
     <a href="index.html">होम</a> › <span>ऑर्डर ट्रैकिंग</span>
@@ -249,380 +235,371 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 
 <div class="pw">
 
-  <!-- ══ SEARCH BOX ══ -->
+  <!-- SEARCH -->
   <div class="search-card">
     <div class="search-title">🔍 अपना ऑर्डर खोजें</div>
-    <p class="search-sub">Tracking ID (जैसे JS-12345) या अपना 10 अंकों का मोबाइल नंबर डालें</p>
+    <p class="search-sub">Tracking ID (जैसे JS-12345) <strong>या</strong> अपना 10 अंकों का मोबाइल नंबर डालें</p>
     <div class="search-row">
-      <input type="text" class="search-input" id="track-input" placeholder="JS-XXXXX या 10 digit मोबाइल नंबर" maxlength="15" onkeydown="if(event.key==='Enter')trackOrder()">
-      <button class="search-btn" id="search-btn" onclick="trackOrder()">🔍 Track करें</button>
+      <input type="text" class="search-input" id="track-input"
+        placeholder="JS-XXXXX  या  10 digit Mobile Number"
+        maxlength="15"
+        onkeydown="if(event.key==='Enter')doTrack()">
+      <button class="search-btn" id="search-btn" onclick="doTrack()">🔍 Track करें</button>
     </div>
     <div class="search-tips">
-      <span class="tip">📋 खतियान ऑर्डर</span>
-      <span class="tip">📜 रजिस्टर 2 (जमाबंदी)</span>
+      <span class="tip">📜 खतियान ऑर्डर</span>
+      <span class="tip">📋 रजिस्टर 2 (जमाबंदी)</span>
       <span class="tip">⚖️ पंचनामा बटवारा</span>
     </div>
   </div>
 
   <!-- LOADER -->
   <div class="loader" id="loader">
-    <div class="loader-spin"></div>
-    <div>डेटा खोजा जा रहा है... कृपया प्रतीक्षा करें</div>
+    <span class="spin"></span> डेटा खोजा जा रहा है... कृपया प्रतीक्षा करें
   </div>
 
-  <!-- ORDER LIST (Multiple) -->
-  <div class="order-list-card" id="order-list-card">
-    <div class="ol-title">📋 आपके नंबर पर मिले ऑर्डर — क्लिक करके देखें:</div>
-    <div id="order-list"></div>
+  <!-- NOT FOUND -->
+  <div class="not-found" id="not-found">
+    <div class="nf-icon">🔎</div>
+    <div class="nf-title">कोई ऑर्डर नहीं मिला</div>
+    <p class="nf-sub">दिए गए ID या Mobile Number पर कोई record नहीं मिला।</p>
+    <ul class="nf-tips">
+      <li>✅ Tracking ID सही लिखें — जैसे <strong>JS-12345</strong></li>
+      <li>✅ वही Mobile Number जो ऑर्डर देते समय दिया था</li>
+      <li>✅ ऑर्डर के बाद WhatsApp पर ID मिली होगी, वो check करें</li>
+    </ul>
+    <a href="https://wa.me/919142075859?text=मेरा ऑर्डर नहीं मिल रहा, मदद करें।" class="wa-btn" target="_blank">📱 WhatsApp पर पूछें</a>
   </div>
 
-  <!-- ORDER DETAIL — hidden by default, shown as overlay -->
-  <div class="detail-card" id="detail-card" style="display:none"></div>
+  <!-- TWO COLUMN LAYOUT: List + Detail -->
+  <div class="two-col" id="two-col" style="display:none">
 
+    <!-- LEFT: ORDER LIST PANEL -->
+    <div class="list-panel" id="list-panel">
+      <div class="lp-head">
+        <div class="lp-head-title">📋 आपके ऑर्डर</div>
+        <div class="lp-head-sub" id="lp-count"></div>
+      </div>
+      <div class="lp-body" id="order-list"></div>
+    </div>
 
-  <!-- ══ HOW IT WORKS ══ -->
-  <div class="info-section">
-    <div class="is-title">📦 ट्रैकिंग कैसे काम करती है?</div>
-    <p style="font-size:13.5px;color:#374151;margin-bottom:16px">जब आप JameenSeva.in पर खतियान, रजिस्टर 2 (जमाबंदी पंजी) या पंचनामा का ऑर्डर देते हैं, तो आपको एक <strong>Unique Tracking ID</strong> (जैसे JS-12345) WhatsApp पर भेजी जाती है। इस ID या अपने Mobile Number से यहाँ track करें।</p>
+    <!-- RIGHT: DETAIL PANEL -->
+    <div class="detail-panel" id="detail-panel">
 
-    <div class="is-title" style="font-size:15px">📋 ऑर्डर के चरण</div>
-    <table class="stage-table">
-      <thead><tr><th>स्टेज</th><th>मतलब</th><th>समय</th></tr></thead>
+      <!-- Viewing Bar -->
+      <div class="viewing-bar">
+        <div class="vb-left">
+          <span>📌 देख रहे हैं:</span>
+          <span class="vb-oid" id="d-oid">—</span>
+          <span id="d-type-badge"></span>
+        </div>
+        <div class="vb-right" id="d-updated">Status जाँचें ↓</div>
+      </div>
+
+      <!-- STATUS BIG CARD -->
+      <div class="status-big-card">
+        <div class="sbc-inner">
+          <div class="sbadge" id="d-sbadge">— — —</div>
+          <div class="sbadge-sub" id="d-sbadge-sub"></div>
+        </div>
+
+        <!-- PROGRESS TRACK -->
+        <div class="prog-track">
+          <div class="pt-step">
+            <div class="pt-circle" id="pc1">📥</div>
+            <div class="pt-label" id="pl1">Order<br>Received</div>
+          </div>
+          <div class="pt-line" id="pline1"></div>
+          <div class="pt-step">
+            <div class="pt-circle" id="pc2">🔄</div>
+            <div class="pt-label" id="pl2">Processing</div>
+          </div>
+          <div class="pt-line" id="pline2"></div>
+          <div class="pt-step">
+            <div class="pt-circle" id="pc3">📦</div>
+            <div class="pt-label" id="pl3">Dispatched</div>
+          </div>
+          <div class="pt-line" id="pline3"></div>
+          <div class="pt-step">
+            <div class="pt-circle" id="pc4">🏠</div>
+            <div class="pt-label" id="pl4">Delivered</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATA BOX -->
+      <div class="dc-box">
+        <div class="dc-divider"></div>
+
+        <!-- Customer -->
+        <div class="dc-sec-title">👤 ग्राहक की जानकारी</div>
+        <div class="dc-grid" id="customer-grid">
+          <!-- filled by JS -->
+        </div>
+
+        <!-- Land -->
+        <div class="dc-sec-title" id="land-sec-title">📋 जमीन की जानकारी</div>
+        <div class="dc-grid" id="land-grid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- BOTTOM CTA -->
+      <div class="detail-bottom">
+        <div class="db-text">
+          <strong>कोई सवाल है?</strong>
+          <p>WhatsApp पर Tracking ID लिखकर भेजें — 10 मिनट में जवाब</p>
+        </div>
+        <a href="#" class="db-btn" id="wa-link" target="_blank" rel="noopener">📱 WhatsApp करें</a>
+      </div>
+
+    </div><!-- /detail-panel -->
+  </div><!-- /two-col -->
+
+  <!-- ══ INFO SECTION ══ -->
+  <div class="info-sec" id="info-sec">
+    <div class="is-title">📦 ऑर्डर के चरण — कितना समय लगता है?</div>
+    <table class="stage-tbl">
+      <thead><tr><th>चरण</th><th>मतलब</th><th>अनुमानित समय</th></tr></thead>
       <tbody>
-        <tr><td><span class="stage-dot dot-red"></span><strong>Order Received</strong></td><td>आपका ऑर्डर हमें मिल गया</td><td>तुरंत</td></tr>
-        <tr><td><span class="stage-dot dot-amber"></span><strong>Processing</strong></td><td>दस्तावेज अंचल कार्यालय से निकाल रहे हैं</td><td>1-2 दिन</td></tr>
-        <tr><td><span class="stage-dot" style="background:#3b82f6"></span><strong>Dispatched</strong></td><td>Speed Post / Courier से भेज दिया</td><td>2-4 दिन</td></tr>
-        <tr><td><span class="stage-dot dot-green"></span><strong>Delivered</strong></td><td>आपके घर पहुँच गया ✅</td><td>3-7 दिन</td></tr>
+        <tr><td><span class="dot" style="background:var(--red)"></span><strong>Order Received</strong></td><td>ऑर्डर हमें मिल गया</td><td>तुरंत</td></tr>
+        <tr><td><span class="dot" style="background:var(--amber)"></span><strong>Processing</strong></td><td>अंचल कार्यालय से दस्तावेज निकाल रहे हैं</td><td>1–2 दिन</td></tr>
+        <tr><td><span class="dot" style="background:#3b82f6"></span><strong>Dispatched</strong></td><td>Speed Post / Courier से भेज दिया</td><td>2–4 दिन</td></tr>
+        <tr><td><span class="dot" style="background:var(--g)"></span><strong>Delivered</strong></td><td>आपके घर पहुँच गया ✅</td><td>3–7 दिन</td></tr>
       </tbody>
     </table>
 
-    <div class="is-title" style="font-size:15px;margin-top:20px">🗂️ कौन-कौन से ऑर्डर ट्रैक होते हैं?</div>
-    <div class="service-grid">
-      <div class="svc-card"><div class="svc-icon">📜</div><div class="svc-name">खतियान</div><div class="svc-desc">CS/RS ओरिजनल खतियान होम डिलीवरी</div></div>
-      <div class="svc-card"><div class="svc-icon">📋</div><div class="svc-name">रजिस्टर 2</div><div class="svc-desc">जमाबंदी पंजी प्रमाणित कॉपी</div></div>
-      <div class="svc-card"><div class="svc-icon">⚖️</div><div class="svc-name">पंचनामा</div><div class="svc-desc">बटवारा दस्तावेज Stamp Paper पर</div></div>
+    <div class="is-title" style="margin-top:20px">❓ सामान्य सवाल</div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="tf(this)">Tracking ID कहाँ मिलती है? <span class="farr">▼</span></button>
+      <div class="faq-a">ऑर्डर confirm होने के बाद हमारी टीम आपके WhatsApp पर <strong>Tracking ID (JS-XXXXX)</strong> भेज देती है।</div>
     </div>
-  </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="tf(this)">रजिस्टर 2 का ऑर्डर भी track होगा? <span class="farr">▼</span></button>
+      <div class="faq-a">हाँ! अब <strong>रजिस्टर 2 (जमाबंदी पंजी)</strong> के सभी orders भी इसी system में track होते हैं।</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="tf(this)">Status अपडेट नहीं हो रहा तो? <span class="farr">▼</span></button>
+      <div class="faq-a">WhatsApp पर <strong>9142075859</strong> पर अपनी Tracking ID भेजें — 10 मिनट में update मिलेगा।</div>
+    </div>
 
-  <!-- ══ FAQ ══ -->
-  <div class="info-section">
-    <div class="is-title">❓ ट्रैकिंग से जुड़े सवाल</div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="tf(this)">Tracking ID कब और कहाँ मिलती है? <span class="farr">▼</span></div>
-      <div class="faq-a">ऑर्डर confirm होने के बाद हमारी टीम आपके WhatsApp नंबर पर <strong>Tracking ID (JS-XXXXX)</strong> भेज देती है। इसी ID से यहाँ track करें।</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="tf(this)">अगर 24 घंटे बाद भी status update न हो? <span class="farr">▼</span></div>
-      <div class="faq-a">WhatsApp पर <strong>9142075859</strong> पर अपनी Tracking ID और Mobile Number लिखकर भेजें — हम 10 मिनट में update देंगे।</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="tf(this)">Mobile Number से track करने पर एक से ज्यादा order दिखे तो? <span class="farr">▼</span></div>
-      <div class="faq-a">अगर आपके नंबर पर एक से ज्यादा orders हैं तो सभी की list दिखेगी। जिस order का detail देखना है उस पर क्लिक करें।</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="tf(this)">Cash on Delivery (COD) उपलब्ध है? <span class="farr">▼</span></div>
-      <div class="faq-a">हाँ! बिहार के सभी 38 जिलों में COD की सुविधा उपलब्ध है। डिलीवरी के समय दस्तावेज देखकर पैसे दें।</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="tf(this)">रजिस्टर 2 (जमाबंदी) का ऑर्डर भी ट्रैक होगा? <span class="farr">▼</span></div>
-      <div class="faq-a">हाँ! अब <strong>रजिस्टर 2 (जमाबंदी पंजी)</strong> के सभी orders भी इसी ट्रैकिंग system में दिखेंगे। अपनी Tracking ID या Mobile Number डालें।</div>
-    </div>
-  </div>
-
-  <!-- ══ RELATED LINKS ══ -->
-  <div class="info-section">
-    <div class="is-title">🔗 संबंधित सेवाएं</div>
+    <div class="is-title" style="margin-top:20px">🔗 संबंधित सेवाएं</div>
     <div class="rel-grid">
-      <a href="khatiyan.html" class="rel-link"><div class="rl-icon">📜</div><div class="rl-txt"><strong>खतियान होम डिलीवरी</strong><span>CS/RS ओरिजनल कॉपी मंगाएं</span></div></a>
-      <a href="ragister2.html" class="rel-link"><div class="rl-icon">📋</div><div class="rl-txt"><strong>रजिस्टर 2 (जमाबंदी) ऑर्डर</strong><span>प्रमाणित कॉपी घर पर</span></div></a>
-      <a href="panchnama.html" class="rel-link"><div class="rl-icon">⚖️</div><div class="rl-txt"><strong>पंचनामा बटवारा COD</strong><span>Stamp Paper पर तैयार दस्तावेज</span></div></a>
-      <a href="panchnamablog.html" class="rel-link"><div class="rl-icon">📄</div><div class="rl-txt"><strong>पंचनामा PDF Download</strong><span>₹49 से Format खरीदें</span></div></a>
-      <a href="contact.html" class="rel-link"><div class="rl-icon">📞</div><div class="rl-txt"><strong>हमसे संपर्क करें</strong><span>WhatsApp: 9142075859</span></div></a>
-      <a href="index.html#services" class="rel-link"><div class="rl-icon">🏠</div><div class="rl-txt"><strong>सभी सेवाएं देखें</strong><span>JameenSeva.in पर</span></div></a>
+      <a href="khatiyan.html" class="rel-link"><div class="rl-icon">📜</div><div class="rl-txt"><strong>खतियान ऑर्डर</strong><span>होम डिलीवरी</span></div></a>
+      <a href="ragister2.html" class="rel-link"><div class="rl-icon">📋</div><div class="rl-txt"><strong>रजिस्टर 2 ऑर्डर</strong><span>जमाबंदी पंजी</span></div></a>
+      <a href="panchnama.html" class="rel-link"><div class="rl-icon">⚖️</div><div class="rl-txt"><strong>पंचनामा COD</strong><span>Stamp Paper पर</span></div></a>
+      <a href="panchnamablog.html" class="rel-link"><div class="rl-icon">📄</div><div class="rl-txt"><strong>पंचनामा PDF</strong><span>₹49 से Download</span></div></a>
+      <a href="contact.html" class="rel-link"><div class="rl-icon">📞</div><div class="rl-txt"><strong>संपर्क करें</strong><span>9142075859</span></div></a>
+      <a href="index.html" class="rel-link"><div class="rl-icon">🏠</div><div class="rl-txt"><strong>सभी सेवाएं</strong><span>JameenSeva.in</span></div></a>
     </div>
   </div>
 
 </div><!-- /pw -->
 
-<!-- ══ ORDER DETAIL MODAL ══ -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
-  <div class="modal-box" id="modal-box">
-    <!-- Header -->
-    <div class="modal-header">
-      <div class="modal-header-left">
-        <span id="m-svc-icon" style="font-size:22px">📋</span>
-        <div>
-          <div style="font-family:'Baloo 2',sans-serif;font-size:11px;color:#94a3b8">सेवा</div>
-          <div style="font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;color:var(--n)" id="m-svc-label">—</div>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeModal()" title="बंद करें">✕</button>
-    </div>
-
-    <!-- Body -->
-    <div class="modal-body">
-
-      <!-- Back to list button (shown only when multiple orders) -->
-      <button class="back-to-list" id="back-btn" onclick="closeModal()" style="display:none">
-        ← सभी Orders देखें
-      </button>
-
-      <!-- Status Banner -->
-      <div class="status-banner" id="m-status-banner">
-        <div class="status-big-icon" id="m-status-icon">📥</div>
-        <div class="status-text-block">
-          <div class="status-main" id="m-status-main">Order Received</div>
-          <div class="status-desc" id="m-status-desc">आपका ऑर्डर मिल गया है। जल्द ही processing शुरू होगी।</div>
-        </div>
-      </div>
-
-      <!-- Progress Track -->
-      <div class="prog-track">
-        <div class="pt-step">
-          <div class="pt-dot" id="pt1">📥</div>
-          <div class="pt-lbl" id="pl1">Order<br>Received</div>
-        </div>
-        <div class="pt-line" id="pline1"></div>
-        <div class="pt-step">
-          <div class="pt-dot" id="pt2">🔄</div>
-          <div class="pt-lbl" id="pl2">Processing</div>
-        </div>
-        <div class="pt-line" id="pline2"></div>
-        <div class="pt-step">
-          <div class="pt-dot" id="pt3">📦</div>
-          <div class="pt-lbl" id="pl3">Dispatched</div>
-        </div>
-        <div class="pt-line" id="pline3"></div>
-        <div class="pt-step">
-          <div class="pt-dot" id="pt4">🏠</div>
-          <div class="pt-lbl" id="pl4">Delivered</div>
-        </div>
-      </div>
-
-      <!-- Order ID Strip -->
-      <div class="oid-strip">
-        <div>
-          <div class="oid-strip-lbl">Tracking ID</div>
-          <div class="oid-strip-val" id="m-orderid">—</div>
-        </div>
-        <div id="m-type-badge"></div>
-      </div>
-
-      <!-- Customer Info -->
-      <div class="drow-group">
-        <div class="drow-gtitle">👤 ग्राहक की जानकारी</div>
-        <div class="drow-grid">
-          <div class="drow-item">
-            <div class="drow-lbl">नाम</div>
-            <div class="drow-val" id="m-name">—</div>
-          </div>
-          <div class="drow-item">
-            <div class="drow-lbl">मोबाइल</div>
-            <div class="drow-val" id="m-mobile">—</div>
-          </div>
-          <div class="drow-item drow-full">
-            <div class="drow-lbl">पूरा पता</div>
-            <div class="drow-val" id="m-address">—</div>
-          </div>
-          <div class="drow-item">
-            <div class="drow-lbl">पिन कोड</div>
-            <div class="drow-val" id="m-pin">—</div>
-          </div>
-          <div class="drow-item">
-            <div class="drow-lbl">भुगतान</div>
-            <div class="drow-val" id="m-pay">—</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Land Info (dynamic) -->
-      <div class="drow-group">
-        <div class="drow-gtitle" id="m-land-title">📋 जमीन की जानकारी</div>
-        <div class="drow-grid" id="m-land-grid"></div>
-      </div>
-
-      <!-- WhatsApp -->
-      <a class="modal-wa" id="m-wa-link" href="#" target="_blank" rel="noopener">
-        <div class="wa-icon">📱</div>
-        <div class="wa-txt">
-          <strong>WhatsApp पर Status पूछें</strong>
-          <span>9142075859 — 10 मिनट में जवाब</span>
-        </div>
-        <div class="wa-arrow">›</div>
-      </a>
-
-    </div><!-- /modal-body -->
-  </div>
-</div>
-
 <footer class="footer">
   <strong>JameenSeva.in — बिहार का भरोसेमंद जमीन दस्तावेज सेवा पोर्टल</strong>
   <div class="ftl">
-    <a href="index.html">होम</a>
     <a href="about.html">हमारे बारे में</a>
     <a href="terms-and-conditions.html">Terms</a>
     <a href="privacy-policy.html">Privacy Policy</a>
     <a href="disclaimer.html">Disclaimer</a>
     <a href="sitemap.html">Sitemap</a>
   </div>
-  <p style="font-size:11px;margin-top:6px;opacity:.55">यह वेबसाइट केवल सहायक सेवा प्रदान करती है। सरकारी कागजात की प्रामाणिकता की जिम्मेदारी संबंधित विभाग की है।<br>© 2026 JameenSeva.in — All Rights Reserved.</p>
+  <p style="font-size:11px;margin-top:6px;opacity:.5">© 2026 JameenSeva.in — All Rights Reserved.</p>
 </footer>
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
 /* ══ SUPABASE ══ */
-const SB_URL = 'https://efgvsddclcnbmwqbtily.supabase.co';
-const SB_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
-const _sb = supabase.createClient(SB_URL, SB_KEY);
+const _sb = supabase.createClient(
+  'https://efgvsddclcnbmwqbtily.supabase.co',
+  'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'
+);
 
 /* ══ TABLE CONFIG ══
-   Har table ka config — columns aur display mapping yahan define hai.
-   Naya table add karna ho to sirf yahan ek entry add karo.
+   Naya table add karna ho to yahan ek entry add karo.
+   status_col: Supabase mein jo column name hai.
+   Agar table mein status column nahi hai to null rakho — system handle karega.
 */
-const TABLE_CONFIG = {
+const TABLES = {
   KHATIYAN: {
-    table: 'khatiyan order',
+    tbl: 'khatiyan order',
     label: 'खतियान',
-    badgeClass: 'type-k',
     icon: '📜',
-    landSectionTitle: '📜 खतियान की जानकारी',
-    fields: [
+    badgeCls: 'tb-k',
+    id_col: 'order_id',
+    mobile_col: 'mobile',
+    name_col: 'raiyat_name',
+    addr_col: 'full_address',
+    pin_col: 'pincode',
+    pay_col: 'payment_method',
+    status_col: 'status',       // Supabase column
+    date_col: 'created_at',
+    landTitle: '📜 खतियान की जानकारी',
+    landFields: [
       { label: 'जिला', key: 'district' },
       { label: 'प्रखंड (Block)', key: 'block' },
       { label: 'गाँव / मौजा', key: 'village' },
       { label: 'खाता नंबर', key: 'khata_no' },
       { label: 'खेसरा नंबर', key: 'khesra_no' },
-      { label: 'खतियान प्रकार', key: 'khatiyan_type' },
-    ],
-    nameKey: 'raiyat_name',
-    mobileKey: 'mobile',
-    addressKey: 'full_address',
-    pinKey: 'pincode',
-    payKey: 'payment_method',
-    statusKey: 'status',
-    orderIdKey: 'order_id',
+      { label: 'खतियान प्रकार', key: 'khatiyan_type', full: true },
+    ]
   },
   PANCHNAMA: {
-    table: 'panchnama batwara',
+    tbl: 'panchnama batwara',
     label: 'पंचनामा बटवारा',
-    badgeClass: 'type-p',
     icon: '⚖️',
-    landSectionTitle: '⚖️ पंचनामा की जानकारी',
-    fields: [
+    badgeCls: 'tb-p',
+    id_col: 'order_id',
+    mobile_col: 'mobile',
+    name_col: 'raiyat_name',
+    addr_col: 'full_address',
+    pin_col: 'pincode',
+    pay_col: 'payment_method',
+    status_col: 'status',
+    date_col: 'created_at',
+    landTitle: '⚖️ पंचनामा की जानकारी',
+    landFields: [
       { label: 'जिला', key: 'district' },
       { label: 'प्रखंड (Block)', key: 'block' },
       { label: 'गाँव / मौजा', key: 'village' },
       { label: 'थाना नंबर', key: 'thana_no' },
-    ],
-    nameKey: 'raiyat_name',
-    mobileKey: 'mobile',
-    addressKey: 'full_address',
-    pinKey: 'pincode',
-    payKey: 'payment_method',
-    statusKey: 'status',
-    orderIdKey: 'order_id',
+    ]
   },
   JAMABANDI: {
-    table: 'jamabandi_orders',
+    tbl: 'jamabandi_orders',
     label: 'रजिस्टर 2 (जमाबंदी)',
-    badgeClass: 'type-j',
     icon: '📋',
-    landSectionTitle: '📋 रजिस्टर 2 (जमाबंदी) की जानकारी',
-    fields: [
+    badgeCls: 'tb-j',
+    id_col: 'order_id',
+    mobile_col: 'mobile',
+    name_col: 'raiyat_name',
+    addr_col: 'full_address',
+    pin_col: 'pincode',
+    pay_col: 'payment_method',
+    status_col: 'status',
+    date_col: 'created_at',
+    landTitle: '📋 रजिस्टर 2 की जानकारी',
+    landFields: [
       { label: 'जिला', key: 'district' },
       { label: 'प्रखंड (Block)', key: 'block' },
       { label: 'थाना नंबर', key: 'thana' },
       { label: 'मौजा / गाँव', key: 'mauja' },
       { label: 'खाता नंबर', key: 'khata' },
       { label: 'खेसरा नंबर', key: 'khesra' },
-      { label: 'जमाबंदी नंबर', key: 'jamabandi' },
-    ],
-    nameKey: 'raiyat_name',
-    mobileKey: 'mobile',
-    addressKey: 'full_address',
-    pinKey: 'pincode',
-    payKey: 'payment_method',
-    statusKey: 'status',
-    orderIdKey: 'order_id',
+      { label: 'जमाबंदी नंबर', key: 'jamabandi', full: true },
+    ]
+  }
+};
+
+/* Status config */
+const STATUS = {
+  'Order Received': {
+    cls: 'sb-recv', icon: '📥',
+    hindi: 'ऑर्डर प्राप्त हुआ',
+    sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार करने की प्रक्रिया जल्द शुरू होगी।',
+    step: 0
+  },
+  'Processing': {
+    cls: 'sb-proc', icon: '🔄',
+    hindi: 'प्रक्रिया में है',
+    sub: 'हमारी टीम अंचल कार्यालय से आपका दस्तावेज निकाल रही है। 1-2 दिन में dispatch होगा।',
+    step: 1
+  },
+  'Dispatched': {
+    cls: 'sb-disp', icon: '📦',
+    hindi: 'भेज दिया गया',
+    sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में पहुँचेगा।',
+    step: 2
+  },
+  'Delivered': {
+    cls: 'sb-dlvr', icon: '🏠',
+    hindi: 'डिलीवर हो गया ✅',
+    sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच गया है! JameenSeva.in को choose करने के लिए धन्यवाद।',
+    step: 3
   }
 };
 
 let allOrders = [];
+let selectedIdx = -1;
 
-/* ══ TRACK FUNCTION ══ */
-async function trackOrder() {
+/* ══ TRACK ══ */
+async function doTrack() {
   const input = document.getElementById('track-input').value.trim();
   if (!input) { alert('कृपया Tracking ID या Mobile Number डालें।'); return; }
 
-  const loader = document.getElementById('loader');
-  const listCard = document.getElementById('order-list-card');
-  const detailCard = document.getElementById('detail-card');
-  const btn = document.getElementById('search-btn');
-
-  loader.style.display = 'block';
-  listCard.style.display = 'none';
-  detailCard.style.display = 'none';
-  btn.disabled = true;
-  btn.textContent = '🔍 खोज रहे हैं...';
+  /* Reset UI */
+  show('loader');
+  hide('not-found');
+  hide('two-col');
+  document.getElementById('search-btn').disabled = true;
+  document.getElementById('search-btn').textContent = '⏳ खोज रहे हैं...';
   allOrders = [];
+  selectedIdx = -1;
 
   try {
-    /* ══ TEEN TABLES SE EK SAATH FETCH ══ */
-    const fetchPromises = Object.entries(TABLE_CONFIG).map(async ([type, cfg]) => {
-      try {
+    /* ══ FETCH FROM ALL 3 TABLES IN PARALLEL ══ */
+    const fetches = await Promise.allSettled(
+      Object.entries(TABLES).map(async ([type, cfg]) => {
         const { data, error } = await _sb
-          .from(cfg.table)
+          .from(cfg.tbl)
           .select('*')
-          .or(`${cfg.orderIdKey}.eq.${input},${cfg.mobileKey}.eq.${input}`);
-        if (error) { console.warn(`Table ${cfg.table} error:`, error.message); return []; }
-        return (data || []).map(row => ({ ...row, __type: type }));
-      } catch(e) { console.warn(`Table ${cfg.table} fetch failed:`, e); return []; }
-    });
+          .or(`${cfg.id_col}.eq.${input},${cfg.mobile_col}.eq.${input}`)
+          .order(cfg.date_col || 'created_at', { ascending: false });
+        if (error) { console.warn(cfg.tbl, error.message); return []; }
+        return (data || []).map(r => ({ ...r, __type: type }));
+      })
+    );
 
-    const results = await Promise.all(fetchPromises);
-    allOrders = results.flat();
+    allOrders = fetches.flatMap(r => r.status === 'fulfilled' ? r.value : []);
 
-    loader.style.display = 'none';
-    btn.disabled = false;
-    btn.textContent = '🔍 Track करें';
+    hide('loader');
+    document.getElementById('search-btn').disabled = false;
+    document.getElementById('search-btn').textContent = '🔍 Track करें';
 
     if (allOrders.length === 0) {
-      alert('माफ़ कीजिए — कोई ऑर्डर नहीं मिला।\n\nजांचें:\n• Tracking ID सही है? (जैसे JS-12345)\n• वही Mobile Number जो ऑर्डर देते समय दिया था?\n• WhatsApp पर 9142075859 पर पूछें।');
+      show('not-found');
       return;
     }
 
-    if (allOrders.length === 1) {
-      showDetail(0);
-    } else {
-      showOrderList();
-    }
+    /* Build list + show first */
+    buildList();
+    showDetail(0);
+    show('two-col');
 
-  } catch(err) {
-    loader.style.display = 'none';
-    btn.disabled = false;
-    btn.textContent = '🔍 Track करें';
-    alert('Connection Error: ' + err.message + '\n\nकृपया दोबारा try करें या WhatsApp पर संपर्क करें।');
+    /* Show list panel only if >1 */
+    document.getElementById('list-panel').style.display = allOrders.length > 1 ? 'block' : 'none';
+
+  } catch(e) {
+    hide('loader');
+    document.getElementById('search-btn').disabled = false;
+    document.getElementById('search-btn').textContent = '🔍 Track करें';
+    alert('Connection error: ' + e.message + '\nWhatsApp: 9142075859');
   }
 }
 
-/* ══ SHOW LIST ══ */
-function showOrderList() {
-  const listCard = document.getElementById('order-list-card');
+/* ══ BUILD LIST ══ */
+function buildList() {
   const listEl = document.getElementById('order-list');
-  listCard.style.display = 'block';
   listEl.innerHTML = '';
+  document.getElementById('lp-count').textContent = allOrders.length + ' ऑर्डर मिले — एक चुनें';
 
   allOrders.forEach((order, idx) => {
-    const cfg = TABLE_CONFIG[order.__type];
+    const cfg = TABLES[order.__type];
+    const rawStatus = order[cfg.status_col] || 'Order Received';
+    const sm = STATUS[rawStatus] || STATUS['Order Received'];
     const btn = document.createElement('button');
     btn.className = 'ol-item';
+    btn.id = 'ol-' + idx;
     btn.innerHTML = `
-      <div class="ol-item-left">
-        <strong>${cfg.icon} ${order[cfg.orderIdKey] || '—'} &nbsp; <span class="type-badge ${cfg.badgeClass}">${cfg.label}</span></strong>
-        <span>जिला: ${order.district || '—'} &nbsp;|&nbsp; स्टेटस: ${order[cfg.statusKey] || 'Order Received'}</span>
+      <div class="ol-left">
+        <strong>${cfg.icon} ${order[cfg.id_col] || '—'}
+          <span class="type-badge ${cfg.badgeCls}">${cfg.label}</span>
+        </strong>
+        <span>${sm.icon} ${sm.hindi} &nbsp;|&nbsp; ${order.district || ''}</span>
       </div>
-      <span class="ol-arrow">›</span>`;
+      <span class="ol-arr">›</span>`;
     btn.onclick = () => showDetail(idx);
     listEl.appendChild(btn);
   });
@@ -630,85 +607,134 @@ function showOrderList() {
 
 /* ══ SHOW DETAIL ══ */
 function showDetail(idx) {
+  selectedIdx = idx;
   const order = allOrders[idx];
-  const cfg = TABLE_CONFIG[order.__type];
-  const detailCard = document.getElementById('detail-card');
+  const cfg = TABLES[order.__type];
 
-  /* Order ID + Type Badge */
-  document.getElementById('d-orderid').textContent = order[cfg.orderIdKey] || '—';
-  document.getElementById('d-typebadge').innerHTML = `<span class="type-badge oid-type ${cfg.badgeClass}">${cfg.icon} ${cfg.label}</span>`;
+  /* Highlight selected in list */
+  document.querySelectorAll('.ol-item').forEach(el => el.classList.remove('selected'));
+  const selBtn = document.getElementById('ol-' + idx);
+  if (selBtn) {
+    selBtn.classList.add('selected');
+    /* Scroll selected item into view within panel */
+    selBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 
-  /* Status */
-  const status = order[cfg.statusKey] || 'Order Received';
-  const statusBadge = document.getElementById('d-statusbadge');
-  const statusMap = {
-    'Order Received': { cls: 's-received', icon: '📥', label: '📥 Order Received' },
-    'Processing':     { cls: 's-processing', icon: '🔄', label: '🔄 Processing' },
-    'Dispatched':     { cls: 's-dispatched', icon: '📦', label: '📦 Dispatched' },
-    'Delivered':      { cls: 's-delivered', icon: '🏠', label: '🏠 Delivered' },
-  };
-  const sm = statusMap[status] || statusMap['Order Received'];
-  statusBadge.className = 'status-badge ' + sm.cls;
-  statusBadge.textContent = sm.label;
+  /* Show detail panel */
+  const dp = document.getElementById('detail-panel');
+  dp.classList.add('visible');
 
-  /* Progress Bar */
-  const stages = ['Order Received','Processing','Dispatched','Delivered'];
-  const curr = stages.indexOf(status);
-  [1,2,3,4].forEach(i => {
-    const circle = document.getElementById('ps'+i);
-    const label  = document.getElementById('pl'+i);
-    const isDone = i - 1 < curr;
+  /* ── Viewing Bar ── */
+  document.getElementById('d-oid').textContent = order[cfg.id_col] || '—';
+  document.getElementById('d-type-badge').innerHTML =
+    `<span class="type-badge ${cfg.badgeCls}">${cfg.icon} ${cfg.label}</span>`;
+
+  const dateRaw = order[cfg.date_col];
+  document.getElementById('d-updated').textContent = dateRaw
+    ? 'ऑर्डर दिनांक: ' + new Date(dateRaw).toLocaleDateString('hi-IN',{day:'numeric',month:'short',year:'numeric'})
+    : '';
+
+  /* ── Status ── */
+  const rawStatus = order[cfg.status_col] || 'Order Received';
+  /* Normalize — handle case variations */
+  const statusKey = Object.keys(STATUS).find(
+    k => k.toLowerCase() === rawStatus.toLowerCase()
+  ) || 'Order Received';
+  const sm = STATUS[statusKey];
+
+  const badge = document.getElementById('d-sbadge');
+  badge.className = 'sbadge ' + sm.cls;
+  badge.innerHTML = `${sm.icon} &nbsp; ${sm.hindi}`;
+  document.getElementById('d-sbadge-sub').textContent = sm.sub;
+
+  /* ── Progress Bar ── */
+  const steps = ['Order Received','Processing','Dispatched','Delivered'];
+  const curr = sm.step; // 0-3
+  for (let i = 1; i <= 4; i++) {
+    const isDone   = i - 1 < curr;
     const isActive = i - 1 === curr;
-    circle.className = 'ps-circle' + (isDone||isActive ? (isDone ? ' done' : ' active') : '');
-    label.className  = 'ps-label' + (isDone||isActive ? (isDone ? ' done' : ' active') : '');
+    const circle = document.getElementById('pc' + i);
+    const label  = document.getElementById('pl' + i);
+    circle.className = 'pt-circle' + (isDone ? ' done' : isActive ? ' active' : '');
+    label.className  = 'pt-label'  + (isDone ? ' done' : isActive ? ' active' : '');
     if (i < 4) {
-      const line = document.getElementById('pline'+i);
-      line.className = 'ps-line' + (isDone ? ' done' : '');
+      const line = document.getElementById('pline' + i);
+      line.className = 'pt-line' + (i - 1 < curr ? ' done' : '');
     }
-  });
+  }
 
-  /* Customer Info */
-  document.getElementById('d-name').textContent    = order[cfg.nameKey]    || '—';
-  document.getElementById('d-mobile').textContent  = order[cfg.mobileKey]  || '—';
-  document.getElementById('d-address').textContent = order[cfg.addressKey] || '—';
-  document.getElementById('d-pin').textContent     = order[cfg.pinKey]     || '—';
-  const payVal = order[cfg.payKey] || '—';
-  const isCod  = payVal.toLowerCase().includes('cod');
-  document.getElementById('d-payment').innerHTML = `<span class="pay-badge ${isCod?'pay-cod':'pay-online'}">${isCod?'🚚 Cash on Delivery':'💳 Online Payment'}</span>`;
+  /* ── Customer Info ── */
+  const cg = document.getElementById('customer-grid');
+  cg.innerHTML = makeItem('रैयत / ग्राहक का नाम', order[cfg.name_col])
+    + makeItem('मोबाइल नंबर', order[cfg.mobile_col])
+    + makeItem('पिन कोड', order[cfg.pin_col])
+    + makePayItem(order[cfg.pay_col])
+    + makeItemFull('पूरा पता', order[cfg.addr_col]);
 
-  /* Land Info — Dynamic per service type */
-  document.getElementById('d-land-section-title').textContent = cfg.landSectionTitle;
-  const grid = document.getElementById('d-land-grid');
-  grid.innerHTML = '';
-  cfg.fields.forEach(f => {
-    const val = order[f.key];
-    const div = document.createElement('div');
-    div.className = 'dc-item';
-    div.innerHTML = `<div class="dc-label">${f.label}</div>
-      <div class="dc-value ${!val?'empty':''}">${val || 'उपलब्ध नहीं'}</div>`;
-    grid.appendChild(div);
-  });
+  /* ── Land Info ── */
+  document.getElementById('land-sec-title').textContent = cfg.landTitle;
+  const lg = document.getElementById('land-grid');
+  lg.innerHTML = cfg.landFields.map(f =>
+    f.full
+      ? makeItemFull(f.label, order[f.key])
+      : makeItem(f.label, order[f.key])
+  ).join('');
 
-  /* WhatsApp link with order ID */
-  const oid = order[cfg.orderIdKey] || '';
-  document.getElementById('wa-link').href = `https://wa.me/919142075859?text=नमस्ते! मेरा ऑर्डर ट्रैक करना है। Tracking ID: ${oid}`;
+  /* ── WhatsApp Link ── */
+  const oid = order[cfg.id_col] || '';
+  document.getElementById('wa-link').href =
+    'https://wa.me/919142075859?text=' +
+    encodeURIComponent('नमस्ते! मेरा ऑर्डर ट्रैक करना है। Tracking ID: ' + oid + ' | Service: ' + cfg.label);
 
-  /* Show & scroll */
-  detailCard.style.display = 'block';
-  document.getElementById('order-list-card').style.display = allOrders.length > 1 ? 'block' : 'none';
-  detailCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  /* ── Scroll detail into view on mobile ── */
+  if (window.innerWidth <= 760) {
+    setTimeout(() => dp.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
 }
 
-/* FAQ */
-function tf(el){
-  const a = el.nextElementSibling;
-  const open = el.classList.contains('open');
-  document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open')});
-  if(!open){el.classList.add('open');a.classList.add('open');}
+/* ── Helpers ── */
+function makeItem(label, val) {
+  return `<div class="dc-item">
+    <div class="dc-label">${label}</div>
+    <div class="dc-value ${!val?'na':''}">${val || 'उपलब्ध नहीं'}</div>
+  </div>`;
+}
+function makeItemFull(label, val) {
+  return `<div class="dc-item full">
+    <div class="dc-label">${label}</div>
+    <div class="dc-value ${!val?'na':''}">${val || 'उपलब्ध नहीं'}</div>
+  </div>`;
+}
+function makePayItem(val) {
+  const v = val || '—';
+  const isCod = v.toLowerCase().includes('cod');
+  return `<div class="dc-item">
+    <div class="dc-label">भुगतान का तरीका</div>
+    <div class="dc-value">
+      <span class="pay-tag ${isCod?'pay-cod':'pay-online'}">${isCod?'🚚 Cash on Delivery':'💳 Online Payment'}</span>
+    </div>
+  </div>`;
 }
 
-/* Back to top */
-window.addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',window.scrollY>400));
+/* ── UI Helpers ── */
+function show(id){ document.getElementById(id).style.display = 'block'; }
+function hide(id){ document.getElementById(id).style.display = 'none'; }
+
+/* ── FAQ ── */
+function tf(btn) {
+  const a = btn.nextElementSibling;
+  const open = btn.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.classList.remove('open');
+  });
+  if (!open) { btn.classList.add('open'); a.classList.add('open'); }
+}
+
+/* ── Back top ── */
+window.addEventListener('scroll', () =>
+  document.getElementById('btt').classList.toggle('show', window.scrollY > 400)
+);
 </script>
 </body>
 </html>
