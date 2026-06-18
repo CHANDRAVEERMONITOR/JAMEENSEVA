@@ -409,19 +409,14 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 </footer>
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <script>
-/* ══ SUPABASE ══ */
+/* ══ SUPABASE CLIENT CONFIG ══ */
 const _sb = supabase.createClient(
   'https://efgvsddclcnbmwqbtily.supabase.co',
   'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'
 );
 
-/* ══ TABLE CONFIG ══
-   Naya table add karna ho to yahan ek entry add karo.
-   status_col: Supabase mein jo column name hai.
-   Agar table mein status column nahi hai to null rakho — system handle karega.
-*/
+/* ══ TABLES METADATA CONFIG ══ */
 const TABLES = {
   KHATIYAN: {
     tbl: 'khatiyan order',
@@ -434,7 +429,7 @@ const TABLES = {
     addr_col: 'full_address',
     pin_col: 'pincode',
     pay_col: 'payment_method',
-    status_col: 'status',       // Supabase column
+    status_col: 'status',
     date_col: 'created_at',
     landTitle: '📜 खतियान की जानकारी',
     landFields: [
@@ -493,7 +488,7 @@ const TABLES = {
   }
 };
 
-/* Status config */
+/* ══ LIVE STATUS STATE MAP CONFIG ══ */
 const STATUS = {
   'Order Received': {
     cls: 'sb-recv', icon: '📥',
@@ -516,7 +511,7 @@ const STATUS = {
   'Delivered': {
     cls: 'sb-dlvr', icon: '🏠',
     hindi: 'डिलीवर हो गया ✅',
-    sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच गया है! JameenSeva.in को choose करने के लिए धन्यवाद।',
+    sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच गया है! JameenSeva.in को चुनने के लिए धन्यवाद।',
     step: 3
   }
 };
@@ -524,12 +519,11 @@ const STATUS = {
 let allOrders = [];
 let selectedIdx = -1;
 
-/* ══ TRACK ══ */
+/* ══ ORDER LOOKUP ENGINE ══ */
 async function doTrack() {
   const input = document.getElementById('track-input').value.trim();
   if (!input) { alert('कृपया Tracking ID या Mobile Number डालें।'); return; }
 
-  /* Reset UI */
   show('loader');
   hide('not-found');
   hide('two-col');
@@ -539,7 +533,6 @@ async function doTrack() {
   selectedIdx = -1;
 
   try {
-    /* ══ FETCH FROM ALL 3 TABLES IN PARALLEL ══ */
     const fetches = await Promise.allSettled(
       Object.entries(TABLES).map(async ([type, cfg]) => {
         const { data, error } = await _sb
@@ -563,12 +556,10 @@ async function doTrack() {
       return;
     }
 
-    /* Build list + show first */
     buildList();
     showDetail(0);
     show('two-col');
 
-    /* Show list panel only if >1 */
     document.getElementById('list-panel').style.display = allOrders.length > 1 ? 'block' : 'none';
 
   } catch(e) {
@@ -579,7 +570,7 @@ async function doTrack() {
   }
 }
 
-/* ══ BUILD LIST ══ */
+/* ══ SIDE-PANEL RENDERER ══ */
 function buildList() {
   const listEl = document.getElementById('order-list');
   listEl.innerHTML = '';
@@ -588,7 +579,12 @@ function buildList() {
   allOrders.forEach((order, idx) => {
     const cfg = TABLES[order.__type];
     const rawStatus = order[cfg.status_col] || 'Order Received';
-    const sm = STATUS[rawStatus] || STATUS['Order Received'];
+    
+    const statusKey = Object.keys(STATUS).find(
+      k => k.toLowerCase().trim() === rawStatus.toLowerCase().trim()
+    ) || 'Order Received';
+    const sm = STATUS[statusKey];
+    
     const btn = document.createElement('button');
     btn.className = 'ol-item';
     btn.id = 'ol-' + idx;
@@ -605,13 +601,12 @@ function buildList() {
   });
 }
 
-/* ══ SHOW DETAIL ══ */
+/* ══ ACTIVE DETAIL SCREEN BUILDER ══ */
 function showDetail(idx) {
   selectedIdx = idx;
   const order = allOrders[idx];
   const cfg = TABLES[order.__type];
 
-  /* Highlight selected in list */
   document.querySelectorAll('.ol-item').forEach(el => el.classList.remove('selected'));
   const selBtn = document.getElementById('ol-' + idx);
   if (selBtn) {
@@ -619,11 +614,10 @@ function showDetail(idx) {
     selBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  /* Show detail panel */
   const dp = document.getElementById('detail-panel');
   dp.classList.add('visible');
 
-  /* ── Viewing Bar ── */
+  /* ── Viewing Banner Bar ── */
   document.getElementById('d-oid').textContent = order[cfg.id_col] || '—';
   document.getElementById('d-type-badge').innerHTML =
     `<span class="type-badge ${cfg.badgeCls}">${cfg.icon} ${cfg.label}</span>`;
@@ -633,30 +627,22 @@ function showDetail(idx) {
     ? 'ऑर्डर दिनांक: ' + new Date(dateRaw).toLocaleDateString('hi-IN',{day:'numeric',month:'short',year:'numeric'})
     : '';
 
-  /* ── 🌟 LIVE STATUS FETCH & FIX ── */
-  // Supabase se actual status uthayenge, agar khali hai to 'Order Received' manenge
+  /* ── 🌟 STABLE CASE-INSENSITIVE STATUS ENGINE ── */
   let dbStatus = order[cfg.status_col] || 'Order Received';
   
-  // Clean text match karne ke liye bade/chote akshar ka jhanjhat khatam karte hain
   let statusKey = Object.keys(STATUS).find(
     k => k.toLowerCase().trim() === dbStatus.toLowerCase().trim()
   ) || 'Order Received';
   
   const sm = STATUS[statusKey];
 
-  // Agar database me custom status hai jo list me nahi h (e.g. Cancelled), toh wahi dikha dega
-  const displayHindiText = sm ? sm.hindi : dbStatus;
-  const displayIcon = sm ? sm.icon : '📌';
-  const displayCls = sm ? sm.cls : 'sb-proc';
-  const displaySub = sm ? sm.sub : 'आपके ऑर्डर पर काम चल रहा है। अधिक जानकारी के लिए WhatsApp करें।';
-
   const badge = document.getElementById('d-sbadge');
-  badge.className = 'sbadge ' + displayCls;
-  badge.innerHTML = `${displayIcon} &nbsp; ${displayHindiText}`;
-  document.getElementById('d-sbadge-sub').textContent = displaySub;
+  badge.className = 'sbadge ' + sm.cls;
+  badge.innerHTML = `${sm.icon} &nbsp; ${sm.hindi}`;
+  document.getElementById('d-sbadge-sub').textContent = sm.sub;
 
-  /* ── Progress Bar ── */
-  const curr = sm ? sm.step : 1; // Agar custom ya processing h to default step 1 (Processing) dikhayega
+  /* ── Line Timeline State Updates ── */
+  const curr = sm.step; 
   for (let i = 1; i <= 4; i++) {
     const isDone   = i - 1 < curr;
     const isActive = i - 1 === curr;
@@ -671,71 +657,7 @@ function showDetail(idx) {
     }
   }
 
-  /* ── DATA GRID BINDING (Yahan customer aur land fields render honge) ── */
-  // Client/Customer info setup
-  const custGrid = document.getElementById('customer-grid');
-  custGrid.innerHTML = `
-    <div class="dc-item">
-      <div class="dc-label">रैयत / ग्राहक का नाम</div>
-      <div class="dc-value">${order[cfg.name_col] || '—'}</div>
-    </div>
-    <div class="dc-item">
-      <div class="dc-label">मोबाइल नंबर</div>
-      <div class="dc-value">${order[cfg.mobile_col] || '—'}</div>
-    </div>
-    <div class="dc-item full">
-      <div class="dc-label">पूरा पता (Delivery Address)</div>
-      <div class="dc-value">${order[cfg.addr_col] || '—'} (पिनकोड: ${order[cfg.pin_col] || '—'})</div>
-    </div>
-    <div class="dc-item full">
-      <div class="dc-label">पेमेंट का तरीका</div>
-      <div class="dc-value">
-        <span class="pay-tag ${order[cfg.pay_col]?.toLowerCase().includes('online') ? 'pay-online' : 'pay-cod'}">
-          ${order[cfg.pay_col] || 'Cash on Delivery (COD)'}
-        </span>
-      </div>
-    </div>
-  `;
-
-  // Land details info setup
-  document.getElementById('land-sec-title').textContent = cfg.landTitle;
-  const landGrid = document.getElementById('land-grid');
-  landGrid.innerHTML = '';
-  
-  cfg.landFields.forEach(f => {
-    const val = order[f.key];
-    const item = document.createElement('div');
-    item.className = 'dc-item' + (f.full ? ' full' : '');
-    item.innerHTML = `
-      <div class="dc-label">${f.label}</div>
-      <div class="dc-value ${!val ? 'na' : ''}">${val || 'not provided'}</div>
-    `;
-    landGrid.appendChild(item);
-  });
-
-  // WhatsApp dynamic link dynamic text ke sath update karna
-  const waBtn = document.getElementById('wa-link');
-  if (waBtn) {
-    waBtn.href = `https://wa.me/919142075859?text=नमस्ते, मेरा ऑर्डर ID ${order[cfg.id_col] || ''} है। मुझे इसका स्टेटस जानना है।`;
-  }
-}
-  /* ── Progress Bar ── */
-  const steps = ['Order Received','Processing','Dispatched','Delivered'];
-  const curr = sm.step; // 0-3
-  for (let i = 1; i <= 4; i++) {
-    const isDone   = i - 1 < curr;
-    const isActive = i - 1 === curr;
-    const circle = document.getElementById('pc' + i);
-    const label  = document.getElementById('pl' + i);
-    circle.className = 'pt-circle' + (isDone ? ' done' : isActive ? ' active' : '');
-    label.className  = 'pt-label'  + (isDone ? ' done' : isActive ? ' active' : '');
-    if (i < 4) {
-      const line = document.getElementById('pline' + i);
-      line.className = 'pt-line' + (i - 1 < curr ? ' done' : '');
-    }
-  }
-
-  /* ── Customer Info ── */
+  /* ── Dynamic Layout Construction ── */
   const cg = document.getElementById('customer-grid');
   cg.innerHTML = makeItem('रैयत / ग्राहक का नाम', order[cfg.name_col])
     + makeItem('मोबाइल नंबर', order[cfg.mobile_col])
@@ -743,7 +665,6 @@ function showDetail(idx) {
     + makePayItem(order[cfg.pay_col])
     + makeItemFull('पूरा पता', order[cfg.addr_col]);
 
-  /* ── Land Info ── */
   document.getElementById('land-sec-title').textContent = cfg.landTitle;
   const lg = document.getElementById('land-grid');
   lg.innerHTML = cfg.landFields.map(f =>
@@ -752,19 +673,18 @@ function showDetail(idx) {
       : makeItem(f.label, order[f.key])
   ).join('');
 
-  /* ── WhatsApp Link ── */
+  /* ── Dynamic Contact Linking ── */
   const oid = order[cfg.id_col] || '';
   document.getElementById('wa-link').href =
     'https://wa.me/919142075859?text=' +
     encodeURIComponent('नमस्ते! मेरा ऑर्डर ट्रैक करना है। Tracking ID: ' + oid + ' | Service: ' + cfg.label);
 
-  /* ── Scroll detail into view on mobile ── */
   if (window.innerWidth <= 760) {
     setTimeout(() => dp.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 }
 
-/* ── Helpers ── */
+/* ══ STRUCTURAL COMPONENT HELPERS ══ */
 function makeItem(label, val) {
   return `<div class="dc-item">
     <div class="dc-label">${label}</div>
@@ -788,11 +708,11 @@ function makePayItem(val) {
   </div>`;
 }
 
-/* ── UI Helpers ── */
+/* ══ SYSTEM VIEW PORT CONTROLERS ══ */
 function show(id){ document.getElementById(id).style.display = 'block'; }
 function hide(id){ document.getElementById(id).style.display = 'none'; }
 
-/* ── FAQ ── */
+/* ══ COLLAPSIBLE UI ACCORDION ══ */
 function tf(btn) {
   const a = btn.nextElementSibling;
   const open = btn.classList.contains('open');
@@ -803,7 +723,7 @@ function tf(btn) {
   if (!open) { btn.classList.add('open'); a.classList.add('open'); }
 }
 
-/* ── Back top ── */
+/* ══ UTILITIES ══ */
 window.addEventListener('scroll', () =>
   document.getElementById('btt').classList.toggle('show', window.scrollY > 400)
 );
