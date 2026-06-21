@@ -714,14 +714,35 @@ function makeItemFull(label, val) {
   </div>`;
 }
 function makePayItem(val) {
-  const v = val || '—';
-  const isCod = v.toLowerCase().includes('cod');
-  return `<div class="dc-item">
-    <div class="dc-label">भुगतान का तरीका</div>
-    <div class="dc-value">
-      <span class="pay-tag ${isCod?'pay-cod':'pay-online'}">${isCod?'🚚 Cash on Delivery':'💳 Online Payment'}</span>
-    </div>
-  </div>`;
+  // Agar column khali hai, null hai, ya empty string hai, toh use hum Cash on Delivery (COD) manenge
+  if (!val || val.trim() === "" || val === "—") {
+    return `<div class="dc-item">
+      <div class="dc-label">भुगतान का तरीका</div>
+      <div class="dc-value">
+        <span class="pay-tag pay-cod">🚚 Cash on Delivery (COD)</span>
+      </div>
+    </div>`;
+  }
+
+  const v = val.toLowerCase().trim();
+  
+  // Agar database me 'online', 'pay', ya 'success' jaisa kuch bhi likha hai
+  if (v.includes('online') || v.includes('pay') || v.includes('razorpay')) {
+    return `<div class="dc-item">
+      <div class="dc-label">भुगतान का तरीका</div>
+      <div class="dc-value">
+        <span class="pay-tag pay-online">💳 Online Payment</span>
+      </div>
+    </div>`;
+  } else {
+    // Baaki sabhi cases ke liye COD safe side backup
+    return `<div class="dc-item">
+      <div class="dc-label">भुगतान का तरीका</div>
+      <div class="dc-value">
+        <span class="pay-tag pay-cod">🚚 Cash on Delivery (COD)</span>
+      </div>
+    </div>`;
+  }
 }
 
 /* ══ SYSTEM VIEW PORT CONTROLERS ══ */
