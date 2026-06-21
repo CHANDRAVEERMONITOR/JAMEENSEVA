@@ -162,10 +162,32 @@ table.pf-table td.left-align{text-align:left}
 
 /* ══ PRINT CSS — only print-area visible ══ */
 @media print {
-  body * { visibility:hidden; }
-  #print-area, #print-area * { visibility:visible; }
-  #print-area { position:absolute; left:0; top:0; width:100%; border:none; padding:6mm; }
-  .navbar,.bc,.hero,.fc-actions,.form-card,.preview-label,.info-sec,.footer,.btt{ display:none !important; }
+  @page {
+    size: A4 landscape; /* Isse page landscape format me fit hoga */
+    margin: 0.3in 0.4in 0.3in 0.4in; /* Margins thoda kam kiya taaki sab ek page me aaye */
+  }
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12px; /* Poore font ko thoda set kiya fitting ke liye */
+  }
+  .no-print, header, footer, .nav-in, button {
+    display: none !important;
+  }
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+  table {
+    page-break-inside: auto;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
 }
 
 /* ══ INFO SECTIONS ══ */
@@ -364,17 +386,21 @@ table.pf-table td.left-align{text-align:left}
             <div class="pf-note">नोट :- इस प्रपत्र को दो प्रतियों में दाखिल किया जायेगा। एक प्रति आवेदक को प्राप्तकर्त्ता पदा0/कर्मी द्वारा हस्ताक्षर तथा आवेदन की तारीख एवं क्रमांक अंकित कर प्राप्ति के प्रमाण के रूप में लौटाया जाएगा।</div>
           </div>
 
-          <div class="pf-bottom">
-            <div class="pf-bottom-left">
-              <div>स्थान:- <span id="pv-sthan"></span></div>
-              <div>दिनांक:- <span id="pv-dinank"></span></div>
-              <div>मोबाईल नं०:- <span id="pv-mobile"></span></div>
-              <div>आधार सं०:- <span id="pv-aadhar"></span></div>
-            </div>
-            <div class="pf-sign">रैयत का हस्ताक्षर / अंगूठे का निशान<br><br>........................................</div>
-          </div>
-        </div>
-      </div>
+          <div style="margin-top: 35px; width: 100%;">
+  
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
+    
+    <div style="display: flex; gap: 40px; font-size: 14px; font-weight: bold;">
+      <div>आधार संख्या: <span style="font-weight: normal; border-bottom: 1px dashed #000; padding-right: 50px;" id="lbl-output-aadhar">...........................................</span></div>
+      <div>मोबाइल संख्या: <span style="font-weight: normal; border-bottom: 1px dashed #000; padding-right: 50px;" id="lbl-output-mobile">...........................................</span></div>
+    </div>
+    
+    <div style="text-align: center; min-width: 220px;">
+      <div style="margin-bottom: 50px;"></div> <p style="font-weight: bold; font-size: 14px; border-top: 1px solid #000; padding-top: 5px;">रैयत/सह-रैयत या उनके प्रतिनिधि का हस्ताक्षर</p>
+    </div>
+
+  </div>
+</div>
     </div>
 
   </div><!-- /layout -->
@@ -603,6 +629,7 @@ function sync() {
 }
 
 /* PDF download */
+/* PDF download config */
 function downloadPDF() {
   const el = document.getElementById('print-area');
   const opt = {
@@ -610,7 +637,7 @@ function downloadPDF() {
     filename: 'Prapatra-2-JameenSeva.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' } // Portrait se Landscape change kiya
   };
   html2pdf().set(opt).from(el).save();
 }
