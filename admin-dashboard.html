@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jameen Seva - Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            display: none; /* Shuru me body hide rahegi jab tak security check na ho jaye */
+        }
+        .navbar {
+            background-color: #2c3e50;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 { margin: 0; font-size: 20px; }
+        .btn-logout {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .container {
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .welcome-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .grid-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .card h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>जमीन सेवा (JameenSeva.in) - मुख्य कंट्रोल पैनल</h1>
+    <button class="btn-logout" id="logoutBtn">Logout</button>
+</div>
+
+<div class="container">
+    <div class="welcome-box">
+        <h2>स्वागत है, चंद्रवीर भाई! 👋</h2>
+        <p>यहाँ से आप अपनी वेबसाइट का डेटा, सेल्स और 38 जिलों का लाइव स्टेटस मैनेज कर सकते हैं।</p>
+    </div>
+
+    <div class="grid-tools">
+        <div class="card">
+            <h3>डेटा अपडेट टूल</h3>
+            <p>नया फॉर्मेट अपलोड करने या रेट बदलने का फॉर्म यहाँ आएगा।</p>
+            </div>
+
+        <div class="card">
+            <h3>लाइव सेल्स (Razorpay Status)</h3>
+            <p>हफ़्ते की लाइव बिक्री और डाउनलोड का स्टेटस यहाँ दिखेगा।</p>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    // ⚠️ SAME SUPABASE DETAILS YAHAN BHI DALO
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL'
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    // ⚠️ APNI ADMIN USER ID (UUID) YAHAN DALO (Supabase Auth > Users me dikhegi)
+    const ADMIN_UUID = 'YOUR_ADMIN_USER_UUID'
+
+    async function checkSecurity() {
+        const { data: { user } } = await supabase.auth.getUser()
+
+        // Agar koi user login nahi hai YA uski ID aapki Admin ID se match nahi karti
+        if (!user || user.id !== ADMIN_UUID) {
+            alert('अनाधिकृत प्रवेश! कृपया पहले एडमिन लॉगिन करें।')
+            window.location.href = 'admin-login.html'
+        } else {
+            // Agar sab sahi hai toh page dikhao
+            document.body.style.display = 'block'
+        }
+    }
+
+    // Page khulte hi security check chalao
+    checkSecurity()
+
+    // Logout Button ka functional code
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+        await supabase.auth.signOut()
+        window.location.href = 'admin-login.html'
+    })
+</script>
+
+</body>
+</html>
