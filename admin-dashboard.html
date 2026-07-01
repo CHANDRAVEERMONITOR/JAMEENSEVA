@@ -85,18 +85,18 @@
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
     // ⚠️ SAME SUPABASE DETAILS YAHAN BHI DALO
-    const SUPABASE_URL = 'YOUR_SUPABASE_URL'
-    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'
+    const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
     // ⚠️ APNI ADMIN USER ID (UUID) YAHAN DALO (Supabase Auth > Users me dikhegi)
-    const ADMIN_UUID = 'YOUR_ADMIN_USER_UUID'
+    const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
 
     async function checkSecurity() {
         const { data: { user } } = await supabase.auth.getUser()
 
         // Agar koi user login nahi hai YA uski ID aapki Admin ID se match nahi karti
-        if (!user || user.id !== ADMIN_UUID) {
+        if (!user || user.id !== 0de0af38-6afa-4248-8057-80e276fc7763) {
             alert('अनाधिकृत प्रवेश! कृपया पहले एडमिन लॉगिन करें।')
             window.location.href = 'admin-login.html'
         } else {
