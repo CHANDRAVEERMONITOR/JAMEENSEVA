@@ -1,315 +1,789 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jameen Seva - Admin Dashboard</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: #f4f7f6;
-            display: none; /* Security check tak hide rahega */
-        }
-        .navbar {
-            background-color: #2c3e50;
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .navbar h1 { margin: 0; font-size: 20px; }
-        .btn-logout {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .container {
-            padding: 25px;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        
-        /* Tab System Styling */
-        .tabs-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-        .tab-btn {
-            padding: 10px 20px;
-            background-color: #e0e0e0;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #333;
-            white-space: nowrap;
-            transition: all 0.3s;
-        }
-        .tab-btn.active {
-            background-color: #2ecc71;
-            color: white;
-        }
-        
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 25px;
-        }
-        @media (max-width: 900px) {
-            .main-layout { grid-template-columns: 1fr; }
-        }
-        
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            height: fit-content;
-        }
-        .card h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
-        
-        /* Form elements */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .btn-submit { background-color: #3498db; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
-        .btn-submit:hover { background-color: #2980b9; }
-        
-        /* Table layout */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
-        table, th, td { border: 1px solid #e0e0e0; }
-        th, td { padding: 12px; text-align: left; }
-        th { background-color: #f8f9fa; color: #333; }
-        tr:nth-child(even) { background-color: #fdfdfd; }
-        
-        #loadingText { font-weight: bold; color: #7f8c8d; padding: 20px 0; }
-        #formMessage { margin-top: 10px; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>जमीन सेवा - एडमिन डैशबोर्ड</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#12314f;
+    --navy-light:#1c4a75;
+    --gold:#c9922f;
+    --gold-light:#e8b95c;
+    --bg:#f2f4f7;
+    --card:#ffffff;
+    --border:#e2e6ec;
+    --text:#1e2733;
+    --text-mute:#6b7684;
+    --green:#1f8a52;
+    --green-bg:#e7f6ee;
+    --amber:#b3760a;
+    --amber-bg:#fdf1dc;
+    --red:#c0392b;
+    --red-bg:#fbe8e5;
+    --blue:#1c5d9e;
+    --blue-bg:#e7f0fa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Inter','Noto Sans Devanagari',sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    display:none;
+  }
+  .lang-dev{font-family:'Noto Sans Devanagari','Inter',sans-serif;}
+
+  /* ---- Navbar ---- */
+  .navbar{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy-light) 100%);
+    color:#fff;
+    padding:14px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    position:sticky; top:0; z-index:50;
+  }
+  .navbar .brand{display:flex; align-items:center; gap:10px;}
+  .navbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold-light);}
+  .navbar h1{margin:0; font-size:18px; font-weight:700; letter-spacing:.2px;}
+  .navbar .sub{font-size:11px; color:#c7d4e2; margin-top:2px;}
+  .btn-logout{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+    color:#fff; padding:8px 16px; border-radius:6px;
+    cursor:pointer; font-weight:600; font-size:13px;
+    transition:.15s;
+  }
+  .btn-logout:hover{background:var(--red); border-color:var(--red);}
+
+  .container{padding:22px 28px 60px; max-width:1440px; margin:0 auto;}
+
+  /* ---- Tabs ---- */
+  .tabs-container{display:flex; gap:8px; margin-bottom:18px; overflow-x:auto; padding-bottom:4px;}
+  .tab-btn{
+    padding:10px 18px; background:#fff; border:1px solid var(--border);
+    border-radius:8px; cursor:pointer; font-weight:600; color:var(--text-mute);
+    white-space:nowrap; font-size:13.5px; transition:.15s;
+  }
+  .tab-btn:hover{border-color:var(--navy-light); color:var(--navy);}
+  .tab-btn.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  /* ---- Summary chips ---- */
+  .summary-row{display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
+  .chip{
+    background:#fff; border:1px solid var(--border); border-radius:10px;
+    padding:12px 18px; min-width:120px;
+  }
+  .chip .num{font-size:22px; font-weight:700; color:var(--navy);}
+  .chip .label{font-size:12px; color:var(--text-mute); margin-top:2px;}
+  .chip.total .num{color:var(--navy);}
+  .chip.pending .num{color:var(--amber);}
+  .chip.done .num{color:var(--green);}
+  .chip.rejected .num{color:var(--red);}
+
+  /* ---- Toolbar ---- */
+  .toolbar{
+    display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center;
+  }
+  .toolbar input[type=text], .toolbar select{
+    padding:10px 12px; border:1px solid var(--border); border-radius:7px;
+    font-size:13.5px; background:#fff;
+  }
+  .toolbar input[type=text]{flex:1; min-width:220px;}
+  .btn-outline{
+    padding:10px 16px; border-radius:7px; border:1px solid var(--navy);
+    background:#fff; color:var(--navy); font-weight:600; cursor:pointer; font-size:13.5px;
+  }
+  .btn-outline:hover{background:var(--navy); color:#fff;}
+  .btn-refresh{margin-left:auto;}
+
+  /* ---- Add panel ---- */
+  .add-panel{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:0; margin-bottom:18px; overflow:hidden;
+  }
+  .add-panel summary{
+    cursor:pointer; padding:14px 18px; font-weight:700; color:var(--navy);
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+    background:#f8f9fb;
+  }
+  .add-panel summary::-webkit-details-marker{display:none;}
+  .add-panel .add-body{padding:18px;}
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:14px;}
+  .form-group label{display:block; margin-bottom:5px; font-weight:600; font-size:12.5px; color:var(--text-mute);}
+  .form-group input, .form-group select{
+    width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:6px; font-size:13.5px;
+  }
+  .btn-submit{
+    background:var(--navy); color:#fff; border:none; padding:11px 22px; border-radius:7px;
+    cursor:pointer; font-weight:700; font-size:13.5px; margin-top:14px;
+  }
+  .btn-submit:hover{background:var(--navy-light);}
+  #formMessage{margin-top:10px; font-weight:600; font-size:13px;}
+
+  /* ---- Table ---- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:0; overflow:hidden;
+  }
+  .table-container{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:13.5px;}
+  th, td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap;}
+  th{background:#f8f9fb; color:var(--text-mute); font-size:11.5px; text-transform:uppercase; letter-spacing:.4px; font-weight:700;}
+  tbody tr{cursor:pointer; transition:.1s;}
+  tbody tr:hover{background:#f5f8fc;}
+
+  .badge{
+    display:inline-block; padding:4px 10px; border-radius:20px; font-size:11.5px; font-weight:700;
+  }
+  .badge-pending{background:var(--amber-bg); color:var(--amber);}
+  .badge-processing{background:var(--blue-bg); color:var(--blue);}
+  .badge-completed, .badge-approved, .badge-paid, .badge-success{background:var(--green-bg); color:var(--green);}
+  .badge-rejected, .badge-failed{background:var(--red-bg); color:var(--red);}
+  .badge-refunded{background:#efe7fb; color:#6a3fb0;}
+  .badge-default{background:#eef0f3; color:var(--text-mute);}
+
+  #loadingText{font-weight:600; color:var(--text-mute); padding:22px;}
+  .empty-state{padding:40px; text-align:center; color:var(--text-mute);}
+
+  /* ---- Modal ---- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(15,25,40,0.55);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:#fff; border-radius:12px; width:100%; max-width:640px; max-height:88vh;
+    overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-head{
+    padding:18px 22px; border-bottom:1px solid var(--border); display:flex;
+    justify-content:space-between; align-items:center; position:sticky; top:0; background:#fff;
+  }
+  .modal-head h3{margin:0; font-size:16px; color:var(--navy);}
+  .modal-close{cursor:pointer; border:none; background:none; font-size:20px; color:var(--text-mute); line-height:1;}
+  .modal-body{padding:20px 22px;}
+  .detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;}
+  .detail-item .k{font-size:11px; color:var(--text-mute); font-weight:700; text-transform:uppercase; letter-spacing:.3px;}
+  .detail-item .v{font-size:14px; margin-top:3px; word-break:break-word;}
+  .detail-item .v a{color:var(--blue);}
+  .detail-item img.thumb{max-width:100%; border-radius:6px; border:1px solid var(--border); margin-top:4px; max-height:160px;}
+  .edit-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:14px; border-top:1px dashed var(--border);}
+  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .btn-save{flex:1; background:var(--green); color:#fff; border:none; padding:11px; border-radius:7px; font-weight:700; cursor:pointer;}
+  .btn-delete{background:var(--red-bg); color:var(--red); border:1px solid var(--red); padding:11px 18px; border-radius:7px; font-weight:700; cursor:pointer;}
+  .modal-msg{margin-top:10px; font-weight:600; font-size:13px;}
+
+  @media (max-width:640px){
+    .detail-grid, .edit-row{grid-template-columns:1fr;}
+    .navbar{padding:12px 16px;}
+    .container{padding:16px;}
+  }
+</style>
 </head>
 <body>
 
 <div class="navbar">
-    <h1>जमीन सेवा (JameenSeva.in) - लाइव डेटाबेस मैनेजर</h1>
-    <button class="btn-logout" id="logoutBtn">Logout</button>
+  <div class="brand">
+    <span class="dot"></span>
+    <div>
+      <h1 class="lang-dev">जमीन सेवा — एडमिन डैशबोर्ड</h1>
+      <div class="sub">JameenSeva.in Live Database Manager</div>
+    </div>
+  </div>
+  <button class="btn-logout" id="logoutBtn">Logout</button>
 </div>
 
 <div class="container">
-    
-    <div class="tabs-container">
-        <button class="tab-btn active" onclick="switchTable('panchnama batwara')">📄 पंचनामा बंटवारा</button>
-        <button class="tab-btn" onclick="switchTable('khatiyan order')">📑 खतियान ऑर्डर्स</button>
-        <button class="tab-btn" onclick="switchTable('jamabandi_orders')">💳 जमाबंदी ऑर्डर्स</button>
-        <button class="tab-btn" onclick="switchTable('amins')">🕵️‍♂️ अमीन लिस्ट</button>
-        <button class="tab-btn" onclick="switchTable('amin-booking')">📅 अमीन बुकिंग</button>
+
+  <div class="tabs-container lang-dev" id="tabsContainer"></div>
+
+  <div class="summary-row" id="summaryRow"></div>
+
+  <details class="add-panel">
+    <summary class="lang-dev">➕ नया रिकॉर्ड जोड़ें (मैन्युअल एंट्री)</summary>
+    <div class="add-body">
+      <form id="dynamicForm">
+        <div class="form-grid" id="dynamicInputs"></div>
+        <button type="submit" class="btn-submit lang-dev">डेटाबेस में सेव करें</button>
+      </form>
+      <div id="formMessage"></div>
     </div>
+  </details>
 
-    <div class="main-layout">
-        
-        <div class="card">
-            <h3 id="formTitle">डेटा जोड़ें - पंचनामा बंटवारा</h3>
-            <form id="dynamicForm">
-                <div id="dynamicInputs"></div>
-                <button type="submit" class="btn-submit">डेटाबेस में सेव करें</button>
-            </form>
-            <div id="formMessage"></div>
-        </div>
+  <div class="toolbar">
+    <input type="text" id="searchInput" class="lang-dev" placeholder="खोजें: नाम, मोबाइल, ऑर्डर ID, ज़िला...">
+    <select id="statusFilter" class="lang-dev"><option value="">सभी स्टेटस</option></select>
+    <button class="btn-outline btn-refresh lang-dev" id="refreshBtn">🔄 रिफ्रेश करें</button>
+  </div>
 
-        <div class="card">
-            <h3 id="tableTitle">लाइव रिकॉर्ड्स - पंचनामा बंटवारा</h3>
-            <div id="loadingText">डेटा लोड हो रहा है...</div>
-            <div class="table-container">
-                <table id="dataTable" style="display: none;">
-                    <thead id="tableHead"></thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
-        </div>
-
+  <div class="card">
+    <div id="loadingText" class="lang-dev">डेटा लोड हो रहा है...</div>
+    <div class="table-container">
+      <table id="dataTable" style="display:none;">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
     </div>
+    <div class="empty-state lang-dev" id="emptyState" style="display:none;">इस टेबल में कोई मिलान रिकॉर्ड नहीं मिला।</div>
+  </div>
+
+</div>
+
+<!-- Detail / Edit Modal -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="lang-dev" id="modalTitle">रिकॉर्ड विवरण</h3>
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-grid" id="modalDetailGrid"></div>
+      <div class="edit-row" id="modalEditRow"></div>
+      <div class="modal-actions">
+        <button class="btn-save lang-dev" id="modalSaveBtn">बदलाव सेव करें</button>
+        <button class="btn-delete lang-dev" id="modalDeleteBtn">डिलीट करें</button>
+      </div>
+      <div class="modal-msg" id="modalMsg"></div>
+    </div>
+  </div>
 </div>
 
 <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    // ⚠️ APNI SUPABASE KI DETAILS YAHAN BHARO
-    const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
+// ⚠️ APNI SUPABASE KI DETAILS
+const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
 
-    let currentTable = 'panchnama batwara';
+// ==========================================================================
+// TABLE CONFIG — agar aapki Supabase table ka naam yahan diye gaye se alag
+// hai, toh sirf "table" wali value badal dein. Baaki sab automatic chalega.
+// ==========================================================================
+const TABLES = {
+  panchnama: {
+    table: 'panchnama batwara',
+    label: 'पंचनामा बंटवारा',
+    icon: '📄',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'payment_status', label:'पेमेंट', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'file_url', label:'फाइल', link:true },
+      { key:'payment_id', label:'पेमेंट ID' },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'full_address', label:'पूरा पता' },
+    ],
+  },
+  khatiyan: {
+    table: 'khatiyan order',
+    label: 'खतियान ऑर्डर्स',
+    icon: '📑',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'payment_status', label:'पेमेंट', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'khatiyan_type', label:'खतियान प्रकार' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_id', label:'पेमेंट ID' },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+    ],
+  },
+  jamabandi: {
+    table: 'jamabandi_orders',
+    label: 'जमाबंदी ऑर्डर्स',
+    icon: '💳',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'payment_status', label:'पेमेंट', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana', label:'थाना' },
+      { key:'mauja', label:'मौजा' },
+      { key:'khata', label:'खाता' },
+      { key:'khesra', label:'खेसरा' },
+      { key:'jamabandi', label:'जमाबंदी' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_method', label:'पेमेंट माध्यम' },
+      { key:'payment_id', label:'पेमेंट ID' },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+    ],
+  },
+  amins: {
+    table: 'amins',
+    label: 'अमीन लिस्ट',
+    icon: '🕵️‍♂️',
+    idKey: 'id',
+    listCols: [
+      { key:'reg_no', label:'रेग नंबर' },
+      { key:'name', label:'नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'experience', label:'अनुभव (वर्ष)' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'created_at', label:'रजिस्टर्ड', date:true },
+    ],
+    fields: [
+      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
+      { key:'name', label:'नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'experience', label:'अनुभव (वर्ष)' },
+      { key:'self_photo_url', label:'फोटो', image:true },
+      { key:'aadhar_photo_url', label:'आधार फोटो', image:true },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Approved','Rejected'] },
+    ],
+    addFields: [
+      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
+      { key:'name', label:'नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'experience', label:'अनुभव (वर्ष)', type:'number' },
+    ],
+  },
+  aminBooking: {
+    table: 'amin-booking', // ⚠️ agar Supabase mein naam alag hai (jaise "amin - booking") toh yahan fix karein
+    label: 'अमीन बुकिंग',
+    icon: '📅',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'raiyat_name', label:'ग्राहक' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'बुकिंग तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'raiyat_name', label:'ग्राहक का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Confirmed','Completed','Cancelled'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'raiyat_name', label:'ग्राहक का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'order_date', label:'बुकिंग तारीख' },
+    ],
+  },
+  khesra: {
+    table: 'khesra to khesra', // ⚠️ Supabase mein exact naam check kar lein
+    label: 'खेसरा टू खेसरा',
+    icon: '🔀',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'status', label:'स्टेटस', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_new', label:'नया खाता' },
+      { key:'khesra_new', label:'नया खेसरा' },
+      { key:'khesra_old', label:'पुराना खेसरा' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+    ],
+    editable: [
+      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+    ],
+  },
+};
 
-    // 1. Security Logic
-    async function checkSecurity() {
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user || user.id !== ADMIN_UUID) {
-            alert('अनाधिकृत प्रवेश!')
-            window.location.href = 'admin-login.html'
-        } else {
-            document.body.style.display = 'block'
-            loadTableContent() // Sab sahi hai toh pehli table load karo
-        }
-    }
+let currentKey = 'panchnama';
+let currentRows = [];
+let selectedRow = null;
 
-    // 2. Tab Change Functions (Global Window functions taaki HTML buttons access kar sakein)
-    window.switchTable = function(tableName) {
-        currentTable = tableName;
-        
-        // Active button style update karo
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        // Titles update karo
-        document.getElementById('formTitle').innerText = `डेटा जोड़ें - ${tableName}`;
-        document.getElementById('tableTitle').innerText = `लाइव रिकॉर्ड्स - ${tableName}`;
-        document.getElementById('formMessage').innerText = '';
-        
-        loadTableContent();
-    }
+// ---------------- Security ----------------
+async function checkSecurity() {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user || user.id !== ADMIN_UUID) {
+    alert('अनाधिकृत प्रवेश!')
+    window.location.href = 'admin-login.html'
+  } else {
+    document.body.style.display = 'block'
+    buildTabs();
+    loadTableContent();
+  }
+}
 
-    // 3. Dynamic UI Generation & Data Fetch
-    async function loadTableContent() {
-        document.getElementById('loadingText').style.display = 'block';
-        document.getElementById('dataTable').style.display = 'none';
-        
-        const inputsDiv = document.getElementById('dynamicInputs');
-        const thead = document.getElementById('tableHead');
-        inputsDiv.innerHTML = '';
-        
-        // Table columns ke columns set karna aapke screenshot ke hisab se
-        if (currentTable === 'panchnama batwara') {
-            inputsDiv.innerHTML = `
-                <div class="form-group"><label>Format Name</label><input type="text" id="col_name" required></div>
-                <div class="form-group"><label>Price (₹)</label><input type="number" id="col_price" required></div>
-            `;
-            thead.innerHTML = `<tr><th>ID</th><th>नाम</th><th>कीमत</th><th>बनाया गया (Created At)</th></tr>`;
-        } 
-        else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
-            inputsDiv.innerHTML = `
-                <div class="form-group"><label>Customer Name</label><input type="text" id="col_cust_name" required></div>
-                <div class="form-group"><label>District / Details</label><input type="text" id="col_details" required></div>
-                <div class="form-group"><label>Status</label><input type="text" id="col_status" placeholder="Pending / Success"></div>
-            `;
-            thead.innerHTML = `<tr><th>ID</th><th>ग्राहक का नाम</th><th>विवरण</th><th>स्टेटस</th></tr>`;
-        }
-        else if (currentTable === 'amins') {
-            inputsDiv.innerHTML = `
-                <div class="form-group"><label>Amin Name</label><input type="text" id="col_amin_name" required></div>
-                <div class="form-group"><label>Mobile Number</label><input type="text" id="col_mobile" required></div>
-                <div class="form-group"><label>Area / Jila</label><input type="text" id="col_area" required></div>
-            `;
-            thead.innerHTML = `<tr><th>ID</th><th>अमीन नाम</th><th>मोबाइल</th><th>क्षेत्र (Area)</th></tr>`;
-        }
-        else if (currentTable === 'amin-booking') {
-            inputsDiv.innerHTML = `
-                <div class="form-group"><label>Customer Name</label><input type="text" id="col_user" required></div>
-                <div class="form-group"><label>Booking Date</label><input type="text" id="col_date" placeholder="DD-MM-YYYY" required></div>
-            `;
-            thead.innerHTML = `<tr><th>ID</th><th>ग्राहक</th><th>बुकिंग तारीख</th></tr>`;
-        }
+// ---------------- Tabs ----------------
+function buildTabs(){
+  const container = document.getElementById('tabsContainer');
+  container.innerHTML = '';
+  Object.keys(TABLES).forEach(key => {
+    const cfg = TABLES[key];
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (key === currentKey ? ' active' : '');
+    btn.textContent = `${cfg.icon} ${cfg.label}`;
+    btn.onclick = () => switchTable(key);
+    btn.dataset.key = key;
+    container.appendChild(btn);
+  });
+}
 
-        // Fetch data from Supabase live
-        const { data, error } = await supabase.from(currentTable).select('*');
-        
-        if (error) {
-            document.getElementById('loadingText').innerText = 'डेटा लोड एरर: ' + error.message;
-            return;
-        }
+function switchTable(key){
+  currentKey = key;
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.key === key);
+  });
+  document.getElementById('searchInput').value = '';
+  document.getElementById('formMessage').innerText = '';
+  buildAddForm();
+  loadTableContent();
+}
 
-        const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = '';
+// ---------------- Add form ----------------
+function buildAddForm(){
+  const cfg = TABLES[currentKey];
+  const inputsDiv = document.getElementById('dynamicInputs');
+  inputsDiv.innerHTML = '';
+  cfg.addFields.forEach(f => {
+    const wrap = document.createElement('div');
+    wrap.className = 'form-group';
+    wrap.innerHTML = `
+      <label class="lang-dev">${f.label}</label>
+      <input type="${f.type || 'text'}" id="add_${f.key}">
+    `;
+    inputsDiv.appendChild(wrap);
+  });
+}
 
-        if(data.length === 0) {
-            document.getElementById('loadingText').innerText = 'इस टेबल में कोई डेटा नहीं है।';
-            return;
-        }
+document.getElementById('dynamicForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const cfg = TABLES[currentKey];
+  const msg = document.getElementById('formMessage');
+  msg.style.color = '#1c5d9e';
+  msg.innerText = 'सेव किया जा रहा है...';
 
-        // Row rendering based on current active table keys
-        data.forEach(item => {
-            let row = `<tr>`;
-            if (currentTable === 'panchnama batwara') {
-                row += `<td>${item.id}</td><td>${item.name || ''}</td><td>₹${item.price || 0}</td><td>${item.created_at ? new Date(item.created_at).toLocaleDateString() : ''}</td>`;
-            } else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
-                row += `<td>${item.id}</td><td>${item.customer_name || item.name || ''}</td><td>${item.details || item.district || ''}</td><td>${item.status || ''}</td>`;
-            } else if (currentTable === 'amins') {
-                row += `<td>${item.id}</td><td>${item.amin_name || ''}</td><td>${item.mobile || ''}</td><td>${item.area || ''}</td>`;
-            } else if (currentTable === 'amin-booking') {
-                row += `<td>${item.id}</td><td>${item.customer_name || ''}</td><td>${item.booking_date || ''}</td>`;
-            }
-            row += `</tr>`;
-            tbody.innerHTML += row;
-        });
+  const insertData = {};
+  cfg.addFields.forEach(f => {
+    const el = document.getElementById(`add_${f.key}`);
+    if (!el) return;
+    let val = el.value;
+    if (f.type === 'number') val = val ? Number(val) : null;
+    insertData[f.key] = val || null;
+  });
 
-        document.getElementById('loadingText').style.display = 'none';
-        document.getElementById('dataTable').style.display = 'table';
-    }
+  const { error } = await supabase.from(cfg.table).insert([insertData]);
+  if (error) {
+    msg.style.color = '#c0392b';
+    msg.innerText = 'एरर: ' + error.message;
+  } else {
+    msg.style.color = '#1f8a52';
+    msg.innerText = 'बधाई हो! रिकॉर्ड सेव हो गया। 🎉';
+    document.getElementById('dynamicForm').reset();
+    loadTableContent();
+  }
+});
 
-    // 4. Form Submission Logic
-    document.getElementById('dynamicForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const msg = document.getElementById('formMessage');
-        msg.style.color = 'blue';
-        msg.innerText = 'डेटाबेस में सुरक्षित किया जा रहा है...';
+// ---------------- Load + render table ----------------
+async function loadTableContent(){
+  const cfg = TABLES[currentKey];
+  document.getElementById('loadingText').style.display = 'block';
+  document.getElementById('loadingText').innerText = 'डेटा लोड हो रहा है...';
+  document.getElementById('dataTable').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
 
-        let insertData = {};
+  const { data, error } = await supabase.from(cfg.table).select('*').order('created_at', { ascending:false });
 
-        // Collect form data dynamically based on active table
-        if (currentTable === 'panchnama batwara') {
-            insertData = { 
-                name: document.getElementById('col_name').value, 
-                price: parseInt(document.getElementById('col_price').value) 
-            };
-        } else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
-            insertData = { 
-                customer_name: document.getElementById('col_cust_name').value, 
-                details: document.getElementById('col_details').value,
-                status: document.getElementById('col_status').value || 'Pending'
-            };
-        } else if (currentTable === 'amins') {
-            insertData = { 
-                amin_name: document.getElementById('col_amin_name').value, 
-                mobile: document.getElementById('col_mobile').value,
-                area: document.getElementById('col_area').value
-            };
-        } else if (currentTable === 'amin-booking') {
-            insertData = { 
-                customer_name: document.getElementById('col_user').value, 
-                booking_date: document.getElementById('col_date').value 
-            };
-        }
+  if (error) {
+    document.getElementById('loadingText').innerText = 'डेटा लोड एरर: ' + error.message + ' — कृपया table का नाम TABLES config में जांचें।';
+    return;
+  }
 
-        // Execute dynamic Supabase Insert
-        const { error } = await supabase.from(currentTable).insert([insertData]);
+  currentRows = data || [];
+  renderSummary();
+  populateStatusFilter();
+  renderTable();
+  document.getElementById('loadingText').style.display = 'none';
+}
 
-        if (error) {
-            msg.style.color = 'red';
-            msg.innerText = 'एरर: ' + error.message;
-        } else {
-            msg.style.color = 'green';
-            msg.innerText = 'बधाई हो! डेटा सुरक्षित हो गया। 🎉';
-            document.getElementById('dynamicForm').reset();
-            loadTableContent(); // Table update
-        }
+function renderSummary(){
+  const cfg = TABLES[currentKey];
+  const total = currentRows.length;
+  const pending = currentRows.filter(r => (r.status || '').toLowerCase() === 'pending').length;
+  const done = currentRows.filter(r => ['completed','approved','confirmed'].includes((r.status||'').toLowerCase())).length;
+  const rejected = currentRows.filter(r => (r.status || '').toLowerCase() === 'rejected').length;
+
+  document.getElementById('summaryRow').innerHTML = `
+    <div class="chip total"><div class="num">${total}</div><div class="label lang-dev">कुल रिकॉर्ड</div></div>
+    <div class="chip pending"><div class="num">${pending}</div><div class="label lang-dev">पेंडिंग</div></div>
+    <div class="chip done"><div class="num">${done}</div><div class="label lang-dev">पूर्ण / स्वीकृत</div></div>
+    <div class="chip rejected"><div class="num">${rejected}</div><div class="label lang-dev">रिजेक्टेड</div></div>
+  `;
+}
+
+function populateStatusFilter(){
+  const sel = document.getElementById('statusFilter');
+  const cfg = TABLES[currentKey];
+  const statusField = cfg.editable.find(f => f.key === 'status');
+  sel.innerHTML = '<option value="">सभी स्टेटस</option>';
+  if (statusField) {
+    statusField.options.forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt; o.textContent = opt;
+      sel.appendChild(o);
     });
+  }
+}
 
-    // Run security check on load
-    checkSecurity();
+function badgeClass(val){
+  const v = (val || '').toLowerCase();
+  if (['pending'].includes(v)) return 'badge-pending';
+  if (['processing','confirmed'].includes(v)) return 'badge-processing';
+  if (['completed','approved','paid','success'].includes(v)) return 'badge-completed';
+  if (['rejected','failed','cancelled'].includes(v)) return 'badge-rejected';
+  if (['refunded'].includes(v)) return 'badge-refunded';
+  return 'badge-default';
+}
 
-    // Logout trigger
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-        await supabase.auth.signOut();
-        window.location.href = 'admin-login.html';
-    });
+function fmtDate(val){
+  if (!val) return '';
+  try { return new Date(val).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); }
+  catch { return val; }
+}
+
+function getFilteredRows(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const statusF = document.getElementById('statusFilter').value;
+  return currentRows.filter(row => {
+    const matchesStatus = !statusF || (row.status || '') === statusF;
+    if (!matchesStatus) return false;
+    if (!q) return true;
+    const haystack = [row.order_id, row.raiyat_name, row.name, row.mobile, row.district, row.reg_no]
+      .filter(Boolean).join(' ').toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+function renderTable(){
+  const cfg = TABLES[currentKey];
+  const thead = document.getElementById('tableHead');
+  const tbody = document.getElementById('tableBody');
+  const rows = getFilteredRows();
+
+  thead.innerHTML = '<tr>' + cfg.listCols.map(c => `<th class="lang-dev">${c.label}</th>`).join('') + '</tr>';
+  tbody.innerHTML = '';
+
+  if (rows.length === 0) {
+    document.getElementById('dataTable').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+    return;
+  }
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('dataTable').style.display = 'table';
+
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = cfg.listCols.map(c => {
+      let val = row[c.key];
+      if (c.date) val = fmtDate(val);
+      if (c.badge) return `<td><span class="badge ${badgeClass(val)}">${val || 'N/A'}</span></td>`;
+      return `<td>${val ?? ''}</td>`;
+    }).join('');
+    tr.addEventListener('click', () => openDetail(row));
+    tbody.appendChild(tr);
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', renderTable);
+document.getElementById('statusFilter').addEventListener('change', renderTable);
+document.getElementById('refreshBtn').addEventListener('click', loadTableContent);
+
+// ---------------- Detail Modal ----------------
+function openDetail(row){
+  const cfg = TABLES[currentKey];
+  selectedRow = row;
+  document.getElementById('modalTitle').innerText = `${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
+
+  const detailGrid = document.getElementById('modalDetailGrid');
+  detailGrid.innerHTML = cfg.fields.map(f => {
+    let val = row[f.key];
+    let display = val ?? '<span style="color:#aab">—</span>';
+    if (f.link && val) display = `<a href="${val}" target="_blank" rel="noopener">फाइल देखें ↗</a>`;
+    if (f.image && val) display = `<a href="${val}" target="_blank" rel="noopener"><img class="thumb" src="${val}" alt="${f.label}"></a>`;
+    return `<div class="detail-item"><div class="k lang-dev">${f.label}</div><div class="v lang-dev">${display}</div></div>`;
+  }).join('');
+
+  const editRow = document.getElementById('modalEditRow');
+  editRow.innerHTML = cfg.editable.map(f => {
+    const options = f.options.map(o => `<option value="${o}" ${row[f.key]===o?'selected':''}>${o}</option>`).join('');
+    return `<div class="form-group"><label class="lang-dev">${f.label}</label><select id="edit_${f.key}" class="lang-dev">${options}</select></div>`;
+  }).join('');
+
+  document.getElementById('modalMsg').innerText = '';
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+document.getElementById('modalCloseBtn').addEventListener('click', () => {
+  document.getElementById('detailOverlay').classList.remove('open');
+});
+document.getElementById('detailOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'detailOverlay') document.getElementById('detailOverlay').classList.remove('open');
+});
+
+document.getElementById('modalSaveBtn').addEventListener('click', async () => {
+  const cfg = TABLES[currentKey];
+  const msg = document.getElementById('modalMsg');
+  const updateData = {};
+  cfg.editable.forEach(f => {
+    const el = document.getElementById(`edit_${f.key}`);
+    if (el) updateData[f.key] = el.value;
+  });
+
+  msg.style.color = '#1c5d9e';
+  msg.innerText = 'अपडेट किया जा रहा है...';
+
+  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  if (error) {
+    msg.style.color = '#c0392b';
+    msg.innerText = 'एरर: ' + error.message;
+  } else {
+    msg.style.color = '#1f8a52';
+    msg.innerText = 'स्टेटस अपडेट हो गया ✅';
+    Object.assign(selectedRow, updateData);
+    await loadTableContent();
+  }
+});
+
+document.getElementById('modalDeleteBtn').addEventListener('click', async () => {
+  const cfg = TABLES[currentKey];
+  if (!confirm('क्या आप वाकई इस रिकॉर्ड को डिलीट करना चाहते हैं? यह वापस नहीं होगा।')) return;
+
+  const { error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]);
+  if (error) {
+    document.getElementById('modalMsg').style.color = '#c0392b';
+    document.getElementById('modalMsg').innerText = 'एरर: ' + error.message;
+  } else {
+    document.getElementById('detailOverlay').classList.remove('open');
+    await loadTableContent();
+  }
+});
+
+// ---------------- Init ----------------
+buildAddForm();
+checkSecurity();
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  window.location.href = 'admin-login.html';
+});
 </script>
 
 </body>
