@@ -9,7 +9,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             background-color: #f4f7f6;
-            display: none; /* Shuru me body hide rahegi jab tak security check na ho jaye */
+            display: none; /* Security check tak hide rahega */
         }
         .navbar {
             background-color: #2c3e50;
@@ -30,89 +30,286 @@
             font-weight: bold;
         }
         .container {
-            padding: 30px;
-            max-width: 1200px;
+            padding: 25px;
+            max-width: 1300px;
             margin: 0 auto;
         }
-        .welcome-box {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        
+        /* Tab System Styling */
+        .tabs-container {
+            display: flex;
+            gap: 10px;
             margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
         }
-        .grid-tools {
+        .tab-btn {
+            padding: 10px 20px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        .tab-btn.active {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .main-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
         }
+        @media (max-width: 900px) {
+            .main-layout { grid-template-columns: 1fr; }
+        }
+        
         .card {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
         }
         .card h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
+        
+        /* Form elements */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #444; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-submit { background-color: #3498db; color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
+        .btn-submit:hover { background-color: #2980b9; }
+        
+        /* Table layout */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; }
+        table, th, td { border: 1px solid #e0e0e0; }
+        th, td { padding: 12px; text-align: left; }
+        th { background-color: #f8f9fa; color: #333; }
+        tr:nth-child(even) { background-color: #fdfdfd; }
+        
+        #loadingText { font-weight: bold; color: #7f8c8d; padding: 20px 0; }
+        #formMessage { margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="navbar">
-    <h1>जमीन सेवा (JameenSeva.in) - मुख्य कंट्रोल पैनल</h1>
+    <h1>जमीन सेवा (JameenSeva.in) - लाइव डेटाबेस मैनेजर</h1>
     <button class="btn-logout" id="logoutBtn">Logout</button>
 </div>
 
 <div class="container">
-    <div class="welcome-box">
-        <h2>स्वागत है, चंद्रवीर भाई! 👋</h2>
-        <p>यहाँ से आप अपनी वेबसाइट का डेटा, सेल्स और 38 जिलों का लाइव स्टेटस मैनेज कर सकते हैं।</p>
+    
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="switchTable('panchnama batwara')">📄 पंचनामा बंटवारा</button>
+        <button class="tab-btn" onclick="switchTable('khatiyan order')">📑 खतियान ऑर्डर्स</button>
+        <button class="tab-btn" onclick="switchTable('jamabandi_orders')">💳 जमाबंदी ऑर्डर्स</button>
+        <button class="tab-btn" onclick="switchTable('amins')">🕵️‍♂️ अमीन लिस्ट</button>
+        <button class="tab-btn" onclick="switchTable('amin-booking')">📅 अमीन बुकिंग</button>
     </div>
 
-    <div class="grid-tools">
+    <div class="main-layout">
+        
         <div class="card">
-            <h3>डेटा अपडेट टूल</h3>
-            <p>नया फॉर्मेट अपलोड करने या रेट बदलने का फॉर्म यहाँ आएगा।</p>
-            </div>
+            <h3 id="formTitle">डेटा जोड़ें - पंचनामा बंटवारा</h3>
+            <form id="dynamicForm">
+                <div id="dynamicInputs"></div>
+                <button type="submit" class="btn-submit">डेटाबेस में सेव करें</button>
+            </form>
+            <div id="formMessage"></div>
+        </div>
 
         <div class="card">
-            <h3>लाइव सेल्स (Razorpay Status)</h3>
-            <p>हफ़्ते की लाइव बिक्री और डाउनलोड का स्टेटस यहाँ दिखेगा।</p>
+            <h3 id="tableTitle">लाइव रिकॉर्ड्स - पंचनामा बंटवारा</h3>
+            <div id="loadingText">डेटा लोड हो रहा है...</div>
+            <div class="table-container">
+                <table id="dataTable" style="display: none;">
+                    <thead id="tableHead"></thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
         </div>
+
     </div>
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    // ⚠️ SAME SUPABASE DETAILS YAHAN BHI DALO
+    // ⚠️ APNI SUPABASE KI DETAILS YAHAN BHARO
     const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-
-    // ⚠️ APNI ADMIN USER ID (UUID) YAHAN DALO (Supabase Auth > Users me dikhegi)
     const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
 
+    let currentTable = 'panchnama batwara';
+
+    // 1. Security Logic
     async function checkSecurity() {
         const { data: { user } } = await supabase.auth.getUser()
-
-        // Agar koi user login nahi hai YA uski ID aapki Admin ID se match nahi karti
-        if (!user || user.id !== 0de0af38-6afa-4248-8057-80e276fc7763) {
-            alert('अनाधिकृत प्रवेश! कृपया पहले एडमिन लॉगिन करें।')
+        if (!user || user.id !== ADMIN_UUID) {
+            alert('अनाधिकृत प्रवेश!')
             window.location.href = 'admin-login.html'
         } else {
-            // Agar sab sahi hai toh page dikhao
             document.body.style.display = 'block'
+            loadTableContent() // Sab sahi hai toh pehli table load karo
         }
     }
 
-    // Page khulte hi security check chalao
-    checkSecurity()
+    // 2. Tab Change Functions (Global Window functions taaki HTML buttons access kar sakein)
+    window.switchTable = function(tableName) {
+        currentTable = tableName;
+        
+        // Active button style update karo
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Titles update karo
+        document.getElementById('formTitle').innerText = `डेटा जोड़ें - ${tableName}`;
+        document.getElementById('tableTitle').innerText = `लाइव रिकॉर्ड्स - ${tableName}`;
+        document.getElementById('formMessage').innerText = '';
+        
+        loadTableContent();
+    }
 
-    // Logout Button ka functional code
+    // 3. Dynamic UI Generation & Data Fetch
+    async function loadTableContent() {
+        document.getElementById('loadingText').style.display = 'block';
+        document.getElementById('dataTable').style.display = 'none';
+        
+        const inputsDiv = document.getElementById('dynamicInputs');
+        const thead = document.getElementById('tableHead');
+        inputsDiv.innerHTML = '';
+        
+        // Table columns ke columns set karna aapke screenshot ke hisab se
+        if (currentTable === 'panchnama batwara') {
+            inputsDiv.innerHTML = `
+                <div class="form-group"><label>Format Name</label><input type="text" id="col_name" required></div>
+                <div class="form-group"><label>Price (₹)</label><input type="number" id="col_price" required></div>
+            `;
+            thead.innerHTML = `<tr><th>ID</th><th>नाम</th><th>कीमत</th><th>बनाया गया (Created At)</th></tr>`;
+        } 
+        else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
+            inputsDiv.innerHTML = `
+                <div class="form-group"><label>Customer Name</label><input type="text" id="col_cust_name" required></div>
+                <div class="form-group"><label>District / Details</label><input type="text" id="col_details" required></div>
+                <div class="form-group"><label>Status</label><input type="text" id="col_status" placeholder="Pending / Success"></div>
+            `;
+            thead.innerHTML = `<tr><th>ID</th><th>ग्राहक का नाम</th><th>विवरण</th><th>स्टेटस</th></tr>`;
+        }
+        else if (currentTable === 'amins') {
+            inputsDiv.innerHTML = `
+                <div class="form-group"><label>Amin Name</label><input type="text" id="col_amin_name" required></div>
+                <div class="form-group"><label>Mobile Number</label><input type="text" id="col_mobile" required></div>
+                <div class="form-group"><label>Area / Jila</label><input type="text" id="col_area" required></div>
+            `;
+            thead.innerHTML = `<tr><th>ID</th><th>अमीन नाम</th><th>मोबाइल</th><th>क्षेत्र (Area)</th></tr>`;
+        }
+        else if (currentTable === 'amin-booking') {
+            inputsDiv.innerHTML = `
+                <div class="form-group"><label>Customer Name</label><input type="text" id="col_user" required></div>
+                <div class="form-group"><label>Booking Date</label><input type="text" id="col_date" placeholder="DD-MM-YYYY" required></div>
+            `;
+            thead.innerHTML = `<tr><th>ID</th><th>ग्राहक</th><th>बुकिंग तारीख</th></tr>`;
+        }
+
+        // Fetch data from Supabase live
+        const { data, error } = await supabase.from(currentTable).select('*');
+        
+        if (error) {
+            document.getElementById('loadingText').innerText = 'डेटा लोड एरर: ' + error.message;
+            return;
+        }
+
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+
+        if(data.length === 0) {
+            document.getElementById('loadingText').innerText = 'इस टेबल में कोई डेटा नहीं है।';
+            return;
+        }
+
+        // Row rendering based on current active table keys
+        data.forEach(item => {
+            let row = `<tr>`;
+            if (currentTable === 'panchnama batwara') {
+                row += `<td>${item.id}</td><td>${item.name || ''}</td><td>₹${item.price || 0}</td><td>${item.created_at ? new Date(item.created_at).toLocaleDateString() : ''}</td>`;
+            } else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
+                row += `<td>${item.id}</td><td>${item.customer_name || item.name || ''}</td><td>${item.details || item.district || ''}</td><td>${item.status || ''}</td>`;
+            } else if (currentTable === 'amins') {
+                row += `<td>${item.id}</td><td>${item.amin_name || ''}</td><td>${item.mobile || ''}</td><td>${item.area || ''}</td>`;
+            } else if (currentTable === 'amin-booking') {
+                row += `<td>${item.id}</td><td>${item.customer_name || ''}</td><td>${item.booking_date || ''}</td>`;
+            }
+            row += `</tr>`;
+            tbody.innerHTML += row;
+        });
+
+        document.getElementById('loadingText').style.display = 'none';
+        document.getElementById('dataTable').style.display = 'table';
+    }
+
+    // 4. Form Submission Logic
+    document.getElementById('dynamicForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg = document.getElementById('formMessage');
+        msg.style.color = 'blue';
+        msg.innerText = 'डेटाबेस में सुरक्षित किया जा रहा है...';
+
+        let insertData = {};
+
+        // Collect form data dynamically based on active table
+        if (currentTable === 'panchnama batwara') {
+            insertData = { 
+                name: document.getElementById('col_name').value, 
+                price: parseInt(document.getElementById('col_price').value) 
+            };
+        } else if (currentTable === 'khatiyan order' || currentTable === 'jamabandi_orders') {
+            insertData = { 
+                customer_name: document.getElementById('col_cust_name').value, 
+                details: document.getElementById('col_details').value,
+                status: document.getElementById('col_status').value || 'Pending'
+            };
+        } else if (currentTable === 'amins') {
+            insertData = { 
+                amin_name: document.getElementById('col_amin_name').value, 
+                mobile: document.getElementById('col_mobile').value,
+                area: document.getElementById('col_area').value
+            };
+        } else if (currentTable === 'amin-booking') {
+            insertData = { 
+                customer_name: document.getElementById('col_user').value, 
+                booking_date: document.getElementById('col_date').value 
+            };
+        }
+
+        // Execute dynamic Supabase Insert
+        const { error } = await supabase.from(currentTable).insert([insertData]);
+
+        if (error) {
+            msg.style.color = 'red';
+            msg.innerText = 'एरर: ' + error.message;
+        } else {
+            msg.style.color = 'green';
+            msg.innerText = 'बधाई हो! डेटा सुरक्षित हो गया। 🎉';
+            document.getElementById('dynamicForm').reset();
+            loadTableContent(); // Table update
+        }
+    });
+
+    // Run security check on load
+    checkSecurity();
+
+    // Logout trigger
     document.getElementById('logoutBtn').addEventListener('click', async () => {
-        await supabase.auth.signOut()
-        window.location.href = 'admin-login.html'
-    })
+        await supabase.auth.signOut();
+        window.location.href = 'admin-login.html';
+    });
 </script>
 
 </body>
