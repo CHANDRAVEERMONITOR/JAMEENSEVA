@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jameen Seva - Admin Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .login-card h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #34495e;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #2ecc71;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #27ae60;
+        }
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>जमीन सेवा - एडमिन लॉगिन</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label>Email ID</label>
+            <form-group><input type="email" id="email" placeholder="admin@jameenseva.in" required></form-group>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <form-group><input type="password" id="password" placeholder="******" required></form-group>
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+    </form>
+    <div id="message"></div>
+</div>
+
+<script type="module">
+    // Supabase CDN Library
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    // ⚠️ APNI SUPABASE DETAILS YAHAN DALO
+    const SUPABASE_URL = 'YOUR_SUPABASE_URL'
+    const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault()
+        const email = document.getElementById('email').value
+        const password = document.getElementById('password').value
+        const messageDiv = document.getElementById('message')
+
+        messageDiv.style.color = 'blue'
+        messageDiv.innerText = 'Checking...'
+
+        // Supabase Auth se login process
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        })
+
+        if (error) {
+            messageDiv.style.color = 'red'
+            messageDiv.innerText = 'Login Failed: ' + error.message
+        } else {
+            messageDiv.style.color = 'green'
+            messageDiv.innerText = 'Success! Redirecting...'
+            // Login hone ke baad sidha dashboard par bhejo
+            setTimeout(() => {
+                window.location.href = 'admin-dashboard.html'
+            }, 1000)
+        }
+    })
+</script>
+
+</body>
+</html>
