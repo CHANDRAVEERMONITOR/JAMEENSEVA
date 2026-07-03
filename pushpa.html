@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDS - Document Generation System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bds-blue: #0033aa;
+    --bds-emerald: #014421;
+    --bds-gold: #b8860b;
+    --paper-bg: #ffffff;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f5f9;
+  }
+  .font-heading { font-family: 'Cinzel', serif; }
+  .font-title { font-family: 'Playfair Display', serif; }
+  
+  /* A4 Setup */
+  .a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 15px auto;
+    background: var(--paper-bg);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    position: relative;
+    padding: 20mm 15mm;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    page-break-after: always;
+  }
+
+  /* Document Headers */
+  .bds-header {
+    border-bottom: 2px solid var(--bds-emerald);
+    padding-bottom: 4px;
+    margin-bottom: 6mm;
+  }
+
+  /* Tables */
+  .bds-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9pt;
+    margin-top: 3mm;
+    margin-bottom: 3mm;
+  }
+  .bds-table th {
+    background-color: var(--bds-emerald);
+    color: white;
+    font-weight: 600;
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+  }
+  .bds-table td {
+    padding: 5px 10px;
+    border: 1px solid #cbd5e1;
+  }
+  .bds-table tr:nth-child(even) { background-color: #f8fafc; }
+
+  /* Badges */
+  .gov-logo-item {
+    font-size: 5.5pt;
+    font-weight: 700;
+    text-align: center;
+    border: 0.2mm solid #cbd5e1;
+    padding: 2px 4px;
+    background: #fff;
+    border-radius: 2px;
+    min-width: 28mm;
+  }
+
+  @media print {
+    body { background: none; padding: 0; }
+    .no-print { display: none !important; }
+    .a4-page {
+      margin: 0 !important;
+      box-shadow: none !important;
+      page-break-after: always;
+    }
+  }
+</style>
+</head>
+<body class="text-gray-800">
+
+<!-- CONTROL PANEL (NO-PRINT) -->
+<div class="no-print sticky top-0 z-50 bg-slate-900 text-white p-4 shadow-md flex flex-wrap items-center justify-between gap-4">
+  <div class="flex items-center gap-3">
+    <div class="bg-amber-500 text-slate-950 font-bold px-2.5 py-1 rounded text-sm">BDS Tool Suite</div>
+    <h1 class="text-base font-semibold tracking-wide">Er. Chandraveer Yadav - Executive Document Engine</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <span class="text-xs text-slate-400">GitHub Profile Username:</span>
+    <input type="text" id="git-user" value="APNA_GITHUB_USERNAME_YAHAN_LIKHEIN" class="bg-slate-800 border border-slate-700 rounded px-2 py-1 text-xs text-amber-400 focus:outline-none w-48 font-mono" placeholder="username">
+    <button onclick="updateSignatures()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-1 rounded text-xs transition-colors">Apply Sign</button>
+  </div>
+  <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-1.5 rounded text-sm shadow transition-colors flex items-center gap-2">
+    🖨️ Print Complete Batch
+  </button>
+</div>
+
+<!-- ==================== DOCUMENT 1: ACCEPTANCE LETTER ==================== -->
+<div class="a4-page">
+  <!-- Header -->
+  <div class="bds-header flex justify-between items-start">
+    <div>
+      <h2 class="font-heading text-2xl font-extrabold text-emerald-900 tracking-wide">BIHAR DIGITAL SERVICES</h2>
+      <p class="text-xs text-gray-500 tracking-wider">Empowering Digital Growth &bull; Darbhanga, Bihar</p>
+      <p class="text-[8pt] text-gray-400 mt-1">Arfabad Colony, East Nahar Road, Bajrangpuri, Patna-800007<br>Contact: +91 7050936593 | contact@ezyintern.in</p>
+    </div>
+    <div class="text-right text-xs text-gray-500 font-mono">
+      <p><b>Ref No:</b> BDS/2026/INT/21795</p>
+      <p><b>Date:</b> 30 May 2026</p>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="text-center my-4">
+    <h3 class="font-title text-xl font-bold text-slate-800 underline decoration-amber-500 decoration-2 underline-offset-4">INTERNSHIP ACCEPTANCE LETTER</h3>
+  </div>
+
+  <!-- Body -->
+  <div class="text-xs space-y-3 text-justify leading-relaxed">
+    <p>To,<br><b class="text-sm tracking-wide">KAMLESH YADAV</b><br>Roll/Reg No: 2322041080208<br>M.M.T.M. College, Darbhanga</p>
+    
+    <p class="pt-2">Dear Candidate,</p>
+    <p>We are pleased to accept your application and formally offer you an internship at <b>Bihar Digital Services</b>. Our internship programmes are designed in full alignment with NEP-2020, AICTE, and UGC Internship Guidelines, adapting perfectly to your university's specific educational internship framework.</p>
+    
+    <p>Your mandatory structural internship program coordinates are detailed comprehensively below:</p>
+
+    <!-- Details Grid -->
+    <div class="border border-gray-200 rounded-lg overflow-hidden my-3">
+      <div class="grid grid-cols-3 bg-gray-50 border-b border-gray-200 p-2 font-semibold text-emerald-900"><div class="col-span-1">Parameter</div><div class="col-span-2">Official Enrollment Value</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">Student Full Name</div><div class="col-span-2 font-bold">Kamlesh Yadav</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">University Roll Number</div><div class="col-span-2 font-mono">2322041080208</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">College & University</div><div class="col-span-2">M.M.T.M. College, LNMU Darbhanga</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">Department / Stream</div><div class="col-span-2">B.A. (History) - Semester 5</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">Internship Domain</div><div class="col-span-2 text-emerald-800 font-semibold">Digital Marketing & Social Media Management</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">Duration Metric / Mode</div><div class="col-span-2">120 Hours Total / Online Operational Mode</div></div>
+      <div class="grid grid-cols-3 border-b border-gray-100 p-2"><div class="font-medium text-gray-600">Active Timeline</div><div class="col-span-2 font-medium text-amber-800">1 June 2026 to 20 June 2026</div></div>
+      <div class="grid grid-cols-3 p-2"><div class="font-medium text-gray-600">Stipend Stipulation</div><div class="col-span-2 text-gray-500 italic">Not Applicable (Academic Credit Framework)</div></div>
+    </div>
+
+    <p>Please report to your assigned digital mentor on your scheduled start date. During the allocated schedule, you are required to maintain strict adherence to timeline protocols, submit comprehensive logs, and observe complete corporate discipline under company parameters.</p>
+    <p>We look forward to an enriching professional collaboration.</p>
+  </div>
+
+  <!-- Sign & Seal Area -->
+  <div class="mt-auto pt-6 border-t border-gray-100 flex justify-between items-end">
+    <div class="text-[7pt] text-gray-400 font-mono">
+      Verification Token: BDS-ACC-21795<br>System Date: 30 May 2026
+    </div>
+    
+    <!-- Signature Component Container -->
+    <div class="text-center relative pr-4" style="min-width: 55mm;">
+      <!-- Real Blue Stamp Layered behind -->
+      <div class="absolute -top-14 -left-12 opacity-85 select-none pointer-events-none transform -rotate-12 border-2 border-double border-blue-600 rounded-full w-24 h-24 flex items-center justify-center text-[5pt] text-blue-600 font-extrabold font-mono p-1">
+        <div class="border border-dashed border-blue-600 rounded-full w-full h-full flex flex-col items-center justify-center">
+          <span>BIHAR DIGITAL</span><span>SERVICES</span><span class="text-xs my-0.5">✓</span><span>OFFICIAL SEAL</span>
+        </div>
+      </div>
+      <!-- GitHub Scanned Signature image line -->
+      <div class="h-12 flex items-end justify-center border-b border-gray-400 mb-1 relative">
+        <img class="git-sign-img h-14 object-contain mix-blend-multiply pointer-events-none select-none absolute bottom-0" src="https://raw.githubusercontent.com/APNA_GITHUB_USERNAME_YAHAN_LIKHEIN/sing.jpg/main/sing.jpg" onerror="this.style.opacity='0';" alt="">
+      </div>
+      <p class="font-title font-bold text-xs text-gray-900">Er. Chandraveer Yadav</p>
+      <p class="text-[8pt] text-emerald-800 font-semibold uppercase tracking-wider">Founder & CEO</p>
+    </div>
+  </div>
+
+  <!-- Corporate Grid Accreditation Bottom Row -->
+  <div class="flex justify-between items-center gap-2 border-t border-amber-500 mt-4 pt-2">
+    <div class="gov-logo-item">👑 <b>DPIIT</b> #startupindia</div>
+    <div class="gov-logo-item">🌐 <b>National</b> Internship Portal</div>
+    <div class="gov-logo-item">⚙️ <b>ISO 9001:2015</b> Certified Co.</div>
+    <div class="gov-logo-item">🏛️ Ministry of <b>MSME</b></div>
+    <div class="text-[7pt] text-right text-emerald-900 font-bold leading-tight">BIHAR DIGITAL SERVICES<br><span class="text-[5.5pt] font-mono text-gray-500">UDYAM-BR-10-0039996</span></div>
+  </div>
+</div>
+
+<!-- ==================== DOCUMENT 2: INTERNSHIP LOGBOOK ==================== -->
+<div class="a4-page">
+  <div class="bds-header flex justify-between items-start">
+    <div>
+      <h2 class="font-heading text-xl font-extrabold text-emerald-900">BIHAR DIGITAL SERVICES</h2>
+      <p class="text-[7pt] text-gray-500 uppercase tracking-wider">Academic Compliance Tracking System</p>
+    </div>
+    <div class="text-right text-[8pt] font-mono text-gray-500">
+      <p><b>Document:</b> Internship Logbook</p>
+      <p><b>Issue Date:</b> 3 July 2026</p>
+    </div>
+  </div>
+
+  <div class="bg-slate-50 border border-gray-200 p-3 rounded-md text-xs grid grid-cols-2 gap-x-6 gap-y-1.5 mb-2">
+    <div><b>Student Name:</b> Kamlesh Yadav</div>
+    <div><b>University:</b> LNMU, Darbhanga</div>
+    <div><b>College:</b> M.M.T.M. College, Darbhanga</div>
+    <div><b>University Roll No:</b> 2322041080208</div>
+    <div><b>Course & Subject:</b> UG / B.A. (History)</div>
+    <div><b>Semester / Domain:</b> Semester 5 / Digital Marketing</div>
+    <div><b>Active Timeline:</b> 1 June 2026 - 20 June 2026</div>
+    <div><b>Duration / Mode:</b> 120 Hours / Online</div>
+  </div>
+
+  <div class="text-center my-1">
+    <h3 class="text-xs font-bold text-gray-700 tracking-widest uppercase bg-amber-100 py-1 rounded">Daily Progress Activity Log (20 Days Schedule)</h3>
+  </div>
+
+  <!-- Table Core Content -->
+  <table class="bds-table">
+    <thead>
+      <tr>
+        <th style="width: 8%">Day</th>
+        <th style="width: 15%">Date</th>
+        <th style="width: 57%">Technical Activity / Topic Covered</th>
+        <th style="width: 20%">Remarks / Verification</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>01/06/2026</td><td>Introduction to Digital Marketing Framework & BDS Project Ecosystem</td><td>Satisfactory</td></tr>
+      <tr><td>2</td><td>02/06/2026</td><td>Social Media Account Auditing & Target Audience Personas Setup</td><td>Completed</td></tr>
+      <tr><td>3</td><td>03/06/2026</td><td>Content Strategy Planning & Dynamic Editorial Calendar Management</td><td>Excellent</td></tr>
+      <tr><td>4</td><td>04/06/2026</td><td>Graphic Asset Creation via Design Tools & Brand Consistent Layouts</td><td>Approved</td></tr>
+      <tr><td>5</td><td>05/06/2026</td><td>Copywriting Fundamentals: Captions, Hashtag Frameworks & CTAs</td><td>Satisfactory</td></tr>
+      <tr><td>6</td><td>06/06/2026</td><td>Facebook & Instagram Page Optimization and Organic Growth Analysis</td><td>Completed</td></tr>
+      <tr><td>7</td><td>07/06/2026</td><td>Weekly Review: Performance Metrics & Insights Assessment Phase</td><td>Verified</td></tr>
+      <tr><td>8</td><td>08/06/2026</td><td>Introduction to Meta Business Suite & Community Management Protocols</td><td>Approved</td></tr>
+      <tr><td>9</td><td>09/06/2026</td><td>Paid Ad Campaign Basics: Structuring Ad Sets & Objectives Mapping</td><td>Excellent</td></tr>
+      <tr><td>10</td><td>10/06/2026</td><td>Budget Allocation Strategies, Bidding Systems & Audience targeting</td><td>Completed</td></tr>
+      <tr><td>11</td><td>11/06/2026</td><td>A/B Testing Implementation for Ad Creatives and Performance Tuning</td><td>Satisfactory</td></tr>
+      <tr><td>12</td><td>12/06/2026</td><td>Lead Generation Campaigns Configuration & Custom Funnel Flow Hooks</td><td>Verified</td></tr>
+      <tr><td>13</td><td>13/06/2026</td><td>LinkedIn & Twitter Professional Outreach Campaign Implementations</td><td>Completed</td></tr>
+      <tr><td>14</td><td>14/06/2026</td><td>Weekly Milestone Evaluation: Paid Marketing Analytics Overview</td><td>Excellent</td></tr>
+      <tr><td>15</td><td>15/06/2026</td><td>Search Engine Optimization (SEO) On-Page Basics & Keywords Map</td><td>Approved</td></tr>
+      <tr><td>16</td><td>16/06/2026</td><td>Google Analytics (GA4) Tracking Metrics Setup & Behavior Dashboard</td><td>Completed</td></tr>
+      <tr><td>17</td><td>17/06/2026</td><td>Email Marketing Frameworks: Newsletters Architecture & Automated Loops</td><td>Verified</td></tr>
+      <tr><td>18</td><td>18/06/2026</td><td>Online Reputation Management (ORM) & Feedback Loop Interventions</td><td>Excellent</td></tr>
+      <tr><td>19</td><td>19/06/2026</td><td>Final Project Compilation: Integrated Digital Marketing Project Board</td><td>Completed</td></tr>
+      <tr><td>20</td><td>20/06/2026</td><td>Final Validation, Reporting Phase, and Program Closure Presentation</td><td>Outstanding</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Sign Footer -->
+  <div class="mt-auto pt-4 border-t border-gray-100 flex justify-between items-end">
+    <span class="text-[7pt] text-gray-400 font-mono">Student Sign: Kamlesh Yadav</span>
+    <div class="text-center relative" style="min-width: 50mm;">
+      <div class="h-10 flex items-end justify-center border-b border-gray-400 mb-1 relative">
+        <img class="git-sign-img h-12 object-contain mix-blend-multiply absolute bottom-0" src="https://raw.githubusercontent.com/APNA_GITHUB_USERNAME_YAHAN_LIKHEIN/sing.jpg/main/sing.jpg" onerror="this.style.opacity='0';" alt="">
+      </div>
+      <p class="font-bold text-[9pt] text-gray-900">Er. Chandraveer Yadav</p>
+      <p class="text-[7pt] text-emerald-800 font-semibold uppercase">Founder & CEO</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== DOCUMENT 3: ATTENDANCE REPORT ==================== -->
+<div class="a4-page">
+  <div class="bds-header flex justify-between items-start">
+    <div>
+      <h2 class="font-heading text-xl font-extrabold text-emerald-900">BIHAR DIGITAL SERVICES</h2>
+      <p class="text-[7pt] text-gray-500 uppercase tracking-wider">Attendance Verification & Audit Manifest</p>
+    </div>
+    <div class="text-right text-[8pt] font-mono text-gray-500">
+      <p><b>Document:</b> Attendance Report</p>
+      <p><b>Issue Date:</b> 20 June 2026</p>
+    </div>
+  </div>
+
+  <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-md text-xs grid grid-cols-3 gap-4 mb-4 text-center">
+    <div class="bg-white p-2 rounded shadow-sm border border-emerald-100">
+      <div class="text-gray-500 text-[8pt] font-semibold uppercase">Total Program Days</div>
+      <div class="text-xl font-bold text-emerald-900 mt-0.5">20 Days</div>
+    </div>
+    <div class="bg-white p-2 rounded shadow-sm border border-emerald-100">
+      <div class="text-gray-500 text-[8pt] font-semibold uppercase">Days Marked Present</div>
+      <div class="text-xl font-bold text-emerald-900 mt-0.5">20 Days</div>
+    </div>
+    <div class="bg-white p-2 rounded shadow-sm border border-emerald-100">
+      <div class="text-gray-500 text-[8pt] font-semibold uppercase">Attendance Percentage</div>
+      <div class="text-xl font-bold text-blue-700 mt-0.5">100.0%</div>
+    </div>
+  </div>
+
+  <div class="text-xs font-bold text-gray-700 mb-2 tracking-wide">METRIC LOGS SPECIFICATIONS:</div>
+  
+  <div class="grid grid-cols-2 gap-x-8">
+    <!-- Column 1 (Days 1 to 10) -->
+    <table class="bds-table !mt-0">
+      <thead>
+        <tr><th>Timeline Block</th><th>Date</th><th>Log Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day 1</td><td>01/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 2</td><td>02/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 3</td><td>03/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 4</td><td>04/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 5</td><td>05/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 6</td><td>06/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 7</td><td>07/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 8</td><td>08/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 9</td><td>09/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 10</td><td>10/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Column 2 (Days 11 to 20) -->
+    <table class="bds-table !mt-0">
+      <thead>
+        <tr><th>Timeline Block</th><th>Date</th><th>Log Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Day 11</td><td>11/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 12</td><td>12/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 13</td><td>13/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 14</td><td>14/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 15</td><td>15/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 16</td><td>16/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 17</td><td>17/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 18</td><td>18/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 19</td><td>19/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+        <tr><td>Day 20</td><td>20/06/2026</td><td class="text-emerald-700 font-bold">✓ Present</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="text-[9pt] text-gray-500 italic mt-4 text-center border border-dashed border-gray-300 p-2 rounded">
+    "This system attendance log stands certified by the institutional dashboard registry and matches 100% cloud-tracked active session parameters."
+  </p>
+
+    <!-- Sign Footer -->
+  <div class="mt-auto pt-6 border-t border-gray-100 flex justify-between items-end">
+    <div class="text-[7pt] text-gray-400 font-mono">
+      Candidate Identity Verified<br>Email: dspklydbg@gmail.com
+    </div>
+    
+    <div class="text-center relative" style="min-width: 50mm;">
+      <div class="h-10 flex items-end justify-center border-b border-gray-400 mb-1 relative">
+        <img class="git-sign-img h-12 object-contain mix-blend-multiply absolute bottom-0" src="https://raw.githubusercontent.com/APNA_GITHUB_USERNAME_YAHAN_LIKHEIN/sing.jpg/main/sing.jpg" onerror="this.style.opacity='0';" alt="">
+      </div>
+      <p class="font-bold text-[9pt] text-gray-900">Er. Chandraveer Yadav</p>
+      <p class="text-[7pt] text-emerald-800 font-semibold uppercase">Founder & CEO</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateSignatures() {
+    const username = document.getElementById('git-user').value.trim();
+    if(!username || username === 'APNA_GITHUB_USERNAME_YAHAN_LIKHEIN') {
+      alert('Kripya apna sahi GitHub Username daal kar Apply karein.');
+      return;
+    }
+    
+    const imgElements = document.querySelectorAll('.git-sign-img');
+    imgElements.forEach(img => {
+      img.style.opacity = '1';
+      // Fallback strategies for main vs master branches
+      img.src = `https://raw.githubusercontent.com/${username}/sing.jpg/main/sing.jpg`;
+      img.onerror = function() {
+        this.src = `https://raw.githubusercontent.com/${username}/sing.jpg/master/sing.jpg`;
+        this.onerror = null; // Prevent looping
+      };
+    });
+  }
+</script>
+
+</body>
+</html>
