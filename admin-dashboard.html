@@ -175,8 +175,23 @@
   .edit-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:14px; border-top:1px dashed var(--border);}
   .modal-actions{display:flex; gap:10px; margin-top:20px;}
   .btn-save{flex:1; background:var(--green); color:#fff; border:none; padding:11px; border-radius:7px; font-weight:700; cursor:pointer;}
+  .btn-save:disabled{opacity:.6; cursor:not-allowed;}
   .btn-delete{background:var(--red-bg); color:var(--red); border:1px solid var(--red); padding:11px 18px; border-radius:7px; font-weight:700; cursor:pointer;}
-  .modal-msg{margin-top:10px; font-weight:600; font-size:13px;}
+  .modal-msg{margin-top:10px; font-weight:600; font-size:13px; padding:0;}
+  .modal-msg.box{padding:10px 12px; border-radius:7px;}
+  .modal-msg.msg-info{background:var(--blue-bg); color:var(--blue);}
+  .modal-msg.msg-success{background:var(--green-bg); color:var(--green);}
+  .modal-msg.msg-error{background:var(--red-bg); color:var(--red);}
+
+  .quick-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
+  .quick-chip{
+    padding:5px 12px; border-radius:20px; border:1px solid var(--border); background:#f8f9fb;
+    font-size:12px; font-weight:600; cursor:pointer; color:var(--text); transition:.12s;
+  }
+  .quick-chip:hover{border-color:var(--navy); color:var(--navy);}
+  .custom-status-input{margin-top:8px; display:none;}
+  .custom-status-input.show{display:block;}
+  .field-block{margin-bottom:4px;}
 
   @media (max-width:640px){
     .detail-grid, .edit-row{grid-template-columns:1fr;}
@@ -296,8 +311,11 @@ const TABLES = {
       { key:'payment_id', label:'पेमेंट ID' },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','Failed','Refunded'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -339,8 +357,11 @@ const TABLES = {
       { key:'payment_id', label:'पेमेंट ID' },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','Failed','Refunded'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -382,8 +403,11 @@ const TABLES = {
       { key:'payment_id', label:'पेमेंट ID' },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', options:['Pending','Paid','Failed','Refunded'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Payment Verification','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','Failed','Refunded'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -418,7 +442,9 @@ const TABLES = {
       { key:'aadhar_photo_url', label:'आधार फोटो', image:true },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Approved','Rejected'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Under Review','Approved','Rejected','Suspended'],
+        quick:['Under Review','Approved','Rejected'] },
     ],
     addFields: [
       { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
@@ -457,7 +483,9 @@ const TABLES = {
       { key:'mobile', label:'मोबाइल' },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Confirmed','Completed','Cancelled'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Confirmed','Amin Assigned','Visit Scheduled','In Progress','Completed','Cancelled','Rescheduled'],
+        quick:['Confirmed','Amin Assigned','In Progress','Completed','Cancelled'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -494,7 +522,9 @@ const TABLES = {
       { key:'mobile', label:'मोबाइल' },
     ],
     editable: [
-      { key:'status', label:'स्टेटस', type:'select', options:['Pending','Processing','Completed','Rejected'] },
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -723,10 +753,52 @@ function openDetail(row){
 
   const editRow = document.getElementById('modalEditRow');
   editRow.innerHTML = cfg.editable.map(f => {
-    const options = f.options.map(o => `<option value="${o}" ${row[f.key]===o?'selected':''}>${o}</option>`).join('');
-    return `<div class="form-group"><label class="lang-dev">${f.label}</label><select id="edit_${f.key}" class="lang-dev">${options}</select></div>`;
+    const currentVal = row[f.key] || '';
+    const isKnown = f.options.includes(currentVal);
+    const options = f.options.map(o => `<option value="${o}" ${currentVal===o?'selected':''}>${o}</option>`).join('');
+    const customOptionHtml = f.custom
+      ? `<option value="__custom__" ${(!isKnown && currentVal) ? 'selected' : ''}>✏️ Custom / अन्य लिखें</option>`
+      : '';
+    const chipsHtml = (f.quick && f.quick.length)
+      ? `<div class="quick-chips">${f.quick.map(q => `<button type="button" class="quick-chip" data-target="edit_${f.key}" data-value="${q}">${q}</button>`).join('')}</div>`
+      : '';
+    const customInputHtml = f.custom
+      ? `<input type="text" id="edit_${f.key}_custom" class="custom-status-input lang-dev ${(!isKnown && currentVal) ? 'show' : ''}"
+           placeholder="कस्टम ${f.label} लिखें..." value="${(!isKnown && currentVal) ? currentVal : ''}">`
+      : '';
+    return `
+      <div class="form-group field-block">
+        <label class="lang-dev">${f.label}</label>
+        <select id="edit_${f.key}" class="lang-dev">${options}${customOptionHtml}</select>
+        ${customInputHtml}
+        ${chipsHtml}
+      </div>`;
   }).join('');
 
+  // Wire up: selecting "Custom" reveals free-text input
+  cfg.editable.forEach(f => {
+    if (!f.custom) return;
+    const sel = document.getElementById(`edit_${f.key}`);
+    const customInput = document.getElementById(`edit_${f.key}_custom`);
+    sel.addEventListener('change', () => {
+      customInput.classList.toggle('show', sel.value === '__custom__');
+      if (sel.value === '__custom__') customInput.focus();
+    });
+  });
+
+  // Wire up: quick chips set the dropdown (or custom box) instantly
+  editRow.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const targetSel = document.getElementById(chip.dataset.target);
+      const optionExists = Array.from(targetSel.options).some(o => o.value === chip.dataset.value);
+      if (optionExists) {
+        targetSel.value = chip.dataset.value;
+        targetSel.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+
+  document.getElementById('modalMsg').className = 'modal-msg';
   document.getElementById('modalMsg').innerText = '';
   document.getElementById('detailOverlay').classList.add('open');
 }
@@ -741,39 +813,83 @@ document.getElementById('detailOverlay').addEventListener('click', (e) => {
 document.getElementById('modalSaveBtn').addEventListener('click', async () => {
   const cfg = TABLES[currentKey];
   const msg = document.getElementById('modalMsg');
-  const updateData = {};
-  cfg.editable.forEach(f => {
-    const el = document.getElementById(`edit_${f.key}`);
-    if (el) updateData[f.key] = el.value;
-  });
+  const saveBtn = document.getElementById('modalSaveBtn');
 
-  msg.style.color = '#1c5d9e';
+  // Collect values, resolving "__custom__" selections to their free-text input
+  const updateData = {};
+  for (const f of cfg.editable) {
+    const el = document.getElementById(`edit_${f.key}`);
+    if (!el) continue;
+    let val = el.value;
+    if (val === '__custom__') {
+      const customEl = document.getElementById(`edit_${f.key}_custom`);
+      val = (customEl ? customEl.value : '').trim();
+      if (!val) {
+        msg.className = 'modal-msg box msg-error';
+        msg.innerText = `कृपया "${f.label}" के लिए कस्टम वैल्यू लिखें।`;
+        return;
+      }
+    }
+    updateData[f.key] = val;
+  }
+
+  saveBtn.disabled = true;
+  msg.className = 'modal-msg box msg-info';
   msg.innerText = 'अपडेट किया जा रहा है...';
 
-  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  const rowId = selectedRow[cfg.idKey];
+
+  // IMPORTANT: .select() forces Supabase to return the row(s) it actually
+  // changed. If Row Level Security silently blocks the update, PostgREST
+  // returns NO error but also 0 rows — that's the "update nahi hota" bug.
+  const { data, error } = await supabase
+    .from(cfg.table)
+    .update(updateData)
+    .eq(cfg.idKey, rowId)
+    .select();
+
+  saveBtn.disabled = false;
+
   if (error) {
-    msg.style.color = '#c0392b';
+    msg.className = 'modal-msg box msg-error';
     msg.innerText = 'एरर: ' + error.message;
-  } else {
-    msg.style.color = '#1f8a52';
-    msg.innerText = 'स्टेटस अपडेट हो गया ✅';
-    Object.assign(selectedRow, updateData);
-    await loadTableContent();
+    return;
   }
+
+  if (!data || data.length === 0) {
+    msg.className = 'modal-msg box msg-error';
+    msg.innerHTML = `अपडेट सेव नहीं हुआ ❗ Supabase ने कोई error नहीं दिया, लेकिन कोई row बदली भी नहीं —
+      इसका मतलब है <b>Row Level Security (RLS)</b> policy UPDATE को रोक रही है।
+      Supabase Dashboard → Authentication → Policies में "${cfg.table}" table पर
+      एक UPDATE policy बनाएं जो <code>auth.uid()</code> को admin से मैच करे।`;
+    return;
+  }
+
+  msg.className = 'modal-msg box msg-success';
+  msg.innerText = 'स्टेटस अपडेट हो गया ✅';
+  Object.assign(selectedRow, updateData);
+  await loadTableContent();
 });
 
 document.getElementById('modalDeleteBtn').addEventListener('click', async () => {
   const cfg = TABLES[currentKey];
+  const msg = document.getElementById('modalMsg');
   if (!confirm('क्या आप वाकई इस रिकॉर्ड को डिलीट करना चाहते हैं? यह वापस नहीं होगा।')) return;
 
-  const { error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]);
+  const { data, error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]).select();
+
   if (error) {
-    document.getElementById('modalMsg').style.color = '#c0392b';
-    document.getElementById('modalMsg').innerText = 'एरर: ' + error.message;
-  } else {
-    document.getElementById('detailOverlay').classList.remove('open');
-    await loadTableContent();
+    msg.className = 'modal-msg box msg-error';
+    msg.innerText = 'एरर: ' + error.message;
+    return;
   }
+  if (!data || data.length === 0) {
+    msg.className = 'modal-msg box msg-error';
+    msg.innerHTML = `डिलीट नहीं हुआ ❗ यह भी RLS policy की वजह से हो सकता है — "${cfg.table}" पर DELETE policy चेक करें।`;
+    return;
+  }
+  document.getElementById('detailOverlay').classList.remove('open');
+  await loadTableContent();
 });
 
 // ---------------- Init ----------------
