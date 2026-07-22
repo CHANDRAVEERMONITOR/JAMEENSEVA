@@ -214,13 +214,13 @@
       <label>WhatsApp Number:</label>
       <input type="tel" id="mobile" placeholder="10 अंकों का WhatsApp नंबर" maxlength="10">
 
-      <button id="submitBtn" onclick="saveData()">Details Safe Karein &amp; Pay ₹29</button>
+      <button id="submitBtn" onclick="saveData()">Details Safe Karein &amp; Pay ₹99</button>
     </div>
 
     <div id="paymentArea">
       <i class="fas fa-check-circle" style="font-size:50px;color:var(--primary)"></i>
       <h3>Aapka Data Save Ho Gaya Hai!</h3>
-      <p>Report tayyar karne ke liye ₹29 ka bhugtan karein.</p>
+      <p>Report tayyar karne ke liye ₹99 ka bhugtan karein.</p>
       <br>
       <form>
         <script src="https://checkout.razorpay.com/v1/payment-button.js"
@@ -301,7 +301,7 @@
     <ol class="steps">
       <li><div><span class="st">सेवा चुनें</span><span class="sd">ऊपर फॉर्म में चुनें — पुराने खेसरा से नया निकालना है या नए से पुराना। दोनों तरफ से मिलान होता है।</span></div></li>
       <li><div><span class="st">जमीन की जानकारी भरें</span><span class="sd">जिला, अंचल, गाँव, थाना नंबर और खेसरा नंबर भरें। रैयत का नाम और WhatsApp नंबर दें।</span></div></li>
-      <li><div><span class="st">₹29 का भुगतान करें</span><span class="sd">डेटा सेव होने के बाद Razorpay से सुरक्षित ऑनलाइन पेमेंट करें।</span></div></li>
+      <li><div><span class="st">₹99 का भुगतान करें</span><span class="sd">डेटा सेव होने के बाद Razorpay से सुरक्षित ऑनलाइन पेमेंट करें।</span></div></li>
       <li><div><span class="st">टीम नक्शा और डेटा जाँचती है</span><span class="sd">हमारी टीम बिहार सर्वे 2026 के नए नक्शे पर आपके खेसरा का मिलान करती है।</span></div></li>
       <li><div><span class="st">24 घंटे में WhatsApp पर रिपोर्ट</span><span class="sd">पुराने खेसरा से नए खेसरा की जानकारी WhatsApp पर भेज दी जाती है। रिपोर्ट में नक्शा भी होता है।</span></div></li>
     </ol>
@@ -493,7 +493,7 @@
     const { error } = await _supabase.from('khesra to khesra').insert([data]);
     if(error){
       alert("Connection Error: " + error.message);
-      btn.disabled = false; btn.innerHTML = "Details Safe Karein & Pay ₹29";
+      btn.disabled = false; btn.innerHTML = "Details Safe Karein & Pay ₹99";
     } else {
       document.getElementById('mainForm').style.display = "none";
       document.getElementById('paymentArea').style.display = "block";
