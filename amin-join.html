@@ -1,804 +1,346 @@
-cat > /mnt/user-data/outputs/amin-join.html << 'HTMLEOF'
 <!DOCTYPE html>
-<html lang="hi" dir="ltr">
+<html lang="hi">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amin Registration: जमीन सेवा पार्टनर बनकर कमाएं | JameenSeva.in</title>
+<meta name="description" content="Kya aap Bihar mein ek Amin hain? Jameen Seva Partner Program se judein, apne area ke zameen mapne aur batwara ke online orders direct apne mobile par payein. Free Registration!">
+<meta name="keywords" content="amin registration online, bihar amin job, jameen seva partner, land survey partner bihar">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1a5928; --dark: #2c3e50; --accent: #e67e22; --bg: #f0f2f5; }
+        body { font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif; background: var(--bg); margin: 0; color: #333; }
+        .navbar { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 700; color: var(--primary); font-size: 22px; text-decoration: none; }
+        .nav-links a { color: var(--dark); text-decoration: none; margin-left: 20px; font-size: 14px; font-weight: 600; }
+        .verify-btn { background: var(--accent); color: white !important; padding: 8px 15px; border-radius: 8px; transition: 0.3s; }
+        
+        .container { max-width: 900px; margin: 40px auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .header-banner { background: linear-gradient(135deg, var(--primary), #2d8a41); color: white; padding: 40px; text-align: center; }
+        .content-area { padding: 40px; }
 
-<!-- ══ TITLE & META — Bihar #1 rank ke liye optimized ══ -->
-<title>अमीन बुकिंग बिहार | Private Amin Booking | Digital Amin Land Report | JameenSeva.in</title>
-<meta name="description" content="बिहार में Private Amin Booking करें — जमीन नापी, Schedule बनवाएं, Digital Amin Land Report पाएं। Certified JameenSeva Amin आपके ब्लॉक में उपलब्ध। अमीन पार्टनर बनें और कमाएं ₹50,000/माह।">
-<meta name="keywords" content="private amin booking, amin booking bihar, emapi bihar, digital amin land report, amin se schedule banwana, amin booking online, bihar amin registration, जमीन नापी बुकिंग, अमीन बुकिंग बिहार, प्राइवेट अमीन, amin land measurement bihar, amin batwara schedule, certified amin bihar, amin partner program, jameen survey amin, jameenseva amin">
-<meta name="author" content="JameenSeva.in">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<link rel="canonical" href="https://jameenseva.in/amin-join.html">
-<meta name="geo.region" content="IN-BR">
-<meta name="geo.placename" content="Bihar">
+        .how-it-works { background: #fdfdfd; padding: 20px; border-radius: 15px; border: 1px solid #eee; margin-bottom: 30px; }
+        .how-it-works h3 { color: var(--primary); border-bottom: 2px solid var(--primary); display: inline-block; margin-bottom: 15px; }
+        .step-box { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
+        .step-num { background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: bold; }
+        .step-text b { color: var(--dark); display: block; }
+        .step-text p { margin: 5px 0; font-size: 14px; color: #666; }
 
-<!-- ══ GSC VERIFICATION ══ -->
-<meta name="google-site-verification" content="APNA_GSC_CODE_YAHAN_DAALEIN">
+        .rules-box { background: #fff5f5; border-left: 5px solid #e74c3c; padding: 15px; margin: 20px 0; border-radius: 5px; }
+        .rules-box h4 { margin: 0 0 10px 0; color: #c0392b; }
+        .rules-box ul { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.6; }
 
-<!-- ══ OPEN GRAPH ══ -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Private Amin Booking Bihar | Digital Amin Land Report | JameenSeva.in">
-<meta property="og:description" content="बिहार में Certified Private Amin बुक करें — जमीन नापी, Schedule, Digital Report। अमीन पार्टनर बनकर ₹50,000/माह कमाएं। Free Registration।">
-<meta property="og:url" content="https://jameenseva.in/amin-join.html">
-<meta property="og:image" content="https://jameenseva.in/logo.png">
-<meta property="og:site_name" content="JameenSeva.in">
-<meta property="og:locale" content="hi_IN">
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-<!-- ══ TWITTER ══ -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Private Amin Booking Bihar | JameenSeva.in">
-<meta name="twitter:description" content="Certified Private Amin बुक करें — जमीन नापी, Schedule, Digital Report। अमीन पार्टनर बनें।">
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
+        input, select { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        .btn { background: var(--primary); color: white; padding: 16px; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; }
+        .btn:disabled { background: #ccc; cursor: not-allowed; }
 
-<!-- ══ SCHEMAS ══ -->
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"Private Amin Booking Bihar — JameenSeva","description":"बिहार में Certified Private Amin बुकिंग सेवा। जमीन नापी, Schedule बनवाना, Digital Amin Land Report — सभी 38 जिलों में उपलब्ध।","provider":{"@type":"Organization","name":"JameenSeva.in","url":"https://jameenseva.in","logo":{"@type":"ImageObject","url":"https://jameenseva.in/logo.png"},"areaServed":{"@type":"State","name":"Bihar","addressCountry":"IN"}},"serviceType":"Land Survey & Amin Booking","areaServed":{"@type":"State","name":"Bihar"},"offers":{"@type":"Offer","price":"0","priceCurrency":"INR","description":"Amin Partner Registration Free"}}
-</script>
+        #idCard { width: 350px; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin: 20px auto; border: 2px solid var(--primary); position: relative; }
+        .id-header { background: var(--primary); color: white; padding: 15px; text-align: center; }
+        .id-body { padding: 20px; text-align: center; }
+        .user-photo-preview { width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--primary); object-fit: cover; margin-bottom: 10px; }
+        .id-info { text-align: left; font-size: 14px; margin-top: 10px; }
+        .id-info div { margin-bottom: 5px; border-bottom: 1px inset #eee; padding-bottom: 2px; }
+        .temp-badge { position: absolute; top: 30px; right: -35px; background: #27ae60; color: white; padding: 5px 40px; transform: rotate(45deg); font-size: 10px; font-weight: bold; z-index: 1; }
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Private Amin Booking Bihar में कैसे होती है?","acceptedAnswer":{"@type":"Answer","text":"JameenSeva.in पर जाएं, अपना जिला और ब्लॉक चुनें, और Certified Amin को बुक करें। Amin 24-48 घंटे में आपसे WhatsApp पर संपर्क करेगा।"}},{"@type":"Question","name":"Digital Amin Land Report क्या होती है?","acceptedAnswer":{"@type":"Answer","text":"Digital Amin Land Report में आपकी जमीन की नापी के बाद खाता, खेसरा, रकबा, चौहद्दी और नक्शा सहित पूरी जानकारी PDF में मिलती है — बिहार सर्वे 2026 के लिए मान्य।"}},{"@type":"Question","name":"Amin से Schedule (अनुसूची) कैसे बनवाएं?","acceptedAnswer":{"@type":"Answer","text":"JameenSeva के Certified Amin से Schedule (पंचनामा बटवारा अनुसूची) बनवाएं। WhatsApp 9142075859 पर संपर्क करें या ऑनलाइन बुकिंग करें।"}},{"@type":"Question","name":"Emapi (अमीन) कौन होता है?","acceptedAnswer":{"@type":"Answer","text":"Emapi या Amin (अमीन) बिहार राजस्व विभाग का अधिकृत भूमि मापक है जो जमीन की नापी, नक्शा बनाना और सर्वे कार्य करता है।"}},{"@type":"Question","name":"Amin Partner Program में कितनी कमाई होती है?","acceptedAnswer":{"@type":"Answer","text":"JameenSeva Amin Partner प्रति नापी ₹2000-₹5000 तक कमा सकता है। महीने में 15-20 केस करने पर ₹30,000-₹50,000 प्रति माह संभव है।"}}]}
-</script>
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jameenseva.in/"},{"@type":"ListItem","position":2,"name":"अमीन बुकिंग","item":"https://jameenseva.in/amin-join.html"},{"@type":"ListItem","position":3,"name":"अमीन पार्टनर रजिस्ट्रेशन","item":"https://jameenseva.in/amin-join.html#register"}]}
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --g:#1a7c3e;--gl:#22a352;--gp:#edfaf2;
-  --n:#0c2340;--nm:#1a3a5c;--blue:#1a5c8a;
-  --sf:#e67e00;--sfl:#ff9c1a;--sfp:#fff7ed;
-  --red:#dc2626;--redp:#fef2f2;--amber:#f59e0b;
-  --w:#fff;--bg:#f1f5f9;--bdr:#e2e8f0;--gray:#6b7280;
-  --sh:0 2px 16px rgba(12,35,64,.08);
-  --shm:0 8px 28px rgba(12,35,64,.13);
-  --r:13px;--rl:20px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);color:#1a202c;font-size:15px;line-height:1.8}
-
-/* NAVBAR */
-.navbar{background:var(--w);border-bottom:3px solid var(--g);position:sticky;top:0;z-index:999;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.nav-in{max-width:1200px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
-.nav-logo img{height:36px;border-radius:8px}
-.nav-logo-txt{font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--n)}
-.nav-logo-txt span{color:var(--g)}
-.nav-links{display:flex;gap:3px;align-items:center}
-.nav-links a{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:600;color:var(--n);text-decoration:none;padding:6px 10px;border-radius:7px;transition:.2s}
-.nav-links a:hover{background:var(--gp);color:var(--g)}
-.nav-cta{background:var(--g)!important;color:#fff!important;padding:7px 14px!important;border-radius:7px!important}
-@media(max-width:760px){.nav-links{display:none}}
-
-/* BC */
-.bc{background:var(--gp);padding:8px 16px;font-family:'Baloo 2',sans-serif;font-size:12px;color:var(--gray);border-bottom:1px solid rgba(26,124,62,.12)}
-.bc-in{max-width:1200px;margin:0 auto}
-.bc a{color:var(--g);text-decoration:none}
-
-/* URGENT STRIP */
-.urgent{background:linear-gradient(90deg,#7c1d1d,var(--red));color:#fff;padding:9px 16px;text-align:center;font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
-.blink{animation:blink 1.2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-
-/* HERO */
-.hero{background:linear-gradient(135deg,var(--n) 0%,#163a60 40%,#1a5c35 100%);padding:50px 16px 40px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 50%,rgba(26,124,62,.18),transparent 55%),radial-gradient(circle at 85% 20%,rgba(255,156,26,.1),transparent 50%)}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(230,127,0,.18);border:1px solid rgba(255,156,26,.4);color:#ffb84d;font-family:'Baloo 2',sans-serif;font-size:11.5px;font-weight:700;padding:4px 13px;border-radius:20px;margin-bottom:13px;position:relative}
-.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(20px,4.5vw,36px);font-weight:800;color:#fff;line-height:1.25;margin-bottom:13px;max-width:850px;margin-left:auto;margin-right:auto;position:relative}
-.hero h1 em{color:#7eeaa5;font-style:normal}
-.hero-sub{color:rgba(255,255,255,.73);font-size:15px;max-width:640px;margin:0 auto 22px;position:relative}
-.hero-stats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;position:relative}
-.hs{font-family:'Baloo 2',sans-serif;color:rgba(255,255,255,.82);font-size:13px;display:flex;align-items:center;gap:5px;text-align:center}
-.hs strong{color:#7eeaa5;font-size:20px;display:block;font-size:17px}
-.hero-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;position:relative}
-.hbtn{display:inline-flex;align-items:center;gap:7px;padding:13px 26px;border-radius:50px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;text-decoration:none;transition:.2s;cursor:pointer;border:none}
-.hbtn-g{background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;box-shadow:0 6px 20px rgba(26,124,62,.38)}
-.hbtn-g:hover{transform:translateY(-2px)}
-.hbtn-o{background:linear-gradient(135deg,var(--sf),var(--sfl));color:#fff;box-shadow:0 6px 20px rgba(230,127,0,.38)}
-.hbtn-o:hover{transform:translateY(-2px)}
-
-/* PAGE WRAP */
-.pw{max-width:1200px;margin:0 auto;padding:24px 14px 56px}
-.layout{display:grid;grid-template-columns:1fr 420px;gap:22px;align-items:start}
-@media(max-width:980px){.layout{grid-template-columns:1fr}}
-
-/* SECTION BOX */
-.sbox{background:var(--w);border-radius:var(--r);padding:28px 24px;box-shadow:var(--sh);border:1px solid var(--bdr);margin-bottom:20px}
-.slbl{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:800;letter-spacing:1.4px;color:var(--g);text-transform:uppercase;margin-bottom:5px}
-.stit{font-family:'Baloo 2',sans-serif;font-size:clamp(17px,3vw,22px);font-weight:800;color:var(--n);margin-bottom:5px}
-.ssub{font-size:13.5px;color:var(--gray);margin-bottom:18px;line-height:1.65}
-
-/* BOOKING SECTION (LEFT) */
-.booking-card{background:linear-gradient(135deg,#0c2340,#163a60);border-radius:var(--rl);padding:30px 26px;margin-bottom:20px;position:relative;overflow:hidden}
-.booking-card::before{content:'📍';position:absolute;right:-10px;top:-10px;font-size:110px;opacity:.06}
-.bc2-title{font-family:'Baloo 2',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
-.bc2-sub{font-size:13.5px;color:rgba(255,255,255,.72);margin-bottom:20px}
-.booking-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.booking-field label{display:block;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;color:rgba(255,255,255,.75);margin-bottom:5px}
-.booking-field input,.booking-field select,.booking-field textarea{
-  width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,.18);border-radius:9px;
-  font-family:'Noto Serif Devanagari',serif;font-size:14px;color:#fff;
-  background:rgba(255,255,255,.1);outline:none;transition:.2s
-}
-.booking-field input::placeholder{color:rgba(255,255,255,.45)}
-.booking-field input:focus,.booking-field select:focus{border-color:rgba(126,234,165,.6);background:rgba(255,255,255,.15)}
-.booking-field select{color:#fff}
-.booking-field select option{color:#000;background:#fff}
-.booking-field textarea{resize:vertical;min-height:70px;color:#fff}
-.booking-field.full{grid-column:1/-1}
-.book-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;border:none;border-radius:10px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:16px;cursor:pointer;transition:.2s;box-shadow:0 6px 18px rgba(26,124,62,.4);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px}
-.book-btn:hover{transform:translateY(-2px)}
-.book-success{display:none;background:rgba(126,234,165,.12);border:1.5px solid rgba(126,234,165,.35);border-radius:10px;padding:16px;margin-top:14px;text-align:center}
-.book-success .bs-icon{font-size:36px;margin-bottom:6px}
-.book-success strong{display:block;font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:#7eeaa5;margin-bottom:4px}
-.book-success p{font-size:13px;color:rgba(255,255,255,.75)}
-
-/* HOW IT WORKS */
-.how-grid{display:flex;flex-direction:column;gap:12px;margin:14px 0}
-.how-step{display:flex;gap:14px;align-items:flex-start;background:#f8fafc;border:1px solid var(--bdr);border-radius:10px;padding:14px;transition:.2s}
-.how-step:hover{border-color:rgba(26,124,62,.25);background:var(--gp)}
-.hs-num{min-width:36px;height:36px;background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;border-radius:50%;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.hs-body strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);margin-bottom:2px}
-.hs-body span{font-size:13px;color:var(--gray)}
-
-/* EARNING CARDS */
-.earn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
-.earn-card{background:linear-gradient(135deg,#f8fafc,#fff);border:1px solid var(--bdr);border-radius:12px;padding:18px;text-align:center;box-shadow:var(--sh)}
-.earn-icon{font-size:28px;margin-bottom:6px}
-.earn-num{font-family:'Baloo 2',sans-serif;font-size:22px;font-weight:800;color:var(--g);margin:4px 0}
-.earn-label{font-size:12px;color:var(--gray);font-family:'Baloo 2',sans-serif}
-
-/* SERVICES GRID */
-.srv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.srv-card{background:#f8fafc;border:1px solid var(--bdr);border-radius:11px;padding:16px;display:flex;gap:12px;align-items:flex-start;transition:.2s}
-.srv-card:hover{border-color:var(--g);background:var(--gp)}
-.srv-icon{font-size:24px;flex-shrink:0}
-.srv-body h4{font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:700;color:var(--n);margin-bottom:3px}
-.srv-body p{font-size:12.5px;color:var(--gray);line-height:1.6}
-
-/* REGISTRATION FORM (RIGHT) */
-.reg-card{background:var(--w);border-radius:var(--r);box-shadow:var(--shm);border:1px solid var(--bdr);overflow:hidden;position:sticky;top:70px}
-@media(max-width:980px){.reg-card{position:static}}
-.reg-head{background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;padding:18px 22px;text-align:center}
-.reg-head h2{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800}
-.reg-head p{font-size:12px;color:rgba(255,255,255,.75);margin-top:3px}
-.reg-tabs{display:flex;border-bottom:1px solid var(--bdr)}
-.reg-tab{flex:1;padding:12px;text-align:center;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:var(--gray);cursor:pointer;border-bottom:2.5px solid transparent;transition:.2s;background:none;border:none;border-bottom:2.5px solid transparent}
-.reg-tab.active{color:var(--g);border-bottom-color:var(--g);background:#f8fafc}
-.reg-body{padding:20px;max-height:72vh;overflow-y:auto}
-.reg-body::-webkit-scrollbar{width:5px}
-.reg-body::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:3px}
-
-/* STEPS (registration flow) */
-.rstep{display:none}
-.rstep.active{display:block;animation:fadein .4s ease}
-@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-.rf-title{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:800;color:var(--n);margin-bottom:14px}
-.f-group{margin-bottom:13px}
-.f-group label{display:block;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;color:var(--n);margin-bottom:5px}
-.f-group input,.f-group select{width:100%;padding:10px 13px;border:1.5px solid var(--bdr);border-radius:8px;font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--n);background:#f8fafc;outline:none;transition:.2s}
-.f-group input:focus,.f-group select:focus{border-color:var(--g);background:#fff;box-shadow:0 0 0 3px rgba(26,124,62,.1)}
-.f-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-.reg-btn{width:100%;padding:12px;border:none;border-radius:9px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:14.5px;cursor:pointer;transition:.2s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:7px}
-.reg-btn-g{background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;box-shadow:0 4px 14px rgba(26,124,62,.3)}
-.reg-btn-g:hover{transform:translateY(-1px)}
-.reg-btn-g:disabled{opacity:.6;pointer-events:none}
-
-/* QUIZ STEP */
-.quiz-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.q-counter{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:var(--n)}
-.timer-ring{width:52px;height:52px;border-radius:50%;border:4px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:20px;color:var(--red);transition:.3s}
-.timer-ring.warn{border-color:var(--red);color:var(--red)}
-.q-progress{height:5px;background:var(--bdr);border-radius:3px;margin-bottom:16px;overflow:hidden}
-.q-fill{height:100%;background:linear-gradient(90deg,var(--g),var(--gl));border-radius:3px;transition:width .3s}
-.q-text{font-family:'Baloo 2',sans-serif;font-size:15px;font-weight:700;color:var(--n);margin-bottom:14px;line-height:1.5}
-.opt-list{display:flex;flex-direction:column;gap:8px}
-.opt{background:#f8fafc;border:1.5px solid var(--bdr);border-radius:9px;padding:11px 14px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:13.5px;font-weight:600;color:var(--n);transition:.2s;text-align:left;width:100%}
-.opt:hover{border-color:var(--g);background:var(--gp);color:var(--g)}
-.opt.correct{border-color:var(--g);background:var(--gp);color:var(--g)}
-.opt.wrong{border-color:var(--red);background:var(--redp);color:var(--red)}
-
-/* RESULT STEP */
-.result-box{text-align:center;padding:16px 0}
-.result-icon{font-size:56px;margin-bottom:10px}
-.result-score{font-family:'Baloo 2',sans-serif;font-size:28px;font-weight:800;color:var(--n);margin-bottom:6px}
-.result-msg{font-size:14px;color:var(--gray);margin-bottom:18px}
-.pass-tag{display:inline-block;background:var(--gp);color:var(--g);font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;padding:4px 14px;border-radius:20px;margin-bottom:14px}
-.fail-tag{display:inline-block;background:var(--redp);color:var(--red);font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;padding:4px 14px;border-radius:20px;margin-bottom:14px}
-.upload-section{background:var(--sfp);border:1px solid rgba(230,127,0,.25);border-radius:10px;padding:16px;margin-top:14px;text-align:left}
-.upload-section label{display:block;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:700;color:var(--n);margin-bottom:5px;margin-top:11px}
-.upload-section input[type="file"]{width:100%;padding:8px;border:1.5px dashed var(--sf);border-radius:8px;background:#fff;cursor:pointer;font-size:13px}
-
-/* ID CARD */
-.id-card-wrap{margin:16px auto;max-width:340px}
-.id-card{background:var(--w);border-radius:14px;overflow:hidden;border:2px solid var(--g);box-shadow:0 10px 30px rgba(0,0,0,.18);position:relative}
-.idc-ribbon{position:absolute;top:24px;right:-32px;background:var(--g);color:#fff;padding:4px 40px;transform:rotate(45deg);font-size:9px;font-weight:800;letter-spacing:.5px}
-.idc-head{background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;padding:16px;text-align:center}
-.idc-head .idc-logo{font-family:'Baloo 2',sans-serif;font-size:17px;font-weight:800}
-.idc-head .idc-sub{font-size:9.5px;opacity:.8;margin-top:2px;letter-spacing:.8px}
-.idc-body{padding:18px;text-align:center}
-.idc-photo{width:90px;height:90px;border-radius:50%;border:3px solid var(--g);object-fit:cover;margin-bottom:8px}
-.idc-name{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;color:var(--n);margin-bottom:10px}
-.idc-info{text-align:left;font-size:12.5px;display:flex;flex-direction:column;gap:6px}
-.idc-row{display:flex;justify-content:space-between;border-bottom:1px solid var(--bdr);padding-bottom:5px}
-.idc-row b{color:var(--gray);font-weight:600}
-.idc-row span{font-weight:700;color:var(--n)}
-.idc-status{display:inline-block;background:var(--gp);color:var(--g);padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700;font-family:'Baloo 2',sans-serif}
-.idc-verify{font-size:10.5px;color:var(--blue);margin-top:12px;text-decoration:none;display:block;border:1px solid var(--bdr);padding:6px;border-radius:7px;text-align:center}
-
-/* BENEFITS TABLE */
-.ben-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
-.ben-table th{background:var(--n);color:#fff;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;padding:11px 14px;text-align:left}
-.ben-table td{padding:11px 14px;border-bottom:1px solid var(--bdr);color:#374151;vertical-align:top}
-.ben-table tr:nth-child(even) td{background:#f8fafc}
-.ben-table tr:last-child td{border-bottom:none}
-.ben-check{color:var(--g);font-weight:800;font-size:15px}
-
-/* ELIGIBILITY */
-.elig-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:14px 0}
-.elig-item{display:flex;align-items:flex-start;gap:9px;background:#f8fafc;border:1px solid var(--bdr);border-radius:9px;padding:12px}
-.elig-icon{font-size:18px;flex-shrink:0;margin-top:1px}
-.elig-body strong{display:block;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:var(--n)}
-.elig-body span{font-size:12px;color:var(--gray)}
-
-/* FAQ */
-.faq-item{border:1px solid var(--bdr);border-radius:10px;margin-bottom:9px;overflow:hidden}
-.faq-q{width:100%;background:#f8fafc;border:none;padding:13px 16px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13.5px;color:var(--n);cursor:pointer;display:flex;justify-content:space-between;align-items:center;text-align:left;transition:.2s}
-.faq-q:hover,.faq-q.open{background:var(--gp);color:var(--g)}
-.farr{transition:transform .3s;font-size:14px;flex-shrink:0}
-.faq-q.open .farr{transform:rotate(180deg)}
-.faq-a{display:none;padding:13px 16px;font-size:13.5px;color:#374151;line-height:1.75;border-top:1px solid var(--bdr)}
-.faq-a.open{display:block}
-
-/* RELATED */
-.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}
-.rel-link{display:flex;align-items:center;gap:9px;background:#f8fafc;border:1px solid var(--bdr);border-radius:9px;padding:11px 12px;text-decoration:none;transition:.2s}
-.rel-link:hover{border-color:var(--g);background:var(--gp)}
-.rl-icon{font-size:18px;flex-shrink:0}
-.rl-txt strong{display:block;font-family:'Baloo 2',sans-serif;font-size:12.5px;font-weight:700;color:var(--n)}
-.rl-txt span{font-size:11px;color:var(--gray)}
-@media(max-width:680px){.rel-grid{grid-template-columns:1fr 1fr}.srv-grid{grid-template-columns:1fr}.earn-grid{grid-template-columns:1fr 1fr}.elig-grid{grid-template-columns:1fr}.booking-row{grid-template-columns:1fr}}
-
-/* FOOTER */
-.footer{background:var(--n);color:rgba(255,255,255,.62);padding:24px 16px;text-align:center;font-family:'Baloo 2',sans-serif;font-size:12.5px;margin-top:10px}
-.footer strong{color:#fff;display:block;font-size:14px;margin-bottom:5px}
-.ftl{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:9px 0}
-.ftl a{color:rgba(255,255,255,.55);text-decoration:none}
-.ftl a:hover{color:#7eeaa5}
-.btt{position:fixed;bottom:20px;right:16px;width:42px;height:42px;background:var(--g);color:#fff;border:none;border-radius:50%;font-size:17px;cursor:pointer;box-shadow:0 4px 14px rgba(26,124,62,.4);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;z-index:990}
-.btt.show{opacity:1;pointer-events:all}
-.ib{background:var(--gp);border-left:5px solid var(--g);border-radius:9px;padding:13px 15px;margin:14px 0;font-size:13.5px;color:#1a3a2a}
-.wb{background:var(--sfp);border-left:5px solid var(--sf);border-radius:9px;padding:13px 15px;margin:14px 0;font-size:13.5px;color:#7c4a00}
-.rb{background:var(--redp);border-left:5px solid var(--red);border-radius:9px;padding:13px 15px;margin:14px 0;font-size:13.5px;color:#7c1d1d}
-</style>
+        .timer-circle { width: 60px; height: 60px; border-radius: 50%; border: 4px solid #eee; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; color: #e74c3c; }
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .option { padding: 15px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; text-align: center; font-weight: 600; transition: 0.2s; }
+        .option:hover { border-color: var(--primary); background: #f0fdf4; }
+    </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="nav-in">
-    <a href="index.html" class="nav-logo">
-      <img src="logo.png" alt="JameenSeva.in">
-      <span class="nav-logo-txt">Jameen<span>Seva</span>.in</span>
-    </a>
-    <div class="nav-links">
-      <a href="index.html">🏠 होम</a>
-      <a href="bihar-survey-guide-2026.html">📋 सर्वे गाइड</a>
-      <a href="prachnamablog.html">⚖️ पंचनामा</a>
-      <a href="verify-amin.html">✅ अमीन सत्यापन</a>
-      <a href="track.html">🚚 ट्रैकिंग</a>
-      <a href="contact.html">📞 संपर्क</a>
-      <a href="#book-amin" class="nav-cta">अमीन बुक करें →</a>
-    </div>
-  </div>
-</nav>
-
-<div class="bc">
-  <div class="bc-in"><a href="index.html">होम</a> › <span>Private Amin Booking | अमीन पार्टनर रजिस्ट्रेशन</span></div>
-</div>
-
-<div class="urgent">
-  <span class="blink">🔴</span>
-  <span>बिहार सर्वे 2026 जारी — <strong>Private Amin तुरंत उपलब्ध!</strong> अभी बुक करें या Amin Partner बनें।</span>
-  <span class="blink">🔴</span>
-</div>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">👨‍💼 बिहार का #1 Certified Amin Network</div>
-  <h1>Private <em>Amin Booking</em> — जमीन नापी,<br>Schedule & Digital Land Report तुरंत पाएं</h1>
-  <p class="hero-sub">बिहार के सभी 38 जिलों में Certified JameenSeva Amin उपलब्ध। नापी, बटवारा Schedule, Emapi रिपोर्ट — सब एक जगह।</p>
-  <div class="hero-stats">
-    <div class="hs"><strong>850+</strong>Certified Amins</div>
-    <div class="hs"><strong>38</strong>जिलों में</div>
-    <div class="hs"><strong>4.8★</strong>Average Rating</div>
-    <div class="hs"><strong>12,000+</strong>Successful Bookings</div>
-  </div>
-  <div class="hero-cta-row">
-    <a href="#book-amin" class="hbtn hbtn-g">📍 Amin अभी बुक करें</a>
-    <a href="#register" class="hbtn hbtn-o">👨‍💼 Amin Partner बनें</a>
-  </div>
-</div>
-
-<div class="pw">
-<div class="layout">
-
-<!-- ══ LEFT: MAIN CONTENT ══ -->
-<div>
-
-  <!-- BOOKING CARD -->
-  <div class="booking-card" id="book-amin">
-    <div class="bc2-title">📍 Private Amin Online Booking करें</div>
-    <p class="bc2-sub">अपनी जानकारी भरें — 24 घंटे के अंदर Certified Amin आपसे WhatsApp पर संपर्क करेगा</p>
-
-    <div class="booking-row">
-      <div class="booking-field"><label>आपका नाम <span style="color:#ff9c1a">*</span></label><input type="text" id="b-name" placeholder="पूरा नाम"></div>
-      <div class="booking-field"><label>WhatsApp नंबर <span style="color:#ff9c1a">*</span></label><input type="tel" id="b-mobile" maxlength="10" placeholder="10 अंकों का नंबर"></div>
-    </div>
-    <div class="booking-row">
-      <div class="booking-field"><label>जिला <span style="color:#ff9c1a">*</span></label>
-        <select id="b-dist" onchange="loadBBlocks()">
-          <option value="">-- जिला चुनें --</option>
-        </select>
-      </div>
-      <div class="booking-field"><label>ब्लॉक <span style="color:#ff9c1a">*</span></label>
-        <select id="b-block"><option value="">-- पहले जिला चुनें --</option></select>
-      </div>
-    </div>
-    <div class="booking-row">
-      <div class="booking-field"><label>सेवा का प्रकार <span style="color:#ff9c1a">*</span></label>
-        <select id="b-service">
-          <option value="">-- सेवा चुनें --</option>
-          <option>जमीन नापी (Measurement)</option>
-          <option>Schedule / अनुसूची बनवाना</option>
-          <option>Digital Amin Land Report</option>
-          <option>बटवारा नापी</option>
-          <option>Emapi (भूमि मापी) रिपोर्ट</option>
-          <option>नक्शा तैयार करवाना</option>
-          <option>पंचनामा के लिए नापी</option>
-        </select>
-      </div>
-      <div class="booking-field"><label>प्लॉट की संख्या</label><input type="text" id="b-plots" placeholder="जैसे: 2 खेसरा"></div>
-    </div>
-    <div class="booking-row">
-      <div class="booking-field full" style="grid-column:1/-1"><label>अतिरिक्त जानकारी (खाता, खेसरा, आदि)</label>
-        <textarea id="b-details" placeholder="खाता नंबर, खेसरा नंबर या कोई विशेष आवश्यकता लिखें..."></textarea>
-      </div>
-    </div>
-    <button class="book-btn" onclick="bookAmin()">📍 Amin Booking Submit करें</button>
-
-    <div class="book-success" id="book-success">
-      <div class="bs-icon">✅</div>
-      <strong id="book-ref">बुकिंग सफल!</strong>
-      <p>हमारी टीम 24 घंटे में आपसे WhatsApp पर संपर्क करेगी।<br>सहायता: 9142075859</p>
-    </div>
-  </div>
-
-  <!-- SERVICES -->
-  <div class="sbox">
-    <div class="slbl">🔧 हमारी सेवाएं</div>
-    <div class="stit">Private Amin से क्या-क्या करवा सकते हैं?</div>
-    <div class="srv-grid">
-      <div class="srv-card"><div class="srv-icon">📏</div><div class="srv-body"><h4>जमीन नापी (Measurement)</h4><p>जरीब से सटीक नापी, रकबा निकालना, खेसरा अनुसार माप — Bihar Survey 2026 के लिए</p></div></div>
-      <div class="srv-card"><div class="srv-icon">📋</div><div class="srv-body"><h4>Schedule / अनुसूची</h4><p>पंचनामा बटवारा के लिए Amin से Schedule (खाता-खेसरा-चौहद्दी सहित) तैयार करवाएं</p></div></div>
-      <div class="srv-card"><div class="srv-icon">📄</div><div class="srv-body"><h4>Digital Amin Land Report</h4><p>नापी के बाद Digital PDF Report — खाता, खेसरा, रकबा, चौहद्दी, नक्शा सहित</p></div></div>
-      <div class="srv-card"><div class="srv-icon">🗺️</div><div class="srv-body"><h4>नक्शा तैयार करवाना</h4><p>जमीन का Rough या Certified नक्शा — सर्वे, दाखिल खारिज और कोर्ट के लिए मान्य</p></div></div>
-      <div class="srv-card"><div class="srv-icon">⚖️</div><div class="srv-body"><h4>बटवारा नापी</h4><p>परिवार में जमीन बंटवारे के लिए Amin से सटीक नापी — हर हिस्सेदार का अलग माप</p></div></div>
-      <div class="srv-card"><div class="srv-icon">📊</div><div class="srv-body"><h4>Emapi (भूमि मापी) रिपोर्ट</h4><p>सरकारी Emapi (Electronic Measurement) रिपोर्ट — अंचल कार्यालय के लिए मान्य</p></div></div>
-    </div>
-    <div class="ib">💡 <strong>JameenSeva का Certified Amin बुक करने पर:</strong> आपको Amin का ID Card, Rating और Service Guarantee मिलती है — जो अनजान Amin से नहीं मिलती।</div>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <div class="sbox">
-    <div class="slbl">⚙️ प्रक्रिया</div>
-    <div class="stit">Private Amin Booking कैसे काम करती है?</div>
-    <div class="how-grid">
-      <div class="how-step"><div class="hs-num">1</div><div class="hs-body"><strong>ऑनलाइन बुकिंग करें</strong><span>ऊपर फॉर्म भरें — जिला, ब्लॉक और सेवा का प्रकार चुनें।</span></div></div>
-      <div class="how-step"><div class="hs-num">2</div><div class="hs-body"><strong>Amin WhatsApp पर संपर्क करेगा</strong><span>आपके ब्लॉक का Certified Amin 24 घंटे में खुद WhatsApp करेगा।</span></div></div>
-      <div class="how-step"><div class="hs-num">3</div><div class="hs-body"><strong>रेट और समय तय करें</strong><span>Amin से रेट और नापी का समय आपस में तय करें। कोई छुपी फीस नहीं।</span></div></div>
-      <div class="how-step"><div class="hs-num">4</div><div class="hs-body"><strong>नापी और Report</strong><span>Amin आपकी जमीन की नापी करेगा और Digital Report / Schedule देगा।</span></div></div>
-    </div>
-    <a href="#book-amin" style="display:inline-flex;align-items:center;gap:7px;background:var(--g);color:#fff;text-decoration:none;padding:11px 22px;border-radius:9px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;margin-top:6px;transition:.2s">📍 अभी Amin बुक करें →</a>
-  </div>
-
-  <!-- EARNING SECTION -->
-  <div class="sbox">
-    <div class="slbl">💰 कमाई</div>
-    <div class="stit">JameenSeva Amin Partner कितना कमाएगा?</div>
-    <p class="ssub">बिहार सर्वे 2026 में लाखों किसानों को Amin की जरूरत है। JameenSeva Partner बनकर अपने ब्लॉक में काम पाएं।</p>
-    <div class="earn-grid">
-      <div class="earn-card"><div class="earn-icon">🏠</div><div class="earn-num">₹2,000-₹5,000</div><div class="earn-label">प्रति नापी कमाई</div></div>
-      <div class="earn-card"><div class="earn-icon">📅</div><div class="earn-num">₹30,000-₹50,000</div><div class="earn-label">प्रति माह (15-20 केस)</div></div>
-      <div class="earn-card"><div class="earn-icon">🎯</div><div class="earn-num">Free</div><div class="earn-label">Registration — कोई फीस नहीं</div></div>
-    </div>
-    <div class="ben-table-wrap" style="overflow-x:auto">
-      <table class="ben-table">
-        <thead><tr><th>JameenSeva Amin Partner का फायदा</th><th>विवरण</th></tr></thead>
-        <tbody>
-          <tr><td><span class="ben-check">✓</span> डिजिटल ID Card</td><td>किसान QR से तुरंत आपकी पहचान verify कर सकते हैं</td></tr>
-          <tr><td><span class="ben-check">✓</span> ब्लॉक-wise ऑर्डर</td><td>आपके ब्लॉक से ऑर्डर आने पर WhatsApp पर तुरंत सूचना</td></tr>
-          <tr><td><span class="ben-check">✓</span> रेटिंग Profile</td><td>5-Star Rating पाने पर ज्यादा ऑर्डर और ज्यादा कमाई</td></tr>
-          <tr><td><span class="ben-check">✓</span> काम से पहले रेट तय</td><td>किसान से पहले रेट तय करने की पूरी स्वतंत्रता</td></tr>
-          <tr><td><span class="ben-check">✓</span> 850+ अमीनों का नेटवर्क</td><td>बिहार का सबसे बड़ा Certified Amin Network</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ELIGIBILITY -->
-  <div class="sbox">
-    <div class="slbl">✅ पात्रता</div>
-    <div class="stit">Amin Partner बनने के लिए क्या चाहिए?</div>
-    <div class="elig-grid">
-      <div class="elig-item"><div class="elig-icon">🏠</div><div class="elig-body"><strong>बिहार का निवासी</strong><span>बिहार का स्थायी निवासी होना अनिवार्य है</span></div></div>
-      <div class="elig-item"><div class="elig-icon">📏</div><div class="elig-body"><strong>नापी का ज्ञान</strong><span>जमीन नापी, जरीब, कड़ी का बुनियादी ज्ञान</span></div></div>
-      <div class="elig-item"><div class="elig-icon">📱</div><div class="elig-body"><strong>WhatsApp उपयोग</strong><span>स्मार्टफोन और WhatsApp का उपयोग आना चाहिए</span></div></div>
-      <div class="elig-item"><div class="elig-icon">📝</div><div class="elig-body"><strong>Online Test</strong><span>15 सवालों का Amin Test पास करना होगा (20 sec/Q)</span></div></div>
-      <div class="elig-item"><div class="elig-icon">🪪</div><div class="elig-body"><strong>आधार कार्ड</strong><span>वैध आधार कार्ड और पासपोर्ट साइज फोटो अनिवार्य</span></div></div>
-      <div class="elig-item"><div class="elig-icon">⚖️</div><div class="elig-body"><strong>ईमानदारी</strong><span>गलत रिपोर्ट या खराब रिव्यू पर ID तुरंत Block</span></div></div>
-    </div>
-    <div class="rb">❌ <strong>चेतावनी:</strong> किसान के खराब रिव्यू या गलत नापी रिपोर्ट देने पर आपकी JameenSeva ID तुरंत Block कर दी जाएगी और आप दोबारा Register नहीं कर सकेंगे।</div>
-    <a href="#register" style="display:inline-flex;align-items:center;gap:7px;background:var(--sf);color:#fff;text-decoration:none;padding:11px 22px;border-radius:9px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;margin-top:6px;transition:.2s">👨‍💼 Amin Partner बनें — Free →</a>
-  </div>
-
-  <!-- FAQ -->
-  <div class="sbox">
-    <div class="slbl">❓ FAQ</div>
-    <div class="stit">अक्सर पूछे जाने वाले सवाल</div>
-    <div style="margin-top:14px">
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">Private Amin Booking में क्या-क्या मिलता है? <span class="farr">▼</span></button>
-        <div class="faq-a">JameenSeva Private Amin Booking में आपको मिलता है: Certified Amin का ID Card देखने का अधिकार, नापी की Digital Report, Schedule (अनुसूची), नक्शा — और Amin का रेटिंग Profile ताकि आप भरोसेमंद Amin चुन सकें।</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">Digital Amin Land Report में क्या होता है? <span class="farr">▼</span></button>
-        <div class="faq-a">Digital Amin Land Report में आपकी जमीन का — खाता नंबर, खेसरा नंबर, रकबा (एकड़-डेसिमल), चौहद्दी (उत्तर-दक्षिण-पूरब-पश्चिम की सीमा), जमीन की किस्म, और Rough Sketch (नक्शा) — PDF फॉर्मेट में होता है। यह बिहार सर्वे 2026, दाखिल खारिज और कोर्ट के लिए उपयोगी है।</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">Emapi (अमीन/भूमि मापी) क्या होता है? <span class="farr">▼</span></button>
-        <div class="faq-a">Emapi या Amin (अमीन) बिहार राजस्व विभाग का अधिकृत भूमि मापक (Land Surveyor) होता है। वह जरीब, कड़ी और सर्वे के उपकरणों से जमीन की सटीक नापी करता है और अंचल कार्यालय को रिपोर्ट देता है।</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">Amin से Schedule कैसे बनवाएं? <span class="farr">▼</span></button>
-        <div class="faq-a">JameenSeva का Amin पहले जमीन की नापी करेगा, फिर हर हिस्सेदार का खाता, खेसरा, रकबा और चौहद्दी लिखकर Schedule (अनुसूची/Rough Schedule) तैयार करेगा। यह Schedule पंचनामा बटवारा बनाने और सर्वे में काम आती है। ऊपर बुकिंग करें — "Schedule / अनुसूची बनवाना" चुनें।</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">Amin Partner बनने में कोई फीस है? <span class="farr">▼</span></button>
-        <div class="faq-a">नहीं, JameenSeva Amin Partner Program में Registration बिल्कुल <strong>मुफ्त</strong> है। सिर्फ 15 सवालों का Online Test पास करना है और आधार+फोटो अपलोड करना है।</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="tf(this)">1 जरीब में कितनी कड़ियाँ होती हैं? (Amin Test Sample) <span class="farr">▼</span></button>
-        <div class="faq-a">1 जरीब में <strong>100 कड़ियाँ</strong> होती हैं। 1 जरीब = 66 फीट = 22 गज = 20.1 मीटर। यह Amin Test का एक Sample Question है।</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RELATED LINKS -->
-  <div class="sbox">
-    <div class="slbl">🔗 संबंधित सेवाएं</div>
-    <div class="stit">बिहार सर्वे से जुड़ी अन्य सेवाएं</div>
-    <div class="rel-grid">
-      <a href="panchnamablog.html" class="rel-link"><div class="rl-icon">⚖️</div><div class="rl-txt"><strong>पंचनामा बटवारा</strong><span>Schedule बाद बनवाएं</span></div></a>
-      <a href="khatiyan.html" class="rel-link"><div class="rl-icon">📜</div><div class="rl-txt"><strong>खतियान डिलीवरी</strong><span>नापी से पहले जरूरी</span></div></a>
-      <a href="ragister2.html" class="rel-link"><div class="rl-icon">📋</div><div class="rl-txt"><strong>रजिस्टर-2 ऑर्डर</strong><span>खाता-खेसरा जानकारी</span></div></a>
-      <a href="prapatra2.html" class="rel-link"><div class="rl-icon">📝</div><div class="rl-txt"><strong>प्रपत्र-2 भरें</strong><span>स्व-घोषणा फॉर्म</span></div></a>
-      <a href="verify-amin.html" class="rel-link"><div class="rl-icon">✅</div><div class="rl-txt"><strong>अमीन सत्यापन</strong><span>ID Card Check करें</span></div></a>
-      <a href="contact.html" class="rel-link"><div class="rl-icon">📞</div><div class="rl-txt"><strong>संपर्क करें</strong><span>9142075859</span></div></a>
-    </div>
-  </div>
-
-</div><!-- /left -->
-
-<!-- ══ RIGHT: REGISTRATION CARD ══ -->
-<div id="register">
-  <div class="reg-card">
-    <div class="reg-head">
-      <h2>👨‍💼 Amin Partner Registration</h2>
-      <p>Free Registration — Test पास करें, ID Card पाएं</p>
-    </div>
-
-    <!-- STEP INDICATOR -->
-    <div class="reg-tabs">
-      <button class="reg-tab active" id="tab1">1️⃣ जानकारी</button>
-      <button class="reg-tab" id="tab2">2️⃣ Test</button>
-      <button class="reg-tab" id="tab3">3️⃣ ID Card</button>
-    </div>
-
-    <div class="reg-body">
-
-      <!-- STEP 1: Details -->
-      <div class="rstep active" id="rs1">
-        <div class="rf-title">📋 अपनी जानकारी भरें</div>
-        <div class="f-group"><label>पूरा नाम <span style="color:var(--red)">*</span></label><input type="text" id="r-name" placeholder="आपका नाम"></div>
-        <div class="f-group"><label>WhatsApp नंबर <span style="color:var(--red)">*</span></label><input type="tel" id="r-mobile" maxlength="10" placeholder="10 अंकों का नंबर"></div>
-        <div class="f-row2">
-          <div class="f-group"><label>जिला <span style="color:var(--red)">*</span></label><select id="r-dist" onchange="loadRBlocks()"><option value="">-- चुनें --</option></select></div>
-          <div class="f-group"><label>ब्लॉक <span style="color:var(--red)">*</span></label><select id="r-block"><option value="">-- पहले जिला --</option></select></div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">Jameen Seva</a>
+        <div class="nav-links">
+            <a href="verify-amin.html" class="verify-btn">✅ अमीन सत्यापन</a>
+            <a href="land-calculator.html">कैलकुलेटर</a>
+            <a href="track.html">ट्रैकिंग</a>
         </div>
-        <div class="wb">⚠️ Test शुरू करने से पहले नियम पढ़ें: गलत नापी रिपोर्ट देने पर ID Block होगी। दो बार Fail होने पर दोबारा Register नहीं होगा।</div>
-        <button class="reg-btn reg-btn-g" onclick="startTest()">🎯 Test शुरू करें (15 सवाल, 20 sec/Q)</button>
-      </div>
+    </nav>
 
-      <!-- STEP 2: QUIZ -->
-      <div class="rstep" id="rs2">
-        <div class="quiz-head">
-          <div class="q-counter">सवाल <span id="qnum">1</span>/15</div>
-          <div class="timer-ring" id="timer">20</div>
-        </div>
-        <div class="q-progress"><div class="q-fill" id="q-fill" style="width:0%"></div></div>
-        <div class="q-text" id="q-text"></div>
-        <div class="opt-list" id="opt-list"></div>
-      </div>
-
-      <!-- STEP 3: RESULT + UPLOAD + ID CARD -->
-      <div class="rstep" id="rs3">
-        <div class="result-box">
-          <div class="result-icon" id="r-icon"></div>
-          <div class="result-score" id="r-score"></div>
-          <div class="result-msg" id="r-msg"></div>
-          <div id="r-tag"></div>
+    <div class="container">
+        <div class="header-banner">
+            <h1>अमीन पार्टनर प्रोग्राम</h1>
+            <p>बिहार अमीन पात्रता परीक्षा एवं डिजिटल पंजीकरण</p>
         </div>
 
-        <div class="upload-section" id="upload-sec" style="display:none">
-          <div style="font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:var(--n);margin-bottom:8px">📸 ID Card के लिए Documents Upload करें</div>
-          <label>अपनी Photo (Face clearly visible) <span style="color:var(--red)">*</span></label>
-          <input type="file" id="r-photo" accept="image/*">
-          <label>आधार कार्ड (Front Side) <span style="color:var(--red)">*</span></label>
-          <input type="file" id="r-aadhar" accept="image/*">
-          <button class="reg-btn reg-btn-g" id="submit-btn" onclick="uploadAndRegister()" style="margin-top:12px">✅ ID Card Generate करें</button>
-        </div>
-
-        <div id="id-card-area" style="display:none">
-          <div class="id-card-wrap">
-            <div class="id-card" id="id-card">
-              <div class="idc-ribbon">VERIFIED</div>
-              <div class="idc-head">
-                <div class="idc-logo">JAMEEN SEVA</div>
-                <div class="idc-sub">OFFICIAL AMIN PARTNER — BIHAR</div>
-              </div>
-              <div class="idc-body">
-                <img id="idc-photo" src="" class="idc-photo" alt="Amin Photo">
-                <div class="idc-name" id="idc-name"></div>
-                <div class="idc-info">
-                  <div class="idc-row"><b>Reg No</b><span id="idc-reg"></span></div>
-                  <div class="idc-row"><b>Block</b><span id="idc-block"></span></div>
-                  <div class="idc-row"><b>District</b><span id="idc-dist"></span></div>
-                  <div class="idc-row"><b>Test Score</b><span id="idc-score"></span></div>
-                  <div class="idc-row"><b>Status</b><span class="idc-status">✅ Active</span></div>
+        <div class="content-area">
+            
+            <div id="step1" class="step active">
+                <div class="how-it-works">
+                    <h3>सिस्टम कैसे काम करता है?</h3>
+                    <div class="step-box">
+                        <div class="step-num">1</div>
+                        <div class="step-text"><b>योग्यता टेस्ट:</b> अपनी जानकारी भरें और 20 सेकंड प्रति सवाल वाला नापी टेस्ट पास करें।</div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">2</div>
+                        <div class="step-text"><b>एरिया आर्डर:</b> आपके ब्लॉक से ऑर्डर आने पर Jameen Seva आपको WhatsApp पर सूचित करेगा।</div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">3</div>
+                        <div class="step-text"><b>नापी और रिपोर्ट:</b> रेट पहले तय करें। नापी के बाद रिपोर्ट/नक्शा Jameen Seva को भेजना अनिवार्य है।</div>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">4</div>
+                        <div class="step-text"><b>कमीशन:</b> काम पूरा होने पर एक छोटी सी तय सेवा शुल्क Jameen Seva को देनी होगी।</div>
+                    </div>
                 </div>
-                <a class="idc-verify" id="idc-verify">🔍 प्रोफाइल सत्यापित करें — verify-amin.html</a>
-              </div>
+
+                <div class="rules-box">
+                    <h4>⚠️ नियम एवं शर्तें</h4>
+                    <ul>
+                        <li>किसान के खराब रिव्यू या गलत नापी रिपोर्ट पर आपकी आईडी तुरंत **Block** कर दी जाएगी।</li>
+                        <li>कोई भी आपकी ID को Jameen Seva पर डालकर आपकी पहचान जांच (Verify) कर सकता है।</li>
+                        <li>नापी के समय Jameen Seva का डिजिटल आईडी कार्ड साथ रखना अनिवार्य है।</li>
+                    </ul>
+                </div>
+
+                <form id="detailsForm">
+                    <div class="form-group">
+                        <label>अपनी जानकारी भरें</label>
+                        <input type="text" id="userName" placeholder="आपका पूरा नाम" required>
+                        <input type="tel" id="userMobile" placeholder="WhatsApp नंबर" required>
+                        <select id="district" onchange="populateBlocks()" required><option value="">जिला चुनें</option></select>
+                        <select id="block" required><option value="">ब्लॉक चुनें</option></select>
+                    </div>
+                    <button type="button" class="btn" onclick="startTest()">टेस्ट शुरू करें (20 Sec Per Q)</button>
+                </form>
             </div>
-          </div>
-          <div style="display:flex;gap:9px;margin-top:10px;flex-wrap:wrap">
-            <button onclick="window.print()" style="flex:1;padding:11px;background:var(--n);color:#fff;border:none;border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🖨️ Print ID Card</button>
-            <button onclick="location.reload()" style="flex:1;padding:11px;background:var(--gray);color:#fff;border:none;border-radius:8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;cursor:pointer">↩ Home जाएं</button>
-          </div>
+
+            <div id="step2" class="step">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div><b>प्रश्न: <span id="qNumDisplay">1</span>/15</b></div>
+                    <div class="timer-circle" id="timeLeftDisplay">20</div>
+                </div>
+                <div id="questionText" style="font-size: 18px; font-weight: 600; margin-top: 20px;"></div>
+                <div class="option-grid" id="optionsBox"></div>
+            </div>
+
+            <div id="step3" class="step" style="text-align: center;">
+                <h2 id="resultMsg"></h2>
+                <div id="uploadSection" style="display: none; text-align: left; background: #fff8f0; padding: 20px; border-radius: 15px; margin-top: 20px;">
+                    <label>अपनी फोटो (ID कार्ड के लिए)</label>
+                    <input type="file" id="selfPhoto" accept="image/*" required>
+                    <label>आधार कार्ड (मुख्य साइड)</label>
+                    <input type="file" id="aadharPhoto" accept="image/*" required>
+                    <button class="btn" id="finalSubmitBtn" onclick="uploadAndSave()">फाइनल सबमिट एवं आईडी जनरेट</button>
+                </div>
+                <div id="idCardContainer"></div>
+                <div id="postActionButtons" style="display:none;">
+                    <button class="btn" onclick="window.print()" style="max-width: 350px;">ID कार्ड प्रिंट करें</button>
+                    <button class="btn" onclick="location.reload()" style="max-width: 350px; background: #666; margin-top: 10px;">Home पर जाएं</button>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
 
-    </div><!-- /reg-body -->
-  </div><!-- /reg-card -->
-</div><!-- /right -->
+    <script>
+        const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+        const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+        const _supabase = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false } });
 
-</div><!-- /layout -->
-</div><!-- /pw -->
+        const biharData = {"Araria": ["Araria", "Forbesganj", "Jokihat", "Kursakanta", "Narpatganj", "Palasi", "Raniganj", "Sikakti", "Terhagachh"],"Arwal": ["Arwal", "Kaler", "Karpi", "Kurtha", "Sonbhadra"],"Aurangabad": ["Aurangabad", "Barun", "Daudnagar", "Deo", "Goh", "Haspura", "Kutumba", "Madanpur", "Nabinagar", "Obra", "Rafiganj"],"Banka": ["Banka", "Amarkant", "Barahat", "Belhar", "Bounsi", "Chandan", "Dhoraiya", "Fullidumar", "Katoria", "Panchrukhi", "Rajaun", "Shambhuganj"],"Begusarai": ["Begusarai", "Bakhri", "Balia", "Barauni", "Begusarai", "Bhagwanpur", "Cheria-Bariarpur", "Chhorahi", "Garhpura", "Khodawandpur", "Mansurchak", "Matihani", "Naokothi", "Sahebpur Kamal", "Shamho Akha Kurha", "Teghra"],"Bhagalpur": ["Bhagalpur", "Gopalpur", "Goradih", "Ishakchak", "Jagdishpur", "Kahalgaon", "Kharik", "Narayanpur", "Nathnagar", "Pirpainti", "Rangra Chowk", "Sabour", "Shahkund", "Sultanganj"],"Bhojpur": ["Arrah", "Agiaon", "Barhara", "Behea", "Charpokhari", "Garhani", "Jagdishpur", "Koilwar", "Piro", "Sahar", "Sandesh", "Shahpur", "Tarari", "Udwantnagar"],"Buxar": ["Buxar", "Brahmpur", "Chakki", "Chausa", "Dumraon", "Itarhi", "Nawanagar", "Rajpur", "Simri"],"Darbhanga": ["Alinagar", "Bahadurpur", "Baheri", "Benipur", "Biraul", "Darbhanga", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Jale", "Keoti", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Singhwara", "Tardih"],"Gaya": ["Gaya Sadar", "Amas", "Atri", "Bankey Bazar", "Barachatti", "Belaganj", "Bodh Gaya", "Dobhi", "Dumaria", "Guraru", "Gurua", "Imamganj", "Khizirsarai", "Konch", "Mohanpur", "Muhra", "Neem Chak Bathani", "Paraiya", "Sherghati", "Tan Kuppa", "Tickari", "Wazirganj"],"Gopalganj": ["Gopalganj", "Baikunthpur", "Barauli", "Bhorey", "Hathua", "Katiya", "Kuchaikote", "Manjha", "Panchdeori", "Phulwaria", "Sidhwalia", "Thawe", "Uchkagaon", "Vijayipur"],"Jamui": ["Jamui", "Barhat", "Chakai", "Gidhaur", "I some", "Khaira", "Laxmipur", "Sikandra", "Sono"],"Jehanabad": ["Jehanabad", "Kako", "Modanganj", "Makhdumpur", "Ratni Faridpur"],"Kaimur": ["Bhabua", "Adhaura", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas"],"Katihar": ["Katihar", "Amdabad", "Azamnagar", "Balrampur", "Barari", "Barsoi", "Dandkhora", "Falka", "Hasanganj", "Kadwa", "Korha", "Kursela", "Manihari", "Mansahi", "Pranpur", "Sameli"],"Khagaria": ["Khagaria", "Alauli", "Beldaur", "Chautham", "Gogri", "Mansi", "Parbatta"],"Kishanganj": ["Kishanganj", "Bahadurganj", "Dighalbank", "Kochadhaman", "Pothia", "Terhagachha", "Thakurganj"],"Lakhisarai": ["Lakhisarai", "Barahiya", "Halsi", "Pipariya", "Ramgarh Chowk", "Surajgarha"],"Madhepura": ["Madhepura", "Alamnagar", "Behariganj", "Chausa", "Gailard", "Gwalpara", "Kumarkhand", "Murliganj", "Puraini", "Singheshwar"],"Madhubani": ["Madhubani Sadar", "Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladania", "Lakhnaur", "Laukahi", "Madhepur", "Pandaul", "Phulparas", "Rajnagar"],"Munger": ["Munger Sadar", "Asarganj", "Bariarpur", "Dharhara", "Jamalpur", "Kharagpur", "Sangrampur", "Tarapur"],"Muzaffarpur": ["Muzaffarpur Sadar", "Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muraul", "Mushahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],"Nalanda": ["Biharsharif", "Asthawan", "Ben", "Bind", "Chandi", "Ekangarsarai", "Giriak", "Harnaut", "Hilsa", "Islampur", "Karai Parsurai", "Katrisarai", "Nagarnausa", "Noorsarai", "Parwalpur", "Rahui", "Rastipur", "Sarmera", "Silao", "Tharthari"],"Nawada": ["Nawada", "Akbarpur", "Govindpur", "Hisua", "Kashichak", "Kauwakoal", "Meskaur", "Nardiganj", "Narhat", "Pakribarawan", "Rajauli", "Roh", "Sirdala", "Warisaliganj"],"Pashchim Champaran": ["Bettiah", "Bagaha", "Bairia", "Bhithaha", "Gaunaha", "Jogapatti", "Lauriya", "Madhuwan", "Mainatand", "Narkatiaganj", "Nautan", "Piprasi", "Ramnagar", "Sikta", "Thakaraha", "Yogapatti"],"Patna": ["Patna Sadar", "Athmalgola", "Bakhtiarpur", "Barh", "Belchhi", "Bihta", "Bikram", "Daniawan", "Danapur", "Dulhin Bazar", "Fatwah", "Ghoswari", "Khagaul", "Khusrupur", "Maner", "Masaurhi", "Mokama", "Naubatpur", "Paliganj", "Pandarak", "Phulwari Sharif", "Punpun", "Sampatchak"],"Purbi Champaran": ["Motihari", "Adapur", "Areraj", "Chakia", "Chiraia", "Dhaka", "Ghorasahan", "Harsidhi", "Kalyanpur", "Kesaria", "Kotwa", "Madhuban", "Mehsi", "Motihari Sadar", "Paharpur", "Pakri Dayal", "Patahi", "Phenhara", "Piprakothi", "Ramgarhwa", "Raxaul", "Sangrampur", "Sugauli", "Tetaria", "Turkaulia"],"Purnia": ["Purnia Sadar", "Amour", "Baisa", "Banmankhi", "Barhara Kothi", "Bhawanipur", "Dagarua", "Dhamdaha", "Jalalgarh", "Kasba", "Krityanand Nagar", "Nanndlalpur", "Rupauli", "Srinagar"],"Rohtas": ["Sasaram", "Akodhi Gola", "Bikramganj", "Chenari", "Dawath", "Dehri", "Dinara", "Karakat", "Kargahar", "Kochas", "Nasriganj", "Nauhatta", "Nokha", "Rajpur", "Rohtas", "Sanjhauli", "Sheosagar", "Surajpura", "Tilouthu"],"Saharsa": ["Saharsa", "Banma Itahri", "Kahara", "Mahishi", "Nauhatta", "Patarghat", "Salkhua", "Simri Bakhtiarpur", "Sonbarsa"],"Samastipur": ["Samastipur", "Bibhutipur", "Bithan", "Dalsinghsarai", "Hasanpur", "Kalyanpur", "Khanpur", "Mohanpur", "Mohiuddin Nagar", "Moraun", "Patori", "Pusa", "Rosera", "Sarairanjan", "Shivaji Nagar", "Singhia", "Tajpur", "Ujiarpur", "Vidyapati Nagar", "Warisnagar"],"Saran": ["Chapra", "Amnour", "Baniapur", "Dariyapur", "Dighwara", "Ekma", "Garkha", "Isuapur", "Jalalpur", "Lahladpur", "Maker", "Manjhi", "Marhaura", "Mashrakh", "Nagra", "Panapur", "Parsa", "Revelganj", "Rivilganj", "Sonepur", "Taraiya"],"Sheikhpura": ["Sheikhpura", "Ariari", "Barbigha", "Chewara", "Ghat Kusumbha", "Shekhopur Sarai"],"Sheohar": ["Sheohar", "Dumri Katsari", "Piprarhi", "Purnahiya", "Tariyani"],"Sitamarhi": ["Sitamarhi", "Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Choraut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Sursand"],"Siwan": ["Siwan Sadar", "Andar", "Barharia", "Basantpur", "Bhagwanpur Hat", "Darauli", "Daraunda", "Gautam Budh Nagar", "Ghuskhari", "Guthani", "Hasanpura", "Hussainganj", "Lakri Nabiganj", "Maharajganj", "Mairwa", "Nautan", "Panchrukhi", "Raghunathpur", "Siswan", "Ziradei"],"Supaul": ["Supaul", "Basantpur", "Chhatapur", "Kishanpur", "Marauna", "Nirmali", "Pipra", "Raghopur", "Saraigarh Bhaptiyahi", "Tribeniganj"],"Vaishali": ["Hajipur", "Bhagwanpur", "Bidupur", "Chehra Kalan", "Desari", "Garaul", "Jandaha", "Lalganj", "Mahnar", "Mahua", "Patedhi Belsar", "Patepur", "Raghopur", "Rajapakar", "Sahdai Buzurg", "Vaishali"]};
 
-<footer class="footer">
-  <strong>JameenSeva.in — बिहार का भरोसेमंद जमीन दस्तावेज एवं Amin सेवा पोर्टल</strong>
-  <div class="ftl">
-    <a href="about.html">हमारे बारे में</a>
-    <a href="verify-amin.html">अमीन सत्यापन</a>
-    <a href="terms-and-conditions.html">Terms</a>
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="disclaimer.html">Disclaimer</a>
-    <a href="sitemap.html">Sitemap</a>
-  </div>
-  <p style="font-size:11px;margin-top:6px;opacity:.55">JameenSeva.in एक निजी सेवा पोर्टल है। यह बिहार सरकार की आधिकारिक वेबसाइट नहीं है। सेवाएं लेने से पहले अपने अंचल कार्यालय से जानकारी सत्यापित करें।<br>© 2026 JameenSeva.in — All Rights Reserved.</p>
-</footer>
+        function populateDistricts() {
+            const distSelect = document.getElementById('district');
+            Object.keys(biharData).sort().forEach(d => { distSelect.innerHTML += `<option value="${d}">${d}</option>`; });
+        }
+        populateDistricts();
 
-<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+        function populateBlocks() {
+            const dist = document.getElementById('district').value;
+            const blockSelect = document.getElementById('block');
+            blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>';
+            if(dist) biharData[dist].sort().forEach(b => { blockSelect.innerHTML += `<option value="${b}">${b}</option>`; });
+        }
 
-<script>
-/* ══ SUPABASE ══ */
-const SB_URL='https://efgvsddclcnbmwqbtily.supabase.co';
-const SB_KEY='sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
-const _sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:false}});
+        const questionBank = [{q: "1 जरीब में कितनी कड़ियाँ होती हैं?", a: ["50", "100", "150", "200"], c: 1},{q: "1 जरीब कितने फीट के बराबर होती है?", a: ["60 फीट", "66 फीट", "70 फीट", "80 फीट"], c: 1},{q: "1 बीघा में कितने कठ्ठा होते हैं?", a: ["10", "20", "25"], c: 1},{q: "1 हेक्टेयर में कितने वर्ग मीटर होते हैं?", a: ["1000", "10000", "20000"], c: 1},{q: "जरीब कितने गज की होती है?", a: ["20", "22", "30"], c: 1},{q: "1 कठ्ठा में कितने धुर होते हैं?", a: ["10", "20", "30"], c: 1},{q: "1 एकड़ में कितने डिसमिल होते हैं?", a: ["50", "100", "150"], c: 1},{q: "1 जरीब में कितने हाथ होते हैं?", a: ["40", "44", "48"], c: 1},{q: "एक जरीब में कितने मीटर होते हैं?", a: ["15", "20", "25"], c: 1},{q: "1 हाथ में कितने इंच होते हैं?", a: ["12", "18", "24"], c: 1},{q: "गुनिया (Guniya) का उपयोग किस पर होता है?", a: ["खेत", "नक्शा", "कागज"], c: 1},{q: "1 डिसमिल में कितने वर्ग फीट होते हैं?", a: ["400", "435.6", "450"], c: 1},{q: "1 कड़ी कितने इंच के बराबर होती है?", a: ["7.92 इंच", "8 इंच", "6 इंच"], c: 0},{q: "नक्शा का पैमाना आमतौर पर?", a: ["16\"=1 मील", "10\"=1 मील", "32\"=1 मील"], c: 0},{q: "जरीब में 10 कड़ी पर क्या होता है?", a: ["नोक वाली फूलिया", "छल्ला", "हैंडल"], c: 0}];
 
-/* ══ BIHAR DATA ══ */
-const BD={"Araria":["Araria","Forbesganj","Jokihat","Kursakanta","Narpatganj","Palasi","Raniganj","Sikakti","Terhagachh"],"Arwal":["Arwal","Kaler","Karpi","Kurtha","Sonbhadra"],"Aurangabad":["Aurangabad","Barun","Daudnagar","Deo","Goh","Haspura","Kutumba","Madanpur","Nabinagar","Obra","Rafiganj"],"Banka":["Banka","Barahat","Belhar","Bounsi","Chandan","Dhoraiya","Fullidumar","Katoria","Rajaun","Shambhuganj"],"Begusarai":["Begusarai","Bakhri","Balia","Barauni","Bhagwanpur","Cheria-Bariarpur","Garhpura","Khodawandpur","Mansurchak","Matihani","Naokothi","Sahebpur Kamal","Teghra"],"Bhagalpur":["Bhagalpur","Gopalpur","Goradih","Jagdishpur","Kahalgaon","Kharik","Narayanpur","Nathnagar","Pirpainti","Rangra Chowk","Sabour","Shahkund","Sultanganj"],"Bhojpur":["Arrah","Agiaon","Barhara","Behea","Charpokhari","Garhani","Jagdishpur","Koilwar","Piro","Sahar","Sandesh","Shahpur","Tarari","Udwantnagar"],"Buxar":["Buxar","Brahmpur","Chakki","Chausa","Dumraon","Itarhi","Nawanagar","Rajpur","Simri"],"Darbhanga":["Alinagar","Bahadurpur","Baheri","Benipur","Biraul","Darbhanga","Ghanshyampur","Hanuman Nagar","Hayaghat","Jale","Keoti","Kiratpur","Singhwara","Tardih"],"Gaya":["Gaya Sadar","Amas","Atri","Bankey Bazar","Barachatti","Belaganj","Bodh Gaya","Dobhi","Dumaria","Guraru","Gurua","Imamganj","Khizirsarai","Konch","Mohanpur","Muhra","Paraiya","Sherghati","Tan Kuppa","Tickari","Wazirganj"],"Gopalganj":["Gopalganj","Baikunthpur","Barauli","Bhorey","Hathua","Katiya","Kuchaikote","Manjha","Panchdeori","Phulwaria","Sidhwalia","Uchkagaon","Vijayipur"],"Jamui":["Jamui","Barhat","Chakai","Gidhaur","Khaira","Laxmipur","Sikandra","Sono"],"Jehanabad":["Jehanabad","Kako","Modanganj","Makhdumpur","Ratni Faridpur"],"Kaimur":["Bhabua","Adhaura","Chainpur","Chand","Durgawati","Kudra","Mohania","Ramgarh","Rampur"],"Katihar":["Katihar","Amdabad","Azamnagar","Balrampur","Barari","Barsoi","Dandkhora","Falka","Hasanganj","Kadwa","Korha","Kursela","Manihari","Mansahi","Pranpur","Sameli"],"Khagaria":["Khagaria","Alauli","Beldaur","Chautham","Gogri","Mansi","Parbatta"],"Kishanganj":["Kishanganj","Bahadurganj","Dighalbank","Kochadhaman","Pothia","Terhagachha","Thakurganj"],"Lakhisarai":["Lakhisarai","Barahiya","Halsi","Pipariya","Ramgarh Chowk","Surajgarha"],"Madhepura":["Madhepura","Alamnagar","Behariganj","Chausa","Gailard","Gwalpara","Kumarkhand","Murliganj","Puraini","Singheshwar"],"Madhubani":["Madhubani Sadar","Andhratharhi","Babubarhi","Basopatti","Benipatti","Bisfi","Ghoghardiha","Harlakhi","Jainagar","Jhanjharpur","Khajauli","Lakhnaur","Laukahi","Pandaul","Phulparas","Rajnagar"],"Munger":["Munger Sadar","Asarganj","Bariarpur","Dharhara","Jamalpur","Kharagpur","Sangrampur","Tarapur"],"Muzaffarpur":["Muzaffarpur Sadar","Aurai","Bandra","Baruraj","Bochahan","Gaighat","Kanti","Katra","Kurhani","Marwan","Minapur","Motipur","Muraul","Mushahari","Paroo","Sahebganj","Sakra","Saraiya"],"Nalanda":["Biharsharif","Asthawan","Ben","Bind","Chandi","Ekangarsarai","Giriak","Harnaut","Hilsa","Islampur","Katrisarai","Noorsarai","Parwalpur","Rahui","Sarmera","Silao","Tharthari"],"Nawada":["Nawada","Akbarpur","Govindpur","Hisua","Kashichak","Kauwakoal","Meskaur","Nardiganj","Narhat","Pakribarawan","Rajauli","Roh","Sirdala","Warisaliganj"],"Pashchim Champaran":["Bettiah","Bagaha","Bairia","Bhithaha","Gaunaha","Jogapatti","Lauriya","Madhuwan","Mainatand","Narkatiaganj","Nautan","Piprasi","Ramnagar","Sikta","Thakaraha"],"Patna":["Patna Sadar","Athmalgola","Bakhtiarpur","Barh","Belchhi","Bihta","Bikram","Daniawan","Danapur","Dulhin Bazar","Fatwah","Ghoswari","Khagaul","Khusrupur","Maner","Masaurhi","Mokama","Naubatpur","Paliganj","Pandarak","Phulwari Sharif","Punpun","Sampatchak"],"Purbi Champaran":["Motihari","Adapur","Areraj","Chakia","Chiraia","Dhaka","Ghorasahan","Harsidhi","Kalyanpur","Kesaria","Kotwa","Madhuban","Mehsi","Paharpur","Pakri Dayal","Patahi","Piprakothi","Ramgarhwa","Raxaul","Sangrampur","Sugauli","Tetaria","Turkaulia"],"Purnia":["Purnia Sadar","Amour","Baisa","Banmankhi","Barhara Kothi","Bhawanipur","Dagarua","Dhamdaha","Jalalgarh","Kasba","Rupauli","Srinagar"],"Rohtas":["Sasaram","Akodhi Gola","Bikramganj","Chenari","Dawath","Dehri","Dinara","Karakat","Kargahar","Kochas","Nasriganj","Nauhatta","Nokha","Rajpur","Rohtas","Sanjhauli","Tilouthu"],"Saharsa":["Saharsa","Banma Itahri","Kahara","Mahishi","Nauhatta","Patarghat","Salkhua","Simri Bakhtiarpur","Sonbarsa"],"Samastipur":["Samastipur","Bibhutipur","Bithan","Dalsinghsarai","Hasanpur","Kalyanpur","Khanpur","Mohanpur","Mohiuddin Nagar","Moraun","Patori","Pusa","Rosera","Sarairanjan","Singhia","Tajpur","Ujiarpur","Warisnagar"],"Saran":["Chapra","Amnour","Baniapur","Dariyapur","Dighwara","Ekma","Garkha","Isuapur","Jalalpur","Lahladpur","Maker","Manjhi","Marhaura","Mashrakh","Nagra","Panapur","Parsa","Revelganj","Rivilganj","Sonepur","Taraiya"],"Sheikhpura":["Sheikhpura","Ariari","Barbigha","Chewara","Shekhopur Sarai"],"Sheohar":["Sheohar","Dumri Katsari","Piprarhi","Purnahiya","Tariyani"],"Sitamarhi":["Sitamarhi","Bairgania","Bajpatti","Bathnaha","Belsand","Bokhra","Choraut","Dumra","Majorganj","Nanpur","Parihar","Parsauni","Pupri","Riga","Runnisaidpur","Sonbarsha","Suppi","Sursand"],"Siwan":["Siwan Sadar","Andar","Barharia","Basantpur","Bhagwanpur Hat","Darauli","Daraunda","Ghuskhari","Guthani","Hasanpura","Hussainganj","Maharajganj","Mairwa","Nautan","Panchrukhi","Raghunathpur","Siswan","Ziradei"],"Supaul":["Supaul","Basantpur","Chhatapur","Kishanpur","Marauna","Nirmali","Pipra","Raghopur","Saraigarh Bhaptiyahi","Tribeniganj"],"Vaishali":["Hajipur","Bhagwanpur","Bidupur","Chehra Kalan","Desari","Garaul","Jandaha","Lalganj","Mahnar","Mahua","Patedhi Belsar","Patepur","Raghopur","Rajapakar","Sahdai Buzurg","Vaishali"]};
+        let currentQ = 0, score = 0, timer, selectedQuestions = [];
 
-/* Populate districts */
-function populateDist(selId,onch){
-  const s=document.getElementById(selId);
-  Object.keys(BD).sort().forEach(d=>{s.innerHTML+=`<option value="${d}">${d}</option>`});
-}
-function loadBlocks(distId,blockId){
-  const d=document.getElementById(distId).value;
-  const b=document.getElementById(blockId);
-  b.innerHTML='<option value="">-- ब्लॉक चुनें --</option>';
-  if(d)(BD[d]||[]).sort().forEach(bl=>{b.innerHTML+=`<option value="${bl}">${bl}</option>`});
-}
-function loadBBlocks(){loadBlocks('b-dist','b-block')}
-function loadRBlocks(){loadBlocks('r-dist','r-block')}
+        function startTest() {
+            if(!document.getElementById('userName').value || !document.getElementById('userMobile').value || !document.getElementById('district').value) return alert("सभी जानकारी भरें!");
+            selectedQuestions = questionBank.sort(() => 0.5 - Math.random()).slice(0, 15);
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+            loadQuestion();
+        }
 
-populateDist('b-dist'); populateDist('r-dist');
+        function loadQuestion() {
+            if(currentQ >= 15) return finishTest();
+            document.getElementById('qNumDisplay').innerText = currentQ + 1;
+            let q = selectedQuestions[currentQ];
+            document.getElementById('questionText').innerText = q.q;
+            document.getElementById('optionsBox').innerHTML = q.a.map((opt, i) => `<div class="option" onclick="checkAnswer(${i})">${opt}</div>`).join('');
+            startTimer();
+        }
 
-/* ══ BOOKING FORM ══ */
-async function bookAmin(){
-  const name=document.getElementById('b-name').value.trim();
-  const mobile=document.getElementById('b-mobile').value.trim();
-  const dist=document.getElementById('b-dist').value;
-  const block=document.getElementById('b-block').value;
-  const svc=document.getElementById('b-service').value;
-  if(!name||!mobile||!dist||!block||!svc){alert('कृपया सभी * वाले फील्ड भरें।');return}
-  if(!/^\d{10}$/.test(mobile)){alert('सही मोबाइल नंबर डालें।');return}
-  try{
-    const refNo='AMB-'+Math.floor(10000+Math.random()*90000);
-    await _sb.from('amin_bookings').insert([{
-      ref_no:refNo,name,mobile,district:dist,block,service:svc,
-      plots:document.getElementById('b-plots').value,
-      details:document.getElementById('b-details').value,
-      status:'Pending'
-    }]);
-    document.getElementById('book-ref').textContent='✅ Booking ID: '+refNo+' — सफल!';
-    document.getElementById('book-success').style.display='block';
-    document.querySelector('.book-btn').style.display='none';
-  }catch(e){
-    /* Even if DB fails, show WhatsApp fallback */
-    const msg=encodeURIComponent('Amin Booking:\nनाम: '+name+'\nMobile: '+mobile+'\nजिला: '+dist+'\nब्लॉक: '+block+'\nसेवा: '+svc);
-    window.open('https://wa.me/919142075859?text='+msg,'_blank');
-  }
-}
+        function startTimer() {
+            let time = 20; // 20 Seconds Updated
+            document.getElementById('timeLeftDisplay').innerText = time;
+            clearInterval(timer);
+            timer = setInterval(() => {
+                time--;
+                document.getElementById('timeLeftDisplay').innerText = time;
+                if(time <= 0) checkAnswer(-1);
+            }, 1000);
+        }
 
-/* ══ QUESTION BANK ══ */
-const QB=[
-  {q:"1 जरीब में कितनी कड़ियाँ होती हैं?",a:["50 कड़ी","100 कड़ी","150 कड़ी","200 कड़ी"],c:1},
-  {q:"1 जरीब कितने फीट के बराबर होती है?",a:["60 फीट","66 फीट","70 फीट","80 फीट"],c:1},
-  {q:"1 बीघा में कितने कट्ठा होते हैं? (बिहार में)",a:["10","20","25","30"],c:1},
-  {q:"1 हेक्टेयर में कितने वर्ग मीटर होते हैं?",a:["1,000","5,000","10,000","20,000"],c:2},
-  {q:"1 जरीब में कितने गज होते हैं?",a:["20","22","30","25"],c:1},
-  {q:"1 कट्ठा में कितने धुर होते हैं?",a:["10","20","25","30"],c:1},
-  {q:"1 एकड़ में कितने डेसिमल होते हैं?",a:["50","75","100","150"],c:2},
-  {q:"1 कड़ी कितने इंच के बराबर होती है?",a:["7.92 इंच","8 इंच","6 इंच","9 इंच"],c:0},
-  {q:"जरीब में 10 कड़ी पर क्या होता है?",a:["नोक वाली फूलिया","छल्ला","हैंडल","कोई नहीं"],c:0},
-  {q:"1 डेसिमल में कितने वर्ग फीट होते हैं?",a:["400","435.6","450","500"],c:1},
-  {q:"नक्शा का पैमाना आमतौर पर क्या होता है?",a:['16"=1 मील','10"=1 मील','32"=1 मील','8"=1 मील'],c:0},
-  {q:"गुनिया (Guniya) का उपयोग किसमें होता है?",a:["खेत नापी में","नक्शा बनाने में","समकोण बनाने में","तीनों में"],c:2},
-  {q:"1 बीघा में कितने एकड़ होते हैं? (बिहार)",a:["0.5","1.25","1.5","2"],c:1},
-  {q:"1 हाथ में कितने इंच होते हैं?",a:["12","16","18","24"],c:2},
-  {q:"जरीब किस धातु से बनती है?",a:["लोहे से","तांबे से","लोहे और जस्ते से","स्टील से"],c:2}
-];
+        function checkAnswer(i) {
+            clearInterval(timer);
+            if(i === selectedQuestions[currentQ].c) score++;
+            currentQ++;
+            loadQuestion();
+        }
 
-let cQ=0,score=0,timer,qSet=[],locked=false;
+        function finishTest() {
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+            if(score >= 10) {
+                document.getElementById('resultMsg').innerHTML = `✅ परीक्षा उत्तीर्ण! (स्कोर: ${score}/15)<br><span style="font-size:14px;">अब ID कार्ड के लिए फोटो अपलोड करें।</span>`;
+                document.getElementById('uploadSection').style.display = "block";
+            } else {
+                document.getElementById('resultMsg').innerHTML = `❌ परीक्षा विफल! स्कोर: ${score}/15<br><button class="btn" onclick="location.reload()">दोबारा प्रयास करें</button>`;
+            }
+        }
 
-function setTab(n){
-  document.querySelectorAll('.reg-tab').forEach((t,i)=>t.classList.toggle('active',i===n-1));
-  document.querySelectorAll('.rstep').forEach((s,i)=>s.classList.toggle('active',i===n-1));
-}
+        async function uploadAndSave() {
+            const finalBtn = document.getElementById('finalSubmitBtn');
+            const selfFile = document.getElementById('selfPhoto').files[0];
+            const aadharFile = document.getElementById('aadharPhoto').files[0];
 
-function startTest(){
-  const name=document.getElementById('r-name').value.trim();
-  const mob=document.getElementById('r-mobile').value.trim();
-  const dist=document.getElementById('r-dist').value;
-  if(!name||!mob||!dist){alert('नाम, मोबाइल और जिला अनिवार्य है।');return}
-  qSet=[...QB].sort(()=>Math.random()-.5).slice(0,15);
-  cQ=0;score=0;
-  setTab(2);
-  loadQ();
-}
+            if (!selfFile || !aadharFile) return alert("कृपया दोनों फोटो चुनें!");
 
-function loadQ(){
-  if(cQ>=15){finishTest();return}
-  locked=false;
-  const q=qSet[cQ];
-  document.getElementById('qnum').textContent=cQ+1;
-  document.getElementById('q-fill').style.width=((cQ/15)*100)+'%';
-  document.getElementById('q-text').textContent=q.q;
-  const ol=document.getElementById('opt-list');
-  ol.innerHTML=q.a.map((a,i)=>`<button class="opt" onclick="checkAns(${i})">${a}</button>`).join('');
-  startClock();
-}
+            finalBtn.disabled = true;
+            finalBtn.innerText = "Processing...";
 
-function startClock(){
-  let t=20;
-  const el=document.getElementById('timer');
-  el.textContent=t;el.classList.remove('warn');
-  clearInterval(timer);
-  timer=setInterval(()=>{
-    t--;el.textContent=t;
-    if(t<=5)el.classList.add('warn');
-    if(t<=0)checkAns(-1);
-  },1000);
-}
+            try {
+                // 1. Generate Reg No (JSA-xxxx)
+                const regNo = "JSA-" + Math.floor(Math.random() * 9000 + 1000);
 
-function checkAns(i){
-  if(locked)return;locked=true;
-  clearInterval(timer);
-  const opts=document.querySelectorAll('.opt');
-  const correct=qSet[cQ].c;
-  if(i===correct){score++;if(opts[i])opts[i].classList.add('correct');}
-  else{if(opts[i])opts[i].classList.add('wrong');if(opts[correct])opts[correct].classList.add('correct');}
-  cQ++;
-  setTimeout(loadQ,700);
-}
+                // 2. Format File Names with Reg No
+                const selfPath = `selfies/${regNo}_profile.${selfFile.name.split('.').pop()}`;
+                const aadharPath = `aadhar/${regNo}_aadhar.${aadharFile.name.split('.').pop()}`;
 
-function finishTest(){
-  setTab(3);
-  const pass=score>=10;
-  document.getElementById('r-icon').textContent=pass?'🎉':'😔';
-  document.getElementById('r-score').textContent=`${score}/15`;
-  document.getElementById('r-msg').textContent=pass?'बधाई! आप परीक्षा में उत्तीर्ण हुए।':'आप परीक्षा में विफल रहे। अधिक तैयारी के बाद दोबारा प्रयास करें।';
-  document.getElementById('r-tag').innerHTML=pass?'<div class="pass-tag">✅ Pass — ID Card के लिए आगे बढ़ें</div>':'<div class="fail-tag">❌ Fail — 10/15 चाहिए</div>';
-  if(pass)document.getElementById('upload-sec').style.display='block';
-  else{
-    setTimeout(()=>{
-      document.getElementById('r-tag').innerHTML+='<br><button class="reg-btn reg-btn-g" onclick="location.reload()" style="margin-top:12px">↩ दोबारा प्रयास करें</button>';
-    },200);
-  }
-}
+                // 3. Upload to Storage
+                await _supabase.storage.from('amin-documents').upload(selfPath, selfFile);
+                await _supabase.storage.from('amin-documents').upload(aadharPath, aadharFile);
 
-async function uploadAndRegister(){
-  const btn=document.getElementById('submit-btn');
-  const photoFile=document.getElementById('r-photo').files[0];
-  const aadharFile=document.getElementById('r-aadhar').files[0];
-  if(!photoFile||!aadharFile){alert('दोनों फोटो जरूरी हैं।');return}
-  btn.disabled=true;btn.textContent='⏳ Processing...';
-  try{
-    const regNo='JSA-'+Math.floor(1000+Math.random()*9000);
-    const sPath=`selfies/${regNo}_profile.${photoFile.name.split('.').pop()}`;
-    const aPath=`aadhar/${regNo}_aadhar.${aadharFile.name.split('.').pop()}`;
-    await _sb.storage.from('amin-documents').upload(sPath,photoFile,{upsert:true});
-    await _sb.storage.from('amin-documents').upload(aPath,aadharFile,{upsert:true});
-    const selfUrl=_sb.storage.from('amin-documents').getPublicUrl(sPath).data.publicUrl;
-    await _sb.from('amins').insert([{
-      reg_no:regNo,
-      name:document.getElementById('r-name').value,
-      mobile:document.getElementById('r-mobile').value,
-      district:document.getElementById('r-dist').value,
-      block:document.getElementById('r-block').value,
-      experience:score,
-      self_photo_url:selfUrl,
-      aadhar_photo_url:_sb.storage.from('amin-documents').getPublicUrl(aPath).data.publicUrl,
-      status:'Active'
-    }]);
-    /* Show ID Card */
-    document.getElementById('upload-sec').style.display='none';
-    document.getElementById('id-card-area').style.display='block';
-    document.getElementById('idc-photo').src=selfUrl;
-    document.getElementById('idc-name').textContent=document.getElementById('r-name').value;
-    document.getElementById('idc-reg').textContent=regNo;
-    document.getElementById('idc-block').textContent=document.getElementById('r-block').value||'—';
-    document.getElementById('idc-dist').textContent=document.getElementById('r-dist').value;
-    document.getElementById('idc-score').textContent=score+'/15';
-    document.getElementById('idc-verify').href='verify-amin.html?id='+regNo;
-    document.getElementById('idc-verify').textContent='🔍 प्रोफाइल सत्यापित करें — verify-amin.html?id='+regNo;
-    document.getElementById('r-icon').textContent='🪪';
-    document.getElementById('r-msg').textContent='आपका ID Card तैयार है! प्रिंट करें और नापी के समय साथ रखें।';
-  }catch(e){
-    alert('Error: '+e.message+'\nWhatsApp पर संपर्क करें: 9142075859');
-    btn.disabled=false;btn.textContent='✅ ID Card Generate करें';
-  }
-}
+                const selfUrl = _supabase.storage.from('amin-documents').getPublicUrl(selfPath).data.publicUrl;
+                const aadharUrl = _supabase.storage.from('amin-documents').getPublicUrl(aadharPath).data.publicUrl;
 
-/* FAQ toggle */
-function tf(btn){
-  const a=btn.nextElementSibling,open=btn.classList.contains('open');
-  document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.classList.remove('open')});
-  if(!open){btn.classList.add('open');a.classList.add('open');}
-}
-window.addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',window.scrollY>400));
-</script>
+                // 4. Save to Database
+                const { error: dbError } = await _supabase.from('amins').insert([{
+                    reg_no: regNo,
+                    name: document.getElementById('userName').value,
+                    mobile: document.getElementById('userMobile').value,
+                    district: document.getElementById('district').value,
+                    block: document.getElementById('block').value,
+                    experience: score,
+                    self_photo_url: selfUrl,
+                    aadhar_photo_url: aadharUrl,
+                    status: 'Active'
+                }]);
+
+                if (dbError) throw dbError;
+
+                document.getElementById('uploadSection').style.display = "none";
+                document.getElementById('resultMsg').innerHTML = "✅ सफलतापूर्वक पंजीकृत! आपका स्थाई ID कार्ड नीचे है।";
+                
+                const cardHtml = `
+                    <div id="idCard">
+                        <div class="temp-badge">VERIFIED</div>
+                        <div class="id-header">
+                            <div style="font-size:18px; font-weight:bold;">JAMEEN SEVA</div>
+                            <div style="font-size:10px;">Official Amin Partner</div>
+                        </div>
+                        <div class="id-body">
+                            <img src="${selfUrl}" class="user-photo-preview">
+                            <div style="font-weight:700; font-size:18px; color:var(--primary);">${document.getElementById('userName').value}</div>
+                            <div class="id-info">
+                                <div><b>Reg No:</b> ${regNo}</div>
+                                <div><b>Block:</b> ${document.getElementById('block').value}</div>
+                                <div><b>District:</b> ${document.getElementById('district').value}</div>
+                                <div><b>Status:</b> <span style="color:green; font-weight:bold;">Active</span></div>
+                            </div>
+                            <a href="verify-amin.html?id=${regNo}" style="font-size:11px; color:#666; text-decoration:none; display:block; margin-top:10px; border:1px solid #ddd; padding:5px; border-radius:5px;">🔍 प्रोफाइल सत्यापित करें</a>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('idCardContainer').innerHTML = cardHtml;
+                document.getElementById('postActionButtons').style.display = "block";
+
+            } catch (err) {
+                alert("❌ Error: " + err.message);
+                finalBtn.disabled = false;
+                finalBtn.innerText = "आईडी कार्ड जनरेट करें";
+            }
+        }
+    </script>
+    <!-- ✅ AMIN-JOIN.HTML ke beech mein yeh section daalo — form ke NEECHE -->
+
+<section style="background:#f9f9f9; border-top:3px solid #28a745; padding:30px 20px; margin-top:40px; font-family:Arial, sans-serif;">
+
+  <h2 style="color:#28a745; font-size:22px; margin-bottom:10px;">👨‍💼 JameenSeva अमीन पार्टनर प्रोग्राम — पूरी जानकारी</h2>
+  <p style="color:#333; font-size:15px; line-height:1.8;">
+    बिहार में चल रहे विशेष भूमि सर्वेक्षण 2026 के दौरान लाखों किसानों को जमीन की नापी (Survey) की जरूरत है। JameenSeva का <strong>अमीन पार्टनर प्रोग्राम</strong> आपको अपने ब्लॉक या जिले में काम करने और अच्छी कमाई करने का मौका देता है — बिना किसी निवेश के।
+  </p>
+
+  <h3 style="color:#1a5c2e; font-size:18px; margin-top:25px;">💰 अमीन पार्टनर कितना कमा सकता है?</h3>
+  <p style="color:#333; font-size:15px; line-height:1.8;">
+    एक अमीन प्रति नापी ₹2000 से ₹5000 तक कमा सकता है। अगर आप महीने में सिर्फ 15-20 केस भी करते हैं तो <strong>₹30,000 से ₹50,000 प्रति माह</strong> की कमाई संभव है। यह काम आप अपने गाँव या ब्लॉक के आसपास रहकर कर सकते हैं।
+  </p>
+
+  <h3 style="color:#1a5c2e; font-size:18px; margin-top:25px;">📋 पात्रता की शर्तें (Eligibility)</h3>
+  <ul style="color:#333; font-size:15px; line-height:2;">
+    <li>बिहार का स्थायी निवासी होना अनिवार्य है।</li>
+    <li>जमीन नापी (Measurement) का बुनियादी ज्ञान होना चाहिए।</li>
+    <li>स्मार्टफोन और WhatsApp का उपयोग आना चाहिए।</li>
+    <li><strong>15 सवालों का Online Test</strong> पास करना होगा (20 सेकंड प्रति सवाल)।</li>
+    <li>आधार कार्ड और पासपोर्ट साइज फोटो अनिवार्य है।</li>
+  </ul>
+
+  <h3 style="color:#1a5c2e; font-size:18px; margin-top:25px;">🪪 JameenSeva अमीन ID Card के फायदे</h3>
+  <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:10px;">
+    <tr style="background:#28a745; color:white;">
+      <th style="padding:10px; text-align:left;">फायदा</th>
+      <th style="padding:10px; text-align:left;">विवरण</th>
+    </tr>
+    <tr style="background:#fff;">
+      <td style="padding:10px; border-bottom:1px solid #ddd;">🌐 डिजिटल पहचान</td>
+      <td style="padding:10px; border-bottom:1px solid #ddd;">किसान QR Code से आपकी पहचान तुरंत verify कर सकते हैं</td>
+    </tr>
+    <tr style="background:#f5f5f5;">
+      <td style="padding:10px; border-bottom:1px solid #ddd;">📦 ऑर्डर नोटिफिकेशन</td>
+      <td style="padding:10px; border-bottom:1px solid #ddd;">आपके ब्लॉक से ऑर्डर आने पर WhatsApp पर सूचना</td>
+    </tr>
+    <tr style="background:#fff;">
+      <td style="padding:10px; border-bottom:1px solid #ddd;">💳 तय रेट</td>
+      <td style="padding:10px; border-bottom:1px solid #ddd;">काम से पहले किसान से रेट तय करने की स्वतंत्रता</td>
+    </tr>
+    <tr style="background:#f5f5f5;">
+      <td style="padding:10px;">🏅 रेटिंग प्रोफाइल</td>
+      <td style="padding:10px;">अच्छे काम पर 5-Star Rating — ज्यादा ऑर्डर मिलते हैं</td>
+    </tr>
+  </table>
+
+  <h3 style="color:#1a5c2e; font-size:18px; margin-top:25px;">❓ अक्सर पूछे जाने वाले सवाल</h3>
+  <p style="color:#333; font-size:15px; line-height:1.8;"><strong>Q: क्या कोई Registration Fee है?</strong><br>
+  नहीं, JameenSeva अमीन पार्टनर प्रोग्राम में रजिस्ट्रेशन बिल्कुल मुफ्त है।</p>
+  <p style="color:#333; font-size:15px; line-height:1.8;"><strong>Q: Test में क्या पूछा जाता है?</strong><br>
+  जमीन नापी, बीघा-कट्ठा-धूर हिसाब, चौहद्दी लिखना, और बिहार सर्वे से जुड़े 15 सवाल पूछे जाते हैं।</p>
+  <p style="color:#333; font-size:15px; line-height:1.8;"><strong>Q: ID मिलने में कितना समय लगता है?</strong><br>
+  Test पास करने और फोटो अपलोड करने के तुरंत बाद Digital ID Card generate हो जाता है।</p>
+
+</section>
 </body>
 </html>
-HTMLEOF
-echo "Done — $(wc -l < /mnt/user-data/outputs/amin-join.html) lines"
-Output
