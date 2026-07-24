@@ -3,33 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>बिहार केवाला (सत्यापित नकल / वेब कॉपी) ऑनलाइन ऑर्डर करें | JameenSeva.in</title>
-  <meta name="description" content="बिहार जमीन केवाला (Registry Deed) की प्रमाणित प्रति (Certified Copy) या वेब कॉपी घर बैठे ऑनलाइन मंगवाएं। 100% सुरक्षित सेवा और Cash on Delivery सुविधा।" />
-  <meta name="keywords" content="बिहार केवाला नकल, kevala copy bihar, certified deed copy bihar, registry copy online bihar, जमीन का केवाला, bihar bhumi kevala" />
+  <title>बिहार केवाला (सत्यापित नकल / वेब कॉपी) ऑनलाइन ऑर्डर | JameenSeva.in</title>
+  <meta name="description" content="बिहार के सभी जिलों, रजिस्ट्री ऑफिस एवं अंचलों के लिए जमीन केवाला की प्रमाणित प्रति या वेब कॉपी ऑनलाइन मंगवाएं।" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://jameenseva.in/kevala.html" />
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="बिहार केवाला (Registry Deed) सत्यापत्ति एवं नकल ऑर्डर | JameenSeva.in" />
-  <meta property="og:description" content="अपने जमीन का पुराना या नया केवाला की सत्यापित नकल ऑनलाइन ऑर्डर करें।" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://jameenseva.in/kevala.html" />
-
-  <!-- Schema.org JSON-LD for Search Engine Ranking -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "बिहार केवाला (सत्यापित नकल) ऑनलाइन सेवा",
-    "provider": {
-      "@type": "Organization",
-      "name": "JameenSeva.in",
-      "url": "https://jameenseva.in"
-    },
-    "areaServed": "Bihar",
-    "description": "ऑनलाइन केवाला वेब कॉपी एवं सत्यापित नकल सेवा।"
-  }
-  </script>
 
   <!-- Supabase JS Library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -48,36 +25,29 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg-light); color: var(--text-main); line-height: 1.6; }
 
-    /* Header & Nav */
+    /* Navigation */
     .nav-bar {
-      background: var(--primary-dark);
-      padding: 12px 20px;
+      background: var(--primary-dark); padding: 12px 20px;
       display: flex; justify-content: space-between; align-items: center;
       position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .brand-logo { color: #fff; font-size: 1.3rem; font-weight: 800; text-decoration: none; }
     .brand-logo span { color: #f39c12; }
     .nav-menu a { color: #e0e0e0; text-decoration: none; font-size: 0.88rem; margin-left: 15px; font-weight: 500; }
-    .nav-menu a:hover { color: #f39c12; }
 
-    /* Hero Banner UI */
+    /* Hero Banner */
     .hero-container {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      color: #fff; padding: 45px 20px; text-align: center; border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
+      color: #fff; padding: 40px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
     }
-    .hero-container h1 { font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; font-weight: 700; }
-    .hero-container p { font-size: 0.98rem; opacity: 0.9; max-width: 680px; margin: 0 auto; }
+    .hero-container h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 8px; font-weight: 700; }
+    .hero-container p { font-size: 0.95rem; opacity: 0.9; max-width: 650px; margin: 0 auto; }
 
-    /* Layout Wrapper */
-    .container { max-width: 860px; margin: -30px auto 40px; padding: 0 16px; }
-
-    /* Dynamic Form Styling */
+    /* Layout & Cards */
+    .container { max-width: 880px; margin: -25px auto 40px; padding: 0 16px; }
     .form-card {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid var(--border-color);
+      background: var(--card-bg); border-radius: 16px; padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); border: 1px solid var(--border-color);
     }
     
     .section-title {
@@ -96,7 +66,7 @@
     }
     input:focus, select:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(15,76,129,0.1); }
 
-    /* Type Selection (Radio Buttons) */
+    /* Radio Card UI */
     .radio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
     .radio-card {
       border: 2px solid var(--border-color); border-radius: 10px; padding: 12px 16px;
@@ -105,7 +75,7 @@
     }
     .radio-card.active { border-color: var(--primary); background: #f0f7ff; color: var(--primary); }
 
-    /* Custom Submit Button */
+    /* Submit Button */
     .btn-submit {
       width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px;
       border-radius: 10px; font-size: 1.05rem; font-weight: 700; cursor: pointer;
@@ -118,14 +88,6 @@
       display: none; padding: 16px; border-radius: 8px; font-weight: 600;
       text-align: center; margin-top: 16px; font-size: 0.92rem;
     }
-
-    /* SEO Content Card */
-    .content-box {
-      background: #fff; border-radius: 16px; padding: 28px; margin-top: 30px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.04); border: 1px solid var(--border-color);
-    }
-    .content-box h2 { font-size: 1.25rem; color: var(--primary); margin-bottom: 12px; }
-    .content-box p { font-size: 0.92rem; color: #4a5568; margin-bottom: 12px; }
 
     @media (max-width: 600px) {
       .form-card { padding: 18px; }
@@ -144,8 +106,8 @@
 </nav>
 
 <header class="hero-container">
-  <h1>बिहार केवाला (केवाला की नकल) ऑनलाइन मंगवाएं</h1>
-  <p>Certified Deed Copy एवं Web Copy आसानी से प्राप्त करें — बिना दफ्तर के चक्कर लगाए।</p>
+  <h1>बिहार केवाला (सत्यापित नकल / वेब कॉपी) ऑर्डर करें</h1>
+  <p>जिला, रजिस्ट्री ऑफिस एवं अंचल चुनकर अपनी ज़मीन का केवाला आसानी से मंगवाएं।</p>
 </header>
 
 <div class="container">
@@ -163,29 +125,46 @@
         </label>
       </div>
 
-      <!-- Step 2: Location & Office Details -->
-      <div class="section-title">📍 2. रजिस्ट्री ऑफिस विवरण</div>
+      <!-- Step 2: Location & Registry Office Dropdowns -->
+      <div class="section-title">📍 2. रजिस्ट्री ऑफिस एवं अंचल विवरण</div>
       <div class="form-grid">
+        
         <div class="form-group">
-          <label>जिला (District) *</label>
-          <input type="text" id="district" placeholder="जैसे: पटना / मुजफ्फरपुर" required />
+          <label>1. जिला (District) *</label>
+          <select id="district" onchange="onDistrictChange()" required>
+            <option value="">-- जिला चुनें --</option>
+            <!-- Dropdown Options Populated Dynamically -->
+          </select>
         </div>
+
         <div class="form-group">
-          <label>रजिस्ट्री ऑफिस (Registry Office) *</label>
-          <input type="text" id="registry_office" placeholder="जैसे: सदर / दानापुर" required />
+          <label>2. रजिस्ट्री ऑफिस (Registry Office) *</label>
+          <select id="registry_office" required disabled>
+            <option value="">-- पहले जिला चुनें --</option>
+          </select>
         </div>
+
         <div class="form-group">
-          <label>अंचल / सर्किल (Anchal) *</label>
-          <input type="text" id="anchal_circle" placeholder="अपने अंचल का नाम दर्ज करें" required />
+          <label>3. अंचल / सर्किल / ब्लॉक (Anchal) *</label>
+          <select id="anchal_circle" required disabled>
+            <option value="">-- पहले जिला चुनें --</option>
+          </select>
         </div>
+
         <div class="form-group">
-          <label>थाना नंबर (Thana No.)</label>
-          <input type="text" id="thana_number" placeholder="थाना नंबर (यदि याद हो)" />
+          <label>4. मौजा का नाम (Mauza Name) *</label>
+          <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम लिखें" required />
         </div>
+
+        <div class="form-group full-width">
+          <label>5. थाना नंबर (Thana No.)</label>
+          <input type="text" id="thana_number" placeholder="थाना नंबर (यदि ज्ञात हो)" />
+        </div>
+
       </div>
 
-      <!-- Step 3: Search Criteria & Date Range -->
-      <div class="section-title">🔍 3. खोजने की समयावधि और विवरण</div>
+      <!-- Step 3: Date & Details -->
+      <div class="section-title">🔍 3. खोज समय-सीमा एवं ज़मीन विवरण</div>
       <div class="form-grid">
         <div class="form-group">
           <label>कब से (From Date) *</label>
@@ -197,11 +176,11 @@
         </div>
         <div class="form-group">
           <label>बेचने वाले का नाम (Seller Name)</label>
-          <input type="text" id="seller_name" placeholder="विक्रेता (दाता) का नाम" />
+          <input type="text" id="seller_name" placeholder="दाता का नाम" />
         </div>
         <div class="form-group">
           <label>खरीदने वाले का नाम (Buyer Name)</label>
-          <input type="text" id="buyer_name" placeholder="क्रेता (गृहीता) का नाम" />
+          <input type="text" id="buyer_name" placeholder="गृहीता का नाम" />
         </div>
         <div class="form-group">
           <label>खाता नंबर (Khata No.)</label>
@@ -217,8 +196,8 @@
         </div>
       </div>
 
-      <!-- Step 4: Personal Details & Address -->
-      <div class="section-title">👤 4. आपकी व्यक्तिगत जानकारी (डिलीवरी हेतु)</div>
+      <!-- Step 4: Personal Info -->
+      <div class="section-title">👤 4. आवेदक एवं डिलीवरी विवरण</div>
       <div class="form-grid">
         <div class="form-group">
           <label>आपका नाम (Full Name) *</label>
@@ -245,18 +224,11 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-submit" id="submit-btn">ऑर्डर सबमिट करें (Request Copy)</button>
+      <button type="submit" class="btn-submit" id="submit-btn">ऑर्डर सबमिट करें (Submit Request)</button>
     </form>
 
     <div id="status-msg"></div>
   </div>
-
-  <!-- SEO Text Block for Console Indexing -->
-  <article class="content-box">
-    <h2>बिहार में केवाला (सत्यापित नकल) क्या है और इसे कैसे प्राप्त करें?</h2>
-    <p>बिहार भूमि निबंधन विभाग के तहत जब भी कोई जमीन या मकान खरीदा या बेचा जाता है, तो उसकी रजिस्ट्री की प्रक्रिया पूरी होने पर केवाला (Deed) जारी किया जाता है। यदि आपका मूल केवाला खो गया है या पुराना हो चुका है, तो आप <strong>JameenSeva.in</strong> के माध्यम से घर बैठे इसकी Certified Copy (सत्यापित प्रति) ऑनलाइन प्राप्त कर सकते हैं।</p>
-    <p><strong>आवश्यक विवरण:</strong> केवाला की नकल निकालने के लिए रजिस्ट्री ऑफिस का नाम, वर्ष (कब से कब तक), बेचने/खरीदने वाले का नाम, अथवा खाता/खेसरा नंबर की आवश्यकता होती है।</p>
-  </article>
 </div>
 
 <script>
@@ -264,6 +236,215 @@
   const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  /* DISTRICT TO REGISTRY OFFICES & ANCHALS MASTER MAPPING DATA */
+  const districtMasterData = {
+    "पटना": {
+      offices: ["पटना सदर", "दानापुर", "बाढ़", "मसौढ़ी", "पालीगंज", "फतुहा", "विक्रम"],
+      anchals: ["पटना सदर", "दानापुर", "फुलवारी", "मसौढ़ी", "पालीगंज", "विक्रम", "बिहटा", "खुसरूपुर", "बख्तियारपुर", "बेलछी", "अथमलगोला", "मोकामा", "पंडारक", "घोसवरी", "नौबतपुर", "दुलहिनबाजार", "संपतचक", "बाढ़", "फतुहा", "मनेर", "पुनपुन", "धनरूआ"]
+    },
+    "दरभंगा": {
+      offices: ["दरभंगा सदर", "बेनीपुर", "बिरौल"],
+      anchals: ["दरभंगा", "बेनीपुर", "अलीनगर", "बहादुरपुर", "बिरौल", "घनश्यामपुर", "गौरा बौराम", "हनुमाननगर", "हायाघाट", "जाले", "केवटी", "किरतपुर", "मनीगाछी", "सिंघवाड़ा", "तारडीह"]
+    },
+    "मुजफ्फरपुर": {
+      offices: ["मुजफ्फरपुर सदर", "सकरा", "पारू"],
+      anchals: ["मुजफ्फरपुर", "औराई", "बंदरा", "बोचहाँ", "गायघाट", "कटरा", "कुढ़नी", "मड़वन", "मीनापुर", "मोतीपुर", "मुरौल", "पारू", "साहेबगंज", "सकरा", "मुशहरी", "कांटी", "सरैया"]
+    },
+    "मधुबनी": {
+      offices: ["मधुबनी सदर", "झंझारपुर", "बेनीपट्टी", "फुलपरास", "जयनगर"],
+      anchals: ["मधुबनी", "अंधराठाढ़ी", "बासोपट्टी", "बेनीपट्टी", "बिस्फी", "घोघरडीहा", "हरलाखी", "जयनगर", "झंझारपुर", "खजौली", "लखनौर", "लौकही", "मधवापुर", "पंडौल", "फुलपरास", "राजनगर", "रहिका", "कलुआही", "बाबूबरही", "लदनिया", "मधेपुर"]
+    },
+    "गया": {
+      offices: ["गया सदर", "शेरघाटी", "टिकारी"],
+      anchals: ["गया सदर", "अतरी", "बाराचट्टी", "बोधगया", "बाँके बाजार", "डुमरिया", "फतेहपुर", "गुरुआ", "इमामगंज", "खिजरसराय", "कोंच", "मानपुर", "मोहरा", "परैया", "शेरघाटी", "टनकुप्पा", "वजीरगंज", "आमश", "बेलागंज", "गुरारू", "डोभी", "टिकारी", "मोहनपुर"]
+    },
+    "भागलपुर": {
+      offices: ["भागलपुर सदर", "नवगछिया", "कहलगांव"],
+      anchals: ["भागलपुर सदर", "बिहपुर", "गोराडीह", "जगदीशपुर", "कहलगांव", "खरीक", "नाथनगर", "नवगछिया", "पीरपैंती", "रंगरा चौक", "सबौर", "सन्हौला", "शाहकुंड", "सुल्तानगंज", "नारायणपुर", "गोपालपुर"]
+    },
+    "समस्तीपुर": {
+      offices: ["समस्तीपुर सदर", "रोसड़ा", "दलसिंहसराय", "पटोरी"],
+      anchals: ["समस्तीपुर सदर", "रोसड़ा", "दलसिंहसराय", "पटोरी", "ताजपुर", "कल्याणपुर", "सिंघिया", "हासनपुर", "मोरवा", "खानपुर", "पूसा", "सरायरंजन", "शिवाजीनगर", "बिथान", "विभूतिपुर", "उजियारपुर", "मोहियुद्दीननगर", "विद्यापतिनगर", "वारिसनगर", "मोहनपुर"]
+    },
+    "सारण": {
+      offices: ["छपरा सदर", "मढ़ौरा", "सोनपुर"],
+      anchals: ["छपरा", "अमनौर", "बनियापुर", "दरियापुर", "दिघवारा", "एकमा", "गड़खा", "इसुआपुर", "जलालपुर", "लहलादपुर", "मकेर", "मांझी", "मरहौरा", "नागरा", "पानापुर", "रिविलगंज", "सोनपुर", "तरैया"]
+    },
+    "नालंदा": {
+      offices: ["बिहारशरीफ", "हिलसा", "राजगीर"],
+      anchals: ["बिहारशरीफ", "राजगीर", "हिलसा", "इस्लामपुर", "हरनौत", "अस्थावां", "एकंगरसराय", "बेन", "बिन्द", "कतरीसराय", "कराई परशुराय", "चंडी", "नूरसराय", "परबलपुर", "गिरियक", "रहुई", "सिलाव", "सरमेरा", "थरथरी", "नगरनौसा"]
+    },
+    "रोहतास": {
+      offices: ["सासाराम", "डेहरी", "विक्रमगंज"],
+      anchals: ["सासाराम", "डेहरी", "विक्रमगंज", "नोखा", "काराकाट", "चेनारी", "शिवसागर", "तिलौथू", "अकोढ़ीगोला", "दिनारा", "करगहर", "कोचस", "नासिरगंज", "राजपुर", "संझौली", "सूर्यपुरा", "रोहतास", "नौहट्टा"]
+    },
+    "पूर्णिया": {
+      offices: ["पूर्णिया सदर", "बनमनखी", "धमदाहा", "बायसी"],
+      anchals: ["पूर्णिया सदर", "अमौर", "बैसी", "बनमनखी", "भवानीपुर", "धमदाहा", "जलालगढ़", "कसबा", "रूपौली", "श्रीनगर", "के नगर", "बीकोठी", "डगरुआ"]
+    },
+    "बेगूसराय": {
+      offices: ["बेगूसराय सदर", "तेघड़ा", "बलिया", "बखरी"],
+      anchals: ["बेगुसराय", "बरौनी", "तेघड़ा", "मटिहानी", "बछवाड़ा", "मंसूरचक", "नावकोठी", "चेरिया बरियारपुर", "खोदावंदपुर", "छौराही", "गढ़पुरा", "बखरी", "बलिया", "साहेबपुर कमाल", "शामहो अकहा कूरहा"]
+    },
+    "पूर्वी चंपारण": {
+      offices: ["मोतिहारी सदर", "अरेराज", "चकिया", "ढाका", "रक्सौल"],
+      anchals: ["मोतिहारी", "तुरकौलिया", "हरसिद्धि", "पहाड़पुर", "अरेराज", "संग्रामपुर", "केसरिया", "कल्याणपुर", "कोटवा", "पीपरा", "चकिया", "मेहसी", "मधुबन", "फेनहारा", "तेतरिया", "रामनगर", "पकरियाल", "ढाका", "छौड़ादानो", "बनकटवा", "रक्सौल", "आदापुर", "रामगढ़वा", "सुगौली", "बंजरिया", "चिराया"]
+    },
+    "पश्चिमी चंपारण": {
+      offices: ["बेतिया सदर", "बगाहा", "नरकटियागंज"],
+      anchals: ["बेतिया", "नौतन", "बैरिया", "जगदीशपुर", "चनपटिया", "मझौलिया", "सिकटा", "मैनाटांड", "नरकटियागंज", "लौकरिया", "बगाहा 1", "बगाहा 2", "रामनगर", "गौनाहा", "ठकराहा", "भितहा", "पिपरसी"]
+    },
+    "सीवान": {
+      offices: ["सीवान सदर", "महाराजगंज"],
+      anchals: ["सीवान सदर", "मैरवा", "गुठनी", "रघुनाथपुर", "महाराजगंज", "आँदर", "दरौली", "बड़हरिया", "गोरेयाकोठी", "बसंतपुर", "भगवानपुर हाट", "दरौंदा", "हुसैनगंज", "लकड़ी नबीगंज", "पचरुखी", "सिसवन", "जीरादेई", "हसनपुरा", "नौतन"]
+    },
+    "गोपालगंज": {
+      offices: ["गोपालगंज सदर", "हथुआ"],
+      anchals: ["बैकुंठपुर", "बरौली", "भोरे", "विजयपुर", "गोपालगंज", "हथुआ", "कटेया", "कुचायकोट", "मांझा", "पंचदेवरी", "फुलवरिया", "सिधवलिया", "थावे", "उचकागांव"]
+    },
+    "भोजपुर": {
+      offices: ["आरा सदर", "जगदीशपुर", "पीरो"],
+      anchals: ["आरा", "बड़हरा", "शाहपुर", "बिहिया", "जगदीशपुर", "पीरो", "चरपोखरी", "गड़हनी", "अगियांव", "तरारी", "सहार", "उदवंतनगर", "संदेश"]
+    },
+    "बक्सर": {
+      offices: ["बक्सर सदर", "डुमरांव"],
+      anchals: ["बक्सर सदर", "इटाढ़ी", "चौसा", "राजारामपुर", "डुमराव", "सिमरी", "ब्रह्मपुर", "चक्की", "चौगाईं", "केसठ", "नावानगर"]
+    },
+    "सहरसा": {
+      offices: ["सहरसा सदर", "सिमरी बख्तियारपुर"],
+      anchals: ["सहरसा सदर", "कहरा", "सिमरी बख्तियारपुर", "सौर बाज़ार", "बनमा ईटहरी", "सोनवर्षा", "नवहट्टा", "सतर कटैया", "महिषी", "पतरघट"]
+    },
+    "सुपौल": {
+      offices: ["सुपौल सदर", "बीरपुर", "त्रिवेणीगंज", "निर्मली"],
+      anchals: ["सुपौल सदर", "बीरपुर", "त्रिवेणीगंज", "निर्मली", "पिपरा", "मरौना", "किशनपुर", "सरायगढ़ भपटियाही", "बसंतपुर", "राघोपुर", "प्रतापगंज"]
+    },
+    "मधेपुरा": {
+      offices: ["मधेपुरा सदर", "उदाकिशुनगंज"],
+      anchals: ["मधेपुरा सदर", "सिंहेश्वर", "गमहरिया", "घैलाढ़", "मुरलीगंज", "कुमारखंड", "चौसा", "पुरैनी", "आलमनगर", "ग्वालपारा", "बिहारीगंज"]
+    },
+    "वैशाली": {
+      offios: ["हाजीपुर सदर", "महुआ", "महनार"],
+      anchals: ["हाजीपुर", "बिंदुपुर", "राजापाकर", "महुआ", "जंदाहा", "गोरौल", "वैशाली", "पटेढ़ी बेलसर", "चेहराकलां", "लालगंज", "भगवानपुर", "महनार", "सहदेई बुजुर्ग", "देशरी", "राघोपुर"]
+    },
+    "सीतामढ़ी": {
+      offices: ["सीतामढ़ी सदर", "पुपरी", "बेलसंड"],
+      anchals: ["डुमरा", "रीगा", "रुन्नीसैदपुर", "बेलसंड", "बाजपट्टी", "परिहार", "सुरसंड", "पुपरी", "सोनबरसा", "मेजरगंज", "बैरगनिया", "चोरौत", "नानपुर", "बोखड़ा", "परसौनी"]
+    },
+    "औरंगाबाद": {
+      offices: ["औरंगाबाद सदर", "दाउदनगर"],
+      anchals: ["औरंगाबाद", "देव", "कुटुम्बा", "मदनपुर", "रफ़ीगंज", "ओबरा", "दाउदनगर", "गोह", "हसपुरा", "नवीनगर", "बारूण"]
+    },
+    "नवादा": {
+      offices: ["नवादा सदर", "रजौली"],
+      anchals: ["नवादा सदर", "अकबरपुर", "गोविन्दपुर", "रजौली", "सिरदला", "मेसकौर", "नरहट", "हिसुआ", "काशीचक", "पकरीबरांवा", "वारिसलीगंज", "कौआकोल", "रोह"]
+    },
+    "जमुई": {
+      offices: ["जमुई सदर"],
+      anchals: ["जमुई", "खैरा", "सोनो", "झाझा", "गिद्धौर", "लक्ष्मीपुर", "बरहट", "सिकंदरा", "अलीगंज", "इस्लामनगर अलीगंज"]
+    },
+    "कटिहार": {
+      offices: ["कटिहार सदर", "बारसोई", "मनिहारी"],
+      anchals: ["कटिहार सदर", "हाफलागंज", "दण्डखोरा", "हसनगंज", "कोढ़ा", "फलका", "समेली", "बरारी", "कुरसेला", "मनिहारी", "अमदाबाद", "प्राणपुर", "आजमनगर", "कदवा", "बारसोई", "बलरामपुर"]
+    },
+    "अररिया": {
+      offices: ["अररिया सदर", "फारबिसगंज"],
+      anchals: ["अररिया", "जोकीहाट", "कुर्साकांटा", "सिकटी", "पलासी", "फारबिसगंज", "भरगामा", "रानीगंज", "नरपतगंज"]
+    },
+    "किशनगंज": {
+      offices: ["किशनगंज सदर"],
+      anchals: ["किशनगंज", "पोठिया", "कोचाधामन", "टेढ़ागाछ", "बहादुरगंज", "दिघलबैंक", "ठाकुरगंज"]
+    },
+    "खगड़िया": {
+      offices: ["खगड़िया सदर", "गोगरी"],
+      anchals: ["खगड़िया सदर", "अलौली", "चौथम", "चित्रगुप्तनगर", "गोगरी", "परबत्ता", "बेलदौर", "मानसी"]
+    },
+    "मुंगेर": {
+      offices: ["मुंगेर सदर", "तारापुर", "हवेली खड़कपुर"],
+      anchals: ["मुंगेर सदर", "जमालपुर", "बरियारपुर", "धरहरा", "खड़गपुर", "तारापुर", "संग्रामपुर", "असरगंज", "टेटिया बम्बर"]
+    },
+    "लखीसराय": {
+      offices: ["लखीसराय सदर"],
+      anchals: ["लखीसराय सदर", "रामगढ़ चौक", "हलसी", "बड़हिया", "सूर्यगड़ा", "पिपरिया"]
+    },
+    "शेखपुरा": {
+      offices: ["शेखपुरा सदर"],
+      anchals: ["शेखपुरा सदर", "बरबीघा", "शेखोपुर सराय", "चेवाड़ा", "अरियारी", "घाटकुसुम्भा"]
+    },
+    "बांका": {
+      offices: ["बांका सदर"],
+      anchals: ["बांका", "अमरपुर", "शंभूगंज", "बेलहर", "फुल्लीडुमर", "कटोरिया", "चंदन", "बौसी", "बाराहाट", "धोरैया", "रजौन"]
+    },
+    "कैमूर": {
+      offices: ["भभुआ", "मोहनिया"],
+      anchals: ["भभुआ", "मोहनिया", "कुदरा", "दुर्गावती", "रामगढ़", "नुआंव", "चांद", "चैनपुर", "भगवानपुर", "रामपुर", "अधौरा"]
+    },
+    "जहानाबाद": {
+      offices: ["जहानाबाद सदर"],
+      anchals: ["जहानाबाद सदर", "काको", "मखदुमपुर", "घोसी", "हुलासगंज", "मोदनगंज", "रतनी फरीदपुर"]
+    },
+    "अरवल": {
+      offices: ["अरवल सदर"],
+      anchals: ["अरवल सदर", "कलेर", "करपी", "कुर्था", "सोनभद्र बंशी सूर्यपुर"]
+    },
+    "शिवहर": {
+      offices: ["शिवहर सदर"],
+      anchals: ["शिवहर सदर", "तरीयानी", "पिपराही", "पूरनहिया", "डुमरी कटसरी"]
+    }
+  };
+
+  // Populate District Dropdown on Load
+  window.addEventListener('DOMContentLoaded', () => {
+    const distSelect = document.getElementById('district');
+    Object.keys(districtMasterData).forEach(dist => {
+      const opt = document.createElement('option');
+      opt.value = dist;
+      opt.textContent = dist;
+      distSelect.appendChild(opt);
+    });
+  });
+
+  // Dynamic Trigger when District is Selected
+  function onDistrictChange() {
+    const dist = document.getElementById('district').value;
+    const regSelect = document.getElementById('registry_office');
+    const anchalSelect = document.getElementById('anchal_circle');
+
+    regSelect.innerHTML = '';
+    anchalSelect.innerHTML = '';
+
+    if (!dist || !districtMasterData[dist]) {
+      regSelect.disabled = true;
+      anchalSelect.disabled = true;
+      regSelect.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
+      anchalSelect.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
+      return;
+    }
+
+    // Enable Selects
+    regSelect.disabled = false;
+    anchalSelect.disabled = false;
+
+    // Populate Registry Offices
+    regSelect.innerHTML = '<option value="">-- रजिस्ट्री ऑफिस चुनें --</option>';
+    const offices = districtMasterData[dist].offices || ["सदर"];
+    offices.forEach(office => {
+      const opt = document.createElement('option');
+      opt.value = office;
+      opt.textContent = office;
+      regSelect.appendChild(opt);
+    });
+
+    // Populate Anchals
+    anchalSelect.innerHTML = '<option value="">-- अंचल / ब्लॉक चुनें --</option>';
+    const anchals = districtMasterData[dist].anchals || [];
+    anchals.forEach(anchal => {
+      const opt = document.createElement('option');
+      opt.value = anchal;
+      opt.textContent = anchal;
+      anchalSelect.appendChild(opt);
+    });
+  }
 
   let selectedDocType = 'Certified Copy';
 
@@ -273,21 +454,22 @@
     document.getElementById('type-web').classList.toggle('active', type === 'Web Copy');
   }
 
+  // Handle Form Submission to Supabase
   async function handleOrder(event) {
     event.preventDefault();
 
     const btn = document.getElementById('submit-btn');
     const msg = document.getElementById('status-msg');
 
-    // Generate Order ID
     const orderId = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const formData = {
       order_id: orderId,
       document_type: selectedDocType,
-      district: document.getElementById('district').value.trim(),
-      registry_office: document.getElementById('registry_office').value.trim(),
-      anchal_circle: document.getElementById('anchal_circle').value.trim(),
+      district: document.getElementById('district').value,
+      registry_office: document.getElementById('registry_office').value,
+      anchal_circle: document.getElementById('anchal_circle').value,
+      mauza_name: document.getElementById('mauza_name').value.trim(),
       thana_number: document.getElementById('thana_number').value.trim(),
       date_from: document.getElementById('date_from').value,
       date_to: document.getElementById('date_to').value,
@@ -303,7 +485,6 @@
       payment_method: document.getElementById('payment_method').value
     };
 
-    // Validations
     if (!/^\d{10}$/.test(formData.customer_mobile)) {
       alert('कृपया 10-अंकों का सही मोबाइल नंबर दर्ज करें।'); return;
     }
@@ -325,22 +506,24 @@
       msg.style.background = '#e6fffa';
       msg.style.color = '#234e52';
       msg.style.border = '1px solid #b2f5ea';
-      msg.innerHTML = `✅ <strong>आपका ऑर्डर सफलतापूर्वक सबमिट हो गया है!</strong><br><br>
+      msg.innerHTML = `✅ <strong>आपका केवाला ऑर्डर सबमिट हो गया है!</strong><br><br>
                        📌 <strong>Order ID:</strong> ${orderId}<br>
                        हमारी टीम जल्द ही आपसे WhatsApp पर संपर्क करेगी।`;
       
       document.getElementById('kevalaForm').reset();
+      document.getElementById('registry_office').disabled = true;
+      document.getElementById('anchal_circle').disabled = true;
       btn.style.display = 'none';
 
     } catch (err) {
-      console.error('Supabase Insert Error:', err);
+      console.error('Supabase Error:', err);
       msg.style.display = 'block';
       msg.style.background = '#fff5f5';
       msg.style.color = '#9b2c2c';
       msg.style.border = '1px solid #feb2b2';
-      msg.innerHTML = '❌ सबमिट करने में कोई समस्या आई। कृपया दोबारा प्रयास करें।';
+      msg.innerHTML = '❌ सबमिट करने में समस्या आई। कृपया पुनः प्रयास करें।';
       btn.disabled = false;
-      btn.textContent = 'ऑर्डर सबमिट करें (Request Copy)';
+      btn.textContent = 'ऑर्डर सबमिट करें (Submit Request)';
     }
   }
 </script>
