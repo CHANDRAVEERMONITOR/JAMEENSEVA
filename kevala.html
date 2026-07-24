@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>बिहार केवाला (सत्यापित नकल / वेब कॉपी) ऑनलाइन ऑर्डर | JameenSeva.in</title>
-  <meta name="description" content="बिहार के सभी जिलों, रजिस्ट्री ऑफिस एवं अंचलों के लिए जमीन केवाला की प्रमाणित प्रति या वेब कॉपी ऑनलाइन मंगवाएं।" />
+  <meta name="description" content="बिहार के सभी 38 जिलों और सभी निबंधन कार्यालयों (Registration Offices) से जमीन केवाला की प्रमाणित प्रति या वेब कॉपी ऑनलाइन मंगवाएं।" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://jameenseva.in/kevala.html" />
 
   <!-- Supabase JS Library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"><\/script>
 
   <style>
     :root {
@@ -38,7 +38,8 @@
     /* Hero Banner */
     .hero-container {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-      color: #fff; padding: 40px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
+      color: #fff; padding: 40px 20px; text-align: center;
+      border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;
     }
     .hero-container h1 { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 8px; font-weight: 700; }
     .hero-container p { font-size: 0.95rem; opacity: 0.9; max-width: 650px; margin: 0 auto; }
@@ -47,12 +48,13 @@
     .container { max-width: 880px; margin: -25px auto 40px; padding: 0 16px; }
     .form-card {
       background: var(--card-bg); border-radius: 16px; padding: 28px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--border-color);
     }
-    
+
     .section-title {
       font-size: 1.05rem; color: var(--primary); font-weight: 700; margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px; border-bottom: 2px dashed #e2e8f0; padding-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 2px dashed #e2e8f0; padding-bottom: 8px;
     }
 
     .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -64,7 +66,10 @@
       padding: 11px 14px; border: 1.5px solid var(--border-color); border-radius: 8px;
       font-size: 0.9rem; outline: none; transition: all 0.2s ease; background: #fcfdfe;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(15,76,129,0.1); }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary); background: #fff;
+      box-shadow: 0 0 0 3px rgba(15,76,129,0.1);
+    }
 
     /* Radio Card UI */
     .radio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
@@ -84,6 +89,16 @@
     .btn-submit:hover { background: #219150; }
     .btn-submit:disabled { background: #a0aec0; cursor: not-allowed; box-shadow: none; }
 
+    /* District count badge */
+    .district-badge {
+      display: inline-block; background: #e8f4fd; color: var(--primary);
+      font-size: 0.8rem; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; margin-left: 8px; border: 1px solid #bee3f8;
+    }
+
+    /* Dropdown hint */
+    .hint { font-size: 0.78rem; color: #718096; margin-top: 3px; }
+
     #status-msg {
       display: none; padding: 16px; border-radius: 8px; font-weight: 600;
       text-align: center; margin-top: 16px; font-size: 0.92rem;
@@ -101,19 +116,20 @@
   <a href="https://jameenseva.in" class="brand-logo">Jameen<span>Seva</span>.in</a>
   <div class="nav-menu">
     <a href="https://jameenseva.in">होम</a>
+    <a href="https://jameenseva.in/panchnama.html">⚖️ पंचनामा</a>
     <a href="https://jameenseva.in/track.html">ऑर्डर ट्रैक</a>
   </div>
 </nav>
 
 <header class="hero-container">
   <h1>बिहार केवाला (सत्यापित नकल / वेब कॉपी) ऑर्डर करें</h1>
-  <p>जिला, रजिस्ट्री ऑफिस एवं अंचल चुनकर अपनी ज़मीन का केवाला आसानी से मंगवाएं।</p>
+  <p>बिहार के सभी 38 जिलों के सभी निबंधन कार्यालयों (SRO) से अपनी ज़मीन का केवाला आसानी से मंगवाएं। COD सुविधा उपलब्ध।</p>
 </header>
 
 <div class="container">
   <div class="form-card">
     <form id="kevalaForm" onsubmit="handleOrder(event)">
-      
+
       <!-- Step 1: Document Type -->
       <div class="section-title">📄 1. केवाला दस्तावेज़ का प्रकार चुनें</div>
       <div class="radio-grid">
@@ -125,23 +141,27 @@
         </label>
       </div>
 
-      <!-- Step 2: Location & Registry Office Dropdowns -->
-      <div class="section-title">📍 2. रजिस्ट्री ऑफिस एवं अंचल विवरण</div>
+      <!-- Step 2: Location Dropdowns -->
+      <div class="section-title">
+        📍 2. रजिस्ट्री ऑफिस, अंचल एवं मौजा विवरण
+        <span class="district-badge">🗂️ 38 जिले • 200+ SRO</span>
+      </div>
       <div class="form-grid">
-        
+
         <div class="form-group">
           <label>1. जिला (District) *</label>
           <select id="district" onchange="onDistrictChange()" required>
-            <option value="">-- जिला चुनें --</option>
-            <!-- Dropdown Options Populated Dynamically -->
+            <option value="">-- जिला चुनें (38 जिले) --</option>
           </select>
+          <span class="hint">बिहार के सभी 38 जिले उपलब्ध हैं।</span>
         </div>
 
         <div class="form-group">
-          <label>2. रजिस्ट्री ऑफिस (Registry Office) *</label>
+          <label>2. रजिस्ट्री ऑफिस / SRO (Registration Office) *</label>
           <select id="registry_office" required disabled>
             <option value="">-- पहले जिला चुनें --</option>
           </select>
+          <span class="hint">जिला चुनने पर सभी SRO / निबंधन कार्यालय दिखेंगे।</span>
         </div>
 
         <div class="form-group">
@@ -175,11 +195,11 @@
           <input type="date" id="date_to" required />
         </div>
         <div class="form-group">
-          <label>बेचने वाले का नाम (Seller Name)</label>
+          <label>बेचने वाले का नाम (Seller / Daata Name)</label>
           <input type="text" id="seller_name" placeholder="दाता का नाम" />
         </div>
         <div class="form-group">
-          <label>खरीदने वाले का नाम (Buyer Name)</label>
+          <label>खरीदने वाले का नाम (Buyer / Grihita Name)</label>
           <input type="text" id="buyer_name" placeholder="गृहीता का नाम" />
         </div>
         <div class="form-group">
@@ -232,166 +252,1076 @@
 </div>
 
 <script>
-  /* SUPABASE CONFIGURATION */
+  /* SUPABASE */
   const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
   const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  /* DISTRICT TO REGISTRY OFFICES & ANCHALS MASTER MAPPING DATA */
+  /* ============================================================
+     COMPLETE BIHAR 38 DISTRICT MASTER DATA
+     All SRO / Registration Offices + Anchals
+     Format: Sadar | Peripheral | Notified Area | Sub-offices
+  ============================================================ */
   const districtMasterData = {
-    "पटना": {
-      offices: ["पटना सदर", "दानापुर", "बाढ़", "मसौढ़ी", "पालीगंज", "फतुहा", "विक्रम"],
-      anchals: ["पटना सदर", "दानापुर", "फुलवारी", "मसौढ़ी", "पालीगंज", "विक्रम", "बिहटा", "खुसरूपुर", "बख्तियारपुर", "बेलछी", "अथमलगोला", "मोकामा", "पंडारक", "घोसवरी", "नौबतपुर", "दुलहिनबाजार", "संपतचक", "बाढ़", "फतुहा", "मनेर", "पुनपुन", "धनरूआ"]
+    "अररिया (Araria)": {
+        "offices": [
+            "Araria Sadar (Araria)",
+            "Araria Peripheral (Araria)",
+            "Forbesganj (Forbesganj)",
+            "Forbesganj Peripheral (Forbesganj)"
+        ],
+        "anchals": [
+            "अररिया",
+            "जोकीहाट",
+            "कुर्साकांटा",
+            "सिकटी",
+            "पलासी",
+            "फारबिसगंज",
+            "भरगामा",
+            "रानीगंज",
+            "नरपतगंज"
+        ]
     },
-    "दरभंगा": {
-      offices: ["दरभंगा सदर", "बेनीपुर", "बिरौल"],
-      anchals: ["दरभंगा", "बेनीपुर", "अलीनगर", "बहादुरपुर", "बिरौल", "घनश्यामपुर", "गौरा बौराम", "हनुमाननगर", "हायाघाट", "जाले", "केवटी", "किरतपुर", "मनीगाछी", "सिंघवाड़ा", "तारडीह"]
+    "अरवल (Arwal)": {
+        "offices": [
+            "Arwal Sadar (Arwal)",
+            "Arwal Peripheral (Arwal)"
+        ],
+        "anchals": [
+            "अरवल",
+            "कलेर",
+            "करपी",
+            "कुर्था",
+            "सोनभद्र बंशी सूर्यपुर"
+        ]
     },
-    "मुजफ्फरपुर": {
-      offices: ["मुजफ्फरपुर सदर", "सकरा", "पारू"],
-      anchals: ["मुजफ्फरपुर", "औराई", "बंदरा", "बोचहाँ", "गायघाट", "कटरा", "कुढ़नी", "मड़वन", "मीनापुर", "मोतीपुर", "मुरौल", "पारू", "साहेबगंज", "सकरा", "मुशहरी", "कांटी", "सरैया"]
+    "औरंगाबाद (Aurangabad)": {
+        "offices": [
+            "Aurangabad Sadar (Aurangabad)",
+            "Aurangabad Peripheral (Aurangabad)",
+            "Daudnagar (Daudnagar)",
+            "Daudnagar Peripheral (Daudnagar)",
+            "Rafiganj (Rafiganj)"
+        ],
+        "anchals": [
+            "औरंगाबाद",
+            "देव",
+            "कुटुम्बा",
+            "मदनपुर",
+            "रफ़ीगंज",
+            "ओबरा",
+            "दाउदनगर",
+            "गोह",
+            "हसपुरा",
+            "नवीनगर",
+            "बारूण"
+        ]
     },
-    "मधुबनी": {
-      offices: ["मधुबनी सदर", "झंझारपुर", "बेनीपट्टी", "फुलपरास", "जयनगर"],
-      anchals: ["मधुबनी", "अंधराठाढ़ी", "बासोपट्टी", "बेनीपट्टी", "बिस्फी", "घोघरडीहा", "हरलाखी", "जयनगर", "झंझारपुर", "खजौली", "लखनौर", "लौकही", "मधवापुर", "पंडौल", "फुलपरास", "राजनगर", "रहिका", "कलुआही", "बाबूबरही", "लदनिया", "मधेपुर"]
+    "बांका (Banka)": {
+        "offices": [
+            "Banka Sadar (Banka)",
+            "Banka Peripheral (Banka)",
+            "Bounsi (Bounsi)",
+            "Katoria (Katoria)"
+        ],
+        "anchals": [
+            "बांका",
+            "अमरपुर",
+            "शंभूगंज",
+            "बेलहर",
+            "फुल्लीडुमर",
+            "कटोरिया",
+            "चंदन",
+            "बौसी",
+            "बाराहाट",
+            "धोरैया",
+            "रजौन"
+        ]
     },
-    "गया": {
-      offices: ["गया सदर", "शेरघाटी", "टिकारी"],
-      anchals: ["गया सदर", "अतरी", "बाराचट्टी", "बोधगया", "बाँके बाजार", "डुमरिया", "फतेहपुर", "गुरुआ", "इमामगंज", "खिजरसराय", "कोंच", "मानपुर", "मोहरा", "परैया", "शेरघाटी", "टनकुप्पा", "वजीरगंज", "आमश", "बेलागंज", "गुरारू", "डोभी", "टिकारी", "मोहनपुर"]
+    "बेगूसराय (Begusarai)": {
+        "offices": [
+            "Begusarai Sadar (Begusarai)",
+            "Begusarai Peripheral (Begusarai)",
+            "Bakhri (Bakhri)",
+            "Bakhri Peripheral (Bakhri)",
+            "Balia (Balia)",
+            "Teghra (Teghra)",
+            "Teghra Peripheral (Teghra)",
+            "Manjhaul (Manjhaul)",
+            "Barauni Notified Area (Begusarai)"
+        ],
+        "anchals": [
+            "बेगुसराय",
+            "बरौनी",
+            "तेघड़ा",
+            "मटिहानी",
+            "बछवाड़ा",
+            "मंसूरचक",
+            "नावकोठी",
+            "चेरिया बरियारपुर",
+            "खोदावंदपुर",
+            "छौराही",
+            "गढ़पुरा",
+            "बखरी",
+            "बलिया",
+            "साहेबपुर कमाल",
+            "शामहो अकहा कूरहा"
+        ]
     },
-    "भागलपुर": {
-      offices: ["भागलपुर सदर", "नवगछिया", "कहलगांव"],
-      anchals: ["भागलपुर सदर", "बिहपुर", "गोराडीह", "जगदीशपुर", "कहलगांव", "खरीक", "नाथनगर", "नवगछिया", "पीरपैंती", "रंगरा चौक", "सबौर", "सन्हौला", "शाहकुंड", "सुल्तानगंज", "नारायणपुर", "गोपालपुर"]
+    "भागलपुर (Bhagalpur)": {
+        "offices": [
+            "Bhagalpur Sadar (Bhagalpur)",
+            "Bhagalpur Peripheral (Bhagalpur)",
+            "Bhagalpur Notified Area (Bhagalpur)",
+            "Naugachhia (Naugachhia)",
+            "Naugachhia Peripheral (Naugachhia)",
+            "Bihpur (Bihpur)",
+            "Kahalgaon (Kahalgaon)",
+            "Sultanganj (Sultanganj)"
+        ],
+        "anchals": [
+            "भागलपुर सदर",
+            "बिहपुर",
+            "गोराडीह",
+            "जगदीशपुर",
+            "कहलगांव",
+            "खरीक",
+            "नाथनगर",
+            "नवगछिया",
+            "पीरपैंती",
+            "रंगरा चौक",
+            "सबौर",
+            "सन्हौला",
+            "शाहकुंड",
+            "सुल्तानगंज",
+            "नारायणपुर",
+            "गोपालपुर"
+        ]
     },
-    "समस्तीपुर": {
-      offices: ["समस्तीपुर सदर", "रोसड़ा", "दलसिंहसराय", "पटोरी"],
-      anchals: ["समस्तीपुर सदर", "रोसड़ा", "दलसिंहसराय", "पटोरी", "ताजपुर", "कल्याणपुर", "सिंघिया", "हासनपुर", "मोरवा", "खानपुर", "पूसा", "सरायरंजन", "शिवाजीनगर", "बिथान", "विभूतिपुर", "उजियारपुर", "मोहियुद्दीननगर", "विद्यापतिनगर", "वारिसनगर", "मोहनपुर"]
+    "भोजपुर (Bhojpur)": {
+        "offices": [
+            "Ara Sadar (Ara)",
+            "Ara Peripheral (Ara)",
+            "Ara Notified Area (Ara)",
+            "Jagdishpur (Jagdishpur)",
+            "Jagdishpur Peripheral (Jagdishpur)",
+            "Piro (Piro)",
+            "Shahpur (Shahpur)"
+        ],
+        "anchals": [
+            "आरा",
+            "बड़हरा",
+            "शाहपुर",
+            "बिहिया",
+            "जगदीशपुर",
+            "पीरो",
+            "चरपोखरी",
+            "गड़हनी",
+            "अगियांव",
+            "तरारी",
+            "सहार",
+            "उदवंतनगर",
+            "संदेश"
+        ]
     },
-    "सारण": {
-      offices: ["छपरा सदर", "मढ़ौरा", "सोनपुर"],
-      anchals: ["छपरा", "अमनौर", "बनियापुर", "दरियापुर", "दिघवारा", "एकमा", "गड़खा", "इसुआपुर", "जलालपुर", "लहलादपुर", "मकेर", "मांझी", "मरहौरा", "नागरा", "पानापुर", "रिविलगंज", "सोनपुर", "तरैया"]
+    "बक्सर (Buxar)": {
+        "offices": [
+            "Buxar Sadar (Buxar)",
+            "Buxar Peripheral (Buxar)",
+            "Dumraon (Dumraon)",
+            "Dumraon Peripheral (Dumraon)",
+            "Buxar Notified Area (Buxar)"
+        ],
+        "anchals": [
+            "बक्सर सदर",
+            "इटाढ़ी",
+            "चौसा",
+            "राजारामपुर",
+            "डुमराव",
+            "सिमरी",
+            "ब्रह्मपुर",
+            "चक्की",
+            "चौगाईं",
+            "केसठ",
+            "नावानगर"
+        ]
     },
-    "नालंदा": {
-      offices: ["बिहारशरीफ", "हिलसा", "राजगीर"],
-      anchals: ["बिहारशरीफ", "राजगीर", "हिलसा", "इस्लामपुर", "हरनौत", "अस्थावां", "एकंगरसराय", "बेन", "बिन्द", "कतरीसराय", "कराई परशुराय", "चंडी", "नूरसराय", "परबलपुर", "गिरियक", "रहुई", "सिलाव", "सरमेरा", "थरथरी", "नगरनौसा"]
+    "दरभंगा (Darbhanga)": {
+        "offices": [
+            "Alinagar-Manigachhi (Darbhanga)",
+            "Alinagar - Part (Bahera)",
+            "Alinagar peripheral (Bahera)",
+            "Bahadurpur (Darbhanga)",
+            "Bahadurpur Peripheral (Darbhanga)",
+            "Baheri (Bahera)",
+            "Baheri (Darbhanga)",
+            "Benipur (Bahera)",
+            "Benipur (Notified Area) (Bahera)",
+            "Benipur Peripheral Area (Bahera)",
+            "Biraul (Bahera)",
+            "Biraul (Biraul)",
+            "Darbhanga Peripheral (Darbhanga)",
+            "Darbhanga Rural (Darbhanga)",
+            "Darbhanga Sadar",
+            "Kamtaul (Kamtaul)"
+        ],
+        "anchals": [
+            "दरभंगा",
+            "बेनीपुर",
+            "अलीनगर",
+            "बहादुरपुर",
+            "बिरौल",
+            "घनश्यामपुर",
+            "गौरा बौराम",
+            "हनुमाननगर",
+            "हायाघाट",
+            "जाले",
+            "केवटी",
+            "किरतपुर",
+            "मनीगाछी",
+            "सिंघवाड़ा",
+            "तारडीह"
+        ]
     },
-    "रोहतास": {
-      offices: ["सासाराम", "डेहरी", "विक्रमगंज"],
-      anchals: ["सासाराम", "डेहरी", "विक्रमगंज", "नोखा", "काराकाट", "चेनारी", "शिवसागर", "तिलौथू", "अकोढ़ीगोला", "दिनारा", "करगहर", "कोचस", "नासिरगंज", "राजपुर", "संझौली", "सूर्यपुरा", "रोहतास", "नौहट्टा"]
+    "पूर्वी चंपारण (East Champaran)": {
+        "offices": [
+            "Motihari Sadar (Motihari)",
+            "Motihari Peripheral (Motihari)",
+            "Motihari Notified Area (Motihari)",
+            "Areraj (Areraj)",
+            "Areraj Peripheral (Areraj)",
+            "Chakia (Chakia)",
+            "Chakia Peripheral (Chakia)",
+            "Dhaka (Dhaka)",
+            "Raxaul (Raxaul)",
+            "Raxaul Peripheral (Raxaul)",
+            "Sugauli (Sugauli)",
+            "Kesaria (Kesaria)"
+        ],
+        "anchals": [
+            "मोतिहारी",
+            "तुरकौलिया",
+            "हरसिद्धि",
+            "पहाड़पुर",
+            "अरेराज",
+            "संग्रामपुर",
+            "केसरिया",
+            "कल्याणपुर",
+            "कोटवा",
+            "पीपरा",
+            "चकिया",
+            "मेहसी",
+            "मधुबन",
+            "फेनहारा",
+            "तेतरिया",
+            "रामनगर",
+            "पकरियाल",
+            "ढाका",
+            "छौड़ादानो",
+            "बनकटवा",
+            "रक्सौल",
+            "आदापुर",
+            "रामगढ़वा",
+            "सुगौली",
+            "बंजरिया",
+            "चिराया"
+        ]
     },
-    "पूर्णिया": {
-      offices: ["पूर्णिया सदर", "बनमनखी", "धमदाहा", "बायसी"],
-      anchals: ["पूर्णिया सदर", "अमौर", "बैसी", "बनमनखी", "भवानीपुर", "धमदाहा", "जलालगढ़", "कसबा", "रूपौली", "श्रीनगर", "के नगर", "बीकोठी", "डगरुआ"]
+    "गया (Gaya)": {
+        "offices": [
+            "Gaya Sadar (Gaya)",
+            "Gaya Peripheral (Gaya)",
+            "Gaya Notified Area (Gaya)",
+            "Sherghati (Sherghati)",
+            "Sherghati Peripheral (Sherghati)",
+            "Tekari (Tekari)",
+            "Tekari Peripheral (Tekari)",
+            "Neemchak Bathani (Neemchak Bathani)",
+            "Bodhgaya Notified Area (Gaya)",
+            "Wazirganj (Wazirganj)"
+        ],
+        "anchals": [
+            "गया सदर",
+            "अतरी",
+            "बाराचट्टी",
+            "बोधगया",
+            "बाँके बाजार",
+            "डुमरिया",
+            "फतेहपुर",
+            "गुरुआ",
+            "इमामगंज",
+            "खिजरसराय",
+            "कोंच",
+            "मानपुर",
+            "मोहरा",
+            "परैया",
+            "शेरघाटी",
+            "टनकुप्पा",
+            "वजीरगंज",
+            "आमश",
+            "बेलागंज",
+            "गुरारू",
+            "डोभी",
+            "टिकारी",
+            "मोहनपुर"
+        ]
     },
-    "बेगूसराय": {
-      offices: ["बेगूसराय सदर", "तेघड़ा", "बलिया", "बखरी"],
-      anchals: ["बेगुसराय", "बरौनी", "तेघड़ा", "मटिहानी", "बछवाड़ा", "मंसूरचक", "नावकोठी", "चेरिया बरियारपुर", "खोदावंदपुर", "छौराही", "गढ़पुरा", "बखरी", "बलिया", "साहेबपुर कमाल", "शामहो अकहा कूरहा"]
+    "गोपालगंज (Gopalganj)": {
+        "offices": [
+            "Gopalganj Sadar (Gopalganj)",
+            "Gopalganj Peripheral (Gopalganj)",
+            "Gopalganj Notified Area (Gopalganj)",
+            "Hathua (Hathua)",
+            "Hathua Peripheral (Hathua)",
+            "Sidhwalia (Sidhwalia)",
+            "Mirganj (Mirganj)"
+        ],
+        "anchals": [
+            "बैकुंठपुर",
+            "बरौली",
+            "भोरे",
+            "विजयपुर",
+            "गोपालगंज",
+            "हथुआ",
+            "कटेया",
+            "कुचायकोट",
+            "मांझा",
+            "पंचदेवरी",
+            "फुलवरिया",
+            "सिधवलिया",
+            "थावे",
+            "उचकागांव"
+        ]
     },
-    "पूर्वी चंपारण": {
-      offices: ["मोतिहारी सदर", "अरेराज", "चकिया", "ढाका", "रक्सौल"],
-      anchals: ["मोतिहारी", "तुरकौलिया", "हरसिद्धि", "पहाड़पुर", "अरेराज", "संग्रामपुर", "केसरिया", "कल्याणपुर", "कोटवा", "पीपरा", "चकिया", "मेहसी", "मधुबन", "फेनहारा", "तेतरिया", "रामनगर", "पकरियाल", "ढाका", "छौड़ादानो", "बनकटवा", "रक्सौल", "आदापुर", "रामगढ़वा", "सुगौली", "बंजरिया", "चिराया"]
+    "जमुई (Jamui)": {
+        "offices": [
+            "Jamui Sadar (Jamui)",
+            "Jamui Peripheral (Jamui)",
+            "Jhajha (Jhajha)",
+            "Jhajha Peripheral (Jhajha)",
+            "Sikandra (Sikandra)"
+        ],
+        "anchals": [
+            "जमुई",
+            "खैरा",
+            "सोनो",
+            "झाझा",
+            "गिद्धौर",
+            "लक्ष्मीपुर",
+            "बरहट",
+            "सिकंदरा",
+            "अलीगंज",
+            "इस्लामनगर अलीगंज"
+        ]
     },
-    "पश्चिमी चंपारण": {
-      offices: ["बेतिया सदर", "बगाहा", "नरकटियागंज"],
-      anchals: ["बेतिया", "नौतन", "बैरिया", "जगदीशपुर", "चनपटिया", "मझौलिया", "सिकटा", "मैनाटांड", "नरकटियागंज", "लौकरिया", "बगाहा 1", "बगाहा 2", "रामनगर", "गौनाहा", "ठकराहा", "भितहा", "पिपरसी"]
+    "जहानाबाद (Jehanabad)": {
+        "offices": [
+            "Jehanabad Sadar (Jehanabad)",
+            "Jehanabad Peripheral (Jehanabad)",
+            "Makhdumpur (Makhdumpur)"
+        ],
+        "anchals": [
+            "जहानाबाद सदर",
+            "काको",
+            "मखदुमपुर",
+            "घोसी",
+            "हुलासगंज",
+            "मोदनगंज",
+            "रतनी फरीदपुर"
+        ]
     },
-    "सीवान": {
-      offices: ["सीवान सदर", "महाराजगंज"],
-      anchals: ["सीवान सदर", "मैरवा", "गुठनी", "रघुनाथपुर", "महाराजगंज", "आँदर", "दरौली", "बड़हरिया", "गोरेयाकोठी", "बसंतपुर", "भगवानपुर हाट", "दरौंदा", "हुसैनगंज", "लकड़ी नबीगंज", "पचरुखी", "सिसवन", "जीरादेई", "हसनपुरा", "नौतन"]
+    "कैमूर (Kaimur/Bhabhua)": {
+        "offices": [
+            "Bhabhua Sadar (Bhabhua)",
+            "Bhabhua Peripheral (Bhabhua)",
+            "Mohania (Mohania)",
+            "Mohania Peripheral (Mohania)",
+            "Ramgarh (Ramgarh)",
+            "Kudra (Kudra)"
+        ],
+        "anchals": [
+            "भभुआ",
+            "मोहनिया",
+            "कुदरा",
+            "दुर्गावती",
+            "रामगढ़",
+            "नुआंव",
+            "चांद",
+            "चैनपुर",
+            "भगवानपुर",
+            "रामपुर",
+            "अधौरा"
+        ]
     },
-    "गोपालगंज": {
-      offices: ["गोपालगंज सदर", "हथुआ"],
-      anchals: ["बैकुंठपुर", "बरौली", "भोरे", "विजयपुर", "गोपालगंज", "हथुआ", "कटेया", "कुचायकोट", "मांझा", "पंचदेवरी", "फुलवरिया", "सिधवलिया", "थावे", "उचकागांव"]
+    "कटिहार (Katihar)": {
+        "offices": [
+            "Katihar Sadar (Katihar)",
+            "Katihar Peripheral (Katihar)",
+            "Katihar Notified Area (Katihar)",
+            "Barsoi (Barsoi)",
+            "Barsoi Peripheral (Barsoi)",
+            "Manihari (Manihari)",
+            "Manihari Peripheral (Manihari)",
+            "Kadwa (Kadwa)",
+            "Falka (Falka)"
+        ],
+        "anchals": [
+            "कटिहार सदर",
+            "हाफलागंज",
+            "दण्डखोरा",
+            "हसनगंज",
+            "कोढ़ा",
+            "फलका",
+            "समेली",
+            "बरारी",
+            "कुरसेला",
+            "मनिहारी",
+            "अमदाबाद",
+            "प्राणपुर",
+            "आजमनगर",
+            "कदवा",
+            "बारसोई",
+            "बलरामपुर"
+        ]
     },
-    "भोजपुर": {
-      offices: ["आरा सदर", "जगदीशपुर", "पीरो"],
-      anchals: ["आरा", "बड़हरा", "शाहपुर", "बिहिया", "जगदीशपुर", "पीरो", "चरपोखरी", "गड़हनी", "अगियांव", "तरारी", "सहार", "उदवंतनगर", "संदेश"]
+    "खगड़िया (Khagaria)": {
+        "offices": [
+            "Khagaria Sadar (Khagaria)",
+            "Khagaria Peripheral (Khagaria)",
+            "Gogri (Gogri)",
+            "Gogri Peripheral (Gogri)",
+            "Mansi (Mansi)"
+        ],
+        "anchals": [
+            "खगड़िया सदर",
+            "अलौली",
+            "चौथम",
+            "चित्रगुप्तनगर",
+            "गोगरी",
+            "परबत्ता",
+            "बेलदौर",
+            "मानसी"
+        ]
     },
-    "बक्सर": {
-      offices: ["बक्सर सदर", "डुमरांव"],
-      anchals: ["बक्सर सदर", "इटाढ़ी", "चौसा", "राजारामपुर", "डुमराव", "सिमरी", "ब्रह्मपुर", "चक्की", "चौगाईं", "केसठ", "नावानगर"]
+    "किशनगंज (Kishanganj)": {
+        "offices": [
+            "Kishanganj Sadar (Kishanganj)",
+            "Kishanganj Peripheral (Kishanganj)",
+            "Kishanganj Notified Area (Kishanganj)",
+            "Bahadurganj (Bahadurganj)",
+            "Thakurganj (Thakurganj)"
+        ],
+        "anchals": [
+            "किशनगंज",
+            "पोठिया",
+            "कोचाधामन",
+            "टेढ़ागाछ",
+            "बहादुरगंज",
+            "दिघलबैंक",
+            "ठाकुरगंज"
+        ]
     },
-    "सहरसा": {
-      offices: ["सहरसा सदर", "सिमरी बख्तियारपुर"],
-      anchals: ["सहरसा सदर", "कहरा", "सिमरी बख्तियारपुर", "सौर बाज़ार", "बनमा ईटहरी", "सोनवर्षा", "नवहट्टा", "सतर कटैया", "महिषी", "पतरघट"]
+    "लखीसराय (Lakhisarai)": {
+        "offices": [
+            "Lakhisarai Sadar (Lakhisarai)",
+            "Lakhisarai Peripheral (Lakhisarai)",
+            "Barahiya (Barahiya)",
+            "Suryagarha (Suryagarha)"
+        ],
+        "anchals": [
+            "लखीसराय सदर",
+            "रामगढ़ चौक",
+            "हलसी",
+            "बड़हिया",
+            "सूर्यगड़ा",
+            "पिपरिया"
+        ]
     },
-    "सुपौल": {
-      offices: ["सुपौल सदर", "बीरपुर", "त्रिवेणीगंज", "निर्मली"],
-      anchals: ["सुपौल सदर", "बीरपुर", "त्रिवेणीगंज", "निर्मली", "पिपरा", "मरौना", "किशनपुर", "सरायगढ़ भपटियाही", "बसंतपुर", "राघोपुर", "प्रतापगंज"]
+    "मधेपुरा (Madhepura)": {
+        "offices": [
+            "Madhepura Sadar (Madhepura)",
+            "Madhepura Peripheral (Madhepura)",
+            "Udakishunganj (Udakishunganj)",
+            "Udakishunganj Peripheral (Udakishunganj)",
+            "Murliganj (Murliganj)",
+            "Bihariganj (Bihariganj)"
+        ],
+        "anchals": [
+            "मधेपुरा सदर",
+            "सिंहेश्वर",
+            "गमहरिया",
+            "घैलाढ़",
+            "मुरलीगंज",
+            "कुमारखंड",
+            "चौसा",
+            "पुरैनी",
+            "आलमनगर",
+            "ग्वालपारा",
+            "बिहारीगंज"
+        ]
     },
-    "मधेपुरा": {
-      offices: ["मधेपुरा सदर", "उदाकिशुनगंज"],
-      anchals: ["मधेपुरा सदर", "सिंहेश्वर", "गमहरिया", "घैलाढ़", "मुरलीगंज", "कुमारखंड", "चौसा", "पुरैनी", "आलमनगर", "ग्वालपारा", "बिहारीगंज"]
+    "मधुबनी (Madhubani)": {
+        "offices": [
+            "Madhubani Sadar (Madhubani)",
+            "Madhubani Peripheral (Madhubani)",
+            "Benipatti (Benipatti)",
+            "Benipatti Peripheral (Benipatti)",
+            "Jayanagar (Jayanagar)",
+            "Jayanagar Peripheral (Jayanagar)",
+            "Jhanjharpur (Jhanjharpur)",
+            "Jhanjharpur Peripheral (Jhanjharpur)",
+            "Babubarhi (Babubarhi)",
+            "Phulparas (Phulparas)",
+            "Phulparas Peripheral (Phulparas)",
+            "Khajauli (Khajauli)",
+            "Khajauli Peripheral (Khajauli)",
+            "Rajnagar (Rajnagar)",
+            "Ladania (Ladania)"
+        ],
+        "anchals": [
+            "मधुबनी",
+            "अंधराठाढ़ी",
+            "बासोपट्टी",
+            "बेनीपट्टी",
+            "बिस्फी",
+            "घोघरडीहा",
+            "हरलाखी",
+            "जयनगर",
+            "झंझारपुर",
+            "खजौली",
+            "लखनौर",
+            "लौकही",
+            "मधवापुर",
+            "पंडौल",
+            "फुलपरास",
+            "राजनगर",
+            "रहिका",
+            "कलुआही",
+            "बाबूबरही",
+            "लदनिया",
+            "मधेपुर"
+        ]
     },
-    "वैशाली": {
-      offios: ["हाजीपुर सदर", "महुआ", "महनार"],
-      anchals: ["हाजीपुर", "बिंदुपुर", "राजापाकर", "महुआ", "जंदाहा", "गोरौल", "वैशाली", "पटेढ़ी बेलसर", "चेहराकलां", "लालगंज", "भगवानपुर", "महनार", "सहदेई बुजुर्ग", "देशरी", "राघोपुर"]
+    "मुंगेर (Munger)": {
+        "offices": [
+            "Munger Sadar (Munger)",
+            "Munger Peripheral (Munger)",
+            "Munger Notified Area (Munger)",
+            "Tarapur (Tarapur)",
+            "Tarapur Peripheral (Tarapur)",
+            "Haveli Kharagpur (Haveli Kharagpur)",
+            "Jamalpur Notified Area (Munger)",
+            "Asarganj (Asarganj)"
+        ],
+        "anchals": [
+            "मुंगेर सदर",
+            "जमालपुर",
+            "बरियारपुर",
+            "धरहरा",
+            "खड़गपुर",
+            "तारापुर",
+            "संग्रामपुर",
+            "असरगंज",
+            "टेटिया बम्बर"
+        ]
     },
-    "सीतामढ़ी": {
-      offices: ["सीतामढ़ी सदर", "पुपरी", "बेलसंड"],
-      anchals: ["डुमरा", "रीगा", "रुन्नीसैदपुर", "बेलसंड", "बाजपट्टी", "परिहार", "सुरसंड", "पुपरी", "सोनबरसा", "मेजरगंज", "बैरगनिया", "चोरौत", "नानपुर", "बोखड़ा", "परसौनी"]
+    "मुजफ्फरपुर (Muzaffarpur)": {
+        "offices": [
+            "Muzaffarpur Sadar (Muzaffarpur)",
+            "Muzaffarpur Peripheral (Muzaffarpur)",
+            "Muzaffarpur Notified Area (Muzaffarpur)",
+            "Motipur (Motipur)",
+            "Motipur Peripheral (Motipur)",
+            "Katra (Katra)",
+            "Katra Peripheral (Katra)",
+            "Sakra (Sakra)",
+            "Sakra Peripheral (Sakra)",
+            "Bochahan (Bochahan)",
+            "Minapur (Minapur)",
+            "Gaighat (Gaighat)"
+        ],
+        "anchals": [
+            "मुजफ्फरपुर",
+            "औराई",
+            "बंदरा",
+            "बोचहाँ",
+            "गायघाट",
+            "कटरा",
+            "कुढ़नी",
+            "मड़वन",
+            "मीनापुर",
+            "मोतीपुर",
+            "मुरौल",
+            "पारू",
+            "साहेबगंज",
+            "सकरा",
+            "मुशहरी",
+            "कांटी",
+            "सरैया"
+        ]
     },
-    "औरंगाबाद": {
-      offices: ["औरंगाबाद सदर", "दाउदनगर"],
-      anchals: ["औरंगाबाद", "देव", "कुटुम्बा", "मदनपुर", "रफ़ीगंज", "ओबरा", "दाउदनगर", "गोह", "हसपुरा", "नवीनगर", "बारूण"]
+    "नालंदा (Nalanda)": {
+        "offices": [
+            "Biharsharif Sadar (Biharsharif)",
+            "Biharsharif Peripheral (Biharsharif)",
+            "Biharsharif Notified Area (Biharsharif)",
+            "Hilsa (Hilsa)",
+            "Hilsa Peripheral (Hilsa)",
+            "Rajgir (Rajgir)",
+            "Rajgir Peripheral (Rajgir)",
+            "Islampur (Islampur)",
+            "Asthawan (Asthawan)",
+            "Ekangarsarai (Ekangarsarai)"
+        ],
+        "anchals": [
+            "बिहारशरीफ",
+            "राजगीर",
+            "हिलसा",
+            "इस्लामपुर",
+            "हरनौत",
+            "अस्थावां",
+            "एकंगरसराय",
+            "बेन",
+            "बिन्द",
+            "कतरीसराय",
+            "कराई परशुराय",
+            "चंडी",
+            "नूरसराय",
+            "परबलपुर",
+            "गिरियक",
+            "रहुई",
+            "सिलाव",
+            "सरमेरा",
+            "थरथरी",
+            "नगरनौसा"
+        ]
     },
-    "नवादा": {
-      offices: ["नवादा सदर", "रजौली"],
-      anchals: ["नवादा सदर", "अकबरपुर", "गोविन्दपुर", "रजौली", "सिरदला", "मेसकौर", "नरहट", "हिसुआ", "काशीचक", "पकरीबरांवा", "वारिसलीगंज", "कौआकोल", "रोह"]
+    "नवादा (Nawada)": {
+        "offices": [
+            "Nawada Sadar (Nawada)",
+            "Nawada Peripheral (Nawada)",
+            "Rajauli (Rajauli)",
+            "Rajauli Peripheral (Rajauli)",
+            "Hisua (Hisua)",
+            "Warisnagar (Warisnagar)"
+        ],
+        "anchals": [
+            "नवादा सदर",
+            "अकबरपुर",
+            "गोविन्दपुर",
+            "रजौली",
+            "सिरदला",
+            "मेसकौर",
+            "नरहट",
+            "हिसुआ",
+            "काशीचक",
+            "पकरीबरांवा",
+            "वारिसलीगंज",
+            "कौआकोल",
+            "रोह"
+        ]
     },
-    "जमुई": {
-      offices: ["जमुई सदर"],
-      anchals: ["जमुई", "खैरा", "सोनो", "झाझा", "गिद्धौर", "लक्ष्मीपुर", "बरहट", "सिकंदरा", "अलीगंज", "इस्लामनगर अलीगंज"]
+    "पटना (Patna)": {
+        "offices": [
+            "Patna Sadar (Patna)",
+            "Patna Peripheral (Patna)",
+            "Patna City (Patna City)",
+            "Patna City Peripheral (Patna City)",
+            "Patna City Notified Area (Patna City)",
+            "Danapur (Danapur)",
+            "Danapur Peripheral (Danapur)",
+            "Danapur Notified Area (Danapur)",
+            "Barh (Barh)",
+            "Barh Peripheral (Barh)",
+            "Bihta (Bihta)",
+            "Bihta Peripheral (Bihta)",
+            "Bikram (Bikram)",
+            "Bikram Peripheral (Bikram)",
+            "Masaurhi (Masaurhi)",
+            "Masaurhi Peripheral (Masaurhi)",
+            "Fatuha (Fatuha)",
+            "Fatuha Peripheral (Fatuha)",
+            "Mokama (Mokama)",
+            "Khusrupur (Khusrupur)",
+            "Punpun (Punpun)"
+        ],
+        "anchals": [
+            "पटना सदर",
+            "दानापुर",
+            "फुलवारी",
+            "मसौढ़ी",
+            "पालीगंज",
+            "विक्रम",
+            "बिहटा",
+            "खुसरूपुर",
+            "बख्तियारपुर",
+            "बेलछी",
+            "अथमलगोला",
+            "मोकामा",
+            "पंडारक",
+            "घोसवरी",
+            "नौबतपुर",
+            "दुलहिनबाजार",
+            "संपतचक",
+            "बाढ़",
+            "फतुहा",
+            "मनेर",
+            "पुनपुन",
+            "धनरूआ"
+        ]
     },
-    "कटिहार": {
-      offices: ["कटिहार सदर", "बारसोई", "मनिहारी"],
-      anchals: ["कटिहार सदर", "हाफलागंज", "दण्डखोरा", "हसनगंज", "कोढ़ा", "फलका", "समेली", "बरारी", "कुरसेला", "मनिहारी", "अमदाबाद", "प्राणपुर", "आजमनगर", "कदवा", "बारसोई", "बलरामपुर"]
+    "पूर्णिया (Purnia)": {
+        "offices": [
+            "Purnia Sadar (Purnia)",
+            "Purnia Peripheral (Purnia)",
+            "Purnia Notified Area (Purnia)",
+            "Banmankhi (Banmankhi)",
+            "Banmankhi Peripheral (Banmankhi)",
+            "Dhamdaha (Dhamdaha)",
+            "Dhamdaha Peripheral (Dhamdaha)",
+            "Baisi (Baisi)",
+            "Baisi Peripheral (Baisi)",
+            "Amour (Amour)",
+            "Kasba (Kasba)",
+            "Rupauli (Rupauli)"
+        ],
+        "anchals": [
+            "पूर्णिया सदर",
+            "अमौर",
+            "बैसी",
+            "बनमनखी",
+            "भवानीपुर",
+            "धमदाहा",
+            "जलालगढ़",
+            "कसबा",
+            "रूपौली",
+            "श्रीनगर",
+            "के नगर",
+            "बीकोठी",
+            "डगरुआ"
+        ]
     },
-    "अररिया": {
-      offices: ["अररिया सदर", "फारबिसगंज"],
-      anchals: ["अररिया", "जोकीहाट", "कुर्साकांटा", "सिकटी", "पलासी", "फारबिसगंज", "भरगामा", "रानीगंज", "नरपतगंज"]
+    "रोहतास (Rohtas)": {
+        "offices": [
+            "Sasaram Sadar (Sasaram)",
+            "Sasaram Peripheral (Sasaram)",
+            "Sasaram Notified Area (Sasaram)",
+            "Dehri (Dehri)",
+            "Dehri Peripheral (Dehri)",
+            "Dehri Notified Area (Dehri)",
+            "Bikramganj (Bikramganj)",
+            "Bikramganj Peripheral (Bikramganj)",
+            "Nokha (Nokha)",
+            "Chenari (Chenari)",
+            "Karakat (Karakat)"
+        ],
+        "anchals": [
+            "सासाराम",
+            "डेहरी",
+            "विक्रमगंज",
+            "नोखा",
+            "काराकाट",
+            "चेनारी",
+            "शिवसागर",
+            "तिलौथू",
+            "अकोढ़ीगोला",
+            "दिनारा",
+            "करगहर",
+            "कोचस",
+            "नासिरगंज",
+            "राजपुर",
+            "संझौली",
+            "सूर्यपुरा",
+            "रोहतास",
+            "नौहट्टा"
+        ]
     },
-    "किशनगंज": {
-      offices: ["किशनगंज सदर"],
-      anchals: ["किशनगंज", "पोठिया", "कोचाधामन", "टेढ़ागाछ", "बहादुरगंज", "दिघलबैंक", "ठाकुरगंज"]
+    "सहरसा (Saharsa)": {
+        "offices": [
+            "Saharsa Sadar (Saharsa)",
+            "Saharsa Peripheral (Saharsa)",
+            "Simri Bakhtiyarpur (Simri Bakhtiyarpur)",
+            "Simri Bakhtiyarpur Peripheral (Simri Bakhtiyarpur)",
+            "Sour Bazar (Sour Bazar)",
+            "Mahishi (Mahishi)"
+        ],
+        "anchals": [
+            "सहरसा सदर",
+            "कहरा",
+            "सिमरी बख्तियारपुर",
+            "सौर बाज़ार",
+            "बनमा ईटहरी",
+            "सोनवर्षा",
+            "नवहट्टा",
+            "सतर कटैया",
+            "महिषी",
+            "पतरघट"
+        ]
     },
-    "खगड़िया": {
-      offices: ["खगड़िया सदर", "गोगरी"],
-      anchals: ["खगड़िया सदर", "अलौली", "चौथम", "चित्रगुप्तनगर", "गोगरी", "परबत्ता", "बेलदौर", "मानसी"]
+    "समस्तीपुर (Samastipur)": {
+        "offices": [
+            "Samastipur Sadar (Samastipur)",
+            "Samastipur Peripheral (Samastipur)",
+            "Samastipur Notified Area (Samastipur)",
+            "Rosera (Rosera)",
+            "Rosera Peripheral (Rosera)",
+            "Dalsinghsarai (Dalsinghsarai)",
+            "Dalsinghsarai Peripheral (Dalsinghsarai)",
+            "Patori (Patori)",
+            "Patori Peripheral (Patori)",
+            "Hasanpur (Hasanpur)",
+            "Ujiyarpur (Ujiyarpur)",
+            "Morwa (Morwa)",
+            "Bibhutipur (Bibhutipur)"
+        ],
+        "anchals": [
+            "समस्तीपुर सदर",
+            "रोसड़ा",
+            "दलसिंहसराय",
+            "पटोरी",
+            "ताजपुर",
+            "कल्याणपुर",
+            "सिंघिया",
+            "हासनपुर",
+            "मोरवा",
+            "खानपुर",
+            "पूसा",
+            "सरायरंजन",
+            "शिवाजीनगर",
+            "बिथान",
+            "विभूतिपुर",
+            "उजियारपुर",
+            "मोहियुद्दीननगर",
+            "विद्यापतिनगर",
+            "वारिसनगर",
+            "मोहनपुर"
+        ]
     },
-    "मुंगेर": {
-      offices: ["मुंगेर सदर", "तारापुर", "हवेली खड़कपुर"],
-      anchals: ["मुंगेर सदर", "जमालपुर", "बरियारपुर", "धरहरा", "खड़गपुर", "तारापुर", "संग्रामपुर", "असरगंज", "टेटिया बम्बर"]
+    "सारण (Saran/Chapra)": {
+        "offices": [
+            "Chapra Sadar (Chapra)",
+            "Chapra Peripheral (Chapra)",
+            "Chapra Notified Area (Chapra)",
+            "Marhaura (Marhaura)",
+            "Marhaura Peripheral (Marhaura)",
+            "Sonepur (Sonepur)",
+            "Sonepur Peripheral (Sonepur)",
+            "Garkha (Garkha)",
+            "Manjhi (Manjhi)",
+            "Revelganj (Revelganj)",
+            "Ekma (Ekma)"
+        ],
+        "anchals": [
+            "छपरा",
+            "अमनौर",
+            "बनियापुर",
+            "दरियापुर",
+            "दिघवारा",
+            "एकमा",
+            "गड़खा",
+            "इसुआपुर",
+            "जलालपुर",
+            "लहलादपुर",
+            "मकेर",
+            "मांझी",
+            "मरहौरा",
+            "नागरा",
+            "पानापुर",
+            "रिविलगंज",
+            "सोनपुर",
+            "तरैया"
+        ]
     },
-    "लखीसराय": {
-      offices: ["लखीसराय सदर"],
-      anchals: ["लखीसराय सदर", "रामगढ़ चौक", "हलसी", "बड़हिया", "सूर्यगड़ा", "पिपरिया"]
+    "शेखपुरा (Sheikhpura)": {
+        "offices": [
+            "Sheikhpura Sadar (Sheikhpura)",
+            "Sheikhpura Peripheral (Sheikhpura)",
+            "Barbigha (Barbigha)",
+            "Barbigha Peripheral (Barbigha)"
+        ],
+        "anchals": [
+            "शेखपुरा सदर",
+            "बरबीघा",
+            "शेखोपुर सराय",
+            "चेवाड़ा",
+            "अरियारी",
+            "घाटकुसुम्भा"
+        ]
     },
-    "शेखपुरा": {
-      offices: ["शेखपुरा सदर"],
-      anchals: ["शेखपुरा सदर", "बरबीघा", "शेखोपुर सराय", "चेवाड़ा", "अरियारी", "घाटकुसुम्भा"]
+    "शिवहर (Sheohar)": {
+        "offices": [
+            "Sheohar Sadar (Sheohar)",
+            "Sheohar Peripheral (Sheohar)"
+        ],
+        "anchals": [
+            "शिवहर सदर",
+            "तरीयानी",
+            "पिपराही",
+            "पूरनहिया",
+            "डुमरी कटसरी"
+        ]
     },
-    "बांका": {
-      offices: ["बांका सदर"],
-      anchals: ["बांका", "अमरपुर", "शंभूगंज", "बेलहर", "फुल्लीडुमर", "कटोरिया", "चंदन", "बौसी", "बाराहाट", "धोरैया", "रजौन"]
+    "सीतामढ़ी (Sitamarhi)": {
+        "offices": [
+            "Sitamarhi Sadar (Sitamarhi)",
+            "Sitamarhi Peripheral (Sitamarhi)",
+            "Sitamarhi Notified Area (Sitamarhi)",
+            "Pupri (Pupri)",
+            "Pupri Peripheral (Pupri)",
+            "Belsand (Belsand)",
+            "Belsand Peripheral (Belsand)",
+            "Riga (Riga)",
+            "Runnisaidpur (Runnisaidpur)",
+            "Bajpatti (Bajpatti)"
+        ],
+        "anchals": [
+            "डुमरा",
+            "रीगा",
+            "रुन्नीसैदपुर",
+            "बेलसंड",
+            "बाजपट्टी",
+            "परिहार",
+            "सुरसंड",
+            "पुपरी",
+            "सोनबरसा",
+            "मेजरगंज",
+            "बैरगनिया",
+            "चोरौत",
+            "नानपुर",
+            "बोखड़ा",
+            "परसौनी"
+        ]
     },
-    "कैमूर": {
-      offices: ["भभुआ", "मोहनिया"],
-      anchals: ["भभुआ", "मोहनिया", "कुदरा", "दुर्गावती", "रामगढ़", "नुआंव", "चांद", "चैनपुर", "भगवानपुर", "रामपुर", "अधौरा"]
+    "सीवान (Siwan)": {
+        "offices": [
+            "Siwan Sadar (Siwan)",
+            "Siwan Peripheral (Siwan)",
+            "Siwan Notified Area (Siwan)",
+            "Maharajganj (Maharajganj)",
+            "Maharajganj Peripheral (Maharajganj)",
+            "Mairwa (Mairwa)",
+            "Mairwa Peripheral (Mairwa)",
+            "Darauli (Darauli)",
+            "Raghunathpur (Raghunathpur)",
+            "Barharia (Barharia)",
+            "Jiradei (Jiradei)"
+        ],
+        "anchals": [
+            "सीवान सदर",
+            "मैरवा",
+            "गुठनी",
+            "रघुनाथपुर",
+            "महाराजगंज",
+            "आँदर",
+            "दरौली",
+            "बड़हरिया",
+            "गोरेयाकोठी",
+            "बसंतपुर",
+            "भगवानपुर हाट",
+            "दरौंदा",
+            "हुसैनगंज",
+            "लकड़ी नबीगंज",
+            "पचरुखी",
+            "सिसवन",
+            "जीरादेई",
+            "हसनपुरा",
+            "नौतन"
+        ]
     },
-    "जहानाबाद": {
-      offices: ["जहानाबाद सदर"],
-      anchals: ["जहानाबाद सदर", "काको", "मखदुमपुर", "घोसी", "हुलासगंज", "मोदनगंज", "रतनी फरीदपुर"]
+    "सुपौल (Supaul)": {
+        "offices": [
+            "Supaul Sadar (Supaul)",
+            "Supaul Peripheral (Supaul)",
+            "Birpur (Birpur)",
+            "Birpur Peripheral (Birpur)",
+            "Triveniganj (Triveniganj)",
+            "Triveniganj Peripheral (Triveniganj)",
+            "Nirmali (Nirmali)",
+            "Nirmali Peripheral (Nirmali)",
+            "Saraigarh Bhaptiyahi (Saraigarh)",
+            "Pratapganj (Pratapganj)"
+        ],
+        "anchals": [
+            "सुपौल सदर",
+            "बीरपुर",
+            "त्रिवेणीगंज",
+            "निर्मली",
+            "पिपरा",
+            "मरौना",
+            "किशनपुर",
+            "सरायगढ़ भपटियाही",
+            "बसंतपुर",
+            "राघोपुर",
+            "प्रतापगंज"
+        ]
     },
-    "अरवल": {
-      offices: ["अरवल सदर"],
-      anchals: ["अरवल सदर", "कलेर", "करपी", "कुर्था", "सोनभद्र बंशी सूर्यपुर"]
+    "वैशाली (Vaishali/Hajipur)": {
+        "offices": [
+            "Hajipur Sadar (Hajipur)",
+            "Hajipur Peripheral (Hajipur)",
+            "Hajipur Notified Area (Hajipur)",
+            "Mahua (Mahua)",
+            "Mahua Peripheral (Mahua)",
+            "Mahnar (Mahnar)",
+            "Mahnar Peripheral (Mahnar)",
+            "Lalganj (Lalganj)",
+            "Jandaha (Jandaha)",
+            "Raghopur (Raghopur)"
+        ],
+        "anchals": [
+            "हाजीपुर",
+            "बिंदुपुर",
+            "राजापाकर",
+            "महुआ",
+            "जंदाहा",
+            "गोरौल",
+            "वैशाली",
+            "पटेढ़ी बेलसर",
+            "चेहराकलां",
+            "लालगंज",
+            "भगवानपुर",
+            "महनार",
+            "सहदेई बुजुर्ग",
+            "देशरी",
+            "राघोपुर"
+        ]
     },
-    "शिवहर": {
-      offices: ["शिवहर सदर"],
-      anchals: ["शिवहर सदर", "तरीयानी", "पिपराही", "पूरनहिया", "डुमरी कटसरी"]
+    "पश्चिमी चंपारण (West Champaran)": {
+        "offices": [
+            "Bettiah Sadar (Bettiah)",
+            "Bettiah Peripheral (Bettiah)",
+            "Bettiah Notified Area (Bettiah)",
+            "Bagaha (Bagaha)",
+            "Bagaha Peripheral (Bagaha)",
+            "Bagaha Notified Area (Bagaha)",
+            "Narkatiaganj (Narkatiaganj)",
+            "Narkatiaganj Peripheral (Narkatiaganj)",
+            "Chanpatia (Chanpatia)",
+            "Ramnagar (Ramnagar)",
+            "Gaunaha (Gaunaha)",
+            "Sikta (Sikta)"
+        ],
+        "anchals": [
+            "बेतिया",
+            "नौतन",
+            "बैरिया",
+            "जगदीशपुर",
+            "चनपटिया",
+            "मझौलिया",
+            "सिकटा",
+            "मैनाटांड",
+            "नरकटियागंज",
+            "लौकरिया",
+            "बगाहा 1",
+            "बगाहा 2",
+            "रामनगर",
+            "गौनाहा",
+            "ठकराहा",
+            "भितहा",
+            "पिपरसी"
+        ]
     }
-  };
+};
 
   // Populate District Dropdown on Load
   window.addEventListener('DOMContentLoaded', () => {
@@ -404,7 +1334,7 @@
     });
   });
 
-  // Dynamic Trigger when District is Selected
+  // Dynamic Cascading Dropdowns
   function onDistrictChange() {
     const dist = document.getElementById('district').value;
     const regSelect = document.getElementById('registry_office');
@@ -421,24 +1351,21 @@
       return;
     }
 
-    // Enable Selects
     regSelect.disabled = false;
     anchalSelect.disabled = false;
 
-    // Populate Registry Offices
-    regSelect.innerHTML = '<option value="">-- रजिस्ट्री ऑफिस चुनें --</option>';
-    const offices = districtMasterData[dist].offices || ["सदर"];
-    offices.forEach(office => {
+    // Registration Offices
+    regSelect.innerHTML = '<option value="">-- रजिस्ट्रेशन ऑफिस (SRO) चुनें --</option>';
+    (districtMasterData[dist].offices || []).forEach(office => {
       const opt = document.createElement('option');
       opt.value = office;
       opt.textContent = office;
       regSelect.appendChild(opt);
     });
 
-    // Populate Anchals
+    // Anchals
     anchalSelect.innerHTML = '<option value="">-- अंचल / ब्लॉक चुनें --</option>';
-    const anchals = districtMasterData[dist].anchals || [];
-    anchals.forEach(anchal => {
+    (districtMasterData[dist].anchals || []).forEach(anchal => {
       const opt = document.createElement('option');
       opt.value = anchal;
       opt.textContent = anchal;
@@ -447,20 +1374,16 @@
   }
 
   let selectedDocType = 'Certified Copy';
-
   function selectDocType(type) {
     selectedDocType = type;
     document.getElementById('type-cert').classList.toggle('active', type === 'Certified Copy');
     document.getElementById('type-web').classList.toggle('active', type === 'Web Copy');
   }
 
-  // Handle Form Submission to Supabase
   async function handleOrder(event) {
     event.preventDefault();
-
     const btn = document.getElementById('submit-btn');
     const msg = document.getElementById('status-msg');
-
     const orderId = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const formData = {
@@ -496,10 +1419,7 @@
     btn.textContent = '⏳ प्रोसेस हो रहा है...';
 
     try {
-      const { data, error } = await _supabase
-        .from('kevala_orders')
-        .insert([formData]);
-
+      const { data, error } = await _supabase.from('kevala_orders').insert([formData]);
       if (error) throw error;
 
       msg.style.display = 'block';
@@ -509,7 +1429,6 @@
       msg.innerHTML = `✅ <strong>आपका केवाला ऑर्डर सबमिट हो गया है!</strong><br><br>
                        📌 <strong>Order ID:</strong> ${orderId}<br>
                        हमारी टीम जल्द ही आपसे WhatsApp पर संपर्क करेगी।`;
-      
       document.getElementById('kevalaForm').reset();
       document.getElementById('registry_office').disabled = true;
       document.getElementById('anchal_circle').disabled = true;
@@ -526,7 +1445,6 @@
       btn.textContent = 'ऑर्डर सबमिट करें (Submit Request)';
     }
   }
-</script>
-
+<\/script>
 </body>
 </html>
