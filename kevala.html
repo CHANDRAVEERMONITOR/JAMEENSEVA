@@ -6,36 +6,14 @@
 
   <!-- SEO Meta -->
   <title>बिहार केवाला ऑनलाइन ऑर्डर | Certified Copy & Web Copy | JameenSeva.in</title>
-  <meta name="description" content="बिहार के सभी 38 जिलों से जमीन का केवाला (Certified Copy / Web Copy) घर बैठे ऑनलाइन मंगवाएं। केवाला क्या है, कैसे निकालें, Certified vs Web Copy अंतर — पूरी जानकारी। COD सुविधा।"/>
-  <meta name="keywords" content="bihar kevala online, bihar jameen kevala, kevala certified copy bihar, kevala web copy, kewala kaise nikale bihar, online kewala order, bihar bhumi kevala nikale, jameen kevala order, bihar registry copy online, jameenseva, केवाला क्या है, केवाला की नकल, बिहार केवाला निकालें, certified copy kaise milegi bihar, web copy kevala"/>
+  <meta name="description" content="बिहार के सभी 38 जिलों से जमीन का केवाला घर बैठे ऑनलाइन मंगवाएं।"/>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large"/>
   <link rel="canonical" href="https://jameenseva.in/kewalablog.html"/>
 
-  <!-- OG -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://jameenseva.in/kewalablog.html"/>
-  <meta property="og:title" content="बिहार केवाला ऑनलाइन ऑर्डर | Certified Copy & Web Copy | JameenSeva"/>
-  <meta property="og:description" content="बिहार के किसी भी जिले के निबंधन कार्यालय से केवाला की सत्यापित नकल ऑनलाइन मंगवाएं। COD पर घर डिलीवरी।"/>
-  <meta property="og:site_name" content="JameenSeva.in"/>
-  <meta property="og:locale" content="hi_IN"/>
-
-  <!-- Schema: Service -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Service","name":"बिहार केवाला सत्यापित नकल ऑनलाइन सेवा","provider":{"@type":"Organization","name":"JameenSeva.in","url":"https://jameenseva.in","telephone":"+919142075859"},"areaServed":"Bihar","description":"बिहार के 38 जिलों से केवाला Certified Copy और Web Copy ऑनलाइन ऑर्डर सेवा","serviceType":["Certified Copy","Web Copy","Land Record"]}
-  </script>
-
-  <!-- Schema: BreadcrumbList -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://jameenseva.in/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://jameenseva.in/blog.html"},{"@type":"ListItem","position":3,"name":"बिहार केवाला गाइड","item":"https://jameenseva.in/kewalablog.html"}]}
-  </script>
-
-  <!-- Schema: FAQPage -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"केवाला क्या होता है?","acceptedAnswer":{"@type":"Answer","text":"केवाला वह कानूनी दस्तावेज है जो जमीन या मकान की रजिस्ट्री (Sale Deed) के समय निबंधन कार्यालय द्वारा जारी किया जाता है। यह संपत्ति के स्वामित्व का प्रमाण है।"}},{"@type":"Question","name":"Certified Copy और Web Copy में क्या अंतर है?","acceptedAnswer":{"@type":"Answer","text":"Certified Copy निबंधन कार्यालय द्वारा सत्यापित और मुहर लगी आधिकारिक प्रति है जो कोर्ट और बैंक में मान्य है। Web Copy ऑनलाइन पोर्टल से डाउनलोड की गई डिजिटल प्रति है जो सामान्य जानकारी के लिए उपयोगी है।"}},{"@type":"Question","name":"बिहार में केवाला ऑनलाइन कैसे मंगवाएं?","acceptedAnswer":{"@type":"Answer","text":"JameenSeva.in पर जाएं, जिला, रजिस्ट्री ऑफिस और जमीन का विवरण भरें, COD या Online Payment चुनें और ऑर्डर सबमिट करें। हमारी टीम WhatsApp पर संपर्क कर घर पर डिलीवरी करेगी।"}},{"@type":"Question","name":"केवाला निकालने के लिए कौन से दस्तावेज चाहिए?","acceptedAnswer":{"@type":"Answer","text":"केवाला खोजने के लिए: रजिस्ट्री ऑफिस का नाम, रजिस्ट्री का वर्ष (कब से कब तक), बेचने/खरीदने वाले का नाम, खाता/खेसरा नंबर, या Deed नंबर में से कोई एक जानकारी पर्याप्त है।"}},{"@type":"Question","name":"केवाला की Certified Copy कितने दिन में मिलती है?","acceptedAnswer":{"@type":"Answer","text":"JameenSeva.in के माध्यम से आवेदन के बाद आमतौर पर 7-15 कार्य दिवसों में Certified Copy आपके पते पर पहुंच जाती है।"}}]}
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <!-- SUPABASE SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -69,537 +47,110 @@
       line-height: 1.75;
       font-size: 15.5px;
     }
-    /* ─── HINDI HEADINGS ─── */
     h1,h2,h3,h4,h5 {
       font-family: 'Tiro Devanagari Hindi', 'Plus Jakarta Sans', serif;
       line-height: 1.35;
     }
 
-    /* ─── NAV ─── */
-    .topbar {
-      background: var(--navy);
-      padding: 0 20px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 12px rgba(0,0,0,.25);
-    }
-    .brand { color: #fff; font-size: 1.15rem; font-weight: 800; text-decoration: none; letter-spacing: -.3px; }
+    /* NAV & BREADCRUMB */
+    .topbar { background: var(--navy); padding: 0 20px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 12px rgba(0,0,0,.25); }
+    .brand { color: #fff; font-size: 1.15rem; font-weight: 800; text-decoration: none; }
     .brand em { color: #f9a825; font-style: normal; }
     .nav-links { display: flex; gap: 6px; align-items: center; }
-    .nav-links a {
-      color: rgba(255,255,255,.8); text-decoration: none; font-size: 13px;
-      font-weight: 600; padding: 6px 11px; border-radius: 6px; transition: .18s;
-    }
-    .nav-links a:hover { background: rgba(255,255,255,.1); color: #fff; }
+    .nav-links a { color: rgba(255,255,255,.8); text-decoration: none; font-size: 13px; font-weight: 600; padding: 6px 11px; border-radius: 6px; }
     .nav-links a.pill { background: var(--teal); color: #fff; }
-    .nav-links a.pill:hover { background: #006257; }
-    @media(max-width:600px){ .nav-links a { font-size: 11px; padding: 5px 8px; } }
 
-    /* ─── BREADCRUMB ─── */
     .crumb { background: #fff; border-bottom: 1px solid var(--border); padding: 9px 20px; font-size: 12.5px; color: var(--mist); }
     .crumb a { color: var(--navy-m); text-decoration: none; }
     .crumb span { margin: 0 5px; }
 
-    /* ─── ALERT BAR ─── */
-    .alert-bar {
-      background: linear-gradient(90deg, #b71c1c, #c62828);
-      color: #fff; text-align: center; padding: 10px 20px;
-      font-size: 13px; font-weight: 600; border-bottom: 3px solid #f9a825;
-    }
+    .alert-bar { background: linear-gradient(90deg, #b71c1c, #c62828); color: #fff; text-align: center; padding: 10px 20px; font-size: 13px; font-weight: 600; border-bottom: 3px solid #f9a825; }
     .alert-bar a { color: #f9a825; }
 
-    /* ─── HERO ─── */
-    .hero {
-      background: var(--navy);
-      padding: 64px 20px 56px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    /* document-texture overlay */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.04) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.02) 40px);
-      pointer-events: none;
-    }
+    /* HERO */
+    .hero { background: var(--navy); padding: 48px 20px 40px; text-align: center; position: relative; overflow: hidden; }
     .hero-inner { position: relative; max-width: 800px; margin: auto; }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(249,168,37,.18);
-      color: #f9a825;
-      font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px;
-      padding: 5px 16px; border-radius: 20px; margin-bottom: 20px;
-      text-transform: uppercase; border: 1px solid rgba(249,168,37,.3);
-    }
-    .hero h1 {
-      color: #fff;
-      font-size: clamp(1.55rem, 3.8vw, 2.6rem);
-      font-weight: 700;
-      margin-bottom: 14px;
-      text-shadow: 0 2px 16px rgba(0,0,0,.25);
-    }
+    .hero-eyebrow { display: inline-block; background: rgba(249,168,37,.18); color: #f9a825; font-size: 11.5px; font-weight: 700; letter-spacing: 1.2px; padding: 5px 16px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; border: 1px solid rgba(249,168,37,.3); }
+    .hero h1 { color: #fff; font-size: clamp(1.55rem, 3.8vw, 2.4rem); font-weight: 700; margin-bottom: 12px; }
     .hero h1 em { color: #f9a825; font-style: normal; }
-    .hero-sub {
-      color: rgba(255,255,255,.82);
-      font-size: 1.02rem;
-      max-width: 620px; margin: 0 auto 32px;
-    }
-    .hero-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    .hero-pill {
-      background: rgba(255,255,255,.1);
-      color: rgba(255,255,255,.88);
-      border: 1px solid rgba(255,255,255,.2);
-      padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
-    }
+    .hero-sub { color: rgba(255,255,255,.82); font-size: 0.98rem; max-width: 620px; margin: 0 auto 24px; }
 
-    /* ─── WRAP ─── */
     .wrap { max-width: 1020px; margin: auto; padding: 0 20px; }
+    .sec-head { font-size: 1.4rem; color: var(--navy); font-weight: 700; margin: 40px 0 20px; padding-left: 16px; border-left: 5px solid var(--teal); }
 
-    /* ─── SECTION HEADING ─── */
-    .sec-head {
-      font-size: 1.5rem; color: var(--navy);
-      font-weight: 700; margin: 52px 0 22px;
-      padding-left: 18px;
-      border-left: 5px solid var(--teal);
-      position: relative;
-    }
-
-    /* ─── WHAT IS KEVALA — 2-col split ─── */
-    .split-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin: 0 0 40px;
-    }
-    @media(max-width:680px){ .split-grid { grid-template-columns: 1fr; } }
-    .split-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 26px 24px;
-      box-shadow: var(--shadow-sm);
-    }
-    .split-card .sc-icon { font-size: 36px; margin-bottom: 12px; }
-    .split-card h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
-    .split-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; }
-    .split-card ul { padding-left: 18px; font-size: 14.5px; color: var(--ink-soft); line-height: 2; }
-
-    /* ─── CERTIFIED vs WEB TABLE ─── */
-    .diff-table { width: 100%; border-collapse: collapse; margin: 8px 0 40px; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); font-size: 14.5px; }
-    .diff-table th { background: var(--navy); color: #fff; padding: 15px 18px; text-align: left; font-family: 'Tiro Devanagari Hindi', serif; }
-    .diff-table td { border: 1px solid var(--border); padding: 14px 18px; vertical-align: top; }
-    .diff-table tr:nth-child(even) td { background: #f9fbfd; }
-    .diff-table .yes { color: var(--teal); font-weight: 700; }
-    .diff-table .no  { color: var(--red); font-weight: 600; }
-
-    /* ─── PROCESS STEPS ─── */
-    .steps-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 16px;
-      margin: 0 0 40px;
-      counter-reset: step;
-    }
-    .step-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 22px 18px;
-      text-align: center;
-      box-shadow: var(--shadow-xs);
-      position: relative;
-      transition: .2s;
-    }
-    .step-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .step-card::before {
-      counter-increment: step;
-      content: counter(step);
-      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      width: 28px; height: 28px; line-height: 28px;
-      background: var(--teal); color: #fff;
-      border-radius: 50%; font-size: 12px; font-weight: 800;
-      text-align: center;
-    }
-    .step-card .s-icon { font-size: 28px; margin-bottom: 8px; margin-top: 6px; }
-    .step-card h4 { font-size: 0.9rem; color: var(--navy); margin-bottom: 5px; }
-    .step-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
-
-    /* ─── TRACKING BANNER ─── */
-    .track-banner {
-      background: linear-gradient(120deg, #0c2d4e 0%, #1a4a72 100%);
-      border-radius: var(--r);
-      padding: 36px 32px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      margin: 44px 0;
-      box-shadow: var(--shadow-md);
-    }
-    @media(max-width:620px){ .track-banner { flex-direction: column; text-align: center; } }
-    .track-banner .tb-icon { font-size: 60px; flex-shrink: 0; }
-    .track-banner h3 { color: #fff; font-size: 1.35rem; margin-bottom: 8px; }
-    .track-banner p { color: rgba(255,255,255,.8); font-size: 14.5px; margin-bottom: 16px; }
-    .track-steps { display: flex; gap: 0; flex-wrap: wrap; margin-bottom: 18px; }
-    .ts { display: flex; align-items: center; }
-    .ts-dot {
-      background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
-      color: rgba(255,255,255,.9); font-size: 12px; font-weight: 700;
-      padding: 5px 12px; border-radius: 20px; white-space: nowrap;
-    }
-    .ts-arr { color: rgba(255,255,255,.4); padding: 0 6px; font-size: 14px; }
-    .track-banner .tb-btn {
-      display: inline-block; background: #f9a825; color: var(--navy);
-      padding: 12px 26px; border-radius: 8px; font-weight: 800; text-decoration: none;
-      font-size: 15px; transition: .2s;
-    }
-    .track-banner .tb-btn:hover { background: #ffc107; transform: translateY(-1px); }
-
-    /* ─── ORDER FORM ─── */
-    .form-outer {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      margin: 0 0 44px;
-    }
-    .form-header {
-      background: var(--navy);
-      padding: 28px 32px;
-      border-bottom: 4px solid var(--teal);
-    }
+    /* ORDER FORM - TOP DESIGN */
+    .form-outer { background: #fff; border: 2px solid var(--teal); border-radius: 18px; box-shadow: var(--shadow-lg); overflow: hidden; margin: 30px 0 44px; }
+    .form-header { background: var(--navy); padding: 24px 28px; border-bottom: 4px solid var(--teal); }
     .form-header h2 { color: #fff; font-size: 1.35rem; margin-bottom: 5px; }
     .form-header p { color: rgba(255,255,255,.75); font-size: 14px; }
-    .form-body { padding: 32px; }
-    @media(max-width:600px){ .form-body { padding: 20px; } }
+    .form-body { padding: 28px; }
+    @media(max-width:600px){ .form-body { padding: 18px; } }
 
-    .form-section { margin-bottom: 30px; }
-    .fs-title {
-      font-size: 13px; font-weight: 700; color: var(--teal);
-      text-transform: uppercase; letter-spacing: .8px;
-      margin-bottom: 14px; padding-bottom: 8px;
-      border-bottom: 1px dashed var(--border);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-    .fg { display: flex; flex-direction: column; gap: 5px; }
+    .form-section { margin-bottom: 24px; }
+    .fs-title { font-size: 13px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); display: flex; align-items: center; gap: 8px; }
+    .fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .fg { display: flex; flex-direction: column; gap: 4px; }
     .fg.full { grid-column: 1 / -1; }
     .fg label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
-    .fg input, .fg select, .fg textarea {
-      padding: 10px 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 13.5px;
-      color: var(--ink);
-      background: var(--paper);
-      outline: none;
-      transition: .18s;
-      font-family: inherit;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color: var(--navy-m);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(26,74,114,.1);
-    }
-    .fg .hint { font-size: 11.5px; color: var(--mist); margin-top: 3px; }
+    .fg input, .fg select, .fg textarea { padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13.5px; color: var(--ink); background: var(--paper); outline: none; transition: .18s; font-family: inherit; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--navy-m); background: #fff; box-shadow: 0 0 0 3px rgba(26,74,114,.1); }
+    .fg .hint { font-size: 11px; color: var(--mist); margin-top: 2px; }
 
-    /* Type cards */
-    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-    .type-card {
-      border: 2px solid var(--border); border-radius: 10px;
-      padding: 14px 16px; cursor: pointer;
-      display: flex; align-items: flex-start; gap: 12px;
-      transition: .18s;
-    }
+    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+    .type-card { border: 2px solid var(--border); border-radius: 10px; padding: 12px 14px; cursor: pointer; display: flex; align-items: flex-start; gap: 10px; transition: .18s; }
     .type-card.active { border-color: var(--navy); background: #eef5ff; }
     .type-card input[type=radio] { margin-top: 3px; accent-color: var(--navy); }
-    .type-card .tc-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-    .type-card .tc-body p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+    .type-card .tc-body h4 { font-size: 13.5px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+    .type-card .tc-body p { font-size: 11.5px; color: var(--ink-soft); line-height: 1.4; }
 
-    /* COD badge in form */
-    .cod-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--teal-l); color: var(--teal);
-      font-size: 12px; font-weight: 700; padding: 5px 14px;
-      border-radius: 20px; border: 1px solid #b2dfdb; margin-bottom: 20px;
-    }
+    .cod-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--teal-l); color: var(--teal); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid #b2dfdb; margin-bottom: 16px; }
 
-    .btn-order {
-      width: 100%; background: var(--teal); color: #fff;
-      border: none; padding: 15px;
-      border-radius: 10px; font-size: 1.05rem; font-weight: 700;
-      cursor: pointer; transition: .2s; font-family: inherit;
-      box-shadow: 0 4px 16px rgba(0,123,110,.3);
-    }
+    .btn-order { width: 100%; background: var(--teal); color: #fff; border: none; padding: 15px; border-radius: 10px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: .2s; font-family: inherit; box-shadow: 0 4px 16px rgba(0,123,110,.3); }
     .btn-order:hover { background: #006257; transform: translateY(-1px); }
-    .btn-order:disabled { background: #a0aec0; box-shadow: none; cursor: not-allowed; transform: none; }
+    .btn-order:disabled { background: #a0aec0; box-shadow: none; cursor: not-allowed; }
 
-    #status-msg {
-      display: none; margin-top: 16px; padding: 18px; border-radius: 10px;
-      font-weight: 600; text-align: center; font-size: 14.5px;
-    }
+    #status-msg { display: none; margin-top: 16px; padding: 16px; border-radius: 10px; font-weight: 600; text-align: center; font-size: 14.5px; }
 
-    /* District badge */
-    .dist-badge {
-      display: inline-block; background: var(--teal-l); color: var(--teal);
-      font-size: 11.5px; font-weight: 700; padding: 3px 10px;
-      border-radius: 20px; margin-left: 8px; border: 1px solid #b2dfdb;
-    }
-
-    /* ─── INTERNAL LINKS ─── */
-    .inlink-box {
-      background: #fff; border: 1px solid var(--border);
-      border-radius: var(--r); padding: 28px;
-      box-shadow: var(--shadow-xs); margin: 44px 0;
-    }
-    .inlink-box h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 18px; }
-    .inlink-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 10px; }
-    .ilink {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 14px; border-radius: 8px;
-      background: var(--paper); border: 1px solid var(--border);
-      text-decoration: none; color: var(--ink-soft);
-      font-size: 13.5px; font-weight: 600; transition: .18s;
-    }
-    .ilink:hover { background: var(--teal-l); border-color: var(--teal); color: var(--teal); }
-    .ilink span { font-size: 17px; }
-
-    /* ─── FAQ ─── */
-    .faq-list { margin: 8px 0 44px; }
-    .fq { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; background: #fff; overflow: hidden; }
-    .fq-q {
-      padding: 15px 20px; cursor: pointer; font-weight: 700;
-      font-size: 14.5px; color: var(--navy);
-      display: flex; justify-content: space-between; align-items: center;
-      background: #f5f8fc; user-select: none;
-    }
-    .fq-q::after { content: '+'; font-size: 20px; font-weight: 400; color: var(--teal); flex-shrink: 0; margin-left: 10px; }
-    .fq-q.open::after { content: '−'; }
-    .fq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; font-size: 14.5px; color: var(--ink-soft); }
-    .fq-a.open { max-height: 260px; padding: 15px 20px; }
-    .fq-a a { color: var(--teal); font-weight: 600; }
-
-    /* ─── FOOTER ─── */
-    footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 52px 20px 24px; margin-top: 60px; }
-    .foot-grid { max-width: 1020px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 36px; margin-bottom: 36px; }
-    .fc h4 { color: #f9a825; font-family: 'Tiro Devanagari Hindi', serif; font-size: 1rem; margin-bottom: 14px; border-bottom: 1px solid rgba(249,168,37,.25); padding-bottom: 6px; }
-    .fc ul { list-style: none; }
-    .fc ul li { margin-bottom: 8px; }
-    .fc ul li a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 13px; transition: .18s; }
-    .fc ul li a:hover { color: #f9a825; }
-    .foot-bottom { max-width: 1020px; margin: auto; border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; text-align: center; font-size: 12.5px; }
-    .foot-bottom a { color: #f9a825; text-decoration: none; }
-
-    /* ─── WA FLOAT ─── */
-    .wa { position: fixed; bottom: 88px; right: 20px; z-index: 999; width: 52px; height: 52px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,.22); transition: .2s; }
-    .wa:hover { transform: scale(1.1); background: #128c7e; }
-    .wa svg { width: 27px; height: 27px; fill: white; }
-
-    /* ─── ORDER FLOAT ─── */
-    .ofloat { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
-    .ofloat-btn { background: var(--amber); color: #fff; border: none; padding: 12px 22px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 14px; font-family: inherit; box-shadow: var(--shadow-lg); }
-    .ofloat-menu { display: none; position: absolute; bottom: 56px; right: 0; background: #fff; border-radius: 12px; width: 226px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); overflow: hidden; }
-    .ofloat-menu.open { display: block; }
-    .ofloat-menu a { display: block; padding: 14px 18px; border-bottom: 1px solid var(--border); color: var(--ink); text-decoration: none; font-size: 13.5px; font-weight: 600; transition: .15s; }
-    .ofloat-menu a:last-child { border-bottom: none; }
-    .ofloat-menu a:hover { background: var(--teal-l); color: var(--teal); }
-
-    /* notice */
-    .notice { background: var(--amber-l); border-left: 4px solid var(--amber); border-radius: 8px; padding: 15px 18px; margin: 24px 0; font-size: 14px; }
-    .notice strong { color: var(--amber); }
+    /* TABLES & CONTENT */
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
+    @media(max-width:680px){ .split-grid { grid-template-columns: 1fr; } }
+    .split-card { background: #fff; border: 1px solid var(--border); border-radius: var(--r); padding: 22px 20px; box-shadow: var(--shadow-sm); }
+    
+    .diff-table { width: 100%; border-collapse: collapse; margin: 8px 0 30px; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); font-size: 14px; }
+    .diff-table th { background: var(--navy); color: #fff; padding: 12px 16px; text-align: left; }
+    .diff-table td { border: 1px solid var(--border); padding: 12px 16px; vertical-align: top; }
+    
+    footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 40px 20px 20px; margin-top: 50px; text-align: center; font-size: 13px; }
   </style>
 </head>
 <body>
 
-<!-- ALERT -->
-<div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, <a href="https://jameenseva.in/khatiyan.html">खतियान</a> और <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा</a> अभी तैयार करवाएं।</div>
+<div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, खतियान ऑनलाइन ऑर्डर करें।</div>
 
-<!-- NAV -->
 <nav class="topbar">
   <a href="https://jameenseva.in/" class="brand">Jameen<em>Seva</em>.in</a>
-  <div class="nav-links">
-    <a href="https://jameenseva.in/">होम</a>
-    <a href="https://jameenseva.in/blog.html">Blog</a>
-    <a href="https://jameenseva.in/track.html">📦 ट्रैक</a>
-    <a href="https://jameenseva.in/panchnama.html" class="pill">⚖️ पंचनामा</a>
-  </div>
 </nav>
 
-<!-- BREADCRUMB -->
 <div class="crumb">
   <a href="https://jameenseva.in/">Home</a><span>›</span>
-  <a href="https://jameenseva.in/blog.html">Blog</a><span>›</span>
-  <strong>बिहार केवाला गाइड और ऑर्डर</strong>
+  <strong>बिहार केवाला ऑर्डर फॉर्म</strong>
 </div>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">📜 Bihar Land Records — Deed Copy Service</div>
-    <h1>बिहार <em>केवाला</em> — Certified Copy<br>और Web Copy ऑनलाइन मंगवाएं</h1>
-    <p class="hero-sub">जमीन का पुराना या नया केवाला, बिना दफ्तर के चक्कर लगाए — COD पर घर पर डिलीवरी। बिहार के सभी 38 जिले कवर।</p>
-    <div class="hero-pills">
-      <div class="hero-pill">🗂️ 38 जिले</div>
-      <div class="hero-pill">200+ Registration Offices</div>
-      <div class="hero-pill">🚚 COD सुविधा</div>
-      <div class="hero-pill">✅ 100% Certified</div>
-    </div>
+    <div class="hero-eyebrow">📜 Bihar Land Records Service</div>
+    <h1>बिहार <em>केवाला</em> — Certified Copy ऑनलाइन मंगवाएं</h1>
+    <p class="hero-sub">बिहार के सभी 38 जिलों से घर बैठे ऑनलाइन केवाला ऑर्डर करें। COD सुविधा उपलब्ध।</p>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- ══════════════ WHAT IS KEVALA ══════════════ -->
-  <h2 class="sec-head" id="kya-hai">केवाला क्या होता है?</h2>
-  <div class="split-grid">
-    <div class="split-card">
-      <div class="sc-icon">📜</div>
-      <h3>केवाला (Sale Deed) की परिभाषा</h3>
-      <p><strong>केवाला</strong> वह कानूनी दस्तावेज है जो किसी जमीन, मकान या संपत्ति की <strong>खरीद-बिक्री की रजिस्ट्री</strong> के समय <strong>निबंधन कार्यालय (Sub-Registrar Office / SRO)</strong> द्वारा जारी किया जाता है। बिहार में इसे <strong>"केवाला"</strong> या <strong>"रजिस्ट्री दस्तावेज"</strong> कहा जाता है। यह संपत्ति के कानूनी स्वामित्व का सबसे महत्वपूर्ण प्रमाण है।</p>
-    </div>
-    <div class="split-card">
-      <div class="sc-icon">⚠️</div>
-      <h3>केवाला कब जरूरी होता है?</h3>
-      <ul>
-        <li>बैंक से होम लोन या KCC लेते समय</li>
-        <li>दाखिल-खारिज (Mutation) कराते समय</li>
-        <li>Bihar Survey 2026 में जमीन का दावा करने में</li>
-        <li>पंचनामा बटवारा / विरासत के मामले में</li>
-        <li>जमीन बेचते वक्त खरीदार को दिखाने हेतु</li>
-        <li>कोर्ट-कचहरी में स्वामित्व साबित करने में</li>
-        <li>LPC सर्टिफिकेट और जमाबंदी मिलान हेतु</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- ══════════════ CERTIFIED vs WEB ══════════════ -->
-  <h2 class="sec-head" id="types">Certified Copy vs Web Copy — क्या अंतर है?</h2>
-  <table class="diff-table">
-    <thead>
-      <tr>
-        <th>विशेषता</th>
-        <th>📜 Certified Copy (प्रमाणित नकल)</th>
-        <th>💻 Web Copy (डिजिटल कॉपी)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>जारीकर्ता</strong></td>
-        <td>निबंधन कार्यालय (SRO) द्वारा मुहर लगाकर जारी</td>
-        <td>igrs.bihar.gov.in पोर्टल से डाउनलोड</td>
-      </tr>
-      <tr>
-        <td><strong>कानूनी मान्यता</strong></td>
-        <td class="yes">✅ कोर्ट, बैंक, सरकारी कार्यालय में पूर्णतः मान्य</td>
-        <td class="no">⚠️ केवल जानकारी/सत्यापन हेतु, कोर्ट में सीमित मान्यता</td>
-      </tr>
-      <tr>
-        <td><strong>डिलीवरी समय</strong></td>
-        <td>7–15 कार्य दिवस</td>
-        <td>2–5 कार्य दिवस (ऑनलाइन)</td>
-      </tr>
-      <tr>
-        <td><strong>उपयोग</strong></td>
-        <td>बैंक लोन, कोर्ट, म्यूटेशन, सर्वे</td>
-        <td>रिकॉर्ड देखना, तुरंत जाँच, सामान्य उपयोग</td>
-      </tr>
-      <tr>
-        <td><strong>COD उपलब्ध</strong></td>
-        <td class="yes">✅ हाँ — घर पर डिलीवरी</td>
-        <td class="yes">✅ हाँ — डिजिटल PDF भेजी जाती है</td>
-      </tr>
-      <tr>
-        <td><strong>कब चुनें?</strong></td>
-        <td>जब बैंक, कोर्ट या सरकारी काम हो</td>
-        <td>जब सिर्फ जानकारी देखनी हो या समय कम हो</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- ══════════════ DOCUMENTS NEEDED ══════════════ -->
-  <h2 class="sec-head" id="documents">केवाला निकालने के लिए क्या जानकारी चाहिए?</h2>
-  <div class="split-grid">
-    <div class="split-card">
-      <div class="sc-icon">✅</div>
-      <h3>आवश्यक जानकारी (कोई एक काफी है)</h3>
-      <ul>
-        <li>रजिस्ट्री ऑफिस (SRO) का नाम</li>
-        <li>रजिस्ट्री का वर्ष (कब से — कब तक)</li>
-        <li>बेचने वाले (दाता) या खरीदने वाले (गृहीता) का नाम</li>
-        <li>खाता नंबर या खेसरा नंबर</li>
-        <li>Deed नंबर (यदि उपलब्ध हो)</li>
-        <li>मौजा / गाँव का नाम</li>
-      </ul>
-    </div>
-    <div class="split-card">
-      <div class="sc-icon">📍</div>
-      <h3>SRO (रजिस्ट्री ऑफिस) कहाँ से पता करें?</h3>
-      <p>जब भी जमीन की रजिस्ट्री होती है, तो उस समय जारी की गई रसीद या मूल केवाला पर <strong>SRO का नाम</strong> लिखा होता है।</p>
-      <p>अगर मूल केवाला नहीं है, तो जमीन जिस <strong>गाँव / अंचल</strong> में है, वहाँ का <strong>SRO</strong> ही सही ऑफिस होगा।</p>
-      <p>किसी भी सहायता के लिए <a href="https://wa.me/919142075859" style="color:var(--teal);font-weight:700;">WhatsApp पर संपर्क करें →</a></p>
-    </div>
-  </div>
-
-  <!-- ══════════════ HOW WE WORK ══════════════ -->
-  <h2 class="sec-head" id="process">JameenSeva.in से केवाला कैसे मंगवाएं?</h2>
-  <div class="steps-row">
-    <div class="step-card">
-      <div class="s-icon">📝</div>
-      <h4>फॉर्म भरें</h4>
-      <p>नीचे दिए गए फॉर्म में जिला, SRO, और जमीन का विवरण भरें।</p>
-    </div>
-    <div class="step-card">
-      <div class="s-icon">📱</div>
-      <h4>WhatsApp कॉल</h4>
-      <p>हमारी टीम 24 घंटे के अंदर WhatsApp पर संपर्क करेगी और विवरण कन्फर्म करेगी।</p>
-    </div>
-    <div class="step-card">
-      <div class="s-icon">🔍</div>
-      <h4>SRO में खोज</h4>
-      <p>निबंधन कार्यालय में आपके केवाला की खोज की जाएगी।</p>
-    </div>
-    <div class="step-card">
-      <div class="s-icon">✅</div>
-      <h4>Certified मुहर</h4>
-      <p>दस्तावेज पर SRO की आधिकारिक मुहर और हस्ताक्षर लगवाए जाएंगे।</p>
-    </div>
-    <div class="step-card">
-      <div class="s-icon">🚚</div>
-      <h4>COD डिलीवरी</h4>
-      <p>सामान मिलने पर भुगतान करें — पूरे बिहार में घर पर डिलीवरी।</p>
-    </div>
-  </div>
-
-  <!-- ══════════════ TRACKING BANNER ══════════════ -->
-  <div class="track-banner">
-    <div class="tb-icon">📦</div>
-    <div>
-      <h3>ऑर्डर के बाद अपना केवाला ट्रैक करें</h3>
-      <p>ऑर्डर सबमिट होने के बाद आपको एक <strong>Order ID</strong> मिलेगी। उस ID से JameenSeva ट्रैकिंग पेज पर अपने केवाला ऑर्डर की स्थिति देखें।</p>
-      <div class="track-steps">
-        <div class="ts"><div class="ts-dot">📝 ऑर्डर सबमिट</div><div class="ts-arr">→</div></div>
-        <div class="ts"><div class="ts-dot">✅ कन्फर्म</div><div class="ts-arr">→</div></div>
-        <div class="ts"><div class="ts-dot">🔍 SRO में खोज</div><div class="ts-arr">→</div></div>
-        <div class="ts"><div class="ts-dot">🚚 डिस्पैच</div><div class="ts-arr">→</div></div>
-        <div class="ts"><div class="ts-dot">🏠 डिलीवर</div></div>
-      </div>
-      <a href="https://jameenseva.in/track.html" class="tb-btn">📦 ऑर्डर ट्रैक करें →</a>
-    </div>
-  </div>
-
-  <!-- ══════════════ ORDER FORM ══════════════ -->
+  <!-- ══════════════ ORDER FORM IS NOW MOVED TO TOP ══════════════ -->
   <div class="form-outer" id="order-form">
     <div class="form-header">
       <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
-      <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
+      <p>विवरण भरें और सबमिट करें — COD पर घर पर डिलीवरी</p>
     </div>
     <div class="form-body">
       <form id="kevalaForm" onsubmit="handleOrder(event)">
@@ -612,14 +163,14 @@
               <input type="radio" name="doc_type" value="Certified Copy" checked/>
               <div class="tc-body">
                 <h4>📜 Certified Copy</h4>
-                <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य</p>
+                <p>SRO मुहर सहित — बैंक, कोर्ट में मान्य</p>
               </div>
             </label>
             <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
               <input type="radio" name="doc_type" value="Web Copy"/>
               <div class="tc-body">
                 <h4>💻 Web Copy</h4>
-                <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग</p>
+                <p>डिजिटल PDF — केवल जानकारी हेतु</p>
               </div>
             </label>
           </div>
@@ -627,7 +178,7 @@
 
         <!-- Location -->
         <div class="form-section">
-          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
+          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण</div>
           <div class="fgrid">
             <div class="fg">
               <label>जिला (District) *</label>
@@ -640,7 +191,6 @@
               <select id="registry_office" required disabled>
                 <option value="">-- पहले जिला चुनें --</option>
               </select>
-              <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
             </div>
             <div class="fg">
               <label>अंचल / ब्लॉक (Anchal) *</label>
@@ -650,18 +200,14 @@
             </div>
             <div class="fg">
               <label>मौजा का नाम (Mauza)</label>
-              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम"/>
-            </div>
-            <div class="fg full">
-              <label>थाना नंबर (Thana No.)</label>
-              <input type="text" id="thana_number" placeholder="थाना नंबर (यदि ज्ञात हो)"/>
+              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा"/>
             </div>
           </div>
         </div>
 
         <!-- Search Details -->
         <div class="form-section">
-          <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
+          <div class="fs-title">🔍 STEP 3 — जमीन विवरण</div>
           <div class="fgrid">
             <div class="fg">
               <label>कब से (From Date) *</label>
@@ -672,43 +218,39 @@
               <input type="date" id="date_to" required/>
             </div>
             <div class="fg">
-              <label>बेचने वाले का नाम (Seller / Daata)</label>
+              <label>बेचने वाले का नाम (Seller)</label>
               <input type="text" id="seller_name" placeholder="दाता का नाम"/>
             </div>
             <div class="fg">
-              <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
+              <label>खरीदने वाले का नाम (Buyer)</label>
               <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
             </div>
             <div class="fg">
-              <label>खाता नंबर (Khata No.)</label>
-              <input type="text" id="khata_number" placeholder="खाता संख्या"/>
+              <label>खाता नंबर</label>
+              <input type="text" id="khata_number" placeholder="खाता"/>
             </div>
             <div class="fg">
-              <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
-              <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
-            </div>
-            <div class="fg full">
-              <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
-              <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
+              <label>खेसरा नंबर</label>
+              <input type="text" id="plot_number" placeholder="खेसरा"/>
             </div>
           </div>
         </div>
 
         <!-- Personal -->
         <div class="form-section">
-          <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
+          <div class="fs-title">👤 STEP 4 — डिलीवरी विवरण</div>
           <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
           <div class="fgrid">
             <div class="fg">
-              <label>आपका पूरा नाम *</label>
-              <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
+              <label>आपका नाम *</label>
+              <input type="text" id="customer_name" placeholder="पूरा नाम" required/>
             </div>
             <div class="fg">
               <label>मोबाइल नंबर *</label>
               <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
             </div>
             <div class="fg full">
-              <label>पूरा पता (डिलीवरी के लिए) *</label>
+              <label>पूरा पता *</label>
               <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
             </div>
             <div class="fg">
@@ -731,1168 +273,39 @@
     </div>
   </div>
 
-  <!-- NOTICE -->
-  <div class="notice">
-    <strong>⚠️ नोट:</strong> JameenSeva.in एक निजी सेवा है। हम सरकारी निबंधन कार्यालयों से दस्तावेज प्राप्त कराते हैं। प्रमाणित नकल के लिए सरकारी शुल्क अलग से लागू होता है। किसी भी सहायता के लिए WhatsApp: <a href="https://wa.me/919142075859" style="color:var(--amber);font-weight:700;">+91-9142075859</a>
+  <!-- DETAILS & FAQ BELOW FORM -->
+  <h2 class="sec-head">केवाला क्या होता है?</h2>
+  <div class="split-card">
+    <p><strong>केवाला</strong> वह कानूनी दस्तावेज है जो किसी जमीन की रजिस्ट्री के समय निबंधन कार्यालय (SRO) द्वारा जारी किया जाता है।</p>
   </div>
-
-  <!-- INTERNAL LINKS -->
-  <div class="inlink-box">
-    <h3>🔗 केवाला से जुड़ी सभी जरूरी सेवाएं</h3>
-    <div class="inlink-grid">
-      <a href="https://jameenseva.in/panchnama.html" class="ilink"><span>⚖️</span>पंचनामा बटवारा ऑर्डर</a>
-      <a href="https://jameenseva.in/panchnamablog.html" class="ilink"><span>📖</span>पंचनामा क्या है?</a>
-      <a href="https://jameenseva.in/khatiyan.html" class="ilink"><span>📜</span>खतियान प्रमाणित कॉपी</a>
-      <a href="https://jameenseva.in/ragister2.html" class="ilink"><span>📒</span>रजिस्टर-2 की प्रति</a>
-      <a href="https://jameenseva.in/dakhil-kharij-blog.html" class="ilink"><span>🔁</span>दाखिल-खारिज प्रोसेस</a>
-      <a href="https://jameenseva.in/parimarjan-blog.html" class="ilink"><span>✏️</span>परिमार्जन गाइड</a>
-      <a href="https://jameenseva.in/lpc-guide-bihar.html" class="ilink"><span>📋</span>LPC सर्टिफिकेट</a>
-      <a href="https://jameenseva.in/bihar-survey-guide-2026.html" class="ilink"><span>🗺️</span>Bihar Survey 2026</a>
-      <a href="https://jameenseva.in/jamabandiblog.html" class="ilink"><span>📗</span>जमाबंदी पंजी देखें</a>
-      <a href="https://jameenseva.in/e-mapi-blog.html" class="ilink"><span>📐</span>ऑनलाइन ई-मापी</a>
-      <a href="https://jameenseva.in/land-calculator.html" class="ilink"><span>🔢</span>जमीन कैलकुलेटर</a>
-      <a href="https://jameenseva.in/track.html" class="ilink"><span>📦</span>ऑर्डर ट्रैक करें</a>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <h2 class="sec-head" id="faq">❓ केवाला से जुड़े अक्सर पूछे जाने वाले सवाल</h2>
-  <div class="faq-list">
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला क्या होता है?</div><div class="fq-a">केवाला वह कानूनी दस्तावेज है जो जमीन या मकान की खरीद-बिक्री की रजिस्ट्री के समय <strong>Sub-Registrar Office (SRO)</strong> द्वारा जारी किया जाता है। यह संपत्ति के स्वामित्व का सबसे महत्वपूर्ण प्रमाण है।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">Certified Copy और Web Copy में क्या फर्क है?</div><div class="fq-a"><strong>Certified Copy</strong> SRO की आधिकारिक मुहर और हस्ताक्षर के साथ जारी होती है — यह कोर्ट, बैंक और सभी सरकारी कामों में पूर्णतः मान्य है। <strong>Web Copy</strong> IGRS पोर्टल से डाउनलोड की डिजिटल प्रति है — सामान्य जानकारी के लिए उपयोगी।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">बिहार में केवाला ऑनलाइन कैसे निकालें?</div><div class="fq-a">ऊपर दिए गए फॉर्म में जिला, SRO, अंचल और जमीन का विवरण भरें। COD या Online Payment चुनें और सबमिट करें। हमारी टीम WhatsApp पर कन्फर्म कर 7-15 दिन में घर पर डिलीवरी करेगी। ऑर्डर स्टेटस <a href="https://jameenseva.in/track.html">track.html</a> पर देखें।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला निकालने के लिए कौन सी जानकारी चाहिए?</div><div class="fq-a">रजिस्ट्री ऑफिस का नाम, रजिस्ट्री वर्ष, दाता/गृहीता का नाम, खाता/खेसरा नंबर, या Deed नंबर — इनमें से <strong>कोई एक</strong> जानकारी पर्याप्त है।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला कितने दिन में मिलती है?</div><div class="fq-a">Certified Copy आमतौर पर <strong>7–15 कार्य दिवस</strong> में मिलती है। Web Copy 2–5 दिन में PDF के रूप में भेजी जाती है। ट्रैकिंग के लिए: <a href="https://jameenseva.in/track.html">jameenseva.in/track.html</a></div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">क्या COD सुविधा उपलब्ध है?</div><div class="fq-a">हाँ! <strong>Cash On Delivery (COD)</strong> उपलब्ध है — पहले दस्तावेज घर पर मिलेगा, फिर भुगतान करें। पूरे बिहार में डिलीवरी होती है।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">पुराना (30-50 साल पुराना) केवाला मिल सकता है?</div><div class="fq-a">हाँ, बिहार के निबंधन कार्यालयों में पुराने रिकॉर्ड सुरक्षित हैं। Form में "From Date" पुरानी तारीख डालें। हमारी टीम SRO से खोजकर आपको उपलब्ध कराएगी।</div></div>
-  </div>
-
-  <p style="font-size:13px;color:var(--mist);font-style:italic;margin:20px 0;border-top:1px solid var(--border);padding-top:16px;">⚠️ <strong>अस्वीकरण:</strong> JameenSeva.in एक निजी सेवा प्रदाता है। हम Bihar IGRS और निबंधन कार्यालय से दस्तावेज प्राप्त कराते हैं। यह जानकारी शैक्षिक उद्देश्य के लिए है।</p>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <div class="foot-grid">
-    <div class="fc">
-      <h4>⚖️ पंचनामा बटवारा</h4>
-      <ul>
-        <li><a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा ऑर्डर</a></li>
-        <li><a href="https://jameenseva.in/panchnamablog.html">पंचनामा क्या है?</a></li>
-        <li><a href="https://jameenseva.in/kewalablog.html" style="color:#f9a825;font-weight:700;">केवाला गाइड (यह पेज)</a></li>
-        <li><a href="https://jameenseva.in/registry-news.html">रजिस्ट्री के नए नियम</a></li>
-      </ul>
-    </div>
-    <div class="fc">
-      <h4>📜 खतियान और रजिस्टर-2</h4>
-      <ul>
-        <li><a href="https://jameenseva.in/khatiyan.html">खतियान ऑर्डर करें</a></li>
-        <li><a href="https://jameenseva.in/ragister2.html">रजिस्टर-2 ऑर्डर</a></li>
-        <li><a href="https://jameenseva.in/jamabandiblog.html">जमाबंदी पंजी देखें</a></li>
-        <li><a href="https://jameenseva.in/lpc-guide-bihar.html">LPC सर्टिफिकेट</a></li>
-        <li><a href="https://jameenseva.in/parimarjan-blog.html">परिमार्जन गाइड</a></li>
-      </ul>
-    </div>
-    <div class="fc">
-      <h4>🗺️ सर्वे और अन्य</h4>
-      <ul>
-        <li><a href="https://jameenseva.in/bihar-survey-guide-2026.html" style="color:#f9a825;font-weight:700;">Bihar Survey 2026</a></li>
-        <li><a href="https://jameenseva.in/dakhil-kharij-blog.html">दाखिल-खारिज</a></li>
-        <li><a href="https://jameenseva.in/land-calculator.html">जमीन कैलकुलेटर</a></li>
-        <li><a href="https://jameenseva.in/e-mapi-blog.html">ई-मापी गाइड</a></li>
-        <li><a href="https://jameenseva.in/track.html">📦 ऑर्डर ट्रैक</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <p>Copyright © 2026 <a href="https://jameenseva.in/">JameenSeva.in</a> — Bihar Land Records Hub</p>
-    <p style="margin-top:5px;color:rgba(255,255,255,.35);">Engineering & Amin Expert: Chandraveer Yadav</p>
-  </div>
+  <p>Copyright © 2026 JameenSeva.in — Bihar Land Records Hub</p>
 </footer>
 
-<!-- WA FLOAT -->
-<a href="https://wa.me/919142075859?text=Hello%20JameenSeva%2C%20mujhe%20Bihar%20Kevala%20chahiye." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.48 2.01 7.79l-2.01 7.21 7.387-1.938c2.193 1.185 4.697 1.861 7.363 1.861 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.35c-2.438 0-4.717-0.643-6.685-1.761l-0.48-0.272-4.382 1.149 1.171-4.204-0.301-0.478c-1.226-1.946-1.933-4.254-1.933-6.73 0-7.363 5.987-13.35 13.35-13.35s13.35 5.987 13.35 13.35-5.987 13.35-13.35 13.35z"/></svg>
-</a>
-
-<!-- ORDER FLOAT -->
-<div class="ofloat">
-  <div class="ofloat-menu" id="ofm">
-    <a href="#order-form">📜 केवाला ऑर्डर करें</a>
-    <a href="https://jameenseva.in/panchnama.html">⚖️ पंचनामा बटवारा</a>
-    <a href="https://jameenseva.in/khatiyan.html">📜 खतियान ऑर्डर</a>
-    <a href="https://jameenseva.in/track.html">📦 ऑर्डर ट्रैक</a>
-  </div>
-  <button class="ofloat-btn" onclick="togOFM()" aria-expanded="false">🗂️ सेवाएं ▲</button>
-</div>
-
 <script>
+  /* ⚠️ IMPORTANT FIX:
+     1. Supabase Dashboard -> Project Settings -> API par jayein.
+     2. 'anon' 'public' Key copy karein.
+     3. Neeche SUPABASE_KEY me replace karein.
+  */
   const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+  const SUPABASE_KEY = 'https://efgvsddclcnbmwqbtily.supabase.co'; // <-- Yahan apni sahi Anon Public Key daalein
+  
   const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-
   const districtMasterData = {
-    "अररिया (Araria)": {
-        "offices": [
-            "Araria Sadar (Araria)",
-            "Araria Peripheral (Araria)",
-            "Forbesganj (Forbesganj)",
-            "Forbesganj Peripheral (Forbesganj)"
-        ],
-        "anchals": [
-            "अररिया",
-            "जोकीहाट",
-            "कुर्साकांटा",
-            "सिकटी",
-            "पलासी",
-            "फारबिसगंज",
-            "भरगामा",
-            "रानीगंज",
-            "नरपतगंज"
-        ]
-    },
-    "अरवल (Arwal)": {
-        "offices": [
-            "Arwal Sadar (Arwal)",
-            "Arwal Peripheral (Arwal)"
-        ],
-        "anchals": [
-            "अरवल",
-            "कलेर",
-            "करपी",
-            "कुर्था",
-            "सोनभद्र बंशी सूर्यपुर"
-        ]
-    },
-    "औरंगाबाद (Aurangabad)": {
-        "offices": [
-            "Aurangabad Sadar (Aurangabad)",
-            "Aurangabad Peripheral (Aurangabad)",
-            "Daudnagar (Daudnagar)",
-            "Daudnagar Peripheral (Daudnagar)",
-            "Rafiganj (Rafiganj)"
-        ],
-        "anchals": [
-            "औरंगाबाद",
-            "देव",
-            "कुटुम्बा",
-            "मदनपुर",
-            "रफ़ीगंज",
-            "ओबरा",
-            "दाउदनगर",
-            "गोह",
-            "हसपुरा",
-            "नवीनगर",
-            "बारूण"
-        ]
-    },
-    "बांका (Banka)": {
-        "offices": [
-            "Banka Sadar (Banka)",
-            "Banka Peripheral (Banka)",
-            "Bounsi (Bounsi)",
-            "Katoria (Katoria)"
-        ],
-        "anchals": [
-            "बांका",
-            "अमरपुर",
-            "शंभूगंज",
-            "बेलहर",
-            "फुल्लीडुमर",
-            "कटोरिया",
-            "चंदन",
-            "बौसी",
-            "बाराहाट",
-            "धोरैया",
-            "रजौन"
-        ]
-    },
-    "बेगूसराय (Begusarai)": {
-        "offices": [
-            "Begusarai Sadar (Begusarai)",
-            "Begusarai Peripheral (Begusarai)",
-            "Bakhri (Bakhri)",
-            "Bakhri Peripheral (Bakhri)",
-            "Balia (Balia)",
-            "Teghra (Teghra)",
-            "Teghra Peripheral (Teghra)",
-            "Manjhaul (Manjhaul)",
-            "Barauni Notified Area (Begusarai)"
-        ],
-        "anchals": [
-            "बेगुसराय",
-            "बरौनी",
-            "तेघड़ा",
-            "मटिहानी",
-            "बछवाड़ा",
-            "मंसूरचक",
-            "नावकोठी",
-            "चेरिया बरियारपुर",
-            "खोदावंदपुर",
-            "छौराही",
-            "गढ़पुरा",
-            "बखरी",
-            "बलिया",
-            "साहेबपुर कमाल",
-            "शामहो अकहा कूरहा"
-        ]
-    },
-    "भागलपुर (Bhagalpur)": {
-        "offices": [
-            "Bhagalpur Sadar (Bhagalpur)",
-            "Bhagalpur Peripheral (Bhagalpur)",
-            "Bhagalpur Notified Area (Bhagalpur)",
-            "Naugachhia (Naugachhia)",
-            "Naugachhia Peripheral (Naugachhia)",
-            "Bihpur (Bihpur)",
-            "Kahalgaon (Kahalgaon)",
-            "Sultanganj (Sultanganj)"
-        ],
-        "anchals": [
-            "भागलपुर सदर",
-            "बिहपुर",
-            "गोराडीह",
-            "जगदीशपुर",
-            "कहलगांव",
-            "खरीक",
-            "नाथनगर",
-            "नवगछिया",
-            "पीरपैंती",
-            "रंगरा चौक",
-            "सबौर",
-            "सन्हौला",
-            "शाहकुंड",
-            "सुल्तानगंज",
-            "नारायणपुर",
-            "गोपालपुर"
-        ]
-    },
-    "भोजपुर (Bhojpur)": {
-        "offices": [
-            "Ara Sadar (Ara)",
-            "Ara Peripheral (Ara)",
-            "Ara Notified Area (Ara)",
-            "Jagdishpur (Jagdishpur)",
-            "Jagdishpur Peripheral (Jagdishpur)",
-            "Piro (Piro)",
-            "Shahpur (Shahpur)"
-        ],
-        "anchals": [
-            "आरा",
-            "बड़हरा",
-            "शाहपुर",
-            "बिहिया",
-            "जगदीशपुर",
-            "पीरो",
-            "चरपोखरी",
-            "गड़हनी",
-            "अगियांव",
-            "तरारी",
-            "सहार",
-            "उदवंतनगर",
-            "संदेश"
-        ]
-    },
-    "बक्सर (Buxar)": {
-        "offices": [
-            "Buxar Sadar (Buxar)",
-            "Buxar Peripheral (Buxar)",
-            "Dumraon (Dumraon)",
-            "Dumraon Peripheral (Dumraon)",
-            "Buxar Notified Area (Buxar)"
-        ],
-        "anchals": [
-            "बक्सर सदर",
-            "इटाढ़ी",
-            "चौसा",
-            "राजारामपुर",
-            "डुमराव",
-            "सिमरी",
-            "ब्रह्मपुर",
-            "चक्की",
-            "चौगाईं",
-            "केसठ",
-            "नावानगर"
-        ]
-    },
-    "दरभंगा (Darbhanga)": {
-        "offices": [
-            "Alinagar-Manigachhi (Darbhanga)",
-            "Alinagar - Part (Bahera)",
-            "Alinagar peripheral (Bahera)",
-            "Bahadurpur (Darbhanga)",
-            "Bahadurpur Peripheral (Darbhanga)",
-            "Baheri (Bahera)",
-            "Baheri (Darbhanga)",
-            "Benipur (Bahera)",
-            "Benipur (Notified Area) (Bahera)",
-            "Benipur Peripheral Area (Bahera)",
-            "Biraul (Bahera)",
-            "Biraul (Biraul)",
-            "Darbhanga Peripheral (Darbhanga)",
-            "Darbhanga Rural (Darbhanga)",
-            "Darbhanga Sadar",
-            "Kamtaul (Kamtaul)"
-        ],
-        "anchals": [
-            "दरभंगा",
-            "बेनीपुर",
-            "अलीनगर",
-            "बहादुरपुर",
-            "बिरौल",
-            "घनश्यामपुर",
-            "गौरा बौराम",
-            "हनुमाननगर",
-            "हायाघाट",
-            "जाले",
-            "केवटी",
-            "किरतपुर",
-            "मनीगाछी",
-            "सिंघवाड़ा",
-            "तारडीह"
-        ]
-    },
-    "पूर्वी चंपारण (East Champaran)": {
-        "offices": [
-            "Motihari Sadar (Motihari)",
-            "Motihari Peripheral (Motihari)",
-            "Motihari Notified Area (Motihari)",
-            "Areraj (Areraj)",
-            "Areraj Peripheral (Areraj)",
-            "Chakia (Chakia)",
-            "Chakia Peripheral (Chakia)",
-            "Dhaka (Dhaka)",
-            "Raxaul (Raxaul)",
-            "Raxaul Peripheral (Raxaul)",
-            "Sugauli (Sugauli)",
-            "Kesaria (Kesaria)"
-        ],
-        "anchals": [
-            "मोतिहारी",
-            "तुरकौलिया",
-            "हरसिद्धि",
-            "पहाड़पुर",
-            "अरेराज",
-            "संग्रामपुर",
-            "केसरिया",
-            "कल्याणपुर",
-            "कोटवा",
-            "पीपरा",
-            "चकिया",
-            "मेहसी",
-            "मधुबन",
-            "फेनहारा",
-            "तेतरिया",
-            "रामनगर",
-            "पकरियाल",
-            "ढाका",
-            "छौड़ादानो",
-            "बनकटवा",
-            "रक्सौल",
-            "आदापुर",
-            "रामगढ़वा",
-            "सुगौली",
-            "बंजरिया",
-            "चिराया"
-        ]
+    "पटना (Patna)": {
+      "offices": ["Patna Sadar", "Danapur", "Barh"],
+      "anchals": ["पटना सदर", "दानापुर", "फुलवारी"]
     },
     "गया (Gaya)": {
-        "offices": [
-            "Gaya Sadar (Gaya)",
-            "Gaya Peripheral (Gaya)",
-            "Gaya Notified Area (Gaya)",
-            "Sherghati (Sherghati)",
-            "Sherghati Peripheral (Sherghati)",
-            "Tekari (Tekari)",
-            "Tekari Peripheral (Tekari)",
-            "Neemchak Bathani (Neemchak Bathani)",
-            "Bodhgaya Notified Area (Gaya)",
-            "Wazirganj (Wazirganj)"
-        ],
-        "anchals": [
-            "गया सदर",
-            "अतरी",
-            "बाराचट्टी",
-            "बोधगया",
-            "बाँके बाजार",
-            "डुमरिया",
-            "फतेहपुर",
-            "गुरुआ",
-            "इमामगंज",
-            "खिजरसराय",
-            "कोंच",
-            "मानपुर",
-            "मोहरा",
-            "परैया",
-            "शेरघाटी",
-            "टनकुप्पा",
-            "वजीरगंज",
-            "आमश",
-            "बेलागंज",
-            "गुरारू",
-            "डोभी",
-            "टिकारी",
-            "मोहनपुर"
-        ]
-    },
-    "गोपालगंज (Gopalganj)": {
-        "offices": [
-            "Gopalganj Sadar (Gopalganj)",
-            "Gopalganj Peripheral (Gopalganj)",
-            "Gopalganj Notified Area (Gopalganj)",
-            "Hathua (Hathua)",
-            "Hathua Peripheral (Hathua)",
-            "Sidhwalia (Sidhwalia)",
-            "Mirganj (Mirganj)"
-        ],
-        "anchals": [
-            "बैकुंठपुर",
-            "बरौली",
-            "भोरे",
-            "विजयपुर",
-            "गोपालगंज",
-            "हथुआ",
-            "कटेया",
-            "कुचायकोट",
-            "मांझा",
-            "पंचदेवरी",
-            "फुलवरिया",
-            "सिधवलिया",
-            "थावे",
-            "उचकागांव"
-        ]
-    },
-    "जमुई (Jamui)": {
-        "offices": [
-            "Jamui Sadar (Jamui)",
-            "Jamui Peripheral (Jamui)",
-            "Jhajha (Jhajha)",
-            "Jhajha Peripheral (Jhajha)",
-            "Sikandra (Sikandra)"
-        ],
-        "anchals": [
-            "जमुई",
-            "खैरा",
-            "सोनो",
-            "झाझा",
-            "गिद्धौर",
-            "लक्ष्मीपुर",
-            "बरहट",
-            "सिकंदरा",
-            "अलीगंज",
-            "इस्लामनगर अलीगंज"
-        ]
-    },
-    "जहानाबाद (Jehanabad)": {
-        "offices": [
-            "Jehanabad Sadar (Jehanabad)",
-            "Jehanabad Peripheral (Jehanabad)",
-            "Makhdumpur (Makhdumpur)"
-        ],
-        "anchals": [
-            "जहानाबाद सदर",
-            "काको",
-            "मखदुमपुर",
-            "घोसी",
-            "हुलासगंज",
-            "मोदनगंज",
-            "रतनी फरीदपुर"
-        ]
-    },
-    "कैमूर (Kaimur/Bhabhua)": {
-        "offices": [
-            "Bhabhua Sadar (Bhabhua)",
-            "Bhabhua Peripheral (Bhabhua)",
-            "Mohania (Mohania)",
-            "Mohania Peripheral (Mohania)",
-            "Ramgarh (Ramgarh)",
-            "Kudra (Kudra)"
-        ],
-        "anchals": [
-            "भभुआ",
-            "मोहनिया",
-            "कुदरा",
-            "दुर्गावती",
-            "रामगढ़",
-            "नुआंव",
-            "चांद",
-            "चैनपुर",
-            "भगवानपुर",
-            "रामपुर",
-            "अधौरा"
-        ]
-    },
-    "कटिहार (Katihar)": {
-        "offices": [
-            "Katihar Sadar (Katihar)",
-            "Katihar Peripheral (Katihar)",
-            "Katihar Notified Area (Katihar)",
-            "Barsoi (Barsoi)",
-            "Barsoi Peripheral (Barsoi)",
-            "Manihari (Manihari)",
-            "Manihari Peripheral (Manihari)",
-            "Kadwa (Kadwa)",
-            "Falka (Falka)"
-        ],
-        "anchals": [
-            "कटिहार सदर",
-            "हाफलागंज",
-            "दण्डखोरा",
-            "हसनगंज",
-            "कोढ़ा",
-            "फलका",
-            "समेली",
-            "बरारी",
-            "कुरसेला",
-            "मनिहारी",
-            "अमदाबाद",
-            "प्राणपुर",
-            "आजमनगर",
-            "कदवा",
-            "बारसोई",
-            "बलरामपुर"
-        ]
-    },
-    "खगड़िया (Khagaria)": {
-        "offices": [
-            "Khagaria Sadar (Khagaria)",
-            "Khagaria Peripheral (Khagaria)",
-            "Gogri (Gogri)",
-            "Gogri Peripheral (Gogri)",
-            "Mansi (Mansi)"
-        ],
-        "anchals": [
-            "खगड़िया सदर",
-            "अलौली",
-            "चौथम",
-            "चित्रगुप्तनगर",
-            "गोगरी",
-            "परबत्ता",
-            "बेलदौर",
-            "मानसी"
-        ]
-    },
-    "किशनगंज (Kishanganj)": {
-        "offices": [
-            "Kishanganj Sadar (Kishanganj)",
-            "Kishanganj Peripheral (Kishanganj)",
-            "Kishanganj Notified Area (Kishanganj)",
-            "Bahadurganj (Bahadurganj)",
-            "Thakurganj (Thakurganj)"
-        ],
-        "anchals": [
-            "किशनगंज",
-            "पोठिया",
-            "कोचाधामन",
-            "टेढ़ागाछ",
-            "बहादुरगंज",
-            "दिघलबैंक",
-            "ठाकुरगंज"
-        ]
-    },
-    "लखीसराय (Lakhisarai)": {
-        "offices": [
-            "Lakhisarai Sadar (Lakhisarai)",
-            "Lakhisarai Peripheral (Lakhisarai)",
-            "Barahiya (Barahiya)",
-            "Suryagarha (Suryagarha)"
-        ],
-        "anchals": [
-            "लखीसराय सदर",
-            "रामगढ़ चौक",
-            "हलसी",
-            "बड़हिया",
-            "सूर्यगड़ा",
-            "पिपरिया"
-        ]
-    },
-    "मधेपुरा (Madhepura)": {
-        "offices": [
-            "Madhepura Sadar (Madhepura)",
-            "Madhepura Peripheral (Madhepura)",
-            "Udakishunganj (Udakishunganj)",
-            "Udakishunganj Peripheral (Udakishunganj)",
-            "Murliganj (Murliganj)",
-            "Bihariganj (Bihariganj)"
-        ],
-        "anchals": [
-            "मधेपुरा सदर",
-            "सिंहेश्वर",
-            "गमहरिया",
-            "घैलाढ़",
-            "मुरलीगंज",
-            "कुमारखंड",
-            "चौसा",
-            "पुरैनी",
-            "आलमनगर",
-            "ग्वालपारा",
-            "बिहारीगंज"
-        ]
-    },
-    "मधुबनी (Madhubani)": {
-        "offices": [
-            "Madhubani Sadar (Madhubani)",
-            "Madhubani Peripheral (Madhubani)",
-            "Benipatti (Benipatti)",
-            "Benipatti Peripheral (Benipatti)",
-            "Jayanagar (Jayanagar)",
-            "Jayanagar Peripheral (Jayanagar)",
-            "Jhanjharpur (Jhanjharpur)",
-            "Jhanjharpur Peripheral (Jhanjharpur)",
-            "Babubarhi (Babubarhi)",
-            "Phulparas (Phulparas)",
-            "Phulparas Peripheral (Phulparas)",
-            "Khajauli (Khajauli)",
-            "Khajauli Peripheral (Khajauli)",
-            "Rajnagar (Rajnagar)",
-            "Ladania (Ladania)"
-        ],
-        "anchals": [
-            "मधुबनी",
-            "अंधराठाढ़ी",
-            "बासोपट्टी",
-            "बेनीपट्टी",
-            "बिस्फी",
-            "घोघरडीहा",
-            "हरलाखी",
-            "जयनगर",
-            "झंझारपुर",
-            "खजौली",
-            "लखनौर",
-            "लौकही",
-            "मधवापुर",
-            "पंडौल",
-            "फुलपरास",
-            "राजनगर",
-            "रहिका",
-            "कलुआही",
-            "बाबूबरही",
-            "लदनिया",
-            "मधेपुर"
-        ]
-    },
-    "मुंगेर (Munger)": {
-        "offices": [
-            "Munger Sadar (Munger)",
-            "Munger Peripheral (Munger)",
-            "Munger Notified Area (Munger)",
-            "Tarapur (Tarapur)",
-            "Tarapur Peripheral (Tarapur)",
-            "Haveli Kharagpur (Haveli Kharagpur)",
-            "Jamalpur Notified Area (Munger)",
-            "Asarganj (Asarganj)"
-        ],
-        "anchals": [
-            "मुंगेर सदर",
-            "जमालपुर",
-            "बरियारपुर",
-            "धरहरा",
-            "खड़गपुर",
-            "तारापुर",
-            "संग्रामपुर",
-            "असरगंज",
-            "टेटिया बम्बर"
-        ]
-    },
-    "मुजफ्फरपुर (Muzaffarpur)": {
-        "offices": [
-            "Muzaffarpur Sadar (Muzaffarpur)",
-            "Muzaffarpur Peripheral (Muzaffarpur)",
-            "Muzaffarpur Notified Area (Muzaffarpur)",
-            "Motipur (Motipur)",
-            "Motipur Peripheral (Motipur)",
-            "Katra (Katra)",
-            "Katra Peripheral (Katra)",
-            "Sakra (Sakra)",
-            "Sakra Peripheral (Sakra)",
-            "Bochahan (Bochahan)",
-            "Minapur (Minapur)",
-            "Gaighat (Gaighat)"
-        ],
-        "anchals": [
-            "मुजफ्फरपुर",
-            "औराई",
-            "बंदरा",
-            "बोचहाँ",
-            "गायघाट",
-            "कटरा",
-            "कुढ़नी",
-            "मड़वन",
-            "मीनापुर",
-            "मोतीपुर",
-            "मुरौल",
-            "पारू",
-            "साहेबगंज",
-            "सकरा",
-            "मुशहरी",
-            "कांटी",
-            "सरैया"
-        ]
-    },
-    "नालंदा (Nalanda)": {
-        "offices": [
-            "Biharsharif Sadar (Biharsharif)",
-            "Biharsharif Peripheral (Biharsharif)",
-            "Biharsharif Notified Area (Biharsharif)",
-            "Hilsa (Hilsa)",
-            "Hilsa Peripheral (Hilsa)",
-            "Rajgir (Rajgir)",
-            "Rajgir Peripheral (Rajgir)",
-            "Islampur (Islampur)",
-            "Asthawan (Asthawan)",
-            "Ekangarsarai (Ekangarsarai)"
-        ],
-        "anchals": [
-            "बिहारशरीफ",
-            "राजगीर",
-            "हिलसा",
-            "इस्लामपुर",
-            "हरनौत",
-            "अस्थावां",
-            "एकंगरसराय",
-            "बेन",
-            "बिन्द",
-            "कतरीसराय",
-            "कराई परशुराय",
-            "चंडी",
-            "नूरसराय",
-            "परबलपुर",
-            "गिरियक",
-            "रहुई",
-            "सिलाव",
-            "सरमेरा",
-            "थरथरी",
-            "नगरनौसा"
-        ]
-    },
-    "नवादा (Nawada)": {
-        "offices": [
-            "Nawada Sadar (Nawada)",
-            "Nawada Peripheral (Nawada)",
-            "Rajauli (Rajauli)",
-            "Rajauli Peripheral (Rajauli)",
-            "Hisua (Hisua)",
-            "Warisnagar (Warisnagar)"
-        ],
-        "anchals": [
-            "नवादा सदर",
-            "अकबरपुर",
-            "गोविन्दपुर",
-            "रजौली",
-            "सिरदला",
-            "मेसकौर",
-            "नरहट",
-            "हिसुआ",
-            "काशीचक",
-            "पकरीबरांवा",
-            "वारिसलीगंज",
-            "कौआकोल",
-            "रोह"
-        ]
-    },
-    "पटना (Patna)": {
-        "offices": [
-            "Patna Sadar (Patna)",
-            "Patna Peripheral (Patna)",
-            "Patna City (Patna City)",
-            "Patna City Peripheral (Patna City)",
-            "Patna City Notified Area (Patna City)",
-            "Danapur (Danapur)",
-            "Danapur Peripheral (Danapur)",
-            "Danapur Notified Area (Danapur)",
-            "Barh (Barh)",
-            "Barh Peripheral (Barh)",
-            "Bihta (Bihta)",
-            "Bihta Peripheral (Bihta)",
-            "Bikram (Bikram)",
-            "Bikram Peripheral (Bikram)",
-            "Masaurhi (Masaurhi)",
-            "Masaurhi Peripheral (Masaurhi)",
-            "Fatuha (Fatuha)",
-            "Fatuha Peripheral (Fatuha)",
-            "Mokama (Mokama)",
-            "Khusrupur (Khusrupur)",
-            "Punpun (Punpun)"
-        ],
-        "anchals": [
-            "पटना सदर",
-            "दानापुर",
-            "फुलवारी",
-            "मसौढ़ी",
-            "पालीगंज",
-            "विक्रम",
-            "बिहटा",
-            "खुसरूपुर",
-            "बख्तियारपुर",
-            "बेलछी",
-            "अथमलगोला",
-            "मोकामा",
-            "पंडारक",
-            "घोसवरी",
-            "नौबतपुर",
-            "दुलहिनबाजार",
-            "संपतचक",
-            "बाढ़",
-            "फतुहा",
-            "मनेर",
-            "पुनपुन",
-            "धनरूआ"
-        ]
-    },
-    "पूर्णिया (Purnia)": {
-        "offices": [
-            "Purnia Sadar (Purnia)",
-            "Purnia Peripheral (Purnia)",
-            "Purnia Notified Area (Purnia)",
-            "Banmankhi (Banmankhi)",
-            "Banmankhi Peripheral (Banmankhi)",
-            "Dhamdaha (Dhamdaha)",
-            "Dhamdaha Peripheral (Dhamdaha)",
-            "Baisi (Baisi)",
-            "Baisi Peripheral (Baisi)",
-            "Amour (Amour)",
-            "Kasba (Kasba)",
-            "Rupauli (Rupauli)"
-        ],
-        "anchals": [
-            "पूर्णिया सदर",
-            "अमौर",
-            "बैसी",
-            "बनमनखी",
-            "भवानीपुर",
-            "धमदाहा",
-            "जलालगढ़",
-            "कसबा",
-            "रूपौली",
-            "श्रीनगर",
-            "के नगर",
-            "बीकोठी",
-            "डगरुआ"
-        ]
-    },
-    "रोहतास (Rohtas)": {
-        "offices": [
-            "Sasaram Sadar (Sasaram)",
-            "Sasaram Peripheral (Sasaram)",
-            "Sasaram Notified Area (Sasaram)",
-            "Dehri (Dehri)",
-            "Dehri Peripheral (Dehri)",
-            "Dehri Notified Area (Dehri)",
-            "Bikramganj (Bikramganj)",
-            "Bikramganj Peripheral (Bikramganj)",
-            "Nokha (Nokha)",
-            "Chenari (Chenari)",
-            "Karakat (Karakat)"
-        ],
-        "anchals": [
-            "सासाराम",
-            "डेहरी",
-            "विक्रमगंज",
-            "नोखा",
-            "काराकाट",
-            "चेनारी",
-            "शिवसागर",
-            "तिलौथू",
-            "अकोढ़ीगोला",
-            "दिनारा",
-            "करगहर",
-            "कोचस",
-            "नासिरगंज",
-            "राजपुर",
-            "संझौली",
-            "सूर्यपुरा",
-            "रोहतास",
-            "नौहट्टा"
-        ]
-    },
-    "सहरसा (Saharsa)": {
-        "offices": [
-            "Saharsa Sadar (Saharsa)",
-            "Saharsa Peripheral (Saharsa)",
-            "Simri Bakhtiyarpur (Simri Bakhtiyarpur)",
-            "Simri Bakhtiyarpur Peripheral (Simri Bakhtiyarpur)",
-            "Sour Bazar (Sour Bazar)",
-            "Mahishi (Mahishi)"
-        ],
-        "anchals": [
-            "सहरसा सदर",
-            "कहरा",
-            "सिमरी बख्तियारपुर",
-            "सौर बाज़ार",
-            "बनमा ईटहरी",
-            "सोनवर्षा",
-            "नवहट्टा",
-            "सतर कटैया",
-            "महिषी",
-            "पतरघट"
-        ]
-    },
-    "समस्तीपुर (Samastipur)": {
-        "offices": [
-            "Samastipur Sadar (Samastipur)",
-            "Samastipur Peripheral (Samastipur)",
-            "Samastipur Notified Area (Samastipur)",
-            "Rosera (Rosera)",
-            "Rosera Peripheral (Rosera)",
-            "Dalsinghsarai (Dalsinghsarai)",
-            "Dalsinghsarai Peripheral (Dalsinghsarai)",
-            "Patori (Patori)",
-            "Patori Peripheral (Patori)",
-            "Hasanpur (Hasanpur)",
-            "Ujiyarpur (Ujiyarpur)",
-            "Morwa (Morwa)",
-            "Bibhutipur (Bibhutipur)"
-        ],
-        "anchals": [
-            "समस्तीपुर सदर",
-            "रोसड़ा",
-            "दलसिंहसराय",
-            "पटोरी",
-            "ताजपुर",
-            "कल्याणपुर",
-            "सिंघिया",
-            "हासनपुर",
-            "मोरवा",
-            "खानपुर",
-            "पूसा",
-            "सरायरंजन",
-            "शिवाजीनगर",
-            "बिथान",
-            "विभूतिपुर",
-            "उजियारपुर",
-            "मोहियुद्दीननगर",
-            "विद्यापतिनगर",
-            "वारिसनगर",
-            "मोहनपुर"
-        ]
-    },
-    "सारण (Saran/Chapra)": {
-        "offices": [
-            "Chapra Sadar (Chapra)",
-            "Chapra Peripheral (Chapra)",
-            "Chapra Notified Area (Chapra)",
-            "Marhaura (Marhaura)",
-            "Marhaura Peripheral (Marhaura)",
-            "Sonepur (Sonepur)",
-            "Sonepur Peripheral (Sonepur)",
-            "Garkha (Garkha)",
-            "Manjhi (Manjhi)",
-            "Revelganj (Revelganj)",
-            "Ekma (Ekma)"
-        ],
-        "anchals": [
-            "छपरा",
-            "अमनौर",
-            "बनियापुर",
-            "दरियापुर",
-            "दिघवारा",
-            "एकमा",
-            "गड़खा",
-            "इसुआपुर",
-            "जलालपुर",
-            "लहलादपुर",
-            "मकेर",
-            "मांझी",
-            "मरहौरा",
-            "नागरा",
-            "पानापुर",
-            "रिविलगंज",
-            "सोनपुर",
-            "तरैया"
-        ]
-    },
-    "शेखपुरा (Sheikhpura)": {
-        "offices": [
-            "Sheikhpura Sadar (Sheikhpura)",
-            "Sheikhpura Peripheral (Sheikhpura)",
-            "Barbigha (Barbigha)",
-            "Barbigha Peripheral (Barbigha)"
-        ],
-        "anchals": [
-            "शेखपुरा सदर",
-            "बरबीघा",
-            "शेखोपुर सराय",
-            "चेवाड़ा",
-            "अरियारी",
-            "घाटकुसुम्भा"
-        ]
-    },
-    "शिवहर (Sheohar)": {
-        "offices": [
-            "Sheohar Sadar (Sheohar)",
-            "Sheohar Peripheral (Sheohar)"
-        ],
-        "anchals": [
-            "शिवहर सदर",
-            "तरीयानी",
-            "पिपराही",
-            "पूरनहिया",
-            "डुमरी कटसरी"
-        ]
-    },
-    "सीतामढ़ी (Sitamarhi)": {
-        "offices": [
-            "Sitamarhi Sadar (Sitamarhi)",
-            "Sitamarhi Peripheral (Sitamarhi)",
-            "Sitamarhi Notified Area (Sitamarhi)",
-            "Pupri (Pupri)",
-            "Pupri Peripheral (Pupri)",
-            "Belsand (Belsand)",
-            "Belsand Peripheral (Belsand)",
-            "Riga (Riga)",
-            "Runnisaidpur (Runnisaidpur)",
-            "Bajpatti (Bajpatti)"
-        ],
-        "anchals": [
-            "डुमरा",
-            "रीगा",
-            "रुन्नीसैदपुर",
-            "बेलसंड",
-            "बाजपट्टी",
-            "परिहार",
-            "सुरसंड",
-            "पुपरी",
-            "सोनबरसा",
-            "मेजरगंज",
-            "बैरगनिया",
-            "चोरौत",
-            "नानपुर",
-            "बोखड़ा",
-            "परसौनी"
-        ]
-    },
-    "सीवान (Siwan)": {
-        "offices": [
-            "Siwan Sadar (Siwan)",
-            "Siwan Peripheral (Siwan)",
-            "Siwan Notified Area (Siwan)",
-            "Maharajganj (Maharajganj)",
-            "Maharajganj Peripheral (Maharajganj)",
-            "Mairwa (Mairwa)",
-            "Mairwa Peripheral (Mairwa)",
-            "Darauli (Darauli)",
-            "Raghunathpur (Raghunathpur)",
-            "Barharia (Barharia)",
-            "Jiradei (Jiradei)"
-        ],
-        "anchals": [
-            "सीवान सदर",
-            "मैरवा",
-            "गुठनी",
-            "रघुनाथपुर",
-            "महाराजगंज",
-            "आँदर",
-            "दरौली",
-            "बड़हरिया",
-            "गोरेयाकोठी",
-            "बसंतपुर",
-            "भगवानपुर हाट",
-            "दरौंदा",
-            "हुसैनगंज",
-            "लकड़ी नबीगंज",
-            "पचरुखी",
-            "सिसवन",
-            "जीरादेई",
-            "हसनपुरा",
-            "नौतन"
-        ]
-    },
-    "सुपौल (Supaul)": {
-        "offices": [
-            "Supaul Sadar (Supaul)",
-            "Supaul Peripheral (Supaul)",
-            "Birpur (Birpur)",
-            "Birpur Peripheral (Birpur)",
-            "Triveniganj (Triveniganj)",
-            "Triveniganj Peripheral (Triveniganj)",
-            "Nirmali (Nirmali)",
-            "Nirmali Peripheral (Nirmali)",
-            "Saraigarh Bhaptiyahi (Saraigarh)",
-            "Pratapganj (Pratapganj)"
-        ],
-        "anchals": [
-            "सुपौल सदर",
-            "बीरपुर",
-            "त्रिवेणीगंज",
-            "निर्मली",
-            "पिपरा",
-            "मरौना",
-            "किशनपुर",
-            "सरायगढ़ भपटियाही",
-            "बसंतपुर",
-            "राघोपुर",
-            "प्रतापगंज"
-        ]
-    },
-    "वैशाली (Vaishali/Hajipur)": {
-        "offices": [
-            "Hajipur Sadar (Hajipur)",
-            "Hajipur Peripheral (Hajipur)",
-            "Hajipur Notified Area (Hajipur)",
-            "Mahua (Mahua)",
-            "Mahua Peripheral (Mahua)",
-            "Mahnar (Mahnar)",
-            "Mahnar Peripheral (Mahnar)",
-            "Lalganj (Lalganj)",
-            "Jandaha (Jandaha)",
-            "Raghopur (Raghopur)"
-        ],
-        "anchals": [
-            "हाजीपुर",
-            "बिंदुपुर",
-            "राजापाकर",
-            "महुआ",
-            "जंदाहा",
-            "गोरौल",
-            "वैशाली",
-            "पटेढ़ी बेलसर",
-            "चेहराकलां",
-            "लालगंज",
-            "भगवानपुर",
-            "महनार",
-            "सहदेई बुजुर्ग",
-            "देशरी",
-            "राघोपुर"
-        ]
-    },
-    "पश्चिमी चंपारण (West Champaran)": {
-        "offices": [
-            "Bettiah Sadar (Bettiah)",
-            "Bettiah Peripheral (Bettiah)",
-            "Bettiah Notified Area (Bettiah)",
-            "Bagaha (Bagaha)",
-            "Bagaha Peripheral (Bagaha)",
-            "Bagaha Notified Area (Bagaha)",
-            "Narkatiaganj (Narkatiaganj)",
-            "Narkatiaganj Peripheral (Narkatiaganj)",
-            "Chanpatia (Chanpatia)",
-            "Ramnagar (Ramnagar)",
-            "Gaunaha (Gaunaha)",
-            "Sikta (Sikta)"
-        ],
-        "anchals": [
-            "बेतिया",
-            "नौतन",
-            "बैरिया",
-            "जगदीशपुर",
-            "चनपटिया",
-            "मझौलिया",
-            "सिकटा",
-            "मैनाटांड",
-            "नरकटियागंज",
-            "लौकरिया",
-            "बगाहा 1",
-            "बगाहा 2",
-            "रामनगर",
-            "गौनाहा",
-            "ठकराहा",
-            "भितहा",
-            "पिपरसी"
-        ]
+      "offices": ["Gaya Sadar", "Sherghati"],
+      "anchals": ["गया सदर", "शेरघाटी"]
     }
-};
-
+  };
 
   window.addEventListener('DOMContentLoaded', () => {
     const ds = document.getElementById('district');
@@ -1910,17 +323,15 @@
     rs.innerHTML = ''; as.innerHTML = '';
     if (!dist || !districtMasterData[dist]) {
       rs.disabled = true; as.disabled = true;
-      rs.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
-      as.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
       return;
     }
     rs.disabled = false; as.disabled = false;
     rs.innerHTML = '<option value="">-- SRO चुनें --</option>';
-    (districtMasterData[dist].offices || []).forEach(o => {
+    districtMasterData[dist].offices.forEach(o => {
       const op = document.createElement('option'); op.value = o; op.textContent = o; rs.appendChild(op);
     });
     as.innerHTML = '<option value="">-- अंचल चुनें --</option>';
-    (districtMasterData[dist].anchals || []).forEach(a => {
+    districtMasterData[dist].anchals.forEach(a => {
       const op = document.createElement('option'); op.value = a; op.textContent = a; as.appendChild(op);
     });
   }
@@ -1936,60 +347,53 @@
     e.preventDefault();
     const btn = document.getElementById('submit-btn');
     const msg = document.getElementById('status-msg');
+    
     const oid = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
+    
     const fd = {
-      order_id: oid, document_type: selType,
+      order_id: oid,
+      document_type: selType,
       district: document.getElementById('district').value,
       registry_office: document.getElementById('registry_office').value,
       anchal_circle: document.getElementById('anchal_circle').value,
       mauza_name: document.getElementById('mauza_name').value.trim(),
-      thana_number: document.getElementById('thana_number').value.trim(),
       date_from: document.getElementById('date_from').value,
       date_to: document.getElementById('date_to').value,
       seller_name: document.getElementById('seller_name').value.trim(),
       buyer_name: document.getElementById('buyer_name').value.trim(),
       khata_number: document.getElementById('khata_number').value.trim(),
       plot_number: document.getElementById('plot_number').value.trim(),
-      deed_number: document.getElementById('deed_number').value.trim(),
       customer_name: document.getElementById('customer_name').value.trim(),
       customer_mobile: document.getElementById('customer_mobile').value.trim(),
       full_address: document.getElementById('full_address').value.trim(),
       pincode: document.getElementById('pincode').value.trim(),
       payment_method: document.getElementById('payment_method').value
     };
-    if (!/^\d{10}$/.test(fd.customer_mobile)) { alert('10 अंकों का सही मोबाइल नंबर दर्ज करें।'); return; }
-    if (!/^\d{6}$/.test(fd.pincode)) { alert('6 अंकों का सही पिन कोड दर्ज करें।'); return; }
-    btn.disabled = true; btn.textContent = '⏳ प्रोसेस हो रहा है...';
+
+    btn.disabled = true; 
+    btn.textContent = '⏳ सबमिट हो रहा है...';
+
     try {
-      const { error } = await _sb.from('kevala_orders').insert([fd]);
-      if (error) throw error;
+      // Direct Insert to Supabase
+      const { data, error } = await _sb.from('kevala_orders').insert([fd]);
+
+      if (error) {
+        console.error('Supabase Error:', error);
+        throw error;
+      }
+
       msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
-      msg.innerHTML = `✅ <strong>ऑर्डर सबमिट हो गया!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>हमारी टीम जल्द WhatsApp पर संपर्क करेगी।<br><br><a href="https://jameenseva.in/track.html" style="color:#007b6e;font-weight:700;">📦 ऑर्डर ट्रैक करें →</a>`;
+      msg.innerHTML = `✅ <strong>ऑर्डर सबमिट हो गया!</strong><br>Order ID: <strong>${oid}</strong>`;
       document.getElementById('kevalaForm').reset();
-      document.getElementById('registry_office').disabled = true;
-      document.getElementById('anchal_circle').disabled = true;
       btn.style.display = 'none';
+
     } catch(err) {
       msg.style.cssText = 'display:block;background:#fff5f5;color:#9b2c2c;border:1px solid #feb2b2;';
-      msg.innerHTML = '❌ सबमिट में समस्या। पुनः प्रयास करें।';
-      btn.disabled = false; btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
+      msg.innerHTML = `❌ Error: ${err.message || 'Supabase me data save nahi ho paya. Key/RLS Check karein.'}`;
+      btn.disabled = false;
+      btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
     }
   }
-
-  function tfaq(el) {
-    const a = el.nextElementSibling, open = a.classList.contains('open');
-    document.querySelectorAll('.fq-a.open').forEach(x => x.classList.remove('open'));
-    document.querySelectorAll('.fq-q.open').forEach(x => x.classList.remove('open'));
-    if (!open) { a.classList.add('open'); el.classList.add('open'); }
-  }
-  document.querySelectorAll('.fq-q').forEach(q => q.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){e.preventDefault();tfaq(q);} }));
-
-  function togOFM() {
-    const m = document.getElementById('ofm');
-    m.classList.toggle('open');
-    document.querySelector('.ofloat-btn').textContent = m.classList.contains('open') ? '🗂️ सेवाएं ▼' : '🗂️ सेवाएं ▲';
-  }
-  document.addEventListener('click', e => { if(!e.target.closest('.ofloat')) document.getElementById('ofm').classList.remove('open'); });
 </script>
 </body>
 </html>
