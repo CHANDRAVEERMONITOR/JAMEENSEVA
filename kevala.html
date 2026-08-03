@@ -1932,49 +1932,66 @@
     document.getElementById('type-web').classList.toggle('active', t === 'Web Copy');
   }
 
-  async function handleOrder(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submit-btn');
-    const msg = document.getElementById('status-msg');
-    const oid = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
-    const fd = {
-      order_id: oid, document_type: selType,
-      district: document.getElementById('district').value,
-      registry_office: document.getElementById('registry_office').value,
-      anchal_circle: document.getElementById('anchal_circle').value,
-      mauza_name: document.getElementById('mauza_name').value.trim(),
-      thana_number: document.getElementById('thana_number').value.trim(),
-      date_from: document.getElementById('date_from').value,
-      date_to: document.getElementById('date_to').value,
-      seller_name: document.getElementById('seller_name').value.trim(),
-      buyer_name: document.getElementById('buyer_name').value.trim(),
-      khata_number: document.getElementById('khata_number').value.trim(),
-      plot_number: document.getElementById('plot_number').value.trim(),
-      deed_number: document.getElementById('deed_number').value.trim(),
-      customer_name: document.getElementById('customer_name').value.trim(),
-      customer_mobile: document.getElementById('customer_mobile').value.trim(),
-      full_address: document.getElementById('full_address').value.trim(),
-      pincode: document.getElementById('pincode').value.trim(),
-      payment_method: document.getElementById('payment_method').value
-    };
-    if (!/^\d{10}$/.test(fd.customer_mobile)) { alert('10 अंकों का सही मोबाइल नंबर दर्ज करें।'); return; }
-    if (!/^\d{6}$/.test(fd.pincode)) { alert('6 अंकों का सही पिन कोड दर्ज करें।'); return; }
-    btn.disabled = true; btn.textContent = '⏳ प्रोसेस हो रहा है...';
-    try {
-      const { error } = await _sb.from('kevala_orders').insert([fd]);
-      if (error) throw error;
-      msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
-      msg.innerHTML = `✅ <strong>ऑर्डर सबमिट हो गया!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>हमारी टीम जल्द WhatsApp पर संपर्क करेगी।<br><br><a href="https://jameenseva.in/track.html" style="color:#007b6e;font-weight:700;">📦 ऑर्डर ट्रैक करें →</a>`;
-      document.getElementById('kevalaForm').reset();
-      document.getElementById('registry_office').disabled = true;
-      document.getElementById('anchal_circle').disabled = true;
-      btn.style.display = 'none';
-    } catch(err) {
-      msg.style.cssText = 'display:block;background:#fff5f5;color:#9b2c2c;border:1px solid #feb2b2;';
-      msg.innerHTML = '❌ सबमिट में समस्या। पुनः प्रयास करें।';
-      btn.disabled = false; btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
+ async function handleOrder(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const msg = document.getElementById('status-msg');
+  const oid = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
+
+  // Date Values हैंडलिंग (खाली स्ट्रिंग की जगह null जाएगा)
+  const dFrom = document.getElementById('date_from').value;
+  const dTo = document.getElementById('date_to').value;
+
+  const fd = {
+    order_id: oid,
+    document_type: selType,
+    district: document.getElementById('district').value,
+    registry_office: document.getElementById('registry_office').value,
+    anchal_circle: document.getElementById('anchal_circle').value,
+    mauza: document.getElementById('mauza_name').value.trim() || null, // FIX: 'mauza' कॉलम का नाम
+    thana_number: document.getElementById('thana_number').value.trim() || null,
+    date_from: dFrom ? dFrom : null, // FIX: खाली तारीख पर null जाएगा
+    date_to: dTo ? dTo : null,       // FIX: खाली तारीख पर null जाएगा
+    seller_name: document.getElementById('seller_name').value.trim() || null,
+    buyer_name: document.getElementById('buyer_name').value.trim() || null,
+    khata_number: document.getElementById('khata_number').value.trim() || null,
+    plot_number: document.getElementById('plot_number').value.trim() || null,
+    deed_number: document.getElementById('deed_number').value.trim() || null,
+    customer_name: document.getElementById('customer_name').value.trim(),
+    customer_mobile: document.getElementById('customer_mobile').value.trim(),
+    full_address: document.getElementById('full_address').value.trim(),
+    pincode: document.getElementById('pincode').value.trim(),
+    payment_method: document.getElementById('payment_method').value
+  };
+
+  if (!/^\d{10}$/.test(fd.customer_mobile)) { alert('10 अंकों का सही मोबाइल नंबर दर्ज करें।'); return; }
+  if (!/^\d{6}$/.test(fd.pincode)) { alert('6 अंकों का सही पिन कोड दर्ज करें।'); return; }
+
+  btn.disabled = true; 
+  btn.textContent = '⏳ प्रोसेस हो रहा है...';
+
+  try {
+    const { error } = await _sb.from('kevala_orders').insert([fd]);
+    if (error) {
+      console.error("Supabase Error Details:", error); // असल एरर कंसोल में दिखेगा
+      throw error;
     }
+    
+    msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
+    msg.innerHTML = `✅ <strong>ऑर्डर सबमिट हो गया!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>हमारी टीम जल्द WhatsApp पर संपर्क करेगी।<br><br><a href="https://jameenseva.in/track.html" style="color:#007b6e;font-weight:700;">📦 ऑर्डर ट्रैक करें →</a>`;
+    
+    document.getElementById('kevalaForm').reset();
+    document.getElementById('registry_office').disabled = true;
+    document.getElementById('anchal_circle').disabled = true;
+    btn.style.display = 'none';
+
+  } catch(err) {
+    msg.style.cssText = 'display:block;background:#fff5f5;color:#9b2c2c;border:1px solid #feb2b2;';
+    msg.innerHTML = `❌ सबमिट में समस्या: ${err.message || 'पुनः प्रयास करें।'}`;
+    btn.disabled = false; 
+    btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
   }
+}
 
   function tfaq(el) {
     const a = el.nextElementSibling, open = a.classList.contains('open');
