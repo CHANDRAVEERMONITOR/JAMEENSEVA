@@ -36,6 +36,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -415,6 +416,33 @@
     /* notice */
     .notice { background: var(--amber-l); border-left: 4px solid var(--amber); border-radius: 8px; padding: 15px 18px; margin: 24px 0; font-size: 14px; }
     .notice strong { color: var(--amber); }
+
+    /* ─── ₹49 ADVANCE SERVICE CHARGE NOTICE ─── */
+    .adv-notice {
+      background: var(--red-l);
+      border: 1.5px dashed var(--red);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 16px 0 20px;
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .adv-notice strong { color: var(--red); }
+    .adv-notice ul { margin: 6px 0 0 18px; padding: 0; }
+    .adv-notice li { margin-bottom: 3px; }
+    .adv-inline {
+      display: inline-block;
+      background: var(--amber-l);
+      border: 1px solid var(--amber);
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 11.5px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-top: 6px;
+    }
+    .type-card.hidden-type { display: none !important; }
   </style>
 </head>
 <body>
@@ -456,6 +484,182 @@
 </header>
 
 <main class="wrap">
+
+  <!-- ══════════════ ORDER FORM ══════════════ -->
+  <div class="form-outer" id="order-form">
+    <div class="form-header">
+      <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
+      <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
+    </div>
+    <div class="form-body">
+      <form id="kevalaForm" onsubmit="handleOrder(event)">
+
+        <!-- Type -->
+        <div class="form-section">
+          <div class="fs-title">📄 STEP 1 — केवाला का वर्ष और दस्तावेज़ का प्रकार चुनें</div>
+
+          <div class="fg" style="margin-bottom:16px;">
+            <label>केवाला / रजिस्ट्रेशन का वर्ष (Deed Year) *</label>
+            <select id="deed_year" onchange="toggleCopyTypeByYear()" required>
+              <option value="">-- वर्ष चुनें --</option>
+            </select>
+            <span class="hint">ध्यान दें: 2006 से पहले (1900–2005) के केवाला के लिए केवल Web / Ordinary Copy (साधारण प्रति) उपलब्ध है, Certified Copy नहीं।</span>
+          </div>
+
+          <div class="type-grid">
+            <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
+              <input type="radio" name="doc_type" value="Certified Copy" checked/>
+              <div class="tc-body">
+                <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
+                <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
+              </div>
+            </label>
+            <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
+              <input type="radio" name="doc_type" value="Web Copy"/>
+              <div class="tc-body">
+                <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
+                <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
+              </div>
+            </label>
+          </div>
+          <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
+            ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="form-section">
+          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>जिला (District) *</label>
+              <select id="district" onchange="onDistrictChange()" required>
+                <option value="">-- जिला चुनें --</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>रजिस्ट्री ऑफिस / SRO *</label>
+              <select id="registry_office" required disabled>
+                <option value="">-- पहले जिला चुनें --</option>
+              </select>
+              <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
+            </div>
+            <div class="fg">
+              <label>अंचल / ब्लॉक (Anchal) *</label>
+              <select id="anchal_circle" required disabled>
+                <option value="">-- पहले जिला चुनें --</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>मौजा का नाम (Mauza)</label>
+              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम"/>
+            </div>
+            <div class="fg full">
+              <label>थाना नंबर (Thana No.)</label>
+              <input type="text" id="thana_number" placeholder="थाना नंबर (यदि ज्ञात हो)"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Details -->
+        <div class="form-section">
+          <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>कब से (From Date) *</label>
+              <input type="date" id="date_from" required/>
+            </div>
+            <div class="fg">
+              <label>कब तक (To Date) *</label>
+              <input type="date" id="date_to" required/>
+            </div>
+            <div class="fg">
+              <label>बेचने वाले का नाम (Seller / Daata)</label>
+              <input type="text" id="seller_name" placeholder="दाता का नाम"/>
+            </div>
+            <div class="fg">
+              <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
+              <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
+            </div>
+            <div class="fg">
+              <label>खाता नंबर (Khata No.)</label>
+              <input type="text" id="khata_number" placeholder="खाता संख्या"/>
+            </div>
+            <div class="fg">
+              <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
+              <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
+            </div>
+            <div class="fg full">
+              <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
+              <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Personal -->
+        <div class="form-section">
+          <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
+          <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>आपका पूरा नाम *</label>
+              <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
+            </div>
+            <div class="fg">
+              <label>मोबाइल नंबर *</label>
+              <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
+            </div>
+            <div class="fg full">
+              <label>पूरा पता (डिलीवरी के लिए) *</label>
+              <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
+            </div>
+            <div class="fg">
+              <label>पिन कोड *</label>
+              <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
+            </div>
+            <div class="fg">
+              <label>भुगतान विधि</label>
+              <select id="payment_method">
+                <option value="COD">🚚 Cash On Delivery (COD)</option>
+                <option value="Online">💳 Online Payment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="adv-notice">
+            <strong>💰 ₹49 Advance Service Charge — अनिवार्य नियम:</strong>
+            <p style="margin-top:4px;">ऑर्डर कन्फर्म करने के लिए हमारी टीम WhatsApp पर <strong>₹49 का Advance Service Charge</strong> (खोज व प्रोसेसिंग शुल्क) लेगी। यह राशि आपके फाइनल दस्तावेज़ शुल्क में समायोजित (adjust) कर दी जाती है।</p>
+            <ul>
+              <li>₹49 Advance केवल <strong>सीरियस ग्राहकों</strong> से लिया जाता है, ताकि फर्जी/गलत ऑर्डर न बनें।</li>
+              <li>Advance प्राप्त होने के बाद ही SRO ऑफिस में केवाला की खोज शुरू होगी।</li>
+              <li>Certified Copy पर सरकारी शुल्क अलग से लागू होगा (COD पर वसूला जाएगा)।</li>
+              <li>Advance किसी कारणवश केवाला न मिलने की स्थिति में वापस (refund) किया जाएगा।</li>
+            </ul>
+            <span class="adv-inline">⚠️ फॉर्म सबमिट करने का अर्थ है कि आप ₹49 Advance नियम से सहमत हैं</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
+      </form>
+      <div id="status-msg"></div>
+
+      <!-- ══════════════ PAYMENT AREA (Razorpay) — डेटा सेव होने के बाद दिखेगा ══════════════ -->
+      <div id="paymentArea" style="display:none;background:var(--white);border:1.5px solid var(--teal);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:32px 20px;text-align:center;margin:24px 0;">
+        <i class="fas fa-check-circle" style="font-size:50px;color:var(--teal)"></i>
+        <h3 style="margin-top:14px;color:var(--navy);">आपका ऑर्डर डेटा सेव हो गया है!</h3>
+        <p id="payment-oid-note" style="color:var(--ink-soft);margin-top:6px;font-weight:600;"></p>
+        <p style="color:var(--red);margin-top:10px;font-weight:700;">⚠️ ऑर्डर तभी कन्फर्म होगा जब ₹49 Advance Service Charge का भुगतान हो जाएगा।</p>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:6px;">नीचे दिए बटन से ₹49 का भुगतान करें — भुगतान होते ही हमारी टीम आपके केवाला की खोज WhatsApp पर कन्फर्म करके शुरू कर देगी।</p>
+        <br>
+        <form>
+          <script src="https://checkout.razorpay.com/v1/payment-button.js"
+            data-payment_button_id="pl_SdQsZaGPmkik6H" async></script>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- ══════════════ WHAT IS KEVALA ══════════════ -->
   <h2 class="sec-head" id="kya-hai">केवाला क्या होता है?</h2>
@@ -595,145 +799,9 @@
     </div>
   </div>
 
-  <!-- ══════════════ ORDER FORM ══════════════ -->
-  <div class="form-outer" id="order-form">
-    <div class="form-header">
-      <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
-      <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
-    </div>
-    <div class="form-body">
-      <form id="kevalaForm" onsubmit="handleOrder(event)">
-
-        <!-- Type -->
-        <div class="form-section">
-          <div class="fs-title">📄 STEP 1 — दस्तावेज़ का प्रकार चुनें</div>
-          <div class="type-grid">
-            <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
-              <input type="radio" name="doc_type" value="Certified Copy" checked/>
-              <div class="tc-body">
-                <h4>📜 Certified Copy</h4>
-                <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य</p>
-              </div>
-            </label>
-            <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
-              <input type="radio" name="doc_type" value="Web Copy"/>
-              <div class="tc-body">
-                <h4>💻 Web Copy</h4>
-                <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग</p>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- Location -->
-        <div class="form-section">
-          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>जिला (District) *</label>
-              <select id="district" onchange="onDistrictChange()" required>
-                <option value="">-- जिला चुनें --</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>रजिस्ट्री ऑफिस / SRO *</label>
-              <select id="registry_office" required disabled>
-                <option value="">-- पहले जिला चुनें --</option>
-              </select>
-              <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
-            </div>
-            <div class="fg">
-              <label>अंचल / ब्लॉक (Anchal) *</label>
-              <select id="anchal_circle" required disabled>
-                <option value="">-- पहले जिला चुनें --</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>मौजा का नाम (Mauza)</label>
-              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम"/>
-            </div>
-            <div class="fg full">
-              <label>थाना नंबर (Thana No.)</label>
-              <input type="text" id="thana_number" placeholder="थाना नंबर (यदि ज्ञात हो)"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- Search Details -->
-        <div class="form-section">
-          <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>कब से (From Date) *</label>
-              <input type="date" id="date_from" required/>
-            </div>
-            <div class="fg">
-              <label>कब तक (To Date) *</label>
-              <input type="date" id="date_to" required/>
-            </div>
-            <div class="fg">
-              <label>बेचने वाले का नाम (Seller / Daata)</label>
-              <input type="text" id="seller_name" placeholder="दाता का नाम"/>
-            </div>
-            <div class="fg">
-              <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
-              <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
-            </div>
-            <div class="fg">
-              <label>खाता नंबर (Khata No.)</label>
-              <input type="text" id="khata_number" placeholder="खाता संख्या"/>
-            </div>
-            <div class="fg">
-              <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
-              <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
-            </div>
-            <div class="fg full">
-              <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
-              <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
-            </div>
-          </div>
-        </div>
-
-        <!-- Personal -->
-        <div class="form-section">
-          <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
-          <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>आपका पूरा नाम *</label>
-              <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
-            </div>
-            <div class="fg">
-              <label>मोबाइल नंबर *</label>
-              <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
-            </div>
-            <div class="fg full">
-              <label>पूरा पता (डिलीवरी के लिए) *</label>
-              <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
-            </div>
-            <div class="fg">
-              <label>पिन कोड *</label>
-              <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
-            </div>
-            <div class="fg">
-              <label>भुगतान विधि</label>
-              <select id="payment_method">
-                <option value="COD">🚚 Cash On Delivery (COD)</option>
-                <option value="Online">💳 Online Payment</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
-      </form>
-      <div id="status-msg"></div>
-    </div>
-  </div>
-
   <!-- NOTICE -->
   <div class="notice">
-    <strong>⚠️ नोट:</strong> JameenSeva.in एक निजी सेवा है। हम सरकारी निबंधन कार्यालयों से दस्तावेज प्राप्त कराते हैं। प्रमाणित नकल के लिए सरकारी शुल्क अलग से लागू होता है। किसी भी सहायता के लिए WhatsApp: <a href="https://wa.me/919142075859" style="color:var(--amber);font-weight:700;">+91-9142075859</a>
+    <strong>⚠️ नोट:</strong> JameenSeva.in एक निजी सेवा है। हम सरकारी निबंधन कार्यालयों से दस्तावेज प्राप्त कराते हैं। प्रमाणित नकल के लिए सरकारी शुल्क अलग से लागू होता है। <strong>ऑर्डर कन्फर्म करने हेतु ₹49 Advance Service Charge अनिवार्य है</strong> — यह केवल सीरियस ग्राहकों की पुष्टि के लिए लिया जाता है और फाइनल शुल्क में समायोजित होता है। किसी भी सहायता के लिए WhatsApp: <a href="https://wa.me/919142075859" style="color:var(--amber);font-weight:700;">+91-9142075859</a>
   </div>
 
   <!-- INTERNAL LINKS -->
@@ -1901,7 +1969,46 @@
       o.value = d; o.textContent = d;
       ds.appendChild(o);
     });
+
+    // ── Deed Year ड्रॉपडाउन भरें (वर्तमान वर्ष से 1900 तक) ──
+    const ys = document.getElementById('deed_year');
+    const curYear = new Date().getFullYear();
+    for (let y = curYear; y >= 1900; y--) {
+      const o = document.createElement('option');
+      o.value = y; o.textContent = y;
+      ys.appendChild(o);
+    }
   });
+
+  // ── 2006 Dynamic Copy Type Logic ──
+  // 2006 या उसके बाद (2006–Present) → Certified Copy विकल्प दिखेगा
+  // 2006 से पहले (1900–2005)        → Certified Copy छिप जाएगा, केवल Web/Ordinary Copy उपलब्ध रहेगी
+  function toggleCopyTypeByYear() {
+    const yearVal = document.getElementById('deed_year').value;
+    const certCard = document.getElementById('type-cert');
+    const lockNote = document.getElementById('year-lock-note');
+
+    if (!yearVal) {
+      // कोई वर्ष चयनित नहीं — डिफ़ॉल्ट रूप से दोनों विकल्प दिखाएं
+      certCard.classList.remove('hidden-type');
+      lockNote.style.display = 'none';
+      return;
+    }
+
+    const year = parseInt(yearVal, 10);
+
+    if (year < 2006) {
+      // Certified Copy छुपाएं, अनिवार्य रूप से Web/Ordinary Copy चुनें
+      certCard.classList.add('hidden-type');
+      certCard.querySelector('input[type="radio"]').checked = false;
+      lockNote.style.display = 'block';
+      selectDocType('Web Copy');
+    } else {
+      // Certified Copy फिर से उपलब्ध कराएं
+      certCard.classList.remove('hidden-type');
+      lockNote.style.display = 'none';
+    }
+  }
 
   function onDistrictChange() {
     const dist = document.getElementById('district').value;
@@ -1978,11 +2085,12 @@
     }
     
     msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
-    msg.innerHTML = `✅ <strong>ऑर्डर सबमिट हो गया!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>हमारी टीम जल्द WhatsApp पर संपर्क करेगी।<br><br><a href="https://jameenseva.in/track.html" style="color:#007b6e;font-weight:700;">📦 ऑर्डर ट्रैक करें →</a>`;
-    
-    document.getElementById('kevalaForm').reset();
-    document.getElementById('registry_office').disabled = true;
-    document.getElementById('anchal_circle').disabled = true;
+    msg.innerHTML = `✅ <strong>आपका डेटा सेव हो गया है!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>ऑर्डर को कन्फर्म करने के लिए नीचे ₹49 Advance Service Charge का भुगतान करें।`;
+
+    // ── फॉर्म बंद करें और भुगतान (Payment Gate) दिखाएं ──
+    document.getElementById('kevalaForm').style.display = 'none';
+    document.getElementById('payment-oid-note').textContent = `Order ID: ${oid}`;
+    document.getElementById('paymentArea').style.display = 'block';
     btn.style.display = 'none';
 
   } catch(err) {
