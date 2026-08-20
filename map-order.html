@@ -3,427 +3,549 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>भू-नक्शा होम डिलीवरी ऑर्डर | JameenSeva.in</title>
-
-<!-- Supabase JS client -->
+<title>भू-नक्शा डिलीवरी सेवा | JameenSeva</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Hind:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --brand:#0f5c3e;       /* deep land-green */
-    --brand-dark:#0a3f2b;
-    --accent:#c8621f;      /* earthen terracotta accent */
-    --bg:#f6f4ee;
-    --card:#ffffff;
-    --line:#e2ddd0;
-    --text:#232019;
-    --muted:#6b6558;
-    --danger:#b91c1c;
-    --danger-bg:#fdecec;
-    font-family:'Noto Sans Devanagari','Segoe UI',Arial,sans-serif;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    padding-bottom:60px;
-  }
-  header{
-    background:var(--brand); color:#fff; padding:15px 20px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  header h1{ font-size:18px; margin:0; letter-spacing:0.3px;}
-  header .track-header-btn{ 
-    font-size:13px; color:#fff; background:var(--accent); text-decoration:none; 
-    padding:6px 12px; border-radius:5px; font-weight:700;
-  }
-  main{ max-width:640px; margin:20px auto; padding:0 16px;}
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:10px;
-    padding:20px; margin-bottom:18px;
-  }
-  .card h2{ font-size:16px; margin:0 0 14px 0; color:var(--brand-dark); border-bottom:1px solid var(--line); padding-bottom:8px;}
-  label{ display:block; font-size:13px; font-weight:600; margin:10px 0 4px;}
-  input, select, textarea{
-    width:100%; padding:10px 12px; border:1px solid #c9c3b3; border-radius:6px;
-    font-size:14px; background:#fffef9; color:var(--text);
-  }
-  input:focus, select:focus, textarea:focus{ outline:2px solid var(--brand); border-color:var(--brand);}
-  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  .row3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;}
-  @media(max-width:520px){ 
-    .row2{ grid-template-columns:1fr;} 
-    .row3{ grid-template-columns:1fr;}
+  :root {
+    --ink:        #1c2b3a;
+    --indigo:     #1e3a5f;
+    --indigo-deep:#122840;
+    --amber:      #d9840c;
+    --amber-soft: #f7e0bd;
+    --paper:      #f6f3ec;
+    --card:       #ffffff;
+    --line:       #e3ddcf;
+    --green:      #2f7d5c;
+    --red:        #b3392c;
+    --muted:      #6b7686;
+
+    --font-display: 'Poppins', 'Hind', sans-serif;
+    --font-body:    'Hind', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
   }
 
-  .sheet-card{
-    background:#faf9f4; border:1px solid var(--line); padding:12px; 
-    border-radius:8px; margin-bottom:12px; position:relative;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    padding-bottom: 60px;
+    -webkit-font-smoothing: antialiased;
   }
-  .sheet-header{
-    display:flex; justify-content:space-between; align-items:center; 
-    margin-bottom:8px; font-weight:700; font-size:13.5px; color:var(--brand-dark);
-  }
-  .remove-sheet{
-    background:var(--danger-bg); color:var(--danger); border:1px solid #f3caca;
-    border-radius:4px; padding:4px 8px; cursor:pointer; font-size:12px; font-weight:600;
-  }
-  #addSheetBtn{
-    width:100%; padding:10px; border:2px dashed var(--brand); background:#eef7f2;
-    color:var(--brand-dark); border-radius:8px; font-weight:700; cursor:pointer; font-size:14px;
-  }
-  #addSheetBtn:hover{ background:#e2f1e8; }
 
-  .price-table{ width:100%; border-collapse:collapse; margin-top:14px; font-size:14px;}
-  .price-table td{ padding:7px 0; border-bottom:1px dashed var(--line);}
-  .price-table td:last-child{ text-align:right; font-weight:600;}
-  .price-table tr.total td{ font-size:17px; color:var(--brand-dark); font-weight:800; border-bottom:none; padding-top:12px;}
+  /* ============ HEADER ============ */
+  .site-header {
+    background: linear-gradient(120deg, var(--indigo-deep), var(--indigo));
+    color: #fff;
+    padding: 16px 20px;
+  }
+  .header-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: var(--amber);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-weight: 800; font-size: 16px; color: var(--indigo-deep);
+  }
+  .brand-text h1 { font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: 0.2px; }
+  .brand-text span { display: block; font-size: 11px; opacity: 0.75; margin-top: 1px; }
+  .track-link {
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; text-decoration: none; padding: 8px 14px; border-radius: 20px;
+    font-size: 12.5px; font-weight: 600; white-space: nowrap;
+  }
+  .track-link:hover { background: rgba(255,255,255,0.18); }
 
-  #submitBtn{
-    width:100%; padding:14px; border:none; border-radius:8px; background:var(--accent);
-    color:#fff; font-size:16px; font-weight:800; cursor:pointer; margin-top:6px;
-    letter-spacing:0.3px;
+  .disclaimer-bar {
+    background: var(--amber-soft); color: #6b4a12;
+    text-align: center; font-size: 12px; padding: 7px 14px; font-weight: 600;
+    border-bottom: 1px solid #e9c98a;
   }
-  #submitBtn:disabled{ background:#c9bfae; cursor:not-allowed;}
-  .note{ font-size:12px; color:var(--muted); margin-top:8px; line-height:1.5;}
-  .error{ color:var(--danger); font-size:13px; margin-top:6px; display:none;}
 
-  /* ===== Payment pending overlay ===== */
-  #payOverlay{
-    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7);
-    z-index:9999; align-items:center; justify-content:center; padding:16px;
+  /* ============ STEP TRACKER ============ */
+  .step-tracker {
+    max-width: 1080px; margin: 22px auto 0; padding: 0 16px;
+    display: flex; align-items: center; gap: 6px;
   }
-  #payOverlay .box{
-    background:#fff; max-width:420px; width:100%; border-radius:12px; overflow:hidden;
-    box-shadow:0 10px 40px rgba(0,0,0,0.4);
+  .step-item { display: flex; align-items: center; gap: 8px; flex: 1; }
+  .step-dot {
+    width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+    background: var(--card); border: 2px solid var(--line); color: var(--muted);
+    transition: all 0.25s ease;
   }
-  #payOverlay .alert-head{
-    background:var(--danger); color:#fff; padding:16px 18px; font-weight:800; font-size:16px;
-    text-align:center;
+  .step-item.active .step-dot { border-color: var(--amber); background: var(--amber); color: #fff; }
+  .step-item.done .step-dot { border-color: var(--green); background: var(--green); color: #fff; }
+  .step-label { font-size: 12.5px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  .step-item.active .step-label, .step-item.done .step-label { color: var(--ink); }
+  .step-line { height: 2px; flex: 1; background: var(--line); margin: 0 4px; }
+  .step-item.done + .step-line { background: var(--green); }
+  @media (max-width: 640px) { .step-label { display: none; } }
+
+  /* ============ LAYOUT ============ */
+  .wrap { max-width: 1080px; margin: 24px auto; padding: 0 16px; display: grid; gap: 20px; }
+
+  .card {
+    background: var(--card); border-radius: 12px; border: 1px solid var(--line);
+    box-shadow: 0 1px 3px rgba(28,43,58,0.05);
   }
-  #payOverlay .alert-body{ padding:20px; text-align:center;}
-  #payOverlay .amount{ font-size:28px; font-weight:900; color:var(--danger); margin:10px 0;}
-  #payOverlay .order-id{ font-size:13px; color:var(--muted); margin-bottom:14px;}
-  #payOverlay .pay-btn{
-    display:block; width:100%; padding:13px; background:var(--brand); color:#fff;
-    border:none; border-radius:8px; font-size:15px; font-weight:800; cursor:pointer; margin-top:8px;
-    text-decoration:none;
+  .card-head {
+    padding: 16px 20px; border-bottom: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
   }
-  #payOverlay .track-link{
-    display:block; margin-top:14px; font-size:13px; color:var(--brand-dark); text-decoration:underline; font-weight:600;
+  .card-head h2 {
+    font-family: var(--font-display); font-size: 15.5px; font-weight: 700; color: var(--indigo-deep);
+    display: flex; align-items: center; gap: 8px;
   }
-  #payOverlay .warn-text{ font-size:13px; color:var(--danger); font-weight:700; margin-top:10px;}
+  .card-head .badge {
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--muted);
+    background: var(--paper); padding: 3px 9px; border-radius: 12px; border: 1px solid var(--line);
+  }
+  .card-body { padding: 20px; }
+
+  /* ============ SEARCH FORM ============ */
+  .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 12px; font-weight: 700; color: var(--indigo); letter-spacing: 0.2px;
+    text-transform: uppercase;
+  }
+  .field select, .field input {
+    font-family: var(--font-body); font-size: 14.5px; color: var(--ink);
+    padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px;
+    background: var(--card); appearance: none; -webkit-appearance: none;
+    transition: border-color 0.15s ease;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7686' stroke-width='1.6' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px;
+  }
+  .field select:focus, .field input:focus {
+    outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(217,132,12,0.14);
+  }
+  .field-hint { font-size: 11.5px; color: var(--muted); }
+
+  .btn {
+    font-family: var(--font-body); font-weight: 700; font-size: 14.5px;
+    border: none; border-radius: 8px; padding: 12px 18px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.1s ease, box-shadow 0.15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--indigo); color: #fff; width: 100%; margin-top: 6px; }
+  .btn-primary:hover { background: var(--indigo-deep); }
+  .btn-amber { background: var(--amber); color: #fff; }
+  .btn-amber:hover { box-shadow: 0 4px 10px rgba(217,132,12,0.3); }
+  .btn-ghost {
+    background: transparent; color: var(--red); border: 1.5px solid #f0d4cf;
+    padding: 6px 12px; font-size: 12.5px;
+  }
+  .btn-ghost:hover { background: #fdf2f0; }
+  .btn-submit {
+    background: var(--green); color: #fff; width: 100%; padding: 15px; font-size: 16px;
+  }
+  .btn-submit:hover { box-shadow: 0 6px 16px rgba(47,125,92,0.3); }
+  .btn-submit:disabled { background: #b9c2ba; cursor: not-allowed; box-shadow: none; }
+
+  /* ============ CART ============ */
+  .cart-list { display: flex; flex-direction: column; gap: 10px; }
+  .cart-row {
+    display: grid; grid-template-columns: auto 1fr auto auto; gap: 14px; align-items: center;
+    padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper);
+  }
+  .cart-icon {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--amber-soft);
+    display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .cart-meta strong { font-size: 13.5px; display: block; }
+  .cart-meta span { font-size: 12px; color: var(--muted); }
+  .sheet-select {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    border: 1.5px solid var(--line); border-radius: 6px; padding: 5px 8px; background: #fff;
+  }
+  .empty-state {
+    text-align: center; padding: 34px 20px; color: var(--muted);
+  }
+  .empty-state .icon { font-size: 32px; margin-bottom: 8px; opacity: 0.6; }
+  .empty-state p { font-size: 13.5px; max-width: 320px; margin: 0 auto; line-height: 1.5; }
+
+  .limit-note {
+    font-size: 12px; color: var(--muted); margin-top: 10px; text-align: center;
+  }
+
+  /* ============ CHECKOUT ============ */
+  .field-grid.two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 560px) { .field-grid, .field-grid.two { grid-template-columns: 1fr; } }
+
+  .summary {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; margin-top: 16px; font-size: 13.5px;
+  }
+  .summary-row { display: flex; justify-content: space-between; padding: 4px 0; color: var(--muted); }
+  .summary-row.total {
+    border-top: 1.5px dashed var(--line); margin-top: 8px; padding-top: 10px;
+    font-size: 16px; font-weight: 800; color: var(--indigo-deep);
+  }
+  .summary-row.total span:last-child { color: var(--red); font-family: var(--font-mono); }
+
+  /* ============ PAYMENT MODAL ============ */
+  #payOverlay {
+    display: none; position: fixed; inset: 0; background: rgba(18,40,64,0.7);
+    z-index: 999; align-items: center; justify-content: center; padding: 18px;
+    backdrop-filter: blur(2px);
+  }
+  .pay-card {
+    background: #fff; max-width: 380px; width: 100%; border-radius: 14px;
+    overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  .pay-head {
+    background: var(--indigo-deep); color: #fff; padding: 16px 20px;
+    display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14px;
+  }
+  .seal {
+    width: 44px; height: 44px; border-radius: 50%; border: 2.5px dashed var(--amber);
+    display: flex; align-items: center; justify-content: center; margin: 18px auto 4px;
+    color: var(--amber); font-size: 20px;
+  }
+  .pay-body { padding: 6px 22px 22px; text-align: center; }
+  .pay-body p { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+  .pay-amt { font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--indigo-deep); margin: 8px 0; }
+  .pay-oid { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .pay-oid b { font-family: var(--font-mono); color: var(--ink); }
+  .btn-upi {
+    display: block; background: var(--green); color: #fff; text-decoration: none;
+    padding: 13px; font-weight: 700; border-radius: 8px; font-size: 14.5px;
+  }
+  .btn-close-modal {
+    display: block; margin: 10px auto 0; background: none; border: none;
+    color: var(--muted); font-size: 12.5px; text-decoration: underline; cursor: pointer;
+  }
+
+  .toast {
+    position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%) translateY(10px);
+    background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 8px;
+    font-size: 13px; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 1000;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<header>
-  <div>
-    <h1>JameenSeva.in</h1>
-    <span style="font-size:12px; opacity:0.85;">भू-नक्शा होम डिलीवरी</span>
+<div class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">JS</div>
+      <div class="brand-text">
+        <h1>JameenSeva</h1>
+        <span>भू-अभिलेख नक़्शा होम डिलीवरी सुविधा</span>
+      </div>
+    </div>
+    <a href="track-map.html" class="track-link">📦 अपना ऑर्डर ट्रैक करें</a>
   </div>
-  <!-- Internal link to track status -->
-  <a href="track-map.html" class="track-header-btn">📦 स्टेटस ट्रैक करें</a>
-</header>
+</div>
+<div class="disclaimer-bar">
+  ⓘ यह एक निजी सहायता सेवा है — राजस्व एवं भूमि सुधार विभाग, बिहार सरकार की आधिकारिक वेबसाइट नहीं है
+</div>
 
-<main>
+<!-- STEP TRACKER -->
+<div class="step-tracker" id="stepTracker">
+  <div class="step-item active" data-step="1">
+    <div class="step-dot">1</div><div class="step-label">नक्शा खोजें</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" data-step="2">
+    <div class="step-dot">2</div><div class="step-label">कार्ट जांचें</div>
+  </div>
+  <div class="step-line"></div>
+  <div class="step-item" data-step="3">
+    <div class="step-dot">3</div><div class="step-label">डिलीवरी व भुगतान</div>
+  </div>
+</div>
 
-  <div class="card">
-    <h2>1. जिला एवं अंचल विवरण</h2>
-    <div class="row2">
-      <div>
-        <label>जिला (District) *</label>
-        <select id="district"></select>
+<div class="wrap">
+
+  <!-- SEARCH CARD -->
+  <div class="card" id="searchCard">
+    <div class="card-head">
+      <h2>🔍 नक्शा खोजें</h2>
+      <span class="badge">अधिकतम 5 शीट / ऑर्डर</span>
+    </div>
+    <div class="card-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>क्षेत्र प्रकार</label>
+          <select id="area_type">
+            <option value="Rural">Rural (ग्रामीण)</option>
+            <option value="Urban">Urban (शहरी)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>नक्शा प्रकार</label>
+          <select id="map_type">
+            <option value="CS">CS — Cadastral Survey</option>
+            <option value="RS">RS — Revisional Survey</option>
+            <option value="Revision">Revision / Municipal</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>जिला</label>
+          <select id="district_select"></select>
+        </div>
+        <div class="field">
+          <label>थाना / ब्लॉक</label>
+          <input type="text" id="thana_input" placeholder="जैसे: दरभंगा">
+        </div>
+        <div class="field full">
+          <label>मौजा / वार्ड</label>
+          <input type="text" id="mauza_input" placeholder="जैसे: बहेरी (87)">
+          <span class="field-hint">मौजा का नाम और कोड सही-सही भरें, जैसा भूलेख रिकॉर्ड में दर्ज है</span>
+        </div>
       </div>
-      <div>
-        <label>ब्लॉक / अंचल (Block) *</label>
-        <select id="block"><option value="">पहले जिला चुनें</option></select>
-      </div>
+      <button type="button" class="btn btn-primary" onclick="searchAndAddRow()">नक्शा खोजें और कार्ट में जोड़ें →</button>
     </div>
   </div>
 
-  <div class="card">
-    <h2>2. नक्शा / चादर (Sheet) विवरण</h2>
-    <p style="font-size:12px; color:var(--muted); margin-top:-8px; margin-bottom:12px;">जितने नक़्शे मंगवाने हैं, सभी का मौजा, थाना नं. एवं शीट भरें:</p>
-    
-    <div id="sheetsList"></div>
-    <button type="button" id="addSheetBtn">+ Add More Sheet / और नक़्शा जोड़ें</button>
-  </div>
-
-  <div class="card">
-    <h2>3. ग्राहक एवं डिलीवरी पता</h2>
-    <div class="row2">
-      <div>
-        <label>पूरा नाम *</label>
-        <input type="text" id="customer_name" placeholder="अपना पूरा नाम लिखें">
-      </div>
-      <div>
-        <label>मोबाइल नंबर *</label>
-        <input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर">
-      </div>
+  <!-- CART CARD -->
+  <div class="card" id="cartCard">
+    <div class="card-head">
+      <h2>🗂️ चयनित नक्शे</h2>
+      <span class="badge" id="cartBadge">0 आइटम</span>
     </div>
-
-    <label>पूरा डिलीवरी पता (Delivery Address) *</label>
-    <textarea id="full_address" rows="3" placeholder="घर/गाँव/मोहल्ला, लैंडमार्क, डाकघर सही-सही लिखें..."></textarea>
-
-    <label>पिन कोड (Pincode) *</label>
-    <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड">
-
-    <div class="error" id="formError"></div>
+    <div class="card-body">
+      <div class="cart-list" id="cartTableBody"></div>
+      <div class="empty-state" id="emptyMsg">
+        <div class="icon">🗺️</div>
+        <p>कोई नक्शा नहीं जोड़ा गया है। ऊपर फ़ॉर्म भरकर "नक्शा खोजें" दबाएँ।</p>
+      </div>
+      <div class="limit-note" id="limitNote" style="display:none;">अधिकतम 5 शीट प्रति ऑर्डर की सीमा पूरी हो गई है</div>
+    </div>
   </div>
 
-  <div class="card">
-    <h2>4. मूल्य विवरण (Price Details)</h2>
-    <table class="price-table">
-      <tr><td>नक्शा शुल्क (<span id="sheetCountLabel">1</span> × ₹200)</td><td>₹<span id="mapCostLabel">200</span></td></tr>
-      <tr><td>सेफ वॉटरप्रूफ कंटेनर (एकमुश्त)</td><td>₹100</td></tr>
-      <tr><td>स्पीड पोस्ट शिपिंग (एकमुश्त)</td><td>₹50</td></tr>
-      <tr class="total"><td>कुल देय राशि (Total)</td><td>₹<span id="totalLabel">350</span></td></tr>
-    </table>
-    <p class="note">यह पूर्णतः प्रीपेड (Prepaid) ऑर्डर है। सबमिट करते ही आपको UPI ऐप (PhonePe/GPay) पर भुगतान हेतु भेजा जाएगा। भुगतान पूर्ण होने के बाद ही नक्शा प्रिंट एवं डिस्पैच किया जाएगा।</p>
+  <!-- CHECKOUT CARD -->
+  <div class="card" id="checkoutCard">
+    <div class="card-head">
+      <h2>📋 डिलीवरी विवरण</h2>
+    </div>
+    <div class="card-body">
+      <div class="field-grid two">
+        <div class="field"><label>पूरा नाम *</label><input type="text" id="cust_name" placeholder="जैसा दस्तावेज़ों में दर्ज है"></div>
+        <div class="field"><label>मोबाइल नंबर *</label><input type="tel" id="cust_mobile" maxlength="10" placeholder="10 अंकों का नंबर"></div>
+      </div>
+      <div class="field full" style="margin-top:14px;">
+        <label>डिलीवरी पता *</label>
+        <input type="text" id="cust_address" placeholder="ग्राम/मोहल्ला, पोस्ट ऑफिस, लैंडमार्क">
+      </div>
+      <div class="field-grid two" style="margin-top:14px;">
+        <div class="field"><label>पिन कोड *</label><input type="text" id="cust_pincode" maxlength="6" placeholder="6 अंकों का पिन कोड"></div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <div style="font-size:12px; color:var(--muted); padding-top:8px;">सभी फ़ील्ड डिलीवरी की पुष्टि के लिए आवश्यक हैं</div>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-row"><span>कुल शीट</span><span id="lbl_sheets" style="font-family:var(--font-mono); font-weight:600; color:var(--ink);">0</span></div>
+        <div class="summary-row"><span>नक्शा शुल्क (₹200 / शीट)</span><span id="lbl_map_cost">₹0</span></div>
+        <div class="summary-row"><span>सुरक्षित पैकेजिंग</span><span>₹100</span></div>
+        <div class="summary-row"><span>स्पीड पोस्ट शिपिंग</span><span>₹50</span></div>
+        <div class="summary-row total"><span>कुल भुगतान</span><span id="lbl_total">₹0</span></div>
+      </div>
+
+      <button type="button" class="btn btn-submit" id="submitBtn" onclick="submitOrder()" style="margin-top:16px;" disabled>
+        ऑर्डर सबमिट करें और भुगतान करें →
+      </button>
+    </div>
   </div>
 
-  <button id="submitBtn">ऑर्डर सबमिट करें एवं भुगतान करें →</button>
-</main>
+</div>
 
-<!-- ===== Payment Pending Overlay ===== -->
+<!-- PAYMENT MODAL -->
 <div id="payOverlay">
-  <div class="box">
-    <div class="alert-head">⚠️ भुगतान अधूरा है</div>
-    <div class="alert-body">
-      <p>आपका ऑर्डर सफलतापूर्वक दर्ज हो गया है। नक्शा प्रिंटिंग शुरू करने के लिए कृपया नीचे बटन दबाकर तुरंत भुगतान करें।</p>
-      <div class="amount" id="overlayAmount">₹350</div>
-      <div class="order-id">Order ID: <strong id="overlayOrderId">—</strong></div>
-      <a href="#" id="upiPayBtn" class="pay-btn">PhonePe / GPay से भुगतान करें</a>
-      <p class="warn-text">₹<span id="overlayAmount2">350</span> का भुगतान होने पर ही स्पीड पोस्ट किया जाएगा।</p>
-      <a href="track-map.html" class="track-link">यहाँ से ऑर्डर स्टेटस ट्रैक करें →</a>
+  <div class="pay-card">
+    <div class="pay-head">⚠️ भुगतान आवश्यक — Prepaid Order</div>
+    <div class="pay-body">
+      <div class="seal">₹</div>
+      <p>आपका ऑर्डर दर्ज हो गया है। नक्शा प्रिंटिंग शुरू करने के लिए UPI से भुगतान पूर्ण करें।</p>
+      <div class="pay-amt" id="pop_amt">₹0</div>
+      <div class="pay-oid">Order ID: <b id="pop_oid">--</b></div>
+      <a href="#" id="pop_upi_btn" class="btn-upi">PhonePe / GPay से भुगतान करें</a>
+      <button class="btn-close-modal" onclick="document.getElementById('payOverlay').style.display='none'">बाद में भुगतान करें</button>
     </div>
   </div>
 </div>
 
+<div class="toast" id="toast"></div>
+
 <script>
-/* ============================================================
-   0) SUPABASE CONFIG — यहाँ अपनी डिटेल्स अपडेट करें
-   ============================================================ */
-const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // ---- Supabase config (replace with real project values) ----
+  const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const UPI_ID = "jameenseva@ybl";
-const UPI_NAME = "JameenSeva";
+  const MAX_SHEETS = 5;
+  const SHEET_PRICE = 200;
 
-/* ============================================================
-   1) District -> Block Data
-   ============================================================ */
-const DISTRICT_BLOCKS = {
-  "देवघर": ["देवघर सदर", "मधुपुर", "सारवां", "मोहनपुर", "पालोजोरी", "सोनारायठाढ़ी", "करौं", "देवीपुर", "मारगोमुंडा"],
-  "दुमका": ["दुमका सदर", "जरमुंडी", "मसलिया", "रामगढ़", "सरैयाहाट", "गोपीकांदर"],
-  "गिरिडीह": ["गिरिडीह", "बगोदर", "जमुआ", "गांडेय", "देवरी", "डुमरी"],
-  "धनबाद": ["धनबाद", "बाघमारा", "निरसा", "टुंडी", "तोपचांची"],
-  "रांची": ["रांची", "कांके", "बुंडू", "ओरमांझी", "नामकुम", "सिल्ली"],
-  "जामताड़ा": ["जामताड़ा", "नाला", "नारायणपुर", "फतेहपुर", "कुंडहित"],
-  "पाकुड़": ["पाकुड़", "महेशपुर", "लिट्टीपाड़ा", "अमड़ापाड़ा"],
-  "साहिबगंज": ["साहिबगंज", "राजमहल", "बरहड़वा", "बोरियो"]
-};
+  const BIHAR_DISTRICTS = [
+    "Araria","Arwal","Aurangabad","Banka","Begusarai","Bhagalpur","Bhojpur","Buxar",
+    "Darbhanga","East Champaran","Gaya","Gopalganj","Jamui","Jehanabad","Kaimur","Katihar",
+    "Khagaria","Kishanganj","Lakhisarai","Madhepura","Madhubani","Munger","Muzaffarpur",
+    "Nalanda","Nawada","Patna","Purnea","Rohtas","Saharsa","Samastipur","Saran","Sheikhpura",
+    "Sheohar","Sitamarhi","Siwan","Supaul","Vaishali","West Champaran"
+  ];
 
-const districtSelect = document.getElementById('district');
-const blockSelect = document.getElementById('block');
+  const distSelect = document.getElementById('district_select');
+  BIHAR_DISTRICTS.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d; opt.innerText = d;
+    distSelect.appendChild(opt);
+  });
 
-Object.keys(DISTRICT_BLOCKS).forEach(d => {
-  const opt = document.createElement('option');
-  opt.value = d; opt.textContent = d;
-  districtSelect.appendChild(opt);
-});
-districtSelect.insertAdjacentHTML('afterbegin', '<option value="">जिला चुनें</option>');
-districtSelect.value = "";
+  let cart = [];
 
-districtSelect.addEventListener('change', () => {
-  const blocks = DISTRICT_BLOCKS[districtSelect.value] || [];
-  blockSelect.innerHTML = '';
-  if (!blocks.length) {
-    blockSelect.innerHTML = '<option value="">पहले जिला चुनें</option>';
-    return;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
   }
-  blockSelect.innerHTML = '<option value="">ब्लॉक चुनें</option>' +
-    blocks.map(b => `<option value="${b}">${b}</option>`).join('');
-});
 
-/* ============================================================
-   2) Dynamic Sheets Cart (Mauza, Thana No, Sheet No.)
-   ============================================================ */
-const sheetsList = document.getElementById('sheetsList');
-let sheetCounter = 0;
-
-function addSheetRow() {
-  sheetCounter++;
-  const card = document.createElement('div');
-  card.className = 'sheet-card';
-  card.innerHTML = `
-    <div class="sheet-header">
-      <span>नक्शा / शीट #${sheetCounter}</span>
-      ${sheetCounter > 1 ? `<button type="button" class="remove-sheet">हटाएं</button>` : ''}
-    </div>
-    <div class="row3">
-      <div>
-        <input type="text" class="sheet-mauza" placeholder="मौजा / गाँव का नाम">
-      </div>
-      <div>
-        <input type="text" class="sheet-thana" placeholder="थाना नंबर">
-      </div>
-      <div>
-        <input type="text" class="sheet-no" placeholder="चादर/शीट नं. (उदा: 01)">
-      </div>
-    </div>
-  `;
-  sheetsList.appendChild(card);
-
-  const removeBtn = card.querySelector('.remove-sheet');
-  if(removeBtn) {
-    removeBtn.addEventListener('click', () => {
-      card.remove();
-      recalcTotal();
+  function setStep(n) {
+    document.querySelectorAll('.step-item').forEach(el => {
+      const s = Number(el.dataset.step);
+      el.classList.toggle('active', s === n);
+      el.classList.toggle('done', s < n);
     });
   }
 
-  card.querySelectorAll('input').forEach(input => input.addEventListener('input', recalcTotal));
-  recalcTotal();
-}
+  function searchAndAddRow() {
+    const mapType = document.getElementById('map_type').value;
+    const district = distSelect.value;
+    const thana = document.getElementById('thana_input').value.trim();
+    const mauza = document.getElementById('mauza_input').value.trim();
 
-document.getElementById('addSheetBtn').addEventListener('click', () => addSheetRow());
-addSheetRow(); // Initial Sheet row
-
-/* ============================================================
-   3) Price Calculation
-   ============================================================ */
-const SHEET_RATE = 200;
-const CONTAINER_COST = 100;
-const SHIPPING_COST = 50;
-
-function recalcTotal() {
-  const count = sheetsList.children.length;
-  const mapCost = count * SHEET_RATE;
-  const total = mapCost + CONTAINER_COST + SHIPPING_COST;
-
-  document.getElementById('sheetCountLabel').textContent = count;
-  document.getElementById('mapCostLabel').textContent = mapCost;
-  document.getElementById('totalLabel').textContent = total;
-
-  return { count, mapCost, total };
-}
-
-/* ============================================================
-   4) Validation & Submit
-   ============================================================ */
-function showError(msg) {
-  const el = document.getElementById('formError');
-  el.textContent = msg;
-  el.style.display = 'block';
-}
-
-function clearError() {
-  document.getElementById('formError').style.display = 'none';
-}
-
-function validateAndGetSheets() {
-  const sheets = [];
-  const cards = sheetsList.querySelectorAll('.sheet-card');
-  let isValid = true;
-
-  cards.forEach((card, idx) => {
-    const mauza = card.querySelector('.sheet-mauza').value.trim();
-    const thana = card.querySelector('.sheet-thana').value.trim();
-    const sheetNo = card.querySelector('.sheet-no').value.trim();
-
-    if (!mauza || !thana || !sheetNo) {
-      isValid = false;
+    if (!thana || !mauza) {
+      showToast('कृपया थाना और मौजा/वार्ड का नाम दर्ज करें');
+      return;
     }
-    sheets.push({ sheet_index: idx + 1, mauza, thana_no: thana, sheet_no: sheetNo });
+    if (cart.length >= MAX_SHEETS) {
+      showToast('अधिकतम ' + MAX_SHEETS + ' शीट प्रति ऑर्डर की सीमा पूरी हो गई है');
+      return;
+    }
+
+    cart.push({ id: Date.now(), mapType, district, thana, mauza, sheetNo: 'Sheet 01' });
+    renderCart();
+    setStep(2);
+    document.getElementById('cartCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function removeCartItem(id) {
+    cart = cart.filter(x => x.id !== id);
+    renderCart();
+  }
+
+  function updateSheet(id, val) {
+    const obj = cart.find(x => x.id === id);
+    if (obj) obj.sheetNo = val;
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cartTableBody');
+    const emptyMsg = document.getElementById('emptyMsg');
+    const limitNote = document.getElementById('limitNote');
+    const cartBadge = document.getElementById('cartBadge');
+    list.innerHTML = '';
+
+    cartBadge.textContent = cart.length + ' आइटम';
+    limitNote.style.display = cart.length >= MAX_SHEETS ? 'block' : 'none';
+
+    if (cart.length === 0) {
+      emptyMsg.style.display = 'block';
+    } else {
+      emptyMsg.style.display = 'none';
+      cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'cart-row';
+        row.innerHTML = `
+          <div class="cart-icon">🗺️</div>
+          <div class="cart-meta">
+            <strong>${item.mapType} · ${item.district}</strong>
+            <span>${item.thana} → ${item.mauza}</span>
+          </div>
+          <select class="sheet-select" onchange="updateSheet(${item.id}, this.value)">
+            <option ${item.sheetNo==='Sheet 01'?'selected':''}>Sheet 01</option>
+            <option ${item.sheetNo==='Sheet 02'?'selected':''}>Sheet 02</option>
+            <option ${item.sheetNo==='Sheet 03'?'selected':''}>Sheet 03</option>
+          </select>
+          <button class="btn btn-ghost" onclick="removeCartItem(${item.id})">हटाएँ</button>
+        `;
+        list.appendChild(row);
+      });
+    }
+    calculateTotal();
+  }
+
+  function calculateTotal() {
+    const count = cart.length;
+    const mapCost = count * SHEET_PRICE;
+    const total = count > 0 ? (mapCost + 100 + 50) : 0;
+
+    document.getElementById('lbl_sheets').textContent = count;
+    document.getElementById('lbl_map_cost').textContent = '₹' + mapCost;
+    document.getElementById('lbl_total').textContent = '₹' + total;
+    document.getElementById('submitBtn').disabled = count === 0;
+
+    return total;
+  }
+
+  // Advance to step 3 once delivery fields are being filled
+  ['cust_name','cust_mobile','cust_address','cust_pincode'].forEach(id => {
+    document.getElementById(id).addEventListener('focus', () => setStep(3));
   });
 
-  return { isValid, sheets };
-}
+  async function submitOrder() {
+    if (cart.length === 0) return showToast('कृपया कम से कम एक नक्शा कार्ट में जोड़ें');
 
-const submitBtn = document.getElementById('submitBtn');
+    const name = document.getElementById('cust_name').value.trim();
+    const mob = document.getElementById('cust_mobile').value.trim();
+    const addr = document.getElementById('cust_address').value.trim();
+    const pin = document.getElementById('cust_pincode').value.trim();
 
-submitBtn.addEventListener('click', async () => {
-  clearError();
+    if (!name || !mob || !addr || !pin) return showToast('कृपया सभी डिलीवरी फ़ील्ड भरें');
+    if (!/^\d{10}$/.test(mob)) return showToast('कृपया मान्य 10 अंकों का मोबाइल नंबर भरें');
+    if (!/^\d{6}$/.test(pin)) return showToast('कृपया मान्य 6 अंकों का पिन कोड भरें');
 
-  const name = document.getElementById('customer_name').value.trim();
-  const mobile = document.getElementById('mobile').value.trim();
-  const address = document.getElementById('full_address').value.trim();
-  const pincode = document.getElementById('pincode').value.trim();
-  const district = districtSelect.value;
-  const block = blockSelect.value;
+    const totalAmt = calculateTotal();
+    const oid = 'MAP-' + Date.now().toString().slice(-6);
 
-  if (!district) return showError("कृपया जिला चुनें।");
-  if (!block) return showError("कृपया ब्लॉक/अंचल चुनें।");
+    const payload = {
+      order_id: oid, customer_name: name, mobile: mob, full_address: addr, pincode: pin,
+      district: cart[0].district, block: cart[0].thana, sheets_data: cart,
+      total_sheets: cart.length, total_amount: totalAmt,
+      payment_status: 'Pending', order_status: 'Order Submitted'
+    };
 
-  const { isValid, sheets } = validateAndGetSheets();
-  if (!isValid) return showError("कृपया सभी जोड़े गए नक़्शों का मौजा, थाना नंबर और शीट नंबर सही से भरें।");
+    try {
+      const { error } = await _sb.from('map_orders').insert([payload]);
+      if (error) throw error;
 
-  if (!name) return showError("कृपया अपना पूरा नाम लिखें।");
-  if (!/^[6-9]\d{9}$/.test(mobile)) return showError("कृपया सही 10 अंकों का मोबाइल नंबर डालें।");
-  if (!address) return showError("कृपया पूरा डिलीवरी पता लिखें।");
-  if (!/^\d{6}$/.test(pincode)) return showError("कृपया सही 6 अंकों का पिन कोड डालें।");
-
-  const { count, mapCost, total } = recalcTotal();
-  const generatedOrderId = 'MAP-' + Date.now().toString().slice(-6);
-
-  const payload = {
-    order_id: generatedOrderId,
-    customer_name: name,
-    mobile: mobile,
-    full_address: address,
-    pincode: pincode,
-    district: district,
-    block: block,
-    sheets_data: sheets, // Mauza, Thana & Sheet Numbers JSON
-    total_sheets: count,
-    map_cost: mapCost,
-    container_cost: CONTAINER_COST,
-    shipping_cost: SHIPPING_COST,
-    total_amount: total,
-    payment_status: 'Pending',
-    order_status: 'Order Submitted'
-  };
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = "सबमिट हो रहा है...";
-
-  try {
-    const { data, error } = await supabaseClient
-      .from('map_orders')
-      .insert(payload)
-      .select('order_id, total_amount')
-      .single();
-
-    if (error) throw error;
-
-    showPaymentOverlay(data.order_id, data.total_amount);
-
-  } catch (err) {
-    console.error(err);
-    showError("ऑर्डर सेव करने में समस्या हुई: " + (err.message || ''));
-    submitBtn.disabled = false;
-    submitBtn.textContent = "ऑर्डर सबमिट करें एवं भुगतान करें →";
+      const upiUrl = `upi://pay?pa=jameenseva@ybl&pn=JameenSeva&am=${totalAmt}&cu=INR&tn=${encodeURIComponent('Map Order ' + oid)}`;
+      document.getElementById('pop_amt').textContent = '₹' + totalAmt;
+      document.getElementById('pop_oid').textContent = oid;
+      document.getElementById('pop_upi_btn').href = upiUrl;
+      document.getElementById('payOverlay').style.display = 'flex';
+    } catch (err) {
+      showToast('ऑर्डर दर्ज करने में समस्या हुई: ' + err.message);
+    }
   }
-});
-
-/* ============================================================
-   5) Payment Overlay + Intent
-   ============================================================ */
-function showPaymentOverlay(orderId, amount) {
-  document.getElementById('overlayOrderId').textContent = orderId;
-  document.getElementById('overlayAmount').textContent = '₹' + amount;
-  document.getElementById('overlayAmount2').textContent = amount;
-
-  const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(UPI_NAME)}&am=${amount}&cu=INR&tn=${encodeURIComponent('Map Order ' + orderId)}`;
-
-  const payBtn = document.getElementById('upiPayBtn');
-  payBtn.href = upiUrl;
-
-  document.getElementById('payOverlay').style.display = 'flex';
-  window.location.href = upiUrl;
-}
 </script>
 
 </body>
