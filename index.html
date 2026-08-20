@@ -94,6 +94,58 @@
 </head>
 
 <body>
+    <!-- ===== Legal Disclaimer Modal Start ===== -->
+<div id="disclaimerOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; max-width:480px; width:90%; border-radius:10px; padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.3); font-family:Arial, sans-serif;">
+    <h3 style="margin-top:0; color:#b91c1c; font-size:19px;">⚠️ महत्वपूर्ण सूचना / Legal Disclaimer</h3>
+    <div style="font-size:14.5px; line-height:1.6; color:#333; max-height:260px; overflow-y:auto; border:1px solid #eee; padding:10px; border-radius:6px; margin-bottom:14px;">
+      <p><strong>JameenSeva.in</strong> एक <strong>प्राइवेट सर्विस प्रदाता</strong> है और किसी भी सरकारी विभाग से संबद्ध नहीं है।</p>
+      <p>सर्च प्रोसेस के लिए लिया जाने वाला <strong>₹49/- सर्विस चार्ज</strong> केवल हमारी सेवा शुल्क है और यह <strong>पूर्णतः Non-refundable</strong> है, चाहे परिणाम कुछ भी हो।</p>
+      <p>ग्राहक द्वारा फॉर्म में भरी गई जानकारी की जिम्मेदारी पूर्णतः ग्राहक की स्वयं की है। <strong>गलत/अधूरी जानकारी</strong> के कारण होने वाली किसी भी असुविधा या नुकसान के लिए JameenSeva.in उत्तरदायी नहीं होगा।</p>
+      <p>फॉर्म सबमिट करने से पहले कृपया सभी विवरण ध्यानपूर्वक जांच लें।</p>
+    </div>
+    <label style="display:flex; align-items:flex-start; gap:8px; font-size:14px; color:#111; cursor:pointer; margin-bottom:16px;">
+      <input type="checkbox" id="agreeCheckbox" style="margin-top:3px;">
+      मैंने सभी नियम एवं शर्तें ध्यानपूर्वक पढ़ ली हैं और सहमत हूँ।
+    </label>
+    <button id="acceptBtn" disabled style="width:100%; padding:12px; border:none; border-radius:6px; background:#9ca3af; color:#fff; font-size:15px; font-weight:bold; cursor:not-allowed; transition:background 0.2s;">
+      स्वीकार करें
+    </button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var overlay = document.getElementById('disclaimerOverlay');
+    var checkbox = document.getElementById('agreeCheckbox');
+    var acceptBtn = document.getElementById('acceptBtn');
+
+    // अगर पहले accept कर चुके हैं तो popup मत दिखाओ
+    if (!localStorage.getItem('jameenSevaTermsAccepted')) {
+      overlay.style.display = 'flex';
+    }
+
+    checkbox.addEventListener('change', function () {
+      if (checkbox.checked) {
+        acceptBtn.disabled = false;
+        acceptBtn.style.background = '#16a34a';
+        acceptBtn.style.cursor = 'pointer';
+      } else {
+        acceptBtn.disabled = true;
+        acceptBtn.style.background = '#9ca3af';
+        acceptBtn.style.cursor = 'not-allowed';
+      }
+    });
+
+    acceptBtn.addEventListener('click', function () {
+      if (checkbox.checked) {
+        localStorage.setItem('jameenSevaTermsAccepted', 'true');
+        overlay.style.display = 'none';
+      }
+    });
+  })();
+</script>
+<!-- ===== Legal Disclaimer Modal End ===== -->
     <div style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; text-align: right; padding-right: 20px;">
     <label style="font-weight: bold; color: #1a5f7a; font-size: 14px;">अपना राज्य बदलें: </label>
     <select onchange="location = this.value;" style="padding: 5px 10px; border-radius: 5px; border: 1px solid #1a5f7a; background: white; color: #1a5f7a; font-weight: bold; cursor: pointer;">
