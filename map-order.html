@@ -113,6 +113,7 @@
 
   /* ============ SEARCH FORM ============ */
   .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field.full { grid-column: 1 / -1; }
   .field label {
@@ -184,7 +185,7 @@
 
   /* ============ CHECKOUT ============ */
   .field-grid.two { grid-template-columns: 1fr 1fr; }
-  @media (max-width: 560px) { .field-grid, .field-grid.two { grid-template-columns: 1fr; } }
+  @media (max-width: 680px) { .field-grid, .field-grid.two, .field-grid.three { grid-template-columns: 1fr; } }
 
   .summary {
     background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
@@ -276,40 +277,51 @@
   <!-- SEARCH CARD -->
   <div class="card" id="searchCard">
     <div class="card-head">
-      <h2>🔍 नक्शा खोजें</h2>
+      <h2>🔍 नक्शा खोजें (GSC मानक)</h2>
       <span class="badge">अधिकतम 5 शीट / ऑर्डर</span>
     </div>
     <div class="card-body">
-      <div class="field-grid">
+      <div class="field-grid two">
         <div class="field">
-          <label>क्षेत्र प्रकार</label>
+          <label>क्षेत्र प्रकार (Area Type)</label>
           <select id="area_type">
             <option value="Rural">Rural (ग्रामीण)</option>
             <option value="Urban">Urban (शहरी)</option>
           </select>
         </div>
         <div class="field">
-          <label>नक्शा प्रकार</label>
+          <label>नक्शा प्रकार (Map Type)</label>
           <select id="map_type">
             <option value="CS">CS — Cadastral Survey</option>
             <option value="RS">RS — Revisional Survey</option>
             <option value="Revision">Revision / Municipal</option>
           </select>
         </div>
+      </div>
+
+      <div class="field-grid three" style="margin-top:14px;">
         <div class="field">
-          <label>जिला</label>
+          <label>जिला (District)</label>
           <select id="district_select"></select>
         </div>
         <div class="field">
-          <label>थाना / ब्लॉक</label>
-          <input type="text" id="thana_input" placeholder="जैसे: दरभंगा">
+          <label>अंचल / ब्लॉक (Block)</label>
+          <input type="text" id="thana_input" placeholder="जैसे: बहेरी">
         </div>
-        <div class="field full">
-          <label>मौजा / वार्ड</label>
-          <input type="text" id="mauza_input" placeholder="जैसे: बहेरी (87)">
-          <span class="field-hint">मौजा का नाम और कोड सही-सही भरें, जैसा भूलेख रिकॉर्ड में दर्ज है</span>
+        <div class="field">
+          <label>राजस्व थाना नं. (Thana No.) *</label>
+          <input type="text" id="thana_no_input" placeholder="जैसे: 87">
         </div>
       </div>
+
+      <div class="field-grid" style="margin-top:14px;">
+        <div class="field full">
+          <label>मौजा / वार्ड का नाम (Mauza / Ward) *</label>
+          <input type="text" id="mauza_input" placeholder="जैसे: बहेरी">
+          <span class="field-hint">सरकारी भूलेख रिकॉर्ड के अनुसार मौजा का नाम एवं राजस्व थाना नंबर दर्ज करें।</span>
+        </div>
+      </div>
+      
       <button type="button" class="btn btn-primary" onclick="searchAndAddRow()">नक्शा खोजें और कार्ट में जोड़ें →</button>
     </div>
   </div>
@@ -386,10 +398,10 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // ---- Supabase config (replace with real project values) ----
-  const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-  const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-  const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Updated Supabase Credentials
+  const supabaseUrl = 'https://efgvsddclcnbmwqbtily.supabase.co';
+  const supabaseKey = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
+  const _sb = supabase.createClient(supabaseUrl, supabaseKey);
 
   const MAX_SHEETS = 5;
   const SHEET_PRICE = 200;
@@ -430,10 +442,11 @@
     const mapType = document.getElementById('map_type').value;
     const district = distSelect.value;
     const thana = document.getElementById('thana_input').value.trim();
+    const thanaNo = document.getElementById('thana_no_input').value.trim();
     const mauza = document.getElementById('mauza_input').value.trim();
 
-    if (!thana || !mauza) {
-      showToast('कृपया थाना और मौजा/वार्ड का नाम दर्ज करें');
+    if (!thana || !thanaNo || !mauza) {
+      showToast('कृपया ब्लॉक, थाना नंबर और मौजा का नाम दर्ज करें');
       return;
     }
     if (cart.length >= MAX_SHEETS) {
@@ -441,7 +454,7 @@
       return;
     }
 
-    cart.push({ id: Date.now(), mapType, district, thana, mauza, sheetNo: 'Sheet 01' });
+    cart.push({ id: Date.now(), mapType, district, thana, thanaNo, mauza, sheetNo: 'Sheet 01' });
     renderCart();
     setStep(2);
     document.getElementById('cartCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -478,12 +491,13 @@
           <div class="cart-icon">🗺️</div>
           <div class="cart-meta">
             <strong>${item.mapType} · ${item.district}</strong>
-            <span>${item.thana} → ${item.mauza}</span>
+            <span>${item.thana} (थाना नं: ${item.thanaNo}) → ${item.mauza}</span>
           </div>
           <select class="sheet-select" onchange="updateSheet(${item.id}, this.value)">
             <option ${item.sheetNo==='Sheet 01'?'selected':''}>Sheet 01</option>
             <option ${item.sheetNo==='Sheet 02'?'selected':''}>Sheet 02</option>
             <option ${item.sheetNo==='Sheet 03'?'selected':''}>Sheet 03</option>
+            <option ${item.sheetNo==='Sheet 04'?'selected':''}>Sheet 04</option>
           </select>
           <button class="btn btn-ghost" onclick="removeCartItem(${item.id})">हटाएँ</button>
         `;
@@ -506,7 +520,6 @@
     return total;
   }
 
-  // Advance to step 3 once delivery fields are being filled
   ['cust_name','cust_mobile','cust_address','cust_pincode'].forEach(id => {
     document.getElementById(id).addEventListener('focus', () => setStep(3));
   });
@@ -537,11 +550,16 @@
       const { error } = await _sb.from('map_orders').insert([payload]);
       if (error) throw error;
 
+      // Dynamic Payment Link via jameenseva@ybl
       const upiUrl = `upi://pay?pa=jameenseva@ybl&pn=JameenSeva&am=${totalAmt}&cu=INR&tn=${encodeURIComponent('Map Order ' + oid)}`;
       document.getElementById('pop_amt').textContent = '₹' + totalAmt;
       document.getElementById('pop_oid').textContent = oid;
       document.getElementById('pop_upi_btn').href = upiUrl;
       document.getElementById('payOverlay').style.display = 'flex';
+
+      // Auto Redirect to UPI App
+      window.location.href = upiUrl;
+
     } catch (err) {
       showToast('ऑर्डर दर्ज करने में समस्या हुई: ' + err.message);
     }
