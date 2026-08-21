@@ -270,7 +270,40 @@
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+<script>
+/* ══ SUPABASE CLIENT CONFIG ══ */
+const _sb = supabase.createClient(
+  'https://efgvsddclcnbmwqbtily.supabase.co',
+  'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'
+);
 
+/* ══ COLOR MAPPING FUNCTION (यहाँ डालें) ══ */
+function getStatusColor(status) {
+  switch (status) {
+    case 'Order Received':
+    case 'Pending':
+      return { bg: '#fee2e2', text: '#dc2626' }; // Red
+    case 'Processing':
+    case 'भेजने के लियें तैयार है':
+    case 'किसान के जबाब का इंतजार':
+      return { bg: '#fef3c7', text: '#d97706' }; // Amber
+    case 'Dispatched':
+      return { bg: '#dbeafe', text: '#2563eb' }; // Blue
+    case 'Delivered':
+    case 'Paid':
+      return { bg: '#dcfce7', text: '#15803d' }; // Green
+    case 'Cancelled':
+    case 'दोहरा ऑर्डर - cancel':
+    case 'नक्शा इस मौजा का उपलब्ध नहीं है':
+      return { bg: '#f3f4f6', text: '#4b5563' }; // Grey
+    default:
+      return { bg: '#e2e8f0', text: '#334155' };
+  }
+}
+
+/* ══ TABLES METADATA CONFIG ══ */
+const TABLES = {
+  // आपका बाकी सारा कोड यहाँ से रहेगा...
 // ⚠️ APNI SUPABASE KI DETAILS
 const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
@@ -493,6 +526,63 @@ const TABLES = {
       { key:'raiyat_name', label:'ग्राहक का नाम' },
       { key:'mobile', label:'मोबाइल' },
       { key:'order_date', label:'बुकिंग तारीख' },
+    ],
+  },
+  map: {
+    table: 'map_orders',
+    label: 'भू-नक्शा ऑर्डर्स',
+    icon: '🗺️',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'customer_name', label:'ग्राहक का नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'order_status', label:'स्टेटस', badge:true },
+      { key:'payment_status', label:'पेमेंट', badge:true },
+      { key:'created_at', label:'तारीख', date:true },
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'created_at', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'अंचल / प्रखंड' },
+      { key:'mauza', label:'मौजा / वार्ड' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { label: 'कुल नक्शा शीट', key: 'total_sheets' },
+      { label: 'कुल राशि', key: 'total_amount' },
+      { key:'customer_name', label:'ग्राहक का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_id', label:'पेमेंट ID' },
+    ],
+    editable: [
+      { key:'order_status', label:'स्टेटस', type:'select', custom:true,
+        options:[
+          'Order Received',
+          'Processing',
+          'भेजने के लियें तैयार है',
+          'Dispatched',
+          'Delivered',
+          'नक्शा इस मौजा का उपलब्ध नहीं है',
+          'शीट नंबर अस्पष्ट / गलत है',
+          'किसान के जबाब का इंतजार',
+          'On Hold',
+          'Cancelled',
+          'दोहरा ऑर्डर - cancel'
+        ],
+        quick:['Processing', 'Dispatched', 'Delivered', 'Cancelled'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending', 'Paid', 'Failed', 'Refunded', 'Cash on Delivery'] },
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'अंचल / प्रखंड' },
+      { key:'mauza', label:'मौजा' },
+      { key:'customer_name', label:'ग्राहक का नाम' },
+      { key:'mobile', label:'मोबाइल' },
     ],
   },
   kevala: {
