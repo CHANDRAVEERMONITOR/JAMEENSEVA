@@ -491,6 +491,29 @@ const TABLES = {
     { label: 'दिनांक (कब तक)', key: 'date_to' },
   ]
 },
+  MAP: {
+  tbl: 'map_orders',
+  label: 'भू-नक्शा',
+  icon: '🗺️',
+  badgeCls: 'tb-m',
+  id_col: 'order_id',
+  mobile_col: 'mobile',
+  name_col: 'customer_name',
+  addr_col: 'full_address',
+  pin_col: 'pincode',
+  pay_col: 'payment_status',
+  status_col: 'order_status',
+  date_col: 'created_at',
+  landTitle: '🗺️ नक्शे की जानकारी',
+  landFields: [
+    { label: 'जिला', key: 'district' },
+    { label: 'अंचल / प्रखंड', key: 'block' },
+    { label: 'मौजा / वार्ड', key: 'mauza' },
+    { label: 'थाना नंबर', key: 'thana_no' },
+    { label: 'कुल नक्शा शीट', key: 'total_sheets' },
+    { label: 'कुल राशि', key: 'total_amount' }
+  ]
+}
   JAMABANDI: {
     tbl: 'jamabandi_orders',
     label: 'रजिस्टर 2 (जमाबंदी)',
