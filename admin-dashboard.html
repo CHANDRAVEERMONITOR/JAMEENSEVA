@@ -270,13 +270,14 @@
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-/* ══ SUPABASE CLIENT CONFIG ══ */
-const _sb = supabase.createClient(
-  'https://efgvsddclcnbmwqbtily.supabase.co',
-  'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5'
-);
 
-/* ══ COLOR MAPPING FUNCTION (यहाँ डालें) ══ */
+/* ══ SUPABASE CLIENT CONFIG ══ */
+const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
+
+/* ══ COLOR MAPPING FUNCTION ══ */
 function getStatusColor(status) {
   switch (status) {
     case 'Order Received':
@@ -301,18 +302,6 @@ function getStatusColor(status) {
 }
 
 /* ══ TABLES METADATA CONFIG ══ */
-const TABLES = {
-  // आपका बाकी सारा कोड यहाँ से रहेगा...
-// ⚠️ APNI SUPABASE KI DETAILS
-const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
-
-// ==========================================================================
-// TABLE CONFIG — agar aapki Supabase table ka naam yahan diye gaye se alag
-// hai, toh sirf "table" wali value badal dein. Baaki sab automatic chalega.
-// ==========================================================================
 const TABLES = {
   panchnama: {
     table: 'panchnama batwara',
@@ -488,7 +477,7 @@ const TABLES = {
     ],
   },
   aminBooking: {
-    table: 'amin-booking', // ⚠️ agar Supabase mein naam alag hai (jaise "amin - booking") toh yahan fix karein
+    table: 'amin-booking',
     label: 'अमीन बुकिंग',
     icon: '📅',
     idKey: 'id',
@@ -548,8 +537,8 @@ const TABLES = {
       { key:'block', label:'अंचल / प्रखंड' },
       { key:'mauza', label:'मौजा / वार्ड' },
       { key:'thana_no', label:'थाना नंबर' },
-      { label: 'कुल नक्शा शीट', key: 'total_sheets' },
-      { label: 'कुल राशि', key: 'total_amount' },
+      { key:'total_sheets', label: 'कुल नक्शा शीट' },
+      { key:'total_amount', label: 'कुल राशि' },
       { key:'customer_name', label:'ग्राहक का नाम' },
       { key:'full_address', label:'पूरा पता' },
       { key:'pincode', label:'पिनकोड' },
@@ -652,7 +641,7 @@ const TABLES = {
     ],
   },
   khesra: {
-    table: 'khesra to khesra', // ⚠️ Supabase mein exact naam check kar lein
+    table: 'khesra to khesra',
     label: 'खेसरा टू खेसरा',
     icon: '🔀',
     idKey: 'id',
@@ -801,24 +790,23 @@ async function loadTableContent(){
 }
 
 function renderSummary(){
-  const cfg = TABLES[currentKey];
   const total = currentRows.length;
-  const pending = currentRows.filter(r => (r.status || '').toLowerCase() === 'pending').length;
-  const done = currentRows.filter(r => ['completed','approved','confirmed'].includes((r.status||'').toLowerCase())).length;
-  const rejected = currentRows.filter(r => (r.status || '').toLowerCase() === 'rejected').length;
+  const pending = currentRows.filter(r => (r.status || r.order_status || '').toLowerCase() === 'pending').length;
+  const done = currentRows.filter(r => ['completed','approved','confirmed','delivered'].includes((r.status || r.order_status || '').toLowerCase())).length;
+  const rejected = currentRows.filter(r => ['rejected','cancelled'].includes((r.status || r.order_status || '').toLowerCase())).length;
 
   document.getElementById('summaryRow').innerHTML = `
     <div class="chip total"><div class="num">${total}</div><div class="label lang-dev">कुल रिकॉर्ड</div></div>
     <div class="chip pending"><div class="num">${pending}</div><div class="label lang-dev">पेंडिंग</div></div>
     <div class="chip done"><div class="num">${done}</div><div class="label lang-dev">पूर्ण / स्वीकृत</div></div>
-    <div class="chip rejected"><div class="num">${rejected}</div><div class="label lang-dev">रिजेक्टेड</div></div>
+    <div class="chip rejected"><div class="num">${rejected}</div><div class="label lang-dev">रिजेक्टेड / कैंसिल</div></div>
   `;
 }
 
 function populateStatusFilter(){
   const sel = document.getElementById('statusFilter');
   const cfg = TABLES[currentKey];
-  const statusField = cfg.editable.find(f => f.key === 'status');
+  const statusField = cfg.editable.find(f => f.key === 'status' || f.key === 'order_status');
   sel.innerHTML = '<option value="">सभी स्टेटस</option>';
   if (statusField) {
     statusField.options.forEach(opt => {
@@ -832,8 +820,8 @@ function populateStatusFilter(){
 function badgeClass(val){
   const v = (val || '').toLowerCase();
   if (['pending'].includes(v)) return 'badge-pending';
-  if (['processing','confirmed'].includes(v)) return 'badge-processing';
-  if (['completed','approved','paid','success'].includes(v)) return 'badge-completed';
+  if (['processing','confirmed','searching'].includes(v)) return 'badge-processing';
+  if (['completed','approved','paid','success','delivered'].includes(v)) return 'badge-completed';
   if (['rejected','failed','cancelled'].includes(v)) return 'badge-rejected';
   if (['refunded'].includes(v)) return 'badge-refunded';
   return 'badge-default';
@@ -849,10 +837,11 @@ function getFilteredRows(){
   const q = document.getElementById('searchInput').value.trim().toLowerCase();
   const statusF = document.getElementById('statusFilter').value;
   return currentRows.filter(row => {
-    const matchesStatus = !statusF || (row.status || '') === statusF;
+    const rowStatus = row.status || row.order_status || '';
+    const matchesStatus = !statusF || rowStatus === statusF;
     if (!matchesStatus) return false;
     if (!q) return true;
-    const haystack = [row.order_id, row.raiyat_name, row.name, row.mobile, row.district, row.reg_no]
+    const haystack = [row.order_id, row.raiyat_name, row.customer_name, row.name, row.mobile, row.customer_mobile, row.district, row.reg_no]
       .filter(Boolean).join(' ').toLowerCase();
     return haystack.includes(q);
   });
@@ -931,7 +920,6 @@ function openDetail(row){
       </div>`;
   }).join('');
 
-  // Wire up: selecting "Custom" reveals free-text input
   cfg.editable.forEach(f => {
     if (!f.custom) return;
     const sel = document.getElementById(`edit_${f.key}`);
@@ -942,7 +930,6 @@ function openDetail(row){
     });
   });
 
-  // Wire up: quick chips set the dropdown (or custom box) instantly
   editRow.querySelectorAll('.quick-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       const targetSel = document.getElementById(chip.dataset.target);
@@ -971,7 +958,6 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
   const msg = document.getElementById('modalMsg');
   const saveBtn = document.getElementById('modalSaveBtn');
 
-  // Collect values, resolving "__custom__" selections to their free-text input
   const updateData = {};
   for (const f of cfg.editable) {
     const el = document.getElementById(`edit_${f.key}`);
@@ -995,9 +981,6 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
 
   const rowId = selectedRow[cfg.idKey];
 
-  // IMPORTANT: .select() forces Supabase to return the row(s) it actually
-  // changed. If Row Level Security silently blocks the update, PostgREST
-  // returns NO error but also 0 rows — that's the "update nahi hota" bug.
   const { data, error } = await supabase
     .from(cfg.table)
     .update(updateData)
