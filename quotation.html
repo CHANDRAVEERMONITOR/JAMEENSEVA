@@ -1,1232 +1,404 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TAX & Quotation Generator — Dynamic Multi-Template</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<style>
-  html, body { font-family: 'Hind', 'Inter', sans-serif; background:#f8fafc; color:#1e293b; }
-  *{ box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <title>Dynamic Quotation Generator - 5 Layouts</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    
+    :root {
+      --primary: #0f172a;
+      --secondary: #2563eb;
+      --accent: #f8fafc;
+      --text: #1e293b;
+      --border: #cbd5e1;
+    }
 
-  /* Custom Scrollbar for Form Sidebar */
-  .form-scroll::-webkit-scrollbar { width: 6px; }
-  .form-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-  .form-scroll::-webkit-scrollbar-track { background: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+    body { background-color: #0f172a; color: #f8fafc; padding: 20px; font-size: 14px; }
 
-  /* Signature canvas */
-  #sigCanvas { touch-action: none; cursor: crosshair; display: block; width: 100%; height: 120px; }
+    .app-container { display: flex; gap: 20px; max-width: 1600px; margin: 0 auto; height: 95vh; }
+    
+    /* Control Panel */
+    .control-panel {
+      flex: 1.1;
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      overflow-y: auto;
+      border: 1px solid #334155;
+    }
 
-  /* Mobile preview toggles */
-  @media (max-width: 1023px) {
-    .mobile-hide { display: none !important; }
-  }
+    .control-panel h2 { color: #38bdf8; font-size: 20px; margin-bottom: 15px; border-bottom: 2px solid #334155; padding-bottom: 10px; }
+    .control-group { margin-bottom: 20px; background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155; }
+    .control-group h3 { color: #f1f5f9; font-size: 13px; margin-bottom: 12px; text-transform: uppercase; }
+    
+    label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 4px; color: #94a3b8; text-transform: uppercase; }
+    input, select, textarea { width: 100%; padding: 8px 10px; margin-bottom: 10px; border: 1px solid #334155; background: #1e293b; color: #f8fafc; border-radius: 6px; font-size: 13px; }
 
-  /* Print Styles */
-  @media print {
-    body * { visibility: hidden; }
-    #previewContent, #previewContent * { visibility: visible; }
-    #previewContent { position: absolute; top: 0; left: 0; width: 100% !important; max-width: 100% !important; box-shadow: none !important; margin: 0 !important; }
-    .no-print { display: none !important; }
-  }
+    .color-pickers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .color-pickers input { height: 38px; padding: 2px; cursor: pointer; }
 
-  input[type="color"] { -webkit-appearance: none; appearance: none; border: none; padding: 0; background: none; }
-  input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
-  input[type="color"]::-webkit-color-swatch { border: none; border-radius: 9999px; }
+    .item-row { display: flex; gap: 6px; margin-bottom: 8px; align-items: center; }
+    .item-row input { margin-bottom: 0; }
+    
+    .btn { padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; }
+    .btn-add { background: #10b981; color: white; width: 100%; margin-top: 5px; }
+    .btn-remove { background: #ef4444; color: white; padding: 8px 10px; }
+    .btn-print { background: #38bdf8; color: #0f172a; width: 100%; padding: 14px; font-size: 16px; margin-top: 10px; font-weight: 700; }
 
-  .anim-fade { animation: fadeIn 0.2s ease-in-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-</style>
+    /* Preview Panel */
+    .preview-panel {
+      flex: 1.9;
+      background: #334155;
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    /* Fixed A4 Paper Styling */
+    .quotation-paper {
+      background: #ffffff;
+      color: #1e293b;
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm 15mm 20mm 15mm;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      display: block;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    /* ==================== FORMAT 1: CORPORATE EXECUTIVE ==================== */
+    .layout-corporate { border-top: 10px solid var(--primary); }
+    .layout-corporate .q-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-bottom: 20px; }
+    .layout-corporate .badge { background: var(--primary); color: white; padding: 6px 18px; border-radius: 20px; font-weight: 700; font-size: 16px; display: inline-block; }
+    .layout-corporate table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .layout-corporate th { background: var(--primary); color: white; padding: 10px 12px; text-align: left; font-size: 12px; }
+    .layout-corporate td { padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 13px; }
+
+    /* ==================== FORMAT 2: MODERN MINIMALIST ==================== */
+    .layout-minimal .q-header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 15px; margin-bottom: 20px; }
+    .layout-minimal .q-title { font-size: 28px; font-weight: 300; letter-spacing: 4px; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; }
+    .layout-minimal table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .layout-minimal th { border-bottom: 2px solid var(--primary); color: var(--primary); padding: 8px 10px; text-align: left; font-size: 12px; text-transform: uppercase; }
+    .layout-minimal td { padding: 10px; border-bottom: 1px dashed var(--border); font-size: 13px; }
+
+    /* ==================== FORMAT 3: CREATIVE COLOR BLOCK ==================== */
+    .layout-creative { border-left: 14px solid var(--primary); }
+    .layout-creative .q-header { background: var(--accent); padding: 20px; border-radius: 6px; display: flex; justify-content: space-between; margin-bottom: 20px; border: 1px solid var(--border); }
+    .layout-creative table { width: 100%; border-collapse: separate; border-spacing: 0 6px; margin-top: 10px; }
+    .layout-creative th { background: var(--secondary); color: white; padding: 10px; font-size: 12px; }
+    .layout-creative th:first-child { border-radius: 4px 0 0 4px; }
+    .layout-creative th:last-child { border-radius: 0 4px 4px 0; }
+    .layout-creative td { background: var(--accent); padding: 10px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    /* ==================== FORMAT 4: ELEGANT LUXURY ==================== */
+    .layout-luxury { border: 2px solid var(--primary); margin: 0; }
+    .layout-luxury .q-header { text-align: left; border-bottom: 1px solid var(--primary); padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .layout-luxury .q-title { font-size: 24px; font-family: 'Georgia', serif; color: var(--primary); letter-spacing: 2px; }
+    .layout-luxury table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    .layout-luxury th { border-top: 1px solid var(--primary); border-bottom: 1px solid var(--primary); color: var(--primary); padding: 8px 10px; font-family: 'Georgia', serif; }
+    .layout-luxury td { padding: 10px; border-bottom: 1px solid var(--border); }
+
+    /* ==================== FORMAT 5: TECH DASHBOARD ==================== */
+    .layout-tech .q-header { background: var(--primary); color: white; padding: 18px; border-radius: 6px; display: flex; justify-content: space-between; margin-bottom: 20px; }
+    .layout-tech .q-header h1 { color: #ffffff !important; }
+    .layout-tech .q-header p { color: #e2e8f0 !important; }
+    .layout-tech table { width: 100%; border-collapse: collapse; margin-top: 15px; border: 1px solid var(--border); }
+    .layout-tech th { background: var(--accent); color: var(--primary); padding: 8px 10px; border: 1px solid var(--border); font-size: 12px; text-transform: uppercase; }
+    .layout-tech td { padding: 10px; border: 1px solid var(--border); font-size: 13px; }
+
+    /* Content Layout Elements */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+    .info-box { background: var(--accent); padding: 10px 12px; border-radius: 6px; border: 1px solid var(--border); font-size: 12px; }
+    .info-box strong { color: var(--primary); font-size: 13px; }
+
+    .totals-section { display: flex; justify-content: flex-end; margin-top: 15px; margin-bottom: 30px; }
+    .totals-table { width: 260px; border-collapse: collapse; }
+    .totals-table td { padding: 5px 8px; font-size: 13px; }
+    .totals-table tr.grand-total { font-weight: 700; font-size: 15px; color: var(--primary); border-top: 2px solid var(--primary); border-bottom: 2px solid var(--primary); }
+
+    .q-footer { margin-top: 40px; padding-top: 15px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: flex-end; font-size: 11px; }
+    .signature-container { text-align: center; width: 180px; }
+    .signature-line { border-top: 1px solid var(--primary); margin-top: 35px; padding-top: 4px; font-weight: 600; color: var(--primary); }
+
+    /* Print Setup */
+    @media print {
+      body { background: transparent; padding: 0; }
+      .control-panel { display: none !important; }
+      .preview-panel { background: transparent; padding: 0; overflow: visible; display: block; }
+      .quotation-paper {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        box-shadow: none !important;
+        padding: 15mm !important;
+        margin: 0 auto !important;
+      }
+    }
+  </style>
 </head>
-<body class="bg-slate-100 text-slate-800">
+<body>
 
-<!-- ============================= TOP HEADER ============================= -->
-<header class="no-print sticky top-0 z-30 bg-white border-b border-slate-200 shadow-sm">
-  <div class="max-w-[1700px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-    
-    <!-- Logo & Title -->
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center text-white font-black text-lg shadow-md shadow-indigo-200">
-        TG
-      </div>
-      <div>
-        <h1 class="font-extrabold text-slate-900 text-base sm:text-lg leading-tight">Tax & Item Billing Master</h1>
-        <p class="text-xs text-slate-500 font-medium hidden sm:block">हर आइटम पर अलग Tax/CGST/SGST/IGST + 5 Dynamic Advance Formats</p>
+<div class="app-container">
+  <!-- Controls Panel -->
+  <div class="control-panel">
+    <h2>Quotation Generator</h2>
+
+    <div class="control-group">
+      <h3>1. Select Layout & Colors</h3>
+      <label>Choose 1 of 5 Formats</label>
+      <select id="layoutSelect" onchange="updateLayout()">
+        <option value="layout-corporate">1. Corporate Executive</option>
+        <option value="layout-minimal">2. Modern Minimalist</option>
+        <option value="layout-creative">3. Creative Color Block</option>
+        <option value="layout-luxury">4. Elegant Luxury</option>
+        <option value="layout-tech">5. Tech Dashboard</option>
+      </select>
+
+      <div class="color-pickers">
+        <div>
+          <label>Primary</label>
+          <input type="color" id="primaryColor" value="#0f172a" onchange="updateColors()">
+        </div>
+        <div>
+          <label>Secondary</label>
+          <input type="color" id="secondaryColor" value="#2563eb" onchange="updateColors()">
+        </div>
+        <div>
+          <label>Accent</label>
+          <input type="color" id="accentColor" value="#f8fafc" onchange="updateColors()">
+        </div>
       </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="flex items-center gap-2 sm:gap-3">
-      <button id="resetBtn" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition">Reset All</button>
-      <button id="printBtn" class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-slate-700 border border-slate-300 hover:bg-slate-50 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-        Print Bill
-      </button>
-      <button id="downloadPdfBtn" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-200 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-        Download PDF
-      </button>
+    <div class="control-group">
+      <h3>2. Vendor Info (Seller)</h3>
+      <label>Vendor Name</label>
+      <input type="text" id="vendorName" value="R. S. WATER CORPORATION" oninput="render()">
+      <label>Address</label>
+      <textarea id="vendorAddress" rows="2" oninput="render()">FRONT OF M. R. M. SCHOOL, LALBAGH, DARBHANGA&#10;Darbhanga - 846004</textarea>
+      <label>GSTIN</label>
+      <input type="text" id="vendorGst" value="10EVEPK8798G1Z8" oninput="render()">
     </div>
+
+    <div class="control-group">
+      <h3>3. Client Info (Customer)</h3>
+      <label>Estimate For</label>
+      <input type="text" id="clientName" value="TO THE PRINCIPAL" oninput="render()">
+      <label>Client Details</label>
+      <textarea id="clientAddress" rows="2" oninput="render()">MARWARI COLLEGE DARBHANGA&#10;Darbhanga - 846004</textarea>
+    </div>
+
+    <div class="control-group">
+      <h3>4. Quotation Meta</h3>
+      <label>Quotation Number</label>
+      <input type="text" id="qNum" value="QT-001" oninput="render()">
+      <label>Date</label>
+      <input type="date" id="qDate" value="2026-08-22" oninput="render()">
+      <label>Valid Until</label>
+      <input type="date" id="qValid" value="2026-09-21" oninput="render()">
+      <label>Currency</label>
+      <input type="text" id="qCurrency" value="Indian Rupee (INR)" oninput="render()">
+    </div>
+
+    <div class="control-group">
+      <h3>5. Item Management</h3>
+      <div id="itemsContainer"></div>
+      <button class="btn btn-add" onclick="addItem()">+ Add Item</button>
+    </div>
+
+    <div class="control-group">
+      <h3>6. Terms & Footers</h3>
+      <label>Notes</label>
+      <input type="text" id="qNotes" value="Thanks for Doing Business with us" oninput="render()">
+      <label>Terms & Conditions</label>
+      <input type="text" id="qTerms" value="All taxes are inclusive" oninput="render()">
+    </div>
+
+    <button class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
   </div>
 
-  <!-- Mobile Tab Switches -->
-  <div class="lg:hidden flex border-t border-slate-200 bg-slate-50">
-    <button id="tabEditBtn" class="flex-1 py-2.5 text-xs font-bold text-indigo-600 border-b-2 border-indigo-600">Form Details</button>
-    <button id="tabPreviewBtn" class="flex-1 py-2.5 text-xs font-bold text-slate-500 border-b-2 border-transparent">Live Preview</button>
+  <!-- Realtime A4 Preview Panel -->
+  <div class="preview-panel">
+    <div class="quotation-paper layout-corporate" id="paper">
+      <div id="quotationRender"></div>
+    </div>
   </div>
-</header>
-
-<!-- ============================= MAIN APP LAYOUT ============================= -->
-<main class="max-w-[1700px] mx-auto lg:grid lg:grid-cols-[480px_1fr] lg:h-[calc(100vh-61px)]">
-
-  <!-- ==================== LEFT: INPUT FORM ==================== -->
-  <section id="formPanel" class="form-scroll bg-white lg:border-r border-slate-200 lg:h-full lg:overflow-y-auto p-4 sm:p-5 space-y-5">
-    
-    <!-- 1. TEMPLATE & COLOR SELECTOR -->
-    <div class="bg-indigo-50/60 border border-indigo-100 rounded-2xl p-4 space-y-3">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-900 flex items-center gap-1.5">
-          <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
-          5 Advance Dynamic Formats
-        </h3>
-      </div>
-
-      <div class="grid grid-cols-2 gap-2" id="formatRadioGroup">
-        <label class="cursor-pointer">
-          <input type="radio" name="layoutStyle" value="tax_invoice_gst" class="sr-only peer" checked>
-          <div class="p-2.5 bg-white border-2 border-slate-200 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 transition">
-            <div class="font-bold text-xs text-slate-800">1. GST Detailed Tax Invoice</div>
-            <div class="text-[10px] text-slate-500">CGST + SGST Breakdown</div>
-          </div>
-        </label>
-
-        <label class="cursor-pointer">
-          <input type="radio" name="layoutStyle" value="tax_invoice_igst" class="sr-only peer">
-          <div class="p-2.5 bg-white border-2 border-slate-200 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 transition">
-            <div class="font-bold text-xs text-slate-800">2. Interstate IGST Format</div>
-            <div class="text-[10px] text-slate-500">Single IGST Tax Column</div>
-          </div>
-        </label>
-
-        <label class="cursor-pointer">
-          <input type="radio" name="layoutStyle" value="corporate_executive" class="sr-only peer">
-          <div class="p-2.5 bg-white border-2 border-slate-200 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 transition">
-            <div class="font-bold text-xs text-slate-800">3. Corporate Executive</div>
-            <div class="text-[10px] text-slate-500">Professional Business Layout</div>
-          </div>
-        </label>
-
-        <label class="cursor-pointer">
-          <input type="radio" name="layoutStyle" value="modern_minimalist" class="sr-only peer">
-          <div class="p-2.5 bg-white border-2 border-slate-200 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 transition">
-            <div class="font-bold text-xs text-slate-800">4. Modern Minimalist</div>
-            <div class="text-[10px] text-slate-500">Clean & Sleek Design</div>
-          </div>
-        </label>
-
-        <label class="cursor-pointer col-span-2">
-          <input type="radio" name="layoutStyle" value="creative_bold" class="sr-only peer">
-          <div class="p-2.5 bg-white border-2 border-slate-200 rounded-xl peer-checked:border-indigo-600 peer-checked:bg-indigo-50/50 transition flex justify-between items-center">
-            <div>
-              <div class="font-bold text-xs text-slate-800">5. Creative / Bold Color Block</div>
-              <div class="text-[10px] text-slate-500">Sidebar Accent & Dynamic Highlighting</div>
-            </div>
-            <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold rounded-full">Stylish</span>
-          </div>
-        </label>
-      </div>
-
-      <!-- Accent Color Picker -->
-      <div class="pt-2 border-t border-indigo-100">
-        <label class="text-xs font-semibold text-slate-600 mb-1.5 block">Dynamic Color Theme (रंग चुनें):</label>
-        <div class="flex items-center gap-2" id="colorSwatches">
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-indigo-600 ring-offset-2" style="background:#1e3a5f" data-color="#1e3a5f"></button>
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-transparent" style="background:#0f766e" data-color="#0f766e"></button>
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-transparent" style="background:#047857" data-color="#047857"></button>
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-transparent" style="background:#7c3aed" data-color="#7c3aed"></button>
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-transparent" style="background:#b91c1c" data-color="#b91c1c"></button>
-          <button type="button" class="swatch-btn w-7 h-7 rounded-full ring-2 ring-transparent" style="background:#18181b" data-color="#18181b"></button>
-          <span class="w-px h-5 bg-slate-300 mx-1"></span>
-          <label class="relative w-7 h-7 rounded-full border border-slate-300 overflow-hidden cursor-pointer" title="Custom Color">
-            <input type="color" id="customColorPicker" value="#1e3a5f" class="w-10 h-10 -m-1 cursor-pointer">
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. COMPANY DETAILS -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">आपकी कंपनी / Business Details</h3>
-      <div class="space-y-2">
-        <input id="companyName" type="text" placeholder="कंपनी / फर्म का नाम" value="Apex Global Tech Solutions" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
-        <input id="companyGstin" type="text" placeholder="GSTIN (जैसे: 10AAAAA0000A1Z5)" value="10ABCDE1234F1Z5" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        <textarea id="companyAddress" rows="2" placeholder="पूरा पता" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none resize-none">Shop #104, IT Hub, Exhibition Road, Patna, Bihar - 800001</textarea>
-        <div class="grid grid-cols-2 gap-2">
-          <input id="companyPhone" type="text" placeholder="फ़ोन" value="+91 98765 43210" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-          <input id="companyEmail" type="text" placeholder="ईमेल" value="contact@apextech.com" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-        
-        <!-- Logo Upload -->
-        <div class="flex items-center gap-3 pt-1">
-          <div id="logoPreviewWrap" class="hidden w-12 h-12 rounded-lg border border-slate-200 p-1 shrink-0">
-            <img id="logoPreviewImg" class="w-full h-full object-contain" alt="Logo">
-          </div>
-          <label class="flex-1 cursor-pointer border border-dashed border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-500 hover:bg-slate-50 flex items-center gap-2">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-            <span>Upload Company Logo</span>
-            <input id="logoInput" type="file" accept="image/*" class="hidden">
-          </label>
-          <button id="removeLogoBtn" type="button" class="hidden text-[11px] text-red-500 font-bold">Remove</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 3. CLIENT DETAILS -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">ग्राहक की जानकारी / Bill To</h3>
-      <div class="space-y-2">
-        <input id="clientName" type="text" placeholder="ग्राहक / पार्टी का नाम" value="M/s Sharma Traders" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-indigo-500 outline-none">
-        <input id="clientGstin" type="text" placeholder="Client GSTIN (यदि है)" value="10XYZPS9876K1ZB" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        <textarea id="clientAddress" rows="2" placeholder="ग्राहक का पता" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none resize-none">Main Market Road, Muzaffarpur, Bihar - 842001</textarea>
-        <div class="grid grid-cols-2 gap-2">
-          <input id="clientPhone" type="text" placeholder="फ़ोन" value="+91 91234 56789" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-          <input id="clientEmail" type="text" placeholder="ईमेल" value="sharma.traders@gmail.com" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-      </div>
-    </div>
-
-    <!-- 4. INVOICE META -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">बिल विवरण (Invoice Meta)</h3>
-      <div class="grid grid-cols-3 gap-2">
-        <div>
-          <label class="text-[10px] text-slate-500 block mb-0.5">Invoice / Quote #</label>
-          <input id="quoteNumber" type="text" class="w-full rounded-lg border border-slate-300 px-2.5 py-1.5 text-xs font-bold focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-        <div>
-          <label class="text-[10px] text-slate-500 block mb-0.5">Date</label>
-          <input id="quoteDate" type="date" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-        <div>
-          <label class="text-[10px] text-slate-500 block mb-0.5">Due / Valid Until</label>
-          <input id="validUntil" type="date" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-      </div>
-    </div>
-
-    <!-- 5. ITEM WISE TAX ENTRY (HAR ITEM PAR ALAG TAX) -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <div class="flex items-center justify-between">
-        <div>
-          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-800">आइटम सूची (Item-Wise Tax Entry)</h3>
-          <p class="text-[10px] text-slate-500">हर सामान पर अलग-अलग HSN, दर और Tax % दर्ज करें</p>
-        </div>
-        <button id="addItemBtn" type="button" class="px-2.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm transition">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-          Add Item
-        </button>
-      </div>
-
-      <!-- Items Container -->
-      <div id="itemsContainer" class="space-y-3"></div>
-
-      <!-- Global Discount -->
-      <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
-        <span class="text-xs font-semibold text-slate-600">कुल बिल पर Extra Discount:</span>
-        <div class="flex items-center gap-1.5 w-40">
-          <input id="discountValue" type="number" min="0" step="0.01" value="0" class="w-full rounded-lg border border-slate-300 px-2 py-1.5 text-xs text-right focus:ring-2 focus:ring-indigo-500 outline-none">
-          <select id="discountType" class="rounded-lg border border-slate-300 px-1 py-1.5 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-            <option value="percent">%</option>
-            <option value="flat">₹ Flat</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6. PAYMENT DETAILS -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">भुगतान विवरण (Payment Details)</h3>
-      <div class="space-y-2">
-        <input id="upiId" type="text" placeholder="UPI ID (जैसे: company@upi)" value="8000018000@okbizaxis" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        <input id="bankDetails" type="text" placeholder="Bank Name, A/c No, IFSC" value="HDFC Bank | A/C: 50200012345678 | IFSC: HDFC0001234" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none">
-        
-        <div class="flex items-center gap-3 pt-1">
-          <div id="qrPreviewWrap" class="hidden w-12 h-12 rounded-lg border border-slate-200 p-1 shrink-0">
-            <img id="qrPreviewImg" class="w-full h-full object-contain" alt="QR">
-          </div>
-          <label class="flex-1 cursor-pointer border border-dashed border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-500 hover:bg-slate-50 flex items-center gap-2">
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            <span>Upload Payment QR Code</span>
-            <input id="qrInput" type="file" accept="image/*" class="hidden">
-          </label>
-          <button id="removeQrBtn" type="button" class="hidden text-[11px] text-red-500 font-bold">Remove</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 7. TERMS & SIGNATURE -->
-    <div class="border border-slate-200 rounded-2xl p-4 space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-slate-700">शर्तें एवं हस्ताक्षर (Terms & Signature)</h3>
-      <textarea id="termsText" rows="3" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs focus:ring-2 focus:ring-indigo-500 outline-none resize-none">1. Good once sold will not be taken back.
-2. Interest @18% p.a. will be charged if bill is not paid within due date.
-3. Subject to local Jurisdiction only.</textarea>
-
-      <!-- Signature Pad -->
-      <div class="pt-2">
-        <label class="text-[11px] font-semibold text-slate-600 mb-1 block">Digital Signature Draw करें:</label>
-        <div class="border border-slate-300 rounded-xl bg-slate-50 overflow-hidden">
-          <canvas id="sigCanvas"></canvas>
-        </div>
-        <div class="flex justify-between items-center mt-1.5">
-          <button id="clearSigBtn" type="button" class="text-[11px] text-red-500 font-bold hover:underline">Clear Signature</button>
-          <input id="signerName" type="text" placeholder="Signatory Name" value="Authorized Signatory" class="rounded-lg border border-slate-300 px-2 py-1 text-xs text-right focus:ring-2 focus:ring-indigo-500 outline-none">
-        </div>
-      </div>
-    </div>
-
-  </section>
- <!-- ==================== RIGHT: LIVE PREVIEW ==================== -->
-  <section id="previewPanel" class="mobile-hide bg-slate-200/70 lg:h-full lg:overflow-y-auto p-4 sm:p-8">
-    <div class="max-w-[850px] mx-auto">
-      <div class="flex items-center justify-between mb-3 no-print">
-        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Live Dynamic Tax Preview
-        </span>
-        <span class="text-[11px] text-slate-500">A4 Printable Format</span>
-      </div>
-
-      <!-- PAPER SHEET CONTAINER -->
-      <div id="previewContent" class="mx-auto w-full max-w-[794px] bg-white shadow-xl rounded-sm overflow-hidden min-h-[1050px] transition-all">
-        <!-- Rendered Dynamically via JavaScript -->
-      </div>
-      <div class="h-12"></div>
-    </div>
-  </section>
-
-</main>
+</div>
 
 <script>
-/* =========================================================================
-   APP STATE & INITIALIZATION
-   ========================================================================= */
-const STORAGE_KEY = 'tax_invoice_master_db_v1';
-let logoDataUrl = null;
-let qrDataUrl = null;
-let itemIdCounter = 0;
-let selectedAccentColor = '#1e3a5f';
-let sigCanvas, sigCtx, hasDrawnSignature = false;
+  let items = [
+    { name: "USHA WATER COOLER 400 LTR.", qty: 1, unit: 1, rate: 139500 },
+    { name: "KENT R.O ELITE (ii) 100 LPH.", qty: 1, unit: 1, rate: 95000 }
+  ];
 
-/* =========================================================================
-   UTILITIES
-   ========================================================================= */
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/[&<>"']/g, function(m) {
-    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
-  });
-}
-
-function val(id) {
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : '';
-}
-
-function fmtMoney(num) {
-  const n = isFinite(num) ? num : 0;
-  return '₹ ' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-}
-
-function formatDateDisplay(isoStr) {
-  if (!isoStr) return '—';
-  const d = new Date(isoStr + 'T00:00:00');
-  if (isNaN(d.getTime())) return isoStr;
-  return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-}
-
-function toDateInputValue(d) {
-  const yyyy = d.getFullYear();
-  const mm = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
-}
-
-function generateQuoteNumber() {
-  const rand = Math.floor(1000 + Math.random() * 9000);
-  return `INV-2026-${rand}`;
-}
-
-function hexToRgb(hex) {
-  hex = (hex || '#1e3a5f').replace('#', '');
-  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
-  return {
-    r: parseInt(hex.substr(0, 2), 16) || 0,
-    g: parseInt(hex.substr(2, 2), 16) || 0,
-    b: parseInt(hex.substr(4, 2), 16) || 0
-  };
-}
-
-function tint(hex, factor) {
-  const { r, g, b } = hexToRgb(hex);
-  const nr = Math.round(r + (255 - r) * factor);
-  const ng = Math.round(g + (255 - g) * factor);
-  const nb = Math.round(b + (255 - b) * factor);
-  return `rgb(${nr},${ng},${nb})`;
-}
-
-function contrastColor(hex) {
-  const { r, g, b } = hexToRgb(hex);
-  const yiq = (r * 299 + g * 587 + b * 114) / 1000;
-  return yiq >= 128 ? '#1e293b' : '#ffffff';
-}
-
-/* =========================================================================
-   DYNAMIC ITEM-WISE TAX ROWS
-   ========================================================================= */
-function createItemRowHTML(id, desc = '', hsn = '', qty = 1, rate = 0, taxPercent = 18) {
-  return `
-  <div class="item-row bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2 anim-fade" data-id="${id}">
-    <div class="flex items-center justify-between gap-2">
-      <input type="text" class="item-desc font-bold text-xs w-full rounded-lg border border-slate-300 px-2.5 py-1.5 focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="आइटम / सामान का नाम (Item Description)" value="${escapeHtml(desc)}">
-      <button type="button" class="remove-item-btn text-slate-400 hover:text-red-500 p-1" title="Delete Item">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-      </button>
-    </div>
-
-    <div class="grid grid-cols-12 gap-1.5 items-center">
-      <div class="col-span-3">
-        <label class="text-[9px] text-slate-400 block">HSN/SAC</label>
-        <input type="text" class="item-hsn w-full rounded-md border border-slate-300 px-2 py-1 text-xs focus:ring-2 focus:ring-indigo-500 outline-none" placeholder="HSN" value="${escapeHtml(hsn)}">
-      </div>
-      <div class="col-span-2">
-        <label class="text-[9px] text-slate-400 block text-center">Qty</label>
-        <input type="number" min="1" step="1" class="item-qty w-full text-center rounded-md border border-slate-300 px-1 py-1 text-xs font-semibold focus:ring-2 focus:ring-indigo-500 outline-none" value="${qty}">
-      </div>
-      <div class="col-span-3">
-        <label class="text-[9px] text-slate-400 block text-right">Rate (₹)</label>
-        <input type="number" min="0" step="0.01" class="item-rate w-full text-right rounded-md border border-slate-300 px-2 py-1 text-xs font-semibold focus:ring-2 focus:ring-indigo-500 outline-none" value="${rate}">
-      </div>
-      <div class="col-span-4">
-        <label class="text-[9px] text-indigo-600 font-bold block text-right">Tax Rate (%)</label>
-        <select class="item-tax w-full text-right rounded-md border border-indigo-300 bg-indigo-50/50 px-1 py-1 text-xs font-bold text-indigo-900 focus:ring-2 focus:ring-indigo-500 outline-none">
-          <option value="0" ${taxPercent == 0 ? 'selected' : ''}>0% (Exempt)</option>
-          <option value="5" ${taxPercent == 5 ? 'selected' : ''}>5% GST</option>
-          <option value="12" ${taxPercent == 12 ? 'selected' : ''}>12% GST</option>
-          <option value="18" ${taxPercent == 18 ? 'selected' : ''}>18% GST</option>
-          <option value="28" ${taxPercent == 28 ? 'selected' : ''}>28% GST</option>
-        </select>
-      </div>
-    </div>
-  </div>`;
-}
-
-function addItemRow(desc = '', hsn = '', qty = 1, rate = 0, taxPercent = 18) {
-  itemIdCounter++;
-  document.getElementById('itemsContainer').insertAdjacentHTML('beforeend', createItemRowHTML(itemIdCounter, desc, hsn, qty, rate, taxPercent));
-}
-
-function getItemsFromDOM() {
-  const rows = document.querySelectorAll('#itemsContainer .item-row');
-  return Array.from(rows).map(row => {
-    const desc = row.querySelector('.item-desc').value;
-    const hsn = row.querySelector('.item-hsn').value;
-    const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
-    const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
-    const taxPercent = parseFloat(row.querySelector('.item-tax').value) || 0;
-
-    const taxableAmount = qty * rate;
-    const taxAmount = taxableAmount * (taxPercent / 100);
-    const cgstAmount = taxAmount / 2;
-    const sgstAmount = taxAmount / 2;
-    const totalAmount = taxableAmount + taxAmount;
-
-    return {
-      desc, hsn, qty, rate, taxPercent,
-      taxableAmount, taxAmount, cgstAmount, sgstAmount, totalAmount
-    };
-  });
-}
-
-/* =========================================================================
-   TAX CALCULATIONS ENGINE
-   ========================================================================= */
-function calcTotals(items, discountValue, discountType) {
-  let totalTaxable = 0;
-  let totalTax = 0;
-  let totalCGST = 0;
-  let totalSGST = 0;
-
-  // Breakdown array grouped by Tax Slab
-  const taxSlabs = {};
-
-  items.forEach(i => {
-    totalTaxable += i.taxableAmount;
-    totalTax += i.taxAmount;
-    totalCGST += i.cgstAmount;
-    totalSGST += i.sgstAmount;
-
-    if (!taxSlabs[i.taxPercent]) {
-      taxSlabs[i.taxPercent] = { taxable: 0, cgst: 0, sgst: 0, taxTotal: 0 };
-    }
-    taxSlabs[i.taxPercent].taxable += i.taxableAmount;
-    taxSlabs[i.taxPercent].cgst += i.cgstAmount;
-    taxSlabs[i.taxPercent].sgst += i.sgstAmount;
-    taxSlabs[i.taxPercent].taxTotal += i.taxAmount;
-  });
-
-  const rawSubtotal = totalTaxable + totalTax;
-  
-  // Calculate Global Discount
-  let discountAmount = 0;
-  if (discountType === 'flat') {
-    discountAmount = Math.min(discountValue, rawSubtotal);
-  } else {
-    discountAmount = rawSubtotal * (discountValue / 100);
+  function updateColors() {
+    document.documentElement.style.setProperty('--primary', document.getElementById('primaryColor').value);
+    document.documentElement.style.setProperty('--secondary', document.getElementById('secondaryColor').value);
+    document.documentElement.style.setProperty('--accent', document.getElementById('accentColor').value);
   }
 
-  const grandTotal = Math.max(rawSubtotal - discountAmount, 0);
-
-  return {
-    totalTaxable, totalTax, totalCGST, totalSGST,
-    rawSubtotal, discountAmount, grandTotal, taxSlabs
-  };
-}
-
-/* =========================================================================
-   COLLECT ALL FORM DATA
-   ========================================================================= */
-function collectData() {
-  const items = getItemsFromDOM();
-  const discountValue = parseFloat(val('discountValue')) || 0;
-  const discountType = val('discountType');
-  const totals = calcTotals(items, discountValue, discountType);
-  const layout = document.querySelector('input[name="layoutStyle"]:checked')?.value || 'tax_invoice_gst';
-
-  let signatureImg = null;
-  if (hasDrawnSignature && sigCanvas) {
-    signatureImg = sigCanvas.toDataURL('image/png');
+  function updateLayout() {
+    const paper = document.getElementById('paper');
+    paper.className = 'quotation-paper ' + document.getElementById('layoutSelect').value;
   }
 
-  return {
-    meta: { layout, accentColor: selectedAccentColor },
-    company: {
-      name: val('companyName') || 'Your Company Name',
-      gstin: val('companyGstin'),
-      address: val('companyAddress'),
-      phone: val('companyPhone'),
-      email: val('companyEmail'),
-      logo: logoDataUrl
-    },
-    client: {
-      name: val('clientName') || 'Client Name',
-      gstin: val('clientGstin'),
-      address: val('clientAddress'),
-      phone: val('clientPhone'),
-      email: val('clientEmail')
-    },
-    quote: {
-      number: val('quoteNumber'),
-      date: val('quoteDate'),
-      validUntil: val('validUntil')
-    },
-    items, totals, discountValue, discountType,
-    payment: {
-      upiId: val('upiId'),
-      bankDetails: val('bankDetails'),
-      qr: qrDataUrl
-    },
-    terms: val('termsText'),
-    signature: { image: signatureImg, signerName: val('signerName') || 'Authorized Signatory' }
-  };
-}
-
-/* =========================================================================
-   PAYMENT QR ENGINE
-   ========================================================================= */
-function renderPaymentQR(data, size = 80) {
-  if (data.payment.qr) {
-    return `<img src="${data.payment.qr}" style="width:${size}px;height:${size}px;object-fit:contain;border-radius:6px;" alt="QR">`;
+  function renderItemsControl() {
+    const container = document.getElementById('itemsContainer');
+    container.innerHTML = '';
+    items.forEach((item, index) => {
+      container.innerHTML += `
+        <div class="item-row">
+          <input type="text" placeholder="Item Name" value="${item.name}" oninput="updateItem(${index}, 'name', this.value)">
+          <input type="number" placeholder="Qty" style="width: 50px;" value="${item.qty}" oninput="updateItem(${index}, 'qty', this.value)">
+          <input type="number" placeholder="Unit" style="width: 50px;" value="${item.unit}" oninput="updateItem(${index}, 'unit', this.value)">
+          <input type="number" placeholder="Rate" style="width: 85px;" value="${item.rate}" oninput="updateItem(${index}, 'rate', this.value)">
+          <button class="btn btn-remove" onclick="removeItem(${index})">X</button>
+        </div>
+      `;
+    });
   }
-  if (data.payment.upiId) {
-    const upiLink = `upi://pay?pa=${encodeURIComponent(data.payment.upiId)}&pn=${encodeURIComponent(data.company.name)}&am=${data.totals.grandTotal.toFixed(2)}&cu=INR`;
-    const src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(upiLink)}`;
-    return `<img src="${src}" style="width:${size}px;height:${size}px;object-fit:contain;border-radius:6px;" alt="UPI QR">`;
+
+  function addItem() {
+    items.push({ name: "New Equipment / Service Item", qty: 1, unit: 1, rate: 0 });
+    renderItemsControl();
+    render();
   }
-  return '';
-}
 
-/* =========================================================================
-   TEMPLATE 1: GST DETAILED TAX INVOICE (CGST + SGST SEPARATE COLUMNS)
-   ========================================================================= */
-function templateGstInvoice(data) {
-  const accent = data.meta.accentColor;
-  const contrast = contrastColor(accent);
+  function removeItem(index) {
+    items.splice(index, 1);
+    renderItemsControl();
+    render();
+  }
 
-  const rows = data.items.map((item, idx) => `
-    <tr style="border-bottom:1px solid #e2e8f0; font-size:11px;">
-      <td style="padding:6px 8px; text-align:center;">${idx + 1}</td>
-      <td style="padding:6px 8px; font-weight:600; color:#0f172a;">${escapeHtml(item.desc)}</td>
-      <td style="padding:6px 8px; text-align:center; color:#64748b;">${escapeHtml(item.hsn) || '-'}</td>
-      <td style="padding:6px 8px; text-align:center;">${item.qty}</td>
-      <td style="padding:6px 8px; text-align:right;">${fmtMoney(item.rate)}</td>
-      <td style="padding:6px 8px; text-align:right; font-weight:600;">${fmtMoney(item.taxableAmount)}</td>
-      <td style="padding:6px 8px; text-align:center; color:#475569;">${item.taxPercent / 2}%<br><span style="font-size:9.5px;color:#059669;">${fmtMoney(item.cgstAmount)}</span></td>
-      <td style="padding:6px 8px; text-align:center; color:#475569;">${item.taxPercent / 2}%<br><span style="font-size:9.5px;color:#059669;">${fmtMoney(item.sgstAmount)}</span></td>
-      <td style="padding:6px 8px; text-align:right; font-weight:700; color:${accent};">${fmtMoney(item.totalAmount)}</td>
-    </tr>
-  `).join('');
+  function updateItem(index, key, value) {
+    items[index][key] = key === 'name' ? value : parseFloat(value) || 0;
+    render();
+  }
 
-  return `
-  <div style="font-family:'Inter','Hind',sans-serif; p-8; background:#ffffff; color:#1e293b; padding:30px;">
-    <!-- Top Header Bar -->
-    <div style="display:flex; justify-between; align-items:flex-start; border-bottom:2px solid ${accent}; padding-bottom:15px; margin-bottom:20px;">
-      <div style="display:flex; gap:12px; align-items:center;">
-        ${data.company.logo ? `<img src="${data.company.logo}" style="max-height:55px; max-width:110px; object-fit:contain;">` : ''}
+  function formatCurrency(amt) {
+    return amt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function render() {
+    const vName = document.getElementById('vendorName').value;
+    const vAddr = document.getElementById('vendorAddress').value.replace(/\n/g, '<br>');
+    const vGst = document.getElementById('vendorGst').value;
+
+    const cName = document.getElementById('clientName').value;
+    const cAddr = document.getElementById('clientAddress').value.replace(/\n/g, '<br>');
+
+    const qNum = document.getElementById('qNum').value;
+    const qDate = document.getElementById('qDate').value;
+    const qValid = document.getElementById('qValid').value;
+    const qCurr = document.getElementById('qCurrency').value;
+
+    const qNotes = document.getElementById('qNotes').value;
+    const qTerms = document.getElementById('qTerms').value;
+
+    let itemsTableHtml = '';
+    let subtotal = 0;
+
+    items.forEach(item => {
+      const amount = item.qty * item.rate;
+      subtotal += amount;
+      itemsTableHtml += `
+        <tr>
+          <td><strong>${item.name}</strong></td>
+          <td style="text-align: center;">${item.qty}</td>
+          <td style="text-align: center;">${item.unit}</td>
+          <td style="text-align: right;">${formatCurrency(item.rate)}</td>
+          <td style="text-align: right;"><strong>${formatCurrency(amount)}</strong></td>
+        </tr>
+      `;
+    });
+
+    const renderDiv = document.getElementById('quotationRender');
+    renderDiv.innerHTML = `
+      <div class="q-header">
         <div>
-          <h2 style="font-size:18px; font-weight:800; color:#0f172a; text-transform:uppercase; margin:0;">${escapeHtml(data.company.name)}</h2>
-          ${data.company.gstin ? `<div style="font-size:11px; font-weight:700; color:${accent};">GSTIN: ${escapeHtml(data.company.gstin)}</div>` : ''}
-          <div style="font-size:10.5px; color:#64748b; margin-top:2px; max-width:320px;">${escapeHtml(data.company.address)}</div>
-          <div style="font-size:10.5px; color:#64748b;">Mob: ${escapeHtml(data.company.phone)} | Email: ${escapeHtml(data.company.email)}</div>
+          <h1 style="color: var(--primary); font-size: 22px; font-weight: 700; margin-bottom: 4px;">${vName}</h1>
+          <p style="color: #475569; font-size: 12px; line-height: 1.4;">${vAddr}</p>
+          <p style="color: #475569; font-size: 12px; margin-top: 3px;"><strong>GSTIN:</strong> ${vGst}</p>
+        </div>
+        <div style="text-align: right;">
+          <span class="badge q-title">QUOTATION</span>
+          <div style="margin-top: 10px; font-size: 12px; line-height: 1.4; color: #334155;">
+            <p><strong>Quotation #:</strong> ${qNum}</p>
+            <p><strong>Date:</strong> ${qDate}</p>
+            <p><strong>Valid Until:</strong> ${qValid}</p>
+            <p><strong>Currency:</strong> ${qCurr}</p>
+          </div>
         </div>
       </div>
-      <div style="text-align:right;">
-        <div style="font-size:22px; font-weight:900; color:${accent}; letter-spacing:1px;">TAX INVOICE</div>
-        <div style="font-size:11px; font-weight:700; color:#334155; margin-top:5px;">Invoice #: ${escapeHtml(data.quote.number)}</div>
-        <div style="font-size:11px; color:#64748b;">Date: ${formatDateDisplay(data.quote.date)}</div>
-        <div style="font-size:11px; color:#64748b;">Due Date: ${formatDateDisplay(data.quote.validUntil)}</div>
+
+      <div class="grid-2">
+        <div class="info-box">
+          <p style="text-transform: uppercase; color: #64748b; font-size: 10px; font-weight: 700; margin-bottom: 3px;">Estimate For:</p>
+          <p><strong>${cName}</strong></p>
+          <p style="color: #334155; margin-top: 2px;">${cAddr}</p>
+        </div>
+        <div class="info-box" style="display: flex; flex-direction: column; justify-content: center;">
+          <p><strong>Status:</strong> Pending Approval</p>
+          <p style="margin-top: 2px; color: #64748b;">Please review the items and terms below.</p>
+        </div>
       </div>
-    </div>
 
-    <!-- Bill To Box -->
-    <div style="background:${tint(accent, 0.94)}; border-left:4px solid ${accent}; padding:12px 15px; border-radius:6px; margin-bottom:20px;">
-      <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:${accent};">BILL TO (PARTY DETAILS):</div>
-      <div style="font-size:14px; font-weight:700; color:#0f172a; margin-top:2px;">${escapeHtml(data.client.name)}</div>
-      ${data.client.gstin ? `<div style="font-size:11px; font-weight:700; color:#0369a1;">GSTIN: ${escapeHtml(data.client.gstin)}</div>` : ''}
-      <div style="font-size:11px; color:#475569; margin-top:2px;">${escapeHtml(data.client.address)}</div>
-      <div style="font-size:11px; color:#475569;">Contact: ${escapeHtml(data.client.phone)} | ${escapeHtml(data.client.email)}</div>
-    </div>
+      <table>
+        <thead>
+          <tr>
+            <th>ITEM DESCRIPTION</th>
+            <th style="text-align: center;">QTY</th>
+            <th style="text-align: center;">UNIT</th>
+            <th style="text-align: right;">RATE</th>
+            <th style="text-align: right;">AMOUNT</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsTableHtml}
+        </tbody>
+      </table>
 
-    <!-- Items Table -->
-    <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-      <thead>
-        <tr style="background:${accent}; color:${contrast}; font-size:10px; text-transform:uppercase; letter-spacing:0.5px;">
-          <th style="padding:8px 6px; text-align:center;">#</th>
-          <th style="padding:8px 6px; text-align:left;">Item Description</th>
-          <th style="padding:8px 6px; text-align:center;">HSN</th>
-          <th style="padding:8px 6px; text-align:center;">Qty</th>
-          <th style="padding:8px 6px; text-align:right;">Rate</th>
-          <th style="padding:8px 6px; text-align:right;">Taxable Amt</th>
-          <th style="padding:8px 6px; text-align:center;">CGST</th>
-          <th style="padding:8px 6px; text-align:center;">SGST</th>
-          <th style="padding:8px 6px; text-align:right;">Total (₹)</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows}
-      </tbody>
-    </table>
-
-    <!-- Totals & Tax Summary Breakdown -->
-    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px; margin-bottom:25px;">
-      <!-- Tax Summary Table -->
-      <div style="flex:1; border:1px solid #cbd5e1; border-radius:6px; overflow:hidden;">
-        <div style="background:#f1f5f9; padding:5px 10px; font-size:10px; font-weight:800; color:#334155; border-bottom:1px solid #cbd5e1;">TAX SUMMARY BREAKDOWN</div>
-        <table style="width:100%; border-collapse:collapse; font-size:10px;">
-          <thead>
-            <tr style="border-bottom:1px solid #e2e8f0; background:#f8fafc; color:#64748b;">
-              <th style="padding:4px 6px; text-align:left;">Tax Rate</th>
-              <th style="padding:4px 6px; text-align:right;">Taxable Value</th>
-              <th style="padding:4px 6px; text-align:right;">CGST</th>
-              <th style="padding:4px 6px; text-align:right;">SGST</th>
-              <th style="padding:4px 6px; text-align:right;">Total Tax</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${Object.entries(data.totals.taxSlabs).map(([slab, val]) => `
-              <tr style="border-bottom:1px solid #f1f5f9;">
-                <td style="padding:4px 6px; font-weight:700;">GST ${slab}%</td>
-                <td style="padding:4px 6px; text-align:right;">${fmtMoney(val.taxable)}</td>
-                <td style="padding:4px 6px; text-align:right;">${fmtMoney(val.cgst)}</td>
-                <td style="padding:4px 6px; text-align:right;">${fmtMoney(val.sgst)}</td>
-                <td style="padding:4px 6px; text-align:right; font-weight:700;">${fmtMoney(val.taxTotal)}</td>
-              </tr>
-            `).join('')}
-          </tbody>
+      <div class="totals-section">
+        <table class="totals-table">
+          <tr>
+            <td>Subtotal</td>
+            <td style="text-align: right;">${formatCurrency(subtotal)}</td>
+          </tr>
+          <tr class="grand-total">
+            <td>Total</td>
+            <td style="text-align: right;">${formatCurrency(subtotal)}</td>
+          </tr>
         </table>
       </div>
 
-      <!-- Calculation Box -->
-      <div style="width:260px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">
-        <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#475569;">
-          <span>Total Taxable Amount:</span>
-          <span style="font-weight:600;">${fmtMoney(data.totals.totalTaxable)}</span>
+      <div class="q-footer">
+        <div>
+          <p style="margin-bottom: 4px;"><strong>Notes:</strong> ${qNotes}</p>
+          <p style="color: #64748b;"><strong>Terms & Conditions:</strong> ${qTerms}</p>
         </div>
-        <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#059669;">
-          <span>Total CGST:</span>
-          <span>${fmtMoney(data.totals.totalCGST)}</span>
-        </div>
-        <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#059669;">
-          <span>Total SGST:</span>
-          <span>${fmtMoney(data.totals.totalSGST)}</span>
-        </div>
-        ${data.totals.discountAmount > 0 ? `
-          <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#dc2626;">
-            <span>Extra Discount:</span>
-            <span>- ${fmtMoney(data.totals.discountAmount)}</span>
-          </div>
-        ` : ''}
-        <div style="display:flex; justify-content:space-between; align-items:center; background:${accent}; color:${contrast}; padding:8px 10px; border-radius:6px; font-size:14px; font-weight:800; margin-top:8px;">
-          <span>Grand Total:</span>
-          <span>${fmtMoney(data.totals.grandTotal)}</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Info & Sign -->
-    <div style="display:flex; justify-content:space-between; gap:20px; border-top:1px solid #e2e8f0; padding-top:15px;">
-      <div style="flex:1;">
-        <div style="font-size:10px; font-weight:800; color:#334155; text-transform:uppercase;">PAYMENT INFO:</div>
-        <div style="display:flex; gap:10px; align-items:center; margin-top:5px;">
-          ${renderPaymentQR(data, 65)}
-          <div style="font-size:10px; color:#475569;">
-            ${data.payment.upiId ? `<div><strong>UPI ID:</strong> ${escapeHtml(data.payment.upiId)}</div>` : ''}
-            ${data.payment.bankDetails ? `<div style="margin-top:2px;"><strong>Bank:</strong> ${escapeHtml(data.payment.bankDetails)}</div>` : ''}
+        <div class="signature-container">
+          <p style="font-size: 10px; color: #94a3b8; margin-bottom: 2px;">Quotation generated by</p>
+          <p style="font-size: 11px; font-weight: 600;">R. S. WATER CORPORATION</p>
+          <div class="signature-line">
+            Authorised Signatory
           </div>
         </div>
-        <div style="font-size:10px; font-weight:700; color:#334155; margin-top:10px;">TERMS & CONDITIONS:</div>
-        <div style="font-size:9.5px; color:#64748b; white-space:pre-line;">${escapeHtml(data.terms)}</div>
       </div>
-
-      <div style="text-align:center; min-width:160px; align-self:flex-end;">
-        ${data.signature.image ? `<img src="${data.signature.image}" style="height:45px; object-fit:contain; margin-bottom:2px;">` : `<div style="height:45px;"></div>`}
-        <div style="border-top:1px dashed #94a3b8; padding-top:3px; font-size:10.5px; font-weight:700; color:#334155;">${escapeHtml(data.signature.signerName)}</div>
-        <div style="font-size:9px; color:#94a3b8;">Authorized Signatory</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* =========================================================================
-   TEMPLATE 2: INTERSTATE IGST FORMAT (SINGLE INTEGRATED TAX COLUMN)
-   ========================================================================= */
-function templateIgstInvoice(data) {
-  const accent = data.meta.accentColor;
-  const contrast = contrastColor(accent);
-
-  const rows = data.items.map((item, idx) => `
-    <tr style="border-bottom:1px solid #e2e8f0; font-size:11.5px;">
-      <td style="padding:7px 8px; text-align:center;">${idx + 1}</td>
-      <td style="padding:7px 8px; font-weight:600;">${escapeHtml(item.desc)}</td>
-      <td style="padding:7px 8px; text-align:center; color:#64748b;">${escapeHtml(item.hsn) || '-'}</td>
-      <td style="padding:7px 8px; text-align:center;">${item.qty}</td>
-      <td style="padding:7px 8px; text-align:right;">${fmtMoney(item.rate)}</td>
-      <td style="padding:7px 8px; text-align:right;">${fmtMoney(item.taxableAmount)}</td>
-      <td style="padding:7px 8px; text-align:center; color:#0284c7; font-weight:600;">${item.taxPercent}%<br><span style="font-size:10px;">(${fmtMoney(item.taxAmount)})</span></td>
-      <td style="padding:7px 8px; text-align:right; font-weight:700; color:${accent};">${fmtMoney(item.totalAmount)}</td>
-    </tr>
-  `).join('');
-
-  return `
-  <div style="font-family:'Inter',sans-serif; padding:30px; background:#ffffff;">
-    <div style="background:${accent}; color:${contrast}; padding:15px 20px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-      <div>
-        <h1 style="font-size:20px; font-weight:800; margin:0; text-transform:uppercase;">${escapeHtml(data.company.name)}</h1>
-        <div style="font-size:11px; opacity:0.9;">INTERSTATE TAX INVOICE (IGST)</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:16px; font-weight:800;"># ${escapeHtml(data.quote.number)}</div>
-        <div style="font-size:11px; opacity:0.9;">Date: ${formatDateDisplay(data.quote.date)}</div>
-      </div>
-    </div>
-
-    <div style="display:flex; justify-content:space-between; gap:20px; margin-bottom:20px; font-size:11px;">
-      <div style="flex:1; border:1px solid #e2e8f0; padding:10px; border-radius:6px;">
-        <strong style="color:${accent};">SUPPLIER (FROM):</strong>
-        <div style="font-weight:700; font-size:12px; margin-top:2px;">${escapeHtml(data.company.name)}</div>
-        ${data.company.gstin ? `<div>GSTIN: <strong>${escapeHtml(data.company.gstin)}</strong></div>` : ''}
-        <div>${escapeHtml(data.company.address)}</div>
-      </div>
-      <div style="flex:1; border:1px solid #e2e8f0; padding:10px; border-radius:6px;">
-        <strong style="color:${accent};">BUYER / CONSIGNEE (TO):</strong>
-        <div style="font-weight:700; font-size:12px; margin-top:2px;">${escapeHtml(data.client.name)}</div>
-        ${data.client.gstin ? `<div>GSTIN: <strong>${escapeHtml(data.client.gstin)}</strong></div>` : ''}
-        <div>${escapeHtml(data.client.address)}</div>
-      </div>
-    </div>
-
-    <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-      <thead>
-        <tr style="background:#f1f5f9; color:#334155; font-size:10px; text-transform:uppercase; border-bottom:2px solid #cbd5e1;">
-          <th style="padding:8px; text-align:center;">#</th>
-          <th style="padding:8px; text-align:left;">Item Description</th>
-          <th style="padding:8px; text-align:center;">HSN</th>
-          <th style="padding:8px; text-align:center;">Qty</th>
-          <th style="padding:8px; text-align:right;">Rate</th>
-          <th style="padding:8px; text-align:right;">Taxable Value</th>
-          <th style="padding:8px; text-align:center;">IGST Rate & Amt</th>
-          <th style="padding:8px; text-align:right;">Total Amount</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-
-    <div style="display:flex; justify-content:flex-end; margin-bottom:20px;">
-      <div style="width:280px; background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; p:12px; padding:10px 15px;">
-        <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0;"><span>Taxable Value:</span><span>${fmtMoney(data.totals.totalTaxable)}</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#0284c7; font-weight:600;"><span>Integrated Tax (IGST):</span><span>${fmtMoney(data.totals.totalTax)}</span></div>
-        ${data.totals.discountAmount > 0 ? `<div style="display:flex; justify-content:space-between; font-size:11px; padding:3px 0; color:#dc2626;"><span>Discount:</span><span>- ${fmtMoney(data.totals.discountAmount)}</span></div>` : ''}
-        <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:800; color:${accent}; border-top:2px solid ${accent}; padding-top:6px; margin-top:4px;"><span>Total Bill:</span><span>${fmtMoney(data.totals.grandTotal)}</span></div>
-      </div>
-    </div>
-
-    <div style="display:flex; justify-content:space-between; border-top:1px solid #e2e8f0; padding-top:15px; font-size:10px;">
-      <div>
-        <strong>Bank Details:</strong> ${escapeHtml(data.payment.bankDetails)}<br>
-        <strong>Terms:</strong> ${escapeHtml(data.terms)}
-      </div>
-      <div style="text-align:center;">
-        ${data.signature.image ? `<img src="${data.signature.image}" style="height:40px;">` : `<div style="height:40px;"></div>`}
-        <div style="border-top:1px solid #cbd5e1; padding-top:2px; font-weight:700;">${escapeHtml(data.signature.signerName)}</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* =========================================================================
-   TEMPLATE 3: CORPORATE EXECUTIVE
-   ========================================================================= */
-function templateCorporate(data) {
-  const accent = data.meta.accentColor;
-  const contrast = contrastColor(accent);
-
-  const rows = data.items.map((item, idx) => `
-    <tr style="border-bottom:1px solid #f1f5f9; font-size:11.5px;">
-      <td style="padding:8px; text-align:center; color:#94a3b8;">${idx + 1}</td>
-      <td style="padding:8px; font-weight:600; color:#1e293b;">${escapeHtml(item.desc)}</td>
-      <td style="padding:8px; text-align:center;">${item.qty}</td>
-      <td style="padding:8px; text-align:right;">${fmtMoney(item.rate)}</td>
-      <td style="padding:8px; text-align:center; color:#6366f1;">${item.taxPercent}%</td>
-      <td style="padding:8px; text-align:right; font-weight:700;">${fmtMoney(item.totalAmount)}</td>
-    </tr>
-  `).join('');
-
-  return `
-  <div style="font-family:'Poppins',sans-serif; padding:35px; background:#ffffff;">
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid ${accent}; padding-bottom:20px; margin-bottom:25px;">
-      <div>
-        <h1 style="font-size:22px; font-weight:800; color:#0f172a; margin:0;">${escapeHtml(data.company.name)}</h1>
-        <div style="font-size:11px; color:#64748b;">${escapeHtml(data.company.address)}</div>
-      </div>
-      <div style="background:${accent}; color:${contrast}; padding:10px 20px; border-radius:30px; font-size:14px; font-weight:800; letter-spacing:1px;">
-        QUOTATION / BILL
-      </div>
-    </div>
-
-    <div style="display:flex; justify-content:space-between; margin-bottom:25px; font-size:11px;">
-      <div>
-        <div style="font-weight:700; color:${accent}; text-transform:uppercase;">CLIENT DETAILS:</div>
-        <div style="font-size:13px; font-weight:700; color:#0f172a; margin-top:2px;">${escapeHtml(data.client.name)}</div>
-        <div style="color:#64748b;">${escapeHtml(data.client.address)}</div>
-      </div>
-      <div style="text-align:right;">
-        <div>Invoice No: <strong>${escapeHtml(data.quote.number)}</strong></div>
-        <div>Date: <strong>${formatDateDisplay(data.quote.date)}</strong></div>
-      </div>
-    </div>
-
-    <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-      <thead>
-        <tr style="background:${tint(accent, 0.9)}; color:${accent}; font-size:11px; font-weight:700;">
-          <th style="padding:10px; text-align:center;">#</th>
-          <th style="padding:10px; text-align:left;">Item & Description</th>
-          <th style="padding:10px; text-align:center;">Qty</th>
-          <th style="padding:10px; text-align:right;">Rate</th>
-          <th style="padding:10px; text-align:center;">Tax %</th>
-          <th style="padding:10px; text-align:right;">Amount</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-
-    <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:2px solid #f1f5f9; padding-top:15px;">
-      <div style="font-size:10px; color:#64748b; max-width:350px;">
-        <strong>Terms:</strong> ${escapeHtml(data.terms)}
-      </div>
-      <div style="width:230px;">
-        <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; padding:4px 0;"><span>Subtotal:</span><span>${fmtMoney(data.totals.totalTaxable)}</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:600; padding:4px 0; color:#059669;"><span>Total Tax:</span><span>${fmtMoney(data.totals.totalTax)}</span></div>
-        <div style="display:flex; justify-content:space-between; font-size:15px; font-weight:800; color:${accent}; border-top:2px solid ${accent}; padding-top:6px; margin-top:4px;"><span>Grand Total:</span><span>${fmtMoney(data.totals.grandTotal)}</span></div>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* =========================================================================
-   TEMPLATE 4: MODERN MINIMALIST
-   ========================================================================= */
-function templateMinimalist(data) {
-  const accent = data.meta.accentColor;
-
-  const rows = data.items.map((item, idx) => `
-    <tr style="border-bottom:1px solid #f8fafc; font-size:11.5px;">
-      <td style="padding:10px 4px; color:#0f172a; font-weight:500;">${escapeHtml(item.desc)}</td>
-      <td style="padding:10px 4px; text-align:center; color:#64748b;">${item.qty}</td>
-      <td style="padding:10px 4px; text-align:right; color:#64748b;">${fmtMoney(item.rate)}</td>
-      <td style="padding:10px 4px; text-align:center; color:#94a3b8;">${item.taxPercent}%</td>
-      <td style="padding:10px 4px; text-align:right; font-weight:700; color:#0f172a;">${fmtMoney(item.totalAmount)}</td>
-    </tr>
-  `).join('');
-
-  return `
-  <div style="font-family:'Inter',sans-serif; padding:40px; background:#ffffff; color:#334155;">
-    <div style="display:flex; justify-content:space-between; margin-bottom:40px;">
-      <div>
-        <h2 style="font-size:20px; font-weight:700; color:#0f172a; margin:0;">${escapeHtml(data.company.name)}</h2>
-        <div style="font-size:11px; color:#94a3b8; margin-top:4px;">${escapeHtml(data.company.address)}</div>
-      </div>
-      <div style="text-align:right;">
-        <div style="font-size:12px; font-weight:700; letter-spacing:2px; color:${accent};">INVOICE</div>
-        <div style="font-size:11px; color:#94a3b8; margin-top:4px;"># ${escapeHtml(data.quote.number)}</div>
-      </div>
-    </div>
-
-    <div style="margin-bottom:30px; font-size:11px;">
-      <div style="color:#94a3b8; text-transform:uppercase; font-size:9px; font-weight:700;">BILLED TO:</div>
-      <div style="font-size:13px; font-weight:600; color:#0f172a;">${escapeHtml(data.client.name)}</div>
-      <div style="color:#64748b;">${escapeHtml(data.client.address)}</div>
-    </div>
-
-    <table style="width:100%; border-collapse:collapse; margin-bottom:30px;">
-      <thead>
-        <tr style="border-bottom:1px solid #0f172a; font-size:10px; text-transform:uppercase; color:#94a3b8;">
-          <th style="padding:6px 4px; text-align:left;">Item</th>
-          <th style="padding:6px 4px; text-align:center;">Qty</th>
-          <th style="padding:6px 4px; text-align:right;">Rate</th>
-          <th style="padding:6px 4px; text-align:center;">Tax %</th>
-          <th style="padding:6px 4px; text-align:right;">Amount</th>
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-
-    <div style="display:flex; justify-content:flex-end;">
-      <div style="width:220px; font-size:12px;">
-        <div style="display:flex; justify-content:space-between; padding:4px 0; color:#64748b;"><span>Taxable:</span><span>${fmtMoney(data.totals.totalTaxable)}</span></div>
-        <div style="display:flex; justify-content:space-between; padding:4px 0; color:#64748b;"><span>Tax:</span><span>${fmtMoney(data.totals.totalTax)}</span></div>
-        <div style="display:flex; justify-content:space-between; padding:8px 0; font-size:16px; font-weight:800; color:${accent}; border-top:1px solid #0f172a;"><span>Total:</span><span>${fmtMoney(data.totals.grandTotal)}</span></div>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* =========================================================================
-   TEMPLATE 5: CREATIVE BOLD COLOR BLOCK
-   ========================================================================= */
-function templateCreativeBold(data) {
-  const accent = data.meta.accentColor;
-  const contrast = contrastColor(accent);
-
-  const rows = data.items.map((item, idx) => `
-    <tr style="border-bottom:1px solid #e2e8f0; font-size:11.5px;">
-      <td style="padding:8px; text-align:center;">${idx + 1}</td>
-      <td style="padding:8px; font-weight:700; color:#0f172a;">${escapeHtml(item.desc)}</td>
-      <td style="padding:8px; text-align:center;">${item.qty}</td>
-      <td style="padding:8px; text-align:right;">${fmtMoney(item.rate)}</td>
-      <td style="padding:8px; text-align:center; color:#0284c7;">${item.taxPercent}%</td>
-      <td style="padding:8px; text-align:right; font-weight:800; color:${accent};">${fmtMoney(item.totalAmount)}</td>
-    </tr>
-  `).join('');
-
-  return `
-  <div style="font-family:'Poppins',sans-serif; display:flex; min-height:600px; background:#ffffff;">
-    <!-- Left Accent Sidebar -->
-    <div style="width:220px; background:${accent}; color:${contrast}; padding:30px 20px; display:flex; flex-direction:column; justify-content:space-between;">
-      <div>
-        <h2 style="font-size:18px; font-weight:900; text-transform:uppercase; margin:0 0 10px 0;">${escapeHtml(data.company.name)}</h2>
-        <div style="font-size:10.5px; opacity:0.85; line-height:1.5;">${escapeHtml(data.company.address)}</div>
-        <div style="font-size:10.5px; opacity:0.85; margin-top:8px;">${escapeHtml(data.company.phone)}</div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.15); padding:12px; border-radius:8px;">
-        <div style="font-size:10px; font-weight:700; text-transform:uppercase; opacity:0.8;">Total Amount Due</div>
-        <div style="font-size:18px; font-weight:900; margin-top:2px;">${fmtMoney(data.totals.grandTotal)}</div>
-      </div>
-    </div>
-
-    <!-- Right Content Area -->
-    <div style="flex:1; padding:30px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:25px;">
-        <div style="font-size:22px; font-weight:900; color:${accent};">INVOICE STATEMENT</div>
-        <div style="text-align:right; font-size:11px;">
-          <div>No: <strong>${escapeHtml(data.quote.number)}</strong></div>
-          <div>Date: <strong>${formatDateDisplay(data.quote.date)}</strong></div>
-        </div>
-      </div>
-
-      <div style="background:#f8fafc; border:1px solid #e2e8f0; p:12px; border-radius:8px; padding:10px; margin-bottom:20px; font-size:11px;">
-        <span style="color:#64748b; font-size:10px; font-weight:700;">BILL TO:</span>
-        <div style="font-size:13px; font-weight:700; color:#0f172a;">${escapeHtml(data.client.name)}</div>
-        <div>${escapeHtml(data.client.address)}</div>
-      </div>
-
-      <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-        <thead>
-          <tr style="background:#f1f5f9; font-size:10px; text-transform:uppercase; color:#475569;">
-            <th style="padding:8px; text-align:center;">#</th>
-            <th style="padding:8px; text-align:left;">Item</th>
-            <th style="padding:8px; text-align:center;">Qty</th>
-            <th style="padding:8px; text-align:right;">Rate</th>
-            <th style="padding:8px; text-align:center;">Tax</th>
-            <th style="padding:8px; text-align:right;">Total</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>
-
-      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #e2e8f0; padding-top:15px; font-size:10px;">
-        <div>Thank you for doing business with us!</div>
-        <div style="text-align:center;">
-          ${data.signature.image ? `<img src="${data.signature.image}" style="height:35px;">` : `<div style="height:35px;"></div>`}
-          <div style="border-top:1px solid #cbd5e1; padding-top:2px; font-weight:700;">${escapeHtml(data.signature.signerName)}</div>
-        </div>
-      </div>
-    </div>
-  </div>`;
-}
-/* =========================================================================
-   RENDER ROUTER
-   ========================================================================= */
-function renderPreview() {
-  const data = collectData();
-  let html = '';
-
-  switch (data.meta.layout) {
-    case 'tax_invoice_igst':
-      html = templateIgstInvoice(data);
-      break;
-    case 'corporate_executive':
-      html = templateCorporate(data);
-      break;
-    case 'modern_minimalist':
-      html = templateMinimalist(data);
-      break;
-    case 'creative_bold':
-      html = templateCreativeBold(data);
-      break;
-    case 'tax_invoice_gst':
-    default:
-      html = templateGstInvoice(data);
-      break;
+    `;
   }
 
-  document.getElementById('previewContent').innerHTML = html;
-}
-
-/* =========================================================================
-   SIGNATURE CANVAS ENGINE
-   ========================================================================= */
-function initSignaturePad() {
-  sigCanvas = document.getElementById('sigCanvas');
-  sigCtx = sigCanvas.getContext('2d');
-
-  function resizeCanvas() {
-    const rect = sigCanvas.getBoundingClientRect();
-    const dpr = window.devicePixelRatio || 1;
-    sigCanvas.width = rect.width * dpr;
-    sigCanvas.height = rect.height * dpr;
-    sigCtx.scale(dpr, dpr);
-    sigCtx.strokeStyle = '#0f172a';
-    sigCtx.lineWidth = 2;
-    sigCtx.lineCap = 'round';
-  }
-
-  resizeCanvas();
-
-  let drawing = false, lastX = 0, lastY = 0;
-  function getPos(e) {
-    const rect = sigCanvas.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }
-
-  sigCanvas.addEventListener('mousedown', (e) => {
-    drawing = true;
-    hasDrawnSignature = true;
-    const p = getPos(e);
-    lastX = p.x; lastY = p.y;
-  });
-
-  sigCanvas.addEventListener('mousemove', (e) => {
-    if (!drawing) return;
-    const p = getPos(e);
-    sigCtx.beginPath();
-    sigCtx.moveTo(lastX, lastY);
-    sigCtx.lineTo(p.x, p.y);
-    sigCtx.stroke();
-    lastX = p.x; lastY = p.y;
-  });
-
-  ['mouseup', 'mouseleave'].forEach(evt => {
-    sigCanvas.addEventListener(evt, () => {
-      if (drawing) {
-        drawing = false;
-        renderPreview();
-      }
-    });
-  });
-
-  document.getElementById('clearSigBtn').addEventListener('click', () => {
-    sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
-    hasDrawnSignature = false;
-    renderPreview();
-  });
-}
-
-/* =========================================================================
-   IMAGE UPLOADS HANDLER
-   ========================================================================= */
-function handleFileUpload(file, callback) {
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    callback(e.target.result);
-  };
-  reader.readAsDataURL(file);
-}
-
-/* =========================================================================
-   PDF EXPORT ENGINE
-   ========================================================================= */
-function downloadPDF() {
-  const element = document.getElementById('previewContent');
-  const opt = {
-    margin: 0,
-    filename: `Tax_Bill_${val('quoteNumber') || 'Invoice'}.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true },
-    jsPDF: { unit: 'px', format: [794, element.scrollHeight], orientation: 'portrait' }
-  };
-  html2pdf().set(opt).from(element).save();
-}
-
-/* =========================================================================
-   EVENT LISTENERS & INIT
-   ========================================================================= */
-document.addEventListener('DOMContentLoaded', function() {
-  // Set Default Dates & Initial Items
-  document.getElementById('quoteNumber').value = generateQuoteNumber();
-  const today = new Date();
-  const valid = new Date(); valid.setDate(valid.getDate() + 15);
-  document.getElementById('quoteDate').value = toDateInputValue(today);
-  document.getElementById('validUntil').value = toDateInputValue(valid);
-
-  // Add Initial Sample Items (Diverse HSN & Tax Slabs)
-  addItemRow('Dell Latitude Laptop 15.6"', '8471', 1, 45000, 18);
-  addItemRow('Wireless Optical Mouse', '8471', 2, 750, 12);
-  addItemRow('Server Maintenance Service', '9983', 1, 5000, 18);
-
-  initSignaturePad();
-
-  // Input Listeners
-  document.getElementById('formPanel').addEventListener('input', renderPreview);
-  document.getElementById('formPanel').addEventListener('change', renderPreview);
-
-  // Dynamic Add Item Button
-  document.getElementById('addItemBtn').addEventListener('click', function() {
-    addItemRow('', '', 1, 0, 18);
-    renderPreview();
-  });
-
-  // Delete Item Event Delegation
-  document.getElementById('itemsContainer').addEventListener('click', function(e) {
-    const btn = e.target.closest('.remove-item-btn');
-    if (!btn) return;
-    const row = btn.closest('.item-row');
-    if (document.querySelectorAll('#itemsContainer .item-row').length > 1) {
-      row.remove();
-    } else {
-      alert('कम से कम एक आइटम का होना अनिवार्य है।');
-    }
-    renderPreview();
-  });
-
-  // Logo & QR Upload
-  document.getElementById('logoInput').addEventListener('change', function(e) {
-    handleFileUpload(e.target.files[0], (data) => {
-      logoDataUrl = data;
-      document.getElementById('logoPreviewImg').src = data;
-      document.getElementById('logoPreviewWrap').classList.remove('hidden');
-      document.getElementById('removeLogoBtn').classList.remove('hidden');
-      renderPreview();
-    });
-  });
-
-  document.getElementById('removeLogoBtn').addEventListener('click', function() {
-    logoDataUrl = null;
-    document.getElementById('logoPreviewWrap').classList.add('hidden');
-    this.classList.add('hidden');
-    renderPreview();
-  });
-
-  document.getElementById('qrInput').addEventListener('change', function(e) {
-    handleFileUpload(e.target.files[0], (data) => {
-      qrDataUrl = data;
-      document.getElementById('qrPreviewImg').src = data;
-      document.getElementById('qrPreviewWrap').classList.remove('hidden');
-      document.getElementById('removeQrBtn').classList.remove('hidden');
-      renderPreview();
-    });
-  });
-
-  document.getElementById('removeQrBtn').addEventListener('click', function() {
-    qrDataUrl = null;
-    document.getElementById('qrPreviewWrap').classList.add('hidden');
-    this.classList.add('hidden');
-    renderPreview();
-  });
-
-  // Swatch Color Picker
-  document.querySelectorAll('.swatch-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.swatch-btn').forEach(b => b.classList.replace('ring-indigo-600', 'ring-transparent'));
-      this.classList.replace('ring-transparent', 'ring-indigo-600');
-      selectedAccentColor = this.dataset.color;
-      renderPreview();
-    });
-  });
-
-  document.getElementById('customColorPicker').addEventListener('input', function() {
-    selectedAccentColor = this.value;
-    renderPreview();
-  });
-
-  // Top Buttons
-  document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
-  document.getElementById('printBtn').addEventListener('click', () => window.print());
-  document.getElementById('resetBtn').addEventListener('click', () => location.reload());
-
-  // Mobile Tabs
-  const tabEditBtn = document.getElementById('tabEditBtn');
-  const tabPreviewBtn = document.getElementById('tabPreviewBtn');
-  tabEditBtn.addEventListener('click', () => {
-    document.getElementById('formPanel').classList.remove('mobile-hide');
-    document.getElementById('previewPanel').classList.add('mobile-hide');
-    tabEditBtn.classList.add('text-indigo-600', 'border-indigo-600');
-    tabPreviewBtn.classList.remove('text-indigo-600', 'border-indigo-600');
-  });
-  tabPreviewBtn.addEventListener('click', () => {
-    document.getElementById('previewPanel').classList.remove('mobile-hide');
-    document.getElementById('formPanel').classList.add('mobile-hide');
-    tabPreviewBtn.classList.add('text-indigo-600', 'border-indigo-600');
-    tabEditBtn.classList.remove('text-indigo-600', 'border-indigo-600');
-  });
-
-  // Initial Render
-  renderPreview();
-});
+  // Initial Load
+  renderItemsControl();
+  render();
 </script>
+
 </body>
 </html>
