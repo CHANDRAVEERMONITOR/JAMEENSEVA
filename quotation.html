@@ -1,129 +1,1406 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Custom Quotation Maker</title>
-    <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f4f7f6; }
-        .controls { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .controls label { font-weight: bold; }
-        .quote-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
-        
-        /* Dynamic Theme Colors */
-        .theme-blue { --main-color: #0056b3; --accent-bg: #eef5ff; }
-        .theme-green { --main-color: #2e7d32; --accent-bg: #e8f5e9; }
-        .theme-purple { --main-color: #6a1b9a; --accent-bg: #f3e5f5; }
-        .theme-dark { --main-color: #212121; --accent-bg: #f5f5f5; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuoteCraft — Professional Quotation Generator</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&family=Playfair+Display:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  html, body { font-family: 'Inter', sans-serif; background:#f1f5f9; }
+  *{ box-sizing: border-box; }
 
-        /* Dynamic Formats */
-        .format-standard .header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--main-color); padding-bottom: 15px; }
-        .format-centered .header { text-align: center; border-bottom: 2px dashed var(--main-color); padding-bottom: 15px; }
-        .format-centered .header h2 { color: var(--main-color); }
-        .format-modern { border-left: 8px solid var(--main-color); padding-left: 20px; }
-        .format-modern .header { display: flex; justify-content: space-between; background: var(--accent-bg); padding: 15px; border-radius: 5px; }
+  /* Scrollbars for the form column */
+  .form-scroll::-webkit-scrollbar{ width:8px; }
+  .form-scroll::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:8px; }
+  .form-scroll::-webkit-scrollbar-track{ background:transparent; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th { background-color: var(--main-color); color: white; padding: 10px; text-align: left; }
-        td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .total-sec { text-align: right; margin-top: 20px; font-size: 1.2em; font-weight: bold; color: var(--main-color); }
-        .btn-print { background: var(--main-color); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 16px; }
-        
-        @media print {
-            .controls, .btn-print { display: none; }
-            .quote-box { box-shadow: none; border: none; }
-        }
-    </style>
+  /* Signature canvas */
+  #sigCanvas{ touch-action:none; cursor:crosshair; display:block; width:100%; height:140px; }
+
+  /* Mobile tab visibility (forced visible again at lg breakpoint regardless of JS state) */
+  @media (max-width: 1023px){
+    .mobile-hide{ display:none !important; }
+  }
+
+  /* Print rules: only the live preview paper gets printed */
+  @media print{
+    body *{ visibility:hidden; }
+    #previewContent, #previewContent *{ visibility:visible; }
+    #previewContent{ position:absolute; top:0; left:0; width:100% !important; max-width:100% !important; box-shadow:none !important; margin:0 !important; }
+    .no-print{ display:none !important; }
+  }
+
+  .anim-pop{ animation:pop .18s ease-out; }
+  @keyframes pop{ from{ transform:scale(.97); opacity:.6; } to{ transform:scale(1); opacity:1; } }
+
+  input[type="color"]{ -webkit-appearance:none; appearance:none; border:none; padding:0; background:none; }
+  input[type="color"]::-webkit-color-swatch-wrapper{ padding:0; }
+  input[type="color"]::-webkit-color-swatch{ border:none; border-radius:9999px; }
+</style>
 </head>
-<body>
+<body class="text-slate-800">
 
-    <!-- Controls Panel -->
-    <div class="controls">
-        <div>
-            <label>Choose Color:</label>
-            <select id="colorSelect" onchange="changeTheme()">
-                <option value="theme-blue">Blue</option>
-                <option value="theme-green">Green</option>
-                <option value="theme-purple">Purple</option>
-                <option value="theme-dark">Dark Gray</option>
-            </select>
-        </div>
-        <div>
-            <label>Choose Layout Format:</label>
-            <select id="formatSelect" onchange="changeFormat()">
-                <option value="format-standard">Standard Header</option>
-                <option value="format-centered">Centered Classic</option>
-                <option value="format-modern">Modern Block</option>
-            </select>
-        </div>
-        <button class="btn-print" onclick="window.print()">Download / Print PDF</button>
+<!-- ============================= TOP HEADER ============================= -->
+<header class="no-print sticky top-0 z-30 bg-white border-b border-slate-200">
+  <div class="max-w-[1600px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-3">
+    <div class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold text-sm shrink-0">QC</div>
+      <div class="leading-tight">
+        <div class="font-bold text-slate-900 text-[15px]">QuoteCraft</div>
+        <div class="text-[11px] text-slate-400 hidden sm:block">Quotation Generator</div>
+      </div>
     </div>
 
-    <!-- Quotation Template -->
-    <div id="quoteArea" class="quote-box theme-blue format-standard">
-        <div class="header">
-            <div>
-                <h2 contenteditable="true" style="margin:0; color:var(--main-color);">Aapki Company Ka Naam</h2>
-                <p contenteditable="true" style="margin:5px 0;">Address & Mobile Number</p>
+    <div class="flex items-center gap-2">
+      <span id="saveStatus" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-slate-400 mr-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 111.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+        Saved to this device
+      </span>
+      <button id="resetBtn" class="px-3 py-2 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 transition">Reset</button>
+      <button id="printBtn" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-600 border border-slate-200 hover:bg-slate-50 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.32 0H6.34m10.94-4.171V5.625c0-.621-.504-1.125-1.125-1.125H7.85c-.621 0-1.125.504-1.125 1.125v8.204"/></svg>
+        Print
+      </button>
+      <button id="downloadPdfBtn" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm shadow-indigo-200 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 12m0 0l4.5-4.5M12 12V3"/></svg>
+        <span>Download PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile tabs -->
+  <div class="lg:hidden flex border-t border-slate-100">
+    <button id="tabEditBtn" class="flex-1 py-2.5 text-sm font-semibold text-indigo-600 border-b-2 border-indigo-600 transition">Edit Details</button>
+    <button id="tabPreviewBtn" class="flex-1 py-2.5 text-sm font-semibold text-slate-400 border-b-2 border-transparent transition">Live Preview</button>
+  </div>
+</header>
+
+<!-- ============================= MAIN LAYOUT ============================= -->
+<main class="max-w-[1600px] mx-auto lg:grid lg:grid-cols-[440px_1fr] lg:h-[calc(100vh-57px)]">
+
+  <!-- ---------- LEFT: FORM PANEL ---------- -->
+  <section id="formPanel" class="form-scroll bg-white lg:border-r border-slate-200 lg:h-full lg:overflow-y-auto p-4 sm:p-5 space-y-4">
+
+    <!-- DESIGN & BRANDING -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="flex items-center gap-2 text-sm font-bold text-slate-800 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
+        Design &amp; Branding
+      </h3>
+
+      <p class="text-xs font-semibold text-slate-500 mb-2">Layout style</p>
+      <div class="grid grid-cols-3 gap-2 mb-4">
+        <label class="relative cursor-pointer">
+          <input type="radio" name="layoutStyle" value="corporate" class="sr-only peer" checked>
+          <div class="rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50 p-2 transition h-full">
+            <div class="h-12 rounded-md bg-slate-100 mb-1.5 p-1.5 flex flex-col gap-1">
+              <div class="h-2.5 w-full rounded-sm bg-indigo-400"></div>
+              <div class="h-1 w-3/4 rounded-sm bg-slate-300"></div>
+              <div class="h-1 w-full rounded-sm bg-slate-300"></div>
             </div>
-            <div style="text-align: right;">
-                <h3 style="margin:0; color:var(--main-color);">QUOTATION</h3>
-                <p contenteditable="true" style="margin:5px 0;">Date: 23/08/2026</p>
+            <div class="text-[10.5px] font-semibold text-slate-700 leading-tight">Corporate Executive</div>
+          </div>
+        </label>
+        <label class="relative cursor-pointer">
+          <input type="radio" name="layoutStyle" value="minimal" class="sr-only peer">
+          <div class="rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50 p-2 transition h-full">
+            <div class="h-12 rounded-md bg-slate-100 mb-1.5 p-1.5 flex flex-col gap-1.5 justify-center">
+              <div class="h-0.5 w-1/2 rounded-sm bg-slate-400"></div>
+              <div class="h-0.5 w-full rounded-sm bg-slate-300"></div>
+              <div class="h-0.5 w-full rounded-sm bg-slate-300"></div>
             </div>
-        </div>
+            <div class="text-[10.5px] font-semibold text-slate-700 leading-tight">Modern Minimalist</div>
+          </div>
+        </label>
+        <label class="relative cursor-pointer">
+          <input type="radio" name="layoutStyle" value="creative" class="sr-only peer">
+          <div class="rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50 p-2 transition h-full">
+            <div class="h-12 rounded-md bg-slate-100 mb-1.5 flex gap-1 overflow-hidden">
+              <div class="w-1/3 h-full bg-indigo-400"></div>
+              <div class="flex-1 p-1.5 flex flex-col gap-1 justify-center">
+                <div class="h-1 w-full rounded-sm bg-slate-300"></div>
+                <div class="h-1 w-2/3 rounded-sm bg-slate-300"></div>
+              </div>
+            </div>
+            <div class="text-[10.5px] font-semibold text-slate-700 leading-tight">Creative / Bold</div>
+          </div>
+        </label>
+      </div>
 
-        <div style="margin-top: 20px;">
-            <p contenteditable="true"><strong>To (Customer Name):</strong> Client Name Here</p>
-        </div>
+      <p class="text-xs font-semibold text-slate-500 mb-2">Accent color</p>
+      <div class="flex items-center flex-wrap gap-2.5 mb-4" id="colorSwatches">
+        <button type="button" class="swatch-btn w-8 h-8 rounded-full ring-2 ring-slate-900 ring-offset-2 transition" style="background:#1e3a5f" data-color="#1e3a5f" title="Navy"></button>
+        <button type="button" class="swatch-btn w-8 h-8 rounded-full ring-2 ring-transparent transition" style="background:#047857" data-color="#047857" title="Emerald"></button>
+        <button type="button" class="swatch-btn w-8 h-8 rounded-full ring-2 ring-transparent transition" style="background:#6d28d9" data-color="#6d28d9" title="Royal Purple"></button>
+        <button type="button" class="swatch-btn w-8 h-8 rounded-full ring-2 ring-transparent transition" style="background:#b91c1c" data-color="#b91c1c" title="Crimson"></button>
+        <button type="button" class="swatch-btn w-8 h-8 rounded-full ring-2 ring-transparent transition" style="background:#27272a" data-color="#27272a" title="Charcoal"></button>
+        <span class="w-px h-6 bg-slate-200 mx-0.5"></span>
+        <span class="relative w-8 h-8 rounded-full border border-slate-300 overflow-hidden flex items-center justify-center" title="Custom color">
+          <input type="color" id="customColorPicker" value="#0f766e" class="w-10 h-10 -m-1 cursor-pointer">
+        </span>
+      </div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Item Description</th>
-                    <th>Qty</th>
-                    <th>Rate (₹)</th>
-                    <th>Amount (₹)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td contenteditable="true">Service/Product 1</td>
-                    <td contenteditable="true">1</td>
-                    <td contenteditable="true">5000</td>
-                    <td contenteditable="true">5000</td>
-                </tr>
-                <tr>
-                    <td contenteditable="true">Service/Product 2</td>
-                    <td contenteditable="true">2</td>
-                    <td contenteditable="true">1500</td>
-                    <td contenteditable="true">3000</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="total-sec">
-            Total: ₹<span contenteditable="true">8000</span>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <p class="text-xs font-semibold text-slate-500 mb-1.5">Font style</p>
+          <select id="fontSelect" class="w-full rounded-lg border border-slate-300 px-2.5 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+            <option value="'Inter', sans-serif" selected>Inter</option>
+            <option value="'Roboto', sans-serif">Roboto</option>
+            <option value="'Playfair Display', serif">Playfair Display</option>
+            <option value="'Poppins', sans-serif">Poppins</option>
+            <option value="'Merriweather', serif">Merriweather</option>
+          </select>
         </div>
-        
-        <div style="margin-top: 30px;">
-            <p contenteditable="true"><strong>Terms & Conditions:</strong><br>1. Payment 50% advance.<br>2. Valid for 15 days.</p>
+        <div>
+          <p class="text-xs font-semibold text-slate-500 mb-1.5">Currency</p>
+          <select id="currencySelect" class="w-full rounded-lg border border-slate-300 px-2.5 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+            <option value="₹" selected>₹ INR</option>
+            <option value="$">$ USD</option>
+            <option value="€">€ EUR</option>
+            <option value="£">£ GBP</option>
+          </select>
         </div>
+      </div>
     </div>
 
-    <script>
-        function changeTheme() {
-            var color = document.getElementById("colorSelect").value;
-            var element = document.getElementById("quoteArea");
-            element.className = element.className.replace(/\btheme-\S+/g, '');
-            element.classList.add(color);
-        }
+    <!-- COMPANY DETAILS -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Your Company</h3>
+      <div class="space-y-2.5">
+        <input id="companyName" type="text" placeholder="Company name" value="Your Company Name" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        <textarea id="companyAddress" rows="2" placeholder="Business address" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none">123, Business Hub, MG Road, Bengaluru, Karnataka - 560001</textarea>
+        <div class="grid grid-cols-2 gap-2.5">
+          <input id="companyPhone" type="text" placeholder="Phone" value="+91 98765 43210" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+          <input id="companyEmail" type="text" placeholder="Email" value="hello@yourcompany.com" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
 
-        function changeFormat() {
-            var format = document.getElementById("formatSelect").value;
-            var element = document.getElementById("quoteArea");
-            element.className = element.className.replace(/\bformat-\S+/g, '');
-            element.classList.add(format);
-        }
-    </script>
+        <div class="flex items-center gap-3 pt-1">
+          <div id="logoPreviewWrap" class="hidden w-14 h-14 rounded-lg border border-slate-200 p-1 shrink-0">
+            <img id="logoPreviewImg" class="w-full h-full object-contain" alt="Logo preview">
+          </div>
+          <label class="flex-1 cursor-pointer border border-dashed border-slate-300 rounded-lg px-3 py-2.5 text-xs text-slate-500 hover:bg-slate-50 flex items-center gap-2 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+            <span>Upload company logo (PNG/JPG)</span>
+            <input id="logoInput" type="file" accept="image/*" class="hidden">
+          </label>
+          <button id="removeLogoBtn" type="button" class="hidden text-[11px] text-red-500 font-semibold shrink-0">Remove</button>
+        </div>
+      </div>
+    </div>
 
+    <!-- CLIENT DETAILS -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Bill To (Client)</h3>
+      <div class="space-y-2.5">
+        <input id="clientName" type="text" placeholder="Client name" value="Client / Company Name" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        <textarea id="clientAddress" rows="2" placeholder="Client address" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none">45, Sector 12, New Delhi - 110001</textarea>
+        <div class="grid grid-cols-2 gap-2.5">
+          <input id="clientPhone" type="text" placeholder="Phone" value="+91 91234 56789" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+          <input id="clientEmail" type="text" placeholder="Email" value="client@example.com" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+      </div>
+    </div>
+
+    <!-- QUOTATION INFO -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Quotation Info</h3>
+      <div class="grid grid-cols-3 gap-2.5">
+        <div class="col-span-1">
+          <label class="text-[11px] text-slate-400 block mb-1">Quote #</label>
+          <input id="quoteNumber" type="text" class="w-full rounded-lg border border-slate-300 px-2.5 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+        <div class="col-span-1">
+          <label class="text-[11px] text-slate-400 block mb-1">Date</label>
+          <input id="quoteDate" type="date" class="w-full rounded-lg border border-slate-300 px-2 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+        <div class="col-span-1">
+          <label class="text-[11px] text-slate-400 block mb-1">Valid Until</label>
+          <input id="validUntil" type="date" class="w-full rounded-lg border border-slate-300 px-2 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEMS -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-slate-800">Items &amp; Services</h3>
+        <button id="addItemBtn" type="button" class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Add Item
+        </button>
+      </div>
+      <div class="hidden sm:grid grid-cols-12 gap-2 text-[10.5px] font-semibold text-slate-400 uppercase px-3 mb-1.5">
+        <div class="col-span-5">Description</div>
+        <div class="col-span-2 text-center">Qty</div>
+        <div class="col-span-2 text-right">Rate</div>
+        <div class="col-span-2 text-right pr-1">Amount</div>
+      </div>
+      <div id="itemsContainer" class="space-y-2"></div>
+
+      <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-slate-100">
+        <div>
+          <label class="text-[11px] text-slate-400 block mb-1">GST / Tax (%)</label>
+          <input id="taxPercent" type="number" min="0" step="0.01" value="18" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-400 block mb-1">Discount</label>
+          <div class="flex gap-1.5">
+            <input id="discountValue" type="number" min="0" step="0.01" value="0" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+            <select id="discountType" class="rounded-lg border border-slate-300 px-1.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+              <option value="percent" selected>%</option>
+              <option value="flat">Flat</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Payment Details</h3>
+      <div class="space-y-2.5">
+        <div class="flex items-center gap-3">
+          <div id="qrPreviewWrap" class="hidden w-14 h-14 rounded-lg border border-slate-200 p-1 shrink-0">
+            <img id="qrPreviewImg" class="w-full h-full object-contain" alt="QR preview">
+          </div>
+          <label class="flex-1 cursor-pointer border border-dashed border-slate-300 rounded-lg px-3 py-2.5 text-xs text-slate-500 hover:bg-slate-50 flex items-center gap-2 transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.5h4.5v4.5h-4.5v-4.5zm0 10.5h4.5v4.5h-4.5v-4.5zm10.5-10.5h4.5v4.5h-4.5v-4.5zm1.5 9v1.5m-1.5 1.5h1.5m1.5 1.5v1.5m0-4.5h1.5"/></svg>
+            <span>Upload payment QR code image</span>
+            <input id="qrInput" type="file" accept="image/*" class="hidden">
+          </label>
+          <button id="removeQrBtn" type="button" class="hidden text-[11px] text-red-500 font-semibold shrink-0">Remove</button>
+        </div>
+        <p class="text-[10.5px] text-slate-400 -mt-1">No QR image? Add a UPI ID below and a scannable QR will be generated automatically.</p>
+        <input id="upiId" type="text" placeholder="UPI ID (e.g. yourcompany@okhdfc)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+        <input id="razorpayLink" type="text" placeholder="Razorpay / Payment link (optional)" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+      </div>
+    </div>
+
+    <!-- TERMS & NOTES -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Terms &amp; Notes</h3>
+      <div class="space-y-2.5">
+        <div>
+          <label class="text-[11px] text-slate-400 block mb-1">Terms &amp; Conditions</label>
+          <textarea id="termsText" rows="4" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none">1. This quotation is valid for 15 days from the date of issue.
+2. Prices are subject to applicable taxes as shown above.
+3. A 50% advance payment is required to confirm this order.
+4. Delivery timeline will be confirmed upon order confirmation.</textarea>
+        </div>
+        <div>
+          <label class="text-[11px] text-slate-400 block mb-1">Notes</label>
+          <textarea id="notesText" rows="2" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none resize-none">Thank you for considering us. Please reach out if you have any questions regarding this quotation.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNATURE -->
+    <div class="section-card border border-slate-200 rounded-2xl p-4 pb-5">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">Authorized Signature</h3>
+      <div class="flex items-center gap-4 mb-3">
+        <label class="flex items-center gap-1.5 text-xs font-medium text-slate-600 cursor-pointer">
+          <input type="radio" name="sigMode" value="draw" checked class="accent-indigo-600"> Draw
+        </label>
+        <label class="flex items-center gap-1.5 text-xs font-medium text-slate-600 cursor-pointer">
+          <input type="radio" name="sigMode" value="upload" class="accent-indigo-600"> Upload
+        </label>
+        <label class="flex items-center gap-1.5 text-xs font-medium text-slate-600 cursor-pointer">
+          <input type="radio" name="sigMode" value="none" class="accent-indigo-600"> None
+        </label>
+      </div>
+
+      <div id="sigDrawPanel">
+        <div class="border border-slate-300 rounded-lg bg-slate-50 overflow-hidden">
+          <canvas id="sigCanvas"></canvas>
+        </div>
+        <button id="clearSigBtn" type="button" class="mt-2 text-[11px] font-semibold text-slate-500 hover:text-red-500">Clear signature</button>
+      </div>
+
+      <div id="sigUploadPanel" class="hidden">
+        <div class="flex items-center gap-3">
+          <div id="sigUploadPreviewWrap" class="hidden w-16 h-12 rounded-lg border border-slate-200 p-1 shrink-0">
+            <img id="sigUploadPreviewImg" class="w-full h-full object-contain" alt="Signature preview">
+          </div>
+          <label class="flex-1 cursor-pointer border border-dashed border-slate-300 rounded-lg px-3 py-2.5 text-xs text-slate-500 hover:bg-slate-50 flex items-center gap-2 transition">
+            <span>Upload signature image</span>
+            <input id="sigUploadInput" type="file" accept="image/*" class="hidden">
+          </label>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <label class="text-[11px] text-slate-400 block mb-1">Signatory name</label>
+        <input id="signerName" type="text" placeholder="Authorized Signatory" value="Authorized Signatory" class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+      </div>
+    </div>
+
+    <p class="text-center text-[11px] text-slate-300 pb-2">Your data is saved only in this browser. Nothing is uploaded to a server.</p>
+  </section>
+
+  <!-- ---------- RIGHT: LIVE PREVIEW ---------- -->
+  <section id="previewPanel" class="mobile-hide bg-slate-100 lg:h-full lg:overflow-y-auto p-4 sm:p-8">
+    <div class="max-w-[860px] mx-auto">
+      <div class="flex items-center justify-between mb-4 no-print">
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">Live Preview</p>
+        <p class="text-[11px] text-slate-400">Updates instantly as you type</p>
+      </div>
+      <div id="previewContent" class="mx-auto w-full max-w-[794px] shadow-xl shadow-slate-300/60 rounded-sm overflow-hidden bg-white">
+        <!-- Rendered via JS -->
+      </div>
+      <div class="h-10"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* =========================================================================
+   STATE / CONSTANTS
+   ========================================================================= */
+const STORAGE_KEY = 'quoteCraftState_v1';
+let logoDataUrl = null;
+let qrDataUrl = null;
+let sigUploadDataUrl = null;
+let hasDrawnSignature = false;
+let itemIdCounter = 0;
+let selectedAccentColor = '#1e3a5f';
+let sigCanvas, sigCtx;
+
+/* =========================================================================
+   UTILITIES
+   ========================================================================= */
+function escapeHtml(str){
+  if(str === undefined || str === null) return '';
+  return String(str).replace(/[&<>"']/g, function(ch){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch];
+  });
+}
+
+function debounce(fn, delay){
+  let t;
+  return function(...args){
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(this, args), delay);
+  };
+}
+
+function val(id){
+  const el = document.getElementById(id);
+  return el ? el.value : '';
+}
+
+function fmtMoney(num, currency){
+  const n = isFinite(num) ? num : 0;
+  return currency + ' ' + n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function formatDateDisplay(isoStr){
+  if(!isoStr) return '—';
+  const d = new Date(isoStr + 'T00:00:00');
+  if(isNaN(d.getTime())) return isoStr;
+  return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function toDateInputValue(d){
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function generateQuoteNumber(){
+  const y = new Date().getFullYear();
+  const rand = Math.floor(1000 + Math.random() * 9000);
+  return `QUO-${y}-${rand}`;
+}
+
+function hexToRgb(hex){
+  hex = (hex || '#1e3a5f').replace('#', '');
+  if(hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  return {
+    r: parseInt(hex.substr(0, 2), 16) || 0,
+    g: parseInt(hex.substr(2, 2), 16) || 0,
+    b: parseInt(hex.substr(4, 2), 16) || 0
+  };
+}
+
+function tint(hex, amount){
+  const { r, g, b } = hexToRgb(hex);
+  const nr = Math.round(r + (255 - r) * amount);
+  const ng = Math.round(g + (255 - g) * amount);
+  const nb = Math.round(b + (255 - b) * amount);
+  return `rgb(${nr},${ng},${nb})`;
+}
+
+function contrastColor(hex){
+  const { r, g, b } = hexToRgb(hex);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.62 ? '#111827' : '#ffffff';
+}
+
+function resizeImage(file, maxDim, callback){
+  if(!file){ callback(null); return; }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+      let w = img.width, h = img.height;
+      if(w > maxDim || h > maxDim){
+        if(w > h){ h = Math.round(h * maxDim / w); w = maxDim; }
+        else { w = Math.round(w * maxDim / h); h = maxDim; }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL('image/png'));
+    };
+    img.onerror = function(){ callback(null); };
+    img.src = e.target.result;
+  };
+  reader.onerror = function(){ callback(null); };
+  reader.readAsDataURL(file);
+}
+
+/* =========================================================================
+   ITEM ROWS
+   ========================================================================= */
+function createItemRowHTML(id, desc, qty, rate){
+  return `
+  <div class="item-row grid grid-cols-12 gap-2 items-center bg-slate-50 rounded-xl p-2.5 anim-pop" data-id="${id}">
+    <div class="col-span-12 sm:col-span-5">
+      <input type="text" class="item-desc w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none" placeholder="Item / service description" value="${escapeHtml(desc)}">
+    </div>
+    <div class="col-span-4 sm:col-span-2">
+      <input type="number" min="0" step="1" class="item-qty w-full rounded-lg border border-slate-300 px-2 py-2 text-sm text-center focus:ring-2 focus:ring-indigo-500 outline-none" value="${qty}">
+    </div>
+    <div class="col-span-4 sm:col-span-2">
+      <input type="number" min="0" step="0.01" class="item-rate w-full rounded-lg border border-slate-300 px-2 py-2 text-sm text-right focus:ring-2 focus:ring-indigo-500 outline-none" value="${rate}">
+    </div>
+    <div class="col-span-3 sm:col-span-2 text-right text-sm font-semibold text-slate-700 item-amount pr-1 truncate">0.00</div>
+    <div class="col-span-1 flex items-center justify-end">
+      <button type="button" class="remove-item-btn text-slate-400 hover:text-red-500 transition p-1" title="Remove item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/></svg>
+      </button>
+    </div>
+  </div>`;
+}
+
+function addItemRow(desc = '', qty = 1, rate = 0){
+  itemIdCounter++;
+  document.getElementById('itemsContainer').insertAdjacentHTML('beforeend', createItemRowHTML(itemIdCounter, desc, qty, rate));
+}
+
+function getItemsFromDOM(){
+  return Array.from(document.querySelectorAll('#itemsContainer .item-row')).map(row => {
+    const desc = row.querySelector('.item-desc').value;
+    const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+    const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
+    const amount = qty * rate;
+    row.querySelector('.item-amount').textContent = amount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return { desc, qty, rate, amount };
+  });
+}
+
+/* =========================================================================
+   CALCULATIONS
+   ========================================================================= */
+function calcTotals(items, taxPercent, discountValue, discountType){
+  const subtotal = items.reduce((s, i) => s + i.amount, 0);
+  const discountAmount = discountType === 'flat'
+    ? Math.min(discountValue, subtotal)
+    : subtotal * (discountValue / 100);
+  const taxable = Math.max(subtotal - discountAmount, 0);
+  const taxAmount = taxable * (taxPercent / 100);
+  const total = taxable + taxAmount;
+  return { subtotal, discountAmount, taxAmount, total, taxable };
+}
+
+/* =========================================================================
+   DATA COLLECTION
+   ========================================================================= */
+function collectData(){
+  const items = getItemsFromDOM();
+  const taxPercent = parseFloat(val('taxPercent')) || 0;
+  const discountValue = parseFloat(val('discountValue')) || 0;
+  const discountType = val('discountType');
+  const totals = calcTotals(items, taxPercent, discountValue, discountType);
+  const layout = document.querySelector('input[name="layoutStyle"]:checked')?.value || 'corporate';
+  const sigMode = document.querySelector('input[name="sigMode"]:checked')?.value || 'none';
+
+  let signatureImg = null;
+  if(sigMode === 'draw' && hasDrawnSignature && sigCanvas){
+    signatureImg = sigCanvas.toDataURL('image/png');
+  } else if(sigMode === 'upload' && sigUploadDataUrl){
+    signatureImg = sigUploadDataUrl;
+  }
+
+  return {
+    meta: { layout, accentColor: selectedAccentColor, font: val('fontSelect'), currency: val('currencySelect') },
+    company: {
+      name: val('companyName') || 'Your Company Name',
+      address: val('companyAddress'),
+      phone: val('companyPhone'),
+      email: val('companyEmail'),
+      logo: logoDataUrl
+    },
+    client: {
+      name: val('clientName') || 'Client Name',
+      address: val('clientAddress'),
+      phone: val('clientPhone'),
+      email: val('clientEmail')
+    },
+    quote: {
+      number: val('quoteNumber'),
+      date: val('quoteDate'),
+      validUntil: val('validUntil')
+    },
+    items, totals, taxPercent, discountValue, discountType,
+    payment: {
+      qr: qrDataUrl,
+      upiId: val('upiId'),
+      razorpayLink: val('razorpayLink')
+    },
+    terms: val('termsText'),
+    notes: val('notesText'),
+    signature: { mode: sigMode, image: signatureImg, signerName: val('signerName') || 'Authorized Signatory' }
+  };
+}
+
+/* =========================================================================
+   PAYMENT / QR BLOCK (shared)
+   ========================================================================= */
+function paymentImageHtml(data, size){
+  if(data.payment.qr){
+    return `<img src="${data.payment.qr}" crossorigin="anonymous" style="width:${size}px;height:${size}px;object-fit:contain;border-radius:8px;" alt="Payment QR">`;
+  }
+  if(data.payment.upiId){
+    const upiLink = `upi://pay?pa=${encodeURIComponent(data.payment.upiId)}&pn=${encodeURIComponent(data.company.name || 'Merchant')}&am=${data.totals.total.toFixed(2)}&cu=INR`;
+    const src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(upiLink)}`;
+    return `<img src="${src}" crossorigin="anonymous" style="width:${size}px;height:${size}px;object-fit:contain;border-radius:8px;" alt="UPI QR">`;
+  }
+  if(data.payment.razorpayLink){
+    const src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data.payment.razorpayLink)}`;
+    return `<img src="${src}" crossorigin="anonymous" style="width:${size}px;height:${size}px;object-fit:contain;border-radius:8px;" alt="Payment link QR">`;
+  }
+  return '';
+}
+
+function hasPaymentInfo(data){
+  return !!(data.payment.qr || data.payment.upiId || data.payment.razorpayLink);
+}
+
+function paymentDetailsLines(data){
+  let lines = '';
+  if(data.payment.upiId){
+    lines += `<div style="font-size:11.5px;color:#4b5563;margin-bottom:2px;"><strong style="color:#111827;">UPI ID:</strong> ${escapeHtml(data.payment.upiId)}</div>`;
+  }
+  if(data.payment.razorpayLink){
+    lines += `<div style="font-size:11.5px;color:#4b5563;word-break:break-all;"><strong style="color:#111827;">Pay online:</strong> ${escapeHtml(data.payment.razorpayLink)}</div>`;
+  }
+  if(!data.payment.upiId && !data.payment.razorpayLink && data.payment.qr){
+    lines += `<div style="font-size:11.5px;color:#4b5563;">Scan the QR code to complete payment.</div>`;
+  }
+  return lines;
+}
+
+/* =========================================================================
+   TEMPLATE: CORPORATE EXECUTIVE
+   ========================================================================= */
+function templateCorporate(data){
+  const accent = data.meta.accentColor;
+  const contrast = contrastColor(accent);
+  const light = tint(accent, 0.93);
+
+  const logoHtml = data.company.logo
+    ? `<img src="${data.company.logo}" style="max-height:56px;max-width:120px;object-fit:contain;">`
+    : '';
+
+  const rowsHtml = data.items.map((item, idx) => `
+    <tr style="background:${idx % 2 === 0 ? '#ffffff' : '#f9fafb'};">
+      <td style="padding:10px 12px;font-size:12.5px;color:#374151;border-bottom:1px solid #e5e7eb;">${idx + 1}</td>
+      <td style="padding:10px 12px;font-size:12.5px;color:#111827;border-bottom:1px solid #e5e7eb;">${escapeHtml(item.desc) || '<span style=\"color:#9ca3af;\">Untitled item</span>'}</td>
+      <td style="padding:10px 12px;font-size:12.5px;color:#374151;text-align:center;border-bottom:1px solid #e5e7eb;">${item.qty}</td>
+      <td style="padding:10px 12px;font-size:12.5px;color:#374151;text-align:right;border-bottom:1px solid #e5e7eb;">${fmtMoney(item.rate, data.meta.currency)}</td>
+      <td style="padding:10px 12px;font-size:12.5px;color:#111827;font-weight:600;text-align:right;border-bottom:1px solid #e5e7eb;">${fmtMoney(item.amount, data.meta.currency)}</td>
+    </tr>`).join('');
+
+  const discountRow = data.totals.discountAmount > 0 ? `
+    <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#dc2626;">
+      <span>Discount ${data.discountType === 'percent' ? '(' + data.discountValue + '%)' : ''}</span>
+      <span>- ${fmtMoney(data.totals.discountAmount, data.meta.currency)}</span>
+    </div>` : '';
+
+  const paymentBlock = hasPaymentInfo(data) ? `
+    <div style="border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:26px;display:flex;gap:16px;align-items:center;">
+      ${paymentImageHtml(data, 84)}
+      <div>
+        <div style="font-size:11.5px;font-weight:700;color:#111827;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;">Payment Details</div>
+        ${paymentDetailsLines(data)}
+      </div>
+    </div>` : '';
+
+  const termsBlock = data.terms ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#111827;margin-bottom:6px;">Terms &amp; Conditions</div>
+      <div style="font-size:11px;color:#6b7280;white-space:pre-line;line-height:1.7;">${escapeHtml(data.terms)}</div>
+    </div>` : '';
+
+  const notesBlock = data.notes ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#111827;margin-bottom:6px;">Notes</div>
+      <div style="font-size:11px;color:#6b7280;white-space:pre-line;line-height:1.7;">${escapeHtml(data.notes)}</div>
+    </div>` : '';
+
+  const sigImg = data.signature.image
+    ? `<img src="${data.signature.image}" style="height:48px;object-fit:contain;margin-bottom:2px;">`
+    : `<div style="height:48px;"></div>`;
+
+  return `
+  <div style="font-family:${data.meta.font};background:#ffffff;">
+    <div style="height:6px;background:${accent};"></div>
+    <div style="padding:36px 40px 40px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;border-bottom:2px solid ${accent};padding-bottom:22px;margin-bottom:22px;">
+        <div style="display:flex;gap:14px;align-items:center;">
+          ${logoHtml}
+          <div>
+            <div style="font-size:19px;font-weight:800;color:#111827;">${escapeHtml(data.company.name)}</div>
+            <div style="font-size:11.5px;color:#6b7280;white-space:pre-line;max-width:280px;margin-top:2px;">${escapeHtml(data.company.address)}</div>
+            <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">${[escapeHtml(data.company.phone), escapeHtml(data.company.email)].filter(Boolean).join(' &nbsp;•&nbsp; ')}</div>
+          </div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:800;letter-spacing:1.5px;color:${accent};">QUOTATION</div>
+          <div style="font-size:11.5px;color:#6b7280;margin-top:8px;">Quote #: <strong style="color:#111827;">${escapeHtml(data.quote.number)}</strong></div>
+          <div style="font-size:11.5px;color:#6b7280;">Date: ${formatDateDisplay(data.quote.date)}</div>
+          <div style="font-size:11.5px;color:#6b7280;">Valid Until: ${formatDateDisplay(data.quote.validUntil)}</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <div style="background:${light};border-radius:10px;padding:14px 16px;max-width:320px;">
+          <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:${accent};margin-bottom:5px;">Billed To</div>
+          <div style="font-size:13.5px;font-weight:700;color:#111827;">${escapeHtml(data.client.name)}</div>
+          <div style="font-size:11.5px;color:#6b7280;white-space:pre-line;margin-top:2px;">${escapeHtml(data.client.address)}</div>
+          <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">${[escapeHtml(data.client.phone), escapeHtml(data.client.email)].filter(Boolean).join(' &nbsp;•&nbsp; ')}</div>
+        </div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+        <thead>
+          <tr style="background:${accent};color:${contrast};">
+            <th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;">#</th>
+            <th style="padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.4px;">Description</th>
+            <th style="padding:10px 12px;text-align:center;font-size:11px;text-transform:uppercase;letter-spacing:.4px;">Qty</th>
+            <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:.4px;">Rate</th>
+            <th style="padding:10px 12px;text-align:right;font-size:11px;text-transform:uppercase;letter-spacing:.4px;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml || `<tr><td colspan="5" style="padding:16px;text-align:center;color:#9ca3af;font-size:12px;">No items added yet</td></tr>`}</tbody>
+      </table>
+
+      <div style="display:flex;justify-content:flex-end;margin-bottom:26px;">
+        <div style="width:270px;">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#374151;"><span>Subtotal</span><span>${fmtMoney(data.totals.subtotal, data.meta.currency)}</span></div>
+          ${discountRow}
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#374151;"><span>GST / Tax (${data.taxPercent}%)</span><span>${fmtMoney(data.totals.taxAmount, data.meta.currency)}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;margin-top:8px;background:${accent};color:${contrast};border-radius:8px;font-size:14.5px;font-weight:800;">
+            <span>Total</span><span>${fmtMoney(data.totals.total, data.meta.currency)}</span>
+          </div>
+        </div>
+      </div>
+
+      ${paymentBlock}
+
+      <div style="display:flex;gap:26px;flex-wrap:wrap;margin-bottom:34px;">
+        ${termsBlock}
+        ${notesBlock}
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #e5e7eb;padding-top:18px;">
+        <div style="font-size:11px;color:#9ca3af;">Thank you for your business.</div>
+        <div style="text-align:center;">
+          ${sigImg}
+          <div style="border-top:1px solid #9ca3af;padding-top:4px;font-size:11px;color:#374151;min-width:170px;">${escapeHtml(data.signature.signerName)}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================================
+   TEMPLATE: MODERN MINIMALIST
+   ========================================================================= */
+function templateMinimal(data){
+  const accent = data.meta.accentColor;
+
+  const logoHtml = data.company.logo
+    ? `<img src="${data.company.logo}" style="max-height:42px;max-width:110px;object-fit:contain;margin-bottom:10px;">`
+    : '';
+
+  const rowsHtml = data.items.map((item, idx) => `
+    <tr>
+      <td style="padding:11px 4px;font-size:12.5px;color:#111827;border-bottom:1px solid #f1f5f9;">${escapeHtml(item.desc) || '<span style=\"color:#9ca3af;\">Untitled item</span>'}</td>
+      <td style="padding:11px 4px;font-size:12.5px;color:#6b7280;text-align:center;border-bottom:1px solid #f1f5f9;">${item.qty}</td>
+      <td style="padding:11px 4px;font-size:12.5px;color:#6b7280;text-align:right;border-bottom:1px solid #f1f5f9;">${fmtMoney(item.rate, data.meta.currency)}</td>
+      <td style="padding:11px 4px;font-size:12.5px;color:#111827;font-weight:600;text-align:right;border-bottom:1px solid #f1f5f9;">${fmtMoney(item.amount, data.meta.currency)}</td>
+    </tr>`).join('');
+
+  const discountRow = data.totals.discountAmount > 0 ? `
+    <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;color:#dc2626;">
+      <span>Discount</span><span>- ${fmtMoney(data.totals.discountAmount, data.meta.currency)}</span>
+    </div>` : '';
+
+  const paymentBlock = hasPaymentInfo(data) ? `
+    <div style="display:flex;gap:16px;align-items:center;padding:18px 0;border-top:1px solid #f1f5f9;margin-bottom:8px;">
+      ${paymentImageHtml(data, 66)}
+      <div>
+        <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#9ca3af;margin-bottom:4px;">Payment</div>
+        ${paymentDetailsLines(data)}
+      </div>
+    </div>` : '';
+
+  const termsBlock = data.terms ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;margin-bottom:6px;">Terms</div>
+      <div style="font-size:10.5px;color:#9ca3af;white-space:pre-line;line-height:1.7;">${escapeHtml(data.terms)}</div>
+    </div>` : '';
+
+  const notesBlock = data.notes ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;margin-bottom:6px;">Notes</div>
+      <div style="font-size:10.5px;color:#9ca3af;white-space:pre-line;line-height:1.7;">${escapeHtml(data.notes)}</div>
+    </div>` : '';
+
+  const sigImg = data.signature.image
+    ? `<img src="${data.signature.image}" style="height:40px;object-fit:contain;margin-bottom:4px;">`
+    : `<div style="height:40px;"></div>`;
+
+  return `
+  <div style="font-family:${data.meta.font};background:#ffffff;padding:46px 46px 40px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:34px;">
+      <div>
+        ${logoHtml}
+        <div style="font-size:17px;font-weight:700;color:#111827;">${escapeHtml(data.company.name)}</div>
+        <div style="font-size:11px;color:#9ca3af;white-space:pre-line;margin-top:3px;max-width:260px;">${escapeHtml(data.company.address)}</div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:2px;">${[escapeHtml(data.company.phone), escapeHtml(data.company.email)].filter(Boolean).join(' · ')}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px;font-weight:700;letter-spacing:3px;color:#9ca3af;">QUOTATION</div>
+        <div style="width:28px;height:2px;background:${accent};margin:8px 0 8px auto;"></div>
+        <div style="font-size:11px;color:#9ca3af;">${escapeHtml(data.quote.number)}</div>
+        <div style="font-size:11px;color:#9ca3af;">${formatDateDisplay(data.quote.date)}</div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:16px 0;border-top:1px solid #f1f5f9;border-bottom:1px solid #f1f5f9;margin-bottom:28px;">
+      <div>
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;margin-bottom:4px;">Billed To</div>
+        <div style="font-size:13px;font-weight:600;color:#111827;">${escapeHtml(data.client.name)}</div>
+        <div style="font-size:11px;color:#9ca3af;white-space:pre-line;">${escapeHtml(data.client.address)}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;margin-bottom:4px;">Valid Until</div>
+        <div style="font-size:13px;color:#111827;">${formatDateDisplay(data.quote.validUntil)}</div>
+      </div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th style="padding:0 4px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;border-bottom:1px solid #111827;">Description</th>
+          <th style="padding:0 4px 10px;text-align:center;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;border-bottom:1px solid #111827;">Qty</th>
+          <th style="padding:0 4px 10px;text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;border-bottom:1px solid #111827;">Rate</th>
+          <th style="padding:0 4px 10px;text-align:right;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:#9ca3af;border-bottom:1px solid #111827;">Amount</th>
+        </tr>
+      </thead>
+      <tbody>${rowsHtml || `<tr><td colspan="4" style="padding:16px 4px;text-align:center;color:#9ca3af;font-size:12px;">No items added yet</td></tr>`}</tbody>
+    </table>
+
+    <div style="display:flex;justify-content:flex-end;margin-bottom:6px;">
+      <div style="width:250px;">
+        <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;color:#6b7280;"><span>Subtotal</span><span>${fmtMoney(data.totals.subtotal, data.meta.currency)}</span></div>
+        ${discountRow}
+        <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;color:#6b7280;"><span>Tax (${data.taxPercent}%)</span><span>${fmtMoney(data.totals.taxAmount, data.meta.currency)}</span></div>
+        <div style="display:flex;justify-content:space-between;padding-top:10px;margin-top:6px;border-top:1px solid #111827;font-size:17px;font-weight:800;color:${accent};">
+          <span style="color:#111827;">Total</span><span>${fmtMoney(data.totals.total, data.meta.currency)}</span>
+        </div>
+      </div>
+    </div>
+
+    ${paymentBlock}
+
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin:22px 0 40px;">
+      ${termsBlock}
+      ${notesBlock}
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;">
+      <div style="text-align:center;">
+        ${sigImg}
+        <div style="border-top:1px solid #d1d5db;padding-top:5px;font-size:10.5px;color:#6b7280;min-width:160px;">${escapeHtml(data.signature.signerName)}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================================
+   TEMPLATE: CREATIVE / BOLD
+   ========================================================================= */
+function templateCreative(data){
+  const accent = data.meta.accentColor;
+  const contrastSide = contrastColor(accent);
+  const light = tint(accent, 0.93);
+
+  const logoBlock = data.company.logo
+    ? `<img src="${data.company.logo}" style="max-height:50px;max-width:140px;object-fit:contain;margin-bottom:14px;">`
+    : `<div style="width:46px;height:46px;border-radius:10px;background:rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:${contrastSide};margin-bottom:14px;">${escapeHtml((data.company.name || 'Y').charAt(0).toUpperCase())}</div>`;
+
+  const rowsHtml = data.items.map((item, idx) => `
+    <tr style="background:${idx % 2 === 0 ? '#ffffff' : light};">
+      <td style="padding:10px 10px;font-size:12.5px;color:#374151;border-bottom:1px solid #eef0f3;">${idx + 1}</td>
+      <td style="padding:10px 10px;font-size:12.5px;color:#111827;border-bottom:1px solid #eef0f3;">${escapeHtml(item.desc) || '<span style=\"color:#9ca3af;\">Untitled item</span>'}</td>
+      <td style="padding:10px 10px;font-size:12.5px;color:#374151;text-align:center;border-bottom:1px solid #eef0f3;">${item.qty}</td>
+      <td style="padding:10px 10px;font-size:12.5px;color:#374151;text-align:right;border-bottom:1px solid #eef0f3;">${fmtMoney(item.rate, data.meta.currency)}</td>
+      <td style="padding:10px 10px;font-size:12.5px;color:#111827;font-weight:700;text-align:right;border-bottom:1px solid #eef0f3;">${fmtMoney(item.amount, data.meta.currency)}</td>
+    </tr>`).join('');
+
+  const discountRow = data.totals.discountAmount > 0 ? `
+    <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#dc2626;">
+      <span>Discount</span><span>- ${fmtMoney(data.totals.discountAmount, data.meta.currency)}</span>
+    </div>` : '';
+
+  const paymentBlock = hasPaymentInfo(data) ? `
+    <div style="border:1px solid #eef0f3;border-radius:12px;padding:16px;margin-bottom:24px;display:flex;gap:16px;align-items:center;">
+      ${paymentImageHtml(data, 80)}
+      <div>
+        <div style="font-size:11.5px;font-weight:800;color:#111827;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;">Payment Details</div>
+        ${paymentDetailsLines(data)}
+      </div>
+    </div>` : '';
+
+  const termsBlock = data.terms ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:${accent};margin-bottom:6px;">Terms &amp; Conditions</div>
+      <div style="font-size:11px;color:#6b7280;white-space:pre-line;line-height:1.7;">${escapeHtml(data.terms)}</div>
+    </div>` : '';
+
+  const notesBlock = data.notes ? `
+    <div style="flex:1;min-width:200px;">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:${accent};margin-bottom:6px;">Notes</div>
+      <div style="font-size:11px;color:#6b7280;white-space:pre-line;line-height:1.7;">${escapeHtml(data.notes)}</div>
+    </div>` : '';
+
+  const sigImg = data.signature.image
+    ? `<img src="${data.signature.image}" style="height:46px;object-fit:contain;margin-bottom:2px;">`
+    : `<div style="height:46px;"></div>`;
+
+  return `
+  <div style="font-family:${data.meta.font};background:#ffffff;display:flex;flex-wrap:wrap;">
+    <div style="flex:1 1 220px;background:${accent};color:${contrastSide};padding:34px 26px;">
+      ${logoBlock}
+      <div style="font-size:18px;font-weight:800;line-height:1.3;margin-bottom:8px;">${escapeHtml(data.company.name)}</div>
+      <div style="font-size:11px;opacity:.85;white-space:pre-line;line-height:1.6;margin-bottom:10px;">${escapeHtml(data.company.address)}</div>
+      <div style="font-size:11px;opacity:.85;line-height:1.6;margin-bottom:26px;">${[escapeHtml(data.company.phone), escapeHtml(data.company.email)].filter(Boolean).join('<br>')}</div>
+
+      <div style="width:32px;height:3px;background:rgba(255,255,255,0.5);margin-bottom:14px;"></div>
+      <div style="font-size:22px;font-weight:800;letter-spacing:1.5px;margin-bottom:14px;">QUOTATION</div>
+      <div style="font-size:11px;opacity:.85;margin-bottom:4px;">Quote #<br><strong style="font-size:12.5px;">${escapeHtml(data.quote.number)}</strong></div>
+      <div style="font-size:11px;opacity:.85;margin-top:10px;">Date<br><strong style="font-size:12.5px;">${formatDateDisplay(data.quote.date)}</strong></div>
+      <div style="font-size:11px;opacity:.85;margin-top:10px;">Valid Until<br><strong style="font-size:12.5px;">${formatDateDisplay(data.quote.validUntil)}</strong></div>
+    </div>
+
+    <div style="flex:3 1 420px;padding:34px 32px;">
+      <div style="background:${light};border-radius:12px;padding:14px 16px;margin-bottom:22px;max-width:320px;">
+        <div style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:${accent};margin-bottom:5px;">Billed To</div>
+        <div style="font-size:13.5px;font-weight:700;color:#111827;">${escapeHtml(data.client.name)}</div>
+        <div style="font-size:11.5px;color:#6b7280;white-space:pre-line;margin-top:2px;">${escapeHtml(data.client.address)}</div>
+        <div style="font-size:11.5px;color:#6b7280;margin-top:2px;">${[escapeHtml(data.client.phone), escapeHtml(data.client.email)].filter(Boolean).join(' &nbsp;•&nbsp; ')}</div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;margin-bottom:22px;">
+        <thead>
+          <tr>
+            <th style="padding:9px 10px;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:${accent};border-bottom:2px solid ${accent};">#</th>
+            <th style="padding:9px 10px;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:${accent};border-bottom:2px solid ${accent};">Description</th>
+            <th style="padding:9px 10px;text-align:center;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:${accent};border-bottom:2px solid ${accent};">Qty</th>
+            <th style="padding:9px 10px;text-align:right;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:${accent};border-bottom:2px solid ${accent};">Rate</th>
+            <th style="padding:9px 10px;text-align:right;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:${accent};border-bottom:2px solid ${accent};">Amount</th>
+          </tr>
+        </thead>
+        <tbody>${rowsHtml || `<tr><td colspan="5" style="padding:16px;text-align:center;color:#9ca3af;font-size:12px;">No items added yet</td></tr>`}</tbody>
+      </table>
+
+      <div style="display:flex;justify-content:flex-end;margin-bottom:26px;">
+        <div style="width:270px;">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#374151;"><span>Subtotal</span><span>${fmtMoney(data.totals.subtotal, data.meta.currency)}</span></div>
+          ${discountRow}
+          <div style="display:flex;justify-content:space-between;padding:6px 0;font-size:12.5px;color:#374151;"><span>GST / Tax (${data.taxPercent}%)</span><span>${fmtMoney(data.totals.taxAmount, data.meta.currency)}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;margin-top:8px;background:${accent};color:${contrastSide};border-radius:10px;font-size:14.5px;font-weight:800;">
+            <span>Total</span><span>${fmtMoney(data.totals.total, data.meta.currency)}</span>
+          </div>
+        </div>
+      </div>
+
+      ${paymentBlock}
+
+      <div style="display:flex;gap:26px;flex-wrap:wrap;margin-bottom:34px;">
+        ${termsBlock}
+        ${notesBlock}
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #eef0f3;padding-top:18px;">
+        <div style="font-size:11px;color:#9ca3af;">Thank you for your business.</div>
+        <div style="text-align:center;">
+          ${sigImg}
+          <div style="border-top:1px solid #9ca3af;padding-top:4px;font-size:11px;color:#374151;min-width:170px;">${escapeHtml(data.signature.signerName)}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================================
+   RENDER DISPATCHER
+   ========================================================================= */
+function renderPreview(){
+  const data = collectData();
+  let html;
+  if(data.meta.layout === 'minimal') html = templateMinimal(data);
+  else if(data.meta.layout === 'creative') html = templateCreative(data);
+  else html = templateCorporate(data);
+  document.getElementById('previewContent').innerHTML = html;
+}
+
+/* =========================================================================
+   PERSISTENCE (localStorage)
+   ========================================================================= */
+function saveState(){
+  try{
+    const items = getItemsFromDOM().map(i => ({ desc: i.desc, qty: i.qty, rate: i.rate }));
+    const data = {
+      form: {
+        companyName: val('companyName'), companyAddress: val('companyAddress'), companyPhone: val('companyPhone'), companyEmail: val('companyEmail'),
+        clientName: val('clientName'), clientAddress: val('clientAddress'), clientPhone: val('clientPhone'), clientEmail: val('clientEmail'),
+        quoteNumber: val('quoteNumber'), quoteDate: val('quoteDate'), validUntil: val('validUntil'),
+        taxPercent: val('taxPercent'), discountValue: val('discountValue'), discountType: val('discountType'),
+        currency: val('currencySelect'), fontSelect: val('fontSelect'),
+        upiId: val('upiId'), razorpayLink: val('razorpayLink'),
+        termsText: val('termsText'), notesText: val('notesText'), signerName: val('signerName')
+      },
+      items,
+      layout: document.querySelector('input[name="layoutStyle"]:checked')?.value || 'corporate',
+      accentColor: selectedAccentColor,
+      logoDataUrl, qrDataUrl, sigUploadDataUrl, hasDrawnSignature,
+      sigMode: document.querySelector('input[name="sigMode"]:checked')?.value || 'draw',
+      sigDrawnDataUrl: (hasDrawnSignature && sigCanvas) ? sigCanvas.toDataURL('image/png') : null
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    flashSaveStatus();
+  }catch(e){
+    console.warn('QuoteCraft: could not save to localStorage', e);
+  }
+}
+
+let saveFlashTimer;
+function flashSaveStatus(){
+  const el = document.getElementById('saveStatus');
+  if(!el) return;
+  el.style.opacity = '1';
+  clearTimeout(saveFlashTimer);
+}
+
+function loadState(){
+  let data = null;
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) data = JSON.parse(raw);
+  }catch(e){
+    console.warn('QuoteCraft: could not read saved data', e);
+  }
+
+  if(!data){
+    // First-time defaults
+    document.getElementById('quoteNumber').value = generateQuoteNumber();
+    const today = new Date();
+    const valid = new Date(); valid.setDate(valid.getDate() + 15);
+    document.getElementById('quoteDate').value = toDateInputValue(today);
+    document.getElementById('validUntil').value = toDateInputValue(valid);
+    addItemRow('Website Design & Development', 1, 25000);
+    addItemRow('Hosting & Domain (1 Year)', 1, 3000);
+    return;
+  }
+
+  // Restore simple fields
+  const f = data.form || {};
+  Object.entries({
+    companyName: f.companyName, companyAddress: f.companyAddress, companyPhone: f.companyPhone, companyEmail: f.companyEmail,
+    clientName: f.clientName, clientAddress: f.clientAddress, clientPhone: f.clientPhone, clientEmail: f.clientEmail,
+    quoteNumber: f.quoteNumber, quoteDate: f.quoteDate, validUntil: f.validUntil,
+    taxPercent: f.taxPercent, discountValue: f.discountValue, discountType: f.discountType,
+    currencySelect: f.currency, fontSelect: f.fontSelect,
+    upiId: f.upiId, razorpayLink: f.razorpayLink,
+    termsText: f.termsText, notesText: f.notesText, signerName: f.signerName
+  }).forEach(([id, value]) => {
+    if(value !== undefined && value !== null){
+      const el = document.getElementById(id);
+      if(el) el.value = value;
+    }
+  });
+
+  if(!document.getElementById('quoteNumber').value) document.getElementById('quoteNumber').value = generateQuoteNumber();
+
+  // Items
+  if(Array.isArray(data.items) && data.items.length){
+    data.items.forEach(it => addItemRow(it.desc, it.qty, it.rate));
+  } else {
+    addItemRow('', 1, 0);
+  }
+
+  // Layout
+  const layoutRadio = document.querySelector(`input[name="layoutStyle"][value="${data.layout}"]`);
+  if(layoutRadio) layoutRadio.checked = true;
+
+  // Accent color
+  if(data.accentColor){
+    const isPreset = Array.from(document.querySelectorAll('.swatch-btn')).some(b => b.dataset.color.toLowerCase() === data.accentColor.toLowerCase());
+    selectAccentColor(data.accentColor, false);
+    if(!isPreset) document.getElementById('customColorPicker').value = data.accentColor;
+  }
+
+  // Images
+  if(data.logoDataUrl){
+    logoDataUrl = data.logoDataUrl;
+    document.getElementById('logoPreviewImg').src = logoDataUrl;
+    document.getElementById('logoPreviewWrap').classList.remove('hidden');
+    document.getElementById('removeLogoBtn').classList.remove('hidden');
+  }
+  if(data.qrDataUrl){
+    qrDataUrl = data.qrDataUrl;
+    document.getElementById('qrPreviewImg').src = qrDataUrl;
+    document.getElementById('qrPreviewWrap').classList.remove('hidden');
+    document.getElementById('removeQrBtn').classList.remove('hidden');
+  }
+  if(data.sigUploadDataUrl){
+    sigUploadDataUrl = data.sigUploadDataUrl;
+    document.getElementById('sigUploadPreviewImg').src = sigUploadDataUrl;
+    document.getElementById('sigUploadPreviewWrap').classList.remove('hidden');
+  }
+
+  // Signature mode
+  if(data.sigMode){
+    const sigRadio = document.querySelector(`input[name="sigMode"][value="${data.sigMode}"]`);
+    if(sigRadio) sigRadio.checked = true;
+    updateSigPanels(data.sigMode);
+  }
+
+  // Drawn signature restore (deferred until canvas initialized)
+  if(data.hasDrawnSignature && data.sigDrawnDataUrl){
+    window.__pendingSignatureRestore = data.sigDrawnDataUrl;
+  }
+}
+
+/* =========================================================================
+   ACCENT COLOR SELECTION
+   ========================================================================= */
+function selectAccentColor(color, triggerUpdate = true){
+  selectedAccentColor = color;
+  document.querySelectorAll('.swatch-btn').forEach(btn => {
+    if(btn.dataset.color.toLowerCase() === color.toLowerCase()){
+      btn.classList.add('ring-slate-900');
+      btn.classList.remove('ring-transparent');
+    } else {
+      btn.classList.remove('ring-slate-900');
+      btn.classList.add('ring-transparent');
+    }
+  });
+  const picker = document.getElementById('customColorPicker');
+  if(picker) picker.value = color;
+  if(triggerUpdate){ renderPreview(); saveState(); }
+}
+
+/* =========================================================================
+   SIGNATURE PAD
+   ========================================================================= */
+function initSignaturePad(){
+  sigCanvas = document.getElementById('sigCanvas');
+  sigCtx = sigCanvas.getContext('2d');
+
+  function resizeCanvas(preserve){
+    const rect = sigCanvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    let snapshot = null;
+    if(preserve && hasDrawnSignature){
+      snapshot = sigCanvas.toDataURL('image/png');
+    }
+    sigCanvas.width = Math.max(rect.width, 1) * dpr;
+    sigCanvas.height = Math.max(rect.height, 1) * dpr;
+    sigCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    sigCtx.strokeStyle = '#1f2937';
+    sigCtx.lineWidth = 2.2;
+    sigCtx.lineCap = 'round';
+    sigCtx.lineJoin = 'round';
+    if(snapshot){
+      const img = new Image();
+      img.onload = () => sigCtx.drawImage(img, 0, 0, rect.width, rect.height);
+      img.src = snapshot;
+    } else if(window.__pendingSignatureRestore){
+      const img = new Image();
+      img.onload = () => {
+        sigCtx.drawImage(img, 0, 0, rect.width, rect.height);
+        hasDrawnSignature = true;
+        renderPreview();
+      };
+      img.src = window.__pendingSignatureRestore;
+      window.__pendingSignatureRestore = null;
+    }
+  }
+
+  resizeCanvas(false);
+  window.addEventListener('resize', debounce(() => resizeCanvas(true), 250));
+
+  let drawing = false, lastX = 0, lastY = 0;
+  function getPos(e){
+    const rect = sigCanvas.getBoundingClientRect();
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+  sigCanvas.addEventListener('pointerdown', function(e){
+    drawing = true;
+    hasDrawnSignature = true;
+    const p = getPos(e);
+    lastX = p.x; lastY = p.y;
+    sigCtx.beginPath();
+    sigCtx.arc(p.x, p.y, 1, 0, Math.PI * 2);
+    sigCtx.fillStyle = '#1f2937';
+    sigCtx.fill();
+    try{ sigCanvas.setPointerCapture(e.pointerId); }catch(err){}
+  });
+  sigCanvas.addEventListener('pointermove', function(e){
+    if(!drawing) return;
+    const p = getPos(e);
+    sigCtx.beginPath();
+    sigCtx.moveTo(lastX, lastY);
+    sigCtx.lineTo(p.x, p.y);
+    sigCtx.stroke();
+    lastX = p.x; lastY = p.y;
+  });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(evt => {
+    sigCanvas.addEventListener(evt, function(){
+      if(drawing){ drawing = false; renderPreview(); saveState(); }
+    });
+  });
+
+  document.getElementById('clearSigBtn').addEventListener('click', function(){
+    const rect = sigCanvas.getBoundingClientRect();
+    sigCtx.clearRect(0, 0, rect.width, rect.height);
+    hasDrawnSignature = false;
+    renderPreview(); saveState();
+  });
+}
+
+function updateSigPanels(mode){
+  const drawPanel = document.getElementById('sigDrawPanel');
+  const uploadPanel = document.getElementById('sigUploadPanel');
+  drawPanel.classList.toggle('hidden', mode !== 'draw');
+  uploadPanel.classList.toggle('hidden', mode !== 'upload');
+}
+
+/* =========================================================================
+   FILE UPLOAD HANDLERS
+   ========================================================================= */
+function handleLogoUpload(file){
+  if(!file) return;
+  resizeImage(file, 400, function(dataUrl){
+    if(!dataUrl) return;
+    logoDataUrl = dataUrl;
+    document.getElementById('logoPreviewImg').src = dataUrl;
+    document.getElementById('logoPreviewWrap').classList.remove('hidden');
+    document.getElementById('removeLogoBtn').classList.remove('hidden');
+    renderPreview(); saveState();
+  });
+}
+function handleQrUpload(file){
+  if(!file) return;
+  resizeImage(file, 400, function(dataUrl){
+    if(!dataUrl) return;
+    qrDataUrl = dataUrl;
+    document.getElementById('qrPreviewImg').src = dataUrl;
+    document.getElementById('qrPreviewWrap').classList.remove('hidden');
+    document.getElementById('removeQrBtn').classList.remove('hidden');
+    renderPreview(); saveState();
+  });
+}
+function handleSigUpload(file){
+  if(!file) return;
+  resizeImage(file, 400, function(dataUrl){
+    if(!dataUrl) return;
+    sigUploadDataUrl = dataUrl;
+    document.getElementById('sigUploadPreviewImg').src = dataUrl;
+    document.getElementById('sigUploadPreviewWrap').classList.remove('hidden');
+    renderPreview(); saveState();
+  });
+}
+
+/* =========================================================================
+   PDF EXPORT / PRINT
+   ========================================================================= */
+function downloadPDF(){
+  const data = collectData();
+  const original = document.getElementById('previewContent');
+  const clone = original.cloneNode(true);
+  clone.style.width = '794px';
+  clone.style.maxWidth = '794px';
+  clone.style.margin = '0';
+  clone.style.position = 'fixed';
+  clone.style.left = '-9999px';
+  clone.style.top = '0';
+  clone.style.boxShadow = 'none';
+  document.body.appendChild(clone);
+
+  const filename = `Quotation-${(data.quote.number || 'draft').replace(/[^a-z0-9\-_]/gi, '_')}.pdf`;
+  const btn = document.getElementById('downloadPdfBtn');
+  const originalHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span>Generating…</span>';
+
+  // give the browser a moment to lay out the off-screen clone (and load QR images) before capture
+  setTimeout(() => {
+    const opt = {
+      margin: 0,
+      filename: filename,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, allowTaint: true, backgroundColor: '#ffffff', windowWidth: 794 },
+      jsPDF: { unit: 'px', format: [794, Math.max(clone.scrollHeight, 400)], orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(clone).save().then(() => {
+      document.body.removeChild(clone);
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+    }).catch((err) => {
+      console.error('PDF export failed', err);
+      document.body.removeChild(clone);
+      btn.disabled = false;
+      btn.innerHTML = originalHtml;
+      alert('PDF export ran into an issue. Please try the Print option instead (it also lets you "Save as PDF").');
+    });
+  }, 350);
+}
+
+function printQuotation(){
+  window.print();
+}
+
+/* =========================================================================
+   INIT / EVENT WIRING
+   ========================================================================= */
+document.addEventListener('DOMContentLoaded', function(){
+  const debouncedUpdate = debounce(() => { renderPreview(); saveState(); }, 250);
+
+  loadState();
+  initSignaturePad();
+
+  // Delegated input/change listeners on the form panel
+  const formPanel = document.getElementById('formPanel');
+  formPanel.addEventListener('input', function(e){
+    if(e.target.classList.contains('item-qty') || e.target.classList.contains('item-rate') || e.target.classList.contains('item-desc')){
+      getItemsFromDOM();
+    }
+    debouncedUpdate();
+  });
+  formPanel.addEventListener('change', function(e){
+    if(e.target.id === 'logoInput'){ handleLogoUpload(e.target.files[0]); return; }
+    if(e.target.id === 'qrInput'){ handleQrUpload(e.target.files[0]); return; }
+    if(e.target.id === 'sigUploadInput'){ handleSigUpload(e.target.files[0]); return; }
+    if(e.target.name === 'sigMode'){ updateSigPanels(e.target.value); }
+    debouncedUpdate();
+  });
+
+  // Color swatches
+  document.querySelectorAll('.swatch-btn').forEach(btn => {
+    btn.addEventListener('click', () => selectAccentColor(btn.dataset.color));
+  });
+  document.getElementById('customColorPicker').addEventListener('input', function(){
+    document.querySelectorAll('.swatch-btn').forEach(b => { b.classList.remove('ring-slate-900'); b.classList.add('ring-transparent'); });
+    selectedAccentColor = this.value;
+    renderPreview(); saveState();
+  });
+
+  // Items add/remove
+  document.getElementById('addItemBtn').addEventListener('click', function(){
+    addItemRow('', 1, 0);
+    getItemsFromDOM();
+    renderPreview(); saveState();
+  });
+  document.getElementById('itemsContainer').addEventListener('click', function(e){
+    const removeBtn = e.target.closest('.remove-item-btn');
+    if(!removeBtn) return;
+    const row = removeBtn.closest('.item-row');
+    const container = document.getElementById('itemsContainer');
+    if(container.children.length <= 1){
+      row.querySelector('.item-desc').value = '';
+      row.querySelector('.item-qty').value = 1;
+      row.querySelector('.item-rate').value = 0;
+    } else {
+      row.remove();
+    }
+    getItemsFromDOM();
+    renderPreview(); saveState();
+  });
+
+  // Remove logo / QR
+  document.getElementById('removeLogoBtn').addEventListener('click', function(){
+    logoDataUrl = null;
+    document.getElementById('logoInput').value = '';
+    document.getElementById('logoPreviewWrap').classList.add('hidden');
+    this.classList.add('hidden');
+    renderPreview(); saveState();
+  });
+  document.getElementById('removeQrBtn').addEventListener('click', function(){
+    qrDataUrl = null;
+    document.getElementById('qrInput').value = '';
+    document.getElementById('qrPreviewWrap').classList.add('hidden');
+    this.classList.add('hidden');
+    renderPreview(); saveState();
+  });
+
+  // Top actions
+  document.getElementById('downloadPdfBtn').addEventListener('click', downloadPDF);
+  document.getElementById('printBtn').addEventListener('click', printQuotation);
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    if(confirm('This will clear all saved quotation data from this browser. Continue?')){
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  });
+
+  // Mobile tabs
+  const tabEditBtn = document.getElementById('tabEditBtn');
+  const tabPreviewBtn = document.getElementById('tabPreviewBtn');
+  tabEditBtn.addEventListener('click', function(){
+    document.getElementById('formPanel').classList.remove('mobile-hide');
+    document.getElementById('previewPanel').classList.add('mobile-hide');
+    tabEditBtn.classList.add('text-indigo-600', 'border-indigo-600');
+    tabEditBtn.classList.remove('text-slate-400', 'border-transparent');
+    tabPreviewBtn.classList.remove('text-indigo-600', 'border-indigo-600');
+    tabPreviewBtn.classList.add('text-slate-400', 'border-transparent');
+  });
+  tabPreviewBtn.addEventListener('click', function(){
+    document.getElementById('previewPanel').classList.remove('mobile-hide');
+    document.getElementById('formPanel').classList.add('mobile-hide');
+    tabPreviewBtn.classList.add('text-indigo-600', 'border-indigo-600');
+    tabPreviewBtn.classList.remove('text-slate-400', 'border-transparent');
+    tabEditBtn.classList.remove('text-indigo-600', 'border-indigo-600');
+    tabEditBtn.classList.add('text-slate-400', 'border-transparent');
+  });
+  // form panel visible by default on mobile
+  document.getElementById('previewPanel').classList.add('mobile-hide');
+
+  renderPreview();
+});
+</script>
 </body>
 </html>
