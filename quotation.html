@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Quotation Maker</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f4f7f6; }
+        .controls { background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .controls label { font-weight: bold; }
+        .quote-box { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 800px; margin: auto; }
+        
+        /* Dynamic Theme Colors */
+        .theme-blue { --main-color: #0056b3; --accent-bg: #eef5ff; }
+        .theme-green { --main-color: #2e7d32; --accent-bg: #e8f5e9; }
+        .theme-purple { --main-color: #6a1b9a; --accent-bg: #f3e5f5; }
+        .theme-dark { --main-color: #212121; --accent-bg: #f5f5f5; }
+
+        /* Dynamic Formats */
+        .format-standard .header { display: flex; justify-content: space-between; border-bottom: 3px solid var(--main-color); padding-bottom: 15px; }
+        .format-centered .header { text-align: center; border-bottom: 2px dashed var(--main-color); padding-bottom: 15px; }
+        .format-centered .header h2 { color: var(--main-color); }
+        .format-modern { border-left: 8px solid var(--main-color); padding-left: 20px; }
+        .format-modern .header { display: flex; justify-content: space-between; background: var(--accent-bg); padding: 15px; border-radius: 5px; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background-color: var(--main-color); color: white; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; }
+        .total-sec { text-align: right; margin-top: 20px; font-size: 1.2em; font-weight: bold; color: var(--main-color); }
+        .btn-print { background: var(--main-color); color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-size: 16px; }
+        
+        @media print {
+            .controls, .btn-print { display: none; }
+            .quote-box { box-shadow: none; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Controls Panel -->
+    <div class="controls">
+        <div>
+            <label>Choose Color:</label>
+            <select id="colorSelect" onchange="changeTheme()">
+                <option value="theme-blue">Blue</option>
+                <option value="theme-green">Green</option>
+                <option value="theme-purple">Purple</option>
+                <option value="theme-dark">Dark Gray</option>
+            </select>
+        </div>
+        <div>
+            <label>Choose Layout Format:</label>
+            <select id="formatSelect" onchange="changeFormat()">
+                <option value="format-standard">Standard Header</option>
+                <option value="format-centered">Centered Classic</option>
+                <option value="format-modern">Modern Block</option>
+            </select>
+        </div>
+        <button class="btn-print" onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+    <!-- Quotation Template -->
+    <div id="quoteArea" class="quote-box theme-blue format-standard">
+        <div class="header">
+            <div>
+                <h2 contenteditable="true" style="margin:0; color:var(--main-color);">Aapki Company Ka Naam</h2>
+                <p contenteditable="true" style="margin:5px 0;">Address & Mobile Number</p>
+            </div>
+            <div style="text-align: right;">
+                <h3 style="margin:0; color:var(--main-color);">QUOTATION</h3>
+                <p contenteditable="true" style="margin:5px 0;">Date: 23/08/2026</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <p contenteditable="true"><strong>To (Customer Name):</strong> Client Name Here</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item Description</th>
+                    <th>Qty</th>
+                    <th>Rate (₹)</th>
+                    <th>Amount (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td contenteditable="true">Service/Product 1</td>
+                    <td contenteditable="true">1</td>
+                    <td contenteditable="true">5000</td>
+                    <td contenteditable="true">5000</td>
+                </tr>
+                <tr>
+                    <td contenteditable="true">Service/Product 2</td>
+                    <td contenteditable="true">2</td>
+                    <td contenteditable="true">1500</td>
+                    <td contenteditable="true">3000</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total-sec">
+            Total: ₹<span contenteditable="true">8000</span>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <p contenteditable="true"><strong>Terms & Conditions:</strong><br>1. Payment 50% advance.<br>2. Valid for 15 days.</p>
+        </div>
+    </div>
+
+    <script>
+        function changeTheme() {
+            var color = document.getElementById("colorSelect").value;
+            var element = document.getElementById("quoteArea");
+            element.className = element.className.replace(/\btheme-\S+/g, '');
+            element.classList.add(color);
+        }
+
+        function changeFormat() {
+            var format = document.getElementById("formatSelect").value;
+            var element = document.getElementById("quoteArea");
+            element.className = element.className.replace(/\bformat-\S+/g, '');
+            element.classList.add(format);
+        }
+    </script>
+
+</body>
+</html>
