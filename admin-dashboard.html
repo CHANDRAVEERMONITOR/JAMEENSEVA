@@ -584,7 +584,7 @@ const TABLES = {
       { key: 'district', label: 'ज़िला' },
       { key: 'customer_mobile', label: 'मोबाइल' },
       { key: 'document_type', label: 'प्रकार' },
-      { key: 'status', label: 'स्टेटस', badge: true },
+      { key: 'order_status', label: 'स्टेटस', badge: true },
       { key: 'payment_method', label: 'पेमेंट विधि', badge: true },
       { key: 'created_at', label: 'तारीख', date: true },
     ],
@@ -611,7 +611,7 @@ const TABLES = {
       { key: 'created_at', label: 'ऑर्डर तारीख' },
     ],
     editable: [
-      { key: 'status', label: 'स्टेटस', type: 'select', custom: true,
+      { key: 'order_status', label: 'स्टेटस', type: 'select', custom: true,
         options: [
           'Pending',
           'सर्च जारी है (Searching)',
