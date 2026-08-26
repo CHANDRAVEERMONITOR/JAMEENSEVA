@@ -482,9 +482,102 @@
     </div>
   </div>
 </header>
+<!-- 📜 KEVALA ADVANCE TOKEN PAYMENT NOTICE BOARD -->
+<style>
+  .kevala-token-box {
+    background: #fffbe6;
+    border: 2px dashed #f59e0b;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 15px 0 25px 0;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+    font-family: 'Baloo 2', 'Noto Serif Devanagari', sans-serif;
+  }
+  .kt-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b45309;
+    font-size: 17px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #fef3c7;
+    padding-bottom: 6px;
+  }
+  .kt-header span {
+    background: #dc2626;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .kt-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.7;
+  }
+  .kt-list li {
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 20px;
+  }
+  .kt-list li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #1a7c3e;
+    font-weight: bold;
+  }
+  .kt-list li.warn::before {
+    content: "⚠️";
+  }
+  .kt-highlight {
+    background: #fef2f2;
+    border-left: 4px solid #dc2626;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #991b1b;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .kt-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+  }
+</style>
 
+<div class="kevala-token-box">
+  <div class="kt-header">
+    🔔 केवाला (रजिस्ट्री) ऑर्डर के लिए आवश्यक सूचना
+    <span>ज़रूरी</span>
+  </div>
+
+  <div class="kt-highlight">
+    ⚠️ अगर आप ₹49 का एडवांस टोकन (Advance Token) भुगतान नहीं करते हैं, तो आपका ऑर्डर Confirm नहीं माना जाएगा।
+  </div>
+
+  <ul class="kt-list">
+    <li><strong>फर्जी ऑर्डर से बचाव:</strong> यह केवल सीरियस (Serious) ग्राहकों के लिए बनाया गया है ताकि फर्जी ऑर्डर को रोका जा सके।</li>
+    <li><strong>एडजस्टमेंट (Adjustable):</strong> यह ₹49 की राशि आपके फाइनल सर्विस चार्ज में जोड़ दी/कम (Manage) कर दी जाएगी।</li>
+    <li><strong>अन्य सेवाओं में उपयोग:</strong> आप चाहें तो इस टोकन राशि का उपयोग JameenSeva.in की किसी भी अन्य सेवा में करवा सकते हैं।</li>
+    <li class="warn"><strong>Non-Refundable:</strong> यह टोकन राशि किसी भी परिस्थिति में वापस (Refund) नहीं होगी।</li>
+  </ul>
+
+  <!-- Razorpay Payment Button Section -->
+  <div class="kt-btn-container">
+    <form>
+      <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TUHh8w4FoRxczt" async> </script> 
+    </form>
+  </div>
+</div>
 <main class="wrap">
-
   <!-- ══════════════ ORDER FORM ══════════════ -->
   <div class="form-outer" id="order-form">
     <div class="form-header">
