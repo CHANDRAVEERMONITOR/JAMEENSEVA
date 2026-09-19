@@ -30,12 +30,7 @@
   </url>
 
   <!-- ===== CORE SERVICE PAGES (सबसे जरूरी) ===== -->
-  <url>
-    <loc>https://jameenseva.in/khatiyan.html</loc>
-    <lastmod>2026-03-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.98</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/ragister2.html</loc>
     <lastmod>2026-03-29</lastmod>
@@ -190,18 +185,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/mp-land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://jameenseva.in/uk-land-calculator.html</loc>
-    <lastmod>2026-03-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/calculator-blog.html</loc>
     <lastmod>2026-03-10</lastmod>
@@ -306,36 +290,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/araria.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/arwal.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/aurangabad.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+ 
   <url>
     <loc>https://jameenseva.in/banka.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/begusarai.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+ 
   <url>
     <loc>https://jameenseva.in/bhagalpur.html</loc>
     <lastmod>2026-06-09</lastmod>
@@ -360,30 +329,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/gaya.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/gopalganj.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/jamui.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jameenseva.in/jehanabad.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/kaimur.html</loc>
     <lastmod>2026-06-09</lastmod>
@@ -402,24 +355,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/kishanganj.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+ 
   <url>
     <loc>https://jameenseva.in/lakhisarai.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/madhepura.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/munger.html</loc>
     <lastmod>2026-06-09</lastmod>
@@ -433,29 +376,12 @@
     <priority>0.80</priority>
   </url>
   <url>
-    <loc>https://jameenseva.in/nalanda.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jameenseva.in/nawada.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
     <loc>https://jameenseva.in/purnia.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/rohtas.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+ 
   <url>
     <loc>https://jameenseva.in/saharsa.html</loc>
     <lastmod>2026-06-09</lastmod>
@@ -480,36 +406,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/sheohar.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jameenseva.in/sitamarhi.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/siwan.html</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://jameenseva.in/supaul.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jameenseva.in/vaishali.html</loc>
-    <lastmod>2026-06-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
+  
   <url>
     <loc>https://jameenseva.in/west-champaran.html</loc>
     <lastmod>2026-06-09</lastmod>
