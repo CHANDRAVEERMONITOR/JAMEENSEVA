@@ -585,9 +585,6 @@
 </head>
 <body>
 
-<!-- ALERT -->
-<div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, <a href="https://jameenseva.in/khatiyan.html">खतियान</a> और <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा</a> अभी तैयार करवाएं।</div>
-
 <!-- NAV -->
 <nav class="topbar">
   <a href="https://jameenseva.in/" class="brand">Jameen<em>Seva</em>.in</a>
@@ -690,6 +687,8 @@
     padding-top: 5px;
   }
 </style>
+<!-- ALERT -->
+<div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, <a href="https://jameenseva.in/khatiyan.html">खतियान</a> और <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा</a> अभी तैयार करवाएं।</div>
 
 <div class="kevala-token-box">
   <div class="kt-header">
@@ -704,8 +703,8 @@
   <ul class="kt-list">
     <li><strong>फर्जी ऑर्डर से बचाव:</strong> यह केवल सीरियस (Serious) ग्राहकों के लिए बनाया गया है ताकि फर्जी ऑर्डर को रोका जा सके।</li>
     <li><strong>एडजस्टमेंट (Adjustable):</strong> यह ₹99 की राशि आपके फाइनल सर्विस चार्ज में जोड़ दी/कम (Manage) कर दी जाएगी।</li>
-    <li><strong>अन्य सेवाओं में उपयोग:</strong> आप चाहें तो इस टोकन राशि का उपयोग JameenSeva.in की किसी भी अन्य सेवा में करवा सकते हैं।</li>
     <li class="warn"><strong>Non-Refundable:</strong> यह टोकन राशि किसी भी परिस्थिति में वापस (Refund) नहीं होगी।</li>
+     <li><strong>अन्य सेवाओं में उपयोग:</strong> आप चाहें तो इस टोकन राशि का उपयोग JameenSeva.in की किसी भी अन्य सेवा में करवा सकते हैं।</li>
   </ul>
 
   <!-- Razorpay Payment Button Section -->
@@ -726,44 +725,42 @@
       <!-- Type -->
       <div class="form-section">
         <div class="fs-title">📄 STEP 1 — केवाला का समय काल, वर्ष और दस्तावेज़ का प्रकार चुनें</div>
-
-        <!-- 2006 से पहले / बाद का Quick Filter -->
-        <div class="fg" style="margin-bottom:16px;">
-          <label style="font-weight:700;margin-bottom:8px;display:block;">रजिस्ट्रेशन की अवधि चुनें *</label>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
-              <input type="radio" name="era_period" value="pre_2006" onchange="onEraChange('pre_2006')" />
-              🕰️ 2006 से पहले (1900 - 2005)
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
-              <input type="radio" name="era_period" value="post_2006" onchange="onEraChange('post_2006')" checked />
-              ⚡ 2006 से वर्तमान (2006 - 2026)
-            </label>
-          </div>
-        </div>
-
-
-        <div class="type-grid">
-          <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
-            <input type="radio" name="doc_type" id="radio-doc-cert" value="Certified Copy" checked/>
-            <div class="tc-body">
-              <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
-              <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
-            </div>
-          </label>
-          <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
-            <input type="radio" name="doc_type" id="radio-doc-web" value="Web Copy"/>
-            <div class="tc-body">
-              <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
-              <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
-            </div>
-          </label>
-        </div>
-        <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
-          ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
-        </div>
-      </div>
-
+ <!-- 2006 से पहले / बाद का Quick Filter -->
+        <div class="fg" style="margin-bottom:16px;">
+          <label style="font-weight:700;margin-bottom:8px;display:block;">रजिस्ट्रेशन की अवधि चुनें *</label>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+              <input type="radio" name="era_period" value="pre_2006" onchange="onEraChange('pre_2006')" />
+              🕰️ 2006 से पहले (1900 - 2005)
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+              <input type="radio" name="era_period" value="post_2006" onchange="onEraChange('post_2006')" checked />
+              ⚡ 2006 से वर्तमान (2006 - 2026)
+            </label>
+          </div>
+        </div>
+ 
+        <div class="type-grid">
+          <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
+            <input type="radio" name="doc_type" id="radio-doc-cert" value="Certified Copy" checked/>
+            <div class="tc-body">
+              <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
+              <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
+            </div>
+          </label>
+          <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
+            <input type="radio" name="doc_type" id="radio-doc-web" value="Web Copy"/>
+            <div class="tc-body">
+              <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
+              <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
+            </div>
+          </label>
+        </div>
+        <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
+          ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
+        </div>
+      </div>
+       
       <!-- Location -->
       <div class="form-section">
         <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
