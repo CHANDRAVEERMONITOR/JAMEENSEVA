@@ -29,6 +29,9 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"बदलनामा (अदला-बदली) क्या होता है?","acceptedAnswer":{"@type":"Answer","text":"बदलनामा वह कानूनी दस्तावेज है जब दो किसान आपसी सहमति से एक-दूसरे की जमीन का हिस्सा बदल लेते हैं। बिहार सर्वे 2026 में यह दस्तावेज खतियान में नाम बदलवाने के लिए अनिवार्य है।"}},{"@type":"Question","name":"क्या बदलनामा बिहार सर्वे 2026 में मान्य है?","acceptedAnswer":{"@type":"Answer","text":"हाँ, सरपंच की मोहर और दोनों पक्षों के हस्ताक्षर के साथ बदलनामा बिहार राजस्व विभाग में पूर्णतः मान्य है।"}},{"@type":"Question","name":"OCR PDF और MS Word में क्या फर्क है?","acceptedAnswer":{"@type":"Answer","text":"OCR PDF ₹99 में print करके हाथ से भर सकते हैं। MS Word ₹149 में computer/mobile पर खुद से नाम, खेसरा, रकबा edit करके भर सकते हैं।"}}]}
 </script>
 
+<!-- RAZORPAY CHECKOUT SCRIPT -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <style>
 :root{
   --g:#1a7c3e;--gl:#22a352;--gp:#edfaf2;
@@ -109,8 +112,8 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
 .disc-cta:hover{transform:translateY(-2px) scale(1.03)}
 
 /* ══ PRICING CARDS ══ */
-.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-.pcard{border:1.5px solid var(--bdr);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;gap:14px;background:var(--w);transition:.25s;position:relative}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch}
+.pcard{border:1.5px solid var(--bdr);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;background:var(--w);transition:.25s;position:relative}
 .pcard:hover{box-shadow:var(--shm);transform:translateY(-3px)}
 .pcard.best{border-color:var(--g);border-width:2px;background:linear-gradient(160deg,#f0fdf6,var(--w))}
 .ptop-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--g);color:#fff;font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:800;padding:3px 13px;border-radius:20px;white-space:nowrap}
@@ -123,8 +126,13 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
 .pfeats li{font-size:13px;color:#374151;display:flex;align-items:flex-start;gap:7px;line-height:1.5}
 .pfeats li::before{content:'✓';color:var(--g);font-weight:800;font-size:11px;margin-top:3px;flex-shrink:0;width:15px;height:15px;background:var(--gp);border-radius:50%;display:flex;align-items:center;justify-content:center}
 .pfeats li.pb{font-weight:700;color:var(--n)}
-.rzw{margin-top:4px}
-.rzw form{width:100%}
+
+/* PAYMENT BUTTONS */
+.btn-buy{width:100%;padding:12px 14px;border:none;border-radius:10px;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:0.2s;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,0.08);}
+.btn-buy-dark{background:var(--n);color:#fff;}
+.btn-buy-dark:hover{background:var(--nm);transform:translateY(-1px);}
+.btn-buy-green{background:linear-gradient(135deg,var(--g),var(--gl));color:#fff;box-shadow:0 4px 14px rgba(26,124,62,0.35);}
+.btn-buy-green:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,124,62,0.45);}
 
 /* GUARANTEE */
 .gstrip{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px;padding:12px;background:var(--gp);border-radius:10px;border:1px solid rgba(26,124,62,.18)}
@@ -360,9 +368,9 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
         <li>Mobile & Computer compatible</li>
       </ul>
       <div class="rzw">
-        <form>
-          <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SwMkkThFI1tmKq" async></script>
-        </form>
+        <button onclick="payAndDownload('badalnama_pdf')" class="btn-buy btn-buy-dark">
+          <span>Download PDF</span> ⚡
+        </button>
       </div>
     </div>
 
@@ -385,9 +393,9 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
         <li>24/7 WhatsApp Support</li>
       </ul>
       <div class="rzw">
-        <form>
-          <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_SwMnZsJo7oH0qE" async></script>
-        </form>
+        <button onclick="payAndDownload('badalnama_word')" class="btn-buy btn-buy-green">
+          <span>Download Format</span> 🚀
+        </button>
       </div>
     </div>
 
@@ -401,6 +409,7 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
     <div class="gi">🔄 Issue पर Replace</div>
   </div>
 </div>
+
 <!-- Jameen Seva panchnama Button Start -->
 <div style="text-align: center; margin: 20px 0;">
     <a href="https://jameenseva.in/panchnamablog.html" style="
@@ -579,7 +588,7 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
       <div class="rlb"><strong>Stamp Paper पर पंचनामा बनवाएं (COD)</strong><span>Expert Team — Discount + Cash on Delivery</span></div>
     </a>
     <a href="bihar-survey-guide-2026.html" class="rl">
-      <div class="rli">🗓️</div>
+      <div class="rli">🗓️️</div>
       <div class="rlb"><strong>बिहार सर्वे 2026 — पूरी गाइड</strong><span>क्या करें, क्या न करें — सब कुछ जानें</span></div>
     </a>
     <a href="dakhil-kharij-blog.html" class="rl">
@@ -645,6 +654,7 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--cream)
 
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<!-- ══════════════ CORE PAYMENT & WEBHOOK SCRIPT ══════════════ -->
 <script>
 function tf(btn){
   var a=btn.nextElementSibling,o=btn.classList.contains('open');
@@ -652,6 +662,56 @@ function tf(btn){
   if(!o){btn.classList.add('open');a.classList.add('open')}
 }
 window.addEventListener('scroll',()=>document.getElementById('btt').classList.toggle('show',window.scrollY>400));
+
+// SUPABASE & RAZORPAY CONFIGURATION
+const SUPABASE_PROJECT_ID = "efgvsddclcnbmwqbtily";
+const BUCKET_NAME = "panchnama-documents";
+const BASE_STORAGE_URL = `https://${SUPABASE_PROJECT_ID}.supabase.co/storage/v1/object/public/${BUCKET_NAME}`;
+
+// EXACT PRODUCT MAPPING FOR BADALNAMA
+const productData = {
+  badalnama_pdf: {
+    name: "Badalnama Exchange (OCR PDF)",
+    amount: 9900, // ₹99
+    fileUrl: `${BASE_STORAGE_URL}/badalnama.pdf`
+  },
+  badalnama_word: {
+    name: "Badalnama Exchange (Editable MS Word)",
+    amount: 14900, // ₹149
+    fileUrl: `${BASE_STORAGE_URL}/badalnama%20batwara%20(2).docx`
+  }
+};
+
+function payAndDownload(itemKey) {
+  const product = productData[itemKey];
+  if (!product) return;
+
+  const options = {
+    key: "rzp_live_TjdhbqZASS5Iyb", // <-- Yahan apna Razorpay LIVE Key ID dalein (rzp_live_...)
+    amount: product.amount,
+    currency: "INR",
+    name: "JameenSeva",
+    description: product.name,
+    image: "https://jameenseva.in/favicon.ico",
+    notes: {
+      product_name: product.name,
+      file_url: product.fileUrl // Webhook ke zariye Supabase panchnama_orders table me save hoga
+    },
+    handler: function (response) {
+      alert("✅ Payment Successful! Aapka बदलनामा फॉर्मेट download ho raha hai.");
+      window.location.href = product.fileUrl;
+    },
+    theme: {
+      color: "#1a7c3e"
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.on('payment.failed', function (response){
+    alert("Payment cancel ya fail ho gaya: " + response.error.description);
+  });
+  rzp.open();
+}
 </script>
 </body>
 </html>
