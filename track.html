@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Track Your Order | JameenSeva.in — खतियान, जमाबंदी, पंचनामा बटवारा,केवाला ऑर्डर ट्रैकिंग</title>
-<meta name="description" content="JameenSeva.in पर खतियान, रजिस्टर 2 (जमाबंदी पंजी), पंचनामा बटवारा,केवाला का लाइव ऑर्डर स्टेटस ट्रैक करें।">
-<meta name="keywords" content="jameenseva track order, khatiyan order status, register 2 tracking, jamabandi order tracking,kevala order tracking, panchnama order delivery tracking">
+<title>Track Your Order | JameenSeva.in — खतियान, जमाबंदी, पंचनामा बटवारा, केवाला ऑर्डर ट्रैकिंग</title>
+<meta name="description" content="JameenSeva.in पर खतियान, रजिस्टर 2 (जमाबंदी पंजी), पंचनामा बटवारा, केवाला का लाइव ऑर्डर स्टेटस ट्रैक करें।">
+<meta name="keywords" content="jameenseva track order, khatiyan order status, register 2 tracking, jamabandi order tracking, kevala order tracking, panchnama order delivery tracking">
 <link rel="canonical" href="https://jameenseva.in/track.html">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@400;700&display=swap" rel="stylesheet">
@@ -15,6 +15,7 @@
   --n:#0c2340;--blue:#1a5c8a;--bluep:#eaf3fb;
   --sf:#e67e00;--red:#dc2626;--redp:#fef2f2;
   --amber:#f59e0b;--ambp:#fef3c7;
+  --purple:#7c3aed;--purp:#f5f3ff;
   --w:#fff;--bg:#f1f5f9;--bdr:#e2e8f0;
   --sh:0 2px 16px rgba(12,35,64,.08);
   --shm:0 8px 32px rgba(12,35,64,.14);
@@ -93,6 +94,7 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 .tb-k{background:#dbeafe;color:#1d4ed8}
 .tb-p{background:var(--gp);color:var(--g)}
 .tb-j{background:var(--ambp);color:#92400e}
+.tb-m{background:#f3e8ff;color:#7c3aed}
 
 /* ══ DETAIL PANEL ══ */
 .detail-panel{display:none}
@@ -100,37 +102,49 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 
 /* Viewing indicator */
 .viewing-bar{background:linear-gradient(135deg,var(--g),var(--gl));border-radius:10px 10px 0 0;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.viewing-bar.canceled-bar{background:linear-gradient(135deg,#991b1b,var(--red))}
+.viewing-bar.hold-bar{background:linear-gradient(135deg,#b45309,var(--amber))}
 .vb-left{font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
 .vb-oid{font-family:'Baloo 2',sans-serif;font-size:16px;font-weight:800;color:#7eeaa5}
 .vb-right{font-family:'Baloo 2',sans-serif;font-size:11px;color:rgba(255,255,255,.7)}
 
 /* Status Big Card */
-.status-big-card{background:var(--w);border:1px solid var(--bdr);border-top:none;border-radius:0 0 0 0;padding:22px;box-shadow:var(--sh)}
-.sbc-inner{text-align:center;margin-bottom:22px}
+.status-big-card{background:var(--w);border:1px solid var(--bdr);border-top:none;padding:24px 20px;box-shadow:var(--sh)}
+.sbc-inner{text-align:center;margin-bottom:18px}
 
-/* Status badge */
-.sbadge{display:inline-flex;align-items:center;gap:10px;padding:12px 28px;border-radius:50px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:16px;margin-bottom:6px}
-.sbadge-sub{font-family:'Baloo 2',sans-serif;font-size:12.5px;color:#64748b}
-.sb-recv{background:#fee2e2;color:var(--red)}
-.sb-proc{background:var(--ambp);color:#92400e}
-.sb-disp{background:#dbeafe;color:#1d4ed8}
-.sb-dlvr{background:var(--gp);color:var(--g)}
+/* Advanced Dynamic Badges */
+.sbadge{display:inline-flex;align-items:center;gap:10px;padding:11px 26px;border-radius:50px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:16px;margin-bottom:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.sbadge-sub{font-family:'Baloo 2',sans-serif;font-size:13px;color:#475569;max-width:540px;margin:0 auto;line-height:1.5}
+
+.sb-recv{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.sb-proc{background:var(--ambp);color:#b45309;border:1px solid #fde68a}
+.sb-rtd{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.sb-disp{background:#e0e7ff;color:#4338ca;border:1px solid #c7d2fe}
+.sb-dlvr{background:var(--gp);color:var(--g);border:1px solid #a7f3d0}
+.sb-canc{background:var(--redp);color:var(--red);border:1px solid #fecaca}
+.sb-hold{background:#fffbeb;color:#d97706;border:1px solid #fef3c7}
+
+/* Alert Box for Cancelled / On Hold Orders */
+.status-alert-box{border-radius:10px;padding:16px 18px;margin:16px 0;display:flex;align-items:flex-start;gap:14px;text-align:left}
+.sab-canc{background:#fef2f2;border:1.5px solid #f87171;color:#991b1b}
+.sab-hold{background:#fffbeb;border:1.5px solid #fbbf24;color:#92400e}
+.sab-icon{font-size:28px;line-height:1}
+.sab-content strong{display:block;font-family:'Baloo 2',sans-serif;font-size:14.5px;font-weight:800;margin-bottom:3px}
+.sab-content p{font-size:13px;line-height:1.5;margin-bottom:6px}
+.sab-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;text-decoration:none;font-family:'Baloo 2',sans-serif;font-size:12px;font-weight:700;padding:6px 12px;border-radius:6px}
 
 /* Progress Track */
-.prog-track{display:flex;align-items:center;margin:18px 0 6px}
+.prog-track{display:flex;align-items:center;margin:22px 0 6px}
 .pt-step{display:flex;flex-direction:column;align-items:center;flex:1}
-.pt-circle{width:40px;height:40px;border-radius:50%;border:2.5px solid #e2e8f0;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:16px;transition:.3s;position:relative;z-index:1}
+.pt-circle{width:42px;height:42px;border-radius:50%;border:2.5px solid #e2e8f0;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:17px;transition:.3s;position:relative;z-index:1}
 .pt-circle.done{background:var(--g);border-color:var(--g);color:#fff;box-shadow:0 4px 12px rgba(26,124,62,.3)}
 .pt-circle.active{background:var(--amber);border-color:var(--amber);color:#fff;box-shadow:0 4px 12px rgba(245,158,11,.35);animation:pulse-active 2s infinite}
 @keyframes pulse-active{0%,100%{box-shadow:0 4px 12px rgba(245,158,11,.35)}50%{box-shadow:0 4px 20px rgba(245,158,11,.6)}}
-.pt-label{font-family:'Baloo 2',sans-serif;font-size:11px;font-weight:700;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.3}
+.pt-label{font-family:'Baloo 2',sans-serif;font-size:11.5px;font-weight:700;color:#94a3b8;text-align:center;margin-top:7px;line-height:1.3}
 .pt-label.done{color:var(--g)}
 .pt-label.active{color:var(--amber)}
-.pt-date{font-family:'Baloo 2',sans-serif;font-size:10px;color:#cbd5e1;margin-top:2px}
-.pt-date.done{color:rgba(26,124,62,.7)}
 .pt-line{flex:1;height:3px;background:#e2e8f0;margin-top:-22px;z-index:0;transition:.3s;border-radius:2px}
 .pt-line.done{background:linear-gradient(90deg,var(--g),var(--gl))}
-.pt-line.partial{background:linear-gradient(90deg,var(--g) 60%,#e2e8f0 100%)}
 
 /* Data Sections */
 .dc-box{background:var(--w);border:1px solid var(--bdr);border-top:none;padding:0 22px 22px;box-shadow:var(--sh)}
@@ -250,7 +264,8 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
       <span class="tip">📜 खतियान ऑर्डर</span>
       <span class="tip">📋 रजिस्टर-2 (जमाबंदी) ऑर्डर</span>
       <span class="tip">⚖️ पंचनामा बटवारा ऑर्डर</span>
-      <span class="tip">⚖️ केवाला ऑर्डर</span>
+      <span class="tip">📜 केवाला ऑर्डर</span>
+      <span class="tip">🗺️ भू-नक्शा ऑर्डर</span>
     </div>
   </div>
 
@@ -288,7 +303,7 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
     <div class="detail-panel" id="detail-panel">
 
       <!-- Viewing Bar -->
-      <div class="viewing-bar">
+      <div class="viewing-bar" id="d-viewing-bar">
         <div class="vb-left">
           <span>📌 देख रहे हैं:</span>
           <span class="vb-oid" id="d-oid">—</span>
@@ -304,8 +319,11 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
           <div class="sbadge-sub" id="d-sbadge-sub"></div>
         </div>
 
-        <!-- PROGRESS TRACK -->
-        <div class="prog-track">
+        <!-- SPECIAL ALERT BOX (CANCELLED / ON HOLD) -->
+        <div id="status-alert-container"></div>
+
+        <!-- PROGRESS TRACK (Visible only for Normal Flow) -->
+        <div class="prog-track" id="prog-track-wrapper">
           <div class="pt-step">
             <div class="pt-circle" id="pc1">📥</div>
             <div class="pt-label" id="pl1">Order<br>Received</div>
@@ -334,22 +352,18 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
 
         <!-- Customer -->
         <div class="dc-sec-title">👤 ग्राहक की जानकारी</div>
-        <div class="dc-grid" id="customer-grid">
-          <!-- filled by JS -->
-        </div>
+        <div class="dc-grid" id="customer-grid"></div>
 
         <!-- Land -->
         <div class="dc-sec-title" id="land-sec-title">📋 जमीन की जानकारी</div>
-        <div class="dc-grid" id="land-grid">
-          <!-- filled by JS -->
-        </div>
+        <div class="dc-grid" id="land-grid"></div>
       </div>
 
       <!-- BOTTOM CTA -->
       <div class="detail-bottom">
         <div class="db-text">
-          <strong>कोई सवाल है?</strong>
-          <p>WhatsApp पर Tracking ID लिखकर भेजें — 10 मिनट में जवाब</p>
+          <strong>कोई सवाल या समस्या है?</strong>
+          <p>WhatsApp पर तुरंत संपर्क करें — 10 मिनट में समाधान</p>
         </div>
         <a href="#" class="db-btn" id="wa-link" target="_blank" rel="noopener">📱 WhatsApp करें</a>
       </div>
@@ -363,10 +377,11 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
     <table class="stage-tbl">
       <thead><tr><th>चरण</th><th>मतलब</th><th>अनुमानित समय</th></tr></thead>
       <tbody>
-        <tr><td><span class="dot" style="background:var(--red)"></span><strong>Order Received</strong></td><td>ऑर्डर हमें मिल गया</td><td>तुरंत</td></tr>
+        <tr><td><span class="dot" style="background:#2563eb"></span><strong>Order Received</strong></td><td>ऑर्डर हमें मिल गया</td><td>तुरंत</td></tr>
         <tr><td><span class="dot" style="background:var(--amber)"></span><strong>Processing</strong></td><td>अंचल कार्यालय से दस्तावेज निकाल रहे हैं</td><td>1–2 दिन</td></tr>
-        <tr><td><span class="dot" style="background:#3b82f6"></span><strong>Dispatched</strong></td><td>Speed Post / Courier से भेज दिया</td><td>2–4 दिन</td></tr>
+        <tr><td><span class="dot" style="background:#4f46e5"></span><strong>Dispatched</strong></td><td>Speed Post / Courier से भेज दिया</td><td>2–4 दिन</td></tr>
         <tr><td><span class="dot" style="background:var(--g)"></span><strong>Delivered</strong></td><td>आपके घर पहुँच गया ✅</td><td>3–7 दिन</td></tr>
+        <tr><td><span class="dot" style="background:var(--red)"></span><strong>Cancelled</strong></td><td>रिकॉर्ड अनुपलब्ध/गलत विवरण पर रद्द</td><td>—</td></tr>
       </tbody>
     </table>
 
@@ -409,7 +424,8 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
   <p style="font-size:11px;margin-top:6px;opacity:.5">© 2026 JameenSeva.in — All Rights Reserved.</p>
 </footer>
 <button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-  <script>
+
+<script>
 /* ══ SUPABASE CLIENT CONFIG ══ */
 const _sb = supabase.createClient(
   'https://efgvsddclcnbmwqbtily.supabase.co',
@@ -464,56 +480,56 @@ const TABLES = {
     ]
   },
   KEVALA: {
-  tbl: 'kevala_orders',
-  label: 'केवाला / रजिस्ट्री',
-  icon: '📜',
-  badgeCls: 'tb-k',
-  id_col: 'order_id',
-  mobile_col: 'customer_mobile',
-  name_col: 'customer_name',
-  addr_col: 'full_address',
-  pin_col: 'pincode',
-  status_col: 'order_status',
-  date_col: 'created_at',
-  landTitle: '📜 केवाला दस्तावेज़ की जानकारी',
-  landFields: [
-    { label: 'जिला', key: 'district' },
-    { label: 'रजिस्ट्री ऑफिस', key: 'registry_office' },
-    { label: 'अंचल (Circle)', key: 'anchal_circle' },
-    { label: 'थाना नंबर', key: 'thana_number' },
-    { label: 'गाँव / मौजा', key: 'mauza' },
-    { label: 'खाता नंबर', key: 'khata_number' },
-    { label: 'खेसरा / प्लॉट', key: 'plot_number' },
-    { label: 'डीड नंबर', key: 'deed_number' },
-    { label: 'विक्रेता (Seller)', key: 'seller_name' },
-    { label: 'क्रेता (Buyer)', key: 'buyer_name' },
-    { label: 'दिनांक (कब से)', key: 'date_from' },
-    { label: 'दिनांक (कब तक)', key: 'date_to' },
-  ]
-},
+    tbl: 'kevala_orders',
+    label: 'केवाला / रजिस्ट्री',
+    icon: '📜',
+    badgeCls: 'tb-k',
+    id_col: 'order_id',
+    mobile_col: 'customer_mobile',
+    name_col: 'customer_name',
+    addr_col: 'full_address',
+    pin_col: 'pincode',
+    status_col: 'order_status',
+    date_col: 'created_at',
+    landTitle: '📜 केवाला दस्तावेज़ की जानकारी',
+    landFields: [
+      { label: 'जिला', key: 'district' },
+      { label: 'रजिस्ट्री ऑफिस', key: 'registry_office' },
+      { label: 'अंचल (Circle)', key: 'anchal_circle' },
+      { label: 'थाना नंबर', key: 'thana_number' },
+      { label: 'गाँव / मौजा', key: 'mauza' },
+      { label: 'खाता नंबर', key: 'khata_number' },
+      { label: 'खेसरा / प्लॉट', key: 'plot_number' },
+      { label: 'डीड नंबर', key: 'deed_number' },
+      { label: 'विक्रेता (Seller)', key: 'seller_name' },
+      { label: 'क्रेता (Buyer)', key: 'buyer_name' },
+      { label: 'दिनांक (कब से)', key: 'date_from' },
+      { label: 'दिनांक (कब तक)', key: 'date_to' },
+    ]
+  },
   MAP: {
-  tbl: 'map_orders',
-  label: 'भू-नक्शा',
-  icon: '🗺️',
-  badgeCls: 'tb-m',
-  id_col: 'order_id',
-  mobile_col: 'mobile',
-  name_col: 'customer_name',
-  addr_col: 'full_address',
-  pin_col: 'pincode',
-  pay_col: 'payment_status',
-  status_col: 'order_status',
-  date_col: 'created_at',
-  landTitle: '🗺️ नक्शे की जानकारी',
-  landFields: [
-    { label: 'जिला', key: 'district' },
-    { label: 'अंचल / प्रखंड', key: 'block' },
-    { label: 'मौजा / वार्ड', key: 'mauza' },
-    { label: 'थाना नंबर', key: 'thana_no' },
-    { label: 'कुल नक्शा शीट', key: 'total_sheets' },
-    { label: 'कुल राशि', key: 'total_amount' }
-  ]
-},
+    tbl: 'map_orders',
+    label: 'भू-नक्शा',
+    icon: '🗺️',
+    badgeCls: 'tb-m',
+    id_col: 'order_id',
+    mobile_col: 'mobile',
+    name_col: 'customer_name',
+    addr_col: 'full_address',
+    pin_col: 'pincode',
+    pay_col: 'payment_status',
+    status_col: 'order_status',
+    date_col: 'created_at',
+    landTitle: '🗺️ नक्शे की जानकारी',
+    landFields: [
+      { label: 'जिला', key: 'district' },
+      { label: 'अंचल / प्रखंड', key: 'block' },
+      { label: 'मौजा / वार्ड', key: 'mauza' },
+      { label: 'थाना नंबर', key: 'thana_no' },
+      { label: 'कुल नक्शा शीट', key: 'total_sheets' },
+      { label: 'कुल राशि', key: 'total_amount' }
+    ]
+  },
   JAMABANDI: {
     tbl: 'jamabandi_orders',
     label: 'रजिस्टर 2 (जमाबंदी)',
@@ -540,64 +556,107 @@ const TABLES = {
   }
 };
 
-/* ══ FAIL-PROOF LIVE STATUS MAP CONFIG ══ */
-const STATUS = {
-  'order received': {
-    cls: 'sb-recv', icon: '📥',
-    hindi: 'ऑर्डर प्राप्त हुआ',
-    sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार करने की प्रक्रिया जल्द शुरू होगी।',
-    step: 0,
-    matches: ['order received', 'received', 'ऑर्डर प्राप्त हुआ', 'ऑर्डर मिला']
-  },
-  'processing': {
-    cls: 'sb-proc', icon: '🔄',
-    hindi: 'प्रक्रिया में है',
-    sub: 'हमारी टीम अंचल कार्यालय से आपका दस्तावेज निकाल रही है। 1-2 दिन में dispatch होगा।',
-    step: 1,
-    matches: ['processing', 'in progress', 'प्रक्रिया में है', 'काम चल रहा है']
-  },
-  'dispatched': {
-    cls: 'sb-disp', icon: '📦',
-    hindi: 'भेज दिया गया',
-    sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में पहुँचेगा।',
-    step: 2,
-    matches: ['dispatched', 'shipped', 'भेज दिया गया', 'भेजा गया']
-  },
-  'delivered': {
-    cls: 'sb-dlvr', icon: '🏠',
-    hindi: 'डिलीवर हो गया ✅',
-    sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच गया है! JameenSeva.in को चुनने के लिए धन्यवाद।',
-    step: 3,
-    matches: ['delivered', 'complete', 'डिलीवर हो गया', 'सफल']
+/* ══ ADVANCED STATUS ENGINE & SMART MAPPINGS ══ */
+function getStatusConfig(dbValue) {
+  const raw = String(dbValue || '').trim();
+  const v = raw.toLowerCase();
+
+  // 1. CANCELLED / REJECTED CATEGORIES
+  if (v.includes('cancel') || v.includes('रद्द') || v.includes('reject') || v.includes('अस्वीकृत') || v.includes('फटा') || v.includes('दौरा') || v.includes('दोहरा') || v.includes('उपलब्ध नहीं')) {
+    let title = raw || 'ऑर्डर रद्द (Cancelled)';
+    let desc = 'यह ऑर्डर रद्द कर दिया गया है। अधिक जानकारी या रिफंड/सपोर्ट के लिए नीचे दिए गए WhatsApp पर संपर्क करें।';
+    if (v.includes('उपलब्ध नहीं')) desc = 'अभिलेख कार्यालय में इस जमीन का रिकॉर्ड उपलब्ध नहीं हो पाया, इसलिए ऑर्डर रद्द कर दिया गया है।';
+    if (v.includes('फटा') || v.includes('अस्पष्ट')) desc = 'पुराना सरकारी रिकॉर्ड फटा या अस्पष्ट होने के कारण इसे रद्द किया गया है।';
+    if (v.includes('दोहरा')) desc = 'एक ही विवरण का दूसरा ऑर्डर होने के कारण इस अतिरिक्त ऑर्डर को रद्द किया गया है।';
+
+    return {
+      type: 'cancelled',
+      cls: 'sb-canc',
+      icon: '❌',
+      hindi: title,
+      sub: desc,
+      step: -1
+    };
   }
-};
+
+  // 2. ON HOLD / TOKEN / KISAN RESPONSE WAITING CATEGORIES
+  if (v.includes('टोकन') || v.includes('token') || v.includes('जवाब') || v.includes('इंतजार') || v.includes('waiting') || v.includes('hold') || v.includes('रुक')) {
+    let title = raw || 'कार्य रुका हुआ (On Hold)';
+    let desc = 'आपके ऑर्डर पर प्रक्रिया आगे बढ़ाने के लिए आपकी पुष्टि या टोकन शुल्क अपेक्षित है।';
+    if (v.includes('टोकन')) desc = 'खोज प्रक्रिया शुरू करने के लिए एडवांस सर्विस चार्ज टोकन का भुगतान प्रतीक्षित है।';
+    if (v.includes('जवाब')) desc = 'हमारी टीम ने आपसे संपर्क किया है। कृपया WhatsApp पर अपना जवाब या स्पष्टीकरण भेजें।';
+
+    return {
+      type: 'hold',
+      cls: 'sb-hold',
+      icon: '⏳',
+      hindi: title,
+      sub: desc,
+      step: 1
+    };
+  }
+
+  // 3. READY TO DISPATCH / IN TRANSIT CATEGORIES
+  if (v.includes('तैयार') || v.includes('ready') || v.includes('transit') || v.includes('भेजने')) {
+    return {
+      type: 'normal',
+      cls: 'sb-rtd',
+      icon: '📋',
+      hindi: raw || 'भेजने के लिए तैयार (Ready)',
+      sub: 'आपका दस्तावेज तैयार कर लिया गया है और सुरक्षित पैकिंग हो चुकी है। जल्द ही कूरियर/पोस्ट को सौंपा जाएगा।',
+      step: 1
+    };
+  }
+
+  // 4. DISPATCHED / SHIPPED CATEGORIES
+  if (v.includes('dispatch') || v.includes('shipped') || v.includes('भेजा') || v.includes('भेज दिया')) {
+    return {
+      type: 'normal',
+      cls: 'sb-disp',
+      icon: '📦',
+      hindi: raw || 'भेज दिया गया (Dispatched)',
+      sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में आपके पते पर पहुँचेगा।',
+      step: 2
+    };
+  }
+
+  // 5. DELIVERED / COMPLETED CATEGORIES
+  if (v.includes('deliver') || v.includes('complete') || v.includes('पहुँच') || v.includes('सफल')) {
+    return {
+      type: 'normal',
+      cls: 'sb-dlvr',
+      icon: '🏠',
+      hindi: raw || 'डिलीवर हो गया ✅',
+      sub: 'आपका दस्तावेज सफलतापूर्वक पहुँच चुका है। JameenSeva.in को चुनने के लिए धन्यवाद!',
+      step: 3
+    };
+  }
+
+  // 6. PROCESSING / SEARCHING CATEGORIES
+  if (v.includes('process') || v.includes('search') || v.includes('खोज') || v.includes('प्रक्रिया') || v.includes('verifying') || v.includes('जाँच')) {
+    return {
+      type: 'normal',
+      cls: 'sb-proc',
+      icon: '🔄',
+      hindi: raw || 'प्रक्रिया में है (Processing)',
+      sub: 'हमारी टीम अंचल/अभिलेख कार्यालय से आपके दस्तावेज की खोज व सत्यापन कर रही है।',
+      step: 1
+    };
+  }
+
+  // 7. ORDER RECEIVED / PENDING / DEFAULT
+  return {
+    type: 'normal',
+    cls: 'sb-recv',
+    icon: '📥',
+    hindi: raw || 'ऑर्डर प्राप्त हुआ (Order Received)',
+    sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार करने की प्रक्रिया जल्द शुरू होगी।',
+    step: 0
+  };
+}
 
 let allOrders = [];
 let selectedIdx = -1;
-
-/* Helper to safely map DB status to configuration keys */
-function getStatusConfig(dbValue) {
-  const cleanVal = String(dbValue || '').toLowerCase().trim();
-  if (!cleanVal) return STATUS['order received'];
-
-  // 1. First check absolute key match
-  if (STATUS[cleanVal]) return STATUS[cleanVal];
-
-  // 2. Scan internal matches array to support Hindi & English variants
-  for (const key in STATUS) {
-    if (STATUS[key].matches.some(m => cleanVal.includes(m.toLowerCase()) || m.toLowerCase().includes(cleanVal))) {
-      return STATUS[key];
-    }
-  }
-  
-  // 3. Dynamic custom fallback if some unmapped text is found in DB
-  return {
-    cls: 'sb-proc', icon: '📌',
-    hindi: dbValue,
-    sub: 'आपके ऑर्डर का स्टेटस अपडेट किया गया है। विस्तृत जानकारी के लिए WhatsApp करें।',
-    step: 1
-  };
-}
 
 /* ══ ORDER LOOKUP ENGINE ══ */
 async function doTrack() {
@@ -702,28 +761,59 @@ function showDetail(idx) {
     ? 'ऑर्डर दिनांक: ' + new Date(dateRaw).toLocaleDateString('hi-IN',{day:'numeric',month:'short',year:'numeric'})
     : '';
 
-  /* ── 🌟 LIVE MAP LOADER ── */
+  /* ── 🌟 SMART STATUS & COLOR LOGIC ── */
   const sm = getStatusConfig(order[cfg.status_col]);
 
+  // Dynamic header bar tint
+  const vbar = document.getElementById('d-viewing-bar');
+  vbar.className = 'viewing-bar';
+  if (sm.type === 'cancelled') vbar.classList.add('canceled-bar');
+  else if (sm.type === 'hold') vbar.classList.add('hold-bar');
+
+  // Badge updates
   const badge = document.getElementById('d-sbadge');
   badge.className = 'sbadge ' + sm.cls;
   badge.innerHTML = `${sm.icon} &nbsp; ${sm.hindi}`;
   document.getElementById('d-sbadge-sub').textContent = sm.sub;
 
-  /* ── Timeline State Tracker ── */
-  const curr = sm.step; 
-  for (let i = 1; i <= 4; i++) {
-    const isDone   = i - 1 < curr;
-    const isActive = i - 1 === curr;
-    const circle = document.getElementById('pc' + i);
-    const label  = document.getElementById('pl' + i);
-    
-    circle.className = 'pt-circle' + (isDone ? ' done' : isActive ? ' active' : '');
-    label.className  = 'pt-label'  + (isDone ? ' done' : isActive ? ' active' : '');
-    if (i < 4) {
-      const line = document.getElementById('pline' + i);
-      line.className = 'pt-line' + (i - 1 < curr ? ' done' : '');
-    }
+  const alertContainer = document.getElementById('status-alert-container');
+  const progTrack = document.getElementById('prog-track-wrapper');
+  alertContainer.innerHTML = '';
+
+  /* ── 🌟 SPECIAL CASE RENDER: CANCELLED / ON HOLD ── */
+  if (sm.type === 'cancelled') {
+    // Hide confusing 4-step progress line
+    progTrack.style.display = 'none';
+
+    // Show high-visibility cancellation alert
+    alertContainer.innerHTML = `
+      <div class="status-alert-box sab-canc">
+        <div class="sab-icon">🚫</div>
+        <div class="sab-content">
+          <strong>यह ऑर्डर रद्द कर दिया गया है</strong>
+          <p>${sm.sub}</p>
+          <a href="https://wa.me/919142075859?text=${encodeURIComponent('नमस्ते! मेरा ऑर्डर ' + (order[cfg.id_col]||'') + ' कैंसल दिख रहा है। कृपया कारण व समाधान बताएं।')}" class="sab-btn" target="_blank">💬 WhatsApp सपोर्ट पर कारण जानें</a>
+        </div>
+      </div>
+    `;
+  } else if (sm.type === 'hold') {
+    // Show Hold Alert box alongside progress bar
+    progTrack.style.display = 'flex';
+    alertContainer.innerHTML = `
+      <div class="status-alert-box sab-hold">
+        <div class="sab-icon">⚠️</div>
+        <div class="sab-content">
+          <strong>अग्रिम कार्रवाई प्रतीक्षित (Action Required)</strong>
+          <p>${sm.sub}</p>
+          <a href="https://wa.me/919142075859?text=${encodeURIComponent('नमस्ते! मेरा ऑर्डर ' + (order[cfg.id_col]||'') + ' होल्ड पर है। मुझे आगे क्या करना होगा?')}" class="sab-btn" target="_blank">📱 WhatsApp पर संपर्क करें</a>
+        </div>
+      </div>
+    `;
+    renderProgressBar(sm.step);
+  } else {
+    // Normal Flow: Show Standard 4-Step Progress
+    progTrack.style.display = 'flex';
+    renderProgressBar(sm.step);
   }
 
   /* ── Layout Construction ── */
@@ -753,6 +843,23 @@ function showDetail(idx) {
   }
 }
 
+/* ── PROGRESS BAR RENDER HELPER ── */
+function renderProgressBar(curr) {
+  for (let i = 1; i <= 4; i++) {
+    const isDone   = i - 1 < curr;
+    const isActive = i - 1 === curr;
+    const circle = document.getElementById('pc' + i);
+    const label  = document.getElementById('pl' + i);
+    
+    circle.className = 'pt-circle' + (isDone ? ' done' : isActive ? ' active' : '');
+    label.className  = 'pt-label'  + (isDone ? ' done' : isActive ? ' active' : '');
+    if (i < 4) {
+      const line = document.getElementById('pline' + i);
+      line.className = 'pt-line' + (i - 1 < curr ? ' done' : '');
+    }
+  }
+}
+
 /* ══ STRUCTURAL COMPONENT HELPERS ══ */
 function makeItem(label, val) {
   return `<div class="dc-item">
@@ -767,7 +874,6 @@ function makeItemFull(label, val) {
   </div>`;
 }
 function makePayItem(val) {
-  // Agar column khali hai, null hai, ya empty string hai, toh use hum Cash on Delivery (COD) manenge
   if (!val || val.trim() === "" || val === "—") {
     return `<div class="dc-item">
       <div class="dc-label">भुगतान का तरीका</div>
@@ -778,8 +884,6 @@ function makePayItem(val) {
   }
 
   const v = val.toLowerCase().trim();
-  
-  // Agar database me 'online', 'pay', ya 'success' jaisa kuch bhi likha hai
   if (v.includes('online') || v.includes('pay') || v.includes('razorpay')) {
     return `<div class="dc-item">
       <div class="dc-label">भुगतान का तरीका</div>
@@ -788,7 +892,6 @@ function makePayItem(val) {
       </div>
     </div>`;
   } else {
-    // Baaki sabhi cases ke liye COD safe side backup
     return `<div class="dc-item">
       <div class="dc-label">भुगतान का तरीका</div>
       <div class="dc-value">
@@ -798,7 +901,7 @@ function makePayItem(val) {
   }
 }
 
-/* ══ SYSTEM VIEW PORT CONTROLERS ══ */
+/* ══ SYSTEM VIEW PORT CONTROLLERS ══ */
 function show(id){ document.getElementById(id).style.display = 'block'; }
 function hide(id){ document.getElementById(id).style.display = 'none'; }
 
