@@ -263,68 +263,206 @@
     }
     .track-banner .tb-btn:hover { background: #ffc107; transform: translateY(-1px); }
 
-    /* ─── ORDER FORM ─── */
-    .form-outer {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      margin: 0 0 44px;
-    }
-    .form-header {
-      background: var(--navy);
-      padding: 28px 32px;
-      border-bottom: 4px solid var(--teal);
-    }
-    .form-header h2 { color: #fff; font-size: 1.35rem; margin-bottom: 5px; }
-    .form-header p { color: rgba(255,255,255,.75); font-size: 14px; }
-    .form-body { padding: 32px; }
-    @media(max-width:600px){ .form-body { padding: 20px; } }
+   /* ─── ENHANCED MODERN ORDER FORM ─── */
+.form-outer {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(15, 23, 42, 0.02);
+  overflow: hidden;
+  margin: 0 0 44px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .form-section { margin-bottom: 30px; }
-    .fs-title {
-      font-size: 13px; font-weight: 700; color: var(--teal);
-      text-transform: uppercase; letter-spacing: .8px;
-      margin-bottom: 14px; padding-bottom: 8px;
-      border-bottom: 1px dashed var(--border);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
-    .fg { display: flex; flex-direction: column; gap: 5px; }
-    .fg.full { grid-column: 1 / -1; }
-    .fg label { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
-    .fg input, .fg select, .fg textarea {
-      padding: 10px 13px;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-size: 13.5px;
-      color: var(--ink);
-      background: var(--paper);
-      outline: none;
-      transition: .18s;
-      font-family: inherit;
-    }
-    .fg input:focus, .fg select:focus, .fg textarea:focus {
-      border-color: var(--navy-m);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(26,74,114,.1);
-    }
-    .fg .hint { font-size: 11.5px; color: var(--mist); margin-top: 3px; }
+.form-outer:hover {
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+}
 
-    /* Type cards */
-    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-    .type-card {
-      border: 2px solid var(--border); border-radius: 10px;
-      padding: 14px 16px; cursor: pointer;
-      display: flex; align-items: flex-start; gap: 12px;
-      transition: .18s;
-    }
-    .type-card.active { border-color: var(--navy); background: #eef5ff; }
-    .type-card input[type=radio] { margin-top: 3px; accent-color: var(--navy); }
-    .type-card .tc-body h4 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-    .type-card .tc-body p { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+/* Gradient & Dynamic Header */
+.form-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #0f172a 100%);
+  padding: 36px 36px 32px;
+  border-bottom: 4px solid var(--teal);
+  position: relative;
+  overflow: hidden;
+}
 
+/* Glowing Accent Ring Background Effect */
+.form-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.form-header h2 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-header p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.form-body {
+  padding: 36px;
+  background: #fafbfc;
+}
+
+@media(max-width: 600px) {
+  .form-body { padding: 22px 18px; }
+  .form-header { padding: 28px 20px; }
+  .type-grid { grid-template-columns: 1fr !important; }
+}
+
+.form-section {
+  margin-bottom: 32px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.fs-title {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.fg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fg.full {
+  grid-column: 1 / -1;
+}
+
+.fg label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Floating Input Focus Effect */
+.fg input, .fg select, .fg textarea {
+  padding: 12px 16px;
+  border: 1.8px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+}
+
+.fg input:hover, .fg select:hover, .fg textarea:hover {
+  border-color: #94a3b8;
+}
+
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--teal, #0d9488);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+  transform: translateY(-1px);
+}
+
+.fg .hint {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ─── INTERACTIVE TYPE CARDS ─── */
+.type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.type-card {
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  user-select: none;
+}
+
+.type-card:hover {
+  border-color: var(--teal, #0d9488);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* Active State with Micro Glow */
+.type-card.active {
+  border-color: var(--navy);
+  background: linear-gradient(145deg, #f0f7ff 0%, #e6f0fa 100%);
+  box-shadow: 0 8px 18px -4px rgba(26, 74, 114, 0.18);
+  transform: translateY(-2px);
+}
+
+.type-card input[type=radio] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--navy);
+  cursor: pointer;
+}
+
+.type-card .tc-body h4 {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+.type-card .tc-body p {
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.5;
+}
     /* COD badge in form */
     .cod-badge {
       display: inline-flex; align-items: center; gap: 6px;
@@ -576,180 +714,279 @@
   </div>
 </div>
 <main class="wrap">
-  <!-- ══════════════ ORDER FORM ══════════════ -->
-  <div class="form-outer" id="order-form">
-    <div class="form-header">
-      <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
-      <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
-    </div>
-    <div class="form-body">
-      <form id="kevalaForm" onsubmit="handleOrder(event)">
+<!-- ══════════════ ORDER FORM ══════════════ -->
+<div class="form-outer" id="order-form">
+  <div class="form-header">
+    <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
+    <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
+  </div>
+  <div class="form-body">
+    <form id="kevalaForm" onsubmit="handleOrder(event)">
 
-        <!-- Type -->
-        <div class="form-section">
-          <div class="fs-title">📄 STEP 1 — केवाला का वर्ष और दस्तावेज़ का प्रकार चुनें</div>
+      <!-- Type -->
+      <div class="form-section">
+        <div class="fs-title">📄 STEP 1 — केवाला का समय काल, वर्ष और दस्तावेज़ का प्रकार चुनें</div>
 
-          <div class="fg" style="margin-bottom:16px;">
-            <label>केवाला / रजिस्ट्रेशन का वर्ष (Deed Year) *</label>
-            <select id="deed_year" onchange="toggleCopyTypeByYear()" required>
-              <option value="">-- वर्ष चुनें --</option>
-            </select>
-            <span class="hint">ध्यान दें: 2006 से पहले (1900–2005) के केवाला के लिए केवल Web / Ordinary Copy (साधारण प्रति) उपलब्ध है, Certified Copy नहीं।</span>
-          </div>
-
-          <div class="type-grid">
-            <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
-              <input type="radio" name="doc_type" value="Certified Copy" checked/>
-              <div class="tc-body">
-                <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
-                <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
-              </div>
+        <!-- 2006 से पहले / बाद का Quick Filter -->
+        <div class="fg" style="margin-bottom:16px;">
+          <label style="font-weight:700;margin-bottom:8px;display:block;">रजिस्ट्रेशन की अवधि चुनें *</label>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;">
+            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+              <input type="radio" name="era_period" value="pre_2006" onchange="onEraChange('pre_2006')" />
+              🕰️ 2006 से पहले (1900 - 2005)
             </label>
-            <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
-              <input type="radio" name="doc_type" value="Web Copy"/>
-              <div class="tc-body">
-                <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
-                <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
-              </div>
+            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+              <input type="radio" name="era_period" value="post_2006" onchange="onEraChange('post_2006')" checked />
+              ⚡ 2006 से वर्तमान (2006 - 2026)
             </label>
           </div>
-          <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
-            ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
-          </div>
         </div>
 
-        <!-- Location -->
-        <div class="form-section">
-          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>जिला (District) *</label>
-              <select id="district" onchange="onDistrictChange()" required>
-                <option value="">-- जिला चुनें --</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>रजिस्ट्री ऑफिस / SRO *</label>
-              <select id="registry_office" required disabled>
-                <option value="">-- पहले जिला चुनें --</option>
-              </select>
-              <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
-            </div>
-            <div class="fg">
-              <label>अंचल / ब्लॉक (Anchal) *</label>
-              <select id="anchal_circle" required disabled>
-                <option value="">-- पहले जिला चुनें --</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>मौजा का नाम (Mauza)</label>
-              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम"/>
-            </div>
-            <div class="fg full">
-              <label>थाना नंबर (Thana No.)</label>
-              <input type="text" id="thana_number" placeholder="थाना नंबर (यदि ज्ञात हो)"/>
-            </div>
-          </div>
+        <div class="fg" style="margin-bottom:16px;">
+          <label>केवाला / रजिस्ट्रेशन का वर्ष (Deed Year) *</label>
+          <select id="deed_year" onchange="toggleCopyTypeByYear()" required>
+            <option value="">-- वर्ष चुनें --</option>
+          </select>
+          <span class="hint">ध्यान दें: 2006 से पहले (1900–2005) के केवाला के लिए केवल Web / Ordinary Copy (साधारण प्रति) उपलब्ध है, Certified Copy नहीं।</span>
         </div>
 
-        <!-- Search Details -->
-        <div class="form-section">
-          <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>कब से (From Date) *</label>
-              <input type="date" id="date_from" required/>
+        <div class="type-grid">
+          <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
+            <input type="radio" name="doc_type" id="radio-doc-cert" value="Certified Copy" checked/>
+            <div class="tc-body">
+              <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
+              <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
             </div>
-            <div class="fg">
-              <label>कब तक (To Date) *</label>
-              <input type="date" id="date_to" required/>
+          </label>
+          <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
+            <input type="radio" name="doc_type" id="radio-doc-web" value="Web Copy"/>
+            <div class="tc-body">
+              <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
+              <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
             </div>
-            <div class="fg">
-              <label>बेचने वाले का नाम (Seller / Daata)</label>
-              <input type="text" id="seller_name" placeholder="दाता का नाम"/>
-            </div>
-            <div class="fg">
-              <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
-              <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
-            </div>
-            <div class="fg">
-              <label>खाता नंबर (Khata No.)</label>
-              <input type="text" id="khata_number" placeholder="खाता संख्या"/>
-            </div>
-            <div class="fg">
-              <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
-              <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
-            </div>
-            <div class="fg full">
-              <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
-              <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
-            </div>
-          </div>
+          </label>
         </div>
-
-        <!-- Personal -->
-        <div class="form-section">
-          <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
-          <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
-          <div class="fgrid">
-            <div class="fg">
-              <label>आपका पूरा नाम *</label>
-              <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
-            </div>
-            <div class="fg">
-              <label>मोबाइल नंबर *</label>
-              <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
-            </div>
-            <div class="fg full">
-              <label>पूरा पता (डिलीवरी के लिए) *</label>
-              <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
-            </div>
-            <div class="fg">
-              <label>पिन कोड *</label>
-              <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
-            </div>
-            <div class="fg">
-              <label>भुगतान विधि</label>
-              <select id="payment_method">
-                <option value="COD">🚚 Cash On Delivery (COD)</option>
-                <option value="Online">💳 Online Payment</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="adv-notice">
-            <strong>💰 ₹99 Service Charge — अनिवार्य नियम:</strong>
-            <p style="margin-top:4px;">ऑर्डर कन्फर्म करने के लिए </strong> (खोज व प्रोसेसिंग शुल्क) लेगी। यह राशि आपके फाइनल दस्तावेज़ शुल्क में समायोजित (adjust) कर दी जाती है।</p>
-            <ul>
-              <li>₹99 केवल <strong>सीरियस ग्राहकों</strong> से लिया जाता है, ताकि फर्जी/गलत ऑर्डर न बनें।</li>
-              <li>Service Charge प्राप्त होने के बाद ही केवाला की खोज शुरू होगी।</li>
-              <li> रिकार्ड मिलने पर सरकारी शुल्क+Service Charge अलग से लागू होगा (COD पर वसूला जाएगा)।</li>
-               <li>ऑर्डर को कन्फर्म करने के लिए नीचे ₹99 Service Charge का भुगतान करें।।</li>
-               </ul>
-               <li> Service Charge refund नहीं होगा। आपका ऑर्डर खोजा गया- इसका प्रूफ भि whataap पर मांग सकतें है। इसके लियें पहले सूचित करना होगा whataapp पर </li>
-              </ul>
-              <span class="adv-inline">⚠️ फॉर्म सबमिट करने का अर्थ है कि आप ₹99 Service Charge नियम से सहमत हैं</span>
-             </div>
-          </div>
-
-        <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
-      </form>
-      <div id="status-msg"></div>
-
-      <!-- ══════════════ PAYMENT AREA (Razorpay) — डेटा सेव होने के बाद दिखेगा ══════════════ -->
-      <div id="paymentArea" style="display:none;background:var(--white);border:1.5px solid var(--teal);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:32px 20px;text-align:center;margin:24px 0;">
-        <i class="fas fa-check-circle" style="font-size:50px;color:var(--teal)"></i>
-        <h3 style="margin-top:14px;color:var(--navy);">आपका ऑर्डर डेटा सेव हो गया है!</h3>
-        <p id="payment-oid-note" style="color:var(--ink-soft);margin-top:6px;font-weight:600;"></p>
-        <p style="color:var(--red);margin-top:10px;font-weight:700;">⚠️ ऑर्डर तभी कन्फर्म होगा जब ₹99 Advance Service Charge का भुगतान हो जाएगा।</p>
-        <p style="color:var(--ink-soft);font-size:13px;margin-top:6px;">नीचे दिए बटन से ₹99 का भुगतान करें — भुगतान होते ही हमारी टीम आपके केवाला की खोज WhatsApp पर कन्फर्म करके शुरू कर देगी।</p>
-        <br>
-        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TjsjP7JX39BdIl" async> </script> </form>
+        <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
+          ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
+        </div>
       </div>
+
+      <!-- Location -->
+      <div class="form-section">
+        <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
+        <div class="fgrid">
+          <div class="fg">
+            <label>जिला (District) *</label>
+            <select id="district" onchange="onDistrictChange(); checkOtherOptions();" required>
+              <option value="">-- जिला चुनें --</option>
+            </select>
+          </div>
+
+          <!-- Registry Office / SRO with Custom Option -->
+          <div class="fg">
+            <label>रजिस्ट्री ऑफिस / SRO *</label>
+            <select id="registry_office" onchange="toggleCustomField('registry_office', 'custom_sro_box', 'custom_sro_input')" required disabled>
+              <option value="">-- पहले जिला चुनें --</option>
+            </select>
+            <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
+            <div id="custom_sro_box" style="display:none;margin-top:8px;">
+              <input type="text" id="custom_sro_input" placeholder="यहाँ अपने SRO / रजिस्ट्री ऑफिस का नाम लिखें" style="border-color:var(--teal, #0d9488);" />
+            </div>
+          </div>
+
+          <!-- Anchal / Circle with Custom Option -->
+          <div class="fg">
+            <label>अंचल / ब्लॉक (Anchal) *</label>
+            <select id="anchal_circle" onchange="toggleCustomField('anchal_circle', 'custom_anchal_box', 'custom_anchal_input')" required disabled>
+              <option value="">-- पहले जिला चुनें --</option>
+            </select>
+            <div id="custom_anchal_box" style="display:none;margin-top:8px;">
+              <input type="text" id="custom_anchal_input" placeholder="यहाँ अपने अंचल / ब्लॉक का नाम लिखें" style="border-color:var(--teal, #0d9488);" />
+            </div>
+          </div>
+
+          <!-- Mauza Name (Mandatory) -->
+          <div class="fg">
+            <label>मौजा का नाम (Mauza) *</label>
+            <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम लिखें" required/>
+          </div>
+
+          <!-- Thana No (Mandatory) -->
+          <div class="fg full">
+            <label>थाना नंबर (Thana No.) *</label>
+            <input type="text" id="thana_number" placeholder="थाना नंबर लिखें (अनिवार्य)" required/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Details -->
+      <div class="form-section">
+        <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
+        <div class="fgrid">
+          <div class="fg">
+            <label>कब से (From Date) *</label>
+            <input type="date" id="date_from" required/>
+          </div>
+          <div class="fg">
+            <label>कब तक (To Date) *</label>
+            <input type="date" id="date_to" required/>
+          </div>
+          <div class="fg">
+            <label>बेचने वाले का नाम (Seller / Daata)</label>
+            <input type="text" id="seller_name" placeholder="दाता का नाम"/>
+          </div>
+          <div class="fg">
+            <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
+            <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
+          </div>
+          <div class="fg">
+            <label>खाता नंबर (Khata No.)</label>
+            <input type="text" id="khata_number" placeholder="खाता संख्या"/>
+          </div>
+          <div class="fg">
+            <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
+            <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
+          </div>
+          <div class="fg full">
+            <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
+            <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Personal -->
+      <div class="form-section">
+        <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
+        <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
+        <div class="fgrid">
+          <div class="fg">
+            <label>आपका पूरा नाम *</label>
+            <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
+          </div>
+          <div class="fg">
+            <label>मोबाइल नंबर *</label>
+            <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
+          </div>
+          <div class="fg full">
+            <label>पूरा पता (डिलीवरी के लिए) *</label>
+            <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
+          </div>
+          <div class="fg">
+            <label>पिन कोड *</label>
+            <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
+          </div>
+          <div class="fg">
+            <label>भुगतान विधि</label>
+            <select id="payment_method">
+              <option value="COD">🚚 Cash On Delivery (COD)</option>
+              <option value="Online">💳 Online Payment</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="adv-notice">
+          <strong>💰 ₹99 Service Charge — अनिवार्य नियम:</strong>
+          <p style="margin-top:4px;">ऑर्डर कन्फर्म करने के लिए ₹99 advance token (खोज व प्रोसेसिंग शुल्क) लिया जाएगा। यह राशि आपके फाइनल दस्तावेज़ शुल्क में समायोजित (adjust) कर दी जाती है।</p>
+          <ul>
+            <li>₹99 केवल <strong>सीरियस ग्राहकों</strong> से लिया जाता है, ताकि फर्जी/गलत ऑर्डर न बनें।</li>
+            <li>Service Charge प्राप्त होने के बाद ही केवाला की खोज शुरू होगी।</li>
+            <li>रिकार्ड मिलने पर सरकारी शुल्क + Service Charge अलग से लागू होगा (COD पर वसूला जाएगा)।</li>
+            <li>ऑर्डर को कन्फर्म करने के लिए नीचे ₹99 Service Charge का भुगतान करें।</li>
+            <li>Service Charge refund नहीं होगा। आपका ऑर्डर खोजा गया—इसका प्रूफ भी WhatsApp पर मांग सकते हैं। इसके लिए पहले सूचित करना होगा।</li>
+          </ul>
+          <span class="adv-inline">⚠️ फॉर्म सबमिट करने का अर्थ है कि आप ₹99 Service Charge नियम से सहमत हैं</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
+    </form>
+    <div id="status-msg"></div>
+
+    <!-- ══════════════ PAYMENT AREA (Razorpay) ══════════════ -->
+    <div id="paymentArea" style="display:none;background:var(--white);border:1.5px solid var(--teal);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:32px 20px;text-align:center;margin:24px 0;">
+      <i class="fas fa-check-circle" style="font-size:50px;color:var(--teal)"></i>
+      <h3 style="margin-top:14px;color:var(--navy);">आपका ऑर्डर डेटा सेव हो गया है!</h3>
+      <p id="payment-oid-note" style="color:var(--ink-soft);margin-top:6px;font-weight:600;"></p>
+      <p style="color:var(--red);margin-top:10px;font-weight:700;">⚠️ ऑर्डर तभी कन्फर्म होगा जब ₹99 Advance Service Charge का भुगतान हो जाएगा।</p>
+      <p style="color:var(--ink-soft);font-size:13px;margin-top:6px;">नीचे दिए बटन से ₹99 का भुगतान करें — भुगतान होते ही हमारी टीम आपके केवाला की खोज WhatsApp पर कन्फर्म करके शुरू कर देगी।</p>
+      <br>
+      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TjsjP7JX39BdIl" async> </script> </form>
     </div>
   </div>
+</div>
 
+<!-- ══════════════ HELPER LOGIC SCRIPT ══════════════ -->
+<script>
+// 1. वर्ष पॉप्युलेट और Era टॉगल (2006 से पहले / बाद)
+function populateDeedYears(era) {
+  const select = document.getElementById('deed_year');
+  if(!select) return;
+  select.innerHTML = '<option value="">-- वर्ष चुनें --</option>';
+  
+  const currentYear = new Date().getFullYear();
+  let startYear = (era === 'pre_2006') ? 1900 : 2006;
+  let endYear   = (era === 'pre_2006') ? 2005 : currentYear;
 
+  for (let y = endYear; y >= startYear; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    select.appendChild(opt);
+  }
+}
+
+function onEraChange(era) {
+  populateDeedYears(era);
+  if (typeof toggleCopyTypeByYear === 'function') {
+    toggleCopyTypeByYear();
+  }
+}
+
+// 2. Custom Option Handler (अगर लिस्ट में SRO या ब्लॉक नहीं मिला)
+function toggleCustomField(selectId, boxId, inputId) {
+  const select = document.getElementById(selectId);
+  const box = document.getElementById(boxId);
+  const input = document.getElementById(inputId);
+  if (select.value === 'OTHER') {
+    box.style.display = 'block';
+    input.required = true;
+    input.focus();
+  } else {
+    box.style.display = 'none';
+    input.required = false;
+    input.value = '';
+  }
+}
+
+// 3. जब जिला चुना जाए तो ड्रॉपडाउन में 'अन्य' का ऑप्शन जोड़ना
+function appendOtherOption(selectElement) {
+  if (!selectElement) return;
+  // अगर पहले से 'OTHER' नहीं है तभी जोड़ें
+  if (!selectElement.querySelector('option[value="OTHER"]')) {
+    const opt = document.createElement('option');
+    opt.value = 'OTHER';
+    opt.textContent = '➕ अन्य (सूची में नहीं है - खुद लिखें)';
+    selectElement.appendChild(opt);
+  }
+}
+
+// District बदलने के बाद SRO और Circle में 'OTHER' जोड़ना
+const originalOnDistrictChange = window.onDistrictChange;
+window.onDistrictChange = function() {
+  if (typeof originalOnDistrictChange === 'function') {
+    originalOnDistrictChange();
+  }
+  setTimeout(() => {
+    appendOtherOption(document.getElementById('registry_office'));
+    appendOtherOption(document.getElementById('anchal_circle'));
+  }, 150);
+};
+
+// पेज लोड पर 2006 के बाद वाले डिफ़ॉल्ट वर्ष सेट करना
+document.addEventListener('DOMContentLoaded', function() {
+  populateDeedYears('post_2006');
+});
+</script>
 
   <!-- ══════════════ WHAT IS KEVALA ══════════════ -->
   <h2 class="sec-head" id="kya-hai">केवाला क्या होता है?</h2>
