@@ -617,24 +617,207 @@
 
 <div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, <a href="https://jameenseva.in/khatiyan.html">खतियान</a> और <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा</a> अभी तैयार करवाएं।</div>
 
-<main class="wrap">
-  <div class="kevala-token-box">
-    <div class="kt-header">
-      🔔 केवाला (रजिस्ट्री) ऑर्डर के लिए आवश्यक सूचना
-      <span>ज़रूरी</span>
+<!-- ══════════════ 2-CARD ADVANCE TOKEN SYSTEM ══════════════ -->
+<style>
+  .token-dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 18px 0 28px 0;
+    align-items: stretch;
+  }
+  @media(max-width: 768px) {
+    .token-dual-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Card 1: Rule & Transparency Card */
+  .token-info-card {
+    background: #ffffff;
+    border: 1.5px solid #fed7aa;
+    border-top: 5px solid #f97316;
+    border-radius: 16px;
+    padding: 22px 20px;
+    box-shadow: 0 4px 18px rgba(249, 115, 22, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tic-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .tic-title {
+    font-size: 16.5px;
+    font-weight: 800;
+    color: #9a3412;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tic-badge {
+    background: #ffedd5;
+    color: #c2410c;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #fdba74;
+  }
+  .tic-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13.5px;
+    color: #334155;
+    line-height: 1.7;
+  }
+  .tic-list li {
+    padding-left: 22px;
+    position: relative;
+    margin-bottom: 8px;
+  }
+  .tic-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #16a34a;
+    font-weight: 800;
+  }
+  .tic-list li.warn::before {
+    content: "⚠️";
+  }
+  .tic-alert {
+    background: #fef2f2;
+    border-left: 3px solid #dc2626;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: #991b1b;
+    font-weight: 700;
+    margin-top: 12px;
+  }
+
+  /* Card 2: Quick Pay & Confirm Card */
+  .token-pay-card {
+    background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+    border: 2px solid #38bdf8;
+    border-radius: 16px;
+    padding: 24px 22px;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .token-pay-card::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .tpc-badge {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid #38bdf8;
+    color: #38bdf8;
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .tpc-title {
+    font-size: 19px;
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 6px;
+  }
+  .tpc-sub {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .tpc-price-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 18px;
+  }
+  .tpc-price {
+    font-size: 26px;
+    font-weight: 900;
+    color: #facc15;
+    line-height: 1;
+  }
+  .tpc-price span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-left: 4px;
+  }
+  .tpc-btn-area {
+    margin-top: auto;
+  }
+</style>
+
+<div class="token-dual-grid">
+  
+  <!-- CARD 1: NIYAM & TRANSPARENCY -->
+  <div class="token-info-card">
+    <div>
+      <div class="tic-head">
+        <div class="tic-title">📋 टोकन क्यों ज़रूरी है?</div>
+        <span class="tic-badge">पारदर्शी नीति</span>
+      </div>
+      <ul class="tic-list">
+        <li><strong>फर्जी ऑर्डर से सुरक्षा:</strong> केवल गंभीर ग्राहकों के रिकॉर्ड्स की खोज शुरू की जाती है।</li>
+        <li><strong>बिल में एडजस्ट:</strong> यह ₹99 आपके कुल सेवा शुल्क (Final Bill) में से घटा दिया जाएगा।</li>
+        <li class="warn"><strong>शर्त:</strong> रिकॉर्ड ढूंढने की मेहनत शुल्क होने के कारण यह रिफंड नहीं होता।</li>
+        <li><strong>अन्य सेवा में छूट:</strong> रिकॉर्ड न मिलने पर यह ₹99 आप खतियान या पंचनामा में उपयोग कर सकते हैं।</li>
+      </ul>
     </div>
-    <div class="kt-highlight">
-      ⚠️ अगर आप ₹99 का एडवांस टोकन (Advance Token) भुगतान नहीं करते हैं, तो आपका ऑर्डर Confirm नहीं माना जाएगा।
-    </div>
-    <ul class="kt-list">
-      <li><strong>फर्जी ऑर्डर से बचाव:</strong> यह केवल सीरियस (Serious) ग्राहकों के लिए बनाया गया है।</li>
-      <li><strong>एडजस्टमेंट:</strong> यह ₹99 की राशि आपके फाइनल सर्विस चार्ज में कम (Manage) कर दी जाएगी।</li>
-      <li><strong>Non-Refundable:</strong> यह टोकन राशि वापस (Refund) नहीं होगी।</li>
-    </ul>
-    <div class="kt-btn-container">
-      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Tk5bSaZ6qjCuz0" async></script></form>
+    <div class="tic-alert">
+      📌 नोट: टोकन प्राप्त होने के 24 घंटे के अंदर टीम WhatsApp पर कन्फर्म करती है।
     </div>
   </div>
+
+  <!-- CARD 2: INSTANT PAYMENT & CONFIRMATION -->
+  <div class="token-pay-card">
+    <div>
+      <span class="tpc-badge">⚡ Quick Confirmation</span>
+      <div class="tpc-title">फॉर्म भरा पर पेमेंट छूट गया?</div>
+      <p class="tpc-sub">
+        अगर आपने ऑर्डर फॉर्म भर दिया है लेकिन टोकन नहीं कटा, तो यहाँ से तुरंत भुगतान करके ऑर्डर कन्फर्म करें।
+      </p>
+      
+      <div class="tpc-price-box">
+        <div class="tpc-price">₹99 <span>एडवांस टोकन शुल्क</span></div>
+      </div>
+    </div>
+
+    <div class="tpc-btn-area">
+      <form>
+        <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Tk5bSaZ6qjCuz0" async></script>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- ══════════════════════════════════════════════════════════ -->
 
   <div class="form-outer" id="order-form">
     <div class="form-header">
