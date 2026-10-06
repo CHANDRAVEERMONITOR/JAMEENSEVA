@@ -70,13 +70,11 @@
       line-height: 1.75;
       font-size: 15.5px;
     }
-    /* ─── HINDI HEADINGS ─── */
     h1,h2,h3,h4,h5 {
       font-family: 'Tiro Devanagari Hindi', 'Plus Jakarta Sans', serif;
       line-height: 1.35;
     }
 
-    /* ─── NAV ─── */
     .topbar {
       background: var(--navy);
       padding: 0 20px;
@@ -101,12 +99,10 @@
     .nav-links a.pill:hover { background: #006257; }
     @media(max-width:600px){ .nav-links a { font-size: 11px; padding: 5px 8px; } }
 
-    /* ─── BREADCRUMB ─── */
     .crumb { background: #fff; border-bottom: 1px solid var(--border); padding: 9px 20px; font-size: 12.5px; color: var(--mist); }
     .crumb a { color: var(--navy-m); text-decoration: none; }
     .crumb span { margin: 0 5px; }
 
-    /* ─── ALERT BAR ─── */
     .alert-bar {
       background: linear-gradient(90deg, #b71c1c, #c62828);
       color: #fff; text-align: center; padding: 10px 20px;
@@ -114,7 +110,6 @@
     }
     .alert-bar a { color: #f9a825; }
 
-    /* ─── HERO ─── */
     .hero {
       background: var(--navy);
       padding: 64px 20px 56px;
@@ -122,7 +117,6 @@
       position: relative;
       overflow: hidden;
     }
-    /* document-texture overlay */
     .hero::before {
       content: '';
       position: absolute; inset: 0;
@@ -161,10 +155,8 @@
       padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
     }
 
-    /* ─── WRAP ─── */
     .wrap { max-width: 1020px; margin: auto; padding: 0 20px; }
 
-    /* ─── SECTION HEADING ─── */
     .sec-head {
       font-size: 1.5rem; color: var(--navy);
       font-weight: 700; margin: 52px 0 22px;
@@ -173,7 +165,6 @@
       position: relative;
     }
 
-    /* ─── WHAT IS KEVALA — 2-col split ─── */
     .split-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -193,7 +184,6 @@
     .split-card p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.8; }
     .split-card ul { padding-left: 18px; font-size: 14.5px; color: var(--ink-soft); line-height: 2; }
 
-    /* ─── CERTIFIED vs WEB TABLE ─── */
     .diff-table { width: 100%; border-collapse: collapse; margin: 8px 0 40px; border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); font-size: 14.5px; }
     .diff-table th { background: var(--navy); color: #fff; padding: 15px 18px; text-align: left; font-family: 'Tiro Devanagari Hindi', serif; }
     .diff-table td { border: 1px solid var(--border); padding: 14px 18px; vertical-align: top; }
@@ -201,7 +191,6 @@
     .diff-table .yes { color: var(--teal); font-weight: 700; }
     .diff-table .no  { color: var(--red); font-weight: 600; }
 
-    /* ─── PROCESS STEPS ─── */
     .steps-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -233,7 +222,6 @@
     .step-card h4 { font-size: 0.9rem; color: var(--navy); margin-bottom: 5px; }
     .step-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
 
-    /* ─── TRACKING BANNER ─── */
     .track-banner {
       background: linear-gradient(120deg, #0c2d4e 0%, #1a4a72 100%);
       border-radius: var(--r);
@@ -263,237 +251,91 @@
     }
     .track-banner .tb-btn:hover { background: #ffc107; transform: translateY(-1px); }
 
-   /* ─── ENHANCED MODERN ORDER FORM ─── */
-.form-outer {
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 24px;
-  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(15, 23, 42, 0.02);
-  overflow: hidden;
-  margin: 0 0 44px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-outer:hover {
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
-}
-
-/* Gradient & Dynamic Header */
-.form-header {
-  background: linear-gradient(135deg, var(--navy) 0%, #0f172a 100%);
-  padding: 36px 36px 32px;
-  border-bottom: 4px solid var(--teal);
-  position: relative;
-  overflow: hidden;
-}
-
-/* Glowing Accent Ring Background Effect */
-.form-header::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -10%;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, rgba(255,255,255,0) 70%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.form-header h2 {
-  color: #ffffff;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.form-header p {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 14.5px;
-  line-height: 1.5;
-}
-
-.form-body {
-  padding: 36px;
-  background: #fafbfc;
-}
-
-@media(max-width: 600px) {
-  .form-body { padding: 22px 18px; }
-  .form-header { padding: 28px 20px; }
-  .type-grid { grid-template-columns: 1fr !important; }
-}
-
-.form-section {
-  margin-bottom: 32px;
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid #f1f5f9;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-}
-
-.fs-title {
-  font-size: 12.5px;
-  font-weight: 800;
-  color: var(--teal);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 18px;
-  padding-bottom: 10px;
-  border-bottom: 2px dashed #e2e8f0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.fgrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 18px;
-}
-
-.fg {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.fg.full {
-  grid-column: 1 / -1;
-}
-
-.fg label {
-  font-size: 13px;
-  font-weight: 700;
-  color: #334155;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Floating Input Focus Effect */
-.fg input, .fg select, .fg textarea {
-  padding: 12px 16px;
-  border: 1.8px solid #cbd5e1;
-  border-radius: 10px;
-  font-size: 14px;
-  color: #0f172a;
-  background: #ffffff;
-  outline: none;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: inherit;
-}
-
-.fg input:hover, .fg select:hover, .fg textarea:hover {
-  border-color: #94a3b8;
-}
-
-.fg input:focus, .fg select:focus, .fg textarea:focus {
-  border-color: var(--teal, #0d9488);
-  background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
-  transform: translateY(-1px);
-}
-
-.fg .hint {
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 4px;
-  font-style: italic;
-}
-
-/* ─── INTERACTIVE TYPE CARDS ─── */
-.type-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.type-card {
-  border: 2px solid #e2e8f0;
-  border-radius: 14px;
-  padding: 18px 20px;
-  cursor: pointer;
-  background: #ffffff;
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  user-select: none;
-}
-
-.type-card:hover {
-  border-color: var(--teal, #0d9488);
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
-}
-
-/* Active State with Micro Glow */
-.type-card.active {
-  border-color: var(--navy);
-  background: linear-gradient(145deg, #f0f7ff 0%, #e6f0fa 100%);
-  box-shadow: 0 8px 18px -4px rgba(26, 74, 114, 0.18);
-  transform: translateY(-2px);
-}
-
-.type-card input[type=radio] {
-  margin-top: 3px;
-  width: 18px;
-  height: 18px;
-  accent-color: var(--navy);
-  cursor: pointer;
-}
-
-.type-card .tc-body h4 {
-  font-size: 14.5px;
-  font-weight: 800;
-  color: var(--navy);
-  margin-bottom: 4px;
-}
-
-.type-card .tc-body p {
-  font-size: 12.5px;
-  color: #475569;
-  line-height: 1.5;
-}
-    /* COD badge in form */
+    .form-outer {
+      background: #ffffff;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      border-radius: 24px;
+      box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.07);
+      overflow: hidden;
+      margin: 0 0 44px;
+    }
+    .form-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #0f172a 100%);
+      padding: 36px 36px 32px;
+      border-bottom: 4px solid var(--teal);
+    }
+    .form-header h2 { color: #ffffff; font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+    .form-header p { color: rgba(255, 255, 255, 0.82); font-size: 14.5px; }
+    .form-body { padding: 36px; background: #fafbfc; }
+    @media(max-width: 600px) {
+      .form-body { padding: 22px 18px; }
+      .form-header { padding: 28px 20px; }
+      .type-grid { grid-template-columns: 1fr !important; }
+    }
+    .form-section {
+      margin-bottom: 32px;
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #f1f5f9;
+    }
+    .fs-title {
+      font-size: 12.5px; font-weight: 800; color: var(--teal);
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px;
+      padding-bottom: 10px; border-bottom: 2px dashed #e2e8f0;
+    }
+    .fgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+    }
+    .fg { display: flex; flex-direction: column; gap: 6px; }
+    .fg.full { grid-column: 1 / -1; }
+    .fg label { font-size: 13px; font-weight: 700; color: #334155; }
+    .fg input, .fg select, .fg textarea {
+      padding: 12px 16px;
+      border: 1.8px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+      color: #0f172a;
+      background: #ffffff;
+      outline: none;
+      font-family: inherit;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.15);
+    }
+    .type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .type-card {
+      border: 2px solid #e2e8f0; border-radius: 14px; padding: 18px 20px;
+      cursor: pointer; background: #ffffff; display: flex; align-items: flex-start; gap: 14px;
+      transition: .2s;
+    }
+    .type-card.active { border-color: var(--navy); background: #f0f7ff; }
+    .type-card.hidden-type { display: none !important; }
     .cod-badge {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--teal-l); color: var(--teal);
       font-size: 12px; font-weight: 700; padding: 5px 14px;
       border-radius: 20px; border: 1px solid #b2dfdb; margin-bottom: 20px;
     }
-
+    .adv-notice {
+      background: var(--red-l); border: 1.5px dashed var(--red);
+      border-radius: 10px; padding: 14px 16px; margin: 16px 0 20px;
+      font-size: 13px; color: var(--ink); line-height: 1.6;
+    }
+    .adv-notice strong { color: var(--red); }
+    .adv-notice ul { margin: 6px 0 0 18px; padding: 0; }
     .btn-order {
       width: 100%; background: var(--teal); color: #fff;
-      border: none; padding: 15px;
-      border-radius: 10px; font-size: 1.05rem; font-weight: 700;
+      border: none; padding: 15px; border-radius: 10px; font-size: 1.05rem; font-weight: 700;
       cursor: pointer; transition: .2s; font-family: inherit;
-      box-shadow: 0 4px 16px rgba(0,123,110,.3);
     }
-    .btn-order:hover { background: #006257; transform: translateY(-1px); }
-    .btn-order:disabled { background: #a0aec0; box-shadow: none; cursor: not-allowed; transform: none; }
+    .btn-order:hover { background: #006257; }
+    .btn-order:disabled { background: #a0aec0; cursor: not-allowed; }
+    #status-msg { display: none; margin-top: 16px; padding: 18px; border-radius: 10px; font-weight: 600; text-align: center; }
 
-    #status-msg {
-      display: none; margin-top: 16px; padding: 18px; border-radius: 10px;
-      font-weight: 600; text-align: center; font-size: 14.5px;
-    }
-
-    /* District badge */
-    .dist-badge {
-      display: inline-block; background: var(--teal-l); color: var(--teal);
-      font-size: 11.5px; font-weight: 700; padding: 3px 10px;
-      border-radius: 20px; margin-left: 8px; border: 1px solid #b2dfdb;
-    }
-
-    /* ─── INTERNAL LINKS ─── */
     .inlink-box {
       background: #fff; border: 1px solid var(--border);
       border-radius: var(--r); padding: 28px;
@@ -511,7 +353,6 @@
     .ilink:hover { background: var(--teal-l); border-color: var(--teal); color: var(--teal); }
     .ilink span { font-size: 17px; }
 
-    /* ─── FAQ ─── */
     .faq-list { margin: 8px 0 44px; }
     .fq { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; background: #fff; overflow: hidden; }
     .fq-q {
@@ -526,7 +367,6 @@
     .fq-a.open { max-height: 260px; padding: 15px 20px; }
     .fq-a a { color: var(--teal); font-weight: 600; }
 
-    /* ─── FOOTER ─── */
     footer { background: var(--navy); color: rgba(255,255,255,.7); padding: 52px 20px 24px; margin-top: 60px; }
     .foot-grid { max-width: 1020px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 36px; margin-bottom: 36px; }
     .fc h4 { color: #f9a825; font-family: 'Tiro Devanagari Hindi', serif; font-size: 1rem; margin-bottom: 14px; border-bottom: 1px solid rgba(249,168,37,.25); padding-bottom: 6px; }
@@ -537,55 +377,19 @@
     .foot-bottom { max-width: 1020px; margin: auto; border-top: 1px solid rgba(255,255,255,.1); padding-top: 20px; text-align: center; font-size: 12.5px; }
     .foot-bottom a { color: #f9a825; text-decoration: none; }
 
-    /* ─── WA FLOAT ─── */
-    .wa { position: fixed; bottom: 88px; right: 20px; z-index: 999; width: 52px; height: 52px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,.22); transition: .2s; }
-    .wa:hover { transform: scale(1.1); background: #128c7e; }
+    .wa { position: fixed; bottom: 88px; right: 20px; z-index: 999; width: 52px; height: 52px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,.22); }
     .wa svg { width: 27px; height: 27px; fill: white; }
-
-    /* ─── ORDER FLOAT ─── */
     .ofloat { position: fixed; bottom: 20px; right: 20px; z-index: 999; }
-    .ofloat-btn { background: var(--amber); color: #fff; border: none; padding: 12px 22px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 14px; font-family: inherit; box-shadow: var(--shadow-lg); }
+    .ofloat-btn { background: var(--amber); color: #fff; border: none; padding: 12px 22px; border-radius: 50px; font-weight: 800; cursor: pointer; font-size: 14px; font-family: inherit; }
     .ofloat-menu { display: none; position: absolute; bottom: 56px; right: 0; background: #fff; border-radius: 12px; width: 226px; box-shadow: var(--shadow-lg); border: 1px solid var(--border); overflow: hidden; }
     .ofloat-menu.open { display: block; }
-    .ofloat-menu a { display: block; padding: 14px 18px; border-bottom: 1px solid var(--border); color: var(--ink); text-decoration: none; font-size: 13.5px; font-weight: 600; transition: .15s; }
-    .ofloat-menu a:last-child { border-bottom: none; }
+    .ofloat-menu a { display: block; padding: 14px 18px; border-bottom: 1px solid var(--border); color: var(--ink); text-decoration: none; font-size: 13.5px; font-weight: 600; }
     .ofloat-menu a:hover { background: var(--teal-l); color: var(--teal); }
-
-    /* notice */
     .notice { background: var(--amber-l); border-left: 4px solid var(--amber); border-radius: 8px; padding: 15px 18px; margin: 24px 0; font-size: 14px; }
-    .notice strong { color: var(--amber); }
-
-    /* ─── ₹99 SERVICE CHARGE NOTICE ─── */
-    .adv-notice {
-      background: var(--red-l);
-      border: 1.5px dashed var(--red);
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin: 16px 0 20px;
-      font-size: 13px;
-      color: var(--ink);
-      line-height: 1.6;
-    }
-    .adv-notice strong { color: var(--red); }
-    .adv-notice ul { margin: 6px 0 0 18px; padding: 0; }
-    .adv-notice li { margin-bottom: 3px; }
-    .adv-inline {
-      display: inline-block;
-      background: var(--amber-l);
-      border: 1px solid var(--amber);
-      color: var(--amber);
-      font-weight: 700;
-      font-size: 11.5px;
-      padding: 3px 10px;
-      border-radius: 20px;
-      margin-top: 6px;
-    }
-    .type-card.hidden-type { display: none !important; }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="topbar">
   <a href="https://jameenseva.in/" class="brand">Jameen<em>Seva</em>.in</a>
   <div class="nav-links">
@@ -596,14 +400,12 @@
   </div>
 </nav>
 
-<!-- BREADCRUMB -->
 <div class="crumb">
   <a href="https://jameenseva.in/">Home</a><span>›</span>
   <a href="https://jameenseva.in/blog.html">Blog</a><span>›</span>
   <strong>बिहार केवाला गाइड और ऑर्डर</strong>
 </div>
 
-<!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">📜 Bihar Land Records — Deed Copy Service</div>
@@ -617,368 +419,217 @@
     </div>
   </div>
 </header>
-<!-- 📜 KEVALA ADVANCE TOKEN PAYMENT NOTICE BOARD -->
-<style>
-  .kevala-token-box {
-    background: #fffbe6;
-    border: 2px dashed #f59e0b;
-    border-radius: 12px;
-    padding: 18px 20px;
-    margin: 15px 0 25px 0;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
-    font-family: 'Baloo 2', 'Noto Serif Devanagari', sans-serif;
-  }
-  .kt-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #b45309;
-    font-size: 17px;
-    font-weight: 800;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #fef3c7;
-    padding-bottom: 6px;
-  }
-  .kt-header span {
-    background: #dc2626;
-    color: #fff;
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-  .kt-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 15px 0;
-    font-size: 13.5px;
-    color: #374151;
-    line-height: 1.7;
-  }
-  .kt-list li {
-    margin-bottom: 6px;
-    position: relative;
-    padding-left: 20px;
-  }
-  .kt-list li::before {
-    content: "✔";
-    position: absolute;
-    left: 0;
-    color: #1a7c3e;
-    font-weight: bold;
-  }
-  .kt-list li.warn::before {
-    content: "⚠️";
-  }
-  .kt-highlight {
-    background: #fef2f2;
-    border-left: 4px solid #dc2626;
-    padding: 8px 12px;
-    border-radius: 4px;
-    color: #991b1b;
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 14px;
-  }
-  .kt-btn-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-  }
-</style>
-<!-- ALERT -->
+
 <div class="alert-bar">🔔 <strong>Bihar Survey 2026 चल रहा है —</strong> केवाला, <a href="https://jameenseva.in/khatiyan.html">खतियान</a> और <a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा</a> अभी तैयार करवाएं।</div>
 
-<div class="kevala-token-box">
-  <div class="kt-header">
-    🔔 केवाला (रजिस्ट्री) ऑर्डर के लिए आवश्यक सूचना
-    <span>ज़रूरी</span>
-  </div>
-
-  <div class="kt-highlight">
-    ⚠️ अगर आप ₹99 का एडवांस टोकन (Advance Token) भुगतान नहीं करते हैं, तो आपका ऑर्डर Confirm नहीं माना जाएगा।
-  </div>
-
-  <ul class="kt-list">
-    <li><strong>फर्जी ऑर्डर से बचाव:</strong> यह केवल सीरियस (Serious) ग्राहकों के लिए बनाया गया है ताकि फर्जी ऑर्डर को रोका जा सके।</li>
-    <li><strong>एडजस्टमेंट (Adjustable):</strong> यह ₹99 की राशि आपके फाइनल सर्विस चार्ज में जोड़ दी/कम (Manage) कर दी जाएगी।</li>
-    <li class="warn"><strong>Non-Refundable:</strong> यह टोकन राशि किसी भी परिस्थिति में वापस (Refund) नहीं होगी।</li>
-     <li><strong>अन्य सेवाओं में उपयोग:</strong> आप चाहें तो इस टोकन राशि का उपयोग JameenSeva.in की किसी भी अन्य सेवा में करवा सकते हैं।</li>
-  </ul>
-
-  <!-- Razorpay Payment Button Section -->
-  <div class="kt-btn-container">
-    <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Tk5bSaZ6qjCuz0" async> </script> </form>
-  </div>
-</div>
 <main class="wrap">
-<div class="form-outer" id="order-form">
-  <div class="form-header">
-    <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
-    <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
-  </div>
-  <div class="form-body">
-    <form id="kevalaForm" onsubmit="handleOrder(event)">
-
-      <!-- Type -->
-      <div class="form-section">
-        <div class="fs-title">📄 STEP 1 — केवाला का समय काल, वर्ष और दस्तावेज़ का प्रकार चुनें</div>
-
-        <!-- 2006 से पहले / बाद का Quick Filter -->
-        <div class="fg" style="margin-bottom:16px;">
-          <label style="font-weight:700;margin-bottom:8px;display:block;">रजिस्ट्रेशन की अवधि चुनें *</label>
-          <div style="display:flex;gap:12px;flex-wrap:wrap;">
-            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
-              <input type="radio" name="era_period" value="pre_2006" onchange="onEraChange('pre_2006')" />
-              🕰️ 2006 से पहले (1900 - 2005)
-            </label>
-            <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
-              <input type="radio" name="era_period" value="post_2006" onchange="onEraChange('post_2006')" checked />
-              ⚡ 2006 से वर्तमान (2006 - 2026)
-            </label>
-          </div>
-        </div>
-
-        <div class="type-grid">
-          <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
-            <input type="radio" name="doc_type" id="radio-doc-cert" value="Certified Copy" checked/>
-            <div class="tc-body">
-              <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
-              <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के केवाला के लिए उपलब्ध।</p>
-            </div>
-          </label>
-          <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
-            <input type="radio" name="doc_type" id="radio-doc-web" value="Web Copy"/>
-            <div class="tc-body">
-              <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
-              <p>डिजिटल PDF — त्वरित जानकारी व सामान्य उपयोग। 1900–2005 के पुराने केवाला के लिए यही विकल्प उपलब्ध है।</p>
-            </div>
-          </label>
-        </div>
-        <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
-          ⚠️ चुने गए वर्ष (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy (साधारण प्रति) चयनित की गई है।
-        </div>
-      </div>
-
-      <!-- Location -->
-      <div class="form-section">
-        <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
-        <div class="fgrid">
-          <div class="fg">
-            <label>जिला (District) *</label>
-            <select id="district" onchange="onDistrictChange(); checkOtherOptions();" required>
-              <option value="">-- जिला चुनें --</option>
-            </select>
-          </div>
-
-          <!-- Registry Office / SRO with Custom Option -->
-          <div class="fg">
-            <label>रजिस्ट्री ऑफिस / SRO *</label>
-            <select id="registry_office" onchange="toggleCustomField('registry_office', 'custom_sro_box', 'custom_sro_input')" required disabled>
-              <option value="">-- पहले जिला चुनें --</option>
-            </select>
-            <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
-            <div id="custom_sro_box" style="display:none;margin-top:8px;">
-              <input type="text" id="custom_sro_input" placeholder="यहाँ अपने SRO / रजिस्ट्री ऑफिस का नाम लिखें" style="border-color:var(--teal, #0d9488);" />
-            </div>
-          </div>
-
-          <!-- Anchal / Circle with Custom Option -->
-          <div class="fg">
-            <label>अंचल / ब्लॉक (Anchal) *</label>
-            <select id="anchal_circle" onchange="toggleCustomField('anchal_circle', 'custom_anchal_box', 'custom_anchal_input')" required disabled>
-              <option value="">-- पहले जिला चुनें --</option>
-            </select>
-            <div id="custom_anchal_box" style="display:none;margin-top:8px;">
-              <input type="text" id="custom_anchal_input" placeholder="यहाँ अपने अंचल / ब्लॉक का नाम लिखें" style="border-color:var(--teal, #0d9488);" />
-            </div>
-          </div>
-
-          <!-- Mauza Name (Mandatory) -->
-          <div class="fg">
-            <label>मौजा का नाम (Mauza) *</label>
-            <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम लिखें" required/>
-          </div>
-
-          <!-- Thana No (Mandatory) -->
-          <div class="fg full">
-            <label>थाना नंबर (Thana No.) *</label>
-            <input type="text" id="thana_number" placeholder="थाना नंबर लिखें (अनिवार्य)" required/>
-          </div>
-        </div>
-      </div>
-
-      <!-- Search Details -->
-      <div class="form-section">
-        <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
-        <div class="fgrid">
-          <div class="fg">
-            <label>कब से (From Date) *</label>
-            <input type="date" id="date_from" required/>
-          </div>
-          <div class="fg">
-            <label>कब तक (To Date) *</label>
-            <input type="date" id="date_to" required/>
-          </div>
-          <div class="fg">
-            <label>बेचने वाले का नाम (Seller / Daata)</label>
-            <input type="text" id="seller_name" placeholder="दाता का नाम"/>
-          </div>
-          <div class="fg">
-            <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
-            <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
-          </div>
-          <div class="fg">
-            <label>खाता नंबर (Khata No.)</label>
-            <input type="text" id="khata_number" placeholder="खाता संख्या"/>
-          </div>
-          <div class="fg">
-            <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
-            <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
-          </div>
-          <div class="fg full">
-            <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
-            <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- Personal -->
-      <div class="form-section">
-        <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
-        <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
-        <div class="fgrid">
-          <div class="fg">
-            <label>आपका पूरा नाम *</label>
-            <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
-          </div>
-          <div class="fg">
-            <label>मोबाइल नंबर *</label>
-            <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
-          </div>
-          <div class="fg full">
-            <label>पूरा पता (डिलीवरी के लिए) *</label>
-            <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
-          </div>
-          <div class="fg">
-            <label>पिन कोड *</label>
-            <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
-          </div>
-          <div class="fg">
-            <label>भुगतान विधि</label>
-            <select id="payment_method">
-              <option value="COD">🚚 Cash On Delivery (COD)</option>
-              <option value="Online">💳 Online Payment</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="adv-notice">
-          <strong>💰 ₹99 Service Charge — अनिवार्य नियम:</strong>
-          <p style="margin-top:4px;">ऑर्डर कन्फर्म करने के लिए ₹99 advance token (खोज व प्रोसेसिंग शुल्क) लिया जाएगा। यह राशि आपके फाइनल दस्तावेज़ शुल्क में समायोजित (adjust) कर दी जाती है।</p>
-          <ul>
-            <li>₹99 केवल <strong>सीरियस ग्राहकों</strong> से लिया जाता है, ताकि फर्जी/गलत ऑर्डर न बनें।</li>
-            <li>Service Charge प्राप्त होने के बाद ही केवाला की खोज शुरू होगी।</li>
-            <li>रिकार्ड मिलने पर सरकारी शुल्क + Service Charge अलग से लागू होगा (COD पर वसूला जाएगा)।</li>
-            <li>ऑर्डर को कन्फर्म करने के लिए नीचे ₹99 Service Charge का भुगतान करें।</li>
-            <li>Service Charge refund नहीं होगा। आपका ऑर्डर खोजा गया—इसका प्रूफ भी WhatsApp पर मांग सकते हैं। इसके लिए पहले सूचित करना होगा।</li>
-          </ul>
-          <span class="adv-inline">⚠️ फॉर्म सबमिट करने का अर्थ है कि आप ₹99 Service Charge नियम से सहमत हैं</span>
-        </div>
-      </div>
-
-      <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
-    </form>
-    <div id="status-msg"></div>
-
-    <!-- ══════════════ PAYMENT AREA (Razorpay) ══════════════ -->
-    <div id="paymentArea" style="display:none;background:var(--white);border:1.5px solid var(--teal);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:32px 20px;text-align:center;margin:24px 0;">
-      <i class="fas fa-check-circle" style="font-size:50px;color:var(--teal)"></i>
-      <h3 style="margin-top:14px;color:var(--navy);">आपका ऑर्डर डेटा सेव हो गया है!</h3>
-      <p id="payment-oid-note" style="color:var(--ink-soft);margin-top:6px;font-weight:600;"></p>
-      <p style="color:var(--red);margin-top:10px;font-weight:700;">⚠️ ऑर्डर तभी कन्फर्म होगा जब ₹99 Advance Service Charge का भुगतान हो जाएगा।</p>
-      <p style="color:var(--ink-soft);font-size:13px;margin-top:6px;">नीचे दिए बटन से ₹99 का भुगतान करें — भुगतान होते ही हमारी टीम आपके केवाला की खोज WhatsApp पर कन्फर्म करके शुरू कर देगी।</p>
-      <br>
-      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TjsjP7JX39BdIl" async> </script> </form>
+  <div class="kevala-token-box">
+    <div class="kt-header">
+      🔔 केवाला (रजिस्ट्री) ऑर्डर के लिए आवश्यक सूचना
+      <span>ज़रूरी</span>
+    </div>
+    <div class="kt-highlight">
+      ⚠️ अगर आप ₹99 का एडवांस टोकन (Advance Token) भुगतान नहीं करते हैं, तो आपका ऑर्डर Confirm नहीं माना जाएगा।
+    </div>
+    <ul class="kt-list">
+      <li><strong>फर्जी ऑर्डर से बचाव:</strong> यह केवल सीरियस (Serious) ग्राहकों के लिए बनाया गया है।</li>
+      <li><strong>एडजस्टमेंट:</strong> यह ₹99 की राशि आपके फाइनल सर्विस चार्ज में कम (Manage) कर दी जाएगी।</li>
+      <li><strong>Non-Refundable:</strong> यह टोकन राशि वापस (Refund) नहीं होगी।</li>
+    </ul>
+    <div class="kt-btn-container">
+      <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Tk5bSaZ6qjCuz0" async></script></form>
     </div>
   </div>
-</div>
 
-<!-- ══════════════ HELPER LOGIC SCRIPT ══════════════ -->
-<script>
-// 1. वर्ष पॉप्युलेट और Era टॉगल (2006 से पहले / बाद)
-function populateDeedYears(era) {
-  const select = document.getElementById('deed_year');
-  if(!select) return;
-  select.innerHTML = '<option value="">-- वर्ष चुनें --</option>';
-  
-  const currentYear = new Date().getFullYear();
-  let startYear = (era === 'pre_2006') ? 1900 : 2006;
-  let endYear   = (era === 'pre_2006') ? 2005 : currentYear;
+  <div class="form-outer" id="order-form">
+    <div class="form-header">
+      <h2>🗂️ बिहार केवाला ऑनलाइन ऑर्डर फॉर्म</h2>
+      <p>सभी 38 जिले और 200+ Registration Offices कवर — COD पर घर पर डिलीवरी</p>
+    </div>
+    <div class="form-body">
+      <form id="kevalaForm" onsubmit="handleOrder(event)">
 
-  for (let y = endYear; y >= startYear; y--) {
-    const opt = document.createElement('option');
-    opt.value = y;
-    opt.textContent = y;
-    select.appendChild(opt);
-  }
-}
+        <!-- STEP 1 -->
+        <div class="form-section">
+          <div class="fs-title">📄 STEP 1 — केवाला का समय काल और दस्तावेज़ का प्रकार चुनें</div>
+          <div class="fg" style="margin-bottom:16px;">
+            <label style="font-weight:700;margin-bottom:8px;display:block;">रजिस्ट्रेशन की अवधि चुनें *</label>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+                <input type="radio" name="era_period" value="pre_2006" onchange="onEraChange('pre_2006')" />
+                🕰️️ 2006 से पहले (1900 - 2005)
+              </label>
+              <label style="display:flex;align-items:center;gap:6px;background:#f1f5f9;padding:10px 16px;border-radius:8px;border:1px solid #cbd5e1;cursor:pointer;font-weight:600;">
+                <input type="radio" name="era_period" value="post_2006" onchange="onEraChange('post_2006')" checked />
+                ⚡ 2006 से वर्तमान (2006 - 2026)
+              </label>
+            </div>
+          </div>
 
-function onEraChange(era) {
-  populateDeedYears(era);
-  if (typeof toggleCopyTypeByYear === 'function') {
-    toggleCopyTypeByYear();
-  }
-}
+          <div class="type-grid">
+            <label class="type-card active" id="type-cert" onclick="selectDocType('Certified Copy')">
+              <input type="radio" name="doc_type" id="radio-doc-cert" value="Certified Copy" checked/>
+              <div class="tc-body">
+                <h4>📜 Certified Copy (प्रमाणित प्रति)</h4>
+                <p>SRO मुहर और हस्ताक्षर सहित — बैंक, कोर्ट में मान्य। केवल 2006–वर्तमान के लिए उपलब्ध।</p>
+              </div>
+            </label>
+            <label class="type-card" id="type-web" onclick="selectDocType('Web Copy')">
+              <input type="radio" name="doc_type" id="radio-doc-web" value="Web Copy"/>
+              <div class="tc-body">
+                <h4>💻 Web Copy (Ordinary / साधारण प्रति)</h4>
+                <p>डिजिटल PDF — त्वरित जानकारी व 1900–2005 के पुराने केवाला के लिए उपलब्ध।</p>
+              </div>
+            </label>
+          </div>
+          <div id="year-lock-note" style="display:none;font-size:12.5px;color:var(--red);font-weight:600;margin-top:-10px;margin-bottom:16px;">
+            ⚠️ चुने गए समय काल (2006 से पहले) के लिए Certified Copy उपलब्ध नहीं है — स्वतः Web Copy चुनी गई है।
+          </div>
+        </div>
 
-// 2. Custom Option Handler (अगर लिस्ट में SRO या ब्लॉक नहीं मिला)
-function toggleCustomField(selectId, boxId, inputId) {
-  const select = document.getElementById(selectId);
-  const box = document.getElementById(boxId);
-  const input = document.getElementById(inputId);
-  if (select.value === 'OTHER') {
-    box.style.display = 'block';
-    input.required = true;
-    input.focus();
-  } else {
-    box.style.display = 'none';
-    input.required = false;
-    input.value = '';
-  }
-}
+        <!-- STEP 2 (CUSTOM SRO, ANCHAL, AND COMPULSORY MAUZA ADDED HERE) -->
+        <div class="form-section">
+          <div class="fs-title">📍 STEP 2 — रजिस्ट्री ऑफिस विवरण <span class="dist-badge">38 जिले · 200+ SRO</span></div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>जिला (District) *</label>
+              <select id="district" onchange="onDistrictChange()" required>
+                <option value="">-- जिला चुनें --</option>
+              </select>
+            </div>
 
-// 3. जब जिला चुना जाए तो ड्रॉपडाउन में 'अन्य' का ऑप्शन जोड़ना
-function appendOtherOption(selectElement) {
-  if (!selectElement) return;
-  // अगर पहले से 'OTHER' नहीं है तभी जोड़ें
-  if (!selectElement.querySelector('option[value="OTHER"]')) {
-    const opt = document.createElement('option');
-    opt.value = 'OTHER';
-    opt.textContent = '➕ अन्य (सूची में नहीं है - खुद लिखें)';
-    selectElement.appendChild(opt);
-  }
-}
+            <!-- Registry Office / SRO with Custom Option -->
+            <div class="fg">
+              <label>रजिस्ट्री ऑफिस / SRO *</label>
+              <select id="registry_office" onchange="toggleCustomField('registry_office', 'custom_sro_box', 'custom_sro_input')" required disabled>
+                <option value="">-- पहले जिला चुनें --</option>
+              </select>
+              <span class="hint">जिला चुनते ही सभी SRO दिखेंगे</span>
+              <div id="custom_sro_box" style="display:none;margin-top:8px;">
+                <input type="text" id="custom_sro_input" placeholder="यहाँ अपने SRO / रजिस्ट्री ऑफिस का नाम लिखें" style="border-color:var(--teal);" />
+              </div>
+            </div>
 
-// District बदलने के बाद SRO और Circle में 'OTHER' जोड़ना
-const originalOnDistrictChange = window.onDistrictChange;
-window.onDistrictChange = function() {
-  if (typeof originalOnDistrictChange === 'function') {
-    originalOnDistrictChange();
-  }
-  setTimeout(() => {
-    appendOtherOption(document.getElementById('registry_office'));
-    appendOtherOption(document.getElementById('anchal_circle'));
-  }, 150);
-};
+            <!-- Anchal / Circle with Custom Option -->
+            <div class="fg">
+              <label>अंचल / ब्लॉक (Anchal) *</label>
+              <select id="anchal_circle" onchange="toggleCustomField('anchal_circle', 'custom_anchal_box', 'custom_anchal_input')" required disabled>
+                <option value="">-- पहले जिला चुनें --</option>
+              </select>
+              <div id="custom_anchal_box" style="display:none;margin-top:8px;">
+                <input type="text" id="custom_anchal_input" placeholder="यहाँ अपने अंचल / ब्लॉक का नाम लिखें" style="border-color:var(--teal);" />
+              </div>
+            </div>
 
-// पेज लोड पर 2006 के बाद वाले डिफ़ॉल्ट वर्ष सेट करना
-document.addEventListener('DOMContentLoaded', function() {
-  populateDeedYears('post_2006');
-});
-</script>
+            <!-- Mauza Name (Compulsory / Required) -->
+            <div class="fg">
+              <label>मौजा का नाम (Mauza) *</label>
+              <input type="text" id="mauza_name" placeholder="ग्राम / मौजा का नाम लिखें" required/>
+            </div>
 
-  <!-- ══════════════ WHAT IS KEVALA ══════════════ -->
+            <!-- Thana No (Mandatory) -->
+            <div class="fg full">
+              <label>थाना नंबर (Thana No.) *</label>
+              <input type="text" id="thana_number" placeholder="थाना नंबर लिखें (अनिवार्य)" required/>
+            </div>
+          </div>
+        </div>
+        <!-- STEP 3 -->
+        <div class="form-section">
+          <div class="fs-title">🔍 STEP 3 — खोज का समय और जमीन विवरण</div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>कब से (From Date) *</label>
+              <input type="date" id="date_from" required/>
+            </div>
+            <div class="fg">
+              <label>कब तक (To Date) *</label>
+              <input type="date" id="date_to" required/>
+            </div>
+            <div class="fg">
+              <label>बेचने वाले का नाम (Seller / Daata)</label>
+              <input type="text" id="seller_name" placeholder="दाता का नाम"/>
+            </div>
+            <div class="fg">
+              <label>खरीदने वाले का नाम (Buyer / Grihita)</label>
+              <input type="text" id="buyer_name" placeholder="गृहीता का नाम"/>
+            </div>
+            <div class="fg">
+              <label>खाता नंबर (Khata No.)</label>
+              <input type="text" id="khata_number" placeholder="खाता संख्या"/>
+            </div>
+            <div class="fg">
+              <label>खेसरा / प्लॉट नंबर (Khesr No.)</label>
+              <input type="text" id="plot_number" placeholder="खेसरा संख्या"/>
+            </div>
+            <div class="fg full">
+              <label>Deed / Registry नंबर (यदि उपलब्ध हो)</label>
+              <input type="text" id="deed_number" placeholder="Deed / Registry Number"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="form-section">
+          <div class="fs-title">👤 STEP 4 — आवेदक और डिलीवरी विवरण</div>
+          <div class="cod-badge">🚚 COD — सामान मिलने के बाद भुगतान करें</div>
+          <div class="fgrid">
+            <div class="fg">
+              <label>आपका पूरा नाम *</label>
+              <input type="text" id="customer_name" placeholder="नाम लिखें" required/>
+            </div>
+            <div class="fg">
+              <label>मोबाइल नंबर *</label>
+              <input type="tel" id="customer_mobile" maxlength="10" placeholder="10 अंकों का नंबर" required/>
+            </div>
+            <div class="fg full">
+              <label>पूरा पता (डिलीवरी के लिए) *</label>
+              <textarea id="full_address" rows="2" placeholder="मकान नं, गाँव/शहर, पोस्ट" required></textarea>
+            </div>
+            <div class="fg">
+              <label>पिन कोड *</label>
+              <input type="text" id="pincode" maxlength="6" placeholder="6 अंकों का पिन कोड" required/>
+            </div>
+            <div class="fg">
+              <label>भुगतान विधि</label>
+              <select id="payment_method">
+                <option value="COD">🚚 Cash On Delivery (COD)</option>
+                <option value="Online">💳 Online Payment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="adv-notice">
+            <strong>💰 ₹99 Service Charge — अनिवार्य नियम:</strong>
+            <p style="margin-top:4px;">ऑर्डर कन्फर्म करने के लिए ₹99 advance token (खोज व प्रोसेसिंग शुल्क) लिया जाएगा। यह राशि आपके फाइनल दस्तावेज़ शुल्क में समायोजित (adjust) कर दी जाती है।</p>
+            <ul>
+              <li>₹99 केवल <strong>सीरियस ग्राहकों</strong> से लिया जाता है, ताकि फर्जी/गलत ऑर्डर न बनें।</li>
+              <li>Service Charge प्राप्त होने के बाद ही केवाला की खोज शुरू होगी।</li>
+              <li>रिकार्ड मिलने पर सरकारी शुल्क + Service Charge अलग से लागू होगा (COD पर वसूला जाएगा)।</li>
+              <li>Service Charge refund नहीं होगा।</li>
+            </ul>
+            <span class="adv-inline">⚠️ फॉर्म सबमिट करने का अर्थ है कि आप ₹99 Service Charge नियम से सहमत हैं</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-order" id="submit-btn">📜 केवाला ऑर्डर सबमिट करें →</button>
+      </form>
+      <div id="status-msg"></div>
+
+      <!-- PAYMENT AREA -->
+      <div id="paymentArea" style="display:none;background:var(--white);border:1.5px solid var(--teal);border-radius:var(--r);box-shadow:var(--shadow-sm);padding:32px 20px;text-align:center;margin:24px 0;">
+        <i class="fas fa-check-circle" style="font-size:50px;color:var(--teal)"></i>
+        <h3 style="margin-top:14px;color:var(--navy);">आपका ऑर्डर डेटा सेव हो गया है!</h3>
+        <p id="payment-oid-note" style="color:var(--ink-soft);margin-top:6px;font-weight:600;"></p>
+        <p style="color:var(--red);margin-top:10px;font-weight:700;">⚠️ ऑर्डर तभी कन्फर्म होगा जब ₹99 Advance Service Charge का भुगतान हो जाएगा।</p>
+        <p style="color:var(--ink-soft);font-size:13px;margin-top:6px;">नीचे दिए बटन से ₹99 का भुगतान करें — भुगतान होते ही हमारी टीम आपके केवाला की खोज WhatsApp पर कन्फर्म करके शुरू कर देगी।</p>
+        <br>
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_TjsjP7JX39BdIl" async> </script> </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT IS KEVALA -->
   <h2 class="sec-head" id="kya-hai">केवाला क्या होता है?</h2>
   <div class="split-grid">
     <div class="split-card">
@@ -1001,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <!-- ══════════════ CERTIFIED vs WEB ══════════════ -->
+  <!-- CERTIFIED vs WEB -->
   <h2 class="sec-head" id="types">Certified Copy vs Web Copy — क्या अंतर है?</h2>
   <table class="diff-table">
     <thead>
@@ -1037,15 +688,10 @@ document.addEventListener('DOMContentLoaded', function() {
         <td class="yes">✅ हाँ — घर पर डिलीवरी</td>
         <td class="yes">✅ हाँ — डिजिटल PDF भेजी जाती है</td>
       </tr>
-      <tr>
-        <td><strong>कब चुनें?</strong></td>
-        <td>जब बैंक, कोर्ट या सरकारी काम हो</td>
-        <td>जब सिर्फ जानकारी देखनी हो या समय कम हो</td>
-      </tr>
     </tbody>
   </table>
 
-  <!-- ══════════════ DOCUMENTS NEEDED ══════════════ -->
+  <!-- DOCUMENTS NEEDED -->
   <h2 class="sec-head" id="documents">केवाला निकालने के लिए क्या जानकारी चाहिए?</h2>
   <div class="split-grid">
     <div class="split-card">
@@ -1069,7 +715,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <!-- ══════════════ HOW WE WORK ══════════════ -->
+  <!-- PROCESS -->
   <h2 class="sec-head" id="process">JameenSeva.in से केवाला कैसे मंगवाएं?</h2>
   <div class="steps-row">
     <div class="step-card">
@@ -1099,7 +745,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <!-- ══════════════ TRACKING BANNER ══════════════ -->
+  <!-- TRACKING BANNER -->
   <div class="track-banner">
     <div class="tb-icon">📦</div>
     <div>
@@ -1116,16 +762,15 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 
-  <!-- NOTICE -->
   <div class="notice">
-    <strong>⚠️ नोट:</strong> JameenSeva.in एक निजी सेवा है। हम सरकारी निबंधन कार्यालयों से दस्तावेज प्राप्त कराते हैं। प्रमाणित नकल के लिए सरकारी शुल्क अलग से लागू होता है। <strong>ऑर्डर कन्फर्म करने हेतु ₹99 Service Charge अनिवार्य है</strong> — यह केवल सीरियस ग्राहकों की पुष्टि के लिए लिया जाता है और फाइनल शुल्क में समायोजित होता है। किसी भी सहायता के लिए WhatsApp: <a href="https://wa.me/919142075859" style="color:var(--amber);font-weight:700;">+91-9142075859</a>
+    <strong>⚠️ नोट:</strong> JameenSeva.in एक निजी सेवा है। हम सरकारी निबंधन कार्यालयों से दस्तावेज प्राप्त कराते हैं। प्रमाणित नकल के लिए सरकारी शुल्क अलग से लागू होता है। <strong>ऑर्डर कन्फर्म करने हेतु ₹99 Service Charge अनिवार्य है</strong> — किसी भी सहायता के लिए WhatsApp: <a href="https://wa.me/919142075859" style="color:var(--amber);font-weight:700;">+91-9142075859</a>
   </div>
 
   <!-- INTERNAL LINKS -->
   <div class="inlink-box">
     <h3>🔗 केवाला से जुड़ी सभी जरूरी सेवाएं</h3>
     <div class="inlink-grid">
-      <a href="https://jameenseva.in/panchnama.html" class="ilink"><span>⚖️</span>पंचनामा बटवारा ऑर्डर</a>
+      <a href="https://jameenseva.in/panchnama.html" class="ilink"><span>⚖️️</span>पंचनामा बटवारा ऑर्डर</a>
       <a href="https://jameenseva.in/panchnamablog.html" class="ilink"><span>📖</span>पंचनामा क्या है?</a>
       <a href="https://jameenseva.in/khatiyan.html" class="ilink"><span>📜</span>खतियान प्रमाणित कॉपी</a>
       <a href="https://jameenseva.in/ragister2.html" class="ilink"><span>📒</span>रजिस्टर-2 की प्रति</a>
@@ -1147,13 +792,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">Certified Copy और Web Copy में क्या फर्क है?</div><div class="fq-a"><strong>Certified Copy</strong> SRO की आधिकारिक मुहर और हस्ताक्षर के साथ जारी होती है — यह कोर्ट, बैंक और सभी सरकारी कामों में पूर्णतः मान्य है। <strong>Web Copy</strong> IGRS पोर्टल से डाउनलोड की डिजिटल प्रति है — सामान्य जानकारी के लिए उपयोगी।</div></div>
     <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">बिहार में केवाला ऑनलाइन कैसे निकालें?</div><div class="fq-a">ऊपर दिए गए फॉर्म में जिला, SRO, अंचल और जमीन का विवरण भरें। COD या Online Payment चुनें और सबमिट करें। हमारी टीम WhatsApp पर कन्फर्म कर 7-15 दिन में घर पर डिलीवरी करेगी। ऑर्डर स्टेटस <a href="https://jameenseva.in/track.html">track.html</a> पर देखें।</div></div>
     <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला निकालने के लिए कौन सी जानकारी चाहिए?</div><div class="fq-a">रजिस्ट्री ऑफिस का नाम, रजिस्ट्री वर्ष, दाता/गृहीता का नाम, खाता/खेसरा नंबर, या Deed नंबर — इनमें से <strong>कोई एक</strong> जानकारी पर्याप्त है।</div></div>
-    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला कितने दिन में मिलती है?</div><div class="fq-a">Certified Copy आमतौर पर <strong>7–15 कार्य दिवस</strong> में मिलती है। Web Copy 2–5 दिन में PDF के रूप में भेजी जाती है। ट्रैकिंग के लिए: <a href="https://jameenseva.in/track.html">jameenseva.in/track.html</a></div></div>
+    <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">केवाला कितने दिन में मिलती है?</div><div class="fq-a">Certified Copy आमतौर पर <strong>7–15 कार्य दिवस</strong> में मिलती है। Web Copy 2–5 दिन में PDF के रूप में भेजी जाती है।</div></div>
     <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">क्या COD सुविधा उपलब्ध है?</div><div class="fq-a">हाँ! <strong>Cash On Delivery (COD)</strong> उपलब्ध है — पहले दस्तावेज घर पर मिलेगा, फिर भुगतान करें। पूरे बिहार में डिलीवरी होती है।</div></div>
     <div class="fq"><div class="fq-q" onclick="tfaq(this)" tabindex="0">पुराना (30-50 साल पुराना) केवाला मिल सकता है?</div><div class="fq-a">हाँ, बिहार के निबंधन कार्यालयों में पुराने रिकॉर्ड सुरक्षित हैं। Form में "From Date" पुरानी तारीख डालें। हमारी टीम SRO से खोजकर आपको उपलब्ध कराएगी।</div></div>
   </div>
-
-  <p style="font-size:13px;color:var(--mist);font-style:italic;margin:20px 0;border-top:1px solid var(--border);padding-top:16px;">⚠️ <strong>अस्वीकरण:</strong> JameenSeva.in एक निजी सेवा प्रदाता है। हम Bihar IGRS और निबंधन कार्यालय से दस्तावेज प्राप्त कराते हैं। यह जानकारी शैक्षिक उद्देश्य के लिए है।</p>
-
 </main>
 
 <!-- FOOTER -->
@@ -1165,7 +807,6 @@ document.addEventListener('DOMContentLoaded', function() {
         <li><a href="https://jameenseva.in/panchnama.html">पंचनामा बटवारा ऑर्डर</a></li>
         <li><a href="https://jameenseva.in/panchnamablog.html">पंचनामा क्या है?</a></li>
         <li><a href="https://jameenseva.in/kewalablog.html" style="color:#f9a825;font-weight:700;">केवाला गाइड (यह पेज)</a></li>
-        <li><a href="https://jameenseva.in/registry-news.html">रजिस्ट्री के नए नियम</a></li>
       </ul>
     </div>
     <div class="fc">
@@ -1174,33 +815,26 @@ document.addEventListener('DOMContentLoaded', function() {
         <li><a href="https://jameenseva.in/khatiyan.html">खतियान ऑर्डर करें</a></li>
         <li><a href="https://jameenseva.in/ragister2.html">रजिस्टर-2 ऑर्डर</a></li>
         <li><a href="https://jameenseva.in/jamabandiblog.html">जमाबंदी पंजी देखें</a></li>
-        <li><a href="https://jameenseva.in/lpc-guide-bihar.html">LPC सर्टिफिकेट</a></li>
-        <li><a href="https://jameenseva.in/parimarjan-blog.html">परिमार्जन गाइड</a></li>
       </ul>
     </div>
     <div class="fc">
       <h4>🗺️ सर्वे और अन्य</h4>
       <ul>
-        <li><a href="https://jameenseva.in/bihar-survey-guide-2026.html" style="color:#f9a825;font-weight:700;">Bihar Survey 2026</a></li>
+        <li><a href="https://jameenseva.in/bihar-survey-guide-2026.html">Bihar Survey 2026</a></li>
         <li><a href="https://jameenseva.in/dakhil-kharij-blog.html">दाखिल-खारिज</a></li>
-        <li><a href="https://jameenseva.in/land-calculator.html">जमीन कैलकुलेटर</a></li>
-        <li><a href="https://jameenseva.in/e-mapi-blog.html">ई-मापी गाइड</a></li>
         <li><a href="https://jameenseva.in/track.html">📦 ऑर्डर ट्रैक</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
     <p>Copyright © 2026 <a href="https://jameenseva.in/">JameenSeva.in</a> — Bihar Land Records Hub</p>
-    <p style="margin-top:5px;color:rgba(255,255,255,.35);">Engineering & Amin Expert: Chandraveer Yadav</p>
   </div>
 </footer>
 
-<!-- WA FLOAT -->
 <a href="https://wa.me/919142075859?text=Hello%20JameenSeva%2C%20mujhe%20Bihar%20Kevala%20chahiye." class="wa" target="_blank" rel="noopener" aria-label="WhatsApp">
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.48 2.01 7.79l-2.01 7.21 7.387-1.938c2.193 1.185 4.697 1.861 7.363 1.861 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.35c-2.438 0-4.717-0.643-6.685-1.761l-0.48-0.272-4.382 1.149 1.171-4.204-0.301-0.478c-1.226-1.946-1.933-4.254-1.933-6.73 0-7.363 5.987-13.35 13.35-13.35s13.35 5.987 13.35 13.35-5.987 13.35-13.35 13.35z"/></svg>
 </a>
 
-<!-- ORDER FLOAT -->
 <div class="ofloat">
   <div class="ofloat-menu" id="ofm">
     <a href="#order-form">📜 केवाला ऑर्डर करें</a>
@@ -1208,15 +842,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <a href="https://jameenseva.in/khatiyan.html">📜 खतियान ऑर्डर</a>
     <a href="https://jameenseva.in/track.html">📦 ऑर्डर ट्रैक</a>
   </div>
-  <button class="ofloat-btn" onclick="togOFM()" aria-expanded="false">🗂️ सेवाएं ▲</button>
+  <button class="ofloat-btn" onclick="togOFM()">🗂️ सेवाएं ▲</button>
 </div>
 
+<!-- ══════════════ CORE JAVASCRIPT & 38 DISTRICTS DATA ══════════════ -->
 <script>
   const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5';
   const _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-
+  // FULL 38 DISTRICTS MASTER DATA WITH ZERO DATA LOSS
   const districtMasterData = {
     "अररिया (Araria)": {
         "offices": [
@@ -2276,9 +1911,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "पिपरसी"
         ]
     }
-};
-
-
+  };
   window.addEventListener('DOMContentLoaded', () => {
     const ds = document.getElementById('district');
     Object.keys(districtMasterData).forEach(d => {
@@ -2286,44 +1919,20 @@ document.addEventListener('DOMContentLoaded', function() {
       o.value = d; o.textContent = d;
       ds.appendChild(o);
     });
-
-    // ── Deed Year ड्रॉपडाउन भरें (वर्तमान वर्ष से 1900 तक) ──
-    const ys = document.getElementById('deed_year');
-    const curYear = new Date().getFullYear();
-    for (let y = curYear; y >= 1900; y--) {
-      const o = document.createElement('option');
-      o.value = y; o.textContent = y;
-      ys.appendChild(o);
-    }
   });
 
-  // ── 2006 Dynamic Copy Type Logic ──
-  // 2006 या उसके बाद (2006–Present) → Certified Copy विकल्प दिखेगा
-  // 2006 से पहले (1900–2005)        → Certified Copy छिप जाएगा, केवल Web/Ordinary Copy उपलब्ध रहेगी
-  function toggleCopyTypeByYear() {
-    const yearVal = document.getElementById('deed_year').value;
+  function onEraChange(era) {
     const certCard = document.getElementById('type-cert');
     const lockNote = document.getElementById('year-lock-note');
-
-    if (!yearVal) {
-      // कोई वर्ष चयनित नहीं — डिफ़ॉल्ट रूप से दोनों विकल्प दिखाएं
-      certCard.classList.remove('hidden-type');
-      lockNote.style.display = 'none';
-      return;
-    }
-
-    const year = parseInt(yearVal, 10);
-
-    if (year < 2006) {
-      // Certified Copy छुपाएं, अनिवार्य रूप से Web/Ordinary Copy चुनें
+    if (era === 'pre_2006') {
       certCard.classList.add('hidden-type');
       certCard.querySelector('input[type="radio"]').checked = false;
       lockNote.style.display = 'block';
       selectDocType('Web Copy');
     } else {
-      // Certified Copy फिर से उपलब्ध कराएं
       certCard.classList.remove('hidden-type');
       lockNote.style.display = 'none';
+      selectDocType('Certified Copy');
     }
   }
 
@@ -2331,6 +1940,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const dist = document.getElementById('district').value;
     const rs = document.getElementById('registry_office');
     const as = document.getElementById('anchal_circle');
+
+    // Reset Custom Inputs
+    if(document.getElementById('custom_sro_box')) {
+      document.getElementById('custom_sro_box').style.display = 'none';
+      document.getElementById('custom_sro_input').required = false;
+      document.getElementById('custom_sro_input').value = '';
+    }
+    if(document.getElementById('custom_anchal_box')) {
+      document.getElementById('custom_anchal_box').style.display = 'none';
+      document.getElementById('custom_anchal_input').required = false;
+      document.getElementById('custom_anchal_input').value = '';
+    }
+
     rs.innerHTML = ''; as.innerHTML = '';
     if (!dist || !districtMasterData[dist]) {
       rs.disabled = true; as.disabled = true;
@@ -2338,15 +1960,42 @@ document.addEventListener('DOMContentLoaded', function() {
       as.innerHTML = '<option value="">-- पहले जिला चुनें --</option>';
       return;
     }
+
     rs.disabled = false; as.disabled = false;
     rs.innerHTML = '<option value="">-- SRO चुनें --</option>';
     (districtMasterData[dist].offices || []).forEach(o => {
       const op = document.createElement('option'); op.value = o; op.textContent = o; rs.appendChild(op);
     });
+    // Add OTHER to SRO
+    const otherSro = document.createElement('option');
+    otherSro.value = 'OTHER';
+    otherSro.textContent = '➕ अन्य SRO (सूची में नहीं है - खुद लिखें)';
+    rs.appendChild(otherSro);
+
     as.innerHTML = '<option value="">-- अंचल चुनें --</option>';
     (districtMasterData[dist].anchals || []).forEach(a => {
       const op = document.createElement('option'); op.value = a; op.textContent = a; as.appendChild(op);
     });
+    // Add OTHER to Anchal
+    const otherAnchal = document.createElement('option');
+    otherAnchal.value = 'OTHER';
+    otherAnchal.textContent = '➕ अन्य ब्लॉक (सूची में नहीं है - खुद लिखें)';
+    as.appendChild(otherAnchal);
+  }
+
+  function toggleCustomField(selectId, boxId, inputId) {
+    const select = document.getElementById(selectId);
+    const box = document.getElementById(boxId);
+    const input = document.getElementById(inputId);
+    if (select.value === 'OTHER') {
+      box.style.display = 'block';
+      input.required = true;
+      input.focus();
+    } else {
+      box.style.display = 'none';
+      input.required = false;
+      input.value = '';
+    }
   }
 
   let selType = 'Certified Copy';
@@ -2354,69 +2003,76 @@ document.addEventListener('DOMContentLoaded', function() {
     selType = t;
     document.getElementById('type-cert').classList.toggle('active', t === 'Certified Copy');
     document.getElementById('type-web').classList.toggle('active', t === 'Web Copy');
+    const certRadio = document.getElementById('radio-doc-cert');
+    const webRadio = document.getElementById('radio-doc-web');
+    if (t === 'Certified Copy' && certRadio) certRadio.checked = true;
+    if (t === 'Web Copy' && webRadio) webRadio.checked = true;
   }
 
- async function handleOrder(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submit-btn');
-  const msg = document.getElementById('status-msg');
-  const oid = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
+  async function handleOrder(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const msg = document.getElementById('status-msg');
+    const oid = `JS-KV-${Math.floor(100000 + Math.random() * 900000)}`;
 
-  // Date Values हैंडलिंग (खाली स्ट्रिंग की जगह null जाएगा)
-  const dFrom = document.getElementById('date_from').value;
-  const dTo = document.getElementById('date_to').value;
+    const dFrom = document.getElementById('date_from').value;
+    const dTo = document.getElementById('date_to').value;
 
-  const fd = {
-    order_id: oid,
-    document_type: selType,
-    district: document.getElementById('district').value,
-    registry_office: document.getElementById('registry_office').value,
-    anchal_circle: document.getElementById('anchal_circle').value,
-    mauza: document.getElementById('mauza_name').value.trim() || null, // FIX: 'mauza' कॉलम का नाम
-    thana_number: document.getElementById('thana_number').value.trim() || null,
-    date_from: dFrom ? dFrom : null, // FIX: खाली तारीख पर null जाएगा
-    date_to: dTo ? dTo : null,       // FIX: खाली तारीख पर null जाएगा
-    seller_name: document.getElementById('seller_name').value.trim() || null,
-    buyer_name: document.getElementById('buyer_name').value.trim() || null,
-    khata_number: document.getElementById('khata_number').value.trim() || null,
-    plot_number: document.getElementById('plot_number').value.trim() || null,
-    deed_number: document.getElementById('deed_number').value.trim() || null,
-    customer_name: document.getElementById('customer_name').value.trim(),
-    customer_mobile: document.getElementById('customer_mobile').value.trim(),
-    full_address: document.getElementById('full_address').value.trim(),
-    pincode: document.getElementById('pincode').value.trim(),
-    payment_method: document.getElementById('payment_method').value
-  };
+    const sroVal = document.getElementById('registry_office').value === 'OTHER' 
+      ? document.getElementById('custom_sro_input').value.trim() 
+      : document.getElementById('registry_office').value;
 
-  if (!/^\d{10}$/.test(fd.customer_mobile)) { alert('10 अंकों का सही मोबाइल नंबर दर्ज करें।'); return; }
-  if (!/^\d{6}$/.test(fd.pincode)) { alert('6 अंकों का सही पिन कोड दर्ज करें।'); return; }
+    const anchalVal = document.getElementById('anchal_circle').value === 'OTHER' 
+      ? document.getElementById('custom_anchal_input').value.trim() 
+      : document.getElementById('anchal_circle').value;
 
-  btn.disabled = true; 
-  btn.textContent = '⏳ प्रोसेस हो रहा है...';
+    const fd = {
+      order_id: oid,
+      document_type: selType,
+      district: document.getElementById('district').value,
+      registry_office: sroVal || null,
+      anchal_circle: anchalVal || null,
+      mauza: document.getElementById('mauza_name').value.trim(),
+      thana_number: document.getElementById('thana_number').value.trim() || null,
+      date_from: dFrom ? dFrom : null,
+      date_to: dTo ? dTo : null,
+      seller_name: document.getElementById('seller_name').value.trim() || null,
+      buyer_name: document.getElementById('buyer_name').value.trim() || null,
+      khata_number: document.getElementById('khata_number').value.trim() || null,
+      plot_number: document.getElementById('plot_number').value.trim() || null,
+      deed_number: document.getElementById('deed_number').value.trim() || null,
+      customer_name: document.getElementById('customer_name').value.trim(),
+      customer_mobile: document.getElementById('customer_mobile').value.trim(),
+      full_address: document.getElementById('full_address').value.trim(),
+      pincode: document.getElementById('pincode').value.trim(),
+      payment_method: document.getElementById('payment_method').value
+    };
 
-  try {
-    const { error } = await _sb.from('kevala_orders').insert([fd]);
-    if (error) {
-      console.error("Supabase Error Details:", error); // असल एरर कंसोल में दिखेगा
-      throw error;
+    if (!/^\d{10}$/.test(fd.customer_mobile)) { alert('10 अंकों का सही मोबाइल नंबर दर्ज करें।'); return; }
+    if (!/^\d{6}$/.test(fd.pincode)) { alert('6 अंकों का सही पिन कोड दर्ज करें।'); return; }
+
+    btn.disabled = true; 
+    btn.textContent = '⏳ प्रोसेस हो रहा है...';
+
+    try {
+      const { error } = await _sb.from('kevala_orders').insert([fd]);
+      if (error) throw error;
+
+      msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
+      msg.innerHTML = `✅ <strong>आपका डेटा सेव हो गया है!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>ऑर्डर को कन्फर्म करने के लिए नीचे ₹99 Advance Service Charge का भुगतान करें।`;
+
+      document.getElementById('kevalaForm').style.display = 'none';
+      document.getElementById('payment-oid-note').textContent = `Order ID: ${oid}`;
+      document.getElementById('paymentArea').style.display = 'block';
+      btn.style.display = 'none';
+
+    } catch(err) {
+      msg.style.cssText = 'display:block;background:#fff5f5;color:#9b2c2c;border:1px solid #feb2b2;';
+      msg.innerHTML = `❌ सबमिट में समस्या: ${err.message || 'पुनः प्रयास करें।'}`;
+      btn.disabled = false; 
+      btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
     }
-    
-    msg.style.cssText = 'display:block;background:#e6fffa;color:#234e52;border:1px solid #b2f5ea;';
-    msg.innerHTML = `✅ <strong>आपका डेटा सेव हो गया है!</strong><br><br>📌 <strong>Order ID: ${oid}</strong><br>ऑर्डर को कन्फर्म करने के लिए नीचे ₹99 Advance Service Charge का भुगतान करें।`;
-
-    // ── फॉर्म बंद करें और भुगतान (Payment Gate) दिखाएं ──
-    document.getElementById('kevalaForm').style.display = 'none';
-    document.getElementById('payment-oid-note').textContent = `Order ID: ${oid}`;
-    document.getElementById('paymentArea').style.display = 'block';
-    btn.style.display = 'none';
-
-  } catch(err) {
-    msg.style.cssText = 'display:block;background:#fff5f5;color:#9b2c2c;border:1px solid #feb2b2;';
-    msg.innerHTML = `❌ सबमिट में समस्या: ${err.message || 'पुनः प्रयास करें।'}`;
-    btn.disabled = false; 
-    btn.textContent = '📜 केवाला ऑर्डर सबमिट करें →';
   }
-}
 
   function tfaq(el) {
     const a = el.nextElementSibling, open = a.classList.contains('open');
