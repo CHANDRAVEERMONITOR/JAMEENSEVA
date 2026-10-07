@@ -1,296 +1,673 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Invoice - SUPRIYA ENTERPRISES</title>
+    <title>Tax Invoice Generator - SUPRIYA ENTERPRISES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-        }
-        body {
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-        }
-        .invoice-box {
-            max-width: 850px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 5px;
-            margin-bottom: 10px;
-        }
-        .header h2 {
-            margin: 0;
-            font-size: 18px;
-            text-transform: uppercase;
-        }
-        .header h1 {
-            margin: 5px 0 0 0;
-            font-size: 20px;
-            color: #1a2a3a;
-        }
-        .company-details {
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-        .grid-2 {
-            display: table;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        .col {
-            display: table-cell;
-            width: 50%;
-            vertical-align: top;
-        }
-        .col-right {
-            text-align: right;
-        }
-        table {
-            width: 100%;
-            line-height: inherit;
-            text-align: left;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-        table th, table td {
-            border: 1px solid #444;
-            padding: 5px;
-            text-align: center;
-        }
-        table th {
-            background: #f0f0f0;
-            font-weight: bold;
-        }
-        input[type="text"], input[type="number"] {
-            width: 95%;
-            padding: 4px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-        .text-left { text-align: left; }
-        .text-right { text-align: right; }
-        .btn {
-            background-color: #28a745;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            padding: 4px 8px;
-        }
-        .btn-print {
-            background-color: #007bff;
-        }
-        .summary-table {
-            width: 50%;
-            float: right;
-        }
-        .clear { clear: both; }
-        
+        /* Custom styles for A4 Print Precision */
         @media print {
             .no-print {
                 display: none !important;
             }
             body {
-                background: white;
-                padding: 0;
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 11px !important;
+                color: #000 !important;
             }
-            .invoice-box {
-                border: none;
-                box-shadow: none;
-                width: 100%;
-                max-width: 100%;
+            .invoice-container {
+                box-shadow: none !important;
+                border: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
-            input {
+            input, textarea, select {
                 border: none !important;
                 background: transparent !important;
+                outline: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                color: #000 !important;
+                appearance: none !important;
+                -webkit-appearance: none !important;
             }
+            /* Hide dropdown arrows in print */
+            select {
+                background-image: none !important;
+            }
+            .page-break {
+                page-break-after: always;
+            }
+        }
+
+        /* Color Themes Dynamic Variables */
+        :root {
+            --primary-color: #1e3a8a;
+            --primary-light: #eff6ff;
+            --primary-border: #bfdbfe;
+            --header-text: #ffffff;
+        }
+
+        .theme-blue {
+            --primary-color: #1e3a8a;
+            --primary-light: #eff6ff;
+            --primary-border: #bfdbfe;
+            --header-text: #ffffff;
+        }
+        .theme-emerald {
+            --primary-color: #047857;
+            --primary-light: #ecfdf5;
+            --primary-border: #a7f3d0;
+            --header-text: #ffffff;
+        }
+        .theme-navy {
+            --primary-color: #0f172a;
+            --primary-light: #f8fafc;
+            --primary-border: #cbd5e1;
+            --header-text: #ffffff;
+        }
+        .theme-slate {
+            --primary-color: #334155;
+            --primary-light: #f1f5f9;
+            --primary-border: #cbd5e1;
+            --header-text: #ffffff;
+        }
+        .theme-burgundy {
+            --primary-color: #831843;
+            --primary-light: #fdf2f8;
+            --primary-border: #fbcfe8;
+            --header-text: #ffffff;
+        }
+        .theme-dark {
+            --primary-color: #18181b;
+            --primary-light: #f4f4f5;
+            --primary-border: #e4e4e7;
+            --header-text: #ffffff;
+        }
+
+        .dynamic-primary-bg { background-color: var(--primary-color) !important; }
+        .dynamic-primary-text { color: var(--primary-color) !important; }
+        .dynamic-primary-border { border-color: var(--primary-color) !important; }
+        .dynamic-light-bg { background-color: var(--primary-light) !important; }
+        .dynamic-header-text { color: var(--header-text) !important; }
+
+        /* Smooth input focus effects */
+        .inv-input {
+            transition: all 0.2s ease;
+        }
+        .inv-input:hover:not(:focus) {
+            background-color: rgba(243, 244, 246, 0.6);
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
 
-<div class="invoice-box">
-    <div class="header">
-        <h2>Tax Invoice</h2>
-        <h1>SUPRIYA ENTERPRISES</h1>
-        <div class="company-details">
-            GOGAUL, KORA, SINGHWARA 01, Unnamed Road, Kora<br>
-            Phone: 9771563791 | Email: ramprity084@gmail.com<br>
-            <strong>GSTIN: 10ANNPY8339A1ZW</strong> | State: 10-Bihar
+<div class="no-print sticky top-0 z-50 bg-slate-900 text-white shadow-xl border-b border-slate-700">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+        <!-- Brand Title -->
+        <div class="flex items-center space-x-3">
+            <div class="p-2 bg-blue-600 rounded-lg shadow-md">
+                <i class="fa-solid fa-file-invoice-dollar text-xl text-white"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight">SUPRIYA ENTERPRISES</h1>
+                <p class="text-xs text-slate-400">Professional Invoice Creator & Customizer</p>
+            </div>
+        </div>
+
+        <!-- Customization Controls -->
+        <div class="flex flex-wrap items-center gap-3">
+            <!-- Format Selector -->
+            <div class="flex items-center space-x-1.5 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-table-cells text-xs text-slate-400 ml-1"></i>
+                <label class="text-xs font-medium text-slate-300">Format:</label>
+                <select id="formatSelect" onchange="changeFormat(this.value)" class="bg-slate-900 text-white text-xs rounded px-2 py-1 outline-none border border-slate-700 focus:border-blue-500">
+                    <option value="vyapar">Format 1: Vyapar Standard GST</option>
+                    <option value="modern">Format 2: Modern Minimalist</option>
+                    <option value="corporate">Format 3: Corporate Accent</option>
+                    <option value="thermal">Format 4: Compact / Retail</option>
+                </select>
+            </div>
+
+            <!-- Color Preset Selector -->
+            <div class="flex items-center space-x-1.5 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-palette text-xs text-slate-400 ml-1"></i>
+                <label class="text-xs font-medium text-slate-300">Theme:</label>
+                <select id="themeSelect" onchange="changeTheme(this.value)" class="bg-slate-900 text-white text-xs rounded px-2 py-1 outline-none border border-slate-700 focus:border-blue-500">
+                    <option value="theme-blue">Classic Blue</option>
+                    <option value="theme-emerald">Emerald Green</option>
+                    <option value="theme-navy">Corporate Navy</option>
+                    <option value="theme-slate">Clean Slate</option>
+                    <option value="theme-burgundy">Warm Burgundy</option>
+                    <option value="theme-dark">Dark Elegant</option>
+                    <option value="custom">Custom Color...</option>
+                </select>
+                <input type="color" id="customColorPicker" value="#1e3a8a" onchange="applyCustomColor(this.value)" class="hidden w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent">
+            </div>
+
+            <!-- Tax Mode Selector -->
+            <div class="flex items-center space-x-1.5 bg-slate-800 p-1.5 rounded-lg border border-slate-700">
+                <i class="fa-solid fa-calculator text-xs text-slate-400 ml-1"></i>
+                <label class="text-xs font-medium text-slate-300">Tax Type:</label>
+                <select id="taxTypeSelect" onchange="calculateTotal()" class="bg-slate-900 text-white text-xs rounded px-2 py-1 outline-none border border-slate-700 focus:border-blue-500">
+                    <option value="cgst_sgst">CGST + SGST (In-State Bihar)</option>
+                    <option value="igst">IGST (Inter-State)</option>
+                </select>
+            </div>
+
+            <!-- Actions -->
+            <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-4 py-2 rounded-lg transition-all shadow-md flex items-center space-x-1.5">
+                <i class="fa-solid fa-print"></i>
+                <span>Print / Save PDF</span>
+            </button>
         </div>
     </div>
+</div>
 
-    <div class="grid-2">
-        <div class="col">
-            <strong>Billed To / Buyer Details:</strong><br>
-            Name: <input type="text" id="buyerName" value="Customer Name" style="width:70%;"><br>
-            Address: <input type="text" id="buyerAddr" value="Address Line 1" style="width:70%;"><br>
-            GSTIN: <input type="text" id="buyerGst" value="10XXXXX0000X1Z0" style="width:70%;">
+<!-- Main Application / Invoice Canvas -->
+<div class="max-w-5xl mx-auto my-6 px-4">
+    
+    <!-- Outer Printable Sheet Container -->
+    <div id="invoiceCanvas" class="invoice-container theme-blue bg-white p-8 rounded-xl shadow-2xl transition-all duration-300 border border-slate-200 min-h-[1050px] relative">
+        
+        <!-- ==================== HEADER SECTION ==================== -->
+        <div id="headerArea" class="mb-6">
+            <!-- Vyapar Format Header -->
+            <div id="vyaparHeader" class="text-center border-b-2 border-slate-800 pb-4">
+                <span class="inline-block px-3 py-0.5 text-xs font-bold tracking-widest uppercase rounded border border-slate-800 dynamic-light-bg dynamic-primary-text mb-1">Tax Invoice</span>
+                <h1 class="text-2xl font-bold uppercase tracking-wide dynamic-primary-text">SUPRIYA ENTERPRISES</h1>
+                <p class="text-xs text-slate-600 mt-1">GOGAUL, KORA, SINGHWARA 01, Unnamed Road Kowai, Bihar</p>
+                <p class="text-xs text-slate-600">Phone: 9771563791 | Email: ramprity084@gmail.com</p>
+                <p class="text-xs font-semibold text-slate-800 mt-1">GSTIN: <span class="font-mono">10ANNPY8339A1ZW</span> | State: <span class="font-mono">10-Bihar</span></p>
+            </div>
+
+            <!-- Modern Format Header -->
+            <div id="modernHeader" class="hidden flex justify-between items-start pb-6 border-b border-slate-200">
+                <div>
+                    <h1 class="text-3xl font-extrabold tracking-tight dynamic-primary-text">SUPRIYA ENTERPRISES</h1>
+                    <p class="text-xs text-slate-500 mt-1 max-w-sm">GOGAUL, KORA, SINGHWARA 01, Unnamed Road Kowai, Bihar</p>
+                    <p class="text-xs text-slate-600 mt-0.5"><i class="fa-solid fa-phone text-[10px] mr-1"></i>9771563791 | <i class="fa-solid fa-envelope text-[10px] mr-1"></i>ramprity084@gmail.com</p>
+                    <p class="text-xs font-semibold text-slate-700 mt-1">GSTIN: <span class="font-mono">10ANNPY8339A1ZW</span> (State Code: 10)</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-3xl font-black uppercase tracking-wider text-slate-300">INVOICE</span>
+                    <div class="mt-2 text-xs font-medium">
+                        <p class="text-slate-500">Invoice No: <input type="text" value="SE/2026-27/042" class="font-bold text-slate-800 text-right inv-input rounded px-1 w-28"></p>
+                        <p class="text-slate-500 mt-1">Date: <input type="text" value="07/10/2026" class="font-bold text-slate-800 text-right inv-input rounded px-1 w-28"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corporate Format Header -->
+            <div id="corporateHeader" class="hidden border-l-8 dynamic-primary-border pl-4 py-2 mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold uppercase tracking-wider dynamic-primary-text">SUPRIYA ENTERPRISES</h1>
+                        <p class="text-xs text-slate-600">Dealers in Hardware, Electrical & Submersible Pumps</p>
+                        <p class="text-xs text-slate-500 mt-1">GSTIN: <span class="font-mono font-semibold">10ANNPY8339A1ZW</span> | Phone: 9771563791</p>
+                    </div>
+                    <div class="dynamic-primary-bg text-white px-4 py-2 rounded-lg text-right shadow-sm">
+                        <p class="text-xs font-light uppercase tracking-widest text-slate-200">Tax Invoice</p>
+                        <p class="text-sm font-mono font-bold">Original For Recipient</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thermal / Compact Header -->
+            <div id="thermalHeader" class="hidden text-center border-b border-dashed border-slate-400 pb-3">
+                <h1 class="text-xl font-bold uppercase tracking-tight">SUPRIYA ENTERPRISES</h1>
+                <p class="text-[11px] text-slate-600">Gogaul, Kora, Singhwara 01, Bihar</p>
+                <p class="text-[11px] text-slate-600">Ph: 9771563791 | GSTIN: 10ANNPY8339A1ZW</p>
+                <div class="mt-2 font-bold text-xs uppercase tracking-wider bg-slate-100 py-0.5">*** TAX INVOICE ***</div>
+            </div>
         </div>
-        <div class="col col-right">
-            Invoice No: <input type="text" id="invNo" value="SE/2025-26/001" style="width:50%;"><br>
-            Date: <input type="text" id="invDate" value="23-05-2025" style="width:50%;"><br>
-            Place of Supply: <input type="text" id="pos" value="10-Bihar" style="width:50%;">
+
+        <!-- ==================== INVOICE METADATA & BUYER DETAILS ==================== -->
+        <div id="metaDetailsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-xs">
+            <!-- Billed To Section -->
+            <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 relative">
+                <span class="absolute -top-2.5 left-3 px-1.5 py-0.2 bg-white text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-200 rounded">Billed To (Buyer)</span>
+                <div class="space-y-1 mt-1">
+                    <div class="flex items-center">
+                        <label class="w-24 text-slate-500 font-medium">Name:</label>
+                        <input type="text" id="buyerName" value="SUMIT KUMAR" class="flex-1 font-bold text-slate-800 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-slate-500 font-medium">Address:</label>
+                        <input type="text" id="buyerAddress" value="BLOCK-KATRA, MUZAFFARPUR, BIHAR" class="flex-1 text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-slate-500 font-medium">GSTIN/UIN:</label>
+                        <input type="text" id="buyerGstin" value="10AUJPS8541B1ZU" class="flex-1 font-mono text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-24 text-slate-500 font-medium">State & Code:</label>
+                        <input type="text" id="buyerState" value="10 - Bihar" class="flex-1 text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invoice Particulars Section -->
+            <div class="p-3.5 rounded-lg border border-slate-200 bg-slate-50/50 relative">
+                <span class="absolute -top-2.5 left-3 px-1.5 py-0.2 bg-white text-[10px] font-bold uppercase tracking-wider text-slate-500 border border-slate-200 rounded">Invoice Details</span>
+                <div class="space-y-1 mt-1">
+                    <div class="flex items-center">
+                        <label class="w-28 text-slate-500 font-medium">Invoice No:</label>
+                        <input type="text" id="invoiceNo" value="990" class="flex-1 font-bold font-mono text-slate-800 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-28 text-slate-500 font-medium">Invoice Date:</label>
+                        <input type="text" id="invoiceDate" value="02/06/2026" class="flex-1 font-mono text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-28 text-slate-500 font-medium">Transport Mode:</label>
+                        <input type="text" id="transportMode" value="Road / Pickup" class="flex-1 text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                    <div class="flex items-center">
+                        <label class="w-28 text-slate-500 font-medium">Vehicle No:</label>
+                        <input type="text" id="vehicleNo" value="BR-06-GA-1234" class="flex-1 font-mono text-slate-700 inv-input rounded px-1.5 py-0.5 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <button class="btn no-print" onclick="addRow()">+ Add New Item Row</button>
-
-    <table id="invoiceTable">
-        <thead>
-            <tr>
-                <th style="width: 5%;">S.N.</th>
-                <th style="width: 30%;">Item / Description</th>
-                <th style="width: 10%;">HSN/SAC</th>
-                <th style="width: 8%;">Qty</th>
-                <th style="width: 8%;">Unit</th>
-                <th style="width: 12%;">Rate (₹)</th>
-                <th style="width: 15%;">Amount (₹)</th>
-                <th class="no-print" style="width: 5%;">Action</th>
-            </tr>
-        </thead>
-        <tbody id="itemRows">
-            <tr>
-                <td>1</td>
-                <td><input type="text" class="item-name" value="Submersible pump 2hp"></td>
-                <td><input type="text" class="item-hsn" value="8480"></td>
-                <td><input type="number" class="item-qty" value="1" oninput="calculateTotal()"></td>
-                <td><input type="text" class="item-unit" value="PCS"></td>
-                <td><input type="number" class="item-rate" value="20338.98" oninput="calculateTotal()"></td>
-                <td class="item-amount text-right">20338.98</td>
-                <td class="no-print"><button class="btn btn-danger" onclick="removeRow(this)">X</button></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div style="width: 100%; display: flex; justify-content: space-between;">
-        <div style="width: 48%; float: left;">
-            <strong>Bank Details:</strong><br>
-            Bank Name: Punjab National Bank, Mankauli<br>
-            Account No.: 1015202100000370<br>
-            IFSC Code: PUNB0101520<br>
-            Account Holder: SUPRIYA ENTERPRISE
-            <br><br>
-            <strong>Terms and Conditions:</strong><br>
-            1. Goods once sold will not be taken back.<br>
-            2. Thank you for doing business with us.
+        <!-- ==================== ITEMS TABLE ==================== -->
+        <div class="mb-4 overflow-x-auto">
+            <table id="itemsTable" class="w-full text-xs text-left border-collapse">
+                <thead>
+                    <tr class="dynamic-primary-bg dynamic-header-text text-[11px] font-semibold uppercase tracking-wider border border-slate-700">
+                        <th class="py-2.5 px-2 text-center w-10">#</th>
+                        <th class="py-2.5 px-3">Description of Goods</th>
+                        <th class="py-2.5 px-2 text-center w-20">HSN/SAC</th>
+                        <th class="py-2.5 px-2 text-center w-16">Qty</th>
+                        <th class="py-2.5 px-2 text-center w-16">Unit</th>
+                        <th class="py-2.5 px-2 text-right w-24">Rate (₹)</th>
+                        <th class="py-2.5 px-2 text-center w-20">Tax %</th>
+                        <th class="py-2.5 px-2 text-right w-28">Amount (₹)</th>
+                        <th class="py-2.5 px-2 text-center w-10 no-print">Act</th>
+                    </tr>
+                </thead>
+                <tbody id="itemRowsContainer" class="divide-y divide-slate-200 border-x border-b border-slate-300">
+                    <!-- Row 1 Default -->
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="py-2 px-2 text-center font-medium text-slate-500 row-sn">1</td>
+                        <td class="py-1.5 px-2">
+                            <input type="text" value="SUBMERSIBLE PUMP AGRICULTURE 2HP" class="w-full font-medium text-slate-800 inv-input rounded px-1.5 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+                        </td>
+                        <td class="py-1.5 px-2">
+                            <input type="text" value="8480" class="w-full text-center font-mono text-slate-700 inv-input rounded px-1 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+                        </td>
+                        <td class="py-1.5 px-2">
+                            <input type="number" value="1" min="1" oninput="calculateTotal()" class="item-qty w-full text-center font-bold text-slate-800 inv-input rounded px-1 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+                        </td>
+                        <td class="py-1.5 px-2">
+                            <select class="item-unit w-full text-center text-slate-700 inv-input rounded py-1 border border-transparent hover:border-slate-300">
+                                <option value="PCS" selected>PCS</option>
+                                <option value="SET">SET</option>
+                                <option value="MTR">MTR</option>
+                                <option value="KG">KG</option>
+                                <option value="LTR">LTR</option>
+                                <option value="BOX">BOX</option>
+                            </select>
+                        </td>
+                        <td class="py-1.5 px-2">
+                            <input type="number" value="20338.98" step="0.01" oninput="calculateTotal()" class="item-rate w-full text-right font-mono text-slate-800 inv-input rounded px-1.5 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+                        </td>
+                        <td class="py-1.5 px-2">
+                            <select onchange="calculateTotal()" class="item-tax-rate w-full text-center text-slate-700 inv-input rounded py-1 border border-transparent hover:border-slate-300">
+                                <option value="18" selected>18%</option>
+                                <option value="12">12%</option>
+                                <option value="5">5%</option>
+                                <option value="28">28%</option>
+                                <option value="0">0%</option>
+                            </select>
+                        </td>
+                        <td class="py-2 px-3 text-right font-mono font-semibold text-slate-900 item-amount">20,338.98</td>
+                        <td class="py-2 px-1 text-center no-print">
+                            <button onclick="removeRow(this)" class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Delete Row">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <table class="summary-table">
-            <tr>
-                <td class="text-left">Sub Total:</td>
-                <td class="text-right" id="subTotal">₹ 20,338.98</td>
-            </tr>
-            <tr>
-                <td class="text-left">CGST (9%):</td>
-                <td class="text-right" id="cgst">₹ 1,830.51</td>
-            </tr>
-            <tr>
-                <td class="text-left">SGST (9%):</td>
-                <td class="text-right" id="sgst">₹ 1,830.51</td>
-            </tr>
-            <tr>
-                <td class="text-left"><strong>Grand Total:</strong></td>
-                <td class="text-right"><strong id="grandTotal">₹ 24,000.00</strong></td>
-            </tr>
-        </table>
-        <div class="clear"></div>
-    </div>
-
-    <br><br>
-    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
-        <div>
-            <br><br>
-            Customer Signature
+        <!-- Add Row Button Bar -->
+        <div class="no-print mb-6">
+            <button onclick="addNewRow()" class="dynamic-primary-bg text-white hover:opacity-90 text-xs font-medium px-4 py-2 rounded-lg shadow transition-all flex items-center space-x-2">
+                <i class="fa-solid fa-plus text-xs"></i>
+                <span>Add Item Line</span>
+            </button>
         </div>
-        <div style="text-align: right;">
-            <strong>For SUPRIYA ENTERPRISES</strong>
-            <br><br><br>
-            Authorized Signatory
-        </div>
-    </div>
 
-    <br>
-    <div style="text-align: center;" class="no-print">
-        <button class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
+        <!-- ==================== SUMMARY & TAX BREAKDOWN ==================== -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-6 text-xs">
+            <!-- Left Side: Amount in Words & Terms & Bank Details -->
+            <div class="md:col-span-7 space-y-4">
+                <!-- Amount In Words -->
+                <div class="p-3 rounded-lg border border-slate-200 dynamic-light-bg">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block mb-0.5">Total Amount in Words</span>
+                    <p id="amountInWords" class="font-bold text-slate-800 italic">TWENTY FOUR THOUSAND RUPEES ONLY</p>
+                </div>
+
+                <!-- Bank Account Details Card -->
+                <div class="p-3.5 rounded-lg border border-slate-200 bg-white">
+                    <div class="flex items-center space-x-2 mb-2 pb-1 border-b border-slate-100">
+                        <i class="fa-solid fa-building-columns dynamic-primary-text"></i>
+                        <span class="font-bold uppercase tracking-wider text-slate-700 text-[11px]">Bank Account Details</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-2 gap-y-1 font-mono text-[11px]">
+                        <span class="text-slate-500">Bank Name:</span>
+                        <span class="font-semibold text-slate-800">Punjab National Bank</span>
+                        
+                        <span class="text-slate-500">Branch:</span>
+                        <span class="text-slate-800">Mankauli</span>
+
+                        <span class="text-slate-500">Account No:</span>
+                        <span class="font-bold text-slate-900">1015202100000370</span>
+
+                        <span class="text-slate-500">IFSC Code:</span>
+                        <span class="font-bold text-slate-900">PUNB0101520</span>
+
+                        <span class="text-slate-500">Account Name:</span>
+                        <span class="text-slate-800">SUPRIYA ENTERPRISE</span>
+                    </div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="text-[10px] text-slate-500 space-y-1 pl-1">
+                    <p class="font-bold uppercase tracking-wider text-slate-600">Terms & Conditions:</p>
+                    <textarea class="w-full h-12 text-[10px] text-slate-600 border border-transparent hover:border-slate-300 focus:border-blue-500 rounded p-1 resize-none inv-input" readonly>1. Goods once sold will not be taken back or exchanged.
+2. 1 Year Guarantee on Submersible Pumps & Warranty on Stabilizers as per manufacturer rules.
+3. Subject to Bihar Jurisdiction.</textarea>
+                </div>
+            </div>
+
+            <!-- Right Side: Calculation Totals Box -->
+            <div class="md:col-span-5">
+                <div class="border border-slate-300 rounded-lg overflow-hidden bg-slate-50/50">
+                    <div class="p-2.5 dynamic-primary-bg dynamic-header-text font-bold text-xs flex justify-between items-center">
+                        <span>TAXABLE BREAKDOWN</span>
+                        <i class="fa-solid fa-receipt opacity-80"></i>
+                    </div>
+                    <div class="p-3 space-y-2 text-xs">
+                        <div class="flex justify-between text-slate-600">
+                            <span>Subtotal (Before Tax):</span>
+                            <span id="subTotalDisplay" class="font-mono font-medium text-slate-800">₹ 20,338.98</span>
+                        </div>
+
+                        <!-- CGST Row -->
+                        <div id="cgstRow" class="flex justify-between text-slate-600">
+                            <span>CGST:</span>
+                            <span id="cgstDisplay" class="font-mono font-medium text-slate-800">₹ 1,830.51</span>
+                        </div>
+
+                        <!-- SGST Row -->
+                        <div id="sgstRow" class="flex justify-between text-slate-600">
+                            <span>SGST:</span>
+                            <span id="sgstDisplay" class="font-mono font-medium text-slate-800">₹ 1,830.51</span>
+                        </div>
+
+                        <!-- IGST Row (Hidden by default) -->
+                        <div id="igstRow" class="hidden flex justify-between text-slate-600">
+                            <span>IGST:</span>
+                            <span id="igstDisplay" class="font-mono font-medium text-slate-800">₹ 0.00</span>
+                        </div>
+
+                        <div class="flex justify-between text-slate-600 border-t border-slate-200 pt-1.5">
+                            <span>Total GST Tax:</span>
+                            <span id="totalTaxDisplay" class="font-mono font-medium text-slate-800">₹ 3,661.02</span>
+                        </div>
+
+                        <div class="flex justify-between items-center border-t-2 border-slate-800 pt-2 mt-1">
+                            <span class="font-bold text-slate-900 text-sm">Grand Total:</span>
+                            <span id="grandTotalDisplay" class="font-mono font-extrabold text-base dynamic-primary-text">₹ 24,000.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SIGNATURE & FOOTER ==================== -->
+        <div class="pt-8 mt-6 border-t border-slate-200 flex justify-between items-end text-xs">
+            <div class="text-slate-500 text-center">
+                <div class="h-12 flex items-center justify-center">
+                    <span class="text-[10px] text-slate-300 italic">[ Customer Seal / Sign ]</span>
+                </div>
+                <p class="border-t border-slate-300 pt-1 w-36">Receiver's Signature</p>
+            </div>
+
+            <div class="text-right">
+                <p class="font-bold text-slate-800">For SUPRIYA ENTERPRISES</p>
+                <div class="h-12 flex items-end justify-end pr-4">
+                    <span class="font-serif italic font-bold text-slate-700 text-sm tracking-wider">Authorized</span>
+                </div>
+                <p class="border-t border-slate-300 pt-1 w-48 font-medium text-slate-700">Authorised Signatory</p>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <script>
-    function addRow() {
-        var tbody = document.getElementById("itemRows");
-        var rowCount = tbody.rows.length + 1;
-        var tr = document.createElement("tr");
+    // Theme Switcher Logic
+    function changeTheme(themeClass) {
+        const canvas = document.getElementById('invoiceCanvas');
+        const customPicker = document.getElementById('customColorPicker');
 
+        // Reset existing theme classes
+        canvas.classList.remove('theme-blue', 'theme-emerald', 'theme-navy', 'theme-slate', 'theme-burgundy', 'theme-dark');
+
+        if (themeClass === 'custom') {
+            customPicker.classList.remove('hidden');
+            applyCustomColor(customPicker.value);
+        } else {
+            customPicker.classList.add('hidden');
+            canvas.style.removeProperty('--primary-color');
+            canvas.style.removeProperty('--primary-light');
+            canvas.style.removeProperty('--primary-border');
+            canvas.classList.add(themeClass);
+        }
+    }
+
+    function applyCustomColor(colorHex) {
+        const canvas = document.getElementById('invoiceCanvas');
+        canvas.style.setProperty('--primary-color', colorHex);
+        canvas.style.setProperty('--primary-light', colorHex + '15'); // 8% opacity tint
+        canvas.style.setProperty('--primary-border', colorHex + '40');
+    }
+
+    // Format Switcher Layout Logic
+    function changeFormat(formatType) {
+        const headers = ['vyaparHeader', 'modernHeader', 'corporateHeader', 'thermalHeader'];
+        headers.forEach(id => document.getElementById(id).classList.add('hidden'));
+
+        const canvas = document.getElementById('invoiceCanvas');
+        canvas.classList.remove('max-w-2xl', 'p-4', 'p-8');
+
+        if (formatType === 'vyapar') {
+            document.getElementById('vyaparHeader').classList.remove('hidden');
+            canvas.classList.add('p-8');
+        } else if (formatType === 'modern') {
+            document.getElementById('modernHeader').classList.remove('hidden');
+            canvas.classList.add('p-8');
+        } else if (formatType === 'corporate') {
+            document.getElementById('corporateHeader').classList.remove('hidden');
+            canvas.classList.add('p-8');
+        } else if (formatType === 'thermal') {
+            document.getElementById('thermalHeader').classList.remove('hidden');
+            canvas.classList.add('max-w-2xl', 'p-4');
+        }
+    }
+
+    // Dynamic Row Addition
+    function addNewRow() {
+        const container = document.getElementById('itemRowsContainer');
+        const rowCount = container.children.length + 1;
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50/80 transition-colors";
         tr.innerHTML = `
-            <td>${rowCount}</td>
-            <td><input type="text" class="item-name" value="New Item"></td>
-            <td><input type="text" class="item-hsn" value=""></td>
-            <td><input type="number" class="item-qty" value="1" oninput="calculateTotal()"></td>
-            <td><input type="text" class="item-unit" value="PCS"></td>
-            <td><input type="number" class="item-rate" value="0" oninput="calculateTotal()"></td>
-            <td class="item-amount text-right">0.00</td>
-            <td class="no-print"><button class="btn btn-danger" onclick="removeRow(this)">X</button></td>
+            <td class="py-2 px-2 text-center font-medium text-slate-500 row-sn">${rowCount}</td>
+            <td class="py-1.5 px-2">
+                <input type="text" value="New Item Description" class="w-full font-medium text-slate-800 inv-input rounded px-1.5 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500 focus:bg-white">
+            </td>
+            <td class="py-1.5 px-2">
+                <input type="text" value="8480" class="w-full text-center font-mono text-slate-700 inv-input rounded px-1 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+            </td>
+            <td class="py-1.5 px-2">
+                <input type="number" value="1" min="1" oninput="calculateTotal()" class="item-qty w-full text-center font-bold text-slate-800 inv-input rounded px-1 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+            </td>
+            <td class="py-1.5 px-2">
+                <select class="item-unit w-full text-center text-slate-700 inv-input rounded py-1 border border-transparent hover:border-slate-300">
+                    <option value="PCS" selected>PCS</option>
+                    <option value="SET">SET</option>
+                    <option value="MTR">MTR</option>
+                    <option value="KG">KG</option>
+                    <option value="LTR">LTR</option>
+                    <option value="BOX">BOX</option>
+                </select>
+            </td>
+            <td class="py-1.5 px-2">
+                <input type="number" value="0.00" step="0.01" oninput="calculateTotal()" class="item-rate w-full text-right font-mono text-slate-800 inv-input rounded px-1.5 py-1 border border-transparent hover:border-slate-300 focus:border-blue-500">
+            </td>
+            <td class="py-1.5 px-2">
+                <select onchange="calculateTotal()" class="item-tax-rate w-full text-center text-slate-700 inv-input rounded py-1 border border-transparent hover:border-slate-300">
+                    <option value="18" selected>18%</option>
+                    <option value="12">12%</option>
+                    <option value="5">5%</option>
+                    <option value="28">28%</option>
+                    <option value="0">0%</option>
+                </select>
+            </td>
+            <td class="py-2 px-3 text-right font-mono font-semibold text-slate-900 item-amount">0.00</td>
+            <td class="py-2 px-1 text-center no-print">
+                <button onclick="removeRow(this)" class="text-slate-400 hover:text-red-500 transition-colors p-1" title="Delete Row">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </td>
         `;
-        tbody.appendChild(tr);
+
+        container.appendChild(tr);
+        reindexRows();
         calculateTotal();
     }
 
+    // Row Removal
     function removeRow(btn) {
-        var row = btn.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-        updateSerialNumbers();
+        const row = btn.closest('tr');
+        row.remove();
+        reindexRows();
         calculateTotal();
     }
 
-    function updateSerialNumbers() {
-        var rows = document.getElementById("itemRows").rows;
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].cells[0].innerText = i + 1;
-        }
+    // Re-index Serial Numbers
+    function reindexRows() {
+        const rows = document.querySelectorAll('#itemRowsContainer tr');
+        rows.forEach((row, index) => {
+            const snCell = row.querySelector('.row-sn');
+            if (snCell) snCell.innerText = index + 1;
+        });
     }
 
+    // Live Math & Tax Calculation Engine
     function calculateTotal() {
-        var rows = document.getElementById("itemRows").rows;
-        var subTotal = 0;
+        const rows = document.querySelectorAll('#itemRowsContainer tr');
+        let subtotal = 0;
+        let totalTax = 0;
 
-        for (var i = 0; i < rows.length; i++) {
-            var qty = parseFloat(rows[i].querySelector(".item-qty").value) || 0;
-            var rate = parseFloat(rows[i].querySelector(".item-rate").value) || 0;
-            var amount = qty * rate;
+        const taxType = document.getElementById('taxTypeSelect').value;
 
-            rows[i].querySelector(".item-amount").innerText = amount.toFixed(2);
-            subTotal += amount;
+        rows.forEach(row => {
+            const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+            const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
+            const taxPct = parseFloat(row.querySelector('.item-tax-rate').value) || 0;
+
+            const lineAmount = qty * rate;
+            const lineTax = (lineAmount * taxPct) / 100;
+
+            row.querySelector('.item-amount').innerText = formatCurrency(lineAmount);
+
+            subtotal += lineAmount;
+            totalTax += lineTax;
+        });
+
+        const grandTotal = subtotal + totalTax;
+
+        // Display Base Values
+        document.getElementById('subTotalDisplay').innerText = '₹ ' + formatCurrency(subtotal);
+        document.getElementById('totalTaxDisplay').innerText = '₹ ' + formatCurrency(totalTax);
+        document.getElementById('grandTotalDisplay').innerText = '₹ ' + formatCurrency(grandTotal);
+
+        // CGST / SGST vs IGST Logic
+        if (taxType === 'cgst_sgst') {
+            document.getElementById('cgstRow').classList.remove('hidden');
+            document.getElementById('sgstRow').classList.remove('hidden');
+            document.getElementById('igstRow').classList.add('hidden');
+
+            const halfTax = totalTax / 2;
+            document.getElementById('cgstDisplay').innerText = '₹ ' + formatCurrency(halfTax);
+            document.getElementById('sgstDisplay').innerText = '₹ ' + formatCurrency(halfTax);
+        } else {
+            document.getElementById('cgstRow').classList.add('hidden');
+            document.getElementById('sgstRow').classList.add('hidden');
+            document.getElementById('igstRow').classList.remove('hidden');
+
+            document.getElementById('igstDisplay').innerText = '₹ ' + formatCurrency(totalTax);
         }
 
-        var cgst = subTotal * 0.09;
-        var sgst = subTotal * 0.09;
-        var grandTotal = subTotal + cgst + sgst;
-
-        document.getElementById("subTotal").innerText = "₹ " + subTotal.toFixed(2);
-        document.getElementById("cgst").innerText = "₹ " + cgst.toFixed(2);
-        document.getElementById("sgst").innerText = "₹ " + sgst.toFixed(2);
-        document.getElementById("grandTotal").innerText = "₹ " + grandTotal.toFixed(2);
+        // Convert Grand Total to Words
+        document.getElementById('amountInWords').innerText = numberToWords(Math.round(grandTotal)) + ' RUPEES ONLY';
     }
 
-    // Initial calculation on page load
-    calculateTotal();
+    // Helper: Formatter
+    function formatCurrency(num) {
+        return num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    // Helper: Indian Number to Words Converter
+    function numberToWords(num) {
+        const a = ['', 'ONE ', 'TWO ', 'THREE ', 'FOUR ', 'FIVE ', 'SIX ', 'SEVEN ', 'EIGHT ', 'NINE ', 'TEN ', 'ELEVEN ', 'TWELVE ', 'THIRTEEN ', 'FOURTEEN ', 'FIFTEEN ', 'SIXTEEN ', 'SEVENTEEN ', 'EIGHTEEN ', 'NINETEEN '];
+        const b = ['', '', 'TWENTY', 'THIRTY', 'FORTY', 'FIFTY', 'SIXTY', 'SEVENTY', 'EIGHTY', 'NINETY'];
+
+        if ((num = num.toString()).length > 9) return 'OVERFLOW';
+        let n = ('000000000' + num).substr(-9);
+        let match = n.match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+        if (!match) return '';
+        let str = '';
+        str += (match[1] != 0) ? (a[Number(match[1])] || b[match[1][0]] + ' ' + a[match[1][1]]) + 'CRORE ' : '';
+        str += (match[2] != 0) ? (a[Number(match[2])] || b[match[2][0]] + ' ' + a[match[2][1]]) + 'LAKH ' : '';
+        str += (match[3] != 0) ? (a[Number(match[3])] || b[match[3][0]] + ' ' + a[match[3][1]]) + 'THOUSAND ' : '';
+        str += (match[4] != 0) ? (a[Number(match[4])] || b[match[4][0]] + ' ' + a[match[4][1]]) + 'HUNDRED ' : '';
+        str += (match[5] != 0) ? ((str != '') ? 'AND ' : '') + (a[Number(match[5])] || b[match[5][0]] + ' ' + a[match[5][1]]) : '';
+        return str.trim();
+    }
+
+    // Initial Trigger on Load
+    window.onload = function() {
+        calculateTotal();
+    };
 </script>
 
 </body>
