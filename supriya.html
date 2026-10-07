@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Invoice - SUPRIYA ENTERPRISES</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        body {
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .invoice-box {
+            max-width: 850px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+        .header h1 {
+            margin: 5px 0 0 0;
+            font-size: 20px;
+            color: #1a2a3a;
+        }
+        .company-details {
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        .grid-2 {
+            display: table;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .col {
+            display: table-cell;
+            width: 50%;
+            vertical-align: top;
+        }
+        .col-right {
+            text-align: right;
+        }
+        table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        table th, table td {
+            border: 1px solid #444;
+            padding: 5px;
+            text-align: center;
+        }
+        table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            padding: 4px 8px;
+        }
+        .btn-print {
+            background-color: #007bff;
+        }
+        .summary-table {
+            width: 50%;
+            float: right;
+        }
+        .clear { clear: both; }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .invoice-box {
+                border: none;
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+            }
+            input {
+                border: none !important;
+                background: transparent !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-box">
+    <div class="header">
+        <h2>Tax Invoice</h2>
+        <h1>SUPRIYA ENTERPRISES</h1>
+        <div class="company-details">
+            GOGAUL, KORA, SINGHWARA 01, Unnamed Road, Kora<br>
+            Phone: 9771563791 | Email: ramprity084@gmail.com<br>
+            <strong>GSTIN: 10ANNPY8339A1ZW</strong> | State: 10-Bihar
+        </div>
+    </div>
+
+    <div class="grid-2">
+        <div class="col">
+            <strong>Billed To / Buyer Details:</strong><br>
+            Name: <input type="text" id="buyerName" value="Customer Name" style="width:70%;"><br>
+            Address: <input type="text" id="buyerAddr" value="Address Line 1" style="width:70%;"><br>
+            GSTIN: <input type="text" id="buyerGst" value="10XXXXX0000X1Z0" style="width:70%;">
+        </div>
+        <div class="col col-right">
+            Invoice No: <input type="text" id="invNo" value="SE/2025-26/001" style="width:50%;"><br>
+            Date: <input type="text" id="invDate" value="23-05-2025" style="width:50%;"><br>
+            Place of Supply: <input type="text" id="pos" value="10-Bihar" style="width:50%;">
+        </div>
+    </div>
+
+    <button class="btn no-print" onclick="addRow()">+ Add New Item Row</button>
+
+    <table id="invoiceTable">
+        <thead>
+            <tr>
+                <th style="width: 5%;">S.N.</th>
+                <th style="width: 30%;">Item / Description</th>
+                <th style="width: 10%;">HSN/SAC</th>
+                <th style="width: 8%;">Qty</th>
+                <th style="width: 8%;">Unit</th>
+                <th style="width: 12%;">Rate (₹)</th>
+                <th style="width: 15%;">Amount (₹)</th>
+                <th class="no-print" style="width: 5%;">Action</th>
+            </tr>
+        </thead>
+        <tbody id="itemRows">
+            <tr>
+                <td>1</td>
+                <td><input type="text" class="item-name" value="Submersible pump 2hp"></td>
+                <td><input type="text" class="item-hsn" value="8480"></td>
+                <td><input type="number" class="item-qty" value="1" oninput="calculateTotal()"></td>
+                <td><input type="text" class="item-unit" value="PCS"></td>
+                <td><input type="number" class="item-rate" value="20338.98" oninput="calculateTotal()"></td>
+                <td class="item-amount text-right">20338.98</td>
+                <td class="no-print"><button class="btn btn-danger" onclick="removeRow(this)">X</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="width: 100%; display: flex; justify-content: space-between;">
+        <div style="width: 48%; float: left;">
+            <strong>Bank Details:</strong><br>
+            Bank Name: Punjab National Bank, Mankauli<br>
+            Account No.: 1015202100000370<br>
+            IFSC Code: PUNB0101520<br>
+            Account Holder: SUPRIYA ENTERPRISE
+            <br><br>
+            <strong>Terms and Conditions:</strong><br>
+            1. Goods once sold will not be taken back.<br>
+            2. Thank you for doing business with us.
+        </div>
+
+        <table class="summary-table">
+            <tr>
+                <td class="text-left">Sub Total:</td>
+                <td class="text-right" id="subTotal">₹ 20,338.98</td>
+            </tr>
+            <tr>
+                <td class="text-left">CGST (9%):</td>
+                <td class="text-right" id="cgst">₹ 1,830.51</td>
+            </tr>
+            <tr>
+                <td class="text-left">SGST (9%):</td>
+                <td class="text-right" id="sgst">₹ 1,830.51</td>
+            </tr>
+            <tr>
+                <td class="text-left"><strong>Grand Total:</strong></td>
+                <td class="text-right"><strong id="grandTotal">₹ 24,000.00</strong></td>
+            </tr>
+        </table>
+        <div class="clear"></div>
+    </div>
+
+    <br><br>
+    <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+        <div>
+            <br><br>
+            Customer Signature
+        </div>
+        <div style="text-align: right;">
+            <strong>For SUPRIYA ENTERPRISES</strong>
+            <br><br><br>
+            Authorized Signatory
+        </div>
+    </div>
+
+    <br>
+    <div style="text-align: center;" class="no-print">
+        <button class="btn btn-print" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+</div>
+
+<script>
+    function addRow() {
+        var tbody = document.getElementById("itemRows");
+        var rowCount = tbody.rows.length + 1;
+        var tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${rowCount}</td>
+            <td><input type="text" class="item-name" value="New Item"></td>
+            <td><input type="text" class="item-hsn" value=""></td>
+            <td><input type="number" class="item-qty" value="1" oninput="calculateTotal()"></td>
+            <td><input type="text" class="item-unit" value="PCS"></td>
+            <td><input type="number" class="item-rate" value="0" oninput="calculateTotal()"></td>
+            <td class="item-amount text-right">0.00</td>
+            <td class="no-print"><button class="btn btn-danger" onclick="removeRow(this)">X</button></td>
+        `;
+        tbody.appendChild(tr);
+        calculateTotal();
+    }
+
+    function removeRow(btn) {
+        var row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+        updateSerialNumbers();
+        calculateTotal();
+    }
+
+    function updateSerialNumbers() {
+        var rows = document.getElementById("itemRows").rows;
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].cells[0].innerText = i + 1;
+        }
+    }
+
+    function calculateTotal() {
+        var rows = document.getElementById("itemRows").rows;
+        var subTotal = 0;
+
+        for (var i = 0; i < rows.length; i++) {
+            var qty = parseFloat(rows[i].querySelector(".item-qty").value) || 0;
+            var rate = parseFloat(rows[i].querySelector(".item-rate").value) || 0;
+            var amount = qty * rate;
+
+            rows[i].querySelector(".item-amount").innerText = amount.toFixed(2);
+            subTotal += amount;
+        }
+
+        var cgst = subTotal * 0.09;
+        var sgst = subTotal * 0.09;
+        var grandTotal = subTotal + cgst + sgst;
+
+        document.getElementById("subTotal").innerText = "₹ " + subTotal.toFixed(2);
+        document.getElementById("cgst").innerText = "₹ " + cgst.toFixed(2);
+        document.getElementById("sgst").innerText = "₹ " + sgst.toFixed(2);
+        document.getElementById("grandTotal").innerText = "₹ " + grandTotal.toFixed(2);
+    }
+
+    // Initial calculation on page load
+    calculateTotal();
+</script>
+
+</body>
+</html>
