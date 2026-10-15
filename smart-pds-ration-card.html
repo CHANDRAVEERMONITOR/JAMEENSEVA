@@ -246,14 +246,211 @@ footer{text-align:center;padding:26px 14px;color:#8a7a6a;font-size:.85rem}
 
 <h2 id="state">राज्यवार आधिकारिक लिंक</h2>
 <p>नीचे वे लिंक हैं जो हमारी जाँच में राज्य पोर्टल के रूप में मिले। राज्य अपने पते बदलते रहते हैं, इसलिए खोलते समय डोमेन में <code>gov.in</code> या <code>nic.in</code> ज़रूर देखें।</p>
-<table>
-<tr><th>राज्य</th><th>राशन कार्ड/विभाग पोर्टल</th><th>AePDS (राशन लेन-देन)</th></tr>
-<tr><td>बिहार</td><td><a href="https://epds.bihar.gov.in" target="_blank" rel="noopener nofollow">epds.bihar.gov.in</a></td><td><a href="https://epos.bihar.gov.in" target="_blank" rel="noopener nofollow">epos.bihar.gov.in</a></td></tr>
-<tr><td>उत्तर प्रदेश</td><td><a href="https://fcs.up.gov.in" target="_blank" rel="noopener nofollow">fcs.up.gov.in</a></td><td><a href="https://smartpds.up.gov.in" target="_blank" rel="noopener nofollow">smartpds.up.gov.in</a></td></tr>
-<tr><td>झारखंड</td><td><a href="https://aahar.jharkhand.gov.in" target="_blank" rel="noopener nofollow">aahar.jharkhand.gov.in</a></td><td><a href="https://smartpds.jharkhand.gov.in" target="_blank" rel="noopener nofollow">smartpds.jharkhand.gov.in</a></td></tr>
-<tr><td>मध्य प्रदेश</td><td colspan="2"><!-- आधिकारिक लिंक जाँचकर यहाँ जोड़ें --> आधिकारिक लिंक जल्द जोड़ा जाएगा</td></tr>
-<tr><td>राजस्थान</td><td colspan="2"><!-- आधिकारिक लिंक जाँचकर यहाँ जोड़ें --> आधिकारिक लिंक जल्द जोड़ा जाएगा</td></tr>
-<tr><td>पश्चिम बंगाल</td><td colspan="2"><!-- आधिकारिक लिंक जाँचकर यहाँ जोड़ें --> आधिकारिक लिंक जल्द जोड़ा जाएगा</td></tr>
+<table class="pds-state-table" style="width:100%; border-collapse:collapse; margin:20px 0; font-size:14.5px;">
+  <thead>
+    <tr style="background:#0f172a; color:#ffffff;">
+      <th style="padding:12px; border:1px solid #cbd5e1; text-align:left;">राज्य</th>
+      <th style="padding:12px; border:1px solid #cbd5e1; text-align:left;">राशन कार्ड / विभाग पोर्टल</th>
+      <th style="padding:12px; border:1px solid #cbd5e1; text-align:left;">AePDS (राशन लेन-देन / ePoS)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- 1. बिहार -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">बिहार</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://br.smartpds.nic.in/login" target="_blank" rel="noopener nofollow">br.smartpds.nic.in</a> / <a href="http://epds.bihar.gov.in" target="_blank" rel="noopener nofollow">epds.bihar.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.bihar.gov.in" target="_blank" rel="noopener nofollow">epos.bihar.gov.in</a></td>
+    </tr>
+
+    <!-- 2. उत्तर प्रदेश -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">उत्तर प्रदेश</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://up.smartpds.nic.in/login" target="_blank" rel="noopener nofollow">up.smartpds.nic.in</a> / <a href="https://fcs.up.gov.in" target="_blank" rel="noopener nofollow">fcs.up.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.up.gov.in" target="_blank" rel="noopener nofollow">smartpds.up.gov.in</a></td>
+    </tr>
+
+    <!-- 3. झारखंड -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">झारखंड</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://jh.smartpds.nic.in/login" target="_blank" rel="noopener nofollow">jh.smartpds.nic.in</a> / <a href="https://aahar.jharkhand.gov.in" target="_blank" rel="noopener nofollow">aahar.jharkhand.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.jharkhand.gov.in" target="_blank" rel="noopener nofollow">smartpds.jharkhand.gov.in</a></td>
+    </tr>
+
+    <!-- 4. मध्य प्रदेश -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">मध्य प्रदेश</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://rationmitra.nic.in" target="_blank" rel="noopener nofollow">rationmitra.nic.in</a> / <a href="https://samagra.gov.in" target="_blank" rel="noopener nofollow">samagra.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.mp.gov.in" target="_blank" rel="noopener nofollow">epos.mp.gov.in</a></td>
+    </tr>
+
+    <!-- 5. राजस्थान -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">राजस्थान</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://food.rajasthan.gov.in" target="_blank" rel="noopener nofollow">food.rajasthan.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://food.rajasthan.gov.in" target="_blank" rel="noopener nofollow">epos.rajasthan.gov.in</a></td>
+    </tr>
+
+    <!-- 6. पश्चिम बंगाल -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">पश्चिम बंगाल</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://food.wb.gov.in" target="_blank" rel="noopener nofollow">food.wb.gov.in</a> / <a href="https://wbpds.wb.gov.in" target="_blank" rel="noopener nofollow">wbpds.wb.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.wb.gov.in" target="_blank" rel="noopener nofollow">smartpds.wb.gov.in</a></td>
+    </tr>
+
+    <!-- 7. छत्तीसगढ़ -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">छत्तीसगढ़</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://fcs.cg.gov.in" target="_blank" rel="noopener nofollow">fcs.cg.gov.in</a> / <a href="https://khadya.cg.nic.in" target="_blank" rel="noopener nofollow">khadya.cg.nic.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.cg.nic.in" target="_blank" rel="noopener nofollow">smartpds.cg.nic.in</a></td>
+    </tr>
+
+    <!-- 8. गुजरात -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">गुजरात</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://dcs-dof.gujarat.gov.in" target="_blank" rel="noopener nofollow">dcs-dof.gujarat.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://ipds.gujarat.gov.in" target="_blank" rel="noopener nofollow">ipds.gujarat.gov.in</a></td>
+    </tr>
+
+    <!-- 9. हरियाणा -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">हरियाणा</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://haryanafood.gov.in" target="_blank" rel="noopener nofollow">haryanafood.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.haryanafood.gov.in" target="_blank" rel="noopener nofollow">epos.haryanafood.gov.in</a></td>
+    </tr>
+
+    <!-- 10. महाराष्ट्र -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">महाराष्ट्र</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://mahafood.gov.in" target="_blank" rel="noopener nofollow">mahafood.gov.in</a> / <a href="https://rcms.mahafood.gov.in" target="_blank" rel="noopener nofollow">rcms.mahafood.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.mahafood.gov.in" target="_blank" rel="noopener nofollow">epos.mahafood.gov.in</a></td>
+    </tr>
+
+    <!-- 11. ओडिशा -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">ओडिशा</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://food.odisha.gov.in" target="_blank" rel="noopener nofollow">food.odisha.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.odisha.gov.in" target="_blank" rel="noopener nofollow">smartpds.odisha.gov.in</a></td>
+    </tr>
+
+    <!-- 12. पंजाब -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">पंजाब</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://foodsuppb.gov.in" target="_blank" rel="noopener nofollow">foodsuppb.gov.in</a> / <a href="https://epds.punjab.gov.in" target="_blank" rel="noopener nofollow">epds.punjab.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.punjab.gov.in" target="_blank" rel="noopener nofollow">epos.punjab.gov.in</a></td>
+    </tr>
+
+    <!-- 13. उत्तराखंड -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">उत्तराखंड</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://fcs.uk.gov.in" target="_blank" rel="noopener nofollow">fcs.uk.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.uk.gov.in" target="_blank" rel="noopener nofollow">epos.uk.gov.in</a></td>
+    </tr>
+
+    <!-- 14. हिमाचल प्रदेश -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">हिमाचल प्रदेश</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epds.co.in" target="_blank" rel="noopener nofollow">epds.co.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.hp.gov.in" target="_blank" rel="noopener nofollow">epos.hp.gov.in</a></td>
+    </tr>
+
+    <!-- 15. असम -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">असम</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://fcsca.assam.gov.in" target="_blank" rel="noopener nofollow">fcsca.assam.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://aepds.assam.gov.in" target="_blank" rel="noopener nofollow">aepds.assam.gov.in</a></td>
+    </tr>
+
+    <!-- 16. आंध्र प्रदेश -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">आंध्र प्रदेश</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epdsap.ap.gov.in" target="_blank" rel="noopener nofollow">epdsap.ap.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://aepos.ap.gov.in" target="_blank" rel="noopener nofollow">aepos.ap.gov.in</a></td>
+    </tr>
+
+    <!-- 17. तेलंगाना -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">तेलंगाना</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epds.telangana.gov.in" target="_blank" rel="noopener nofollow">epds.telangana.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://smartpds.telangana.gov.in" target="_blank" rel="noopener nofollow">smartpds.telangana.gov.in</a></td>
+    </tr>
+
+    <!-- 18. कर्नाटक -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">कर्नाटक</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://ahara.kar.nic.in" target="_blank" rel="noopener nofollow">ahara.kar.nic.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.karnataka.gov.in" target="_blank" rel="noopener nofollow">epos.karnataka.gov.in</a></td>
+    </tr>
+
+    <!-- 19. केरल -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">केरल</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://ecitizen.civilsupplieskerala.gov.in" target="_blank" rel="noopener nofollow">ecitizen.civilsupplieskerala.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.kerala.gov.in" target="_blank" rel="noopener nofollow">epos.kerala.gov.in</a></td>
+    </tr>
+
+    <!-- 20. तमिलनाडु -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">तमिलनाडु</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://www.tnpds.gov.in" target="_blank" rel="noopener nofollow">www.tnpds.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://www.tnpds.gov.in" target="_blank" rel="noopener nofollow">tnpds.gov.in</a></td>
+    </tr>
+
+    <!-- 21. गोवा -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">गोवा</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://goacivilsupplies.gov.in" target="_blank" rel="noopener nofollow">goacivilsupplies.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.goa.gov.in" target="_blank" rel="noopener nofollow">epos.goa.gov.in</a></td>
+    </tr>
+
+    <!-- 22. अरुणाचल प्रदेश -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">अरुणाचल प्रदेश</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://ar.smartpds.nic.in/login" target="_blank" rel="noopener nofollow">ar.smartpds.nic.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://aepds.arunachal.gov.in" target="_blank" rel="noopener nofollow">aepds.arunachal.gov.in</a></td>
+    </tr>
+
+    <!-- 23. मणिपुर -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">मणिपुर</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://pdsmanipur.nic.in" target="_blank" rel="noopener nofollow">pdsmanipur.nic.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.manipur.gov.in" target="_blank" rel="noopener nofollow">epos.manipur.gov.in</a></td>
+    </tr>
+
+    <!-- 24. मेघालय -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">मेघालय</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://megpds.gov.in" target="_blank" rel="noopener nofollow">megpds.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.meghalaya.gov.in" target="_blank" rel="noopener nofollow">epos.meghalaya.gov.in</a></td>
+    </tr>
+
+    <!-- 25. मिजोरम -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">मिजोरम</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://fcsca.mizoram.gov.in" target="_blank" rel="noopener nofollow">fcsca.mizoram.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.mizoram.gov.in" target="_blank" rel="noopener nofollow">epos.mizoram.gov.in</a></td>
+    </tr>
+
+    <!-- 26. नागालैंड -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">नागालैंड</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://fcs.nagaland.gov.in" target="_blank" rel="noopener nofollow">fcs.nagaland.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.nagaland.gov.in" target="_blank" rel="noopener nofollow">epos.nagaland.gov.in</a></td>
+    </tr>
+
+    <!-- 27. सिक्किम -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">सिक्किम</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://sikkimfood.gov.in" target="_blank" rel="noopener nofollow">sikkimfood.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.sikkim.gov.in" target="_blank" rel="noopener nofollow">epos.sikkim.gov.in</a></td>
+    </tr>
+
+    <!-- 28. त्रिपुरा -->
+    <tr>
+      <td style="padding:10px; border:1px solid #cbd5e1; font-weight:700;">त्रिपुरा</td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://pds.tripura.gov.in" target="_blank" rel="noopener nofollow">pds.tripura.gov.in</a></td>
+      <td style="padding:10px; border:1px solid #cbd5e1;"><a href="https://epos.tripura.gov.in" target="_blank" rel="noopener nofollow">epos.tripura.gov.in</a></td>
+    </tr>
+  </tbody>
 </table>
 <p>राष्ट्रीय स्तर पर सहायता के लिए टोल-फ्री 1967 या 14445 पर संपर्क करें।</p>
 
