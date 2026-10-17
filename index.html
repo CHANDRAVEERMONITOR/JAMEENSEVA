@@ -270,43 +270,275 @@ document.getElementById('installApp').addEventListener('click', async () => {
         <div style="margin: 5px;">✅ ओरिजिनल रिकॉर्ड की 100% गारंटी</div>
         <div style="margin: 5px;">✅ Cash on Delivery (COD) उपलब्ध</div>
     </div>
-<!-- Jameen Seva badalnama Button Start -->
-<div style="text-align: center; margin: 20px 0;">
-    <a href="https://jameenseva.in/paperless-deed.html" style="
-        display: inline-block;
-        background: linear-gradient(135deg, #27ae60, #2bc48a);
-        color: #ffffff;
-        font-family: 'Arial', sans-serif;
-        font-size: 18px;
-        font-weight: bold;
-        text-decoration: none;
-        padding: 14px 28px;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        transition: all 0.3s ease;
-        border: 2px solid #219653;
-    " onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 6px 20px rgba(39, 174, 96, 0.4)';" 
-      onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(39, 174, 96, 0.3)';">
-        📥 बिहार पेपरलेस रजिस्ट्री प्रकिया और पेपरलेस केवाला नमूना डाउनलोड करें
-        
-    </a>
-</div>
+    <!-- ══════════════ JAMEENSEVA CORE SERVICE CARDS & UTILITIES ══════════════ -->
+<style>
+  .js-action-wrap {
+    max-width: 1100px;
+    margin: 25px auto;
+    padding: 0 12px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+  .js-section-badge {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .js-badge-text {
+    background: #eef7ee;
+    color: #15803d;
+    border: 1.5px solid #bbf7d0;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 14px;
+    display: inline-block;
+  }
+  .js-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .js-card {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .js-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+  }
+  .js-card-green { border-top: 4px solid #16a34a; }
+  .js-card-blue { border-top: 4px solid #0284c7; }
+  .js-card-amber { border-top: 4px solid #d97706; }
+  .js-card-purple { border-top: 4px solid #7c3aed; }
+  
+  .js-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .js-icon { font-size: 24px; line-height: 1; }
+  .js-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .js-desc {
+    font-size: 13px;
+    color: #475569;
+    margin: 0 0 16px 0;
+    line-height: 1.55;
+    flex-grow: 1;
+  }
+  .js-btn-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .js-btn {
+    flex: 1;
+    min-width: 105px;
+    text-align: center;
+    padding: 9px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    transition: 0.2s;
+    box-sizing: border-box;
+    display: inline-block;
+  }
+  .js-btn-green { background: #16a34a; color: #ffffff !important; }
+  .js-btn-green:hover { background: #15803d; }
+  .js-btn-blue { background: #0284c7; color: #ffffff !important; }
+  .js-btn-blue:hover { background: #0369a1; }
+  .js-btn-amber { background: #d97706; color: #ffffff !important; }
+  .js-btn-amber:hover { background: #b45309; }
+  .js-btn-purple { background: #7c3aed; color: #ffffff !important; }
+  .js-btn-purple:hover { background: #6d28d9; }
+  .js-btn-navy { background: #0f172a; color: #ffffff !important; }
+  .js-btn-navy:hover { background: #1e293b; }
 
-     <!-- KCC Loan Callout Box (Option 1) -->
-<div style="background: linear-gradient(135deg, #f0fdf4 0%, #e6f4ea 100%); border: 1px solid #bbf7d0; border-left: 6px solid #16a34a; padding: 20px; margin: 25px 0; border-radius: 10px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.08); font-family: 'Segoe UI', Roboto, sans-serif;">
-  <div style="display: flex; align-items: center; margin-bottom: 8px;">
-    <span style="font-size: 24px; margin-right: 10px;">🚜</span>
-    <strong style="color: #15803d; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.2px;">
-      किसान क्रेडिट कार्ड (KCC) लोन योजना 2026
-    </strong>
+  /* Mini Quick Links Bar */
+  .js-mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .js-mini-tile {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .js-mini-tile:hover {
+    border-color: #16a34a;
+    background: #f0fdf4;
+    color: #15803d !important;
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    .js-cards-grid { grid-template-columns: 1fr; }
+    .js-btn { width: 100%; min-width: 100%; }
+    .js-mini-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<div class="js-action-wrap">
+  
+  <div class="js-section-badge">
+    <span class="js-badge-text">⚡ मुख्य प्रमाणित सेवाएं (Direct Online Apply)</span>
   </div>
-  <p style="margin: 0 0 16px 0; color: #334155; font-size: 0.98rem; line-height: 1.6;">
-    अपनी जमीन की रसीद या खतियान पर KCC लोन कैसे लें? पात्रता, आवश्यक दस्तावेज और ऑनलाइन आवेदन की पूरी जानकारी यहाँ देखें:
-  </p>
-  <a href="https://jameenseva.in/kcc-loan-blog.html" target="_blank" style="background-color: #16a34a; color: #ffffff; padding: 10px 22px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: 6 font-size: 0.95rem; transition: background-color 0.2s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-    घर बैठे KCC लोन ऑनलाइन आवेदन &amp; जानकारी देखें &rarr;
-  </a>
+
+  <!-- 4 Primary Action Cards -->
+  <div class="js-cards-grid">
+    
+    <!-- 1. Khatian & Kewala -->
+    <div class="js-card js-card-green">
+      <div>
+        <div class="js-card-head">
+          <span class="js-icon">📜</span>
+          <h3 class="js-title">खतियान व केवाला नकल</h3>
+        </div>
+        <p class="js-desc">
+          1900 से अब तक का पुराना C.S. व R.S. खतियान या रजिस्ट्री (Deed) का केवाला मुहर सहित स्पीड पोस्ट से घर मंगाएं।
+        </p>
+      </div>
+      <div class="js-btn-group">
+        <a href="khatiyan.html" class="js-btn js-btn-green">📜 खतियान ऑर्डर</a>
+        <a href="kevala.html" class="js-btn js-btn-navy">केवाला ऑर्डर →</a>
+      </div>
+    </div>
+
+    <!-- 2. Panchnama Batwara -->
+    <div class="js-card js-card-blue">
+      <div>
+        <div class="js-card-head">
+          <span class="js-icon">⚖️</span>
+          <h3 class="js-title">पंचनामा बटवारा सेवा</h3>
+        </div>
+        <p class="js-desc">
+          सर्वे अमीन व कोर्ट द्वारा 100% मान्य। ₹49 से रेडीमेड PDF/Word फॉर्मेट लें या ₹100 स्टांप पेपर पर फाइनल ड्राफ्ट मंगाएं।
+        </p>
+      </div>
+      <div class="js-btn-group">
+        <a href="panchnama.html" class="js-btn js-btn-blue">🚚 स्टांप COD</a>
+        <a href="panchnamablog.html" class="js-btn js-btn-navy">₹49 PDF डाउनलोड</a>
+      </div>
+    </div>
+
+    <!-- 3. Smart PDS Ration Card -->
+    <div class="js-card js-card-amber">
+      <div>
+        <div class="js-card-head">
+          <span class="js-icon">🌾</span>
+          <h3 class="js-title">Smart PDS राशन कार्ड</h3>
+        </div>
+        <p class="js-desc">
+          पोर्टल (br.smartpds.nic.in) पर नया राशन कार्ड ऑनलाइन आवेदन, परिवार का नाम जोड़ना-काटना और e-KYC की पूरी प्रक्रिया।
+        </p>
+      </div>
+      <div class="js-btn-group">
+        <a href="smart-pds-ration-card.html" class="js-btn js-btn-amber" style="width:100%;">🌾 राशन कार्ड पोर्टल गाइड →</a>
+      </div>
+    </div>
+
+    <!-- 4. Land Calculator & Map -->
+    <div class="js-card js-card-purple">
+      <div>
+        <div class="js-card-head">
+          <span class="js-icon">📐</span>
+          <h3 class="js-title">जमीन मापी व नक्शा</h3>
+        </div>
+        <p class="js-desc">
+          4 से 8.5 हाथ के लग्गे अनुसार धुर, कट्ठा, बीघा का सही रकबा निकालें या राजस्व विभाग का ओरिजिनल भू-नक्शा शीट मंगाएं।
+        </p>
+      </div>
+      <div class="js-btn-group">
+        <a href="land-calculator.html" class="js-btn js-btn-purple">📐 कैलकुलेटर</a>
+        <a href="map-order.html" class="js-btn js-btn-navy">🗺️ नक्शा ऑर्डर</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Mini Tool Grid -->
+  <div class="js-mini-grid">
+    <a href="ragister2.html" class="js-mini-tile">📋 रजिस्टर-2 (जमाबंदी)</a>
+    <a href="badalnama-blog.html" class="js-mini-tile">🔄 बदलनामा (अदला-बदली)</a>
+    <a href="book-amin.html" class="js-mini-tile">👨‍💼 अमीन बुकिंग</a>
+    <a href="p2.html" class="js-mini-tile">📝 प्रपत्र-2 स्वघोषणा</a>
+    <a href="track.html" class="js-mini-tile">🚚 ऑर्डर लाइव ट्रैकिंग</a>
+    <a href="https://wa.me/919142075859?text=Namaste%20Jameen%20Seva" target="_blank" class="js-mini-tile" style="border-color:#86efac; color:#15803d !important;">💬 WhatsApp सहायता</a>
+  </div>
+
 </div>
+<!-- ══════════════════════════════════════════════════════════ -->
+    
+<!-- ══ DUAL ACTION ROW (PAPERLESS DEED + KCC LOAN) ══ -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 22px 0; font-family: 'Segoe UI', Arial, sans-serif;">
+
+  <!-- Card 1: Paperless Registry & Deed -->
+  <div style="background: linear-gradient(135deg, #f0fdf4 0%, #e8f8f0 100%); border: 1.5px solid #bbf7d0; border-left: 5px solid #27ae60; padding: 18px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(39, 174, 96, 0.08); display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span style="font-size: 22px;">📥</span>
+        <strong style="color: #166534; font-size: 1.05rem; font-weight: 700;">
+          बिहार पेपरलेस रजिस्ट्री सेवा 2026
+        </strong>
+      </div>
+      <p style="margin: 0 0 14px 0; color: #334155; font-size: 13.5px; line-height: 1.6;">
+        पेपरलेस रजिस्ट्री के नियम, ऑनलाइन डीड ड्राफ्टिंग और डिजिटल केवाला का असली प्रारूप (PDF) देखें:
+      </p>
+    </div>
+    <div>
+      <a href="https://jameenseva.in/paperless-deed.html" style="display: inline-block; width: 100%; box-sizing: border-box; text-align: center; background: linear-gradient(135deg, #27ae60, #219653); color: #ffffff; padding: 10px 16px; border-radius: 6px; font-weight: 700; font-size: 13.5px; text-decoration: none; box-shadow: 0 2px 6px rgba(39, 174, 96, 0.25); transition: 0.2s;">
+        पेपरलेस केवाला नमूना &amp; प्रक्रिया देखें &rarr;
+      </a>
+    </div>
+  </div>
+
+  <!-- Card 2: KCC Loan -->
+  <div style="background: linear-gradient(135deg, #f0fdf4 0%, #e6f4ea 100%); border: 1.5px solid #bbf7d0; border-left: 5px solid #16a34a; padding: 18px 20px; border-radius: 10px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.08); display: flex; flex-direction: column; justify-content: space-between;">
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span style="font-size: 22px;">🚜</span>
+        <strong style="color: #15803d; font-size: 1.05rem; font-weight: 700;">
+          किसान क्रेडिट कार्ड (KCC) लोन योजना 2026
+        </strong>
+      </div>
+      <p style="margin: 0 0 14px 0; color: #334155; font-size: 13.5px; line-height: 1.6;">
+        अपनी जमीन की रसीद या खतियान पर KCC लोन कैसे लें? आवश्यक दस्तावेज और ऑनलाइन आवेदन की जानकारी:
+      </p>
+    </div>
+    <div>
+      <a href="https://jameenseva.in/kcc-loan-blog.html" target="_blank" style="display: inline-block; width: 100%; box-sizing: border-box; text-align: center; background: #16a34a; color: #ffffff; padding: 10px 16px; border-radius: 6px; font-weight: 700; font-size: 13.5px; text-decoration: none; box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25); transition: 0.2s;">
+        KCC लोन ऑनलाइन आवेदन &amp; नियम देखें &rarr;
+      </a>
+    </div>
+  </div>
+
+</div>
+    
     <hr style="border: 1px solid #ddd; margin: 40px 5%;">
 
     <div class="home-blog-header">
