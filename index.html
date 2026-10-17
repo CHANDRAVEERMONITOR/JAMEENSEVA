@@ -244,26 +244,249 @@ document.getElementById('installApp').addEventListener('click', async () => {
   }
 });
 </script>
-    <div class="services-grid">
-        <a href="khatiyan.html" class="tile"> खतियान ऑर्डर करें-प्रमाणित नकल </a>
-        <a href="panchnama.html" class="tile">पंचनमा बंटवारा/शैड्यूल बटवारा ऑर्डर</a>
-<a href="kevala.html" class="tile">केवला(Deed) निकालने का ऑर्डर</a>
-        <a href="panchnamablog.html" class="tile">पंचनामा बटवारा pdf/word,doc file download </a>
-         <a href="badalnama-blog.html" class="tile">जमीन अदला-बदली (बदलनामा) pdf </a>
-        <a href="ragister2.html" class="tile">रजिस्टर-2 या जमाबंदी ओरिजिनल ऑर्डर</a>
-         <a href="map-order.html" class="tile">बिहार भू-नक्शा होम डिलीवरी</a>
-          <a href="book-amin.html" class="tile">अमीन Booking जमीन मापी हेतु  </a>
-          <a href="amin-join.html" class="tile">अमीन पार्टनर प्रोग्राम </a>
-        <a href="p2.html" class="tile">प्रपत्र-2 फॉर्म भरें </a>
-        <a href="sarkari.html" class="tile">सरकारी सेवा लिंक</a>
-         <a href="sitemap.html" class="tile">Sitemap</a>
-        <a href="blog.html" class="tile">जमीन संबंधित जानकारी </a>
-          <a href="land-calculator.html" class="tile">📐जमीन मापी कैलकुलेटर </a>
-        <a href="track.html" class="tile">ऑर्डर ट्रैक करें</a>
-         
-        
-    </div>
+  <!-- ══════════════ ENHANCED SERVICES GRID ══════════════ -->
+<style>
+  .services-grid-pro {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+    padding: 24px 4%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Baloo 2', 'Segoe UI', sans-serif;
+  }
+  .pro-tile {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .pro-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(12, 35, 64, 0.09);
+    border-color: #16a34a;
+    background: #fdfdfd;
+  }
+  .pt-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .pro-tile:hover .pt-icon-box {
+    transform: scale(1.1);
+    background: #eef7ed;
+  }
+  .pt-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-grow: 1;
+  }
+  .pt-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .pt-sub {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .pt-arrow {
+    color: #cbd5e1;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s, color 0.2s;
+  }
+  .pro-tile:hover .pt-arrow {
+    color: #16a34a;
+    transform: translateX(3px);
+  }
 
+  @media (max-width: 600px) {
+    .services-grid-pro {
+      grid-template-columns: 1fr;
+      padding: 16px 12px;
+      gap: 10px;
+    }
+    .pro-tile {
+      padding: 14px 15px;
+    }
+  }
+</style>
+
+<div class="services-grid-pro" id="services">
+
+  <!-- 1. खतियान -->
+  <a href="khatiyan.html" class="pro-tile">
+    <div class="pt-icon-box">📜</div>
+    <div class="pt-info">
+      <span class="pt-title">खतियान प्रमाणित नकल</span>
+      <span class="pt-sub">C.S. व R.S. पुराना खतियान होम डिलीवरी</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 2. पंचनामा बटवारा (स्टांप) -->
+  <a href="panchnama.html" class="pro-tile">
+    <div class="pt-icon-box">⚖️</div>
+    <div class="pt-info">
+      <span class="pt-title">पंचनामा बटवारा ऑर्डर</span>
+      <span class="pt-sub">₹100/₹500 स्टांप पेपर पर फाइनल ड्राफ्ट</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 3. केवाला (Deed) -->
+  <a href="kevala.html" class="pro-tile">
+    <div class="pt-icon-box">📑</div>
+    <div class="pt-info">
+      <span class="pt-title">केवाला (Deed) नकल</span>
+      <span class="pt-sub">रजिस्ट्री ऑफिस से प्रमाणित मूल प्रति</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 4. पंचनामा PDF / Word डाउनलोड -->
+  <a href="panchnamablog.html" class="pro-tile">
+    <div class="pt-icon-box">📥</div>
+    <div class="pt-info">
+      <span class="pt-title">बटवारा फॉर्मेट डाउनलोड</span>
+      <span class="pt-sub">एडिटेबल Word व PDF फॉर्मेट (मात्र ₹49)</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 5. बदलनामा (अदला-बदली) -->
+  <a href="badalnama-blog.html" class="pro-tile">
+    <div class="pt-icon-box">🔄</div>
+    <div class="pt-info">
+      <span class="pt-title">जमीन अदला-बदली (बदलनामा)</span>
+      <span class="pt-sub">पारस्परिक भूमि विनिमय कानूनी दस्तावेज</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 6. रजिस्टर-2 (जमाबंदी) -->
+  <a href="ragister2.html" class="pro-tile">
+    <div class="pt-icon-box">📋</div>
+    <div class="pt-info">
+      <span class="pt-title">रजिस्टर-2 जमाबंदी नकल</span>
+      <span class="pt-sub">अंचल अभिलेखागार से मुहर लगी प्रति</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 7. भू-नक्शा -->
+  <a href="map-order.html" class="pro-tile">
+    <div class="pt-icon-box">🗺️</div>
+    <div class="pt-info">
+      <span class="pt-title">बिहार भू-नक्शा शीट</span>
+      <span class="pt-sub">मौजा व चादर अनुसार ओरिजिनल नक्शा</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 8. अमीन बुकिंग -->
+  <a href="book-amin.html" class="pro-tile">
+    <div class="pt-icon-box">📐</div>
+    <div class="pt-info">
+      <span class="pt-title">सरकारी अमीन बुकिंग</span>
+      <span class="pt-sub">खेत व प्लॉट की सटीक मापी और सीमांकन</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 9. अमीन पार्टनर -->
+  <a href="amin-join.html" class="pro-tile">
+    <div class="pt-icon-box">🤝</div>
+    <div class="pt-info">
+      <span class="pt-title">अमीन पार्टनर प्रोग्राम</span>
+      <span class="pt-sub">JameenSeva से जुड़ें और काम पाएं</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 10. प्रपत्र-2 स्वघोषणा -->
+  <a href="p2.html" class="pro-tile">
+    <div class="pt-icon-box">✍️</div>
+    <div class="pt-info">
+      <span class="pt-title">प्रपत्र-2 स्वघोषणा फॉर्म</span>
+      <span class="pt-sub">बिहार विशेष भूमि सर्वे 2026 फॉर्म भरें</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 11. जमीन कैलकुलेटर -->
+  <a href="land-calculator.html" class="pro-tile">
+    <div class="pt-icon-box">🧮</div>
+    <div class="pt-info">
+      <span class="pt-title">जमीन मापी कैलकुलेटर</span>
+      <span class="pt-sub">धुर, कट्ठा, बीघा व डिसमिल कनवर्टर</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 12. लाइव ऑर्डर ट्रैकिंग -->
+  <a href="track.html" class="pro-tile">
+    <div class="pt-icon-box">🚚</div>
+    <div class="pt-info">
+      <span class="pt-title">लाइव ऑर्डर ट्रैकिंग</span>
+      <span class="pt-sub">Tracking ID या मोबाइल नंबर से स्टेटस जांचें</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 13. सरकारी सेवा लिंक -->
+  <a href="sarkari.html" class="pro-tile">
+    <div class="pt-icon-box">🏛️</div>
+    <div class="pt-info">
+      <span class="pt-title">सरकारी पोर्टल डायरेक्ट लिंक</span>
+      <span class="pt-sub">दाखिल-खारिज, LPC, परिमार्जन व भूलेख</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 14. जमीन ज्ञान ब्लॉग -->
+  <a href="blog.html" class="pro-tile">
+    <div class="pt-icon-box">📰</div>
+    <div class="pt-info">
+      <span class="pt-title">जमीन कानूनी ज्ञान &amp; ब्लॉग</span>
+      <span class="pt-sub">सर्वे नियम, कोर्ट आदेश व अमीन नियम</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+  <!-- 15. साइटमैप -->
+  <a href="sitemap.html" class="pro-tile">
+    <div class="pt-icon-box">🌐</div>
+    <div class="pt-info">
+      <span class="pt-title">संपूर्ण साइटमैप (Sitemap)</span>
+      <span class="pt-sub">JameenSeva की सभी 38+ सेवाएं एक नजर में</span>
+    </div>
+    <span class="pt-arrow">›</span>
+  </a>
+
+</div>
+<!-- ═════════════════════════════════════════════════════ -->
     <div class="trust-bar">
         <div style="margin: 5px;">✅ 699+ सफल होम डिलीवरी</div>
         <div style="margin: 5px;">✅ बिहार के सभी 38 जिलों में सेवा</div>
