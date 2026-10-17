@@ -3,256 +3,702 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags for Traffic -->
-    <title>अमीन बुकिंग सेवा 2026 | JameenSeva - बिहार भूमि सर्वे नापी</title>
-    <meta name="description" content="JameenSeva अमीन बुकिंग सेवा: बिहार भूमि सर्वे 2026 के लिए सरकारी नियमों के अनुसार जमीन की सटीक नापी और बंटवारा पंचनामा के लिए प्रशिक्षित अमीन बुक करें।">
-    <meta name="keywords" content="Amin Booking Bihar, Jameen Seva Amin, Land Survey Bihar 2026, Jameen ki napi,emapi bihar,online amin book,online jameen napi, Darbhanga Amin, Patna Amin, Bhojpur Amin, अमीन बुकिंग">
+    <title>अमीन बुकिंग सेवा 2026 | JameenSeva - बिहार भूमि सर्वे नापी एवं सीमांकन</title>
+    <meta name="description" content="JameenSeva अमीन बुकिंग सेवा: बिहार भूमि सर्वे 2026 के लिए सरकारी नियमों के अनुसार जमीन की सटीक नापी, सीमांकन और बंटवारा पंचनामा हेतु प्रशिक्षित अमीन ऑनलाइन बुक करें।">
+    <meta name="keywords" content="Amin Booking Bihar, Jameen Seva Amin, Land Survey Bihar 2026, Jameen ki napi, emapi bihar, online amin book, online jameen napi, Darbhanga Amin, Patna Amin, Bhojpur Amin, अमीन बुकिंग">
     <meta name="author" content="JameenSeva.in">
-    <meta property="og:title" content="अमीन बुकिंग सेवा - JameenSeva">
-    <meta property="og:description" content="बिहार जमीन सर्वे के लिए घर बैठे अमीन बुक करें।">
+    <meta property="og:title" content="अमीन बुकिंग सेवा 2026 - JameenSeva">
+    <meta property="og:description" content="बिहार जमीन सर्वे के लिए घर बैठे प्रशिक्षित अमीन बुक करें।">
     <meta property="og:url" content="https://jameenseva.in/book-amin.html">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
-        :root { --primary: #1a5928; --bg: #f4f7f6; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
-        .booking-card { max-width: 500px; margin: 20px auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 6px solid var(--primary); }
-        h2 { color: var(--primary); text-align: center; margin-bottom: 10px; }
-        .form-group { margin-bottom: 12px; }
-        label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 5px; color: #333; }
-        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 15px; transition: 0.3s; }
-        input:focus, select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 5px rgba(26, 89, 40, 0.2); }
-        .row { display: flex; gap: 10px; }
-        .row .form-group { flex: 1; }
-        .btn { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        .btn:hover { background: #144520; }
-        .btn:disabled { background: #ccc; cursor: not-allowed; }
-        .notice { background: #fff3cd; color: #856404; padding: 10px; border-radius: 5px; font-size: 12px; margin-bottom: 15px; text-align: center; border: 1px solid #ffeeba; }
+        :root {
+            --primary: #15803d;
+            --primary-dark: #14532d;
+            --primary-light: #22c55e;
+            --navy: #0f172a;
+            --navy-light: #1e3a5f;
+            --amber: #d97706;
+            --amber-soft: #fffbeb;
+            --red: #dc2626;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --radius: 16px;
+            --shadow-lg: 0 16px 36px -10px rgba(15, 23, 42, 0.12), 0 0 1px 1px rgba(15, 23, 42, 0.05);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Noto Serif Devanagari', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: #1e293b;
+            line-height: 1.8;
+            font-size: 15.5px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--white);
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .brand {
+            font-family: 'Baloo 2', sans-serif;
+            font-weight: 800;
+            color: var(--navy);
+            font-size: 22px;
+            text-decoration: none;
+        }
+        .brand span { color: var(--primary); }
+        .nav-links a {
+            color: var(--navy);
+            text-decoration: none;
+            margin-left: 14px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* Top Hero Header */
+        .hero-banner {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, var(--primary-dark) 100%);
+            color: var(--white);
+            padding: 44px 20px 36px;
+            text-align: center;
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #86efac;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 30px;
+            margin-bottom: 12px;
+        }
+        .hero-banner h1 {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: clamp(22px, 4vw, 34px);
+            font-weight: 800;
+            line-height: 1.3;
+            max-width: 860px;
+            margin: 0 auto 10px;
+        }
+        .hero-banner h1 em { color: #86efac; font-style: normal; }
+        .hero-banner p { font-size: 15px; color: #cbd5e1; max-width: 650px; margin: 0 auto; }
+
+        .layout-wrap { max-width: 1060px; margin: 30px auto 60px; padding: 0 16px; }
+
+        /* Glowing Form Card */
+        .booking-card-pro {
+            max-width: 720px;
+            margin: 0 auto 40px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid #86efac;
+            overflow: hidden;
+            position: relative;
+        }
+        .form-header-box {
+            background: linear-gradient(135deg, #14532d, #15803d);
+            padding: 24px 28px;
+            color: #fff;
+            position: relative;
+        }
+        .form-header-box h2 {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 23px;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-header-box p { font-size: 13.5px; color: #dcfce7; margin: 0; line-height: 1.5; }
+
+        .form-body-box { padding: 30px 28px; background: #fafbfc; }
+        @media(max-width: 600px) {
+            .form-body-box { padding: 20px 16px; }
+            .form-header-box { padding: 20px 18px; }
+        }
+
+        .alert-district {
+            background: #fffbeb;
+            border-left: 4px solid var(--amber);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+        .fg { display: flex; flex-direction: column; gap: 6px; }
+        .fg.full { grid-column: 1 / -1; }
+        .fg label {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .fg label span { color: var(--red); }
+        .fg input, .fg select, .fg textarea {
+            padding: 12px 14px;
+            border: 1.8px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-family: inherit;
+            outline: none;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .fg input:focus, .fg select:focus, .fg textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
+        }
+
+        .btn-submit-booking {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(21, 128, 61, 0.35);
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit-booking:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+        .btn-submit-booking:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Post-Booking Payment Modal / Box */
+        #paymentTokenArea {
+            display: none;
+            background: #ffffff;
+            border: 2px dashed #16a34a;
+            border-radius: var(--radius);
+            padding: 28px 22px;
+            text-align: center;
+            margin: 20px 0;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .token-price-tag {
+            background: #f0fdf4;
+            border: 1.5px solid #86efac;
+            color: #166534;
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            padding: 8px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 14px 0;
+        }
+
+        /* System Workflow 4 Steps */
+        .workflow-box {
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 24px;
+            margin-bottom: 34px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .wb-header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .wb-header h3 {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0;
+        }
+        .wf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+        }
+        .wf-item {
+            background: #f8fafc;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 18px 16px;
+            position: relative;
+        }
+        .wf-num {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            font-family: 'Baloo 2', sans-serif;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .wf-item strong {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 16px;
+            color: var(--navy);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .wf-item p { font-size: 13px; color: #475569; margin: 0; line-height: 1.55; }
+
+        /* Details Section */
+        .info-card {
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px 26px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+        .info-card h3 {
+            font-family: 'Baloo 2', sans-serif;
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: 24px 0 10px;
+            border-bottom: 1.5px solid #f0fdf4;
+            padding-bottom: 6px;
+        }
+        .info-card h3:first-of-type { margin-top: 0; }
+        .info-card ul { margin: 0 0 16px 20px; font-size: 14px; color: #334155; }
+        .info-card li { margin-bottom: 6px; }
+
+        .pro-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin: 14px 0 20px;
+        }
+        .pro-table th {
+            background: var(--navy);
+            color: #fff;
+            font-family: 'Baloo 2', sans-serif;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .pro-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+        .pro-table tr:nth-child(even) td { background: #f8fafc; }
+
+        .help-callout-box {
+            margin-top: 24px;
+            text-align: center;
+            padding: 18px;
+            border: 2px dashed #16a34a;
+            border-radius: 10px;
+            background: #f0fdf4;
+        }
     </style>
 </head>
 <body>
 
-<div class="booking-card">
-    <h2>📐 अमीन बुकिंग सेवा</h2>
-    <div class="notice">अभी कुछ ही जिले के लिए सर्विस चालू है। जल्द ही सभी जिले के लिए सर्विस चालू हो जायेगा।</div>
-    
-    <div class="form-group">
-        <label>किसान/आवेदक का नाम:</label>
-        <input type="text" id="rName" placeholder="पूरा नाम लिखें" required>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="index.html" class="brand">Jameen<span>Seva</span>.in</a>
+        <div class="nav-links">
+            <a href="verify-amin.html">🔍 अमीन सत्यापन</a>
+            <a href="land-calculator.html">📐 कैलकुलेटर</a>
+            <a href="track-booking.html">📦 अमीन ट्रैकिंग</a>
+        </div>
+    </nav>
+
+    <!-- HERO HEADER -->
+    <header class="hero-banner">
+        <span class="hero-tag">⚡ बिहार भूमि सर्वे 2026 प्रमाणित सेवा</span>
+        <h1>प्रशिक्षित अमीन बुकिंग सेवा: <em>खेत, प्लॉट नापी व आपसी बंटवारा सीमांकन</em></h1>
+        <p>सरकारी नियमों अनुसार जरीब व गुनिया से सटीक नापी। अनुभवी अमीन खेत पर आकर कच्चा नक्शा व फील्ड रिपोर्ट तैयार करेंगे।</p>
+    </header>
+
+    <div class="layout-wrap">
+
+        <!-- ══ 1. GLOWING BOOKING CARD ══ -->
+        <div class="booking-card-pro">
+            <div class="form-header-box">
+                <h2><i class="fa-solid fa-compass-drafting"></i> अमीन ऑनलाइन बुकिंग फॉर्म</h2>
+                <p>अपनी जमीन का विवरण दर्ज करें — सबमिट करने के बाद टोकन राशि का भुगतान कर बुकिंग सुनिश्चित करें।</p>
+            </div>
+
+            <div class="form-body-box">
+                <div class="alert-district">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>सूचना: वर्तमान में चयनित सक्रिय जिलों में सेवा तेजी से उपलब्ध है। शेष जिलों में जल्द शुरू हो रही है।</span>
+                </div>
+
+                <!-- BOOKING FORM -->
+                <form id="aminBookingForm" onsubmit="event.preventDefault(); submitBooking();">
+                    
+                    <div class="form-grid">
+                        <div class="fg">
+                            <label for="rName">किसान / आवेदक का नाम <span>*</span></label>
+                            <input type="text" id="rName" placeholder="जैसे: सुधीर कुमार" required>
+                        </div>
+                        <div class="fg">
+                            <label for="mobile">WhatsApp मोबाइल नंबर <span>*</span></label>
+                            <input type="tel" id="mobile" maxlength="10" placeholder="10 अंकों का नंबर" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="fg">
+                            <label for="jila">जिला (District) <span>*</span></label>
+                            <select id="jila" onchange="updateBlocks()" required>
+                                <option value="">-- जिला चुनें --</option>
+                                <option value="Darbhanga">Darbhanga (दरभंगा)</option>
+                                <option value="Patna">Patna (पटना)</option>
+                                <option value="Bhojpur">Bhojpur (भोजपुर)</option>
+                                <option value="Gaya">Gaya (गया)</option>
+                                <option value="Saran">Saran (सारण)</option>
+                                <option value="Vaishali">Vaishali (वैशाली)</option>
+                                <option value="Samastipur">Samastipur (समस्तीपुर)</option>
+                                <option value="Siwan">Siwan (सीवान)</option>
+                                <option value="Madhubani">Madhubani (मधुबनी)</option>
+                                <option value="Sitamarhi">Sitamarhi (सीतामढ़ी)</option>
+                                <option value="Muzaffarpur">Muzaffarpur (मुजफ्फरपुर)</option>
+                                <option value="Banka">Banka (बाँका)</option>
+                                <option value="Saharsa">Saharsa (सहरसा)</option>
+                                <option value="kaimur">Kaimur (कैमूर)</option>
+                            </select>
+                        </div>
+                        <div class="fg">
+                            <label for="anchal">प्रखंड / अंचल (Block) <span>*</span></label>
+                            <select id="anchal" required>
+                                <option value="">-- पहले जिला चुनें --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="fg">
+                            <label for="village">मौजा / गाँव का नाम <span>*</span></label>
+                            <input type="text" id="village" placeholder="गाँव का नाम" required>
+                        </div>
+                        <div class="fg">
+                            <label for="thana">थाना नंबर (Thana No.)</label>
+                            <input type="text" id="thana" placeholder="उदा. 145">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="fg">
+                            <label for="khata">खाता नंबर (Khata No.)</label>
+                            <input type="text" id="khata" placeholder="खाता संख्या">
+                        </div>
+                        <div class="fg">
+                            <label for="khesra">खेसरा / प्लॉट नंबर</label>
+                            <input type="text" id="khesra" placeholder="खेसरा संख्या">
+                        </div>
+                    </div>
+
+                    <!-- NEW FIELD: MEASUREMENT DATE -->
+                    <div class="form-grid">
+                        <div class="fg">
+                            <label for="measureDate">नापी की अपेक्षित तारीख (Desired Date) <span>*</span></label>
+                            <input type="date" id="measureDate" required>
+                        </div>
+                        <div class="fg">
+                            <label for="napiPurpose">नापी का उद्देश्य</label>
+                            <select id="napiPurpose">
+                                <option value="सामान्य सीमांकन / मेढ़ नापी">सामान्य सीमांकन / मेढ़ नापी</option>
+                                <option value="पारिवारिक पंचनामा बंटवारा">पारिवारिक पंचनामा बंटवारा</option>
+                                <option value="जमीन खरीद-बिक्री से पूर्व पैमाइश">जमीन खरीद-बिक्री से पूर्व पैमाइश</option>
+                                <option value="सर्वे हेतु प्लॉट सत्यापन">सर्वे हेतु प्लॉट सत्यापन</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="fg full" style="margin-bottom:16px;">
+                        <label for="addr">पूरा पता (जहाँ अमीन को पहुँचना है) <span>*</span></label>
+                        <input type="text" id="addr" placeholder="मकान नं / वार्ड, गाँव, पोस्ट, लैंडमार्क" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit-booking" id="bookBtn">
+                        📐 अमीन बुकिंग ऑर्डर सबमिट करें →
+                    </button>
+                </form>
+
+                <!-- ══ 2. TOKEN PAYMENT GATEWAY SECTION ══ -->
+                <div id="paymentTokenArea">
+                    <div style="font-size:48px; color:#16a34a; margin-bottom:8px;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3 style="font-family:'Baloo 2'; color:var(--navy); font-size:22px; margin-bottom:4px;">
+                        आपकी बुकिंग दर्ज कर ली गई है!
+                    </h3>
+                    <p id="displayOid" style="font-weight:700; color:#0284c7; font-size:16px; margin-bottom:6px;"></p>
+                    <p style="color:#475569; font-size:14px; max-width:540px; margin:0 auto 14px;">
+                        अमीन अलॉटमेंट प्रक्रिया शुरू करने और फर्जी बुकिंग रोकने के लिए <strong>₹99 का एडवांस सर्विस टोकन</strong> भुगतान करना अनिवार्य है (यह राशि अमीन की अंतिम फीस में समायोजित कर दी जाएगी)।
+                    </p>
+
+                    <div class="token-price-tag">
+                        टोकन शुल्क: ₹99 मात्र
+                    </div>
+
+                    <!-- RAZORPAY PAYMENT BUTTON -->
+                    <div style="margin-top:10px; display:flex; justify-content:center;">
+                        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Toy8NTCUeALh6R" async> </script> </form>
+                    </div>
+
+                    <div style="margin-top:16px;">
+                        <a id="trackBookingLink" href="#" style="font-family:'Baloo 2'; font-size:13.5px; color:#15803d; font-weight:700; text-decoration:underline;">
+                            📦 अपनी बुकिंग का लाइव स्टेटस ट्रैक करें →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ══ 3. HOW SYSTEM WORKS (TRANSPARENT WORKFLOW) ══ -->
+        <section class="workflow-box">
+            <div class="wb-header">
+                <h3>⚙️ अमीन बुकिंग सिस्टम कैसे काम करता है? (4 आसान चरण)</h3>
+                <span style="background:#e0f2fe; color:#0369a1; font-family:'Baloo 2'; font-size:12px; font-weight:800; padding:3px 12px; border-radius:20px;">
+                    100% सुरक्षित प्रक्रिया
+                </span>
+            </div>
+
+            <div class="wf-grid">
+                <div class="wf-item">
+                    <div class="wf-num">1</div>
+                    <strong>ऑनलाइन फॉर्म व टोकन</strong>
+                    <p>किसान अपनी जमीन व पसंदीदा तारीख भरकर ₹99 टोकन से बुकिंग कन्फर्म करता है।</p>
+                </div>
+                <div class="wf-item">
+                    <div class="wf-num">2</div>
+                    <strong>लोकल अमीन असाइनमेंट</strong>
+                    <p>24 घंटे में आपके ब्लॉक के वेरिफाइड अमीन का नाम व मोबाइल नंबर WhatsApp पर दिया जाता है।</p>
+                </div>
+                <div class="wf-item">
+                    <div class="wf-num">3</div>
+                    <strong>नापी व फीस तय करना</strong>
+                    <p>अमीन और किसान बात करके नापी का समय व उचित फीस (₹1,500–₹2,500) तय करते हैं।</p>
+                </div>
+                <div class="wf-item">
+                    <div class="wf-num">4</div>
+                    <strong>फील्ड नापी व नजरी नक्शा</strong>
+                    <p>अमीन खेत पर नापी करके मेमो व कच्चा नक्शा सौंपता है और किसान से सीधा नकद भुगतान लेता है।</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ 4. RULES & BENEFITS ══ -->
+        <article class="info-card">
+            <h3><i class="fa-solid fa-award"></i> JameenSeva अमीन सेवा की विशेषताएं</h3>
+            <table class="pro-table">
+                <thead>
+                    <tr>
+                        <th>सुविधा</th>
+                        <th>विवरण</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>🎯 अनुभवी अमीन</strong></td>
+                        <td>बिहार कैडस्ट्रल (C.S.) व रिविजनल (R.S.) नक्शा व जरीब के प्रमाणित जानकार।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>🪪 Digital ID Card</strong></td>
+                        <td>प्रत्येक अमीन की पहचान JameenSeva पोर्टल पर ऑनलाइन वेरिफाई की जा सकती है।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>📍 होम सर्विस</strong></td>
+                        <td>अमीन नियत तारीख पर सीधे आपके खेत या घर पर पहुँचकर नापी करेगा।</td>
+                    </tr>
+                    <tr>
+                        <td><strong>💰 पारदर्शी दरें</strong></td>
+                        <td>कोई बिचौलिया नहीं—जमीन के रकबे व काम के अनुसार अमीन से सीधी बात।</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3><i class="fa-solid fa-circle-exclamation"></i> जरूरी सूचना एवं किसान नियम</h3>
+            <ul>
+                <li>नापी के दिन अपने <strong>खतियान या जमाबंदी की फोटोकॉपी</strong> अमीन को दिखाने हेतु तैयार रखें।</li>
+                <li>नापी के दौरान जमीन के <strong>चौहद्दीदारों (पड़ोसियों)</strong> की उपस्थिति अवश्य सुनिश्चित करें ताकि बाद में कोई विवाद न हो।</li>
+                <li>JameenSeva अमीन की रिपोर्ट आपसी सहमति, मेढ़ निर्धारण व पारिवारिक बंटवारे के लिए है; यह अदालती डिक्री का विकल्प नहीं है।</li>
+                <li>अमीन की शेष फीस (रकबा अनुसार सामान्यतः ₹1,500 से ₹2,500) नापी पूरी होने पर सीधे अमीन को नकद या UPI द्वारा देनी होगी।</li>
+            </ul>
+
+            <div class="help-callout-box">
+                <p style="font-family:'Baloo 2'; font-weight:700; margin-bottom:4px; font-size:15px; color:#14532d;">
+                    अमीन बुकिंग या सहायता के लिए सीधे संपर्क करें:
+                </p>
+                <p style="color:#15803d; font-size:20px; font-weight:800; font-family:'Baloo 2'; margin:0;">
+                    <i class="fa-brands fa-whatsapp"></i> 9142075859
+                </p>
+            </div>
+        </article>
+
     </div>
 
-    <div class="row">
-        <div class="form-group">
-            <label>जिला:</label>
-            <select id="jila" onchange="updateBlocks()">
-                <option value="">--जिला चुनें--</option>
-                <option value="Darbhanga">Darbhanga (दरभंगा)</option>
-                <option value="Patna">Patna (पटना)</option>
-                <option value="Bhojpur">Bhojpur (भोजपुर)</option>
-                <option value="Gaya">Gaya (गया)</option>
-                 <option value="Saran">Saran (सारण)</option>
-                 <option value="Vaishali">Vaishali (वैशाली)</option>
-                 <option value="Samastipur">Samastipur (समस्तीपुर)</option>
-                 <option value="Siwan">Siwan (सीवान)</option>
-                 <option value="Madhubani">Madhubani (मधुबनी)</option>
-                <option value="Sitamarhi">Sitamarhi (सीतामढ़ी)</option>
-                <option value="Muzaffarpur">Muzaffarpur (मुजफ्फरपुर)</option>
-                 <option value="Banka">Banka (बाँका)</option>
-                 <option value="Saharsa">Saharsa (सहरसा)</option>
-                 <option value="kaimur">kaimur (कैमूर)</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>ब्लॉक (अंचल):</label>
-            <select id="anchal">
-                <option value="">--पहले जिला चुनें--</option>
-            </select>
-        </div>
-    </div>
+    <!-- SCRIPT LOGIC -->
+    <script>
+    // District wise Blocks Data
+    const blockData = {
+        "Darbhanga": ["Darbhanga Sadar", "Benipur", "Baheri", "Biraul", "Singhwara", "Jale", "Keoti", "Manigachhi", "Alinagar", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Bahadurpur", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Tardih"],
+        "Patna": ["Patna Sadar", "Sampatchak", "Phulwari Sharif", "Fatwah", "Daniawan", "Khusrupur", "Athmalgola", "Mokama", "Belchhi", "Ghoswari", "Pandarak", "Bakhtiyarpur", "Barh", "Chandi", "Bihta", "Maner", "Dinapur-Cum-Khagaul", "Naubatpur", "Bikram", "Dulhin Bazar", "Paliganj", "Masaurhi", "Dhanarua", "Punpun"],
+        "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Koilwar", "Udwantnagar", "Sandesh", "Sahar", "Garhani", "Piro", "Charpokhari", "Tarari", "Jagdishpur", "Bihiya", "Shahpur"],
+        "Gaya": ["गया सदर","अतरी","बाराचट्टी","बोधगया","बाँके बाजार","डुमरिया","फतेहपुर","गुरुआ","इमामगंज","खिजरसराय","कोंच","मानपुर","मोहरा","परैया","शेरघाटी","टनकुप्पा","वजीरगंज"],
+        "Saran": ["छपरा","अमनौर","बनियापुर","दरियापुर","दिघवारा","एकमा","गड़खा","इसुआपुर","जलालपुर","लहलादपुर","मकेर","मांझी","मरहौरा","नागरा","पानापुर","रिविलगंज","सोनपुर","तरैया"],
+        "Samastipur": ["समस्तीपुर सदर","रोसड़ा","दलसिंहसराय","पटोरी","ताजपुर","कल्याणपुर","सिंघिया","हासनपुर","मोरवा","खानपुर","पूसा","सरायरंजन","शिवाजीनगर","बिथान","विभूतिपुर","उजियारपुर","मोहियुद्दीननगर","विद्यापतिनगर","वारिसनगर","मोहनपुर"],
+        "Siwan": ["सीवान सदर","मैरवा","गुठनी","रघुनाथपुर","महाराजगंज","आँदर","दरौली","बड़हरिया","गोरेयाकोठी","बसंतपुर","भगवानपुर हाट","दरौंदा","हुसैनगंज","लकड़ी नबीगंज","पचरुखी","सिसवन","जीरादेई","हसनपुरा","नौतन"],
+        "Vaishali": ["हाजीपुर","बिंदुपुर","राजापाकर","महुआ","जंदाहा","गोरौल","वैशाली","पटेढ़ी बेलसर","चेहराकलां","लालगंज","भगवानपुर","महनार","सहदेई बुजुर्ग","देशरी","राघोपुर"],
+        "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
+        "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsha", "Suppi", "Surand"],
+        "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
+        "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
+        "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
+        "kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"]
+    };
 
-    <div class="row">
-        <div class="form-group">
-            <label>थाना नंबर:</label>
-            <input type="text" id="thana" placeholder="उदा. 145">
-        </div>
-        <div class="form-group">
-            <label>मौजा/गाँव:</label>
-            <input type="text" id="village" placeholder="गाँव का नाम">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="form-group">
-            <label>खाता नंबर:</label>
-            <input type="text" id="khata" placeholder="खाता नं">
-        </div>
-        <div class="form-group">
-            <label>खेसरा नंबर:</label>
-            <input type="text" id="khesra" placeholder="खेसरा नं">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label>पूरा पता और मोबाइल नंबर:</label>
-        <input type="text" id="addr" placeholder="ग्राम + पोस्ट + जिला">
-        <input type="tel" id="mobile" placeholder="WhatsApp नंबर (10 अंक)" style="margin-top:10px;" maxlength="10">
-    </div>
-
-    <button class="btn" id="bookBtn" onclick="submitBooking()">ऑर्डर सबमिट करें</button>
-</div>
-
-<!-- Info Section (For SEO & User Trust) -->
-<section style="max-width:800px; margin:40px auto; background:#fff; padding:30px; border-radius:15px; border-top:3px solid #28a745;">
-    <h2 style="color:#28a745; text-align:left;">📐 JameenSeva अमीन बुकिंग सेवा</h2>
-    <p>बिहार भूमि सर्वे 2026 के लिए प्रशिक्षित अमीन से जमीन की सटीक नापी करवाएं।</p>
-    <!-- (Baaki ka table content jo aapne diya tha, wo yahan daal sakte hain) -->
-</section>
-
-<script>
-// District wise Blocks Data
-const blockData = {
-    "Darbhanga": ["Darbhanga Sadar", "Benipur", "Baheri", "Biraul", "Singhwara", "Jale", "Keoti", "Manigachhi", "Alinagar", "Ghanshyampur", "Hanuman Nagar", "Hayaghat", "Bahadurpur", "Kiratpur", "Kusheshwar Asthan", "Kusheshwar Asthan East", "Tardih"],
-    "Patna": ["Patna Sadar", "Sampatchak", "Phulwari Sharif", "Fatwah", "Daniawan", "Khusrupur", "Athmalgola", "Mokama", "Belchhi", "Ghoswari", "Pandarak", "Bakhtiyarpur", "Barh", "Chandi", "Bihta", "Maner", "Dinapur-Cum-Khagaul", "Naubatpur", "Bikram", "Dulhin Bazar", "Paliganj", "Masaurhi", "Dhanarua", "Punpun"],
-    "Bhojpur": ["Arrah", "Agiaon", "Barhara", "Koilwar", "Udwantnagar", "Sandesh", "Sahar", "Garhani", "Piro", "Charpokhari", "Tarari", "Jagdishpur", "Bihiya", "Shahpur"],
-    "Gaya": ["गया","अतरी","बाराचट्टी","बोधगया","बाँके बाजार","डुमरिया","फतेहपुर","गुरुआ","इमामगंज","खिजरसराय","कोंच","मानपुर","मोहरा","नवादा","परैया","शेरघाटी","टनकुप्पा","वजीरगंज"],
-    "Saran": ["छपरा","अमनौर","बनियापुर","दरियापुर","दिघवारा","एकमा","गड़खा","इसुआपुर","जलालपुर","लहलादपुर","मकेर","मांझी","मरहौरा","नागरा","पानापुर","रिविलगंज","सोनपुर","तरैया"],
-     "Samastipur": ["समस्तीपुर सदर","रोसड़ा","दलसिंहसराय","पटोरी","ताजपुर","कल्याणपुर","सिंघिया","हासनपुर","मोरवा","खानपुर","पूसा","सरायरंजन","शिवाजीनगर","बिथान","विभूतिपुर","उजियारपुर","मोहियुद्दीननगर","विद्यापतिनगर","वारिसनगर","मोहनपुर"],
-     "Siwan": ["सीवान सदर","मैरवा","गुठनी","रघुनाथपुर","महाराजगंज","आँदर","दरौली","बड़हरिया","गोरेयाकोठी","बसंतपुर","भगवानपुर हाट","दरौंदा","हुसैनगंज","लकड़ी नबीगंज","पचरुखी","सिसवन","जीरादेई","हसनपुरा","नौतन"],
-    "Vaishali": ["हाजीपुर","बिंदुपुर","राजापाकर","महुआ","जंदाहा","गोरौल","वैशाली","पटेढ़ी बेलसर","चेहराकलां","लालगंज","भगवानपुर","महनार","सहदेई बुजुर्ग","देशरी","राघोपुर"],
-    "Madhubani": ["Andhratharhi", "Babubarhi", "Basopatti", "Benipatti", "Bisfi", "Ghoghardiha", "Harlakhi", "Jainagar", "Jhanjharpur", "Kaluahi", "Khajauli", "Khutauna", "Ladhania", "Lakhnaur", "Laukahi", "Madhepur", "Madhubani", "Pandaul", "Phulparas", "Rajnagar"],
-     "Sitamarhi": ["Bairgania", "Bajpatti", "Bathnaha", "Belsand", "Bokhra", "Charaut", "Dumra", "Majorganj", "Nanpur", "Parihar", "Parsauni", "Pupri", "Riga", "Runnisaidpur", "Sonbarsa", "Suppi", "Surand"],
-    "Muzaffarpur": ["Aurai", "Bandra", "Baruraj", "Bochahan", "Gaighat", "Kanti", "Katra", "Kurhani", "Marwan", "Minapur", "Motipur", "Muzaffarpur", "Musahari", "Paroo", "Sahebganj", "Sakra", "Saraiya"],
-    "Banka": ["Amarpur", "Banka", "Barahat", "Bausi", "Chandan", "Dhoraiya", "Fullidumar", "Katoriya", "Laukaha", "Panchrukhi", "Rajaun", "Shambhuganj"],
-     "Saharsa": ["Banma Itahari", "Kahra", "Mahishi", "Nauhatta", "Panchgachhia", "Patarghat", "Salkhua", "Sattar Katiya", "Simri Bakhtiarpur", "Sonbarsa"],
-    "kaimur": ["Adhaura", "Bhabua", "Chainpur", "Chand", "Durgawati", "Kudra", "Mohania", "Ramgarh", "Rampur", "Rohtas", "Sheosagar"],
-};
-function updateBlocks() {
-    const distSelect = document.getElementById("jila");
-    const blockSelect = document.getElementById("anchal");
-    const selectedDist = distSelect.value;
-    blockSelect.innerHTML = '<option value="">--ब्लॉक चुनें--</option>';
-    if (selectedDist && blockData[selectedDist]) {
-        blockData[selectedDist].forEach(block => {
-            const option = document.createElement("option");
-            option.value = block;
-            option.text = block;
-            blockSelect.appendChild(option);
-        });
+    function updateBlocks() {
+        const distSelect = document.getElementById("jila");
+        const blockSelect = document.getElementById("anchal");
+        const selectedDist = distSelect.value;
+        blockSelect.innerHTML = '<option value="">-- ब्लॉक चुनें --</option>';
+        if (selectedDist && blockData[selectedDist]) {
+            blockData[selectedDist].forEach(block => {
+                const option = document.createElement("option");
+                option.value = block;
+                option.text = block;
+                blockSelect.appendChild(option);
+            });
+        }
     }
-}
 
-// Supabase Configuration
-const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
-const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
-const _supabase = supabase.createClient(SB_URL, SB_KEY);
+    // Default Date to Tomorrow
+    document.addEventListener('DOMContentLoaded', () => {
+        const today = new Date();
+        today.setDate(today.getDate() + 1);
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('measureDate').min = `${yyyy}-${mm}-${dd}`;
+    });
 
-async function submitBooking() {
-    const btn = document.getElementById('bookBtn');
-    const mobile = document.getElementById('mobile').value;
-    const name = document.getElementById('rName').value;
-    const district = document.getElementById('jila').value;
-    const block = document.getElementById('anchal').value;
+    // Supabase Configuration
+    const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+    const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+    const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-    // Basic Validation
-    if(!name || mobile.length < 10 || !district || !block) {
-        return alert("कृपया सभी जानकारी और सही मोबाइल नंबर भरें!");
+    async function submitBooking() {
+        const btn = document.getElementById('bookBtn');
+        const mobile = document.getElementById('mobile').value.trim();
+        const name = document.getElementById('rName').value.trim();
+        const district = document.getElementById('jila').value;
+        const block = document.getElementById('anchal').value;
+        const village = document.getElementById('village').value.trim();
+        const addr = document.getElementById('addr').value.trim();
+        const measureDate = document.getElementById('measureDate').value;
+        const purpose = document.getElementById('napiPurpose').value;
+
+        if(!name || mobile.length < 10 || !district || !block || !village || !addr || !measureDate) {
+            return alert("कृपया सभी अनिवार्य (*) जानकारी और 10 अंकों का मोबाइल नंबर भरें!");
+        }
+
+        btn.disabled = true;
+        btn.innerText = "⏳ बुकिंग सुरक्षित की जा रही है...";
+
+        const orderID = "BK-" + Math.floor(1000 + Math.random() * 9000);
+        const today = new Date().toLocaleString('hi-IN');
+
+        try {
+            const { error } = await _supabase.from('amin-booking').insert([{
+                order_id: orderID,
+                order_date: today,
+                district: district,
+                block: block,
+                thana_no: document.getElementById('thana').value.trim() || null,
+                village: village,
+                khata_no: document.getElementById('khata').value.trim() || null,
+                khesra_no: document.getElementById('khesra').value.trim() || null,
+                raiyat_name: name,
+                full_address: `${addr} | नापी तारीख: ${measureDate} | उद्देश्य: ${purpose}`,
+                mobile: mobile,
+                status: 'Pending Token'
+            }]);
+
+            if(error) throw error;
+
+            // Hide Form and Show Payment Card
+            document.getElementById('aminBookingForm').style.display = 'none';
+            document.getElementById('displayOid').innerText = "आपकी ऑर्डर आईडी: " + orderID;
+            document.getElementById('trackBookingLink').href = "track-booking.html?id=" + orderID;
+            document.getElementById('paymentTokenArea').style.display = 'block';
+
+        } catch (err) {
+            console.error(err);
+            alert("त्रुटि: " + err.message);
+            btn.disabled = false;
+            btn.innerText = "📐 अमीन बुकिंग ऑर्डर सबमिट करें →";
+        }
     }
-
-    btn.disabled = true;
-    btn.innerText = "प्रोसेसिंग...";
-
-    const orderID = "BK-" + Math.floor(1000 + Math.random() * 9000);
-    const today = new Date().toLocaleString('hi-IN');
-
-    try {
-        const { error } = await _supabase.from('amin-booking').insert([{
-            order_id: orderID,
-            order_date: today,
-            district: district,
-            block: block,
-            thana_no: document.getElementById('thana').value,
-            village: document.getElementById('village').value,
-            khata_no: document.getElementById('khata').value,
-            khesra_no: document.getElementById('khesra').value,
-            raiyat_name: name,
-            full_address: document.getElementById('addr').value,
-            mobile: mobile,
-            status: 'Pending'
-        }]);
-
-        if(error) throw error;
-
-        alert("✅ बुकिंग सफल! आपकी ऑर्डर आईडी है: " + orderID);
-        window.location.href = "track-booking.html?id=" + orderID;
-
-    } catch (err) {
-        console.error(err);
-        alert("त्रुटि: " + err.message);
-        btn.disabled = false;
-        btn.innerText = "ऑर्डर सबमिट करें";
-    }
-}
-</script>
-    <!-- ✅ NIYAM AUR PROCESS SECTION — SEO AUR USER TRUST KE LIYE -->
-<section style="max-width:800px; margin:40px auto; background:#fff; padding:30px; border-radius:15px; border-top:5px solid #1a5928; box-shadow: 0 5px 15px rgba(0,0,0,0.05); font-family: 'Poppins', sans-serif;">
-
-    <h2 style="color:#1a5928; font-size:24px; border-bottom:2px solid #eee; padding-bottom:10px;">📐 JameenSeva अमीन बुकिंग: नियम और प्रक्रिया</h2>
-    
-    <p style="color:#333; font-size:15px; line-height:1.8; margin-top:15px;">
-        बिहार में **विशेष भूमि सर्वेक्षण 2026** चल रहा है। अपनी जमीन की सुरक्षा और सही रिकॉर्ड के लिए सटीक नापी जरूरी है। JameenSeva के माध्यम से आप अनुभवी अमीन बुक कर सकते हैं।
-    </p>
-
-    <h3 style="color:#1a5c2e; font-size:19px; margin-top:25px;"><i class="fas fa-check-circle"></i> अमीन बुकिंग के मुख्य फायदे</h3>
-    <table style="width:100%; border-collapse:collapse; font-size:14px; margin-top:10px; border: 1px solid #ddd;">
-        <tr style="background:#1a5928; color:white;">
-            <th style="padding:12px; text-align:left;">सुविधा</th>
-            <th style="padding:12px; text-align:left;">विवरण</th>
-        </tr>
-        <tr>
-            <td style="padding:12px; border-bottom:1px solid #ddd; font-weight:bold;">🎯 एक्सपर्ट अमीन</td>
-            <td style="padding:12px; border-bottom:1px solid #ddd;">बिहार सर्वे और जमीन मापी के नियमों के जानकार अमीन।</td>
-        </tr>
-        <tr style="background:#f9f9f9;">
-            <td style="padding:12px; border-bottom:1px solid #ddd; font-weight:bold;">🪪 Digital ID Card</td>
-            <td style="padding:12px; border-bottom:1px solid #ddd;">अमीन की पहचान QR Code से Verify करें।[cite: 1]</td>
-        </tr>
-        <tr>
-            <td style="padding:12px; border-bottom:1px solid #ddd; font-weight:bold;">📍 Home Service</td>
-            <td style="padding:12px; border-bottom:1px solid #ddd;">अमीन सीधे आपके खेत या घर पर आएगा।[cite: 1]</td>
-        </tr>
-        <tr style="background:#f9f9f9;">
-            <td style="padding:12px; border-bottom:1px solid #ddd; font-weight:bold;">💰 Transparent Rate</td>
-            <td style="padding:12px; border-bottom:1px solid #ddd;">कोई छुपा हुआ चार्ज नहीं, काम के अनुसार उचित फीस।[cite: 1]</td>
-        </tr>
-    </table>
-
-    <h3 style="color:#1a5c2e; font-size:19px; margin-top:30px;"><i class="fas fa-tasks"></i> बुकिंग और काम करने की प्रक्रिया</h3>
-    <div style="background:#f0f7f1; padding:20px; border-radius:10px; border-left:5px solid #1a5928;">
-        <ul style="list-style:none; padding:0; margin:0; line-height:2;">
-            <li><strong>1. ऑनलाइन फॉर्म:</strong> ऊपर दिया गया फॉर्म भरकर अपना विवरण सबमिट करें।[cite: 1]</li>
-            <li><strong>2. वेरिफिकेशन:</strong> हमारी टीम आपके पते और जमीन के विवरण की जांच करेगी।[cite: 1]</li>
-            <li><strong>3. अमीन असाइनमेंट:</strong> 24 घंटे के भीतर आपको WhatsApp पर अमीन का नाम और नंबर मिल जाएगा।[cite: 1]</li>
-            <li><strong>4. नापी और रिपोर्ट:</strong> अमीन खेत पर आकर नापी करेगा और आपको कच्चा नक्शा/रिपोर्ट देगा।[cite: 1]</li>
-        </ul>
-    </div>
-
-    <h3 style="color:#1a5c2e; font-size:19px; margin-top:30px;"><i class="fas fa-exclamation-triangle"></i> जरूरी सूचना और नियम</h3>
-    <ul style="color:#555; font-size:14px; line-height:1.8;">
-        <li>बुकिंग के समय अपना **खतियान या जमाबंदी** की फोटोकॉपी तैयार रखें।[cite: 1]</li>
-        <li>नापी के दौरान जमीन की **चौहद्दी** (पड़ोसियों) का होना विवादों को कम करता है।[cite: 1]</li>
-        <li>JameenSeva अमीन की रिपोर्ट आपसी सहमति और निजी बंटवारे के लिए है; यह सरकारी अदालती आदेश का विकल्प नहीं है।[cite: 1]</li>
-        <li>अमीन की फीस जमीन के रकवे और दूरी के आधार पर अमीन से सीधे तय की जा सकती है (सामान्यतः ₹2000-₹3000)।[cite: 1]</li>
-    </ul>
-
-    <div style="margin-top:30px; text-align:center; padding:15px; border:2px dashed #1a5928; border-radius:10px;">
-        <p style="font-weight:bold; margin-bottom:5px;">सहायता के लिए संपर्क करें:</p>
-        <p style="color:#1a5928; font-size:18px;"><i class="fab fa-whatsapp"></i> <strong>9142075859</strong></p>
-    </div>
-
-</section>
-<script src="footer.js"></script>
+    </script>
+    <script src="footer.js"></script>
 </body>
 </html>
