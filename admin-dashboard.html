@@ -292,8 +292,8 @@ function getStatusColor(status) {
     case 'Delivered':
     case 'Paid':
       return { bg: '#dcfce7', text: '#15803d' }; // Green
-    case 'Cancelled':
-    case 'दोहरा ऑर्डर - cancel':
+    case 'Cancelled ❌':
+    case 'दोहरा ऑर्डर - cancel❌':
     case 'नक्शा इस मौजा का उपलब्ध नहीं है':
       return { bg: '#f3f4f6', text: '#4b5563' }; // Grey
     default:
@@ -333,8 +333,8 @@ const TABLES = {
     ],
     editable: [
       { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
       { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
         options:['Pending','Paid','Failed','Refunded'] },
     ],
@@ -379,7 +379,7 @@ const TABLES = {
     ],
     editable: [
       { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','प्लॉट नंबर के साथ ऑर्डर करें ','Processing','भेजने के लियें तैयार है','In Transit','Order Received','Dispatched','Delivered','रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌','किसान के जबाब का इंतजार','रिकॉर्ड फटा होने के कारण आर्डर cancel ❌ किया गया','On Hold','Cancelled ❌','दोहरा ऑर्डर -cancel ❌'],
+        options:['Pending','प्लॉट या खाता नंबर के साथ करें order cencel❌','Processing','भेजने के लियें तैयार है','In Transit','Order Received','Dispatched','Delivered','रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌','किसान के जबाब का इंतजार order cancel❌','रिकॉर्ड फटा होने के कारण आर्डर cancel ❌','On Hold','Cancelled ❌','दोहरा ऑर्डर -cancel ❌'],
         quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
       { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
         options:['Pending','Paid','Failed','Refunded'] },
@@ -425,8 +425,8 @@ const TABLES = {
     ],
     editable: [
       { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Payment Verification','Processing','Ready to Dispatch','In Transit','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+        options:['Pending','Payment Verification','Processing','Ready to Dispatch','In Transit','Dispatched','Delivered','Completed','On Hold','Cancelled ❌','Rejected ❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
       { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
         options:['Pending','Paid','Failed','Refunded'] },
     ],
@@ -505,8 +505,8 @@ const TABLES = {
     ],
     editable: [
       { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Confirmed','Amin Assigned','Visit Scheduled','In Progress','Completed','Cancelled','Rescheduled'],
-        quick:['Confirmed','Amin Assigned','In Progress','Completed','Cancelled'] },
+        options:['Pending','Confirmed','Amin Assigned','Visit Scheduled','In Progress','Completed','Cancelled❌','Rescheduled'],
+        quick:['Confirmed','Amin Assigned','In Progress','Completed','Cancelled❌'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -627,7 +627,7 @@ const TABLES = {
           'Cancelled',
           'दोहरा ऑर्डर -cancel'
         ],
-        quick: ['Searching', 'Processing', 'Ready to Dispatch', 'Dispatched', 'Completed', 'Cancelled'] },
+        quick: ['Searching', 'Processing', 'Ready to Dispatch', 'Dispatched', 'Completed', 'Cancelled❌'] },
       { key: 'payment_method', label: 'पेमेंट स्टेटस', type: 'select', custom: true,
         options: ['COD', 'Online', 'Paid Advance ₹99', 'Fully Paid', 'Failed', 'Refunded'] },
     ],
@@ -668,8 +668,8 @@ const TABLES = {
     ],
     editable: [
       { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled','Rejected'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
     ],
     addFields: [
       { key:'order_id', label:'ऑर्डर ID' },
@@ -793,7 +793,7 @@ function renderSummary(){
   const total = currentRows.length;
   const pending = currentRows.filter(r => (r.status || r.order_status || '').toLowerCase() === 'pending').length;
   const done = currentRows.filter(r => ['completed','approved','confirmed','delivered'].includes((r.status || r.order_status || '').toLowerCase())).length;
-  const rejected = currentRows.filter(r => ['rejected','cancelled'].includes((r.status || r.order_status || '').toLowerCase())).length;
+  const rejected = currentRows.filter(r => ['rejected','cancelled❌'].includes((r.status || r.order_status || '').toLowerCase())).length;
 
   document.getElementById('summaryRow').innerHTML = `
     <div class="chip total"><div class="num">${total}</div><div class="label lang-dev">कुल रिकॉर्ड</div></div>
@@ -822,7 +822,7 @@ function badgeClass(val){
   if (['pending'].includes(v)) return 'badge-pending';
   if (['processing','confirmed','searching'].includes(v)) return 'badge-processing';
   if (['completed','approved','paid','success','delivered'].includes(v)) return 'badge-completed';
-  if (['rejected','failed','cancelled'].includes(v)) return 'badge-rejected';
+  if (['rejected','failed','cancelled❌'].includes(v)) return 'badge-rejected';
   if (['refunded'].includes(v)) return 'badge-refunded';
   return 'badge-default';
 }
