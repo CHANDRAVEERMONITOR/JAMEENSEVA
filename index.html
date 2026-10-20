@@ -110,72 +110,89 @@
 
 <body>
   <!-- ===== Legal Disclaimer Modal Start ===== -->
-<div id="disclaimerOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:9999; align-items:center; justify-content:center;">
-  <div style="background:#fff; max-width:520px; width:90%; border-radius:10px; padding:24px; box-shadow:0 8px 30px rgba(0,0,0,0.35); font-family:Arial, sans-serif;">
-    <h3 style="margin-top:0; color:#b91c1c; font-size:19px; border-bottom:2px solid #f3f4f6; padding-bottom:10px;">⚠️ नियम, शर्तें एवं दायित्व-सीमन (Terms, Conditions & Disclaimer)</h3>
-    <div style="font-size:14px; line-height:1.7; color:#222; max-height:280px; overflow-y:auto; border:1px solid #eee; padding:12px; border-radius:6px; margin-bottom:16px;">
+<div id="disclaimerOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.72); z-index:99999; align-items:center; justify-content:center; backdrop-filter:blur(3px);">
+  <div style="background:#fff; max-width:480px; width:92%; border-radius:14px; padding:22px; box-shadow:0 12px 35px rgba(0,0,0,0.3); font-family:'Segoe UI', Arial, sans-serif; position:relative;" onclick="event.stopPropagation();">
+    
+    <!-- Close Button (कहीं भी क्लिक / क्रॉस पर भी ऑटो-स्वीकार) -->
+    <button onclick="autoAcceptTerms()" style="position:absolute; top:12px; right:14px; background:#f1f5f9; border:none; width:30px; height:30px; border-radius:50%; font-size:16px; font-weight:bold; color:#475569; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
 
-      <p><strong>1. सेवा प्रदाता की प्रकृति:</strong> <strong>JameenSeva.in</strong> एक <strong>स्वतंत्र एवं निजी सेवा-प्रदाता मंच</strong> है, जिसका किसी भी राजस्व प्राधिकरण अथवा शासकीय संस्था से कोई प्रत्यक्ष अथवा अप्रत्यक्ष संबद्धता नहीं है। यह प्लेटफ़ॉर्म केवल सहायक (Facilitator) की भूमिका में कार्यरत है।</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #fee2e2;">
+      <span style="font-size:22px;">⚠️</span>
+      <h3 style="margin:0; color:#b91c1c; font-size:18px; font-weight:700;">ज़रूरी नियम, शर्तें एवं सूचना</h3>
+    </div>
 
-      <p><strong>2. सेवा शुल्क एवं धन-वापसी नीति:</strong> अभिलेख अन्वेषण (Search Process) हेतु प्रभारित <strong> सेवा शुल्क</strong> प्रशासनिक एवं परिचालन व्यय के रूप में लिया जाता है, जो प्रक्रिया आरंभ होते ही <strong>अप्रतिदेय (Strictly Non-Refundable)</strong> हो जाता है — चाहे खोज का परिणाम अनुकूल हो अथवा प्रतिकूल।</p>
+    <!-- संक्षिप्त व सरल शर्तें -->
+    <div style="font-size:13.5px; line-height:1.7; color:#334155; max-height:260px; overflow-y:auto; border:1px solid #e2e8f0; padding:12px 14px; border-radius:8px; background:#f8fafc; margin-bottom:14px;">
+      
+      <p style="margin:0 0 10px 0;"><strong>1. निजी सेवा केंद्र:</strong> <strong>JameenSeva.in</strong> एक स्वतंत्र निजी सहायक मंच है। यह कोई सरकारी विभाग नहीं है, बल्कि आपके लिए सरकारी अभिलेख प्राप्त करने में मदद करता है।</p>
 
-      <p><strong>3. सूचना की सटीकता एवं उपयोगकर्ता का दायित्व:</strong> उपयोगकर्ता द्वारा प्रविष्ट की गई समस्त जानकारी की प्रामाणिकता एवं शुद्धता सुनिश्चित करना पूर्णतः उपयोगकर्ता का व्यक्तिगत उत्तरदायित्व है। त्रुटिपूर्ण, अपूर्ण अथवा भ्रामक विवरण के परिणामस्वरूप उत्पन्न किसी भी हानि, विलंब अथवा असुविधा के लिए JameenSeva.in किसी भी रूप में उत्तरदायी नहीं होगा।</p>
+      <p style="margin:0 0 10px 0;"><strong>2. खोज शुल्क (Non-Refundable):</strong> केवाला आर्डर में दस्तावेज़ खोजने के लिए लिया गया सेवा शुल्क खोज प्रक्रिया शुरू होते ही वापस नहीं होगा (अप्रतिदेय), चाहे रिकॉर्ड मिले या न मिले।</p>
 
-      <p><strong>4. तृतीय-पक्ष स्रोतों पर निर्भरता:</strong> प्रदर्शित परिणाम शासकीय अथवा तृतीय-पक्ष पोर्टलों से प्राप्त आँकड़ों पर आधारित होते हैं। उक्त स्रोतों में तकनीकी व्यवधान, डेटा अद्यतन (Update) में विलंब अथवा परिवर्तन की स्थिति में सेवा की समयबद्धता प्रभावित हो सकती है, जिसके लिए यह मंच बाध्य नहीं है।</p>
+      <p style="margin:0 0 10px 0;"><strong>3. सही विवरण का दायित्व:</strong> खाता, खेसरा, मौजा या नाम की सही जानकारी देना आपकी ज़िम्मेदारी है। गलत जानकारी देने पर सेवा में देरी या असुविधा के लिए हम ज़िम्मेदार नहीं होंगे।</p>
 
-      <p><strong>5. अप्रत्याशित परिस्थितियाँ (Force Majeure):</strong> सर्वर व्यवधान, तकनीकी अवरोध, सरकारी वेबसाइट में आकस्मिक परिवर्तन अथवा किसी भी अनियंत्रित बाह्य कारण से सेवा में विलंब अथवा बाधा उत्पन्न होने पर JameenSeva.in उत्तरदायी नहीं ठहराया जाएगा।</p>
+      <p style="margin:0 0 10px 0;"><strong>4. कन्फर्मेशन कॉल पर अंतिम शुल्क:</strong> ऑर्डर देने के बाद हमारी टीम द्वारा कॉल आने पर अपनी ज़मीन का विवरण दोबारा मिला लें। अंतिम राशि इसी कॉल पर सुनिश्चित की जाएगी।</p>
 
-      <p><strong>6. डेटा गोपनीयता:</strong> उपयोगकर्ता द्वारा साझा की गई जानकारी का उपयोग केवल संबंधित सेवा हेतु किया जाएगा तथा इसे किसी अनधिकृत तृतीय-पक्ष के साथ साझा नहीं किया जाएगा।</p>
+      <p style="margin:0 0 10px 0;"><strong>5. सरकारी सर्वर विलंब:</strong> सरकारी पोर्टल में तकनीकी खराबी या रिकॉर्ड न मिलने की स्थिति में होने वाले विलंब के लिए प्लेटफ़ॉर्म बाध्य नहीं होगा।</p>
 
-      <p><strong>7. शर्तों में परिवर्तन का अधिकार:</strong> JameenSeva.in को बिना पूर्व सूचना के इन नियमों एवं शर्तों में संशोधन करने का पूर्ण अधिकार सुरक्षित है। सेवा का निरंतर उपयोग संशोधित शर्तों की स्वीकृति माना जाएगा।</p>
-        
-        <p><strong>8. जरूरी सुझाव </strong> JameenSeva.in पर ऑर्डर देने से पहले हमारे सभी Legal Disclaimer हमारे बारे में | प्राइवेसी पॉलिसी | संपर्क करें| डिस्क्लेमर| नियम और शर्तें। पेज की जानकारी देख लें </p>
-        
-         <p><strong>9.ऑर्डर कन्फर्म कॉल </strong> JameenSeva.in के तरफ से फाइनल ऑर्डर कान्फर्मैशन कॉल आने के समय ही अपनी जमीन की कागजात का विवरण पूछ लें सुधता के लियें। और फाइनल राशी ऑर्डर का इसी समय बताई जाएंगी  </p>
+      <!-- आपकी जोड़ी गई विशेष पंक्ति -->
+      <p style="margin:0; background:#fef3c7; padding:8px 10px; border-radius:6px; color:#92400e; font-weight:600; border-left:3px solid #d97706;">
+        📌 <strong>नीति में बदलाव:</strong> ज़मीन सेवा (JameenSeva.in) अपनी किसी भी पॉलिसी, नियम और सेवा शुल्क में किसी भी समय बदलाव करने का पूर्ण अधिकार सुरक्षित रखती है।
+      </p>
 
     </div>
-    <label style="display:flex; align-items:flex-start; gap:8px; font-size:14px; color:#111; cursor:pointer; margin-bottom:16px; font-weight:500;">
-      <input type="checkbox" id="agreeCheckbox" style="margin-top:3px;">
-      मैंने उपरोक्त समस्त नियम एवं शर्तें ध्यानपूर्वक पढ़ एवं समझ ली हैं तथा इनसे पूर्णतः सहमत हूँ।
-    </label>
-    <button id="acceptBtn" disabled style="width:100%; padding:12px; border:none; border-radius:6px; background:#9ca3af; color:#fff; font-size:15px; font-weight:bold; cursor:not-allowed; transition:background 0.2s;">
-      स्वीकार करें एवं आगे बढ़ें
+
+    <p style="font-size:12px; color:#64748b; margin:0 0 12px 0; text-align:center;">
+      आगे बढ़ने या कहीं भी टच करने पर इन नियमों की स्वतः सहमति मानी जाएगी।
+    </p>
+
+    <!-- सीधा 1-क्लिक स्वीकार बटन -->
+    <button onclick="autoAcceptTerms()" style="width:100%; padding:13px; border:none; border-radius:8px; background:#16a34a; color:#fff; font-size:16px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(22, 163, 74, 0.3); transition:0.2s;">
+      ✅ स्वीकार करें एवं आगे बढ़ें
     </button>
+
   </div>
 </div>
 
 <script>
+  // शर्तों को सेव करने और पॉपअप बंद करने का फंक्शन
+  function autoAcceptTerms() {
+    try {
+      localStorage.setItem('jameenSevaTermsAccepted', 'true');
+      localStorage.setItem('jameenSevaTermsAcceptedDate', new Date().toISOString());
+    } catch(e) {}
+    
+    var overlay = document.getElementById('disclaimerOverlay');
+    if (overlay) {
+      overlay.style.display = 'none';
+    }
+  }
+
   (function () {
     var overlay = document.getElementById('disclaimerOverlay');
-    var checkbox = document.getElementById('agreeCheckbox');
-    var acceptBtn = document.getElementById('acceptBtn');
+    if (!overlay) return;
 
+    // यदि पहले से स्वीकार नहीं किया है, तो दिखाएँ
     if (!localStorage.getItem('jameenSevaTermsAccepted')) {
       overlay.style.display = 'flex';
     }
 
-    checkbox.addEventListener('change', function () {
-      if (checkbox.checked) {
-        acceptBtn.disabled = false;
-        acceptBtn.style.background = '#16a34a';
-        acceptBtn.style.cursor = 'pointer';
-      } else {
-        acceptBtn.disabled = true;
-        acceptBtn.style.background = '#9ca3af';
-        acceptBtn.style.cursor = 'not-allowed';
-      }
+    // 1. काली स्क्रीन (बाहर) कहीं भी क्लिक करने पर ऑटो-स्वीकार और बंद
+    overlay.addEventListener('click', function () {
+      autoAcceptTerms();
     });
 
-    acceptBtn.addEventListener('click', function () {
-      if (checkbox.checked) {
-        localStorage.setItem('jameenSevaTermsAccepted', 'true');
-        localStorage.setItem('jameenSevaTermsAcceptedDate', new Date().toISOString());
-        overlay.style.display = 'none';
+    // 2. यदि कोई बैक बटन या बाहर टच करे तो भी स्वतः स्वीकार
+    overlay.addEventListener('touchend', function (e) {
+      if (e.target === overlay) {
+        autoAcceptTerms();
       }
     });
   })();
 </script>
 <!-- ===== Legal Disclaimer Modal End ===== -->
+ 
+      
+  
     <div style="background: #f8f9fa; padding: 10px; border-bottom: 1px solid #ddd; text-align: right; padding-right: 20px;">
     <label style="font-weight: bold; color: #1a5f7a; font-size: 14px;">अपना राज्य बदलें: </label>
     <select onchange="location = this.value;" style="padding: 5px 10px; border-radius: 5px; border: 1px solid #1a5f7a; background: white; color: #1a5f7a; font-weight: bold; cursor: pointer;">
