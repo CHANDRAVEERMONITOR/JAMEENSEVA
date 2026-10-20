@@ -530,48 +530,304 @@
 </footer>
 
 <!-- ══ DYNAMIC SITEMAP / INTERNAL LINKING SCRIPT ══ -->
+<!-- ══════════════ JAMEENSEVA CATEGORY-WISE COLOR SERVICES ══════════════ -->
+<style>
+  .js-category-hub {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 14px;
+    font-family: 'Baloo 2', 'Segoe UI', Arial, sans-serif;
+  }
+  .jch-main-title {
+    background: linear-gradient(135deg, #0f172a, #1e3a5f);
+    color: #ffffff;
+    padding: 20px 24px;
+    border-radius: 14px;
+    border-bottom: 4px solid #16a34a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1);
+  }
+  .jch-main-title h2 {
+    font-size: clamp(19px, 3.5vw, 24px);
+    font-weight: 800;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .jch-badge {
+    background: #22c55e;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+  }
+
+  /* Category Block Wrapper */
+  .category-block {
+    background: #ffffff;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  }
+  .cat-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f1f5f9;
+    margin-bottom: 16px;
+  }
+  .cat-header h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin: 0;
+  }
+  .cat-tag {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: auto;
+  }
+
+  /* Vibrant Solid Button Grid */
+  .cat-btn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .color-btn {
+    text-decoration: none;
+    border-radius: 9px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff !important;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.22), 0 4px 8px rgba(0,0,0,0.12);
+    border-bottom: 3.5px solid rgba(0,0,0,0.28);
+    transition: all 0.15s ease-in-out;
+    box-sizing: border-box;
+  }
+  .color-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.22), 0 7px 14px rgba(0,0,0,0.18);
+    filter: brightness(1.06);
+  }
+  .color-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  }
+  .btn-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .btn-name {
+    flex-grow: 1;
+    line-height: 1.35;
+  }
+  .btn-pill {
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.28);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+  }
+
+  /* ══ 7 CATEGORY THEMES (HIGH CONTRAST SOLID COLORS) ══ */
+  /* 1. Direct Home Delivery (Deep Emerald Green) */
+  .theme-delivery .cat-header h3 { color: #15803d; }
+  .theme-delivery .cat-tag { background: #dcfce7; color: #15803d; }
+  .theme-delivery .color-btn { background: linear-gradient(180deg, #16a34a, #15803d); border-color: #0f5132; }
+
+  /* 2. Jameen Online Services (Royal Blue) */
+  .theme-land .cat-header h3 { color: #0369a1; }
+  .theme-land .cat-tag { background: #e0f2fe; color: #0369a1; }
+  .theme-land .color-btn { background: linear-gradient(180deg, #0284c7, #0369a1); border-color: #0c4a6e; }
+
+  /* 3. Bihar Land Survey 2026 (Dark Violet / Purple) */
+  .theme-survey .cat-header h3 { color: #6d28d9; }
+  .theme-survey .cat-tag { background: #ede9fe; color: #6d28d9; }
+  .theme-survey .color-btn { background: linear-gradient(180deg, #7c3aed, #6d28d9); border-color: #4c1d95; }
+
+  /* 4. Sarkari Yojna (Bright Amber / Orange) */
+  .theme-yojna .cat-header h3 { color: #b45309; }
+  .theme-yojna .cat-tag { background: #fef3c7; color: #b45309; }
+  .theme-yojna .color-btn { background: linear-gradient(180deg, #d97706, #b45309); border-color: #78350f; }
+
+  /* 5. Kisan Corner (Forest Dark Teal) */
+  .theme-kisan .cat-header h3 { color: #0f766e; }
+  .theme-kisan .cat-tag { background: #ccfbf1; color: #0f766e; }
+  .theme-kisan .color-btn { background: linear-gradient(180deg, #0d9488, #0f766e); border-color: #115e59; }
+
+  /* 6. Kanuni Jankari / Legal (Crimson Red / Maroon) */
+  .theme-legal .cat-header h3 { color: #b91c1c; }
+  .theme-legal .cat-tag { background: #fee2e2; color: #b91c1c; }
+  .theme-legal .color-btn { background: linear-gradient(180deg, #dc2626, #b91c1c); border-color: #7f1d1d; }
+
+  /* 7. Education & Amin Tools (Navy Slate) */
+  .theme-edu .cat-header h3 { color: #334155; }
+  .theme-edu .cat-tag { background: #f1f5f9; color: #334155; }
+  .theme-edu .color-btn { background: linear-gradient(180deg, #334155, #1e293b); border-color: #0f172a; }
+
+  @media(max-width: 600px) {
+    .cat-btn-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="js-category-hub">
+
+  <!-- Header Banner -->
+  <div class="jch-main-title">
+    <h2><span>🌐</span> JameenSeva.in की सभी मुख्य बिहार भूमि सेवाएं (Direct Access)</h2>
+    <span class="jch-badge">Category Directory 2026</span>
+  </div>
+
+  <!-- Dynamic Content rendered by JavaScript -->
+  <div id="dynamic-categories-root"></div>
+
+</div>
+
+<!-- ══════════════ MODULAR JAVASCRIPT SYSTEM ══════════════ -->
 <script>
-  // 📌 भविष्य में नया पेज जोड़ना हो, तो बस इस लिस्ट में 1 लाइन जोड़ दें!
-  const BIHAR_LINKS = [
-    { title: "खतियान नकल ऑर्डर", url: "https://jameenseva.in/khatiyan.html", icon: "📜", tag: "होम डिलीवरी" },
-    { title: "पंचनामा बटवारा ऑर्डर", url: "https://jameenseva.in/panchnama.html", icon: "⚖️", tag: "स्टांप COD" },
-    { title: "बटवारा फॉर्मेट PDF (₹49)", url: "https://jameenseva.in/panchnamablog.html", icon: "📥", tag: "डाउनलोड" },
-    { title: "केवाला (Sale Deed) नकल", url: "https://jameenseva.in/kevala.html", icon: "📑", tag: "रजिस्ट्री" },
-    { title: "रजिस्टर-2 (जमाबंदी)", url: "https://jameenseva.in/ragister2.html", icon: "📋", tag: "अंचल नकल" },
-    { title: "जमीन अदला-बदली बदलनामा", url: "https://jameenseva.in/badalnama-blog.html", icon: "🔄", tag: "फॉर्मेट" },
-    { title: "बिहार भू-नक्शा शीट ऑर्डर", url: "https://jameenseva.in/map-order.html", icon: "🗺️", tag: "ओरिजिनल" },
-    { title: "जमीन मापी कैलकुलेटर", url: "https://jameenseva.in/land-calculator.html", icon: "🧮", tag: "कैलकुलेटर" },
-    { title: "प्राइवेट अमीन बुकिंग", url: "https://jameenseva.in/book-amin.html", icon: "📐", tag: "होम सर्विस" },
-    { title: "अमीन पार्टनर रजिस्ट्रेशन", url: "https://jameenseva.in/amin-join.html", icon: "🤝", tag: "फ्री टेस्ट" },
-    { title: "प्रपत्र-2 स्वघोषणा फॉर्म", url: "https://jameenseva.in/p2.html", icon: "✍️", tag: "सर्वे 2026" },
-    { title: "Smart PDS राशन कार्ड", url: "https://jameenseva.in/smart-pds-ration-card.html", icon: "🌾", tag: "पोर्टल लिंक" },
-    { title: "पेपरलेस रजिस्ट्री गाइड", url: "https://jameenseva.in/paperless-deed.html", icon: "💻", tag: "ई-निबंधन" },
-    { title: "सर्वे शिकायत पोर्टल गाइड", url: "https://jameenseva.in/bihar-survey-complaint-guide.html", icon: "🚨", tag: "शिकायत" },
-    { title: "KCC किसान क्रेडिट कार्ड लोन", url: "https://jameenseva.in/kcc-loan-blog.html", icon: "🚜", tag: "लोन गाइड" },
-    { title: "लाइव ऑर्डर स्टेटस ट्रैकिंग", url: "https://jameenseva.in/track.html", icon: "🚚", tag: "ट्रैकिंग" }
+  /**
+   * 📌 FUTURE EXPANSION GUIDE:
+   * Jab bhi naya blog ya service link add karna ho, bas neeche diye gaye category ke 
+   * "links" array me 1 naya object paste kar dein:
+   * { title: "Aapke Blog Ka Naam", url: "https://jameenseva.in/page.html", icon: "🔥", tag: "NEW" }
+   */
+  const JAMEEN_CATEGORIES = [
+    {
+      id: "delivery",
+      themeClass: "theme-delivery",
+      title: "📦 डायरेक्ट होम डिलीवरी सेवाएं (Cash on Delivery)",
+      tag: "घर बैठे प्राप्त करें",
+      links: [
+        { title: "खतियान प्रमाणित नकल (CS/RS)", url: "https://jameenseva.in/khatiyan.html", icon: "📜", tag: "COD उपलब्ध" },
+        { title: "पंचनामा बटवारा स्टांप पेपर", url: "https://jameenseva.in/panchnama.html", icon: "⚖️", tag: "स्टांप ड्राफ्ट" },
+        { title: "केवाला (Sale Deed) मूल नकल", url: "https://jameenseva.in/kevala.html", icon: "📑", tag: "रजिस्ट्री नकल" },
+        { title: "रजिस्टर-2 (जमाबंदी) अभिलेख", url: "https://jameenseva.in/ragister2.html", icon: "📋", tag: "अंचल नकल" },
+        { title: "बिहार भू-नक्शा शीट डिलीवरी", url: "https://jameenseva.in/map-order.html", icon: "🗺️", tag: "कपड़ा/कागज नक्शा" },
+        { title: "लाइव ऑर्डर स्टेटस ट्रैकिंग", url: "https://jameenseva.in/track.html", icon: "🚚", tag: "ट्रैक करें" }
+      ]
+    },
+    {
+      id: "land_services",
+      themeClass: "theme-land",
+      title: "🏛️ बिहार जमीन ऑनलाइन सेवाएं व पोर्टल्स",
+      tag: "आधिकारिक पोर्टल्स",
+      links: [
+        { title: "अपना खाता खतियान ऑनलाइन देखें", url: "https://jameenseva.in/sarkari.html", icon: "📂", tag: "land.bihar" },
+        { title: "जमाबंदी पंजी (रजिस्टर-2) देखें", url: "https://jameenseva.in/jamabandiblog.html", icon: "📘", tag: "biharbhumi" },
+        { title: "दाखिल-खारिज (Mutation) गाइड", url: "https://jameenseva.in/dakhil-kharij-blog.html", icon: "⚙️", tag: "35 दिन नियम" },
+        { title: "परिमार्जन प्लस ऑनलाइन सुधार", url: "https://jameenseva.in/parimarjan-blog.html", icon: "🔧", tag: "त्रुटि सुधार" },
+        { title: "भू-लगान ऑनलाइन रसीद काटें", url: "https://jameenseva.in/sarkari.html#portals", icon: "💳", tag: "ई-लगान" },
+        { title: "डिजिटल ई-मापी (E-Mapi) आवेदन", url: "https://jameenseva.in/e-mapi-blog.html", icon: "📐", tag: "सरकारी मापी" }
+      ]
+    },
+    {
+      id: "survey",
+      themeClass: "theme-survey",
+      title: "🗺️ बिहार विशेष भूमि सर्वेक्षण 2026 जानकारी",
+      tag: "सर्वे विशेष",
+      links: [
+        { title: "बिहार विशेष सर्वेक्षण 2026 गाइड", url: "https://jameenseva.in/bihar-survey-guide-2026.html", icon: "📋", tag: "A to Z नियम" },
+        { title: "प्रपत्र-2 स्वघोषणा फॉर्म भरें", url: "https://jameenseva.in/p2.html", icon: "✍️", tag: "ऑनलाइन फॉर्म" },
+        { title: "प्रपत्र-3(1) वंशावली कैसे बनाएं?", url: "https://jameenseva.in/blog.html", icon: "🌳", tag: "वंशावली फॉर्मेट" },
+        { title: "सर्वे अमीन व कानूनगो शिकायत पोर्टल", url: "https://jameenseva.in/bihar-survey-complaint-guide.html", icon: "🚨", tag: "dlrs शिकायत" },
+        { title: "कैडस्ट्रल (CS) vs रिविजनल (RS) सर्वे", url: "https://jameenseva.in/khatiyan.html", icon: "📜", tag: "मिलान नियम" }
+      ]
+    },
+    {
+      id: "yojna",
+      themeClass: "theme-yojna",
+      title: "📢 सरकारी योजनाएं (Sarkari Yojna Updates)",
+      tag: "योजना विशेष",
+      links: [
+        { title: "Smart PDS राशन कार्ड 2026 (28 राज्य)", url: "https://jameenseva.in/smart-pds-ration-card.html", icon: "🌾", tag: "br.smartpds" },
+        { title: "UP महिला ₹50,000 योजना अपडेट", url: "https://jameenseva.in/up-mahila-50000-yojana-2026-form.html", icon: "💰", tag: "योजना सच" },
+        { title: "PM किसान सम्मान निधि ई-केवाईसी", url: "https://jameenseva.in/sarkari.html#portals", icon: "🌾", tag: "pmkisan" },
+        { title: "स्वामित्व योजना (SVAMITVA) आबादी पट्टा", url: "https://jameenseva.in/up.html", icon: "🏘️", tag: "ड्रोन सर्वे" }
+      ]
+    },
+    {
+      id: "kisan",
+      themeClass: "theme-kisan",
+      title: "🚜 किसान कॉर्नर (Kisan Services)",
+      tag: "किसान सहायता",
+      links: [
+        { title: "KCC किसान क्रेडिट कार्ड लोन 2026", url: "https://jameenseva.in/kcc-loan-blog.html", icon: "🚜", tag: "लोन गाइड" },
+        { title: "LPC (भूमि दखल-कब्जा प्रमाण पत्र)", url: "https://jameenseva.in/lpc-guide-bihar.html", icon: "📋", tag: "आवेदन नियम" },
+        { title: "प्राइवेट अमीन खेत नापी बुकिंग", url: "https://jameenseva.in/book-amin.html", icon: "📐", tag: "होम सर्विस" },
+        { title: "किसान सहायता हेल्पलाइन WhatsApp", url: "https://wa.me/919142075859", icon: "💬", tag: "9142075859" }
+      ]
+    },
+    {
+      id: "legal",
+      themeClass: "theme-legal",
+      title: "⚖️ कानूनी जानकारी व दस्तावेज प्रारूप",
+      tag: "विधिक प्रारूप",
+      links: [
+        { title: "पंचनामा बटवारा फॉर्मेट (Word/PDF)", url: "https://jameenseva.in/panchnamablog.html", icon: "📥", tag: "मात्र ₹49" },
+        { title: "जमीन अदला-बदली (बदलनामा) डीड", url: "https://jameenseva.in/badalnama-blog.html", icon: "🔄", tag: "कानूनी प्रारूप" },
+        { title: "बिहार पेपरलेस रजिस्ट्री गाइड 2026", url: "https://jameenseva.in/paperless-deed.html", icon: "💻", tag: "ई-निबंधन" },
+        { title: "रजिस्ट्री के नए नियम व रोक सूची", url: "https://jameenseva.in/registry-news.html", icon: "📑", tag: "नियम 2026" }
+      ]
+    },
+    {
+      id: "education",
+      themeClass: "theme-edu",
+      title: "📚 शिक्षा, अमीन टूल्स व कैलकुलेटर",
+      tag: "अमीन शिक्षा",
+      links: [
+        { title: "जमीन मापी कैलकुलेटर (धुर-कट्ठा-बीघा)", url: "https://jameenseva.in/land-calculator.html", icon: "🧮", tag: "सटीक मापी" },
+        { title: "अमीन पार्टनर रजिस्ट्रेशन व ऑनलाइन टेस्ट", url: "https://jameenseva.in/amin-join.html", icon: "🤝", tag: "फ्री टेस्ट" },
+        { title: "अमीन डिजिटल आईकार्ड सत्यापन", url: "https://jameenseva.in/verify-amin.html", icon: "🔍", tag: "QR सत्यापन" },
+        { title: "उत्तर प्रदेश भूलेख (UP Bhulekh)", url: "https://jameenseva.in/up.html", icon: "🏛️", tag: "UP 75 जिले" },
+        { title: "संपूर्ण साइटमैप (All 38+ Links)", url: "https://jameenseva.in/sitemap.html", icon: "🌐", tag: "Sitemap" }
+      ]
+    }
   ];
 
-  function renderBiharLinks() {
-    const container = document.getElementById('bihar-services-grid');
-    if (!container) return;
+  function renderCategoryHub() {
+    const root = document.getElementById('dynamic-categories-root');
+    if (!root) return;
 
-    container.innerHTML = BIHAR_LINKS.map(item => `
-      <a href="${item.url}" class="jlink-btn">
-        <span class="jlink-icon">${item.icon}</span>
-        <span>${item.title}</span>
-        ${item.tag ? `<span class="jlink-tag">${item.tag}</span>` : ''}
-      </a>
+    root.innerHTML = JAMEEN_CATEGORIES.map(cat => `
+      <div class="category-block ${cat.themeClass}">
+        <div class="cat-header">
+          <h3>${cat.title}</h3>
+          <span class="cat-tag">${cat.tag}</span>
+        </div>
+        <div class="cat-btn-grid">
+          ${cat.links.map(link => `
+            <a href="${link.url}" class="color-btn">
+              <span class="btn-icon">${link.icon}</span>
+              <span class="btn-name">${link.title}</span>${link.tag ? `<span class="btn-pill">${link.tag}</span>` : ''}
+            </a>
+          `).join('')}
+        </div>
+      </div>
     `).join('');
   }
 
-  // Accordion Toggle
-  document.querySelectorAll('.faq-q').forEach(q => {
-    q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
-  });
-
-  // Run on page load
-  document.addEventListener('DOMContentLoaded', renderBiharLinks);
+  // Load dynamically on page ready
+  document.addEventListener('DOMContentLoaded', renderCategoryHub);
 </script>
+<!-- ═══════════════════════════════════════════════════════ -->
 
 </body>
 </html>
