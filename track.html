@@ -585,7 +585,7 @@ function getStatusConfig(dbValue) {
   // 1. CANCELLED / REJECTED CATEGORIES
   if (v.includes('cancel') || v.includes('रद्द') || v.includes('reject') || v.includes('अस्वीकृत') || v.includes('फटा') || v.includes('दौरा') || v.includes('दोहरा') || v.includes('उपलब्ध नहीं')) {
     let title = raw || 'ऑर्डर रद्द (Cancelled)';
-    let desc = 'यह ऑर्डर रद्द कर दिया गया है। अधिक जानकारी या रिफंड/सपोर्ट के लिए नीचे दिए गए WhatsApp पर संपर्क करें।';
+    let desc = 'यह ऑर्डर रद्द कर दिया गया है। अधिक जानकारी या सपोर्ट के लिए नीचे दिए गए WhatsApp पर संपर्क करें।';
     if (v.includes('उपलब्ध नहीं')) desc = 'अभिलेख कार्यालय में इस जमीन का रिकॉर्ड उपलब्ध नहीं हो पाया, इसलिए ऑर्डर रद्द कर दिया गया है।';
     if (v.includes('फटा') || v.includes('अस्पष्ट')) desc = 'पुराना सरकारी रिकॉर्ड फटा या अस्पष्ट होने के कारण इसे रद्द किया गया है।';
     if (v.includes('दोहरा')) desc = 'एक ही विवरण का दूसरा ऑर्डर होने के कारण इस अतिरिक्त ऑर्डर को रद्द किया गया है।';
@@ -603,9 +603,9 @@ function getStatusConfig(dbValue) {
   // 2. ON HOLD / TOKEN / KISAN RESPONSE WAITING CATEGORIES
   if (v.includes('टोकन') || v.includes('token') || v.includes('जवाब') || v.includes('इंतजार') || v.includes('waiting') || v.includes('hold') || v.includes('रुक')) {
     let title = raw || 'कार्य रुका हुआ (On Hold)';
-    let desc = 'आपके ऑर्डर पर प्रक्रिया आगे बढ़ाने के लिए आपकी पुष्टि या टोकन शुल्क अपेक्षित है।';
-    if (v.includes('टोकन')) desc = 'खोज प्रक्रिया शुरू करने के लिए एडवांस सर्विस चार्ज टोकन का भुगतान प्रतीक्षित है।';
-    if (v.includes('जवाब')) desc = 'हमारी टीम ने आपसे संपर्क किया है। कृपया WhatsApp पर अपना जवाब या स्पष्टीकरण भेजें।';
+    let desc = 'आपके ऑर्डर पर प्रक्रिया आगे बढ़ाने के लिए आपकी टोकन शुल्क बकाया है।';
+    if (v.includes('टोकन')) desc = 'खोज प्रक्रिया शुरू करने के लिए एडवांस सर्विस चार्ज टोकन का भुगतान करना होगा है।';
+    if (v.includes('जवाब')) desc = 'हमारी टीम ने आपसे संपर्क किया पर नहीं हो पाया कृपया WhatsApp पर अपना जवाब या स्पष्टीकरण भेजें।';
 
     return {
       type: 'hold',
@@ -618,25 +618,25 @@ function getStatusConfig(dbValue) {
   }
 
   // 3. READY TO DISPATCH / IN TRANSIT CATEGORIES
-  if (v.includes('तैयार') || v.includes('ready') || v.includes('transit') || v.includes('भेजने')) {
+  if (v.includes('तैयार') || v.includes('ready') || v.includes('dispatched') || v.includes('भेजने')) {
     return {
       type: 'normal',
       cls: 'sb-rtd',
       icon: '📋',
-      hindi: raw || 'भेजने के लिए तैयार (Ready)',
-      sub: 'आपका दस्तावेज तैयार कर लिया गया है और सुरक्षित पैकिंग हो चुकी है। जल्द ही कूरियर/पोस्ट को सौंपा जाएगा।',
+      hindi: raw || 'कूरियर से भेजने के लिए तैयार (Ready)',
+      sub: 'आपका दस्तावेज तैयार कर लिया गया है और सुरक्षित पैकिंग हो चुकी है। और कूरियर/पोस्ट को सौंपा दिया गया है।',
       step: 1
     };
   }
 
   // 4. DISPATCHED / SHIPPED CATEGORIES
-  if (v.includes('dispatch') || v.includes('shipped') || v.includes('भेजा') || v.includes('भेज दिया')) {
+  if (v.includes('dispatch') || v.includes('transit') || v.includes('भेजा') || v.includes('भेज दिया')) {
     return {
       type: 'normal',
       cls: 'sb-disp',
       icon: '📦',
       hindi: raw || 'भेज दिया गया (Dispatched)',
-      sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में आपके पते पर पहुँचेगा।',
+      sub: 'आपका दस्तावेज Speed Post / Courier से भेज दिया गया है। 2-4 दिन में आपके घर पर पहुँचेगा।',
       step: 2
     };
   }
@@ -671,7 +671,7 @@ function getStatusConfig(dbValue) {
     cls: 'sb-recv',
     icon: '📥',
     hindi: raw || 'ऑर्डर प्राप्त हुआ (Order Received)',
-    sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार करने की प्रक्रिया जल्द शुरू होगी।',
+    sub: 'हमें आपका ऑर्डर मिल गया है। दस्तावेज तैयार/खोजने  करने की प्रक्रिया जल्द शुरू होगी।',
     step: 0
   };
 }
