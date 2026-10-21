@@ -285,7 +285,6 @@ body{font-family:'Noto Serif Devanagari','Baloo 2',serif;background:var(--bg);co
     <ul class="nf-tips">
       <li>✅ Tracking ID सही लिखें — जैसे <strong>JS-12345</strong></li>
       <li>✅ वही Mobile Number जो ऑर्डर देते समय दिया था</li>
-      <li>✅ ऑर्डर के बाद WhatsApp पर ID मिली होगी, वो check करें</li>
     </ul>
     <a href="https://wa.me/919142075859?text=मेरा ऑर्डर नहीं मिल रहा, मदद करें।" class="wa-btn" target="_blank">📱 WhatsApp पर पूछें</a>
   </div>
@@ -583,13 +582,13 @@ function getStatusConfig(dbValue) {
   const v = raw.toLowerCase();
 
   // 1. CANCELLED / REJECTED CATEGORIES
-  if (v.includes('cancel') || v.includes('रद्द') || v.includes('reject') || v.includes('अस्वीकृत') || v.includes('फटा') || v.includes('दौरा') || v.includes('दोहरा') || v.includes('उपलब्ध नहीं')) {
+  if (v.includes('cancel') || v.includes('रद्द') || v.includes('reject') || v.includes('अस्वीकृत') || v.includes('फटा') || v.includes('RTO') || v.includes('दोहरा') || v.includes('उपलब्ध नहीं')) {
     let title = raw || 'ऑर्डर रद्द (Cancelled)';
     let desc = 'यह ऑर्डर रद्द कर दिया गया है। अधिक जानकारी या सपोर्ट के लिए नीचे दिए गए WhatsApp पर संपर्क करें।';
     if (v.includes('उपलब्ध नहीं')) desc = 'अभिलेख कार्यालय में इस जमीन का रिकॉर्ड उपलब्ध नहीं हो पाया, इसलिए ऑर्डर रद्द कर दिया गया है।';
     if (v.includes('फटा') || v.includes('अस्पष्ट')) desc = 'पुराना सरकारी रिकॉर्ड फटा या अस्पष्ट होने के कारण इसे रद्द किया गया है।';
     if (v.includes('दोहरा')) desc = 'एक ही विवरण का दूसरा ऑर्डर होने के कारण इस अतिरिक्त ऑर्डर को रद्द किया गया है।';
-
+    if (v.includes('RTO')) desc = 'आपने ऑर्डर लेने से मना कर दिया। इसी लियें यह कागजात वापस हो गया-ऑर्डर CANCEL हुआ';
     return {
       type: 'cancelled',
       cls: 'sb-canc',
@@ -601,12 +600,12 @@ function getStatusConfig(dbValue) {
   }
 
   // 2. ON HOLD / TOKEN / KISAN RESPONSE WAITING CATEGORIES
-  if (v.includes('टोकन') || v.includes('token') || v.includes('जवाब') || v.includes('इंतजार') || v.includes('waiting') || v.includes('hold') || v.includes('रुक')) {
+  if (v.includes('टोकन') || v.includes('token') || v.includes('जवाब') || v.includes('इंतजार') || v.includes('waiting') || v.includes('hold') || v.includes('रुका')) {
     let title = raw || 'कार्य रुका हुआ (On Hold)';
     let desc = 'आपके ऑर्डर पर प्रक्रिया आगे बढ़ाने के लिए आपकी टोकन शुल्क बकाया है।';
     if (v.includes('टोकन')) desc = 'खोज प्रक्रिया शुरू करने के लिए एडवांस सर्विस चार्ज टोकन का भुगतान करना होगा है।';
     if (v.includes('जवाब')) desc = 'हमारी टीम ने आपसे संपर्क किया पर नहीं हो पाया कृपया WhatsApp पर अपना जवाब या स्पष्टीकरण भेजें।';
-
+    
     return {
       type: 'hold',
       cls: 'sb-hold',
