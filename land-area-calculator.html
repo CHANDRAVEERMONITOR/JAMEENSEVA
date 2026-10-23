@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ PRIMARY TARGETED SEO & GSC META TAGS ══ -->
+  <title>जमीन का क्षेत्रफल कैसे निकालें? All India Land Area Calculator (वर्ग फीट, गज, एकड़, हेक्टेयर) | JameenSeva</title>
+  <meta name="description" content="ऑनलाइन जमीन क्षेत्रफल कैलकुलेटर (All India Land Calculator): आयताकार, त्रिभुज, विषमकोण व गोलाकार जमीन का सटीक रकबा वर्ग फीट (Sq Ft), वर्ग गज, डिसमिल, गुंठा, एकड़ और हेक्टेयर में तुरंत निकालें।" />
+  <meta name="keywords" content="land area calculator, jameen ka kshetraphal kaise nikale, jameen napne ka tarika, square feet to gaj calculator, plot area calculator india, all india land converter, jameenseva land calculator, varg feet calculator" />
+  <meta name="author" content="JameenSeva.in" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://jameenseva.in/land-area-calculator.html" />
+
+  <!-- ══ OPEN GRAPH (SOCIAL PREVIEW) ══ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="hi_IN" />
+  <meta property="og:title" content="All India Land Area Calculator — जमीन का क्षेत्रफल ऑनलाइन निकालें" />
+  <meta property="og:description" content="8 आकारों में जमीन का सटीक क्षेत्रफल वर्ग फीट, गज, एकड़ और डिसमिल में आसानी से निकालें।" />
+  <meta property="og:url" content="https://jameenseva.in/land-area-calculator.html" />
+  <meta property="og:image" content="https://jameenseva.in/logo.png" />
+  <meta property="og:site_name" content="JameenSeva.in" />
+
+  <!-- ══ 1. WEBAPPLICATION / SOFTWARE SCHEMA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "All India Land Area Calculator - JameenSeva",
+    "url": "https://jameenseva.in/land-area-calculator.html",
+    "description": "सटीक ज्यामितीय सूत्रों द्वारा भारत के सभी राज्यों के लिए मान्य जमीन क्षेत्रफल और यूनिट कनवर्टर कैलकुलेटर।",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR"
+    }
+  }
+  </script>
+
+  <!-- ══ 2. FAQ SCHEMA FOR GSC RICH SNIPPETS ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "1 डिसमिल जमीन में कितने वर्ग फीट (Square Feet) होते हैं?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "राष्ट्रीय मानक के अनुसार 1 डिसमिल (Decimal / Cent) में ठीक 435.60 वर्ग फीट होते हैं।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "1 एकड़ में कितने वर्ग गज (Gaj / Sq Yard) होते हैं?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1 एकड़ में 4,840 वर्ग गज (43,560 वर्ग फीट) होते हैं।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "टेढ़ी-मेढ़ी या असमकोण जमीन का क्षेत्रफल कैसे निकालते हैं?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "असमकोण या चार अलग-अलग भुजाओं वाले खेत को बीच से एक विकर्ण खींचकर दो त्रिभुजों में बांट लिया जाता है, फिर हेरोन के सूत्र (Heron's Formula) से दोनों त्रिभुजों का क्षेत्रफल जोड़कर कुल रकबा निकाला जाता है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "1 हेक्टेयर में कितने एकड़ होते हैं?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1 हेक्टेयर में 10,000 वर्ग मीटर अथवा लगभग 2.471 एकड़ (1,07,639 वर्ग फीट) जमीन होती है।"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- ══ 3. BREADCRUMBLIST SCHEMA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "होम", "item": "https://jameenseva.in/" },
+      { "@type": "ListItem", "position": 2, "name": "कैलकुलेटर", "item": "https://jameenseva.in/land-area-calculator.html" }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-dark: #0f172a;
+      --primary-light: #eff6ff;
+      --border-p: #bfdbfe;
+      --green: #15803d;
+      --green-light: #dcfce7;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #cbd5e1;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --radius: 14px;
+      --shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Serif Devanagari', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 15.5px; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Top Notice & Navbar */
+    .top-notice { background: #0f172a; color: #cbd5e1; font-family: 'Baloo 2', sans-serif; font-size: 13px; padding: 7px 16px; text-align: center; border-bottom: 2px solid #22c55e; }
+    .top-notice b { color: #86efac; }
+    .navbar { background: #ffffff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000; }
+    .brand { font-family: 'Baloo 2', sans-serif; font-weight: 800; color: #0f172a; font-size: 22px; text-decoration: none; }
+    .brand span { color: #15803d; }
+    .nav-links { display: flex; gap: 8px; align-items: center; }
+    .nav-links a { color: #0f172a; text-decoration: none; font-family: 'Baloo 2', sans-serif; font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 6px; }
+    .nav-links a:hover { background: #f1f5f9; color: var(--primary); }
+
+    /* Hero Header */
+    .page-header { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, var(--primary) 100%); color: #fff; padding: 44px 20px 36px; text-align: center; }
+    .page-header h1 { font-family: 'Baloo 2', sans-serif; font-size: clamp(1.4rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.35; margin-bottom: 8px; }
+    .page-header h1 span { color: #facc15; }
+    .page-header p { font-size: .95rem; color: #cbd5e1; max-width: 720px; margin: auto; }
+    .header-badges { display: flex; gap: 8px; justify-content: center; margin-top: 14px; flex-wrap: wrap; }
+    .h-badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); padding: 4px 14px; border-radius: 50px; font-size: .78rem; font-weight: 700; font-family: 'Baloo 2', sans-serif; }
+
+    .breadcrumb { font-size: .8rem; padding: 10px 16px; color: #64748b; background: #fff; border-bottom: 1px solid #e2e8f0; font-family: 'Baloo 2', sans-serif; }
+    .breadcrumb a { color: var(--primary); font-weight: 700; }
+
+    /* App Layout */
+    .app-wrap { max-width: 1140px; margin: auto; padding: 26px 16px 50px; }
+    .app-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; align-items: start; }
+
+    /* Cards */
+    .card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); border: 1.5px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+    .card-head { padding: 14px 18px; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; gap: 10px; background: #fff; }
+    .card-head h2 { font-family: 'Baloo 2', sans-serif; font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 0; }
+    .card-head .icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; background: var(--primary-light); }
+    .card-body { padding: 20px; }
+
+    /* Shape Grid */
+    .shape-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .shape-btn {
+      border: 1.8px solid var(--border); border-radius: 8px; padding: 10px 4px; cursor: pointer; text-align: center;
+      transition: all .2s; background: #fff; display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .shape-btn:hover { border-color: var(--primary); background: var(--primary-light); transform: translateY(-2px); }
+    .shape-btn.active { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 3px rgba(30,64,175,.15); }
+    .shape-btn svg { width: 40px; height: 34px; display: block; }
+    .shape-btn span { font-size: .74rem; font-weight: 700; color: var(--text); line-height: 1.2; font-family: 'Baloo 2', sans-serif; }
+    .shape-btn.active span { color: var(--primary); }
+
+    /* Shape Preview */
+    .shape-preview {
+      background: linear-gradient(135deg, #f8faff, #f1f5f9); border: 1.5px dashed var(--border-p); border-radius: 8px;
+      height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; position: relative; overflow: hidden;
+    }
+    .shape-preview svg { max-width: 92%; max-height: 92%; filter: drop-shadow(0 2px 8px rgba(30,64,175,.12)); }
+
+    /* Inputs */
+    .inp-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .inp-group label { font-size: .8rem; font-weight: 700; color: var(--text); display: flex; align-items: center; justify-content: space-between; font-family: 'Baloo 2', sans-serif; }
+    .inp-group label .hint { background: var(--primary-light); color: var(--primary); font-size: .68rem; padding: 2px 8px; border-radius: 50px; font-weight: 800; }
+    .inp-group input {
+      padding: 11px 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 1.05rem; font-weight: 800;
+      color: var(--text); font-family: inherit; transition: all .2s; background: #fff; outline: none;
+    }
+    .inp-group input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(30,64,175,.12); }
+
+    /* Unit Buttons */
+    .unit-tab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 8px 0 16px; }
+    .unit-tab {
+      padding: 8px 4px; border: 1.8px solid var(--border); border-radius: 8px; font-size: .78rem; font-weight: 700;
+      cursor: pointer; font-family: 'Baloo 2', sans-serif; background: #fff; color: var(--muted); transition: all .15s; text-align: center;
+    }
+    .unit-tab:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+    .unit-tab.active { border-color: var(--primary); background: var(--primary); color: #fff; box-shadow: 0 2px 6px rgba(30,64,175,0.25); }
+
+    /* Buttons */
+    .btn-calc {
+      width: 100%; padding: 14px; border-radius: 8px; border: none; font-size: 1.02rem; font-weight: 800; cursor: pointer;
+      font-family: 'Baloo 2', sans-serif; background: linear-gradient(135deg, var(--primary), #1d4ed8); color: #fff;
+      box-shadow: 0 4px 14px rgba(30,64,175,.3); transition: all .2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-calc:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .btn-reset {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1.5px solid var(--border); font-size: .85rem; font-weight: 700;
+      cursor: pointer; font-family: 'Baloo 2', sans-serif; background: transparent; color: var(--muted); transition: all .2s; margin-top: 8px;
+    }
+    .btn-reset:hover { border-color: #ef4444; color: #ef4444; background: #fef2f2; }
+
+    /* Result Card (Square Feet Hero) */
+    .result-placeholder { text-align: center; padding: 50px 20px; color: var(--muted); }
+    .main-result {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); color: #fff; border-radius: 10px; padding: 20px;
+      margin-bottom: 16px; text-align: center; box-shadow: 0 4px 14px rgba(15,23,42,0.15);
+    }
+    .main-result .mr-label { font-size: .82rem; font-weight: 800; color: #93c5fd; text-transform: uppercase; letter-spacing: 0.8px; font-family: 'Baloo 2', sans-serif; margin-bottom: 4px; }
+    .main-result .mr-val { font-size: 2.3rem; font-weight: 900; line-height: 1.1; font-family: 'Baloo 2', sans-serif; }
+    .main-result .mr-unit { font-size: 1rem; font-weight: 700; color: #facc15; font-family: 'Baloo 2', sans-serif; margin-top: 4px; }
+    .main-result .mr-sub { font-size: .78rem; color: #cbd5e1; margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.15); }
+
+    /* National Units Grid */
+    .unit-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .unit-card { background: #fff; border: 1.8px solid var(--border); border-radius: 8px; padding: 12px 14px; transition: all .15s; }
+    .unit-card:hover { border-color: var(--primary); background: var(--primary-light); }
+    .unit-card.primary-feat { border-color: var(--primary); background: var(--primary-light); }
+    .unit-card.primary-feat .uc-val { color: var(--primary); }
+    .unit-card.accent-feat { border-color: var(--green); background: var(--green-light); }
+    .unit-card.accent-feat .uc-val { color: var(--green); }
+    .unit-card .uc-val { font-size: 1.15rem; font-weight: 900; color: var(--text); line-height: 1.2; font-family: 'Baloo 2', sans-serif; }
+    .unit-card .uc-unit { font-size: .75rem; color: var(--muted); font-weight: 700; margin-top: 2px; font-family: 'Baloo 2', sans-serif; }
+
+    .formula-box { background: #f8fafc; border: 1.5px solid var(--border); border-radius: 8px; padding: 12px 14px; font-size: .84rem; margin-top: 12px; }
+    .formula-box strong { color: var(--primary); display: block; margin-bottom: 4px; font-size: .78rem; font-family: 'Baloo 2', sans-serif; text-transform: uppercase; }
+    .formula-box code { background: #e2e8f0; color: #0f172a; padding: 3px 8px; border-radius: 4px; font-weight: 800; font-family: monospace; }
+
+    /* Tab Bar */
+    .tab-bar { display: flex; gap: 4px; background: #e2e8f0; padding: 4px; border-radius: 8px; margin-bottom: 14px; }
+    .tab-btn { flex: 1; padding: 8px; border: none; background: transparent; border-radius: 6px; font-size: .82rem; font-weight: 700; color: var(--muted); cursor: pointer; font-family: 'Baloo 2', sans-serif; }
+    .tab-btn.active { background: #fff; color: var(--primary); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* Tables */
+    .comp-table { width: 100%; border-collapse: collapse; font-size: .86rem; margin-top: 8px; }
+    .comp-table th { background: #0f172a; color: #fff; padding: 9px 12px; text-align: left; font-family: 'Baloo 2', sans-serif; font-weight: 700; }
+    .comp-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+    .comp-table tr:nth-child(even) td { background: #f8fafc; }
+    .comp-table .cv { font-weight: 800; color: var(--primary); text-align: right; font-family: 'Baloo 2', sans-serif; }
+
+    /* AdSense Boxes */
+    .adsense-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 14px; margin: 22px 0; text-align: center; }
+    .ads-lbl { font-family: 'Baloo 2', sans-serif; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; }
+    .ads-slot { min-height: 90px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-family: monospace; color: #94a3b8; font-size: 12px; }
+
+    /* Comprehensive Article */
+    .article-card { background: #fff; border-radius: var(--radius); border: 1.5px solid var(--border); box-shadow: var(--shadow); padding: 32px 28px; margin-top: 30px; }
+    .article-card h2 { font-family: 'Baloo 2', sans-serif; font-size: 1.35rem; font-weight: 800; color: #0f172a; margin: 26px 0 10px; border-bottom: 2px solid var(--primary-light); padding-bottom: 8px; }
+    .article-card h2:first-of-type { margin-top: 0; }
+    .article-card h3 { font-family: 'Baloo 2', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--primary); margin: 18px 0 6px; }
+    .article-card p { font-size: .96rem; color: #334155; margin-bottom: 12px; }
+    .article-card ul, .article-card ol { margin: 0 0 16px 22px; color: #334155; font-size: .95rem; }
+    .article-card li { margin-bottom: 6px; }
+
+    /* FAQ */
+    .faq-item { border: 1.5px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+    .faq-q { background: #f8fafc; padding: 13px 16px; font-weight: 700; font-size: .95rem; color: #0f172a; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; font-family: 'Baloo 2', sans-serif; }
+    .faq-q .arrow { font-size: .75rem; transition: transform .2s; }
+    .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+    .faq-a { display: none; padding: 14px 18px; font-size: .92rem; color: #475569; line-height: 1.75; background: #fff; border-top: 1px solid var(--border); }
+    .faq-item.open .faq-a { display: block; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: #0f172a; color: #fff; padding: 10px 22px; border-radius: 50px;
+      font-size: .85rem; font-weight: 700; z-index: 999; transition: transform .3s; box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    footer { background: #0f172a; color: rgba(255,255,255,.75); text-align: center; padding: 34px 16px; font-size: .84rem; line-height: 2; border-top: 3px solid #16a34a; font-family: 'Baloo 2', sans-serif; margin-top: 40px; }
+    footer a { color: #86efac; }
+
+    @media (max-width: 780px) {
+      .app-grid { grid-template-columns: 1fr; }
+      .shape-grid { grid-template-columns: repeat(4, 1fr); }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 480px) {
+      .shape-grid { grid-template-columns: repeat(3, 1fr); }
+      .unit-results-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-notice">
+    <span>📐 <b>All India Land Area Calculator:</b> जमीन, प्लॉट और खेत की सटीक पैमाइश — 100% सटीक राष्ट्रीय मानक</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="https://jameenseva.in/" class="brand">Jameen<span>Seva</span>.in</a>
+    <div class="nav-links">
+      <a href="https://jameenseva.in/">🏠 Home</a>
+      <a href="https://jameenseva.in/sarkari.html">🏛️ सरकारी सेवाएं</a>
+      <a href="https://jameenseva.in/khatiyan.html">📜 खतियान</a>
+      <a href="https://jameenseva.in/panchnamablog.html">⚖️ बटवारा</a>
+      <a href="https://jameenseva.in/book-amin.html">📐 अमीन बुकिंग</a>
+      <a href="https://jameenseva.in/track.html">🚚 Tracking</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <h1>All India <span>Land Area Calculator</span></h1>
+    <p>राष्ट्रीय जमीन क्षेत्रफल कैलकुलेटर — आयताकार, त्रिभुज, समलंब या गोलाकार प्लॉट का रकबा वर्ग फीट, वर्ग गज, एकड़ और हेक्टेयर में निकालें</p>
+    <div class="header-badges">
+      <span class="h-badge">📐 प्राथमिक परिणाम: वर्ग फीट (Sq Ft)</span>
+      <span class="h-badge">🌐 8 मानक आकृतियाँ</span>
+      <span class="h-badge">📏 6 इनपुट इकाइयाँ</span>
+      <span class="h-badge">⚖️ भारत सरकार ISO मानक</span>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="https://jameenseva.in/">होम</a> ›
+    <a href="https://jameenseva.in/land-area-calculator.html">भूमि कैलकुलेटर</a> ›
+    राष्ट्रीय जमीन क्षेत्रफल कैलकुलेटर
+  </div>
+
+  <div class="app-wrap">
+
+    <!-- AD SLOT 1 (HEADER BANNER) -->
+    <div class="adsense-box">
+      <div class="ads-lbl">ADVERTISEMENT</div>
+      <div class="ads-slot">[Google AdSense Top Leaderboard Unit]</div>
+    </div>
+
+    <!-- CALCULATOR ENGINE GRID -->
+    <div class="app-grid">
+
+      <!-- LEFT: SHAPE & INPUTS -->
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="card-head">
+            <div class="icon">🔷</div>
+            <h2>1. जमीन की आकृति चुनें (Select Shape)</h2>
+          </div>
+          <div class="card-body">
+            <div class="shape-grid" id="shapeGrid">
+
+              <div class="shape-btn active" data-shape="rectangle" onclick="selectShape('rectangle',this)">
+                <svg viewBox="0 0 44 38"><rect x="4" y="9" width="36" height="20" rx="1" fill="#dbeafe" stroke="#1e40af" stroke-width="2.2"/></svg>
+                <span>आयताकार<br>Rectangle</span>
+              </div>
+
+              <div class="shape-btn" data-shape="square" onclick="selectShape('square',this)">
+                <svg viewBox="0 0 44 38"><rect x="8" y="5" width="28" height="28" rx="1" fill="#ede9fe" stroke="#6d28d9" stroke-width="2.2"/></svg>
+                <span>वर्गाकार<br>Square</span>
+              </div>
+
+              <div class="shape-btn" data-shape="triangle" onclick="selectShape('triangle',this)">
+                <svg viewBox="0 0 44 38"><polygon points="22,5 4,33 40,33" fill="#dcfce7" stroke="#15803d" stroke-width="2.2"/></svg>
+                <span>त्रिभुजाकार<br>Triangle</span>
+              </div>
+
+              <div class="shape-btn" data-shape="circle" onclick="selectShape('circle',this)">
+                <svg viewBox="0 0 44 38"><circle cx="22" cy="19" r="14" fill="#fef9c3" stroke="#b45309" stroke-width="2.2"/></svg>
+                <span>गोलाकार<br>Circle</span>
+              </div>
+
+              <div class="shape-btn" data-shape="trapezoid" onclick="selectShape('trapezoid',this)">
+                <svg viewBox="0 0 44 38"><polygon points="10,33 34,33 38,9 6,9" fill="#fff7ed" stroke="#c2410c" stroke-width="2.2"/></svg>
+                <span>समलंब<br>Trapezoid</span>
+              </div>
+
+              <div class="shape-btn" data-shape="rhombus" onclick="selectShape('rhombus',this)">
+                <svg viewBox="0 0 44 38"><polygon points="22,4 39,19 22,34 5,19" fill="#f0fdf4" stroke="#166534" stroke-width="2.2"/></svg>
+                <span>समचतुर्भुज<br>Rhombus</span>
+              </div>
+
+              <div class="shape-btn" data-shape="right-triangle" onclick="selectShape('right-triangle',this)">
+                <svg viewBox="0 0 44 38"><polygon points="6,33 38,33 6,7" fill="#e0f2fe" stroke="#0369a1" stroke-width="2.2"/></svg>
+                <span>समकोण त्रिभुज<br>Right Triangle</span>
+              </div>
+
+              <div class="shape-btn" data-shape="ellipse" onclick="selectShape('ellipse',this)">
+                <svg viewBox="0 0 44 38"><ellipse cx="22" cy="19" rx="17" ry="11" fill="#fce7f3" stroke="#be185d" stroke-width="2.2"/></svg>
+                <span>अंडाकार<br>Ellipse</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="icon">📐</div>
+            <h2 id="inputCardTitle">2. माप दर्ज करें (Enter Dimensions)</h2>
+          </div>
+          <div class="card-body">
+            <div class="shape-preview" id="shapePreview"></div>
+            <div id="dynamicInputs"></div>
+
+            <label style="font-size:.82rem;font-weight:700;color:var(--text);display:block;margin-top:14px;font-family:'Baloo 2'">माप किस इकाई में नापी गई है? (Input Unit):</label>
+            <div class="unit-tab-grid" id="unitBtns">
+              <button class="unit-tab active" data-unit="feet" onclick="setUnit('feet',this)">Feet (फीट)</button>
+              <button class="unit-tab" data-unit="meter" onclick="setUnit('meter',this)">Meter (मीटर)</button>
+              <button class="unit-tab" data-unit="yard" onclick="setUnit('yard',this)">Gaj / Yard (गज़)</button>
+              <button class="unit-tab" data-unit="inch" onclick="setUnit('inch',this)">Inch (इंच)</button>
+              <button class="unit-tab" data-unit="cm" onclick="setUnit('cm',this)">CM (सेमी)</button>
+              <button class="unit-tab" data-unit="km" onclick="setUnit('km',this)">KM (किमी)</button>
+            </div>
+
+            <button class="btn-calc" onclick="calculate()">
+              🧮 क्षेत्रफल निकालें — Calculate Area
+            </button>
+            <button class="btn-reset" onclick="resetAll()">↺ रीसेट करें (Reset)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: OUTPUT PANEL -->
+      <div>
+        <div class="card">
+          <div class="card-head">
+            <div class="icon">📊</div>
+            <h2>3. क्षेत्रफल परिणाम (Area Result)</h2>
+          </div>
+          <div class="card-body">
+
+            <div class="tab-bar">
+              <button class="tab-btn active" onclick="switchTab('results',this)">📐 परिणाम</button>
+              <button class="tab-btn" onclick="switchTab('comparison',this)">📋 तुलना तालिका</button>
+              <button class="tab-btn" onclick="switchTab('history',this)">⏱️ इतिहास</button>
+            </div>
+
+            <div class="tab-pane active" id="tab-results">
+              <div id="resultArea">
+                <div class="result-placeholder">
+                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                  <p>बाईं ओर माप भरकर<br><strong>"Calculate Area"</strong> बटन दबाएँ</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-comparison">
+              <div id="compArea">
+                <p style="text-align:center;color:var(--muted);font-size:.84rem;padding:30px">गणना करने के बाद सभी राष्ट्रीय इकाइयों में तुलनात्मक चार्ट यहाँ प्रदर्शित होगा।</p>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-history">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+                <span style="font-size:.8rem;font-weight:700;color:var(--muted);font-family:'Baloo 2'">हालिया गणनाएं</span>
+                <button onclick="clearHistory()" style="background:none;border:none;color:#ef4444;font-size:.76rem;font-weight:700;cursor:pointer;font-family:'Baloo 2'">🗑️ साफ़ करें</button>
+              </div>
+              <div id="historyList" style="display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- NATIONAL STANDARDS TABLE -->
+        <div class="card">
+          <div class="card-head">
+            <div class="icon">🇮🇳</div>
+            <h2>राष्ट्रीय भूमि मापन संदर्भ (Standard Indian Land Units)</h2>
+          </div>
+          <div class="card-body" style="padding:14px">
+            <table class="comp-table">
+              <thead>
+                <tr><th>मानक इकाई</th><th>वर्ग फीट में मान (Square Feet)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1 Decimal / Dismil (डिसमिल)</td><td class="cv">435.60 sq ft</td></tr>
+                <tr><td>1 Gaj / Sq Yard (वर्ग गज)</td><td class="cv">9.00 sq ft</td></tr>
+                <tr><td>1 Guntha (गुंठा - MH/KA/GJ)</td><td class="cv:">1,089.00 sq ft</td></tr>
+                <tr><td>1 Cent (सेंट - दक्षिण भारत)</td><td class="cv">435.60 sq ft</td></tr>
+                <tr><td>1 Acre (एकड़)</td><td class="cv">43,560.00 sq ft</td></tr>
+                <tr><td>1 Hectare (हेक्टेयर)</td><td class="cv">1,07,639.10 sq ft</td></tr>
+                <tr><td>1 Square Meter (वर्ग मीटर)</td><td class="cv">10.7639 sq ft</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- IN-ARTICLE AD -->
+    <div class="adsense-box">
+      <div class="ads-lbl">ADVERTISEMENT</div>
+      <div class="ads-slot">[Google AdSense In-Article Responsive Banner]</div>
+    </div>
+
+    <!-- ══ COMPREHENSIVE SEO CONTENT & GUIDE ══ -->
+    <article class="article-card">
+      <h2>1. जमीन का क्षेत्रफल (रकबा) निकालने की सही वैज्ञानिक विधि</h2>
+      <p>
+        भारत में जमीन की खरीद-बिक्री, दाखिल-खारिज (म्यूटेशन), रजिस्ट्री और बैंक ऋण (KCC/Home Loan) के लिए जमीन का सही क्षेत्रफल निकालना सबसे महत्वपूर्ण प्रक्रिया है। अक्सर अमीन या लेखपाल द्वारा जमीन नापते समय छोटी सी गणितीय चूक से लाखों रुपयों का नुकसान हो जाता है।
+      </p>
+      <p>
+        हमारा <strong>All India Land Area Calculator</strong> शुद्ध ज्यामितीय नियमों और भारत सरकार के विधिक माप विज्ञान (Legal Metrology) के आधार पर काम करता है। चाहे आपका प्लॉट वर्गाकार हो, समकोण हो, या चार अलग-अलग भुजाओं वाला समलंब हो, यह कैलकुलेटर 100% सटीक परिणाम सीधे <strong>वर्ग फीट (Square Feet)</strong> और <strong>वर्ग गज (Gaj)</strong> में प्रदान करता है।
+      </p>
+
+      <h2>2. भारतीय भूमि मापन की प्रमुख राष्ट्रीय इकाइयाँ (National Land Units)</h2>
+      <p>अलग-अलग राज्यों में जमीन नापने की स्थानीय बोलियाँ अलग हो सकती हैं, लेकिन सरकारी रिकॉर्ड और रजिस्ट्री डीड में राष्ट्रीय मानक इकाइयाँ ही मान्य होती हैं:</p>
+      <ul>
+        <li><strong>वर्ग फीट (Square Feet):</strong> भारत के शहरों और कस्बों में आवासीय एवं व्यावसायिक प्लॉट की रजिस्ट्री वर्ग फीट में ही होती है।</li>
+        <li><strong>वर्ग गज (Square Yard / गज):</strong> दिल्ली, उत्तर प्रदेश, हरियाणा और पंजाब में प्लॉट का आकार गज में बताया जाता है। (1 गज = 9 वर्ग फीट)।</li>
+        <li><strong>डिसमिल / सेंट (Decimal / Cent):</strong> बिहार, झारखंड, पश्चिम बंगाल और ओडिशा में ग्रामीण जमीन डिसमिल में नापी जाती है, जबकि दक्षिण भारत (तमिलनाडु, केरल) में इसे 'Cent' कहा जाता है। (1 डिसमिल = 435.60 वर्ग फीट)।</li>
+        <li><strong>गुंठा (Guntha):</strong> महाराष्ट्र, गुजरात और कर्नाटक में 1 गुंठा = 1,089 वर्ग फीट (1/40 एकड़) होता है।</li>
+        <li><strong>एकड़ (Acre):</strong> पूरे भारत में 1 एकड़ = 43,560 वर्ग फीट = 4,840 वर्ग गज = 100 डिसमिल होता है।</li>
+        <li><strong>हेक्टेयर (Hectare):</strong> 1 हेक्टेयर = 10,000 वर्ग मीटर = 2.471 एकड़ (लगभग 247 डिसमिल) होता है।</li>
+      </ul>
+
+      <h2>3. विषमकोण (Irregular Shaped) जमीन का क्षेत्रफल कैसे निकालें?</h2>
+      <p>
+        यदि खेत की चारों भुजाएं अलग-अलग लंबाई की हैं, तो कभी भी आमने-सामने की भुजाओं को जोड़कर आधा करने का औसत नियम (Average Method) न अपनाएं। औसत विधि से रकबा हमेशा वास्तविक माप से अधिक निकल जाता है, जिससे विवाद पैदा होता है।
+      </p>
+      <p>
+        <strong>सटीक अमीन तरीका:</strong> खेत के किसी एक कोने से सामने वाले कोने तक एक तिरछी रेखा (विकर्ण / Diagonal) नाप लें। इससे आपका विषमकोण खेत दो अलग-अलग त्रिभुजों में बंट जाता है। इसके बाद हमारे कैलकुलेटर के <em>Triangle</em> मोड का उपयोग करके दोनों हिस्सों का क्षेत्रफल निकालकर जोड़ लें।
+      </p>
+
+      <h2>4. अक्सर पूछे जाने वाले सवाल (FAQs)</h2>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">1 डिसमिल में कितने वर्ग फीट होते हैं? <span class="arrow">▼</span></div>
+        <div class="faq-a">1 डिसमिल (Decimal) में बिल्कुल <strong>435.6 वर्ग फीट</strong> होते हैं। यदि आपका प्लॉट 43.56 फीट लंबा और 10 फीट चौड़ा है, तो वह ठीक 1 डिसमिल कहलाएगा।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">वर्ग फीट से वर्ग गज (Gaj) में कैसे बदलें? <span class="arrow">▼</span></div>
+        <div class="faq-a">वर्ग फीट को वर्ग गज में बदलने के लिए कुल वर्ग फीट में <strong>9</strong> का भाग (Divide) दिया जाता है। उदाहरण: 900 वर्ग फीट ÷ 9 = 100 गज।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">1 बीघा में कितना वर्ग फीट होता है? <span class="arrow">▼</span></div>
+        <div class="faq-a">बीघा कोई राष्ट्रीय मानक इकाई नहीं है। उत्तर प्रदेश में पक्का बीघा 27,225 वर्ग फीट और कच्चा बीघा 9,075 वर्ग फीट होता है। बिहार में 6 हाथ के लग्गे पर 1 बीघा लगभग 27,225 वर्ग फीट (62.5 डिसमिल) होता है, जबकि राजस्थान और मध्य प्रदेश में इसका मान अलग होता है। इसलिए विवाद से बचने के लिए हमेशा <strong>वर्ग फीट</strong> या <strong>एकड़</strong> का उपयोग करें।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">प्लॉट की चौहद्दी (Boundary) नापते समय क्या ध्यान रखें? <span class="arrow">▼</span></div>
+        <div class="faq-a">नापी हमेशा जमीन की मेढ़ के केंद्र (सेंटर) से करें। लोहे की प्रमाणित फीते या 66 फीट वाली गुंटर जरीब का ही इस्तेमाल करें, कपड़े के फीते से नापने पर खिंचाव के कारण माप गलत हो जाती है।</div>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <strong style="color:#fff;font-size:1.05rem;">JameenSeva.in — भारत का अग्रणी भूमि एवं विधिक सेवा पोर्टल</strong><br>
+      <a href="https://jameenseva.in/about-us.html">हमारे बारे में</a> &nbsp;|&nbsp;
+      <a href="https://jameenseva.in/terms-and-conditions.html">नियम व शर्तें</a> &nbsp;|&nbsp;
+      <a href="https://jameenseva.in/privacy-policy.html">गोपनीयता नीति</a> &nbsp;|&nbsp;
+      <a href="https://jameenseva.in/disclaimer.html">डिस्क्लेमर</a> &nbsp;|&nbsp;
+      <a href="https://jameenseva.in/contact.html">संपर्क करें</a><br>
+      © 2026 JameenSeva.in – सर्वाधिकार सुरक्षित।
+    </div>
+  </footer>
+
+  <script>
+    // ══════════════════════════════════════════════
+    // STATE & CONVERSIONS
+    // ══════════════════════════════════════════════
+    let currentShape = 'rectangle';
+    let currentUnit  = 'feet';
+    let history = JSON.parse(localStorage.getItem('nat_calc_history') || '[]');
+
+    const toMeter = {
+      feet  : 0.3048,
+      meter : 1.0,
+      yard  : 0.9144,
+      inch  : 0.0254,
+      cm    : 0.01,
+      km    : 1000.0
+    };
+
+    const unitLabel = {
+      feet  : 'Feet (फीट)',
+      meter : 'Meter (मीटर)',
+      yard  : 'Gaj / Yard (गज़)',
+      inch  : 'Inch (इंच)',
+      cm    : 'Centimeter (सेमी)',
+      km    : 'Kilometer (किमी)'
+    };
+
+    const shapes = {
+      'rectangle': {
+        title: 'आयताकार प्लॉट (Rectangle)',
+        fields: [{id:'len',label:'लंबाई (Length)',hint:'L'},{id:'wid',label:'चौड़ाई (Width)',hint:'W'}],
+        formula: 'Area = Length × Width',
+        calc: d => d.len * d.wid,
+        svg: `<svg viewBox="0 0 300 160"><rect x="30" y="25" width="240" height="110" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="2.5"/><text x="150" y="18" text-anchor="middle" fill="#1e40af" font-size="12" font-weight="700">← लंबाई (Length) →</text><text x="285" y="85" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="700" transform="rotate(90,285,85)">चौड़ाई (Width) ↕</text></svg>`
+      },
+      'square': {
+        title: 'वर्गाकार प्लॉट (Square)',
+        fields: [{id:'side',label:'भुजा (Side)',hint:'S'}],
+        formula: 'Area = Side²',
+        calc: d => d.side * d.side,
+        svg: `<svg viewBox="0 0 300 160"><rect x="90" y="20" width="120" height="120" rx="3" fill="#ede9fe" stroke="#6d28d9" stroke-width="2.5"/><text x="150" y="14" text-anchor="middle" fill="#6d28d9" font-size="12" font-weight="700">← भुजा (Side) →</text><text x="225" y="85" text-anchor="middle" fill="#6d28d9" font-size="11" font-weight="700" transform="rotate(90,225,85)">भुजा ↕</text></svg>`
+      },
+      'triangle': {
+        title: 'त्रिभुजाकार प्लॉट (Triangle)',
+        fields: [{id:'base',label:'आधार (Base)',hint:'b'},{id:'height',label:'लंब / ऊँचाई (Height)',hint:'h'}],
+        formula: 'Area = ½ × Base × Height',
+        calc: d => 0.5 * d.base * d.height,
+        svg: `<svg viewBox="0 0 300 160"><polygon points="150,15 30,145 270,145" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"/><line x1="150" y1="15" x2="150" y2="145" stroke="#15803d" stroke-width="1.8" stroke-dasharray="5,4"/><text x="150" y="157" text-anchor="middle" fill="#15803d" font-size="12" font-weight="700">← आधार (Base) →</text><text x="162" y="85" fill="#15803d" font-size="11" font-weight="700">Height ↕</text></svg>`
+      },
+      'circle': {
+        title: 'गोलाकार भूखंड (Circle)',
+        fields: [{id:'radius',label:'त्रिज्या (Radius)',hint:'r'}],
+        formula: 'Area = π × r² (π = 3.14159)',
+        calc: d => Math.PI * d.radius * d.radius,
+        svg: `<svg viewBox="0 0 300 160"><circle cx="150" cy="80" r="65" fill="#fef9c3" stroke="#b45309" stroke-width="2.5"/><line x1="150" y1="80" x2="215" y2="80" stroke="#b45309" stroke-width="2"/><circle cx="150" cy="80" r="3" fill="#b45309"/><text x="182" y="74" fill="#b45309" font-size="12" font-weight="700">त्रिज्या (r)</text></svg>`
+      },
+      'trapezoid': {
+        title: 'समलंब चतुर्भुज (Trapezoid)',
+        fields: [{id:'a',label:'समानांतर भुजा A (Parallel Side A)',hint:'a'},{id:'b',label:'समानांतर भुजा B (Parallel Side B)',hint:'b'},{id:'height',label:'ऊँचाई / लंब (Height)',hint:'h'}],
+        formula: 'Area = ½ × (A + B) × Height',
+        calc: d => 0.5 * (d.a + d.b) * d.height,
+        svg: `<svg viewBox="0 0 300 160"><polygon points="60,25 240,25 275,140 25,140" fill="#fff7ed" stroke="#c2410c" stroke-width="2.5"/><line x1="150" y1="25" x2="150" y2="140" stroke="#c2410c" stroke-width="1.8" stroke-dasharray="5,4"/><text x="150" y="17" text-anchor="middle" fill="#c2410c" font-size="11" font-weight="700">भुजा A</text><text x="150" y="155" text-anchor="middle" fill="#c2410c" font-size="11" font-weight="700">भुजा B</text><text x="162" y="85" fill="#c2410c" font-size="11" font-weight="700">Height ↕</text></svg>`
+      },
+      'rhombus': {
+        title: 'समचतुर्भुज (Rhombus)',
+        fields: [{id:'d1',label:'पहला विकर्ण (Diagonal 1)',hint:'d1'},{id:'d2',label:'दूसरा विकर्ण (Diagonal 2)',hint:'d2'}],
+        formula: 'Area = ½ × d1 × d2',
+        calc: d => 0.5 * d.d1 * d.d2,
+        svg: `<svg viewBox="0 0 300 160"><polygon points="150,15 265,80 150,145 35,80" fill="#f0fdf4" stroke="#166534" stroke-width="2.5"/><line x1="35" y1="80" x2="265" y2="80" stroke="#166534" stroke-width="1.5" stroke-dasharray="5,4"/><line x1="150" y1="15" x2="150" y2="145" stroke="#166534" stroke-width="1.5" stroke-dasharray="5,4"/><text x="150" y="74" text-anchor="middle" fill="#166534" font-size="11" font-weight="700">d1 →</text><text x="158" y="45" fill="#166534" font-size="11" font-weight="700">d2 ↕</text></svg>`
+      },
+      'right-triangle': {
+        title: 'समकोण त्रिभुज (Right Triangle)',
+        fields: [{id:'base',label:'आधार (Base)',hint:'b'},{id:'height',label:'लंब (Perpendicular/Height)',hint:'h'}],
+        formula: 'Area = ½ × Base × Height',
+        calc: d => 0.5 * d.base * d.height,
+        svg: `<svg viewBox="0 0 300 160"><polygon points="35,140 265,140 35,20" fill="#e0f2fe" stroke="#0369a1" stroke-width="2.5"/><rect x="35" y="125" width="15" height="15" fill="none" stroke="#0369a1" stroke-width="1.5"/><text x="150" y="155" text-anchor="middle" fill="#0369a1" font-size="12" font-weight="700">← आधार (Base) →</text><text x="22" y="80" text-anchor="middle" fill="#0369a1" font-size="11" font-weight="700" transform="rotate(-90,22,80)">लंब ↕</text></svg>`
+      },
+      'ellipse': {
+        title: 'दीर्घवृत्ताकार प्लॉट (Ellipse)',
+        fields: [{id:'a',label:'अर्ध-दीर्घ अक्ष (Semi-Major Axis)',hint:'a'},{id:'b',label:'अर्ध-लघु अक्ष (Semi-Minor Axis)',hint:'b'}],
+        formula: 'Area = π × a × b',
+        calc: d => Math.PI * d.a * d.b,
+        svg: `<svg viewBox="0 0 300 160"><ellipse cx="150" cy="80" rx="120" ry="60" fill="#fce7f3" stroke="#be185d" stroke-width="2.5"/><line x1="150" y1="80" x2="270" y2="80" stroke="#be185d" stroke-width="1.8" stroke-dasharray="5,3"/><line x1="150" y1="80" x2="150" y2="20" stroke="#be185d" stroke-width="1.8" stroke-dasharray="5,3"/><text x="210" y="74" fill="#be185d" font-size="11" font-weight="700">a →</text><text x="156" y="50" fill="#be185d" font-size="11" font-weight="700">b ↑</text></svg>`
+      }
+    };
+
+    function selectShape(shape, el){
+      currentShape = shape;
+      document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      const cfg = shapes[shape];
+      document.getElementById('inputCardTitle').textContent = cfg.title;
+      document.getElementById('shapePreview').innerHTML = cfg.svg;
+      buildInputs(cfg.fields);
+    }
+
+    function buildInputs(fields){
+      const wrap = document.getElementById('dynamicInputs');
+      wrap.innerHTML = '';
+      fields.forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'inp-group';
+        div.innerHTML = `
+          <label>${f.label} <span class="hint">${f.hint}</span></label>
+          <input type="number" id="inp_${f.id}" placeholder="0.00" min="0" step="any" onkeydown="if(event.key==='Enter')calculate()">
+        `;
+        wrap.appendChild(div);
+      });
+    }
+
+    function setUnit(unit, el){
+      currentUnit = unit;
+      document.querySelectorAll('.unit-tab').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function calculate(){
+      const cfg = shapes[currentShape];
+      const factor = toMeter[currentUnit];
+
+      const data = {};
+      let valid = true;
+      cfg.fields.forEach(f => {
+        const val = parseFloat(document.getElementById('inp_' + f.id)?.value || 0);
+        if(!val || val <= 0) valid = false;
+        data[f.id] = val * factor;
+      });
+
+      if(!valid){
+        showToast('⚠️ कृपया सभी माप सही-सही दर्ज करें!');
+        return;
+      }
+
+      // Exact SI Base
+      const sqM = cfg.calc(data);
+      // Exact Sq Feet Base (1 m = 1 / 0.3048 ft)
+      const sqFt = sqM / (0.3048 * 0.3048);
+
+      const r = {
+        sqFt,
+        sqYd    : sqFt / 9.0,
+        acre    : sqFt / 43560.0,
+        hectare : sqM / 10000.0,
+        dismil  : sqFt / 435.60,
+        guntha  : sqFt / 1089.00,
+        sqM     : sqM,
+        sqInch  : sqFt * 144.0
+      };
+
+      renderResults(r, cfg);
+      renderComparison(r);
+      addHistory(r, cfg);
+      switchTab('results', document.querySelectorAll('.tab-btn')[0]);
+    }
+
+    function renderResults(r, cfg){
+      const html = `
+        <div class="main-result">
+          <div class="mr-label">कुल क्षेत्रफल (Total Land Area)</div>
+          <div class="mr-val">${fmtN(r.sqFt)}</div>
+          <div class="mr-unit">वर्ग फीट (Square Feet)</div>
+          <div class="mr-sub">📐 आकृति: ${cfg.title} &nbsp;|&nbsp; इनपुट इकाई: ${unitLabel[currentUnit]}</div>
+        </div>
+
+        <div style="font-size:.78rem;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:8px;font-family:'Baloo 2'">राष्ट्रीय मानक इकाइयाँ (National Land Units):</div>
+        <div class="unit-results-grid">
+          <div class="unit-card primary-feat">
+            <div class="uc-val">${fmtN(r.sqYd)}</div>
+            <div class="uc-unit">वर्ग गज / गज़ (Sq Yard / Gaj)</div>
+          </div>
+          <div class="unit-card accent-feat">
+            <div class="uc-val">${fmtN(r.acre)}</div>
+            <div class="uc-unit">एकड़ (Acre)</div>
+          </div>
+          <div class="unit-card">
+            <div class="uc-val">${fmtN(r.dismil)}</div>
+            <div class="uc-unit">डिसमिल / सेंट (Decimal / Cent)</div>
+          </div>
+          <div class="unit-card">
+            <div class="uc-val">${fmtN(r.guntha)}</div>
+            <div class="uc-unit">गुंठा (Guntha)</div>
+          </div>
+          <div class="unit-card">
+            <div class="uc-val">${fmtN(r.hectare)}</div>
+            <div class="uc-unit">हेक्टेयर (Hectare)</div>
+          </div>
+          <div class="unit-card">
+            <div class="uc-val">${fmtN(r.sqM)}</div>
+            <div class="uc-unit">वर्ग मीटर (Square Meter)</div>
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <strong>📐 प्रयुक्त ज्यामितीय सूत्र (Formula Applied):</strong>
+          <code>${cfg.formula}</code>
+        </div>
+      `;
+      document.getElementById('resultArea').innerHTML = html;
+    }
+
+    function renderComparison(r){
+      const rows = [
+        ['वर्ग फीट (Square Feet)', r.sqFt, 'मानक रजिस्ट्री इकाई'],
+        ['वर्ग गज / गज़ (Sq Yard / Gaj)', r.sqYd, '1 गज = 9 sq ft'],
+        ['डिसमिल / सेंट (Decimal / Cent)', r.dismil, '1/100 एकड़ (435.60 sq ft)'],
+        ['गुंठा (Guntha)', r.guntha, '1/40 एकड़ (1,089 sq ft)'],
+        ['एकड़ (Acre)', r.acre, '43,560 sq ft'],
+        ['हेक्टेयर (Hectare)', r.hectare, '10,000 sq m (2.471 एकड़)'],
+        ['वर्ग मीटर (Square Meter)', r.sqM, 'SI अंतर्राष्ट्रीय मानक'],
+        ['वर्ग इंच (Square Inch)', r.sqInch, '144 sq in per sq ft']
+      ];
+
+      const html = `
+        <table class="comp-table">
+          <thead>
+            <tr><th>भूमि मापन इकाई</th><th style="text-align:right">क्षेत्रफल मान</th></tr>
+          </thead>
+          <tbody>
+            ${rows.map(([label, val, note]) => `
+              <tr>
+                <td><strong>${label}</strong> <span style="font-size:.72rem;color:var(--muted)">(${note})</span></td>
+                <td class="cv">${fmtN(val)}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+      document.getElementById('compArea').innerHTML = html;
+    }
+
+    function addHistory(r, cfg){
+      const item = {
+        shape: cfg.title,
+        unit: currentUnit,
+        sqFt: r.sqFt,
+        sqYd: r.sqYd,
+        time: new Date().toLocaleTimeString('hi-IN', {hour:'2-digit', minute:'2-digit'})
+      };
+      history.unshift(item);
+      if(history.length > 10) history.pop();
+      localStorage.setItem('nat_calc_history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory(){
+      const wrap = document.getElementById('historyList');
+      if(!history.length){
+        wrap.innerHTML = '<p style="text-align:center;color:var(--muted);font-size:.82rem;padding:20px">कोई गणना इतिहास उपलब्ध नहीं है।</p>';
+        return;
+      }
+      wrap.innerHTML = history.map(h => `
+        <div style="background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:8px 12px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700;font-size:.82rem;font-family:'Baloo 2'">${h.shape}</div>
+            <div style="font-size:.72rem;color:var(--muted)">${h.time} | इनपुट: ${unitLabel[h.unit]}</div>
+          </div>
+          <div style="text-align:right">
+            <strong style="color:var(--primary);font-size:.9rem;font-family:'Baloo 2'">${fmtN(h.sqFt)}</strong> <span style="font-size:.72rem">sq ft</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function clearHistory(){
+      history = [];
+      localStorage.removeItem('nat_calc_history');
+      renderHistory();
+      showToast('इतिहास साफ़ कर दिया गया');
+    }
+
+    function switchTab(tab, el){
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      if(el) el.classList.add('active');
+      const target = document.getElementById('tab-' + tab);
+      if(target) target.classList.add('active');
+    }
+
+    function resetAll(){
+      document.querySelectorAll('#dynamicInputs input').forEach(i => i.value = '');
+      document.getElementById('resultArea').innerHTML = `
+        <div class="result-placeholder">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <p>बाईं ओर माप भरकर<br><strong>"Calculate Area"</strong> बटन दबाएँ</p>
+        </div>
+      `;
+      document.getElementById('compArea').innerHTML = `<p style="text-align:center;color:var(--muted);font-size:.84rem;padding:30px">गणना करने के बाद सभी राष्ट्रीय इकाइयों में तुलनात्मक चार्ट यहाँ प्रदर्शित होगा।</p>`;
+      showToast('कैलकुलेटर रीसेट हो गया');
+    }
+
+    function fmtN(n){
+      if(isNaN(n) || !isFinite(n)) return '—';
+      if(n === 0) return '0';
+      if(n < 0.0001) return n.toFixed(6);
+      const digits = n >= 1000 ? 2 : n >= 1 ? 4 : 5;
+      return n.toLocaleString('en-IN', { maximumFractionDigits: digits });
+    }
+
+    function showToast(msg){
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    function toggleFaq(el) {
+      el.parentElement.classList.toggle('open');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      selectShape('rectangle', document.querySelector('[data-shape="rectangle"]'));
+      renderHistory();
+    });
+  </script>
+</body>
+</html>
