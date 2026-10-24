@@ -3,25 +3,29 @@ name: Generate Sitemap
 on:
   push:
     branches:
-      - main  # Agar aapka default branch 'master' hai toh yahan master likh dein
+      - main
+
+# GitHub ko repository me Write (sitemap.xml save karne) ki permission de
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Run Sitemap Generator
         run: node generate-sitemap.js
 
       - name: Commit and Push Sitemap
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update sitemap.xml via GitHub Actions"
           file_pattern: sitemap.xml
