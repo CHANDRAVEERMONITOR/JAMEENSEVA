@@ -3,10 +3,18 @@ const fs = require('fs');
 const DOMAIN = 'https://jameenseva.in';
 const files = fs.readdirSync('.');
 
-// Sirf HTML files ko filter karein (sitemap.html ko chhod kar)
-const htmlFiles = files.filter(file => file.endsWith('.html') && file !== 'sitemap.html');
+// Jin pages ko sitemap se door rakhna hai unke keywords yahan daal dein
+const excludeList = ['sitemap.html', 'admin', 'login', 'dashboard', 'private', 'checkout'];
 
-// 1. GENERATE sitemap.xml
+// Sirf public HTML files ko filter karein
+const htmlFiles = files.filter(file => {
+    if (!file.endsWith('.html')) return false;
+    let lowerFile = file.toLowerCase();
+    // Check karein ki file me koi excluded keyword toh nahi hai
+    return !excludeList.some(keyword => lowerFile.includes(keyword));
+});
+
+// 1. GENERATE sitemap.xml (Sirf Public Pages)
 let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
 xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
@@ -20,14 +28,13 @@ htmlFiles.forEach(file => {
 xml += '</urlset>';
 fs.writeFileSync('sitemap.xml', xml);
 
-// Categories define karne ke liye helper function
+// Categories define karne ke liye function
 function categorizeFiles(files) {
     let cats = {
         bihar: [],
         states: [],
         yojana: [],
         amin: [],
-        admin: [],
         others: []
     };
 
@@ -41,8 +48,6 @@ function categorizeFiles(files) {
             cats.yojana.push(file);
         } else if (lower.includes('amin') || lower.includes('partner') || lower.includes('surveyor') || lower.includes('booking')) {
             cats.amin.push(file);
-        } else if (lower.includes('admin') || lower.includes('login') || lower.includes('dashboard')) {
-            cats.admin.push(file);
         } else {
             cats.others.push(file);
         }
@@ -53,7 +58,7 @@ function categorizeFiles(files) {
 
 let categories = categorizeFiles(htmlFiles);
 
-// 2. GENERATE Professional Category-wise sitemap.html
+// 2. GENERATE sitemap.html (Professional & Category-wise)
 let htmlContent = `<!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -95,7 +100,6 @@ htmlContent += renderCategory("📍 Bihar Land Records & Services", categories.b
 htmlContent += renderCategory("🌍 Other States & Regional Services", categories.states);
 htmlContent += renderCategory("📜 Sarkari Yojana & Blogs", categories.yojana);
 htmlContent += renderCategory("👷 Amin & Partner Program", categories.amin);
-htmlContent += renderCategory("⚙️ Admin Panel & Authentication", categories.admin);
 htmlContent += renderCategory("📂 Other Useful Pages", categories.others);
 
 htmlContent += `    </div>
@@ -103,4 +107,4 @@ htmlContent += `    </div>
 </html>`;
 
 fs.writeFileSync('sitemap.html', htmlContent);
-console.log('Category-wise sitemap updated successfully!');
+console.log('Secure sitemap updated successfully!');
