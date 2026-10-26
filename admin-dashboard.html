@@ -18,7 +18,7 @@
       line-height: 1.5;
     }
 
-    /* Top Master Bar */
+    /* Top Master Header */
     .top-bar {
       background: #0f172a;
       color: #fff;
@@ -56,7 +56,7 @@
     }
     .btn-logout:hover { background: #b91c1c; }
 
-    /* Earning Dashboard Cards */
+    /* Live Earning Metrics Cards */
     .earning-dashboard {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -77,13 +77,55 @@
     .metric-val { font-size: 1.6rem; font-weight: 900; color: #0f172a; margin-top: 4px; }
     .metric-sub { font-size: 11px; color: #16a34a; font-weight: 700; margin-top: 2px; }
 
-    /* Controls Strip */
+    /* ══ SINGLE-LINE HORIZONTAL TABLE NAV STRIP ══ */
+    .table-nav-strip {
+      background: #ffffff;
+      padding: 12px 24px;
+      margin-top: 14px;
+      border-top: 1.5px solid #e2e8f0;
+      border-bottom: 1.5px solid #e2e8f0;
+      overflow-x: auto;
+      white-space: nowrap;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      scrollbar-width: thin;
+    }
+    .table-nav-strip::-webkit-scrollbar { height: 6px; }
+    .table-nav-strip::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+    .tbl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1.8px solid #cbd5e1;
+      background: #f8fafc;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .tbl-btn:hover {
+      border-color: #16a34a;
+      background: #f0fdf4;
+      color: #15803d;
+    }
+    .tbl-btn.active {
+      border-color: #15803d;
+      background: #15803d;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(21, 128, 61, 0.3);
+    }
+
+    /* Sub Controls (Search, Month, Status, Add Order) */
     .controls-strip {
       background: #ffffff;
-      padding: 14px 24px;
+      padding: 12px 24px;
       border-bottom: 1.5px solid #e2e8f0;
-      border-top: 1.5px solid #e2e8f0;
-      margin-top: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -91,27 +133,22 @@
       gap: 12px;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 90;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
     .left-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .table-picker {
-      padding: 9px 14px; border: 2px solid #16a34a;
-      background: #f0fdf4; color: #14532d;
-      border-radius: 8px; font-size: 13.5px; font-weight: 800;
-      outline: none; cursor: pointer;
-    }
     .search-inp {
-      padding: 9px 14px; border: 1.8px solid #cbd5e1;
-      border-radius: 8px; font-size: 13.5px; width: 220px; outline: none;
+      padding: 8px 14px; border: 1.8px solid #cbd5e1;
+      border-radius: 8px; font-size: 13.5px; width: 230px; outline: none;
     }
     .search-inp:focus { border-color: #2563eb; }
-    .status-select, .month-select {
-      padding: 9px 12px; border: 1.8px solid #cbd5e1;
+    .select-ctl {
+      padding: 8px 12px; border: 1.8px solid #cbd5e1;
       border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #fff;
     }
 
     .btn {
-      padding: 9px 15px; border-radius: 8px; font-size: 13.5px;
+      padding: 8px 15px; border-radius: 8px; font-size: 13.5px;
       font-weight: 700; border: none; cursor: pointer;
       display: inline-flex; align-items: center; gap: 6px;
     }
@@ -120,7 +157,7 @@
     .btn-refresh { background: #f1f5f9; color: #0f172a; border: 1.5px solid #cbd5e1; }
     .btn-refresh:hover { background: #e2e8f0; }
 
-    /* Table */
+    /* Table Container */
     .table-card {
       margin: 16px 24px 60px;
       background: #fff;
@@ -138,30 +175,32 @@
     td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
     tr:hover td { background: #f8fafc; }
 
-    /* Fixed Columns */
+    /* Columns matching previous order exactly */
     .col-id { width: 110px; font-weight: 700; color: #0284c7; }
-    .col-name { width: 220px; font-weight: 600; word-break: break-word; line-height: 1.35; }
-    .col-district { width: 115px; }
-    .col-mobile { width: 120px; font-weight: 600; }
-    .col-amount { width: 105px; font-weight: 800; color: #15803d; }
-    .col-status { width: 155px; }
+    .col-name { width: 230px; font-weight: 600; word-break: break-word; line-height: 1.35; }
+    .col-district { width: 130px; }
+    .col-mobile { width: 125px; font-weight: 600; }
+    .col-status { width: 175px; }
+    .col-payment { width: 140px; }
     .col-date { width: 110px; color: #64748b; font-size: 12px; white-space: nowrap; }
     .col-action { width: 80px; text-align: center; }
 
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    /* Badges */
+    .badge { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 700; }
     .badge-pending { background: #fef3c7; color: #b45309; }
     .badge-processing { background: #e0f2fe; color: #0369a1; }
-    .badge-received { background: #f1f5f9; color: #475569; }
-    .badge-cancel { background: #fee2e2; color: #dc2626; }
+    .badge-received { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+    .badge-cancel { background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
     .badge-completed { background: #dcfce7; color: #166534; }
+    .badge-custom { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; font-weight: 600; }
 
     .btn-edit {
-      padding: 5px 9px; background: #eff6ff; color: #2563eb;
+      padding: 5px 10px; background: #eff6ff; color: #2563eb;
       border: 1px solid #bfdbfe; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer;
     }
     .btn-edit:hover { background: #2563eb; color: #fff; }
 
-    /* Modal System */
+    /* Modal */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0;
       width: 100%; height: 100%; background: rgba(15,23,42,0.65);
@@ -190,7 +229,7 @@
 </head>
 <body>
 
-  <!-- Top Master Bar with Founder Info -->
+  <!-- Top Bar -->
   <header class="top-bar">
     <div class="brand-section">
       <div class="brand-title">📦 JameenSeva <span>Master Control</span></div>
@@ -208,10 +247,10 @@
     </div>
   </header>
 
-  <!-- Live Month-wise Earning Dashboard -->
+  <!-- Month-wise Earning Dashboard -->
   <div class="earning-dashboard">
     <div class="metric-card" style="border-left: 4px solid #16a34a;">
-      <div class="metric-title">कुल कमाई (Total Received)</div>
+      <div class="metric-title">कुल प्राप्त राशि (Total Paid / Collected)</div>
       <div class="metric-val" id="statTotalEarning">₹0</div>
       <div class="metric-sub" id="statEarningSub">चयनित महीने के अनुसार</div>
     </div>
@@ -221,32 +260,49 @@
       <div class="metric-sub" id="statOrdersSub">एक्टिव टेबल में</div>
     </div>
     <div class="metric-card" style="border-left: 4px solid #d97706;">
-      <div class="metric-title">पेंडिंग राशि (Pending Amount)</div>
+      <div class="metric-title">बकाया राशि (Pending Amount)</div>
       <div class="metric-val" id="statPendingAmount" style="color:#d97706;">₹0</div>
       <div class="metric-sub" style="color:#d97706;">वसूल की जाने वाली राशि</div>
     </div>
   </div>
 
-  <!-- Filter & Controls Strip -->
+  <!-- ══ HORIZONTAL NAVIGATION BUTTONS (IN ONE LINE) ══ -->
+  <nav class="table-nav-strip" id="tableNavStrip">
+    <button class="tbl-btn active" data-table="khatiyan order" onclick="switchTable('khatiyan order', this)">
+      📜 खतियान (khatiyan order)
+    </button>
+    <button class="tbl-btn" data-table="kevala_orders" onclick="switchTable('kevala_orders', this)">
+      📑 केवाला (kevala_orders)
+    </button>
+    <button class="tbl-btn" data-table="amin-booking" onclick="switchTable('amin-booking', this)">
+      📐 अमीन बुकिंग (amin-booking)
+    </button>
+    <button class="tbl-btn" data-table="jamabandi_orders" onclick="switchTable('jamabandi_orders', this)">
+      📋 जमाबंदी (jamabandi_orders)
+    </button>
+    <button class="tbl-btn" data-table="panchnama_orders" onclick="switchTable('panchnama_orders', this)">
+      ⚖️ पंचनामा ऑर्डर्स (panchnama_orders)
+    </button>
+    <button class="tbl-btn" data-table="panchnama batwara" onclick="switchTable('panchnama batwara', this)">
+      ⚖️ पंचनामा बटवारा (panchnama batwara)
+    </button>
+    <button class="tbl-btn" data-table="map_orders" onclick="switchTable('map_orders', this)">
+      🗺️ नक्शा ऑर्डर्स (map_orders)
+    </button>
+    <button class="tbl-btn" data-table="khesra to khesra" onclick="switchTable('khesra to khesra', this)">
+      🔄 खेसरा-खेसरा (khesra to khesra)
+    </button>
+    <button class="tbl-btn" data-table="amins" onclick="switchTable('amins', this)">
+      🤝 अमीन पार्टनर्स (amins)
+    </button>
+  </nav>
+
+  <!-- Controls Strip -->
   <div class="controls-strip">
     <div class="left-controls">
-      <!-- 9 Supabase Tables Dropdown -->
-      <label style="font-size:12.5px; font-weight:700; color:#334155;">तालिका चुनें:</label>
-      <select id="tableSelector" class="table-picker" onchange="switchTable(this.value)">
-        <option value="khatiyan order">📜 खतियान ऑर्डर (khatiyan order)</option>
-        <option value="amin-booking">📐 अमीन बुकिंग (amin-booking)</option>
-        <option value="jamabandi_orders">📋 जमाबंदी ऑर्डर (jamabandi_orders)</option>
-        <option value="kevala_orders">📑 केवाला ऑर्डर (kevala_orders)</option>
-        <option value="panchnama_orders">⚖️ पंचनामा ऑर्डर (panchnama_orders)</option>
-        <option value="panchnama batwara">⚖️ पंचनामा बटवारा (panchnama batwara)</option>
-        <option value="map_orders">🗺️ नक्शा ऑर्डर (map_orders)</option>
-        <option value="khesra to khesra">🔄 खेसरा-खेसरा (khesra to khesra)</option>
-        <option value="amins">🤝 अमीन पार्टनर्स (amins)</option>
-      </select>
-
-      <!-- Month Filter for Calculations -->
-      <select id="monthFilter" class="month-select" onchange="calculateMetricsAndRender()">
-        <option value="">सभी महीने (All Time)</option>
+      <!-- Month Filter -->
+      <select id="monthFilter" class="select-ctl" onchange="calculateMetricsAndRender()">
+        <option value="">सभी महीने (All Months)</option>
         <option value="01">जनवरी (January)</option>
         <option value="02">फ़रवरी (February)</option>
         <option value="03">मार्च (March)</option>
@@ -261,17 +317,17 @@
         <option value="12">दिसंबर (December)</option>
       </select>
 
-      <!-- Search Input -->
+      <!-- Live Search -->
       <input type="text" id="searchInp" class="search-inp" placeholder="खोजें: नाम, मोबाइल, ID, ज़िला..." onkeyup="filterOrders()" />
 
       <!-- Status Filter -->
-      <select id="statusFilter" class="status-select" onchange="filterOrders()">
-        <option value="">सभी स्टेटस (All)</option>
+      <select id="statusFilter" class="select-ctl" onchange="filterOrders()">
+        <option value="">सभी स्टेटस (All Status)</option>
         <option value="Order Received">Order Received</option>
         <option value="Processing">Processing</option>
         <option value="Pending">Pending</option>
-        <option value="cancel">Cancelled</option>
-        <option value="Delivered">Delivered / Active</option>
+        <option value="cancel">Cancelled ❌</option>
+        <option value="Delivered">Delivered / Active ✅</option>
       </select>
     </div>
 
@@ -285,7 +341,7 @@
     </div>
   </div>
 
-  <!-- Table Card -->
+  <!-- Main Table -->
   <div class="table-card">
     <div class="table-responsive">
       <table>
@@ -295,8 +351,8 @@
             <th class="col-name">रैयत / किसान का नाम</th>
             <th class="col-district">ज़िला</th>
             <th class="col-mobile">मोबाइल</th>
-            <th class="col-amount">भुगतान (₹)</th>
             <th class="col-status">ऑर्डर स्टेटस</th>
+            <th class="col-payment">पेमेंट / विवरण</th>
             <th class="col-date">तारीख</th>
             <th class="col-action">एक्शन</th>
           </tr>
@@ -316,7 +372,7 @@
   <div class="modal-overlay" id="editModal">
     <div class="modal-box">
       <div class="modal-head">
-        <h3 id="editModalTitle">✏️ ऑर्डर व पेमेंट विवरण संपादित करें</h3>
+        <h3 id="editModalTitle">✏️ ऑर्डर व पेमेंट संपादित करें</h3>
         <button class="modal-close" onclick="closeEditModal()">✕</button>
       </div>
 
@@ -345,21 +401,12 @@
           </div>
 
           <div class="m-group">
-            <label>राशि (Payment Amount ₹) *</label>
-            <input type="number" id="editAmount" placeholder="जैसे: 79 या 500" required style="font-weight:800; color:#15803d;" />
+            <label>राशि (Amount ₹)</label>
+            <input type="number" id="editAmount" placeholder="जैसे: 79 या 150" style="font-weight:800; color:#15803d;" />
           </div>
 
           <div class="m-group">
-            <label>पेमेंट स्थिति (Payment Status)</label>
-            <select id="editPaymentStatus">
-              <option value="Paid">Paid (प्राप्त हुआ)</option>
-              <option value="Pending">Pending (बकाया)</option>
-              <option value="COD">COD (डिलीवरी पर देय)</option>
-            </select>
-          </div>
-
-          <div class="m-group">
-            <label>ऑर्डर स्टेटस</label>
+            <label>ऑर्डर स्टेटस (Order Status)</label>
             <select id="editStatus">
               <option value="Order Received">Order Received</option>
               <option value="Processing">Processing</option>
@@ -371,6 +418,11 @@
               <option value="Dispatched / इन ट्रांजिट 🚚">Dispatched / इन ट्रांजिट 🚚</option>
               <option value="Delivered ✅">Delivered ✅</option>
             </select>
+          </div>
+
+          <div class="m-group">
+            <label>पेमेंट / रिमार्क्स (Payment Status / Details)</label>
+            <input type="text" id="editPaymentStatus" placeholder="Pending / Paid / CS 116 F1" />
           </div>
 
           <div class="m-group">
@@ -426,7 +478,7 @@
   <div class="modal-overlay" id="manualOrderModal">
     <div class="modal-box">
       <div class="modal-head" style="background:#15803d;">
-        <h3>➕ नया मैन्युअल ऑर्डर दर्ज करें</h3>
+        <h3>➕ नया ऑर्डर दर्ज करें ("<span id="targetTableLabel"></span>")</h3>
         <button class="modal-close" onclick="closeManualOrderModal()">✕</button>
       </div>
 
@@ -438,8 +490,8 @@
           </div>
 
           <div class="m-group">
-            <label>ऑर्डर राशि (Amount ₹) *</label>
-            <input type="number" id="mAmount" placeholder="उदा. 79 या 299" required style="font-weight:800; color:#15803d;" />
+            <label>ऑर्डर राशि (Amount ₹)</label>
+            <input type="number" id="mAmount" placeholder="उदा. 79 या 299" style="font-weight:800; color:#15803d;" />
           </div>
 
           <div class="m-group full">
@@ -453,12 +505,8 @@
           </div>
 
           <div class="m-group">
-            <label>पेमेंट स्थिति</label>
-            <select id="mPaymentStatus">
-              <option value="Paid">Paid (प्राप्त हुआ)</option>
-              <option value="Pending">Pending (बकाया)</option>
-              <option value="COD">COD</option>
-            </select>
+            <label>पेमेंट स्थिति / विवरण</label>
+            <input type="text" id="mPaymentStatus" placeholder="Pending / Paid / CS 116 F1" />
           </div>
 
           <div class="m-group">
@@ -518,15 +566,29 @@
     const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
     const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-    // Default to the first table from your screenshot
     let CURRENT_TABLE = "khatiyan order";
     let ALL_ORDERS = [];
 
-    function switchTable(tableName) {
+    // Switch Table from Single-Line Navigation Buttons
+    function switchTable(tableName, btnElement) {
       CURRENT_TABLE = tableName;
+      document.querySelectorAll('.tbl-btn').forEach(b => b.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
       fetchOrders();
     }
 
+    // Helper: Safely get first non-empty value from multiple possible column keys
+    function getVal(ord, keys, defaultVal = '') {
+      if (!ord) return defaultVal;
+      for (let k of keys) {
+        if (ord[k] !== undefined && ord[k] !== null && String(ord[k]).trim() !== '') {
+          return ord[k];
+        }
+      }
+      return defaultVal;
+    }
+
+    // Fetch Orders for Active Table
     async function fetchOrders() {
       const tbody = document.getElementById('ordersTbody');
       tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">डेटा लोड हो रहा है ("${CURRENT_TABLE}")...</td></tr>`;
@@ -545,12 +607,12 @@
         console.error(err);
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #dc2626; font-weight:700;">
           त्रुटि: ${err.message}<br>
-          <small style="color:#64748b;">कृपया सुनिश्चित करें कि तालिका "${CURRENT_TABLE}" आपके Supabase में मौजूद है।</small>
+          <small style="color:#64748b;">कृपया सुनिश्चित करें कि तालिका "${CURRENT_TABLE}" आपके Supabase में उपलब्ध है।</small>
         </td></tr>`;
       }
     }
 
-    // Live Earning & Month Wise Calculation
+    // Calculate Earning Stats & Render
     function calculateMetricsAndRender() {
       const selectedMonth = document.getElementById('monthFilter').value;
       
@@ -559,17 +621,15 @@
       let orderCount = 0;
 
       const filteredByMonth = ALL_ORDERS.filter(o => {
-        const dateStr = o.order_date || o.created_at || '';
+        const dateStr = String(getVal(o, ['order_date', 'created_at', 'date']));
         if (!selectedMonth) return true;
-        
-        // Month checking in standard date formats
         return dateStr.includes(`-${selectedMonth}-`) || dateStr.includes(`/${selectedMonth}/`) || dateStr.includes(` ${selectedMonth} `);
       });
 
       filteredByMonth.forEach(o => {
         orderCount++;
-        const amt = parseFloat(o.amount || o.price || 0) || 0;
-        const pStatus = (o.payment_status || o.payment || '').toLowerCase();
+        const amt = parseFloat(getVal(o, ['amount', 'price', 'fee', 'total_amount'], 0)) || 0;
+        const pStatus = String(getVal(o, ['payment_status', 'payment', 'pay_status'], '')).toLowerCase();
 
         if (pStatus.includes('paid') || pStatus.includes('success')) {
           totalReceived += amt;
@@ -578,7 +638,6 @@
         }
       });
 
-      // Update Top Metrics UI
       document.getElementById('statTotalEarning').innerText = `₹${totalReceived.toLocaleString('en-IN')}`;
       document.getElementById('statTotalOrders').innerText = orderCount;
       document.getElementById('statPendingAmount').innerText = `₹${totalPending.toLocaleString('en-IN')}`;
@@ -586,28 +645,34 @@
       renderTable(filteredByMonth);
     }
 
+    // Render Table with strict column mapping
     function renderTable(orders) {
       const tbody = document.getElementById('ordersTbody');
       if (!orders || orders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">इस चयन में कोई ऑर्डर उपलब्ध नहीं है।</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">इस चयन ("${CURRENT_TABLE}") में कोई ऑर्डर उपलब्ध नहीं है।</td></tr>`;
         return;
       }
 
       tbody.innerHTML = orders.map(ord => {
-        const oid = ord.order_id || ord.orderId || ord.reg_no || ('JS-' + ord.id);
-        const name = ord.raiyat_name || ord.name || ord.userName || '—';
-        const district = ord.district || ord.jila || '—';
-        const mobile = ord.mobile || ord.phone || ord.userMobile || '—';
-        const status = ord.status || 'Order Received';
-        const amount = ord.amount || ord.price || 0;
-        const pStatus = ord.payment_status || ord.payment || 'Pending';
-        const date = ord.order_date || ord.created_at || '—';
+        const oid = getVal(ord, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + ord.id);
+        const name = getVal(ord, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name'], '—');
+        const district = getVal(ord, ['district', 'jila', 'dist'], '—');
+        const mobile = getVal(ord, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp'], '—');
+        const status = getVal(ord, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status'], 'Order Received');
+        const payment = getVal(ord, ['payment_status', 'payment', 'pay_status', 'remarks'], (ord.experience ? `Score: ${ord.experience}/15` : 'Pending'));
+        const date = getVal(ord, ['order_date', 'created_at', 'date'], '—');
 
-        let badgeClass = 'badge-received';
-        if (status.includes('cancel')) badgeClass = 'badge-cancel';
-        else if (status.includes('Processing')) badgeClass = 'badge-processing';
-        else if (status.includes('Delivered') || status === 'Active') badgeClass = 'badge-completed';
-        else if (status.includes('Pending')) badgeClass = 'badge-pending';
+        // Status Badge Styling (preserving exact previous behavior)
+        let statusBadge = 'badge-received';
+        if (status.includes('cancel')) statusBadge = 'badge-cancel';
+        else if (status.includes('Processing')) statusBadge = 'badge-processing';
+        else if (status.includes('Delivered') || status === 'Active') statusBadge = 'badge-completed';
+        else if (status.includes('Pending')) statusBadge = 'badge-pending';
+
+        // Payment Badge Styling (Pending/Paid/Custom)
+        let payBadge = 'badge-custom';
+        if (payment === 'Pending') payBadge = 'badge-pending';
+        else if (payment.toLowerCase().includes('paid')) payBadge = 'badge-completed';
 
         return `
           <tr>
@@ -615,11 +680,8 @@
             <td class="col-name" title="${escapeHtml(name)}">${escapeHtml(name)}</td>
             <td class="col-district">${escapeHtml(district)}</td>
             <td class="col-mobile"><a href="tel:${mobile}" style="color:#0f172a; text-decoration:none;">${escapeHtml(mobile)}</a></td>
-            <td class="col-amount">
-              ₹${parseFloat(amount).toLocaleString('en-IN')}
-              <br><span style="font-size:10px; font-weight:700; color:${pStatus==='Paid'?'#16a34a':'#d97706'}">${pStatus}</span>
-            </td>
-            <td class="col-status"><span class="badge ${badgeClass}">${escapeHtml(status)}</span></td>
+            <td class="col-status"><span class="badge ${statusBadge}">${escapeHtml(status)}</span></td>
+            <td class="col-payment"><span class="badge ${payBadge}">${escapeHtml(payment)}</span></td>
             <td class="col-date">${formatDate(date)}</td>
             <td class="col-action">
               <button class="btn-edit" onclick="openEditModal(${ord.id})">✏️ Edit</button>
@@ -634,11 +696,11 @@
       const statusFilter = document.getElementById('statusFilter').value;
 
       const filtered = ALL_ORDERS.filter(o => {
-        const name = (o.raiyat_name || o.name || o.userName || '').toLowerCase();
-        const mobile = (o.mobile || o.phone || o.userMobile || '').toLowerCase();
-        const oid = (o.order_id || o.orderId || o.reg_no || ('JS-' + o.id)).toLowerCase();
-        const dist = (o.district || o.jila || '').toLowerCase();
-        const status = (o.status || '');
+        const name = String(getVal(o, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name'])).toLowerCase();
+        const mobile = String(getVal(o, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp'])).toLowerCase();
+        const oid = String(getVal(o, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + o.id)).toLowerCase();
+        const dist = String(getVal(o, ['district', 'jila', 'dist'])).toLowerCase();
+        const status = String(getVal(o, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status']));
 
         const matchesQuery = !q || name.includes(q) || mobile.includes(q) || oid.includes(q) || dist.includes(q);
         const matchesStatus = !statusFilter || status.includes(statusFilter);
@@ -654,21 +716,21 @@
       if (!ord) return;
 
       document.getElementById('editRowId').value = ord.id;
-      document.getElementById('editOrderId').value = ord.order_id || ord.orderId || ord.reg_no || ('JS-' + ord.id);
-      document.getElementById('editOrderDate').value = ord.order_date || ord.created_at || '';
-      document.getElementById('editRaiyatName').value = ord.raiyat_name || ord.name || ord.userName || '';
-      document.getElementById('editMobile').value = ord.mobile || ord.phone || ord.userMobile || '';
-      document.getElementById('editAmount').value = ord.amount || ord.price || 0;
-      document.getElementById('editPaymentStatus').value = ord.payment_status || ord.payment || 'Pending';
-      document.getElementById('editDistrict').value = ord.district || ord.jila || '';
-      document.getElementById('editBlock').value = ord.block || ord.anchal || '';
-      document.getElementById('editVillage').value = ord.village || ord.mauja || '';
-      document.getElementById('editThana').value = ord.thana_no || ord.thana || '';
-      document.getElementById('editKhata').value = ord.khata_no || ord.khata || '';
-      document.getElementById('editKhesra').value = ord.khesra_no || ord.khesra || '';
-      document.getElementById('editStatus').value = ord.status || 'Order Received';
-      document.getElementById('editTrackingNumber').value = ord.tracking_number || ord.tracking_id || '';
-      document.getElementById('editFullAddress').value = ord.full_address || ord.address || '';
+      document.getElementById('editOrderId').value = getVal(ord, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + ord.id);
+      document.getElementById('editOrderDate').value = getVal(ord, ['order_date', 'created_at', 'date']);
+      document.getElementById('editRaiyatName').value = getVal(ord, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name']);
+      document.getElementById('editMobile').value = getVal(ord, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp']);
+      document.getElementById('editAmount').value = getVal(ord, ['amount', 'price', 'fee', 'total_amount'], 0);
+      document.getElementById('editStatus').value = getVal(ord, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status'], 'Order Received');
+      document.getElementById('editPaymentStatus').value = getVal(ord, ['payment_status', 'payment', 'pay_status', 'remarks'], 'Pending');
+      document.getElementById('editDistrict').value = getVal(ord, ['district', 'jila', 'dist']);
+      document.getElementById('editBlock').value = getVal(ord, ['block', 'anchal']);
+      document.getElementById('editVillage').value = getVal(ord, ['village', 'mauja']);
+      document.getElementById('editThana').value = getVal(ord, ['thana_no', 'thana']);
+      document.getElementById('editKhata').value = getVal(ord, ['khata_no', 'khata']);
+      document.getElementById('editKhesra').value = getVal(ord, ['khesra_no', 'khesra']);
+      document.getElementById('editTrackingNumber').value = getVal(ord, ['tracking_number', 'tracking_id']);
+      document.getElementById('editFullAddress').value = getVal(ord, ['full_address', 'address']);
 
       document.getElementById('editModal').style.display = 'flex';
     }
@@ -681,22 +743,43 @@
       const rowId = document.getElementById('editRowId').value;
       const saveBtn = document.getElementById('saveEditBtn');
 
+      const nameVal = document.getElementById('editRaiyatName').value.trim();
+      const mobileVal = document.getElementById('editMobile').value.trim();
+      const distVal = document.getElementById('editDistrict').value.trim();
+      const blockVal = document.getElementById('editBlock').value.trim();
+      const villageVal = document.getElementById('editVillage').value.trim();
+      const thanaVal = document.getElementById('editThana').value.trim();
+      const khataVal = document.getElementById('editKhata').value.trim();
+      const khesraVal = document.getElementById('editKhesra').value.trim();
+      const statusVal = document.getElementById('editStatus').value;
+      const payVal = document.getElementById('editPaymentStatus').value.trim();
+      const amtVal = parseFloat(document.getElementById('editAmount').value) || 0;
+      const trackVal = document.getElementById('editTrackingNumber').value.trim();
+      const addrVal = document.getElementById('editFullAddress').value.trim();
+      const dateVal = document.getElementById('editOrderDate').value.trim();
+
       const updatedPayload = {
-        raiyat_name: document.getElementById('editRaiyatName').value.trim(),
-        name: document.getElementById('editRaiyatName').value.trim(),
-        mobile: document.getElementById('editMobile').value.trim(),
-        amount: parseFloat(document.getElementById('editAmount').value) || 0,
-        payment_status: document.getElementById('editPaymentStatus').value,
-        district: document.getElementById('editDistrict').value.trim(),
-        block: document.getElementById('editBlock').value.trim(),
-        village: document.getElementById('editVillage').value.trim(),
-        thana_no: document.getElementById('editThana').value.trim(),
-        khata_no: document.getElementById('editKhata').value.trim(),
-        khesra_no: document.getElementById('editKhesra').value.trim(),
-        status: document.getElementById('editStatus').value,
-        tracking_number: document.getElementById('editTrackingNumber').value.trim(),
-        full_address: document.getElementById('editFullAddress').value.trim(),
-        order_date: document.getElementById('editOrderDate').value.trim()
+        raiyat_name: nameVal,
+        name: nameVal,
+        applicant_name: nameVal,
+        customer_name: nameVal,
+        mobile: mobileVal,
+        mobile_no: mobileVal,
+        phone: mobileVal,
+        district: distVal,
+        block: blockVal,
+        village: villageVal,
+        thana_no: thanaVal,
+        khata_no: khataVal,
+        khesra_no: khesraVal,
+        status: statusVal,
+        order_status: statusVal,
+        payment_status: payVal,
+        payment: payVal,
+        amount: amtVal,
+        tracking_number: trackVal,
+        full_address: addrVal,
+        order_date: dateVal
       };
 
       saveBtn.disabled = true;
@@ -710,7 +793,7 @@
 
         if (error) throw error;
 
-        alert("✅ विवरण एवं भुगतान सफलतापूर्वक अपडेट हो गया!");
+        alert("✅ ऑर्डर विवरण एवं स्टेटस सफलतापूर्वक अपडेट हो गया!");
         closeEditModal();
         fetchOrders();
       } catch (err) {
@@ -724,6 +807,7 @@
 
     function openManualOrderModal() {
       const now = new Date();
+      document.getElementById('targetTableLabel').innerText = CURRENT_TABLE;
       document.getElementById('mOrderDate').value = now.toLocaleDateString('hi-IN', { day:'2-digit', month:'short', year:'numeric' });
       document.getElementById('mAmount').value = 79;
       document.getElementById('mRaiyatName').value = '';
@@ -769,9 +853,12 @@
         order_date: document.getElementById('mOrderDate').value,
         raiyat_name: name,
         name: name,
+        applicant_name: name,
         mobile: mobile,
+        phone: mobile,
         amount: amount,
         payment_status: document.getElementById('mPaymentStatus').value,
+        payment: document.getElementById('mPaymentStatus').value,
         district: district,
         block: block,
         village: village,
@@ -789,7 +876,7 @@
 
         if (error) throw error;
 
-        alert(`✅ नया ऑर्डर "${CURRENT_TABLE}" में दर्ज हुआ!\nOrder ID: ${newOrderId}\nAmount: ₹${amount}`);
+        alert(`✅ नया ऑर्डर "${CURRENT_TABLE}" में दर्ज हुआ!\nOrder ID: ${newOrderId}`);
         closeManualOrderModal();
         fetchOrders();
       } catch (err) {
