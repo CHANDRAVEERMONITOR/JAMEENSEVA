@@ -121,7 +121,7 @@
       box-shadow: 0 3px 10px rgba(21, 128, 61, 0.3);
     }
 
-    /* Sub Controls (Search, Month, Status, Add Order) */
+    /* Controls Strip */
     .controls-strip {
       background: #ffffff;
       padding: 12px 24px;
@@ -175,13 +175,18 @@
     td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
     tr:hover td { background: #f8fafc; }
 
-    /* Columns matching previous order exactly */
-    .col-id { width: 110px; font-weight: 700; color: #0284c7; }
-    .col-name { width: 230px; font-weight: 600; word-break: break-word; line-height: 1.35; }
+    /* Columns */
+    .col-id { width: 125px; font-weight: 800; color: #0284c7; }
+    .col-id a {
+      color: #0284c7; text-decoration: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .col-id a:hover { text-decoration: underline; color: #0369a1; }
+    .col-name { width: 220px; font-weight: 600; word-break: break-word; line-height: 1.35; }
     .col-district { width: 130px; }
     .col-mobile { width: 125px; font-weight: 600; }
     .col-status { width: 175px; }
-    .col-payment { width: 140px; }
+    .col-payment { width: 135px; }
     .col-date { width: 110px; color: #64748b; font-size: 12px; white-space: nowrap; }
     .col-action { width: 80px; text-align: center; }
 
@@ -200,7 +205,7 @@
     }
     .btn-edit:hover { background: #2563eb; color: #fff; }
 
-    /* Modal */
+    /* Modal System */
     .modal-overlay {
       display: none; position: fixed; top: 0; left: 0;
       width: 100%; height: 100%; background: rgba(15,23,42,0.65);
@@ -225,6 +230,21 @@
     }
     .m-group input:focus, .m-group select:focus, .m-group textarea:focus { border-color: #2563eb; }
     .modal-footer { padding: 14px 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px; }
+
+    /* Quick View Details Card */
+    .view-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .view-card div strong { color: #64748b; font-size: 11.5px; display: block; }
+    .view-card div span { color: #0f172a; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -266,7 +286,7 @@
     </div>
   </div>
 
-  <!-- ══ HORIZONTAL NAVIGATION BUTTONS (IN ONE LINE) ══ -->
+  <!-- ══ SINGLE-LINE HORIZONTAL TABLE NAV STRIP ══ -->
   <nav class="table-nav-strip" id="tableNavStrip">
     <button class="tbl-btn active" data-table="khatiyan order" onclick="switchTable('khatiyan order', this)">
       📜 खतियान (khatiyan order)
@@ -368,11 +388,56 @@
     </div>
   </div>
 
-  <!-- ══════════ ADVANCED EDIT MODAL ══════════ -->
+  <!-- ══════════ 1. QUICK VIEW / STATUS CHANGER MODAL (Triggered by Order ID) ══════════ -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-box" style="max-width: 520px;">
+      <div class="modal-head" style="background:#0284c7;">
+        <h3 id="qvModalTitle">🔍 ऑर्डर विवरण व तुरंत स्टेटस बदलें</h3>
+        <button class="modal-close" onclick="closeQuickViewModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" id="qvRowId" />
+        
+        <div class="view-card" id="qvDetailsContainer">
+          <!-- Filled dynamically with clean key-value pairs -->
+        </div>
+
+        <div class="m-grid" style="margin-top:10px;">
+          <div class="m-group">
+            <label style="color:#0284c7;">त्वरित ऑर्डर स्टेटस (Quick Status):</label>
+            <select id="qvStatus" style="font-weight:700; border:2px solid #0284c7;">
+              <option value="Order Received">Order Received</option>
+              <option value="Processing">Processing</option>
+              <option value="Pending Token">Pending Token</option>
+              <option value="Active">Active</option>
+              <option value="दोहरा ऑर्डर -cancel ❌">दोहरा ऑर्डर -cancel ❌</option>
+              <option value="रिकॉर्ड फटा होने के कारण आर्डर cancel ❌">रिकॉर्ड फटा होने के कारण आर्डर cancel ❌</option>
+              <option value="रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌">रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌</option>
+              <option value="Dispatched / इन ट्रांजिट 🚚">Dispatched / इन ट्रांजिट 🚚</option>
+              <option value="Delivered ✅">Delivered ✅</option>
+            </select>
+          </div>
+
+          <div class="m-group">
+            <label style="color:#0284c7;">पेमेंट / विवरण (Payment Info):</label>
+            <input type="text" id="qvPayment" placeholder="Pending / Paid / CS 116 F1" style="font-weight:700;" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-refresh" onclick="closeQuickViewModal()">बंद करें</button>
+        <button class="btn btn-green" id="saveQvBtn" onclick="saveQuickStatus()">⚡ सिर्फ स्टेटस अपडेट करें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 2. FULL ADVANCED EDIT MODAL (Triggered by Action Edit Button) ══════════ -->
   <div class="modal-overlay" id="editModal">
     <div class="modal-box">
       <div class="modal-head">
-        <h3 id="editModalTitle">✏️ ऑर्डर व पेमेंट संपादित करें</h3>
+        <h3 id="editModalTitle">✏️ पूरा ऑर्डर विवरण संपादित करें (Full Edit)</h3>
         <button class="modal-close" onclick="closeEditModal()">✕</button>
       </div>
 
@@ -391,7 +456,7 @@
           </div>
 
           <div class="m-group full">
-            <label>रैयत / किसान का पूरा नाम</label>
+            <label>रैयत / किसान / आवेदक का पूरा नाम</label>
             <input type="text" id="editRaiyatName" required />
           </div>
 
@@ -431,12 +496,12 @@
           </div>
 
           <div class="m-group">
-            <label>प्रखंड / अंचल (Block)</label>
+            <label>प्रखंड / अंचल (Block / Circle)</label>
             <input type="text" id="editBlock" />
           </div>
 
           <div class="m-group">
-            <label>मौजा / गाँव</label>
+            <label>मौजा / गाँव (Mauja / Village)</label>
             <input type="text" id="editVillage" />
           </div>
 
@@ -451,7 +516,7 @@
           </div>
 
           <div class="m-group">
-            <label>खेसरा नंबर (Khesra No.)</label>
+            <label>खेसरा नंबर (Khesra / Plot No.)</label>
             <input type="text" id="editKhesra" />
           </div>
 
@@ -469,12 +534,12 @@
 
       <div class="modal-footer">
         <button class="btn btn-refresh" onclick="closeEditModal()">रद्द करें</button>
-        <button class="btn btn-green" id="saveEditBtn" onclick="saveOrderChanges()">💾 बदलाव सुरक्षित करें</button>
+        <button class="btn btn-green" id="saveEditBtn" onclick="saveOrderChanges()">💾 पूरा विवरण सुरक्षित करें</button>
       </div>
     </div>
   </div>
 
-  <!-- ══════════ MANUAL ORDER ENTRY MODAL ══════════ -->
+  <!-- ══════════ 3. MANUAL ORDER ENTRY MODAL ══════════ -->
   <div class="modal-overlay" id="manualOrderModal">
     <div class="modal-box">
       <div class="modal-head" style="background:#15803d;">
@@ -577,15 +642,48 @@
       fetchOrders();
     }
 
-    // Helper: Safely get first non-empty value from multiple possible column keys
-    function getVal(ord, keys, defaultVal = '') {
-      if (!ord) return defaultVal;
-      for (let k of keys) {
-        if (ord[k] !== undefined && ord[k] !== null && String(ord[k]).trim() !== '') {
-          return ord[k];
+    // ══ SMART COLUMN EXTRACTOR (Detects all irregular Supabase columns) ══
+    function extractOrderData(ord) {
+      if (!ord) return {};
+
+      // Helper function to match keys loosely
+      const findKey = (patterns) => {
+        const keys = Object.keys(ord);
+        for (let p of patterns) {
+          const directMatch = keys.find(k => k.toLowerCase() === p.toLowerCase());
+          if (directMatch && ord[directMatch] !== null && ord[directMatch] !== undefined && String(ord[directMatch]).trim() !== '') {
+            return ord[directMatch];
+          }
         }
-      }
-      return defaultVal;
+        for (let p of patterns) {
+          const partialMatch = keys.find(k => k.toLowerCase().includes(p.toLowerCase()));
+          if (partialMatch && ord[partialMatch] !== null && ord[partialMatch] !== undefined && String(ord[partialMatch]).trim() !== '') {
+            return ord[partialMatch];
+          }
+        }
+        return '';
+      };
+
+      const id = ord.id;
+      const order_id = findKey(['order_id', 'orderId', 'reg_no', 'id_no']) || ('JS-' + id);
+      const name = findKey(['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name', 'user']) || '—';
+      const district = findKey(['district', 'jila', 'dist']) || '—';
+      const mobile = findKey(['mobile', 'mobile_no', 'phone', 'phone_number', 'userMobile', 'contact', 'contact_no', 'whatsapp']) || '—';
+      const status = findKey(['status', 'order_status', 'orderStatus', 'state', 'delivery_status', 'step']) || 'Order Received';
+      const payment = findKey(['payment_status', 'payment', 'pay_status', 'remarks', 'pay_mode']) || (ord.experience ? `Score: ${ord.experience}/15` : 'Pending');
+      const amount = parseFloat(findKey(['amount', 'price', 'fee', 'total_amount', 'total_price', 'cost'])) || 0;
+      const date = findKey(['order_date', 'created_at', 'date', 'entry_date', 'timestamp']) || '—';
+      const block = findKey(['block', 'anchal', 'circle', 'tehsil', 'block_name']) || '';
+      const village = findKey(['village', 'mauja', 'moza', 'gaon', 'village_name', 'mauja_name']) || '';
+      const thana = findKey(['thana_no', 'thana', 'thana_number', 'police_station']) || '';
+      const khata = findKey(['khata_no', 'khata', 'khata_number']) || '';
+      const khesra = findKey(['khesra_no', 'khesra', 'plot_no', 'khasra', 'khesra_number', 'plot']) || '';
+      const tracking = findKey(['tracking_number', 'tracking_id', 'tracking', 'consignment_no']) || '';
+      const address = findKey(['full_address', 'address', 'delivery_address', 'user_address', 'shipping_address']) || '';
+
+      return {
+        id, order_id, name, district, mobile, status, payment, amount, date, block, village, thana, khata, khesra, tracking, address, raw: ord
+      };
     }
 
     // Fetch Orders for Active Table
@@ -601,7 +699,7 @@
 
         if (error) throw error;
 
-        ALL_ORDERS = data || [];
+        ALL_ORDERS = (data || []).map(extractOrderData);
         calculateMetricsAndRender();
       } catch (err) {
         console.error(err);
@@ -621,15 +719,15 @@
       let orderCount = 0;
 
       const filteredByMonth = ALL_ORDERS.filter(o => {
-        const dateStr = String(getVal(o, ['order_date', 'created_at', 'date']));
+        const dateStr = String(o.date);
         if (!selectedMonth) return true;
         return dateStr.includes(`-${selectedMonth}-`) || dateStr.includes(`/${selectedMonth}/`) || dateStr.includes(` ${selectedMonth} `);
       });
 
       filteredByMonth.forEach(o => {
         orderCount++;
-        const amt = parseFloat(getVal(o, ['amount', 'price', 'fee', 'total_amount'], 0)) || 0;
-        const pStatus = String(getVal(o, ['payment_status', 'payment', 'pay_status'], '')).toLowerCase();
+        const amt = o.amount || 0;
+        const pStatus = String(o.payment).toLowerCase();
 
         if (pStatus.includes('paid') || pStatus.includes('success')) {
           totalReceived += amt;
@@ -645,7 +743,7 @@
       renderTable(filteredByMonth);
     }
 
-    // Render Table with strict column mapping
+    // Render Table with Clean Clickable Order ID
     function renderTable(orders) {
       const tbody = document.getElementById('ordersTbody');
       if (!orders || orders.length === 0) {
@@ -654,35 +752,32 @@
       }
 
       tbody.innerHTML = orders.map(ord => {
-        const oid = getVal(ord, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + ord.id);
-        const name = getVal(ord, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name'], '—');
-        const district = getVal(ord, ['district', 'jila', 'dist'], '—');
-        const mobile = getVal(ord, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp'], '—');
-        const status = getVal(ord, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status'], 'Order Received');
-        const payment = getVal(ord, ['payment_status', 'payment', 'pay_status', 'remarks'], (ord.experience ? `Score: ${ord.experience}/15` : 'Pending'));
-        const date = getVal(ord, ['order_date', 'created_at', 'date'], '—');
+        const status = ord.status || 'Order Received';
+        const payment = ord.payment || 'Pending';
 
-        // Status Badge Styling (preserving exact previous behavior)
         let statusBadge = 'badge-received';
         if (status.includes('cancel')) statusBadge = 'badge-cancel';
         else if (status.includes('Processing')) statusBadge = 'badge-processing';
         else if (status.includes('Delivered') || status === 'Active') statusBadge = 'badge-completed';
         else if (status.includes('Pending')) statusBadge = 'badge-pending';
 
-        // Payment Badge Styling (Pending/Paid/Custom)
         let payBadge = 'badge-custom';
         if (payment === 'Pending') payBadge = 'badge-pending';
         else if (payment.toLowerCase().includes('paid')) payBadge = 'badge-completed';
 
         return `
           <tr>
-            <td class="col-id">${escapeHtml(oid)}</td>
-            <td class="col-name" title="${escapeHtml(name)}">${escapeHtml(name)}</td>
-            <td class="col-district">${escapeHtml(district)}</td>
-            <td class="col-mobile"><a href="tel:${mobile}" style="color:#0f172a; text-decoration:none;">${escapeHtml(mobile)}</a></td>
+            <td class="col-id">
+              <a href="javascript:void(0)" onclick="openQuickViewModal(${ord.id})" title="क्लिक करके पूरा विवरण देखें व स्टेटस बदलें">
+                ${escapeHtml(ord.order_id)} ↗
+              </a>
+            </td>
+            <td class="col-name" title="${escapeHtml(ord.name)}">${escapeHtml(ord.name)}</td>
+            <td class="col-district">${escapeHtml(ord.district)}</td>
+            <td class="col-mobile"><a href="tel:${ord.mobile}" style="color:#0f172a; text-decoration:none;">${escapeHtml(ord.mobile)}</a></td>
             <td class="col-status"><span class="badge ${statusBadge}">${escapeHtml(status)}</span></td>
             <td class="col-payment"><span class="badge ${payBadge}">${escapeHtml(payment)}</span></td>
-            <td class="col-date">${formatDate(date)}</td>
+            <td class="col-date">${formatDate(ord.date)}</td>
             <td class="col-action">
               <button class="btn-edit" onclick="openEditModal(${ord.id})">✏️ Edit</button>
             </td>
@@ -696,11 +791,11 @@
       const statusFilter = document.getElementById('statusFilter').value;
 
       const filtered = ALL_ORDERS.filter(o => {
-        const name = String(getVal(o, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name'])).toLowerCase();
-        const mobile = String(getVal(o, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp'])).toLowerCase();
-        const oid = String(getVal(o, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + o.id)).toLowerCase();
-        const dist = String(getVal(o, ['district', 'jila', 'dist'])).toLowerCase();
-        const status = String(getVal(o, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status']));
+        const name = String(o.name).toLowerCase();
+        const mobile = String(o.mobile).toLowerCase();
+        const oid = String(o.order_id).toLowerCase();
+        const dist = String(o.district).toLowerCase();
+        const status = String(o.status);
 
         const matchesQuery = !q || name.includes(q) || mobile.includes(q) || oid.includes(q) || dist.includes(q);
         const matchesStatus = !statusFilter || status.includes(statusFilter);
@@ -711,26 +806,113 @@
       renderTable(filtered);
     }
 
+    // ══ 1. QUICK VIEW / STATUS ONLY MODAL (Triggered by Order ID Click) ══
+    function openQuickViewModal(rowId) {
+      const ord = ALL_ORDERS.find(o => o.id === rowId);
+      if (!ord) return;
+
+      document.getElementById('qvRowId').value = ord.id;
+      document.getElementById('qvStatus').value = ord.status || 'Order Received';
+      document.getElementById('qvPayment').value = ord.payment || 'Pending';
+
+      // Build Clean Summary Card
+      const container = document.getElementById('qvDetailsContainer');
+      container.innerHTML = `
+        <div><strong>ऑर्डर ID:</strong> <span>${escapeHtml(ord.order_id)}</span></div>
+        <div><strong>तारीख:</strong> <span>${formatDate(ord.date)}</span></div>
+        <div><strong>रैयत का नाम:</strong> <span>${escapeHtml(ord.name)}</span></div>
+        <div><strong>मोबाइल:</strong> <span>${escapeHtml(ord.mobile)}</span></div>
+        <div><strong>ज़िला:</strong> <span>${escapeHtml(ord.district)}</span></div>
+        <div><strong>प्रखंड:</strong> <span>${escapeHtml(ord.block || '—')}</span></div>
+        <div><strong>मौजा / गाँव:</strong> <span>${escapeHtml(ord.village || '—')}</span></div>
+        <div><strong>खाता / खेसरा:</strong> <span>${escapeHtml(ord.khata || '—')} / ${escapeHtml(ord.khesra || '—')}</span></div>
+        <div style="grid-column: 1 / -1;"><strong>पूरा पता:</strong> <span>${escapeHtml(ord.address || '—')}</span></div>
+      `;
+
+      document.getElementById('quickViewModal').style.display = 'flex';
+    }
+
+    function closeQuickViewModal() {
+      document.getElementById('quickViewModal').style.display = 'none';
+    }
+
+    async function saveQuickStatus() {
+      const rowId = document.getElementById('qvRowId').value;
+      const statusVal = document.getElementById('qvStatus').value;
+      const payVal = document.getElementById('qvPayment').value.trim();
+      const saveBtn = document.getElementById('saveQvBtn');
+
+      saveBtn.disabled = true;
+      saveBtn.innerText = "अपडेट हो रहा है...";
+
+      const ord = ALL_ORDERS.find(o => o.id == rowId);
+      const raw = ord ? ord.raw : {};
+
+      // Match dynamic field keys for status and payment in the current table
+      const payload = {};
+      
+      const statusKeys = ['status', 'order_status', 'orderStatus', 'state', 'delivery_status'];
+      const payKeys = ['payment_status', 'payment', 'pay_status', 'remarks'];
+
+      let statusUpdated = false;
+      for (let k of statusKeys) {
+        if (raw[k] !== undefined) {
+          payload[k] = statusVal;
+          statusUpdated = true;
+        }
+      }
+      if (!statusUpdated) payload['status'] = statusVal;
+
+      let payUpdated = false;
+      for (let k of payKeys) {
+        if (raw[k] !== undefined) {
+          payload[k] = payVal;
+          payUpdated = true;
+        }
+      }
+      if (!payUpdated) payload['payment_status'] = payVal;
+
+      try {
+        const { error } = await _supabase
+          .from(CURRENT_TABLE)
+          .update(payload)
+          .eq('id', rowId);
+
+        if (error) throw error;
+
+        alert("✅ स्टेटस सफलतापूर्वक अपडेट हो गया!");
+        closeQuickViewModal();
+        fetchOrders();
+      } catch (err) {
+        console.error(err);
+        alert("अपडेट में त्रुटि: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "⚡ सिर्फ स्टेटस अपडेट करें";
+      }
+    }
+
+    // ══ 2. FULL ADVANCED EDIT MODAL (Triggered by Action Edit Button) ══
     function openEditModal(rowId) {
       const ord = ALL_ORDERS.find(o => o.id === rowId);
       if (!ord) return;
 
       document.getElementById('editRowId').value = ord.id;
-      document.getElementById('editOrderId').value = getVal(ord, ['order_id', 'orderId', 'reg_no', 'id_no'], 'JS-' + ord.id);
-      document.getElementById('editOrderDate').value = getVal(ord, ['order_date', 'created_at', 'date']);
-      document.getElementById('editRaiyatName').value = getVal(ord, ['raiyat_name', 'applicant_name', 'customer_name', 'name', 'buyer_name', 'kisan_name', 'userName', 'full_name', 'party_name']);
-      document.getElementById('editMobile').value = getVal(ord, ['mobile', 'mobile_no', 'phone', 'userMobile', 'contact', 'contact_no', 'whatsapp']);
-      document.getElementById('editAmount').value = getVal(ord, ['amount', 'price', 'fee', 'total_amount'], 0);
-      document.getElementById('editStatus').value = getVal(ord, ['status', 'order_status', 'orderStatus', 'state', 'delivery_status'], 'Order Received');
-      document.getElementById('editPaymentStatus').value = getVal(ord, ['payment_status', 'payment', 'pay_status', 'remarks'], 'Pending');
-      document.getElementById('editDistrict').value = getVal(ord, ['district', 'jila', 'dist']);
-      document.getElementById('editBlock').value = getVal(ord, ['block', 'anchal']);
-      document.getElementById('editVillage').value = getVal(ord, ['village', 'mauja']);
-      document.getElementById('editThana').value = getVal(ord, ['thana_no', 'thana']);
-      document.getElementById('editKhata').value = getVal(ord, ['khata_no', 'khata']);
-      document.getElementById('editKhesra').value = getVal(ord, ['khesra_no', 'khesra']);
-      document.getElementById('editTrackingNumber').value = getVal(ord, ['tracking_number', 'tracking_id']);
-      document.getElementById('editFullAddress').value = getVal(ord, ['full_address', 'address']);
+      document.getElementById('editOrderId').value = ord.order_id;
+      document.getElementById('editOrderDate').value = ord.date;
+      document.getElementById('editRaiyatName').value = ord.name === '—' ? '' : ord.name;
+      document.getElementById('editMobile').value = ord.mobile === '—' ? '' : ord.mobile;
+      document.getElementById('editAmount').value = ord.amount || 0;
+      document.getElementById('editStatus').value = ord.status || 'Order Received';
+      document.getElementById('editPaymentStatus').value = ord.payment || 'Pending';
+      document.getElementById('editDistrict').value = ord.district === '—' ? '' : ord.district;
+      document.getElementById('editBlock').value = ord.block;
+      document.getElementById('editVillage').value = ord.village;
+      document.getElementById('editThana').value = ord.thana;
+      document.getElementById('editKhata').value = ord.khata;
+      document.getElementById('editKhesra').value = ord.khesra;
+      document.getElementById('editTrackingNumber').value = ord.tracking;
+      document.getElementById('editFullAddress').value = ord.address;
 
       document.getElementById('editModal').style.display = 'flex';
     }
@@ -742,6 +924,8 @@
     async function saveOrderChanges() {
       const rowId = document.getElementById('editRowId').value;
       const saveBtn = document.getElementById('saveEditBtn');
+      const ord = ALL_ORDERS.find(o => o.id == rowId);
+      const raw = ord ? ord.raw : {};
 
       const nameVal = document.getElementById('editRaiyatName').value.trim();
       const mobileVal = document.getElementById('editMobile').value.trim();
@@ -758,29 +942,33 @@
       const addrVal = document.getElementById('editFullAddress').value.trim();
       const dateVal = document.getElementById('editOrderDate').value.trim();
 
-      const updatedPayload = {
-        raiyat_name: nameVal,
-        name: nameVal,
-        applicant_name: nameVal,
-        customer_name: nameVal,
-        mobile: mobileVal,
-        mobile_no: mobileVal,
-        phone: mobileVal,
-        district: distVal,
-        block: blockVal,
-        village: villageVal,
-        thana_no: thanaVal,
-        khata_no: khataVal,
-        khesra_no: khesraVal,
-        status: statusVal,
-        order_status: statusVal,
-        payment_status: payVal,
-        payment: payVal,
-        amount: amtVal,
-        tracking_number: trackVal,
-        full_address: addrVal,
-        order_date: dateVal
+      // Dynamic payload mapper: saves to whichever column name exists in this table
+      const updatedPayload = {};
+      const setMatchingKeys = (patterns, val, fallback) => {
+        let set = false;
+        Object.keys(raw).forEach(k => {
+          if (patterns.some(p => k.toLowerCase() === p.toLowerCase() || k.toLowerCase().includes(p.toLowerCase()))) {
+            updatedPayload[k] = val;
+            set = true;
+          }
+        });
+        if (!set) updatedPayload[fallback] = val;
       };
+
+      setMatchingKeys(['raiyat_name', 'applicant_name', 'name', 'buyer_name'], nameVal, 'raiyat_name');
+      setMatchingKeys(['mobile', 'mobile_no', 'phone', 'contact'], mobileVal, 'mobile');
+      setMatchingKeys(['district', 'jila'], distVal, 'district');
+      setMatchingKeys(['block', 'anchal', 'circle'], blockVal, 'block');
+      setMatchingKeys(['village', 'mauja'], villageVal, 'village');
+      setMatchingKeys(['thana_no', 'thana'], thanaVal, 'thana_no');
+      setMatchingKeys(['khata_no', 'khata'], khataVal, 'khata_no');
+      setMatchingKeys(['khesra_no', 'khesra', 'plot'], khesraVal, 'khesra_no');
+      setMatchingKeys(['status', 'order_status'], statusVal, 'status');
+      setMatchingKeys(['payment_status', 'payment'], payVal, 'payment_status');
+      setMatchingKeys(['amount', 'price', 'fee'], amtVal, 'amount');
+      setMatchingKeys(['tracking_number', 'tracking_id'], trackVal, 'tracking_number');
+      setMatchingKeys(['full_address', 'address'], addrVal, 'full_address');
+      setMatchingKeys(['order_date', 'date'], dateVal, 'order_date');
 
       saveBtn.disabled = true;
       saveBtn.innerText = "सुरक्षित हो रहा है...";
@@ -793,7 +981,7 @@
 
         if (error) throw error;
 
-        alert("✅ ऑर्डर विवरण एवं स्टेटस सफलतापूर्वक अपडेट हो गया!");
+        alert("✅ पूरा विवरण सफलतापूर्वक अपडेट हो गया!");
         closeEditModal();
         fetchOrders();
       } catch (err) {
@@ -801,10 +989,11 @@
         alert("अपडेट में त्रुटि: " + err.message);
       } finally {
         saveBtn.disabled = false;
-        saveBtn.innerText = "💾 बदलाव सुरक्षित करें";
+        saveBtn.innerText = "💾 पूरा विवरण सुरक्षित करें";
       }
     }
 
+    // ══ 3. MANUAL ORDER ENTRY ══
     function openManualOrderModal() {
       const now = new Date();
       document.getElementById('targetTableLabel').innerText = CURRENT_TABLE;
@@ -852,8 +1041,8 @@
         order_id: newOrderId,
         order_date: document.getElementById('mOrderDate').value,
         raiyat_name: name,
-        name: name,
         applicant_name: name,
+        name: name,
         mobile: mobile,
         phone: mobile,
         amount: amount,
