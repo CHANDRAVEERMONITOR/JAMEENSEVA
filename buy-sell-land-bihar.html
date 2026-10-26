@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="hi" dir="ltr">
+<head>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3881463813155829" crossorigin="anonymous"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ══ SEO & GSC META TAGS ══ -->
+  <title>बिहार जमीन खरीद-बिक्री पोर्टल 2026: प्लॉट, खेत व मकान खरीदें या बेचें | Verified Land Listings | JameenSeva</title>
+  <meta name="description" content="बिहार के सभी 38 जिलों में जमीन खरीदने और बेचने का नंबर-1 सुरक्षित पोर्टल। जिला, प्रखंड और मौजा अनुसार वेरीफाइड प्लॉट, खेत व आवासीय जमीन खोजें या फ्री लिस्टिंग दर्ज करें।" />
+  <meta name="keywords" content="bihar land buy and sell, bihar plot bikri, jameen bechna hai bihar, patna darbhanga plot sale, bihar agriculture land for sale, jameenseva plot listing, khet bikau hai bihar" />
+  <meta name="author" content="JameenSeva.in" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <link rel="canonical" href="https://jameenseva.in/buy-sell-land-bihar.html" />
+
+  <!-- ══ OPEN GRAPH ══ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="hi_IN" />
+  <meta property="og:title" content="बिहार जमीन खरीद-बिक्री पोर्टल 2026: वेरीफाइड जमीन खरीदें और बेचें" />
+  <meta property="og:description" content="प्लॉट, खेत या कमर्शियल जमीन की खरीद-बिक्री। डायरेक्ट वेरीफाइड लिस्टिंग्स और सुरक्षित डील।" />
+  <meta property="og:url" content="https://jameenseva.in/buy-sell-land-bihar.html" />
+  <meta property="og:image" content="https://jameenseva.in/logo.png" />
+  <meta property="og:site_name" content="JameenSeva.in" />
+
+  <!-- ══ 1. REAL ESTATE LISTING SCHEMA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    "name": "Bihar Verified Land Marketplace - JameenSeva",
+    "description": "बिहार राज्य के सभी 38 जिलों में कृषि, आवासीय एवं व्यावसायिक जमीन की खरीद-बिक्री हेतु सुरक्षित मंच।",
+    "url": "https://jameenseva.in/buy-sell-land-bihar.html"
+  }
+  </script>
+
+  <!-- ══ 2. FAQ SCHEMA ══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "क्या जमीन बेचने के लिए लिस्टिंग दर्ज करना मुफ्त है?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "हाँ, JameenSeva पोर्टल पर कोई भी रैयत या किसान अपनी जमीन बेचने के लिए बेसिक विवरण भरकर पूरी तरह मुफ्त में लिस्टिंग दर्ज कर सकता है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "खरीदार को विक्रेता का मोबाइल नंबर और खाता-खेसरा क्यों छुपाया जाता है?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "जमीन मालिक की गोपनीयता बनाए रखने, दलालों की ठगी रोकने और जमीन पर किसी भी फर्जी दावे या विवाद से सुरक्षा के लिए सार्वजनिक लिस्टिंग में खाता, खेसरा और रैयत का नाम आंशिक रूप से गोपनीय रखा जाता है।"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "जमीन खरीदने से पहले दस्तावेजों की जांच (Verification) कैसे करें?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "आप JameenSeva के माध्यम से जमीन का ओरिजिनल खतियान, वर्तमान जमाबंदी पंजी-2 नकल, और दाखिल-खारिज स्थिति ऑनलाइन मंगवाकर कानूनी वैधता की जांच कर सकते हैं।"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts & Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #15803d;
+      --primary-dark: #14532d;
+      --navy: #0f172a;
+      --navy-light: #1e3a8a;
+      --amber: #d97706;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Serif Devanagari', 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+    a { color: var(--primary); text-decoration: none; }
+
+    /* Navbar */
+    .top-notice { background: var(--navy); color: #cbd5e1; font-family: 'Baloo 2', sans-serif; font-size: 13px; padding: 6px 16px; text-align: center; border-bottom: 2px solid #22c55e; }
+    .top-notice b { color: #86efac; }
+    .navbar { background: #fff; padding: 12px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000; }
+    .brand { font-family: 'Baloo 2', sans-serif; font-weight: 800; color: var(--navy); font-size: 22px; text-decoration: none; }
+    .brand span { color: var(--primary); }
+    .nav-links { display: flex; gap: 8px; align-items: center; }
+    .nav-links a { color: var(--navy); text-decoration: none; font-family: 'Baloo 2', sans-serif; font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 6px; }
+
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, var(--primary-dark) 100%); color: #fff; text-align: center; padding: 42px 16px 36px; }
+    .hero .tag { display: inline-block; background: #22c55e; color: #052e16; font-size: .75rem; font-weight: 800; padding: 3px 16px; border-radius: 20px; margin-bottom: 12px; text-transform: uppercase; font-family: 'Baloo 2', sans-serif; }
+    .hero h1 { font-family: 'Baloo 2', sans-serif; font-size: clamp(1.4rem, 4vw, 2.3rem); font-weight: 900; line-height: 1.35; margin-bottom: 10px; }
+    .hero h1 em { color: #facc15; font-style: normal; }
+    .hero p { font-size: .96rem; opacity: .9; max-width: 720px; margin: 0 auto 16px; }
+
+    /* Mode Switcher Buttons */
+    .mode-switch-wrap { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .mode-btn { padding: 10px 24px; border-radius: 30px; font-family: 'Baloo 2', sans-serif; font-size: 15px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-buy-mode { background: #facc15; color: #0f172a; box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35); }
+    .btn-sell-mode { background: #22c55e; color: #052e16; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35); }
+    .mode-btn:hover { transform: translateY(-2px); }
+
+    /* Layout */
+    .wrapper { max-width: 1140px; margin: auto; padding: 26px 14px 60px; }
+    .filter-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 24px; box-shadow: var(--shadow); }
+    .filter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end; }
+    .f-group { display: flex; flex-direction: column; gap: 5px; }
+    .f-group label { font-family: 'Baloo 2', sans-serif; font-size: 13px; font-weight: 700; color: #475569; }
+    .f-group select, .f-group input { padding: 9px 12px; border: 1.8px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; background: #fff; font-family: inherit; }
+    .f-group select:focus, .f-group input:focus { border-color: var(--primary); }
+
+    /* Listing Grid */
+    .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .land-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; }
+    .land-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(15, 23, 42, 0.12); border-color: #86efac; }
+    .lc-header { background: #f8fafc; padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .lc-type-badge { font-family: 'Baloo 2', sans-serif; font-size: 11.5px; font-weight: 800; padding: 2px 10px; border-radius: 20px; background: #dcfce7; color: #166534; }
+    .lc-type-comm { background: #fef3c7; color: #b45309; }
+    .lc-price { font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 900; color: #15803d; }
+    
+    .lc-body { padding: 16px; }
+    .lc-loc { font-family: 'Baloo 2', sans-serif; font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    
+    /* Privacy Masked Details Box */
+    .lc-masked-box { background: #f1f5f9; border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; font-size: 13px; border-left: 3px solid #64748b; }
+    .lc-masked-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+    .lc-masked-row:last-child { margin-bottom: 0; }
+    .lc-masked-row span { color: #64748b; }
+    .lc-masked-row strong { color: var(--navy); font-family: monospace; font-size: 13.5px; letter-spacing: 0.5px; }
+
+    .lc-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px; color: #334155; margin-bottom: 12px; }
+    .lc-specs div strong { color: #0f172a; font-family: 'Baloo 2', sans-serif; }
+
+    .lc-footer { padding: 12px 16px; background: #fafafa; border-top: 1px solid var(--border); display: flex; gap: 8px; }
+    .btn-inquire { flex: 1; padding: 9px; background: var(--primary); color: #fff; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 13.5px; border: none; border-radius: 6px; cursor: pointer; text-align: center; }
+    .btn-inquire:hover { background: var(--primary-dark); }
+    .btn-verify-doc { padding: 9px 12px; background: #e0f2fe; color: #0369a1; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 12.5px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+
+    /* Seller Form Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.72); z-index: 9999; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(3px); }
+    .modal-box { background: #fff; width: 100%; max-width: 650px; max-height: 90vh; border-radius: var(--radius); overflow-y: auto; box-shadow: 0 16px 40px rgba(0,0,0,0.3); }
+    .modal-head { background: var(--navy); color: #fff; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; }
+    .modal-head h3 { font-family: 'Baloo 2', sans-serif; font-size: 18px; font-weight: 800; }
+    .modal-close { background: none; border: none; color: #94a3b8; font-size: 22px; cursor: pointer; font-weight: 700; }
+    .modal-body { padding: 20px; }
+    
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-family: 'Baloo 2', sans-serif; font-size: 12.5px; font-weight: 700; color: #334155; }
+    .form-group input, .form-group select, .form-group textarea { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 6px; font-size: 13.5px; outline: none; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+
+    .btn-submit-listing { width: 100%; padding: 12px; background: #16a34a; color: #fff; font-family: 'Baloo 2', sans-serif; font-size: 16px; font-weight: 800; border: none; border-radius: 8px; cursor: pointer; margin-top: 14px; }
+    .btn-submit-listing:hover { background: #15803d; }
+
+    /* AdSense Slots */
+    .adsense-box { background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 10px; padding: 14px; margin: 24px 0; text-align: center; }
+    .ads-lbl { font-family: 'Baloo 2', sans-serif; font-size: 11px; color: #94a3b8; text-transform: uppercase; margin-bottom: 6px; }
+    .ads-slot { min-height: 90px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-family: monospace; color: #94a3b8; font-size: 12px; }
+
+    /* FAQ Card */
+    .faq-card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--radius); padding: 26px; margin-top: 36px; }
+    .faq-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+    .faq-q { background: #f8fafc; padding: 12px 16px; font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .faq-a { display: none; padding: 14px 16px; font-size: 14px; color: #475569; background: #fff; border-top: 1px solid var(--border); line-height: 1.7; }
+
+    footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 34px 16px; font-size: 13.5px; border-top: 3px solid var(--primary); margin-top: 40px; font-family: 'Baloo 2', sans-serif; }
+    footer a { color: #86efac; text-decoration: none; margin: 0 6px; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .listings-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-notice">
+    <span>🛡️ <b>JameenSeva Trust Shield:</b> बिना दलाल डायरेक्ट जमीन मालिक से संपर्क, 100% लीगल पेपर वेरिफिकेशन</span>
+  </div>
+
+  <nav class="navbar">
+    <a href="https://jameenseva.in/" class="brand">Jameen<span>Seva</span>.in</a>
+    <div class="nav-links">
+      <a href="https://jameenseva.in/">🏠 Home</a>
+      <a href="https://jameenseva.in/sarkari.html">🏛️ सरकारी सेवाएं</a>
+      <a href="https://jameenseva.in/khatiyan.html">📜 खतियान</a>
+      <a href="https://jameenseva.in/panchnamablog.html">⚖️ बटवारा</a>
+      <a href="https://jameenseva.in/track.html">🚚 Tracking</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="tag">Bihar Land Marketplace 2026</span>
+    <h1>बिहार जमीन खरीद-बिक्री पोर्टल<br><em>वेरीफाइड प्लॉट, खेत व कमर्शियल जमीन खोजें या फ्री लिस्ट करें</em></h1>
+    <p>खरीदार के लिए सुरक्षित प्राइवेसी सुरक्षा और विक्रेता के लिए बिना दलाल डायरेक्ट जेनुइन कस्टमर मिलने का सबसे भरोसेमंद मंच।</p>
+    
+    <div class="mode-switch-wrap">
+      <button class="mode-btn btn-buy-mode" onclick="scrollToFilter()">
+        🔍 जमीन खरीदना है (View Available Lands)
+      </button>
+      <button class="mode-btn btn-sell-mode" onclick="openSellModal()">
+        ➕ अपनी जमीन बेचना है (List Your Land Free)
+      </button>
+    </div>
+  </header>
+
+  <div class="wrapper">
+
+    <!-- AD SLOT 1 -->
+    <div class="adsense-box">
+      <div class="ads-lbl">ADVERTISEMENT</div>
+      <div class="ads-slot">[Google AdSense Header Unit]</div>
+    </div>
+
+    <!-- ══ SEARCH & FILTER BAR ══ -->
+    <div class="filter-card" id="filterSection">
+      <h3 style="font-family:'Baloo 2'; font-size:17px; font-weight:800; color:var(--navy); margin-bottom:12px;">
+        🎯 अपनी पसंद का जिला, प्रखंड और जमीन का प्रकार चुनें:
+      </h3>
+      <div class="filter-grid">
+        
+        <div class="f-group">
+          <label>1. जिला चुनें (Select District)</label>
+          <select id="filterDistrict" onchange="handleDistrictChange()">
+            <option value="">सभी 38 जिले (All Bihar)</option>
+            <!-- Auto populated by JS -->
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>2. प्रखंड / अंचल (Select Block)</label>
+          <select id="filterBlock" onchange="applyFilters()">
+            <option value="">सभी प्रखंड (All Blocks)</option>
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>3. जमीन का प्रकार (Land Type)</label>
+          <select id="filterType" onchange="applyFilters()">
+            <option value="">सभी प्रकार (All Types)</option>
+            <option value="Residential Plot">आवासीय प्लॉट (Residential)</option>
+            <option value="Agriculture Farm">खेती की जमीन (Agriculture)</option>
+            <option value="Commercial / Highway">कमर्शियल / हाईवे फ्रंट</option>
+          </select>
+        </div>
+
+        <div class="f-group">
+          <label>4. मौजा या कीवर्ड (Search Mauja)</label>
+          <input type="text" id="filterKeyword" placeholder="जैसे: भटियारीसराय, बेला, बिहटा" onkeyup="applyFilters()" />
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ LAND LISTINGS CONTAINER ══ -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <h2 style="font-family:'Baloo 2'; font-size:20px; font-weight:800; color:var(--navy);">
+        📍 उपलब्ध सत्यापित जमीनें (<span id="listingCount">0</span> Listings Found)
+      </h2>
+      <button onclick="openSellModal()" style="background:#15803d; color:#fff; border:none; padding:7px 14px; border-radius:6px; font-family:'Baloo 2'; font-weight:700; cursor:pointer; font-size:13px;">
+        + अपनी जमीन लिस्ट करें
+      </button>
+    </div>
+
+    <div class="listings-grid" id="listingsContainer">
+      <!-- Listings Rendered by JS -->
+    </div>
+
+    <!-- IN-ARTICLE AD -->
+    <div class="adsense-box">
+      <div class="ads-lbl">ADVERTISEMENT</div>
+      <div class="ads-slot">[Google AdSense In-Article Responsive Banner]</div>
+    </div>
+
+    <!-- ══ FAQ SECTION ══ -->
+    <div class="faq-card">
+      <h2 style="font-family:'Baloo 2'; font-size:20px; font-weight:800; color:var(--navy); margin-bottom:14px;">
+        ❓ अक्सर पूछे जाने वाले सवाल — बिहार जमीन खरीद-बिक्री
+      </h2>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">क्या जमीन बेचने के लिए लिस्टिंग दर्ज करना मुफ्त है? <span>▼</span></div>
+        <div class="faq-a">हाँ, JameenSeva पोर्टल पर किसान या जमीन मालिक अपनी जमीन बेचने के लिए बेसिक जानकारी भरकर बिना किसी ब्रोकरेज के 100% फ्री में लिस्टिंग जोड़ सकते हैं।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">खरीदार को खाता, खेसरा और मालिक का मोबाइल नंबर आधा छुपा हुआ क्यों दिखता है? <span>▼</span></div>
+        <div class="faq-a">सुरक्षा कारणों से सार्वजनिक रूप से संवेदनशील जानकारी जैसे पूरा खाता, खेसरा और रैयत का मोबाइल नंबर मास्क (Hide) रखा जाता है ताकि कोई असामाजिक तत्व या दलाल जमीन मालिक को परेशान न कर सके। वास्तविक खरीदार को 'वेरीफाइड इन्क्वायरी' करने पर JameenSeva लीगल टीम सत्यापन के बाद विवरण प्रदान करती है।</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">जमीन खरीदने से पहले कौन-से दस्तावेज जांचने चाहिए? <span>▼</span></div>
+        <div class="faq-a">जमीन खरीदने से पहले पुराना कैडस्ट्रल (CS) या रिविजनल (RS) खतियान, वर्तमान जमाबंदी पंजी-2 नकल, ऑनलाइन अद्यतन लगान रसीद, और पिछले 12 वर्षों का गैर-भार प्रमाण पत्र (Encumbrance Certificate - EC) अनिवार्य रूप से जांचना चाहिए।</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ SELLER REGISTRATION MODAL ══════════ -->
+  <div class="modal-overlay" id="sellerModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>📝 अपनी जमीन बेचने के लिए विवरण दर्ज करें (Free Listing)</h3>
+        <button class="modal-close" onclick="closeSellModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-size:12.5px; color:#64748b; margin-bottom:14px; background:#fef3c7; padding:8px 10px; border-radius:6px; border-left:3px solid #d97706;">
+          🔒 <b>प्राइवेसी सुरक्षा:</b> आपकी निजी जानकारी (मोबाइल व पूरा खेसरा) केवल सत्यापन हेतु ली जा रही है। वेबसाइट पर यह सार्वजनिक रूप से छुपाकर (Masked) रखी जाएगी।
+        </p>
+
+        <form id="sellLandForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-grid">
+            
+            <div class="form-group full">
+              <label>रैयत / जमीन मालिक का पूरा नाम *</label>
+              <input type="text" id="sellerName" placeholder="जमाबंदी या खतियान के अनुसार नाम" required />
+            </div>
+
+            <div class="form-group">
+              <label>मोबाइल नंबर (WhatsApp Active) *</label>
+              <input type="tel" id="sellerMobile" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" required />
+            </div>
+
+            <div class="form-group">
+              <label>जमीन का प्रकार (Property Type) *</label>
+              <select id="propertyType" required>
+                <option value="Residential Plot">आवासीय प्लॉट (Residential)</option>
+                <option value="Agriculture Farm">खेती की जमीन (Agriculture)</option>
+                <option value="Commercial / Highway">कमर्शियल / हाईवे प्लॉट</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>जिला (District) *</label>
+              <select id="sellerDistrict" onchange="handleSellerDistrictChange()" required>
+                <option value="">जिला चुनें</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>प्रखंड / अंचल (Block) *</label>
+              <select id="sellerBlock" required>
+                <option value="">पहले जिला चुनें</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>मौजा / गाँव का नाम *</label>
+              <input type="text" id="sellerMauja" placeholder="गाँव / मौजा का नाम" required />
+            </div>
+
+            <div class="form-group">
+              <label>थाना नंबर (Thana No.)</label>
+              <input type="text" id="sellerThana" placeholder="जैसे: 142" />
+            </div>
+
+            <div class="form-group">
+              <label>खाता संख्या (Khata No.) *</label>
+              <input type="text" id="sellerKhata" placeholder="जैसे: 85" required />
+            </div>
+
+            <div class="form-group">
+              <label>खेसरा / प्लॉट संख्या (Khesra No.) *</label>
+              <input type="text" id="sellerKhesra" placeholder="जैसे: 412" required />
+            </div>
+
+            <div class="form-group">
+              <label>कुल रकबा (Area) *</label>
+              <input type="text" id="sellerRakba" placeholder="जैसे: 2 कट्ठा, 10 धुर या 1 बीघा" required />
+            </div>
+
+            <div class="form-group">
+              <label>मांगी जाने वाली कीमत (Expected Price ₹) *</label>
+              <input type="text" id="sellerPrice" placeholder="उदा. ₹15 लाख प्रति कट्ठा" required />
+            </div>
+
+            <div class="form-group full">
+              <label>सड़क की चौड़ाई व कनेक्टिविटी (Road Details) *</label>
+              <input type="text" id="sellerRoad" placeholder="जैसे: 16 फीट पीसीसी सड़क, एनएच-57 से 200 मीटर" required />
+            </div>
+
+            <div class="form-group full">
+              <label>अतिरिक्त जानकारी / चौहद्दी (Additional Remarks)</label>
+              <textarea id="sellerRemarks" rows="2" placeholder="आस-पास स्कूल, अस्पताल, या जमीन की कोई विशेष खूबी"></textarea>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn-submit-listing" id="submitBtn">
+            ✅ जमीन की लिस्टिंग पोस्ट करें (Submit Free Listing)
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 JameenSeva.in — बिहार का नंबर 1 भूमि अभिलेख एवं वेरीफाइड प्रॉपर्टी पोर्टल</p>
+    <p style="margin-top:6px;">
+      <a href="https://jameenseva.in/">होम</a> |
+      <a href="https://jameenseva.in/khatiyan.html">खतियान सेवा</a> |
+      <a href="https://jameenseva.in/panchnamablog.html">बंटवारा</a> |
+      <a href="https://jameenseva.in/contact.html">संपर्क करें</a> |
+      <a href="https://jameenseva.in/disclaimer.html">डिस्क्लेमर</a>
+    </p>
+  </footer>
+
+  <!-- ══ JAVASCRIPT LOGIC ══ -->
+  <script>
+    // 38 Districts of Bihar & Key Blocks Mapping
+    const BIHAR_LOCATIONS = {
+      "Darbhanga": ["Darbhanga Sadar", "Bahadurpur", "Benipur", "Baheri", "Biraul", "Hayaghat", "Jale", "Keoti", "Manigachhi", "Singhwara"],
+      "Patna": ["Patna Sadar", "Danapur", "Bihta", "Phulwari Sharif", "Fatwah", "Bakhtiarpur", "Barh", "Masaurhi", "Paliganj", "Sampatchak"],
+      "Muzaffarpur": ["Musahari", "Kanti", "Motipur", "Marwan", "Sakra", "Kurhani", "Bochahan", "Aurai", "Minapur", "Paroo"],
+      "Madhubani": ["Madhubani Sadar", "Pandaul", "Rajnagar", "Jhanjharpur", "Benipatti", "Khajauli", "Babubarhi", "Laukaha", "Bisfi"],
+      "Samastipur": ["Samastipur Sadar", "Kalyanpur", "Warisnagar", "Ujiarpur", "Dalsinghsarai", "Rosera", "Pusa", "Tajpur", "Patori"],
+      "Gaya": ["Gaya Sadar", "Bodhgaya", "Tekari", "Manpur", "Sherghati", "Wazirganj", "Belaganj", "Atri"],
+      "Bhagalpur": ["Jagdishpur", "Nathnagar", "Sabour", "Sultanganj", "Kahalgaon", "Colgong", "Bihpur"],
+      "Begusarai": ["Begusarai Sadar", "Barauni", "Teghra", "Bakhri", "Ballia", "Matihani", "Sahebpur Kamal"],
+      "Purnia": ["Purnia East", "Kasba", "Banmankhi", "Dhamdaha", "Baisi", "Krityanand Nagar"],
+      "Saran (Chhapra)": ["Chhapra Sadar", "Marhaura", "Garkha", "Dighwara", "Sonpur", "Baniapur"],
+      "Vaishali (Hajipur)": ["Hajipur", "Lalganj", "Mahua", "Bidupur", "Jandaha", "Raghopur"],
+      "Nalanda (Biharsharif)": ["Biharsharif", "Rajgir", "Hilsa", "Islampur", "Harnaut", "Asthawan"]
+    };
+
+    // Pre-filled Verified Initial Listings (All Sensitive Data is securely masked)
+    let LISTINGS_DATA = [
+      {
+        id: "JS-LND-101",
+        raiyat_name: "Rameshwar Prasad Yadav",
+        mobile: "9142075859",
+        district: "Darbhanga",
+        block: "Bahadurpur",
+        mauja: "Dekuli (देकुली)",
+        khata: "114",
+        khesra: "628",
+        rakba: "3 कट्ठा (Commercial)",
+        price: "₹18.5 लाख प्रति कट्ठा",
+        type: "Commercial / Highway",
+        road: "20 फीट चौड़ी पक्की सड़क, SH-88 से 100 मीटर",
+        remarks: "दुकान, गोदाम या आवासीय मकान के लिए सबसे उपयुक्त। दाखिल-खारिज और रसीद अद्यतन है।"
+      },
+      {
+        id: "JS-LND-102",
+        raiyat_name: "Santosh Kumar Jha",
+        mobile: "9142075859",
+        district: "Patna",
+        block: "Bihta",
+        mauja: "Kanhauli (कन्हौली)",
+        khata: "248",
+        khesra: "1402",
+        rakba: "5 कट्ठा (Residential)",
+        price: "₹28 लाख प्रति कट्ठा",
+        type: "Residential Plot",
+        road: "16 फीट ढलाई रास्ता, बिहटा-सरमेरा रिंग रोड के पास",
+        remarks: "आईआईटी बिहटा और नए एयरपोर्ट से मात्र 4 किमी। तुरंत घर बनाने योग्य।"
+      },
+      {
+        id: "JS-LND-103",
+        raiyat_name: "Mahesh Singh",
+        mobile: "9142075859",
+        district: "Samastipur",
+        block: "Pusa",
+        mauja: "Malikpur (मलिकपुर)",
+        khata: "76",
+        khesra: "389",
+        rakba: "1 बीघा (उपजाऊ खेत)",
+        price: "₹45 लाख कुल कीमत",
+        type: "Agriculture Farm",
+        road: "सरकारी नहर व 12 फीट रास्ता",
+        remarks: "3 फसली सिंचित उपजाऊ जमीन। बोरिंग की सुविधा उपलब्ध।"
+      },
+      {
+        id: "JS-LND-104",
+        raiyat_name: "Abdul Karim",
+        mobile: "9142075859",
+        district: "Muzaffarpur",
+        block: "Kanti",
+        mauja: "Kothiya (कोठिया)",
+        khata: "192",
+        khesra: "841",
+        rakba: "2 कट्ठा 10 धुर",
+        price: "₹14 लाख प्रति कट्ठा",
+        type: "Residential Plot",
+        road: "14 फीट संपर्क मार्ग",
+        remarks: "कांति थर्मल पावर स्टेशन के पास आवासीय बस्ती।"
+      }
+    ];
+
+    // Helper: Mask sensitive text for Buyer Privacy
+    function maskName(str) {
+      if (!str || str.length < 3) return "रै*** कु***";
+      let parts = str.split(" ");
+      return parts.map(p => p[0] + "****" + (p.length > 2 ? p.slice(-1) : "")).join(" ");
+    }
+
+    function maskNumber(num) {
+      if (!num) return "***";
+      let s = String(num);
+      if (s.length <= 2) return s[0] + "*";
+      return s.slice(0, 1) + "**" + s.slice(-1);
+    }
+
+    // Populate Districts in Dropdowns
+    function initDistricts() {
+      const filterDist = document.getElementById("filterDistrict");
+      const sellerDist = document.getElementById("sellerDistrict");
+      
+      const districts = Object.keys(BIHAR_LOCATIONS);
+      districts.forEach(d => {
+        filterDist.innerHTML += `<option value="${d}">${d}</option>`;
+        sellerDist.innerHTML += `<option value="${d}">${d}</option>`;
+      });
+    }
+
+    // Update Blocks on District Select (Filter)
+    function handleDistrictChange() {
+      const dist = document.getElementById("filterDistrict").value;
+      const blockSelect = document.getElementById("filterBlock");
+      blockSelect.innerHTML = `<option value="">सभी प्रखंड (All Blocks)</option>`;
+
+      if (dist && BIHAR_LOCATIONS[dist]) {
+        BIHAR_LOCATIONS[dist].forEach(b => {
+          blockSelect.innerHTML += `<option value="${b}">${b}</option>`;
+        });
+      }
+      applyFilters();
+    }
+
+    // Update Blocks on District Select (Seller Form)
+    function handleSellerDistrictChange() {
+      const dist = document.getElementById("sellerDistrict").value;
+      const blockSelect = document.getElementById("sellerBlock");
+      blockSelect.innerHTML = `<option value="">प्रखंड चुनें</option>`;
+
+      if (dist && BIHAR_LOCATIONS[dist]) {
+        BIHAR_LOCATIONS[dist].forEach(b => {
+          blockSelect.innerHTML += `<option value="${b}">${b}</option>`;
+        });
+      }
+    }
+
+    // Render Land Cards
+    function renderListings(data) {
+      const container = document.getElementById("listingsContainer");
+      document.getElementById("listingCount").innerText = data.length;
+
+      if (!data || data.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column:1/-1; text-align:center; padding:40px; background:#fff; border-radius:12px; border:1px solid #cbd5e1;">
+            <div style="font-size:36px; margin-bottom:8px;">🌾</div>
+            <strong style="font-family:'Baloo 2'; font-size:18px; color:#0f172a;">इस जिले या प्रखंड में अभी कोई जमीन उपलब्ध नहीं है।</strong>
+            <p style="font-size:13.5px; color:#64748b; margin-top:4px;">यदि आपके पास यहाँ जमीन है तो 'अपनी जमीन बेचना है' बटन से फ्री में लिस्ट करें।</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = data.map(item => `
+        <div class="land-card">
+          <div>
+            <div class="lc-header">
+              <span class="lc-type-badge ${item.type.includes('Commercial') ? 'lc-type-comm' : ''}">
+                ${item.type}
+              </span>
+              <span class="lc-price">${item.price}</span>
+            </div>
+
+            <div class="lc-body">
+              <div class="lc-loc">
+                <span>📍</span> ${item.mauja}, ${item.block}, ${item.district}
+              </div>
+
+              <!-- Masked Privacy Box -->
+              <div class="lc-masked-box">
+                <div class="lc-masked-row">
+                  <span>रैयत का नाम:</span>
+                  <strong>${maskName(item.raiyat_name)}</strong>
+                </div>
+                <div class="lc-masked-row">
+                  <span>खाता संख्या:</span>
+                  <strong>${maskNumber(item.khata)}</strong>
+                </div>
+                <div class="lc-masked-row">
+                  <span>खेसरा / प्लॉट:</span>
+                  <strong>${maskNumber(item.khesra)}</strong>
+                </div>
+              </div>
+
+              <div class="lc-specs">
+                <div><strong>रकबा:</strong> ${item.rakba}</div>
+                <div><strong>सड़क:</strong> ${item.road}</div>
+              </div>
+
+              ${item.remarks ? `<p style="font-size:12.5px; color:#475569; line-height:1.5; margin-top:6px;"><b>विवरण:</b> ${item.remarks}</p>` : ''}
+            </div>
+          </div>
+
+          <div class="lc-footer">
+            <button class="btn-inquire" onclick="inquireLand('${item.id}', '${item.mauja}', '${item.district}')">
+              📞 संपर्क व पेपर जांचें
+            </button>
+            <a href="https://jameenseva.in/khatiyan.html" target="_blank" class="btn-verify-doc">
+              📜 खतियान निकालें
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Apply Real-time Filters
+    function applyFilters() {
+      const dist = document.getElementById("filterDistrict").value;
+      const block = document.getElementById("filterBlock").value;
+      const type = document.getElementById("filterType").value;
+      const q = document.getElementById("filterKeyword").value.toLowerCase().trim();
+
+      const filtered = LISTINGS_DATA.filter(item => {
+        const matchesDist = !dist || item.district === dist;
+        const matchesBlock = !block || item.block === block;
+        const matchesType = !type || item.type === type;
+        const matchesQ = !q || item.mauja.toLowerCase().includes(q) || item.district.toLowerCase().includes(q) || item.block.toLowerCase().includes(q);
+        return matchesDist && matchesBlock && matchesType && matchesQ;
+      });
+
+      renderListings(filtered);
+    }
+
+    // Modal Handlers
+    function openSellModal() {
+      document.getElementById("sellerModal").style.display = "flex";
+    }
+    function closeSellModal() {
+      document.getElementById("sellerModal").style.display = "none";
+    }
+    function scrollToFilter() {
+      document.getElementById("filterSection").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Handle Seller Form Submission (Adds to listing and masks for viewers)
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.innerText = "लिस्टिंग सुरक्षित हो रही है...";
+
+      const newListing = {
+        id: "JS-LND-" + Math.floor(100 + Math.random() * 900),
+        raiyat_name: document.getElementById("sellerName").value.trim(),
+        mobile: document.getElementById("sellerMobile").value.trim(),
+        type: document.getElementById("propertyType").value,
+        district: document.getElementById("sellerDistrict").value,
+        block: document.getElementById("sellerBlock").value,
+        mauja: document.getElementById("sellerMauja").value.trim(),
+        thana: document.getElementById("sellerThana").value.trim(),
+        khata: document.getElementById("sellerKhata").value.trim(),
+        khesra: document.getElementById("sellerKhesra").value.trim(),
+        rakba: document.getElementById("sellerRakba").value.trim(),
+        price: document.getElementById("sellerPrice").value.trim(),
+        road: document.getElementById("sellerRoad").value.trim(),
+        remarks: document.getElementById("sellerRemarks").value.trim()
+      };
+
+      // Add to front of listings
+      LISTINGS_DATA.unshift(newListing);
+      
+      setTimeout(() => {
+        alert("✅ बधाई हो! आपकी जमीन की लिस्टिंग JameenSeva पर लाइव हो गई है। सुरक्षा कारणों से आपका मोबाइल और खेसरा नंबर छुपाकर (Masked) प्रदर्शित किया गया है।");
+        closeSellModal();
+        document.getElementById("sellLandForm").reset();
+        submitBtn.disabled = false;
+        submitBtn.innerText = "✅ जमीन की लिस्टिंग पोस्ट करें (Submit Free Listing)";
+        renderListings(LISTINGS_DATA);
+      }, 500);
+    }
+
+    // Inquire Action (WhatsApp direct routing)
+    function inquireLand(id, mauja, district) {
+      const msg = `नमस्ते JameenSeva! मुझे प्रॉपर्टी ID [${id}] जो ${mauja}, ${district} में स्थित है, के बारे में पूरी जानकारी और मालिक से बात करनी है। कृपया जमीन के वैध कागजात सत्यापित करके संपर्क करवाएं।`;
+      window.open(`https://wa.me/919142075859?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // FAQ Toggle
+    function toggleFaq(el) {
+      const ans = el.nextElementSibling;
+      ans.style.display = ans.style.display === "block" ? "none" : "block";
+    }
+
+    // Init
+    document.addEventListener("DOMContentLoaded", () => {
+      initDistricts();
+      renderListings(LISTINGS_DATA);
+    });
+  </script>
+</body>
+</html>
