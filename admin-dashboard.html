@@ -1,1045 +1,776 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>जमीन सेवा - एडमिन डैशबोर्ड</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#12314f;
-    --navy-light:#1c4a75;
-    --gold:#c9922f;
-    --gold-light:#e8b95c;
-    --bg:#f2f4f7;
-    --card:#ffffff;
-    --border:#e2e6ec;
-    --text:#1e2733;
-    --text-mute:#6b7684;
-    --green:#1f8a52;
-    --green-bg:#e7f6ee;
-    --amber:#b3760a;
-    --amber-bg:#fdf1dc;
-    --red:#c0392b;
-    --red-bg:#fbe8e5;
-    --blue:#1c5d9e;
-    --blue-bg:#e7f0fa;
-  }
-  *{box-sizing:border-box;}
-  body{
-    font-family:'Inter','Noto Sans Devanagari',sans-serif;
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    display:none;
-  }
-  .lang-dev{font-family:'Noto Sans Devanagari','Inter',sans-serif;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JameenSeva Admin Master Panel</title>
+  
+  <!-- Supabase JS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 
-  /* ---- Navbar ---- */
-  .navbar{
-    background:linear-gradient(135deg,var(--navy) 0%, var(--navy-light) 100%);
-    color:#fff;
-    padding:14px 28px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    box-shadow:0 2px 8px rgba(0,0,0,0.15);
-    position:sticky; top:0; z-index:50;
-  }
-  .navbar .brand{display:flex; align-items:center; gap:10px;}
-  .navbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold-light);}
-  .navbar h1{margin:0; font-size:18px; font-weight:700; letter-spacing:.2px;}
-  .navbar .sub{font-size:11px; color:#c7d4e2; margin-top:2px;}
-  .btn-logout{
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.25);
-    color:#fff; padding:8px 16px; border-radius:6px;
-    cursor:pointer; font-weight:600; font-size:13px;
-    transition:.15s;
-  }
-  .btn-logout:hover{background:var(--red); border-color:var(--red);}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Noto Sans Devanagari', Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+      line-height: 1.5;
+    }
 
-  .container{padding:22px 28px 60px; max-width:1440px; margin:0 auto;}
+    /* Top Control Bar */
+    .top-bar {
+      background: #ffffff;
+      padding: 14px 20px;
+      border-bottom: 1.5px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-title span { color: #16a34a; }
 
-  /* ---- Tabs ---- */
-  .tabs-container{display:flex; gap:8px; margin-bottom:18px; overflow-x:auto; padding-bottom:4px;}
-  .tab-btn{
-    padding:10px 18px; background:#fff; border:1px solid var(--border);
-    border-radius:8px; cursor:pointer; font-weight:600; color:var(--text-mute);
-    white-space:nowrap; font-size:13.5px; transition:.15s;
-  }
-  .tab-btn:hover{border-color:var(--navy-light); color:var(--navy);}
-  .tab-btn.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+    .control-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .search-inp {
+      padding: 9px 14px;
+      border: 1.8px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      width: 260px;
+      outline: none;
+      transition: 0.2s;
+    }
+    .search-inp:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
 
-  /* ---- Summary chips ---- */
-  .summary-row{display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
-  .chip{
-    background:#fff; border:1px solid var(--border); border-radius:10px;
-    padding:12px 18px; min-width:120px;
-  }
-  .chip .num{font-size:22px; font-weight:700; color:var(--navy);}
-  .chip .label{font-size:12px; color:var(--text-mute); margin-top:2px;}
-  .chip.total .num{color:var(--navy);}
-  .chip.pending .num{color:var(--amber);}
-  .chip.done .num{color:var(--green);}
-  .chip.rejected .num{color:var(--red);}
+    .filter-select {
+      padding: 9px 12px;
+      border: 1.8px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+      background: #fff;
+      cursor: pointer;
+    }
 
-  /* ---- Toolbar ---- */
-  .toolbar{
-    display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center;
-  }
-  .toolbar input[type=text], .toolbar select{
-    padding:10px 12px; border:1px solid var(--border); border-radius:7px;
-    font-size:13.5px; background:#fff;
-  }
-  .toolbar input[type=text]{flex:1; min-width:220px;}
-  .btn-outline{
-    padding:10px 16px; border-radius:7px; border:1px solid var(--navy);
-    background:#fff; color:var(--navy); font-weight:600; cursor:pointer; font-size:13.5px;
-  }
-  .btn-outline:hover{background:var(--navy); color:#fff;}
-  .btn-refresh{margin-left:auto;}
+    .btn {
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-green { background: #16a34a; color: #fff; }
+    .btn-green:hover { background: #15803d; }
+    .btn-refresh { background: #f1f5f9; color: #0f172a; border: 1.5px solid #cbd5e1; }
+    .btn-refresh:hover { background: #e2e8f0; }
 
-  /* ---- Add panel ---- */
-  .add-panel{
-    background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:0; margin-bottom:18px; overflow:hidden;
-  }
-  .add-panel summary{
-    cursor:pointer; padding:14px 18px; font-weight:700; color:var(--navy);
-    list-style:none; display:flex; justify-content:space-between; align-items:center;
-    background:#f8f9fb;
-  }
-  .add-panel summary::-webkit-details-marker{display:none;}
-  .add-panel .add-body{padding:18px;}
-  .form-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:14px;}
-  .form-group label{display:block; margin-bottom:5px; font-weight:600; font-size:12.5px; color:var(--text-mute);}
-  .form-group input, .form-group select{
-    width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:6px; font-size:13.5px;
-  }
-  .btn-submit{
-    background:var(--navy); color:#fff; border:none; padding:11px 22px; border-radius:7px;
-    cursor:pointer; font-weight:700; font-size:13.5px; margin-top:14px;
-  }
-  .btn-submit:hover{background:var(--navy-light);}
-  #formMessage{margin-top:10px; font-weight:600; font-size:13px;}
+    /* Main Table Container */
+    .table-card {
+      margin: 18px 20px;
+      background: #fff;
+      border-radius: 12px;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(15,23,42,0.05);
+      overflow: hidden;
+    }
 
-  /* ---- Table ---- */
-  .card{
-    background:var(--card); border:1px solid var(--border); border-radius:10px;
-    padding:0; overflow:hidden;
-  }
-  .table-container{overflow-x:auto;}
-  table{width:100%; border-collapse:collapse; font-size:13.5px;}
-  th, td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap;}
-  th{background:#f8f9fb; color:var(--text-mute); font-size:11.5px; text-transform:uppercase; letter-spacing:.4px; font-weight:700;}
-  tbody tr{cursor:pointer; transition:.1s;}
-  tbody tr:hover{background:#f5f8fc;}
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
 
-  .badge{
-    display:inline-block; padding:4px 10px; border-radius:20px; font-size:11.5px; font-weight:700;
-  }
-  .badge-pending{background:var(--amber-bg); color:var(--amber);}
-  .badge-processing{background:var(--blue-bg); color:var(--blue);}
-  .badge-completed, .badge-approved, .badge-paid, .badge-success{background:var(--green-bg); color:var(--green);}
-  .badge-rejected, .badge-failed{background:var(--red-bg); color:var(--red);}
-  .badge-refunded{background:#efe7fb; color:#6a3fb0;}
-  .badge-default{background:#eef0f3; color:var(--text-mute);}
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* Ensures strict column widths so dates never cut */
+      font-size: 13.5px;
+    }
 
-  #loadingText{font-weight:600; color:var(--text-mute); padding:22px;}
-  .empty-state{padding:40px; text-align:center; color:var(--text-mute);}
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+    }
 
-  /* ---- Modal ---- */
-  .overlay{
-    position:fixed; inset:0; background:rgba(15,25,40,0.55);
-    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
-  }
-  .overlay.open{display:flex;}
-  .modal{
-    background:#fff; border-radius:12px; width:100%; max-width:640px; max-height:88vh;
-    overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3);
-  }
-  .modal-head{
-    padding:18px 22px; border-bottom:1px solid var(--border); display:flex;
-    justify-content:space-between; align-items:center; position:sticky; top:0; background:#fff;
-  }
-  .modal-head h3{margin:0; font-size:16px; color:var(--navy);}
-  .modal-close{cursor:pointer; border:none; background:none; font-size:20px; color:var(--text-mute); line-height:1;}
-  .modal-body{padding:20px 22px;}
-  .detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px;}
-  .detail-item .k{font-size:11px; color:var(--text-mute); font-weight:700; text-transform:uppercase; letter-spacing:.3px;}
-  .detail-item .v{font-size:14px; margin-top:3px; word-break:break-word;}
-  .detail-item .v a{color:var(--blue);}
-  .detail-item img.thumb{max-width:100%; border-radius:6px; border:1px solid var(--border); margin-top:4px; max-height:160px;}
-  .edit-row{display:grid; grid-template-columns:1fr 1fr; gap:14px; padding-top:14px; border-top:1px dashed var(--border);}
-  .modal-actions{display:flex; gap:10px; margin-top:20px;}
-  .btn-save{flex:1; background:var(--green); color:#fff; border:none; padding:11px; border-radius:7px; font-weight:700; cursor:pointer;}
-  .btn-save:disabled{opacity:.6; cursor:not-allowed;}
-  .btn-delete{background:var(--red-bg); color:var(--red); border:1px solid var(--red); padding:11px 18px; border-radius:7px; font-weight:700; cursor:pointer;}
-  .modal-msg{margin-top:10px; font-weight:600; font-size:13px; padding:0;}
-  .modal-msg.box{padding:10px 12px; border-radius:7px;}
-  .modal-msg.msg-info{background:var(--blue-bg); color:var(--blue);}
-  .modal-msg.msg-success{background:var(--green-bg); color:var(--green);}
-  .modal-msg.msg-error{background:var(--red-bg); color:var(--red);}
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
 
-  .quick-chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;}
-  .quick-chip{
-    padding:5px 12px; border-radius:20px; border:1px solid var(--border); background:#f8f9fb;
-    font-size:12px; font-weight:600; cursor:pointer; color:var(--text); transition:.12s;
-  }
-  .quick-chip:hover{border-color:var(--navy); color:var(--navy);}
-  .custom-status-input{margin-top:8px; display:none;}
-  .custom-status-input.show{display:block;}
-  .field-block{margin-bottom:4px;}
+    tr:hover td { background: #f8fafc; }
 
-  @media (max-width:640px){
-    .detail-grid, .edit-row{grid-template-columns:1fr;}
-    .navbar{padding:12px 16px;}
-    .container{padding:16px;}
-  }
-</style>
+    /* Strict Column Widths to Fix Screen Cut Issue */
+    .col-id { width: 110px; font-weight: 700; color: #0284c7; }
+    .col-name { 
+      width: 220px; 
+      font-weight: 600; 
+      color: #0f172a;
+      word-break: break-word; /* Fixes long text overflow */
+      line-height: 1.4;
+    }
+    .col-district { width: 120px; }
+    .col-mobile { width: 130px; font-weight: 600; }
+    .col-status { width: 160px; }
+    .col-payment { width: 120px; }
+    .col-date { width: 110px; color: #64748b; font-size: 12.5px; white-space: nowrap; }
+    .col-action { width: 90px; text-align: center; }
+
+    /* Badges */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-pending { background: #fef3c7; color: #b45309; }
+    .badge-processing { background: #e0f2fe; color: #0369a1; }
+    .badge-received { background: #f1f5f9; color: #475569; }
+    .badge-cancel { background: #fee2e2; color: #dc2626; }
+    .badge-completed { background: #dcfce7; color: #166534; }
+
+    /* Edit Button */
+    .btn-edit {
+      padding: 5px 10px;
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-edit:hover { background: #2563eb; color: #fff; }
+
+    /* ══════ MODAL POPUP SYSTEM ══════ */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(15,23,42,0.65);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      backdrop-filter: blur(2px);
+    }
+    .modal-box {
+      background: #fff;
+      width: 100%;
+      max-width: 680px;
+      border-radius: 14px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      overflow: hidden;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-head {
+      background: #0f172a;
+      color: #fff;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-head h3 { font-size: 1.1rem; font-weight: 800; }
+    .modal-close {
+      background: none;
+      border: none;
+      color: #cbd5e1;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Modal Form Grid */
+    .m-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .m-group { display: flex; flex-direction: column; gap: 4px; }
+    .m-group.full { grid-column: 1 / -1; }
+    .m-group label {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .m-group input, .m-group select, .m-group textarea {
+      padding: 9px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13.5px;
+      outline: none;
+      font-family: inherit;
+    }
+    .m-group input:focus, .m-group select:focus, .m-group textarea:focus {
+      border-color: #2563eb;
+    }
+
+    .modal-footer {
+      padding: 14px 20px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="navbar">
-  <div class="brand">
-    <span class="dot"></span>
-    <div>
-      <h1 class="lang-dev">जमीन सेवा — एडमिन डैशबोर्ड</h1>
-      <div class="sub">JameenSeva.in Live Database Manager</div>
+  <!-- Top Navigation & Controls -->
+  <header class="top-bar">
+    <div class="brand-title">
+      📦 JameenSeva <span>Master Admin Panel</span>
     </div>
-  </div>
-  <button class="btn-logout" id="logoutBtn">Logout</button>
-</div>
 
-<div class="container">
+    <div class="control-actions">
+      <!-- Live Search -->
+      <input type="text" id="searchInp" class="search-inp" placeholder="खोजें: नाम, मोबाइल, ऑर्डर ID, ज़िला..." onkeyup="filterOrders()" />
 
-  <div class="tabs-container lang-dev" id="tabsContainer"></div>
+      <!-- Status Filter -->
+      <select id="statusFilter" class="filter-select" onchange="filterOrders()">
+        <option value="">सभी स्टेटस (All Status)</option>
+        <option value="Order Received">Order Received</option>
+        <option value="Processing">Processing</option>
+        <option value="cancel">Cancelled</option>
+        <option value="Delivered">Delivered</option>
+      </select>
 
-  <div class="summary-row" id="summaryRow"></div>
+      <!-- New Manual Order Button -->
+      <button class="btn btn-green" onclick="openManualOrderModal()">
+        ➕ नया मैन्युअल ऑर्डर दर्ज करें
+      </button>
 
-  <details class="add-panel">
-    <summary class="lang-dev">➕ नया रिकॉर्ड जोड़ें (मैन्युअल एंट्री)</summary>
-    <div class="add-body">
-      <form id="dynamicForm">
-        <div class="form-grid" id="dynamicInputs"></div>
-        <button type="submit" class="btn-submit lang-dev">डेटाबेस में सेव करें</button>
-      </form>
-      <div id="formMessage"></div>
+      <!-- Refresh -->
+      <button class="btn btn-refresh" onclick="fetchOrders()">
+        🔄 रिफ्रेश करें
+      </button>
     </div>
-  </details>
+  </header>
 
-  <div class="toolbar">
-    <input type="text" id="searchInput" class="lang-dev" placeholder="खोजें: नाम, मोबाइल, ऑर्डर ID, ज़िला...">
-    <select id="statusFilter" class="lang-dev"><option value="">सभी स्टेटस</option></select>
-    <button class="btn-outline btn-refresh lang-dev" id="refreshBtn">🔄 रिफ्रेश करें</button>
-  </div>
-
-  <div class="card">
-    <div id="loadingText" class="lang-dev">डेटा लोड हो रहा है...</div>
-    <div class="table-container">
-      <table id="dataTable" style="display:none;">
-        <thead id="tableHead"></thead>
-        <tbody id="tableBody"></tbody>
+  <!-- Table Card -->
+  <div class="table-card">
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-id">ऑर्डर ID</th>
+            <th class="col-name">रैयत / किसान का नाम</th>
+            <th class="col-district">ज़िला</th>
+            <th class="col-mobile">मोबाइल</th>
+            <th class="col-status">ऑर्डर स्टेटस</th>
+            <th class="col-payment">पेमेंट स्टेटस</th>
+            <th class="col-date">तारीख</th>
+            <th class="col-action">एक्शन</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTbody">
+          <tr>
+            <td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">
+              डेटा लोड हो रहा है, कृपया प्रतीक्षा करें...
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
-    <div class="empty-state lang-dev" id="emptyState" style="display:none;">इस टेबल में कोई मिलान रिकॉर्ड नहीं मिला।</div>
   </div>
 
-</div>
-
-<!-- Detail / Edit Modal -->
-<div class="overlay" id="detailOverlay">
-  <div class="modal">
-    <div class="modal-head">
-      <h3 class="lang-dev" id="modalTitle">रिकॉर्ड विवरण</h3>
-      <button class="modal-close" id="modalCloseBtn">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="detail-grid" id="modalDetailGrid"></div>
-      <div class="edit-row" id="modalEditRow"></div>
-      <div class="modal-actions">
-        <button class="btn-save lang-dev" id="modalSaveBtn">बदलाव सेव करें</button>
-        <button class="btn-delete lang-dev" id="modalDeleteBtn">डिलीट करें</button>
+  <!-- ══════════ ADVANCED EDIT MODAL ══════════ -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="editModalTitle">✏️ ऑर्डर विवरण संपादित करें</h3>
+        <button class="modal-close" onclick="closeEditModal()">✕</button>
       </div>
-      <div class="modal-msg" id="modalMsg"></div>
+
+      <div class="modal-body">
+        <input type="hidden" id="editRowId" />
+        
+        <div class="m-grid">
+          <div class="m-group">
+            <label>ऑर्डर ID (Order ID)</label>
+            <input type="text" id="editOrderId" readonly style="background:#f1f5f9; font-weight:700;" />
+          </div>
+
+          <div class="m-group">
+            <label>तारीख (Order Date)</label>
+            <input type="text" id="editOrderDate" />
+          </div>
+
+          <div class="m-group full">
+            <label>रैयत / किसान का नाम (Full Name)</label>
+            <input type="text" id="editRaiyatName" required />
+          </div>
+
+          <div class="m-group">
+            <label>मोबाइल नंबर (WhatsApp No.)</label>
+            <input type="text" id="editMobile" maxlength="10" required />
+          </div>
+
+          <div class="m-group">
+            <label>ज़िला (District)</label>
+            <input type="text" id="editDistrict" required />
+          </div>
+
+          <div class="m-group">
+            <label>प्रखंड / अंचल (Block)</label>
+            <input type="text" id="editBlock" />
+          </div>
+
+          <div class="m-group">
+            <label>मौजा / गाँव (Mauja)</label>
+            <input type="text" id="editVillage" />
+          </div>
+
+          <div class="m-group">
+            <label>थाना नंबर (Thana No.)</label>
+            <input type="text" id="editThana" />
+          </div>
+
+          <div class="m-group">
+            <label>खाता नंबर (Khata No.)</label>
+            <input type="text" id="editKhata" />
+          </div>
+
+          <div class="m-group">
+            <label>खेसरा नंबर (Khesra No.)</label>
+            <input type="text" id="editKhesra" />
+          </div>
+
+          <div class="m-group">
+            <label>ऑर्डर स्टेटस (Order Status)</label>
+            <select id="editStatus">
+              <option value="Order Received">Order Received</option>
+              <option value="Processing">Processing</option>
+              <option value="दोहरा ऑर्डर -cancel ❌">दोहरा ऑर्डर -cancel ❌</option>
+              <option value="रिकॉर्ड फटा होने के कारण आर्डर cancel ❌">रिकॉर्ड फटा होने के कारण आर्डर cancel ❌</option>
+              <option value="रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌">रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌</option>
+              <option value="Dispatched / इन ट्रांजिट 🚚">Dispatched / इन ट्रांजिट 🚚</option>
+              <option value="Delivered ✅">Delivered ✅</option>
+            </select>
+          </div>
+
+          <div class="m-group">
+            <label>पेमेंट स्टेटस / विवरण (Payment / Remarks)</label>
+            <input type="text" id="editPaymentStatus" placeholder="Pending / Paid / CS 116 F1" />
+          </div>
+
+          <div class="m-group full">
+            <label>ट्रैकिंग नंबर / स्पीड पोस्ट नंबर (Tracking ID)</label>
+            <input type="text" id="editTrackingNumber" placeholder="उदा. EK123456789IN" />
+          </div>
+
+          <div class="m-group full">
+            <label>पूरा पता (Full Address)</label>
+            <textarea id="editFullAddress" rows="2"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-refresh" onclick="closeEditModal()">रद्द करें</button>
+        <button class="btn btn-primary" id="saveEditBtn" onclick="saveOrderChanges()">💾 बदलाव सुरक्षित करें</button>
+      </div>
     </div>
   </div>
-</div>
 
-<script type="module">
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+  <!-- ══════════ MANUAL ORDER ENTRY MODAL ══════════ -->
+  <div class="modal-overlay" id="manualOrderModal">
+    <div class="modal-box">
+      <div class="modal-head" style="background:#16a34a;">
+        <h3>➕ नया मैन्युअल ऑर्डर दर्ज करें</h3>
+        <button class="modal-close" onclick="closeManualOrderModal()">✕</button>
+      </div>
 
-/* ══ SUPABASE CLIENT CONFIG ══ */
-const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
+      <div class="modal-body">
+        <div class="m-grid">
+          <div class="m-group">
+            <label>सेवा का प्रकार (Service Type) *</label>
+            <select id="mServiceType">
+              <option value="Khatiyan">खतियान होम डिलीवरी</option>
+              <option value="Panchnama">पंचनामा बटवारा</option>
+              <option value="Amin Booking">प्राइवेट अमीन बुकिंग</option>
+              <option value="Map">भू-नक्शा शीट</option>
+              <option value="Register2">रजिस्टर-2 नकल</option>
+            </select>
+          </div>
 
-/* ══ COLOR MAPPING FUNCTION ══ */
-function getStatusColor(status) {
-  switch (status) {
-    case 'Order Received':
-    case 'Pending':
-      return { bg: '#fee2e2', text: '#dc2626' }; // Red
-    case 'Processing':
-    case 'भेजने के लियें तैयार है':
-    case 'किसान के जबाब का इंतजार':
-      return { bg: '#fef3c7', text: '#d97706' }; // Amber
-    case 'Dispatched':
-      return { bg: '#dbeafe', text: '#2563eb' }; // Blue
-    case 'Delivered':
-    case 'Paid':
-      return { bg: '#dcfce7', text: '#15803d' }; // Green
-    case 'Cancelled ❌':
-    case 'दोहरा ऑर्डर - cancel❌':
-    case 'नक्शा इस मौजा का उपलब्ध नहीं है':
-      return { bg: '#f3f4f6', text: '#4b5563' }; // Grey
-    default:
-      return { bg: '#e2e8f0', text: '#334155' };
-  }
-}
+          <div class="m-group">
+            <label>ऑर्डर तारीख *</label>
+            <input type="text" id="mOrderDate" />
+          </div>
 
-/* ══ TABLES METADATA CONFIG ══ */
-const TABLES = {
-  panchnama: {
-    table: 'panchnama batwara',
-    label: 'पंचनामा बंटवारा',
-    icon: '📄',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'payment_status', label:'पेमेंट', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'order_date', label:'ऑर्डर तारीख' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'thana_no', label:'थाना नंबर' },
-      { key:'village', label:'गांव' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'pincode', label:'पिनकोड' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'file_url', label:'फाइल', link:true },
-      { key:'payment_id', label:'पेमेंट ID' },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
-        options:['Pending','Paid','Failed','Refunded'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'full_address', label:'पूरा पता' },
-    ],
-  },
-  khatiyan: {
-    table: 'khatiyan order',
-    label: 'खतियान ऑर्डर्स',
-    icon: '📑',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'payment_status', label:'पेमेंट', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'order_date', label:'ऑर्डर तारीख' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'thana_no', label:'थाना नंबर' },
-      { key:'village', label:'गांव' },
-      { key:'khata_no', label:'खाता नंबर' },
-      { key:'khesra_no', label:'खेसरा नंबर' },
-      { key:'khatiyan_type', label:'खतियान प्रकार' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'pincode', label:'पिनकोड' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'payment_id', label:'पेमेंट ID' },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','प्लॉट या खाता नंबर के साथ करें order cencel❌','Processing','भेजने के लियें तैयार है','In Transit','Order Received','Dispatched','Delivered','रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌','किसान के जबाब का इंतजार order cancel❌','रिकॉर्ड फटा होने के कारण आर्डर cancel ❌','On Hold','Cancelled ❌','दोहरा ऑर्डर -cancel ❌'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
-        options:['Pending','Paid','Failed','Refunded'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'khata_no', label:'खाता नंबर' },
-      { key:'khesra_no', label:'खेसरा नंबर' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-  },
-  jamabandi: {
-    table: 'jamabandi_orders',
-    label: 'जमाबंदी ऑर्डर्स',
-    icon: '💳',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'payment_status', label:'पेमेंट', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'thana', label:'थाना' },
-      { key:'mauja', label:'मौजा' },
-      { key:'khata', label:'खाता' },
-      { key:'khesra', label:'खेसरा' },
-      { key:'jamabandi', label:'जमाबंदी' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'pincode', label:'पिनकोड' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'payment_method', label:'पेमेंट माध्यम' },
-      { key:'payment_id', label:'पेमेंट ID' },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Payment Verification','Processing','Ready to Dispatch','In Transit','Dispatched','Delivered','Completed','On Hold','Cancelled ❌','Rejected ❌'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
-        options:['Pending','Paid','Failed','Refunded'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-  },
-  amins: {
-    table: 'amins',
-    label: 'अमीन लिस्ट',
-    icon: '🕵️‍♂️',
-    idKey: 'id',
-    listCols: [
-      { key:'reg_no', label:'Reg नंबर' },
-      { key:'name', label:'नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'experience', label:'Passing no' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'created_at', label:'रजिस्टर्ड', date:true },
-    ],
-    fields: [
-      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
-      { key:'name', label:'नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'experience', label:'Passing no' },
-      { key:'self_photo_url', label:'फोटो', image:true },
-      { key:'aadhar_photo_url', label:'आधार फोटो', image:true },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Under Review','Approved','Rejected','Suspended'],
-        quick:['Under Review','Approved','Rejected'] },
-    ],
-    addFields: [
-      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
-      { key:'name', label:'नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'experience', label:'अनुभव (वर्ष)', type:'number' },
-    ],
-  },
-  aminBooking: {
-    table: 'amin-booking',
-    label: 'अमीन बुकिंग',
-    icon: '📅',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'raiyat_name', label:'ग्राहक' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'order_date', label:'बुकिंग तारीख' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'thana_no', label:'थाना नंबर' },
-      { key:'village', label:'गांव' },
-      { key:'khata_no', label:'खाता नंबर' },
-      { key:'khesra_no', label:'खेसरा नंबर' },
-      { key:'raiyat_name', label:'ग्राहक का नाम' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'pincode', label:'पिनकोड' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Confirmed','Amin Assigned','Visit Scheduled','In Progress','Completed','Cancelled❌','Rescheduled'],
-        quick:['Confirmed','Amin Assigned','In Progress','Completed','Cancelled❌'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'raiyat_name', label:'ग्राहक का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'order_date', label:'बुकिंग तारीख' },
-    ],
-  },
-  map: {
-    table: 'map_orders',
-    label: 'भू-नक्शा ऑर्डर्स',
-    icon: '🗺️',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'customer_name', label:'ग्राहक का नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'order_status', label:'स्टेटस', badge:true },
-      { key:'payment_status', label:'पेमेंट', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'created_at', label:'ऑर्डर तारीख' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'अंचल / प्रखंड' },
-      { key:'mauza', label:'मौजा / वार्ड' },
-      { key:'thana_no', label:'थाना नंबर' },
-      { key:'total_sheets', label: 'कुल नक्शा शीट' },
-      { key:'total_amount', label: 'कुल राशि' },
-      { key:'customer_name', label:'ग्राहक का नाम' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'pincode', label:'पिनकोड' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'payment_id', label:'पेमेंट ID' },
-    ],
-    editable: [
-      { key:'order_status', label:'स्टेटस', type:'select', custom:true,
-        options:[
-          'Order Received',
-          'Processing',
-          'भेजने के लियें तैयार है',
-          'Dispatched',
-          'Delivered',
-          'नक्शा इस मौजा का उपलब्ध नहीं है',
-          'शीट नंबर अस्पष्ट / गलत है cancel',
-          'किसान के जबाब का इंतजार',
-          'On Hold',
-          'Cancelled',
-          'दोहरा ऑर्डर - cancel'
-        ],
-        quick:['Processing', 'Dispatched', 'Delivered', 'Cancelled'] },
-      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
-        options:['Pending', 'Paid', 'Failed', 'Refunded', 'Cash on Delivery'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'अंचल / प्रखंड' },
-      { key:'mauza', label:'मौजा' },
-      { key:'customer_name', label:'ग्राहक का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-  },
-  kevala: {
-    table: 'kevala_orders',
-    label: 'केवाला ऑर्डर्स',
-    icon: '📜',
-    idKey: 'id',
-    listCols: [
-      { key: 'order_id', label: 'ऑर्डर ID' },
-      { key: 'customer_name', label: 'आवेदक' },
-      { key: 'district', label: 'ज़िला' },
-      { key: 'customer_mobile', label: 'मोबाइल' },
-      { key: 'document_type', label: 'प्रकार' },
-      { key: 'order_status', label: 'स्टेटस', badge: true },
-      { key: 'payment_method', label: 'पेमेंट विधि', badge: true },
-      { key: 'created_at', label: 'तारीख', date: true },
-    ],
-    fields: [
-      { key: 'order_id', label: 'ऑर्डर ID' },
-      { key: 'document_type', label: 'दस्तावेज़ प्रकार' },
-      { key: 'district', label: 'ज़िला' },
-      { key: 'registry_office', label: 'रजिस्ट्री ऑफिस (SRO)' },
-      { key: 'anchal_circle', label: 'अंचल / ब्लॉक' },
-      { key: 'mauza', label: 'मौजा' },
-      { key: 'thana_number', label: 'थाना नंबर' },
-      { key: 'date_from', label: 'कब से (From Date)' },
-      { key: 'date_to', label: 'कब तक (To Date)' },
-      { key: 'seller_name', label: 'बेचने वाले का नाम (दाता)' },
-      { key: 'buyer_name', label: 'खरीदने वाले का नाम (गृहीता)' },
-      { key: 'khata_number', label: 'खाता नंबर' },
-      { key: 'plot_number', label: 'प्लॉट/खेसरा नंबर' },
-      { key: 'deed_number', label: 'डीड नंबर' },
-      { key: 'customer_name', label: 'आवेदक का नाम' },
-      { key: 'customer_mobile', label: 'मोबाइल' },
-      { key: 'full_address', label: 'पूरा पता' },
-      { key: 'pincode', label: 'पिनकोड' },
-      { key: 'payment_method', label: 'पेमेंट मोड' },
-      { key: 'created_at', label: 'ऑर्डर तारीख' },
-    ],
-    editable: [
-      { key: 'order_status', label: 'स्टेटस', type: 'select', custom: true,
-        options: [
-          'Pending',
-          'सर्च जारी है (Searching)',
-          'Processing',
-          'एडवांस ₹99 टोकन का इंतजार',
-          'भेजने के लियें तैयार है',
-          'Dispatched',
-          'Delivered',
-          'रिकार्ड इस समय उपलब्ध नहीं है ऑर्डर Cancel ❌',
-          'ग्राहक के जबाब का इंतजार',
-          'रिकॉर्ड फटा/अस्पष्ट होने के कारण Cancel ❌',
-          'On Hold',
-          'Cancelled',
-          'दिए गए विवरण के आधार पर रिकॉर्ड नहीं मिला ऑर्डर Cancel ❌ '
-        ],
-        quick: ['Searching', 'Processing', 'Ready to Dispatch', 'Dispatched', 'Completed', 'Cancelled❌'] },
-      { key: 'payment_method', label: 'पेमेंट स्टेटस', type: 'select', custom: true,
-        options: ['COD', 'Online', 'Paid Advance ₹99', 'Fully Paid', 'Failed', 'Refunded'] },
-    ],
-    addFields: [
-      { key: 'order_id', label: 'ऑर्डर ID' },
-      { key: 'customer_name', label: 'आवेदक' },
-      { key: 'customer_mobile', label: 'मोबाइल' },
-      { key: 'district', label: 'ज़िला' },
-      { key: 'registry_office', label: 'SRO ऑफिस' },
-      { key: 'document_type', label: 'प्रकार' },
-    ],
-  },
-  khesra: {
-    table: 'khesra to khesra',
-    label: 'खेसरा टू खेसरा',
-    icon: '🔀',
-    idKey: 'id',
-    listCols: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'district', label:'ज़िला' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'status', label:'स्टेटस', badge:true },
-      { key:'created_at', label:'तारीख', date:true },
-    ],
-    fields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'order_date', label:'ऑर्डर तारीख' },
-      { key:'district', label:'ज़िला' },
-      { key:'block', label:'ब्लॉक' },
-      { key:'thana_no', label:'थाना नंबर' },
-      { key:'village', label:'गांव' },
-      { key:'khata_new', label:'नया खाता' },
-      { key:'khesra_new', label:'नया खेसरा' },
-      { key:'khesra_old', label:'पुराना खेसरा' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-    editable: [
-      { key:'status', label:'स्टेटस', type:'select', custom:true,
-        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
-        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
-    ],
-    addFields: [
-      { key:'order_id', label:'ऑर्डर ID' },
-      { key:'district', label:'ज़िला' },
-      { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-    ],
-  },
-};
+          <div class="m-group full">
+            <label>रैयत / किसान का नाम *</label>
+            <input type="text" id="mRaiyatName" placeholder="किसान का पूरा नाम दर्ज करें" required />
+          </div>
 
-let currentKey = 'panchnama';
-let currentRows = [];
-let selectedRow = null;
+          <div class="m-group">
+            <label>मोबाइल नंबर (WhatsApp) *</label>
+            <input type="text" id="mMobile" maxlength="10" placeholder="10 अंकों का नंबर" required />
+          </div>
 
-// ---------------- Security ----------------
-async function checkSecurity() {
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user || user.id !== ADMIN_UUID) {
-    alert('अनाधिकृत प्रवेश!')
-    window.location.href = 'admin-login.html'
-  } else {
-    document.body.style.display = 'block'
-    buildTabs();
-    loadTableContent();
-  }
-}
+          <div class="m-group">
+            <label>ज़िला (District) *</label>
+            <input type="text" id="mDistrict" placeholder="उदा. Darbhanga" required />
+          </div>
 
-// ---------------- Tabs ----------------
-function buildTabs(){
-  const container = document.getElementById('tabsContainer');
-  container.innerHTML = '';
-  Object.keys(TABLES).forEach(key => {
-    const cfg = TABLES[key];
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (key === currentKey ? ' active' : '');
-    btn.textContent = `${cfg.icon} ${cfg.label}`;
-    btn.onclick = () => switchTable(key);
-    btn.dataset.key = key;
-    container.appendChild(btn);
-  });
-}
+          <div class="m-group">
+            <label>अंचल / प्रखंड (Block) *</label>
+            <input type="text" id="mBlock" placeholder="प्रखंड का नाम" required />
+          </div>
 
-function switchTable(key){
-  currentKey = key;
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.key === key);
-  });
-  document.getElementById('searchInput').value = '';
-  document.getElementById('formMessage').innerText = '';
-  buildAddForm();
-  loadTableContent();
-}
+          <div class="m-group">
+            <label>मौजा / गाँव *</label>
+            <input type="text" id="mVillage" placeholder="गाँव का नाम" required />
+          </div>
 
-// ---------------- Add form ----------------
-function buildAddForm(){
-  const cfg = TABLES[currentKey];
-  const inputsDiv = document.getElementById('dynamicInputs');
-  inputsDiv.innerHTML = '';
-  cfg.addFields.forEach(f => {
-    const wrap = document.createElement('div');
-    wrap.className = 'form-group';
-    wrap.innerHTML = `
-      <label class="lang-dev">${f.label}</label>
-      <input type="${f.type || 'text'}" id="add_${f.key}">
-    `;
-    inputsDiv.appendChild(wrap);
-  });
-}
+          <div class="m-group">
+            <label>थाना नंबर (Thana No.)</label>
+            <input type="text" id="mThana" placeholder="थाना संख्या" />
+          </div>
 
-document.getElementById('dynamicForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const cfg = TABLES[currentKey];
-  const msg = document.getElementById('formMessage');
-  msg.style.color = '#1c5d9e';
-  msg.innerText = 'सेव किया जा रहा है...';
+          <div class="m-group">
+            <label>खाता नंबर (Khata No.)</label>
+            <input type="text" id="mKhata" placeholder="खाता संख्या" />
+          </div>
 
-  const insertData = {};
-  cfg.addFields.forEach(f => {
-    const el = document.getElementById(`add_${f.key}`);
-    if (!el) return;
-    let val = el.value;
-    if (f.type === 'number') val = val ? Number(val) : null;
-    insertData[f.key] = val || null;
-  });
+          <div class="m-group">
+            <label>खेसरा नंबर (Khesra No.)</label>
+            <input type="text" id="mKhesra" placeholder="खेसरा संख्या" />
+          </div>
 
-  const { error } = await supabase.from(cfg.table).insert([insertData]);
-  if (error) {
-    msg.style.color = '#c0392b';
-    msg.innerText = 'एरर: ' + error.message;
-  } else {
-    msg.style.color = '#1f8a52';
-    msg.innerText = 'बधाई हो! रिकॉर्ड सेव हो गया। 🎉';
-    document.getElementById('dynamicForm').reset();
-    loadTableContent();
-  }
-});
+          <div class="m-group">
+            <label>शुरुआती ऑर्डर स्टेटस</label>
+            <select id="mStatus">
+              <option value="Order Received">Order Received</option>
+              <option value="Processing">Processing</option>
+            </select>
+          </div>
 
-// ---------------- Load + render table ----------------
-async function loadTableContent(){
-  const cfg = TABLES[currentKey];
-  document.getElementById('loadingText').style.display = 'block';
-  document.getElementById('loadingText').innerText = 'डेटा लोड हो रहा है...';
-  document.getElementById('dataTable').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
+          <div class="m-group">
+            <label>पेमेंट स्थिति / विवरण</label>
+            <input type="text" id="mPaymentStatus" placeholder="उदा. Pending या COD ₹79" />
+          </div>
 
-  const { data, error } = await supabase.from(cfg.table).select('*').order('created_at', { ascending:false });
+          <div class="m-group full">
+            <label>पूरा डाक पता (Full Delivery Address) *</label>
+            <textarea id="mFullAddress" rows="2" placeholder="मकान/वार्ड, गाँव, पोस्ट, पिन कोड" required></textarea>
+          </div>
+        </div>
+      </div>
 
-  if (error) {
-    document.getElementById('loadingText').innerText = 'डेटा लोड एरर: ' + error.message + ' — कृपया table का नाम TABLES config में जांचें।';
-    return;
-  }
+      <div class="modal-footer">
+        <button class="btn btn-refresh" onclick="closeManualOrderModal()">रद्द करें</button>
+        <button class="btn btn-green" id="submitManualBtn" onclick="submitManualOrder()">✅ ऑर्डर सुरक्षित करें</button>
+      </div>
+    </div>
+  </div>
 
-  currentRows = data || [];
-  renderSummary();
-  populateStatusFilter();
-  renderTable();
-  document.getElementById('loadingText').style.display = 'none';
-}
+  <!-- ══════════ JAVASCRIPT LOGIC ══════════ -->
+  <script>
+    // Supabase Configuration
+    const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
+    const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
+    const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-function renderSummary(){
-  const total = currentRows.length;
-  const pending = currentRows.filter(r => (r.status || r.order_status || '').toLowerCase() === 'pending').length;
-  const done = currentRows.filter(r => ['completed','approved','confirmed','delivered'].includes((r.status || r.order_status || '').toLowerCase())).length;
-  const rejected = currentRows.filter(r => ['rejected','cancelled❌'].includes((r.status || r.order_status || '').toLowerCase())).length;
+    // Target Table Name in Supabase
+    const ORDERS_TABLE = "orders"; // Agar aapki table ka naam alag hai (jaise 'amin-booking') to yahan badal sakte hain
 
-  document.getElementById('summaryRow').innerHTML = `
-    <div class="chip total"><div class="num">${total}</div><div class="label lang-dev">कुल रिकॉर्ड</div></div>
-    <div class="chip pending"><div class="num">${pending}</div><div class="label lang-dev">पेंडिंग</div></div>
-    <div class="chip done"><div class="num">${done}</div><div class="label lang-dev">पूर्ण / स्वीकृत</div></div>
-    <div class="chip rejected"><div class="num">${rejected}</div><div class="label lang-dev">रिजेक्टेड / कैंसिल</div></div>
-  `;
-}
+    let ALL_ORDERS = [];
 
-function populateStatusFilter(){
-  const sel = document.getElementById('statusFilter');
-  const cfg = TABLES[currentKey];
-  const statusField = cfg.editable.find(f => f.key === 'status' || f.key === 'order_status');
-  sel.innerHTML = '<option value="">सभी स्टेटस</option>';
-  if (statusField) {
-    statusField.options.forEach(opt => {
-      const o = document.createElement('option');
-      o.value = opt; o.textContent = opt;
-      sel.appendChild(o);
-    });
-  }
-}
+    // Fetch All Orders on Load
+    async function fetchOrders() {
+      const tbody = document.getElementById('ordersTbody');
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">डेटा लोड हो रहा है...</td></tr>`;
 
-function badgeClass(val){
-  const v = (val || '').toLowerCase();
-  if (['pending'].includes(v)) return 'badge-pending';
-  if (['processing','confirmed','searching'].includes(v)) return 'badge-processing';
-  if (['completed','approved','paid','success','delivered'].includes(v)) return 'badge-completed';
-  if (['rejected','failed','cancelled❌'].includes(v)) return 'badge-rejected';
-  if (['refunded'].includes(v)) return 'badge-refunded';
-  return 'badge-default';
-}
+      try {
+        const { data, error } = await _supabase
+          .from(ORDERS_TABLE)
+          .select('*')
+          .order('id', { ascending: false });
 
-function fmtDate(val){
-  if (!val) return '';
-  try { return new Date(val).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); }
-  catch { return val; }
-}
+        if (error) throw error;
 
-function getFilteredRows(){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  const statusF = document.getElementById('statusFilter').value;
-  return currentRows.filter(row => {
-    const rowStatus = row.status || row.order_status || '';
-    const matchesStatus = !statusF || rowStatus === statusF;
-    if (!matchesStatus) return false;
-    if (!q) return true;
-    const haystack = [row.order_id, row.raiyat_name, row.customer_name, row.name, row.mobile, row.customer_mobile, row.district, row.reg_no]
-      .filter(Boolean).join(' ').toLowerCase();
-    return haystack.includes(q);
-  });
-}
-
-function renderTable(){
-  const cfg = TABLES[currentKey];
-  const thead = document.getElementById('tableHead');
-  const tbody = document.getElementById('tableBody');
-  const rows = getFilteredRows();
-
-  thead.innerHTML = '<tr>' + cfg.listCols.map(c => `<th class="lang-dev">${c.label}</th>`).join('') + '</tr>';
-  tbody.innerHTML = '';
-
-  if (rows.length === 0) {
-    document.getElementById('dataTable').style.display = 'none';
-    document.getElementById('emptyState').style.display = 'block';
-    return;
-  }
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('dataTable').style.display = 'table';
-
-  rows.forEach(row => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = cfg.listCols.map(c => {
-      let val = row[c.key];
-      if (c.date) val = fmtDate(val);
-      if (c.badge) return `<td><span class="badge ${badgeClass(val)}">${val || 'N/A'}</span></td>`;
-      return `<td>${val ?? ''}</td>`;
-    }).join('');
-    tr.addEventListener('click', () => openDetail(row));
-    tbody.appendChild(tr);
-  });
-}
-
-document.getElementById('searchInput').addEventListener('input', renderTable);
-document.getElementById('statusFilter').addEventListener('change', renderTable);
-document.getElementById('refreshBtn').addEventListener('click', loadTableContent);
-
-// ---------------- Detail Modal ----------------
-function openDetail(row){
-  const cfg = TABLES[currentKey];
-  selectedRow = row;
-  document.getElementById('modalTitle').innerText = `${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
-
-  const detailGrid = document.getElementById('modalDetailGrid');
-  detailGrid.innerHTML = cfg.fields.map(f => {
-    let val = row[f.key];
-    let display = val ?? '<span style="color:#aab">—</span>';
-    if (f.link && val) display = `<a href="${val}" target="_blank" rel="noopener">फाइल देखें ↗</a>`;
-    if (f.image && val) display = `<a href="${val}" target="_blank" rel="noopener"><img class="thumb" src="${val}" alt="${f.label}"></a>`;
-    return `<div class="detail-item"><div class="k lang-dev">${f.label}</div><div class="v lang-dev">${display}</div></div>`;
-  }).join('');
-
-  const editRow = document.getElementById('modalEditRow');
-  editRow.innerHTML = cfg.editable.map(f => {
-    const currentVal = row[f.key] || '';
-    const isKnown = f.options.includes(currentVal);
-    const options = f.options.map(o => `<option value="${o}" ${currentVal===o?'selected':''}>${o}</option>`).join('');
-    const customOptionHtml = f.custom
-      ? `<option value="__custom__" ${(!isKnown && currentVal) ? 'selected' : ''}>✏️ Custom / अन्य लिखें</option>`
-      : '';
-    const chipsHtml = (f.quick && f.quick.length)
-      ? `<div class="quick-chips">${f.quick.map(q => `<button type="button" class="quick-chip" data-target="edit_${f.key}" data-value="${q}">${q}</button>`).join('')}</div>`
-      : '';
-    const customInputHtml = f.custom
-      ? `<input type="text" id="edit_${f.key}_custom" class="custom-status-input lang-dev ${(!isKnown && currentVal) ? 'show' : ''}"
-           placeholder="कस्टम ${f.label} लिखें..." value="${(!isKnown && currentVal) ? currentVal : ''}">`
-      : '';
-    return `
-      <div class="form-group field-block">
-        <label class="lang-dev">${f.label}</label>
-        <select id="edit_${f.key}" class="lang-dev">${options}${customOptionHtml}</select>
-        ${customInputHtml}
-        ${chipsHtml}
-      </div>`;
-  }).join('');
-
-  cfg.editable.forEach(f => {
-    if (!f.custom) return;
-    const sel = document.getElementById(`edit_${f.key}`);
-    const customInput = document.getElementById(`edit_${f.key}_custom`);
-    sel.addEventListener('change', () => {
-      customInput.classList.toggle('show', sel.value === '__custom__');
-      if (sel.value === '__custom__') customInput.focus();
-    });
-  });
-
-  editRow.querySelectorAll('.quick-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const targetSel = document.getElementById(chip.dataset.target);
-      const optionExists = Array.from(targetSel.options).some(o => o.value === chip.dataset.value);
-      if (optionExists) {
-        targetSel.value = chip.dataset.value;
-        targetSel.dispatchEvent(new Event('change'));
-      }
-    });
-  });
-
-  document.getElementById('modalMsg').className = 'modal-msg';
-  document.getElementById('modalMsg').innerText = '';
-  document.getElementById('detailOverlay').classList.add('open');
-}
-
-document.getElementById('modalCloseBtn').addEventListener('click', () => {
-  document.getElementById('detailOverlay').classList.remove('open');
-});
-document.getElementById('detailOverlay').addEventListener('click', (e) => {
-  if (e.target.id === 'detailOverlay') document.getElementById('detailOverlay').classList.remove('open');
-});
-
-document.getElementById('modalSaveBtn').addEventListener('click', async () => {
-  const cfg = TABLES[currentKey];
-  const msg = document.getElementById('modalMsg');
-  const saveBtn = document.getElementById('modalSaveBtn');
-
-  const updateData = {};
-  for (const f of cfg.editable) {
-    const el = document.getElementById(`edit_${f.key}`);
-    if (!el) continue;
-    let val = el.value;
-    if (val === '__custom__') {
-      const customEl = document.getElementById(`edit_${f.key}_custom`);
-      val = (customEl ? customEl.value : '').trim();
-      if (!val) {
-        msg.className = 'modal-msg box msg-error';
-        msg.innerText = `कृपया "${f.label}" के लिए कस्टम वैल्यू लिखें।`;
-        return;
+        ALL_ORDERS = data || [];
+        renderTable(ALL_ORDERS);
+      } catch (err) {
+        console.error(err);
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #dc2626;">त्रुटि: ${err.message}</td></tr>`;
       }
     }
-    updateData[f.key] = val;
-  }
 
-  saveBtn.disabled = true;
-  msg.className = 'modal-msg box msg-info';
-  msg.innerText = 'अपडेट किया जा रहा है...';
+    // Render Table Rows with Strict Widths
+    function renderTable(orders) {
+      const tbody = document.getElementById('ordersTbody');
+      if (!orders || orders.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">कोई ऑर्डर उपलब्ध नहीं है।</td></tr>`;
+        return;
+      }
 
-  const rowId = selectedRow[cfg.idKey];
+      tbody.innerHTML = orders.map(ord => {
+        const oid = ord.order_id || ord.orderId || ('JS-' + ord.id);
+        const name = ord.raiyat_name || ord.name || '—';
+        const district = ord.district || ord.jila || '—';
+        const mobile = ord.mobile || ord.phone || '—';
+        const status = ord.status || 'Order Received';
+        const payment = ord.payment_status || ord.payment || 'Pending';
+        const date = ord.order_date || ord.created_at || '—';
 
-  const { data, error } = await supabase
-    .from(cfg.table)
-    .update(updateData)
-    .eq(cfg.idKey, rowId)
-    .select();
+        // Badge class determination
+        let badgeClass = 'badge-received';
+        if (status.includes('cancel')) badgeClass = 'badge-cancel';
+        else if (status.includes('Processing')) badgeClass = 'badge-processing';
+        else if (status.includes('Delivered')) badgeClass = 'badge-completed';
+        else if (status.includes('Pending')) badgeClass = 'badge-pending';
 
-  saveBtn.disabled = false;
+        return `
+          <tr>
+            <td class="col-id">${oid}</td>
+            <td class="col-name" title="${escapeHtml(name)}">${escapeHtml(name)}</td>
+            <td class="col-district">${escapeHtml(district)}</td>
+            <td class="col-mobile"><a href="tel:${mobile}" style="color:#0f172a; text-decoration:none;">${mobile}</a></td>
+            <td class="col-status"><span class="badge ${badgeClass}">${escapeHtml(status)}</span></td>
+            <td class="col-payment"><span class="badge ${payment === 'Pending' ? 'badge-pending' : 'badge-processing'}">${escapeHtml(payment)}</span></td>
+            <td class="col-date">${formatDate(date)}</td>
+            <td class="col-action">
+              <button class="btn-edit" onclick="openEditModal(${ord.id})">✏️ Edit</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
 
-  if (error) {
-    msg.className = 'modal-msg box msg-error';
-    msg.innerText = 'एरर: ' + error.message;
-    return;
-  }
+    // Filter Logic for Search & Status
+    function filterOrders() {
+      const q = document.getElementById('searchInp').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('statusFilter').value;
 
-  if (!data || data.length === 0) {
-    msg.className = 'modal-msg box msg-error';
-    msg.innerHTML = `अपडेट सेव नहीं हुआ ❗ Supabase ने कोई error नहीं दिया, लेकिन कोई row बदली भी नहीं —
-      इसका मतलब है <b>Row Level Security (RLS)</b> policy UPDATE को रोक रही है।
-      Supabase Dashboard → Authentication → Policies में "${cfg.table}" table पर
-      एक UPDATE policy बनाएं जो <code>auth.uid()</code> को admin से मैच करे।`;
-    return;
-  }
+      const filtered = ALL_ORDERS.filter(o => {
+        const name = (o.raiyat_name || o.name || '').toLowerCase();
+        const mobile = (o.mobile || o.phone || '').toLowerCase();
+        const oid = (o.order_id || o.orderId || ('JS-' + o.id)).toLowerCase();
+        const dist = (o.district || o.jila || '').toLowerCase();
+        const status = (o.status || '');
 
-  msg.className = 'modal-msg box msg-success';
-  msg.innerText = 'स्टेटस अपडेट हो गया ✅';
-  Object.assign(selectedRow, updateData);
-  await loadTableContent();
-});
+        const matchesQuery = !q || name.includes(q) || mobile.includes(q) || oid.includes(q) || dist.includes(q);
+        const matchesStatus = !statusFilter || status.includes(statusFilter);
 
-document.getElementById('modalDeleteBtn').addEventListener('click', async () => {
-  const cfg = TABLES[currentKey];
-  const msg = document.getElementById('modalMsg');
-  if (!confirm('क्या आप वाकई इस रिकॉर्ड को डिलीट करना चाहते हैं? यह वापस नहीं होगा।')) return;
+        return matchesQuery && matchesStatus;
+      });
 
-  const { data, error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]).select();
+      renderTable(filtered);
+    }
 
-  if (error) {
-    msg.className = 'modal-msg box msg-error';
-    msg.innerText = 'एरर: ' + error.message;
-    return;
-  }
-  if (!data || data.length === 0) {
-    msg.className = 'modal-msg box msg-error';
-    msg.innerHTML = `डिलीट नहीं हुआ ❗ यह भी RLS policy की वजह से हो सकता है — "${cfg.table}" पर DELETE policy चेक करें।`;
-    return;
-  }
-  document.getElementById('detailOverlay').classList.remove('open');
-  await loadTableContent();
-});
+    // Open Edit Modal with Order Data
+    function openEditModal(rowId) {
+      const ord = ALL_ORDERS.find(o => o.id === rowId);
+      if (!ord) return;
 
-// ---------------- Init ----------------
-buildAddForm();
-checkSecurity();
+      document.getElementById('editRowId').value = ord.id;
+      document.getElementById('editOrderId').value = ord.order_id || ord.orderId || ('JS-' + ord.id);
+      document.getElementById('editOrderDate').value = ord.order_date || ord.created_at || '';
+      document.getElementById('editRaiyatName').value = ord.raiyat_name || ord.name || '';
+      document.getElementById('editMobile').value = ord.mobile || ord.phone || '';
+      document.getElementById('editDistrict').value = ord.district || ord.jila || '';
+      document.getElementById('editBlock').value = ord.block || ord.anchal || '';
+      document.getElementById('editVillage').value = ord.village || ord.mauja || '';
+      document.getElementById('editThana').value = ord.thana_no || ord.thana || '';
+      document.getElementById('editKhata').value = ord.khata_no || ord.khata || '';
+      document.getElementById('editKhesra').value = ord.khesra_no || ord.khesra || '';
+      document.getElementById('editStatus').value = ord.status || 'Order Received';
+      document.getElementById('editPaymentStatus').value = ord.payment_status || ord.payment || 'Pending';
+      document.getElementById('editTrackingNumber').value = ord.tracking_number || ord.tracking_id || '';
+      document.getElementById('editFullAddress').value = ord.full_address || ord.address || '';
 
-document.getElementById('logoutBtn').addEventListener('click', async () => {
-  await supabase.auth.signOut();
-  window.location.href = 'admin-login.html';
-});
-</script>
+      document.getElementById('editModal').style.display = 'flex';
+    }
 
+    function closeEditModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    // Save All Order Edits to Supabase
+    async function saveOrderChanges() {
+      const rowId = document.getElementById('editRowId').value;
+      const saveBtn = document.getElementById('saveEditBtn');
+
+      const updatedPayload = {
+        raiyat_name: document.getElementById('editRaiyatName').value.trim(),
+        mobile: document.getElementById('editMobile').value.trim(),
+        district: document.getElementById('editDistrict').value.trim(),
+        block: document.getElementById('editBlock').value.trim(),
+        village: document.getElementById('editVillage').value.trim(),
+        thana_no: document.getElementById('editThana').value.trim(),
+        khata_no: document.getElementById('editKhata').value.trim(),
+        khesra_no: document.getElementById('editKhesra').value.trim(),
+        status: document.getElementById('editStatus').value,
+        payment_status: document.getElementById('editPaymentStatus').value.trim(),
+        tracking_number: document.getElementById('editTrackingNumber').value.trim(),
+        full_address: document.getElementById('editFullAddress').value.trim(),
+        order_date: document.getElementById('editOrderDate').value.trim()
+      };
+
+      saveBtn.disabled = true;
+      saveBtn.innerText = "सुरक्षित हो रहा है...";
+
+      try {
+        const { error } = await _supabase
+          .from(ORDERS_TABLE)
+          .update(updatedPayload)
+          .eq('id', rowId);
+
+        if (error) throw error;
+
+        alert("✅ ऑर्डर विवरण सफलतापूर्वक अपडेट हो गया!");
+        closeEditModal();
+        fetchOrders();
+      } catch (err) {
+        console.error(err);
+        alert("अपडेट में त्रुटि: " + err.message);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerText = "💾 बदलाव सुरक्षित करें";
+      }
+    }
+
+    // Open Manual Order Entry Modal
+    function openManualOrderModal() {
+      const now = new Date();
+      document.getElementById('mOrderDate').value = now.toLocaleDateString('hi-IN', { day:'2-digit', month:'short', year:'numeric' });
+      document.getElementById('mRaiyatName').value = '';
+      document.getElementById('mMobile').value = '';
+      document.getElementById('mDistrict').value = '';
+      document.getElementById('mBlock').value = '';
+      document.getElementById('mVillage').value = '';
+      document.getElementById('mThana').value = '';
+      document.getElementById('mKhata').value = '';
+      document.getElementById('mKhesra').value = '';
+      document.getElementById('mPaymentStatus').value = 'Pending';
+      document.getElementById('mFullAddress').value = '';
+
+      document.getElementById('manualOrderModal').style.display = 'flex';
+    }
+
+    function closeManualOrderModal() {
+      document.getElementById('manualOrderModal').style.display = 'none';
+    }
+
+    // Submit Manual Order to Supabase
+    async function submitManualOrder() {
+      const name = document.getElementById('mRaiyatName').value.trim();
+      const mobile = document.getElementById('mMobile').value.trim();
+      const district = document.getElementById('mDistrict').value.trim();
+      const block = document.getElementById('mBlock').value.trim();
+      const village = document.getElementById('mVillage').value.trim();
+      const addr = document.getElementById('mFullAddress').value.trim();
+      const submitBtn = document.getElementById('submitManualBtn');
+
+      if (!name || mobile.length < 10 || !district || !block || !village || !addr) {
+        alert("कृपया सभी अनिवार्य (*) फ़ील्ड और 10 अंकों का मोबाइल नंबर भरें!");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "दर्ज हो रहा है...";
+
+      const newOrderId = "JS-" + Math.floor(100000 + Math.random() * 900000);
+
+      const payload = {
+        order_id: newOrderId,
+        order_date: document.getElementById('mOrderDate').value,
+        raiyat_name: name,
+        mobile: mobile,
+        district: district,
+        block: block,
+        village: village,
+        thana_no: document.getElementById('mThana').value.trim() || null,
+        khata_no: document.getElementById('mKhata').value.trim() || null,
+        khesra_no: document.getElementById('mKhesra').value.trim() || null,
+        status: document.getElementById('mStatus').value,
+        payment_status: document.getElementById('mPaymentStatus').value.trim() || 'Pending',
+        full_address: addr
+      };
+
+      try {
+        const { error } = await _supabase
+          .from(ORDERS_TABLE)
+          .insert([payload]);
+
+        if (error) throw error;
+
+        alert("✅ नया ऑर्डर सफलतापूर्वक दर्ज हुआ!\nOrder ID: " + newOrderId);
+        closeManualOrderModal();
+        fetchOrders();
+      } catch (err) {
+        console.error(err);
+        alert("ऑर्डर दर्ज करने में त्रुटि: " + err.message);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "✅ ऑर्डर सुरक्षित करें";
+      }
+    }
+
+    // Helpers
+    function formatDate(raw) {
+      if (!raw) return '—';
+      if (raw.length > 15) return raw.substring(0, 15);
+      return raw;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', fetchOrders);
+  </script>
 </body>
 </html>
