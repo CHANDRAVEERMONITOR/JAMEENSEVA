@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JameenSeva Admin Master Console</title>
+  <title>JameenSeva Master Admin Console</title>
   
-  <!-- Supabase JS Library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
@@ -31,76 +30,60 @@
       gap: 12px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.15);
     }
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .brand-title {
-      font-size: 1.3rem;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
+    .brand-section { display: flex; align-items: center; gap: 12px; }
+    .brand-title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; }
     .brand-title span { color: #22c55e; }
 
-    /* Admin Profile Badge */
+    /* Admin Profile */
     .admin-profile-badge {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 6px 14px;
-      border-radius: 50px;
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      padding: 5px 14px; border-radius: 50px;
     }
     .admin-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #22c55e;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 14px;
-      border: 2px solid #fff;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #22c55e; color: #0f172a;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13.5px; border: 2px solid #fff;
     }
-    .admin-info {
-      line-height: 1.25;
-      text-align: left;
-    }
-    .admin-name {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .admin-role {
-      font-size: 11px;
-      color: #94a3b8;
-      font-weight: 600;
-    }
+    .admin-info { line-height: 1.25; text-align: left; }
+    .admin-name { font-size: 13px; font-weight: 800; color: #ffffff; }
+    .admin-role { font-size: 11px; color: #94a3b8; font-weight: 600; }
     .btn-logout {
-      background: #dc2626;
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s;
+      background: #dc2626; color: #fff; border: none;
+      padding: 6px 14px; border-radius: 20px; font-size: 12.5px;
+      font-weight: 700; cursor: pointer; transition: 0.2s;
     }
     .btn-logout:hover { background: #b91c1c; }
 
-    /* Filter & Controls Bar */
+    /* Earning Dashboard Cards */
+    .earning-dashboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      padding: 16px 24px 0;
+    }
+    .metric-card {
+      background: #fff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .metric-title { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+    .metric-val { font-size: 1.6rem; font-weight: 900; color: #0f172a; margin-top: 4px; }
+    .metric-sub { font-size: 11px; color: #16a34a; font-weight: 700; margin-top: 2px; }
+
+    /* Controls Strip */
     .controls-strip {
       background: #ffffff;
       padding: 14px 24px;
       border-bottom: 1.5px solid #e2e8f0;
+      border-top: 1.5px solid #e2e8f0;
+      margin-top: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -109,121 +92,63 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .left-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .left-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .table-picker {
-      padding: 9px 14px;
-      border: 2px solid #2563eb;
-      background: #eff6ff;
-      color: #1e40af;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 800;
-      outline: none;
-      cursor: pointer;
+      padding: 9px 14px; border: 2px solid #16a34a;
+      background: #f0fdf4; color: #14532d;
+      border-radius: 8px; font-size: 13.5px; font-weight: 800;
+      outline: none; cursor: pointer;
     }
     .search-inp {
-      padding: 9px 14px;
-      border: 1.8px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 14px;
-      width: 250px;
-      outline: none;
+      padding: 9px 14px; border: 1.8px solid #cbd5e1;
+      border-radius: 8px; font-size: 13.5px; width: 220px; outline: none;
     }
-    .search-inp:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
-    .status-select {
-      padding: 9px 12px;
-      border: 1.8px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      outline: none;
-      background: #fff;
+    .search-inp:focus { border-color: #2563eb; }
+    .status-select, .month-select {
+      padding: 9px 12px; border: 1.8px solid #cbd5e1;
+      border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #fff;
     }
 
     .btn {
-      padding: 9px 15px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s;
+      padding: 9px 15px; border-radius: 8px; font-size: 13.5px;
+      font-weight: 700; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
     }
     .btn-green { background: #16a34a; color: #fff; }
     .btn-green:hover { background: #15803d; }
     .btn-refresh { background: #f1f5f9; color: #0f172a; border: 1.5px solid #cbd5e1; }
     .btn-refresh:hover { background: #e2e8f0; }
 
-    /* Table Container */
+    /* Table */
     .table-card {
-      margin: 20px 24px 60px;
+      margin: 16px 24px 60px;
       background: #fff;
       border-radius: 12px;
       border: 1.5px solid #e2e8f0;
       box-shadow: 0 4px 16px rgba(15,23,42,0.05);
       overflow: hidden;
     }
-    .table-responsive {
-      width: 100%;
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      table-layout: fixed;
-      font-size: 13.5px;
-    }
+    .table-responsive { width: 100%; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }
     th {
-      background: #f8fafc;
-      color: #475569;
-      font-weight: 700;
-      padding: 12px 14px;
-      text-align: left;
-      border-bottom: 2px solid #e2e8f0;
-      white-space: nowrap;
+      background: #f8fafc; color: #475569; font-weight: 700;
+      padding: 12px 14px; text-align: left; border-bottom: 2px solid #e2e8f0; white-space: nowrap;
     }
-    td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #f1f5f9;
-      vertical-align: middle;
-    }
+    td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
     tr:hover td { background: #f8fafc; }
 
-    /* Column Widths (Date Cut Fix) */
+    /* Fixed Columns */
     .col-id { width: 110px; font-weight: 700; color: #0284c7; }
-    .col-name { 
-      width: 230px; 
-      font-weight: 600; 
-      color: #0f172a;
-      word-break: break-word;
-      line-height: 1.4;
-    }
-    .col-district { width: 120px; }
-    .col-mobile { width: 125px; font-weight: 600; }
-    .col-status { width: 160px; }
-    .col-payment { width: 130px; }
-    .col-date { width: 115px; color: #64748b; font-size: 12.5px; white-space: nowrap; }
-    .col-action { width: 85px; text-align: center; }
+    .col-name { width: 220px; font-weight: 600; word-break: break-word; line-height: 1.35; }
+    .col-district { width: 115px; }
+    .col-mobile { width: 120px; font-weight: 600; }
+    .col-amount { width: 105px; font-weight: 800; color: #15803d; }
+    .col-status { width: 155px; }
+    .col-date { width: 110px; color: #64748b; font-size: 12px; white-space: nowrap; }
+    .col-action { width: 80px; text-align: center; }
 
-    /* Badges */
-    .badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 11.5px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 700; }
     .badge-pending { background: #fef3c7; color: #b45309; }
     .badge-processing { background: #e0f2fe; color: #0369a1; }
     .badge-received { background: #f1f5f9; color: #475569; }
@@ -231,93 +156,36 @@
     .badge-completed { background: #dcfce7; color: #166534; }
 
     .btn-edit {
-      padding: 5px 10px;
-      background: #eff6ff;
-      color: #2563eb;
-      border: 1px solid #bfdbfe;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
+      padding: 5px 9px; background: #eff6ff; color: #2563eb;
+      border: 1px solid #bfdbfe; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer;
     }
     .btn-edit:hover { background: #2563eb; color: #fff; }
 
     /* Modal System */
     .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(15,23,42,0.65);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
+      display: none; position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%; background: rgba(15,23,42,0.65);
+      z-index: 9999; align-items: center; justify-content: center; padding: 16px;
       backdrop-filter: blur(2px);
     }
     .modal-box {
-      background: #fff;
-      width: 100%;
-      max-width: 680px;
-      border-radius: 14px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
-      overflow: hidden;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
+      background: #fff; width: 100%; max-width: 680px;
+      border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      overflow: hidden; max-height: 90vh; display: flex; flex-direction: column;
     }
-    .modal-head {
-      background: #0f172a;
-      color: #fff;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .modal-head { background: #0f172a; color: #fff; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
     .modal-head h3 { font-size: 1.1rem; font-weight: 800; }
-    .modal-close {
-      background: none;
-      border: none;
-      color: #cbd5e1;
-      font-size: 20px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-    .modal-body {
-      padding: 20px;
-      overflow-y: auto;
-    }
-    .m-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+    .modal-close { background: none; border: none; color: #cbd5e1; font-size: 20px; cursor: pointer; font-weight: 700; }
+    .modal-body { padding: 20px; overflow-y: auto; }
+    .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .m-group { display: flex; flex-direction: column; gap: 4px; }
     .m-group.full { grid-column: 1 / -1; }
-    .m-group label {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #334155;
-    }
+    .m-group label { font-size: 12px; font-weight: 700; color: #334155; }
     .m-group input, .m-group select, .m-group textarea {
-      padding: 9px 12px;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 13.5px;
-      outline: none;
-      font-family: inherit;
+      padding: 8px 12px; border: 1.5px solid #cbd5e1; border-radius: 6px; font-size: 13.5px; outline: none; font-family: inherit;
     }
-    .m-group input:focus, .m-group select:focus, .m-group textarea:focus {
-      border-color: #2563eb;
-    }
-    .modal-footer {
-      padding: 14px 20px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
+    .m-group input:focus, .m-group select:focus, .m-group textarea:focus { border-color: #2563eb; }
+    .modal-footer { padding: 14px 20px; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: flex-end; gap: 10px; }
   </style>
 </head>
 <body>
@@ -329,7 +197,6 @@
     </div>
 
     <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-      <!-- Founder & CEO Profile Box -->
       <div class="admin-profile-badge">
         <div class="admin-avatar">CY</div>
         <div class="admin-info">
@@ -337,25 +204,64 @@
           <div class="admin-role">Founder & CEO, JameenSeva.in</div>
         </div>
       </div>
-
-      <!-- Logout Button -->
       <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
     </div>
   </header>
 
+  <!-- Live Month-wise Earning Dashboard -->
+  <div class="earning-dashboard">
+    <div class="metric-card" style="border-left: 4px solid #16a34a;">
+      <div class="metric-title">कुल कमाई (Total Received)</div>
+      <div class="metric-val" id="statTotalEarning">₹0</div>
+      <div class="metric-sub" id="statEarningSub">चयनित महीने के अनुसार</div>
+    </div>
+    <div class="metric-card" style="border-left: 4px solid #0284c7;">
+      <div class="metric-title">कुल ऑर्डर्स (Total Orders)</div>
+      <div class="metric-val" id="statTotalOrders">0</div>
+      <div class="metric-sub" id="statOrdersSub">एक्टिव टेबल में</div>
+    </div>
+    <div class="metric-card" style="border-left: 4px solid #d97706;">
+      <div class="metric-title">पेंडिंग राशि (Pending Amount)</div>
+      <div class="metric-val" id="statPendingAmount" style="color:#d97706;">₹0</div>
+      <div class="metric-sub" style="color:#d97706;">वसूल की जाने वाली राशि</div>
+    </div>
+  </div>
+
   <!-- Filter & Controls Strip -->
   <div class="controls-strip">
     <div class="left-controls">
-      <!-- Active Table Switcher Dropdown -->
-      <label style="font-size:13px; font-weight:700; color:#475569;">तालिका चुनें (Select Table):</label>
+      <!-- 9 Supabase Tables Dropdown -->
+      <label style="font-size:12.5px; font-weight:700; color:#334155;">तालिका चुनें:</label>
       <select id="tableSelector" class="table-picker" onchange="switchTable(this.value)">
-        <option value="amin-booking">📐 Amin Booking (amin-booking)</option>
-        <option value="orders">📦 Home Delivery Orders (orders)</option>
-        <option value="khatiyan_orders">📜 Khatiyan Orders (khatiyan_orders)</option>
-        <option value="amins">🤝 Registered Amins (amins)</option>
+        <option value="khatiyan order">📜 खतियान ऑर्डर (khatiyan order)</option>
+        <option value="amin-booking">📐 अमीन बुकिंग (amin-booking)</option>
+        <option value="jamabandi_orders">📋 जमाबंदी ऑर्डर (jamabandi_orders)</option>
+        <option value="kevala_orders">📑 केवाला ऑर्डर (kevala_orders)</option>
+        <option value="panchnama_orders">⚖️ पंचनामा ऑर्डर (panchnama_orders)</option>
+        <option value="panchnama batwara">⚖️ पंचनामा बटवारा (panchnama batwara)</option>
+        <option value="map_orders">🗺️ नक्शा ऑर्डर (map_orders)</option>
+        <option value="khesra to khesra">🔄 खेसरा-खेसरा (khesra to khesra)</option>
+        <option value="amins">🤝 अमीन पार्टनर्स (amins)</option>
       </select>
 
-      <!-- Live Search Box -->
+      <!-- Month Filter for Calculations -->
+      <select id="monthFilter" class="month-select" onchange="calculateMetricsAndRender()">
+        <option value="">सभी महीने (All Time)</option>
+        <option value="01">जनवरी (January)</option>
+        <option value="02">फ़रवरी (February)</option>
+        <option value="03">मार्च (March)</option>
+        <option value="04">अप्रैल (April)</option>
+        <option value="05">मई (May)</option>
+        <option value="06">जून (June)</option>
+        <option value="07">जुलाई (July)</option>
+        <option value="08">अगस्त (August)</option>
+        <option value="09">सितंबर (September)</option>
+        <option value="10">अक्टूबर (October)</option>
+        <option value="11">नवंबर (November)</option>
+        <option value="12">दिसंबर (December)</option>
+      </select>
+
+      <!-- Search Input -->
       <input type="text" id="searchInp" class="search-inp" placeholder="खोजें: नाम, मोबाइल, ID, ज़िला..." onkeyup="filterOrders()" />
 
       <!-- Status Filter -->
@@ -371,7 +277,7 @@
 
     <div style="display:flex; gap:10px;">
       <button class="btn btn-green" onclick="openManualOrderModal()">
-        ➕ नया ऑर्डर दर्ज करें
+        ➕ नया ऑर्डर जोड़ें
       </button>
       <button class="btn btn-refresh" onclick="fetchOrders()">
         🔄 रिफ्रेश
@@ -379,7 +285,7 @@
     </div>
   </div>
 
-  <!-- Main Table Card -->
+  <!-- Table Card -->
   <div class="table-card">
     <div class="table-responsive">
       <table>
@@ -389,8 +295,8 @@
             <th class="col-name">रैयत / किसान का नाम</th>
             <th class="col-district">ज़िला</th>
             <th class="col-mobile">मोबाइल</th>
+            <th class="col-amount">भुगतान (₹)</th>
             <th class="col-status">ऑर्डर स्टेटस</th>
-            <th class="col-payment">पेमेंट स्टेटस</th>
             <th class="col-date">तारीख</th>
             <th class="col-action">एक्शन</th>
           </tr>
@@ -410,7 +316,7 @@
   <div class="modal-overlay" id="editModal">
     <div class="modal-box">
       <div class="modal-head">
-        <h3 id="editModalTitle">✏️ ऑर्डर विवरण संपादित करें</h3>
+        <h3 id="editModalTitle">✏️ ऑर्डर व पेमेंट विवरण संपादित करें</h3>
         <button class="modal-close" onclick="closeEditModal()">✕</button>
       </div>
 
@@ -436,6 +342,35 @@
           <div class="m-group">
             <label>मोबाइल नंबर</label>
             <input type="text" id="editMobile" maxlength="10" required />
+          </div>
+
+          <div class="m-group">
+            <label>राशि (Payment Amount ₹) *</label>
+            <input type="number" id="editAmount" placeholder="जैसे: 79 या 500" required style="font-weight:800; color:#15803d;" />
+          </div>
+
+          <div class="m-group">
+            <label>पेमेंट स्थिति (Payment Status)</label>
+            <select id="editPaymentStatus">
+              <option value="Paid">Paid (प्राप्त हुआ)</option>
+              <option value="Pending">Pending (बकाया)</option>
+              <option value="COD">COD (डिलीवरी पर देय)</option>
+            </select>
+          </div>
+
+          <div class="m-group">
+            <label>ऑर्डर स्टेटस</label>
+            <select id="editStatus">
+              <option value="Order Received">Order Received</option>
+              <option value="Processing">Processing</option>
+              <option value="Pending Token">Pending Token</option>
+              <option value="Active">Active</option>
+              <option value="दोहरा ऑर्डर -cancel ❌">दोहरा ऑर्डर -cancel ❌</option>
+              <option value="रिकॉर्ड फटा होने के कारण आर्डर cancel ❌">रिकॉर्ड फटा होने के कारण आर्डर cancel ❌</option>
+              <option value="रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌">रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌</option>
+              <option value="Dispatched / इन ट्रांजिट 🚚">Dispatched / इन ट्रांजिट 🚚</option>
+              <option value="Delivered ✅">Delivered ✅</option>
+            </select>
           </div>
 
           <div class="m-group">
@@ -468,28 +403,8 @@
             <input type="text" id="editKhesra" />
           </div>
 
-          <div class="m-group">
-            <label>ऑर्डर स्टेटस</label>
-            <select id="editStatus">
-              <option value="Order Received">Order Received</option>
-              <option value="Processing">Processing</option>
-              <option value="Pending Token">Pending Token</option>
-              <option value="Active">Active</option>
-              <option value="दोहरा ऑर्डर -cancel ❌">दोहरा ऑर्डर -cancel ❌</option>
-              <option value="रिकॉर्ड फटा होने के कारण आर्डर cancel ❌">रिकॉर्ड फटा होने के कारण आर्डर cancel ❌</option>
-              <option value="रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌">रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌</option>
-              <option value="Dispatched / इन ट्रांजिट 🚚">Dispatched / इन ट्रांजिट 🚚</option>
-              <option value="Delivered ✅">Delivered ✅</option>
-            </select>
-          </div>
-
-          <div class="m-group">
-            <label>पेमेंट स्टेटस / विवरण</label>
-            <input type="text" id="editPaymentStatus" placeholder="Pending / Paid / CS 116 F1" />
-          </div>
-
           <div class="m-group full">
-            <label>ट्रैकिंग नंबर / स्पीड पोस्ट नंबर (Speed Post Tracking)</label>
+            <label>स्पीड पोस्ट / कूरियर ट्रैकिंग नंबर</label>
             <input type="text" id="editTrackingNumber" placeholder="उदा. EK123456789IN" />
           </div>
 
@@ -523,23 +438,27 @@
           </div>
 
           <div class="m-group">
-            <label>सेवा का प्रकार</label>
-            <select id="mServiceType">
-              <option value="Khatiyan">खतियान होम डिलीवरी</option>
-              <option value="Panchnama">पंचनामा बटवारा</option>
-              <option value="Amin Booking">प्राइवेट अमीन बुकिंग</option>
-              <option value="Map">भू-नक्शा शीट</option>
-            </select>
+            <label>ऑर्डर राशि (Amount ₹) *</label>
+            <input type="number" id="mAmount" placeholder="उदा. 79 या 299" required style="font-weight:800; color:#15803d;" />
           </div>
 
           <div class="m-group full">
             <label>रैयत / किसान का नाम *</label>
-            <input type="text" id="mRaiyatName" placeholder="किसान का पूरा नाम दर्ज करें" required />
+            <input type="text" id="mRaiyatName" placeholder="पूरा नाम दर्ज करें" required />
           </div>
 
           <div class="m-group">
             <label>मोबाइल नंबर (WhatsApp) *</label>
-            <input type="text" id="mMobile" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" required />
+            <input type="text" id="mMobile" maxlength="10" placeholder="10 अंकों का नंबर" required />
+          </div>
+
+          <div class="m-group">
+            <label>पेमेंट स्थिति</label>
+            <select id="mPaymentStatus">
+              <option value="Paid">Paid (प्राप्त हुआ)</option>
+              <option value="Pending">Pending (बकाया)</option>
+              <option value="COD">COD</option>
+            </select>
           </div>
 
           <div class="m-group">
@@ -548,7 +467,7 @@
           </div>
 
           <div class="m-group">
-            <label>अंचल / प्रखंड (Block) *</label>
+            <label>प्रखंड / अंचल (Block) *</label>
             <input type="text" id="mBlock" placeholder="प्रखंड का नाम" required />
           </div>
 
@@ -558,17 +477,17 @@
           </div>
 
           <div class="m-group">
-            <label>थाना नंबर (Thana No.)</label>
+            <label>थाना नंबर</label>
             <input type="text" id="mThana" placeholder="थाना संख्या" />
           </div>
 
           <div class="m-group">
-            <label>खाता नंबर (Khata No.)</label>
+            <label>खाता नंबर</label>
             <input type="text" id="mKhata" placeholder="खाता संख्या" />
           </div>
 
           <div class="m-group">
-            <label>खेसरा नंबर (Khesra No.)</label>
+            <label>खेसरा नंबर</label>
             <input type="text" id="mKhesra" placeholder="खेसरा संख्या" />
           </div>
 
@@ -580,13 +499,8 @@
             </select>
           </div>
 
-          <div class="m-group">
-            <label>पेमेंट स्थिति / विवरण</label>
-            <input type="text" id="mPaymentStatus" placeholder="उदा. Pending या COD ₹79" />
-          </div>
-
           <div class="m-group full">
-            <label>पूरा डाक पता (Full Address) *</label>
+            <label>पूरा डाक पता *</label>
             <textarea id="mFullAddress" rows="2" placeholder="मकान/वार्ड, गाँव, पोस्ट, पिन कोड" required></textarea>
           </div>
         </div>
@@ -599,26 +513,23 @@
     </div>
   </div>
 
-  <!-- ══════════ LOGIC SCRIPT ══════════ -->
   <script>
     const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
     const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
     const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-    // Current Active Table (defaulting to existing amin-booking)
-    let CURRENT_TABLE = "amin-booking";
+    // Default to the first table from your screenshot
+    let CURRENT_TABLE = "khatiyan order";
     let ALL_ORDERS = [];
 
-    // Switch Table function
     function switchTable(tableName) {
       CURRENT_TABLE = tableName;
       fetchOrders();
     }
 
-    // Fetch Orders with Auto-Fallback System
     async function fetchOrders() {
       const tbody = document.getElementById('ordersTbody');
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">डेटा लोड हो रहा है (${CURRENT_TABLE})...</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #64748b;">डेटा लोड हो रहा है ("${CURRENT_TABLE}")...</td></tr>`;
 
       try {
         const { data, error } = await _supabase
@@ -626,35 +537,59 @@
           .select('*')
           .order('id', { ascending: false });
 
-        if (error) {
-          // If table not found in schema cache, attempt fallback tables
-          if (error.message.includes("Could not find the table") || error.code === "PGRST204") {
-            console.warn(`Table ${CURRENT_TABLE} not found. Attempting fallback...`);
-            if (CURRENT_TABLE !== "amin-booking") {
-              CURRENT_TABLE = "amin-booking";
-              document.getElementById('tableSelector').value = "amin-booking";
-              return fetchOrders();
-            }
-          }
-          throw error;
-        }
+        if (error) throw error;
 
         ALL_ORDERS = data || [];
-        renderTable(ALL_ORDERS);
+        calculateMetricsAndRender();
       } catch (err) {
         console.error(err);
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 30px; color: #dc2626; font-weight:700;">
           त्रुटि: ${err.message}<br>
-          <small style="color:#64748b;">कृपया ऊपर दिए गए ड्रॉपडाउन से अपनी सही Supabase टेबल चुनें।</small>
+          <small style="color:#64748b;">कृपया सुनिश्चित करें कि तालिका "${CURRENT_TABLE}" आपके Supabase में मौजूद है।</small>
         </td></tr>`;
       }
     }
 
-    // Render Table with Strict Word Break & Column Widths
+    // Live Earning & Month Wise Calculation
+    function calculateMetricsAndRender() {
+      const selectedMonth = document.getElementById('monthFilter').value;
+      
+      let totalReceived = 0;
+      let totalPending = 0;
+      let orderCount = 0;
+
+      const filteredByMonth = ALL_ORDERS.filter(o => {
+        const dateStr = o.order_date || o.created_at || '';
+        if (!selectedMonth) return true;
+        
+        // Month checking in standard date formats
+        return dateStr.includes(`-${selectedMonth}-`) || dateStr.includes(`/${selectedMonth}/`) || dateStr.includes(` ${selectedMonth} `);
+      });
+
+      filteredByMonth.forEach(o => {
+        orderCount++;
+        const amt = parseFloat(o.amount || o.price || 0) || 0;
+        const pStatus = (o.payment_status || o.payment || '').toLowerCase();
+
+        if (pStatus.includes('paid') || pStatus.includes('success')) {
+          totalReceived += amt;
+        } else {
+          totalPending += amt;
+        }
+      });
+
+      // Update Top Metrics UI
+      document.getElementById('statTotalEarning').innerText = `₹${totalReceived.toLocaleString('en-IN')}`;
+      document.getElementById('statTotalOrders').innerText = orderCount;
+      document.getElementById('statPendingAmount').innerText = `₹${totalPending.toLocaleString('en-IN')}`;
+
+      renderTable(filteredByMonth);
+    }
+
     function renderTable(orders) {
       const tbody = document.getElementById('ordersTbody');
       if (!orders || orders.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">इस टेबल (${CURRENT_TABLE}) में कोई ऑर्डर उपलब्ध नहीं है।</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 40px; color: #64748b;">इस चयन में कोई ऑर्डर उपलब्ध नहीं है।</td></tr>`;
         return;
       }
 
@@ -664,7 +599,8 @@
         const district = ord.district || ord.jila || '—';
         const mobile = ord.mobile || ord.phone || ord.userMobile || '—';
         const status = ord.status || 'Order Received';
-        const payment = ord.payment_status || ord.payment || (ord.experience ? `Score: ${ord.experience}/15` : 'Pending');
+        const amount = ord.amount || ord.price || 0;
+        const pStatus = ord.payment_status || ord.payment || 'Pending';
         const date = ord.order_date || ord.created_at || '—';
 
         let badgeClass = 'badge-received';
@@ -679,8 +615,11 @@
             <td class="col-name" title="${escapeHtml(name)}">${escapeHtml(name)}</td>
             <td class="col-district">${escapeHtml(district)}</td>
             <td class="col-mobile"><a href="tel:${mobile}" style="color:#0f172a; text-decoration:none;">${escapeHtml(mobile)}</a></td>
+            <td class="col-amount">
+              ₹${parseFloat(amount).toLocaleString('en-IN')}
+              <br><span style="font-size:10px; font-weight:700; color:${pStatus==='Paid'?'#16a34a':'#d97706'}">${pStatus}</span>
+            </td>
             <td class="col-status"><span class="badge ${badgeClass}">${escapeHtml(status)}</span></td>
-            <td class="col-payment"><span class="badge ${payment === 'Pending' ? 'badge-pending' : 'badge-processing'}">${escapeHtml(payment)}</span></td>
             <td class="col-date">${formatDate(date)}</td>
             <td class="col-action">
               <button class="btn-edit" onclick="openEditModal(${ord.id})">✏️ Edit</button>
@@ -690,7 +629,6 @@
       }).join('');
     }
 
-    // Filter Logic for Live Search & Status
     function filterOrders() {
       const q = document.getElementById('searchInp').value.toLowerCase().trim();
       const statusFilter = document.getElementById('statusFilter').value;
@@ -711,7 +649,6 @@
       renderTable(filtered);
     }
 
-    // Open Edit Modal with Dynamic Field Mapping
     function openEditModal(rowId) {
       const ord = ALL_ORDERS.find(o => o.id === rowId);
       if (!ord) return;
@@ -721,6 +658,8 @@
       document.getElementById('editOrderDate').value = ord.order_date || ord.created_at || '';
       document.getElementById('editRaiyatName').value = ord.raiyat_name || ord.name || ord.userName || '';
       document.getElementById('editMobile').value = ord.mobile || ord.phone || ord.userMobile || '';
+      document.getElementById('editAmount').value = ord.amount || ord.price || 0;
+      document.getElementById('editPaymentStatus').value = ord.payment_status || ord.payment || 'Pending';
       document.getElementById('editDistrict').value = ord.district || ord.jila || '';
       document.getElementById('editBlock').value = ord.block || ord.anchal || '';
       document.getElementById('editVillage').value = ord.village || ord.mauja || '';
@@ -728,7 +667,6 @@
       document.getElementById('editKhata').value = ord.khata_no || ord.khata || '';
       document.getElementById('editKhesra').value = ord.khesra_no || ord.khesra || '';
       document.getElementById('editStatus').value = ord.status || 'Order Received';
-      document.getElementById('editPaymentStatus').value = ord.payment_status || ord.payment || 'Pending';
       document.getElementById('editTrackingNumber').value = ord.tracking_number || ord.tracking_id || '';
       document.getElementById('editFullAddress').value = ord.full_address || ord.address || '';
 
@@ -739,48 +677,27 @@
       document.getElementById('editModal').style.display = 'none';
     }
 
-    // Save Changes Safely to Current Table
     async function saveOrderChanges() {
       const rowId = document.getElementById('editRowId').value;
       const saveBtn = document.getElementById('saveEditBtn');
 
-      const updatedPayload = {};
-      const nameVal = document.getElementById('editRaiyatName').value.trim();
-      const mobileVal = document.getElementById('editMobile').value.trim();
-      const distVal = document.getElementById('editDistrict').value.trim();
-      const blockVal = document.getElementById('editBlock').value.trim();
-      const villageVal = document.getElementById('editVillage').value.trim();
-      const thanaVal = document.getElementById('editThana').value.trim();
-      const khataVal = document.getElementById('editKhata').value.trim();
-      const khesraVal = document.getElementById('editKhesra').value.trim();
-      const statusVal = document.getElementById('editStatus').value;
-      const payVal = document.getElementById('editPaymentStatus').value.trim();
-      const trackVal = document.getElementById('editTrackingNumber').value.trim();
-      const addrVal = document.getElementById('editFullAddress').value.trim();
-      const dateVal = document.getElementById('editOrderDate').value.trim();
-
-      // Flexible column assignment based on active table structure
-      if (CURRENT_TABLE === "amins") {
-        updatedPayload.name = nameVal;
-        updatedPayload.mobile = mobileVal;
-        updatedPayload.district = distVal;
-        updatedPayload.block = blockVal;
-        updatedPayload.status = statusVal;
-      } else {
-        updatedPayload.raiyat_name = nameVal;
-        updatedPayload.mobile = mobileVal;
-        updatedPayload.district = distVal;
-        updatedPayload.block = blockVal;
-        updatedPayload.village = villageVal;
-        updatedPayload.thana_no = thanaVal;
-        updatedPayload.khata_no = khataVal;
-        updatedPayload.khesra_no = khesraVal;
-        updatedPayload.status = statusVal;
-        updatedPayload.payment_status = payVal;
-        updatedPayload.tracking_number = trackVal;
-        updatedPayload.full_address = addrVal;
-        updatedPayload.order_date = dateVal;
-      }
+      const updatedPayload = {
+        raiyat_name: document.getElementById('editRaiyatName').value.trim(),
+        name: document.getElementById('editRaiyatName').value.trim(),
+        mobile: document.getElementById('editMobile').value.trim(),
+        amount: parseFloat(document.getElementById('editAmount').value) || 0,
+        payment_status: document.getElementById('editPaymentStatus').value,
+        district: document.getElementById('editDistrict').value.trim(),
+        block: document.getElementById('editBlock').value.trim(),
+        village: document.getElementById('editVillage').value.trim(),
+        thana_no: document.getElementById('editThana').value.trim(),
+        khata_no: document.getElementById('editKhata').value.trim(),
+        khesra_no: document.getElementById('editKhesra').value.trim(),
+        status: document.getElementById('editStatus').value,
+        tracking_number: document.getElementById('editTrackingNumber').value.trim(),
+        full_address: document.getElementById('editFullAddress').value.trim(),
+        order_date: document.getElementById('editOrderDate').value.trim()
+      };
 
       saveBtn.disabled = true;
       saveBtn.innerText = "सुरक्षित हो रहा है...";
@@ -793,7 +710,7 @@
 
         if (error) throw error;
 
-        alert("✅ विवरण सफलतापूर्वक अपडेट हो गया!");
+        alert("✅ विवरण एवं भुगतान सफलतापूर्वक अपडेट हो गया!");
         closeEditModal();
         fetchOrders();
       } catch (err) {
@@ -805,10 +722,10 @@
       }
     }
 
-    // Open Manual Order Entry Modal
     function openManualOrderModal() {
       const now = new Date();
       document.getElementById('mOrderDate').value = now.toLocaleDateString('hi-IN', { day:'2-digit', month:'short', year:'numeric' });
+      document.getElementById('mAmount').value = 79;
       document.getElementById('mRaiyatName').value = '';
       document.getElementById('mMobile').value = '';
       document.getElementById('mDistrict').value = '';
@@ -827,7 +744,6 @@
       document.getElementById('manualOrderModal').style.display = 'none';
     }
 
-    // Submit Manual Order
     async function submitManualOrder() {
       const name = document.getElementById('mRaiyatName').value.trim();
       const mobile = document.getElementById('mMobile').value.trim();
@@ -835,6 +751,7 @@
       const block = document.getElementById('mBlock').value.trim();
       const village = document.getElementById('mVillage').value.trim();
       const addr = document.getElementById('mFullAddress').value.trim();
+      const amount = parseFloat(document.getElementById('mAmount').value) || 0;
       const submitBtn = document.getElementById('submitManualBtn');
 
       if (!name || mobile.length < 10 || !district || !block || !village || !addr) {
@@ -851,7 +768,10 @@
         order_id: newOrderId,
         order_date: document.getElementById('mOrderDate').value,
         raiyat_name: name,
+        name: name,
         mobile: mobile,
+        amount: amount,
+        payment_status: document.getElementById('mPaymentStatus').value,
         district: district,
         block: block,
         village: village,
@@ -859,7 +779,6 @@
         khata_no: document.getElementById('mKhata').value.trim() || null,
         khesra_no: document.getElementById('mKhesra').value.trim() || null,
         status: document.getElementById('mStatus').value,
-        payment_status: document.getElementById('mPaymentStatus').value.trim() || 'Pending',
         full_address: addr
       };
 
@@ -870,7 +789,7 @@
 
         if (error) throw error;
 
-        alert(`✅ नया ऑर्डर सफलतापूर्वक ${CURRENT_TABLE} में दर्ज हुआ!\nOrder ID: ${newOrderId}`);
+        alert(`✅ नया ऑर्डर "${CURRENT_TABLE}" में दर्ज हुआ!\nOrder ID: ${newOrderId}\nAmount: ₹${amount}`);
         closeManualOrderModal();
         fetchOrders();
       } catch (err) {
@@ -882,7 +801,6 @@
       }
     }
 
-    // Admin Logout Function
     function logoutAdmin() {
       if (confirm("क्या आप एडमिन पैनल से लॉगआउट करना चाहते हैं?")) {
         try {
