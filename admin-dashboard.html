@@ -155,7 +155,6 @@
   tbody tr{cursor:pointer; transition:.1s;}
   tbody tr:hover{background:#f5f8fc;}
 
-  /* Strict width & break rules to fix date cut off */
   .col-break{word-break:break-word; line-height:1.35;}
 
   .badge{
@@ -189,13 +188,20 @@
   .modal-close{cursor:pointer; border:none; background:none; font-size:22px; color:var(--text-mute); line-height:1;}
   .modal-body{padding:20px;}
   
-  .detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; background:#f8f9fb; padding:14px; border-radius:8px; border:1px solid var(--border);}
+  /* Scrollable detailed box for Quick Search */
+  .detail-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:10px 14px;
+    margin-bottom:16px; background:#f8f9fb; padding:14px;
+    border-radius:8px; border:1px solid var(--border);
+    max-height:300px; overflow-y:auto;
+  }
   .detail-item .k{font-size:11px; color:var(--text-mute); font-weight:700; text-transform:uppercase;}
-  .detail-item .v{font-size:13.5px; margin-top:3px; word-break:break-word; font-weight:600;}
+  .detail-item .v{font-size:13px; margin-top:2px; word-break:break-word; font-weight:600; color:#0f172a;}
   .detail-item .v a{color:var(--blue);}
+  .detail-item.full-col{grid-column: 1 / -1;}
 
   .edit-row{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:12px; margin-top:14px;}
-  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .modal-actions{display:flex; gap:10px; margin-top:18px;}
   .btn-save{flex:1; background:var(--green); color:#fff; border:none; padding:11px; border-radius:7px; font-weight:700; cursor:pointer;}
   .btn-save:disabled{opacity:.6; cursor:not-allowed;}
   .btn-delete{background:var(--red-bg); color:var(--red); border:1px solid var(--red); padding:11px 18px; border-radius:7px; font-weight:700; cursor:pointer;}
@@ -282,14 +288,18 @@
 
 <!-- 1. Quick Status & Payment Modal (Row click) -->
 <div class="overlay" id="quickOverlay">
-  <div class="modal" style="max-width:540px;">
+  <div class="modal" style="max-width:620px;">
     <div class="modal-head">
-      <h3 class="lang-dev" id="quickModalTitle">त्वरित स्टेटस व पेमेंट अपडेट</h3>
+      <h3 class="lang-dev" id="quickModalTitle">ऑर्डर विवरण व त्वरित स्टेटस</h3>
       <button class="modal-close" onclick="closeOverlay('quickOverlay')">✕</button>
     </div>
     <div class="modal-body">
+      <div style="font-size:12px; font-weight:700; color:var(--navy); margin-bottom:8px;">📋 जमीन व आवेदक का पूरा विवरण (रिकॉर्ड खोजने हेतु):</div>
       <div class="detail-grid" id="quickDetailGrid"></div>
+      
+      <div style="font-size:12px; font-weight:700; color:var(--navy); margin-top:14px; margin-bottom:4px;">⚡ स्टेटस व भुगतान अपडेट करें:</div>
       <div id="quickEditFields"></div>
+      
       <div class="modal-actions">
         <button class="btn-save lang-dev" id="quickSaveBtn">⚡ स्टेटस व पेमेंट सेव करें</button>
       </div>
@@ -338,7 +348,7 @@ function getStatusStyle(val) {
   return { bg: '#e2e8f0', text: '#334155' };
 }
 
-/* ══ PRESERVED TABLE METADATA CONFIG ══ */
+/* ══ TABLE CONFIG ══ */
 const TABLES = {
   panchnama: {
     table: 'panchnama batwara',
@@ -384,8 +394,7 @@ const TABLES = {
       { key:'block', label:'ब्लॉक' },
       { key:'raiyat_name', label:'रैयत का नाम' },
       { key:'mobile', label:'मोबाइल' },
-      { key:'full_address', label:'पूरा पता' },
-      { key:'remarks', label:'रिमार्क्स' }
+      { key:'full_address', label:'पूरा पता' }
     ]
   },
 
@@ -435,8 +444,7 @@ const TABLES = {
       { key:'khata_no', label:'खाता नंबर' },
       { key:'khesra_no', label:'खेसरा नंबर' },
       { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'remarks', label:'रिमार्क्स' }
+      { key:'mobile', label:'मोबाइल' }
     ]
   },
 
@@ -485,8 +493,7 @@ const TABLES = {
       { key:'district', label:'ज़िला' },
       { key:'block', label:'ब्लॉक' },
       { key:'raiyat_name', label:'रैयत का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'remarks', label:'रिमार्क्स' }
+      { key:'mobile', label:'मोबाइल' }
     ]
   },
 
@@ -555,8 +562,7 @@ const TABLES = {
       { key: 'customer_mobile', label: 'मोबाइल' },
       { key: 'district', label: 'ज़िला' },
       { key: 'registry_office', label: 'SRO ऑफिस' },
-      { key: 'document_type', label: 'प्रकार' },
-      { key: 'remarks', label: 'रिमार्क्स' }
+      { key: 'document_type', label: 'प्रकार' }
     ]
   },
 
@@ -571,6 +577,7 @@ const TABLES = {
       { key:'district', label:'ज़िला', width:'120px' },
       { key:'mobile', label:'मोबाइल', width:'120px' },
       { key:'order_status', label:'स्टेटस', badge:true, width:'180px' },
+      { key:'remarks', label:'रिमार्क्स', badge:true, width:'120px' },
       { key:'payment_status', label:'पेमेंट', badge:true, width:'120px' },
       { key:'created_at', label:'तारीख', date:true, width:'105px' },
       { key:'_action', label:'एक्शन', action:true, width:'75px' }
@@ -616,8 +623,7 @@ const TABLES = {
       { key:'block', label:'अंचल / प्रखंड' },
       { key:'mauza', label:'मौजा' },
       { key:'customer_name', label:'ग्राहक का नाम' },
-      { key:'mobile', label:'मोबाइल' },
-      { key:'remarks', label:'रिमार्क्स' }
+      { key:'mobile', label:'मोबाइल' }
     ]
   },
 
@@ -907,7 +913,7 @@ function getFilteredRows(){
     const matchesStatus = !statusF || rowStatus === statusF;
     if (!matchesStatus) return false;
     if (!q) return true;
-    const haystack = [row.order_id, row.raiyat_name, row.customer_name, row.name, row.mobile, row.customer_mobile, row.district, row.mauja, row.village, row.reg_no]
+    const haystack = [row.order_id, row.raiyat_name, row.customer_name, row.name, row.mobile, row.customer_mobile, row.district, row.mauja, row.village, row.reg_no, row.deed_number]
       .filter(Boolean).join(' ').toLowerCase();
     return haystack.includes(q);
   });
@@ -945,7 +951,7 @@ function renderTable(){
       return `<td class="${c.isName ? 'col-break' : ''}">${val ?? '—'}</td>`;
     }).join('');
     
-    // Row click -> Quick Status/Payment Modal
+    // Row click -> Quick Status/Payment Modal with full view
     tr.addEventListener('click', () => openQuickStatus(row));
     tbody.appendChild(tr);
   });
@@ -955,19 +961,22 @@ document.getElementById('searchInput').addEventListener('input', renderTable);
 document.getElementById('statusFilter').addEventListener('change', renderTable);
 document.getElementById('refreshBtn').addEventListener('click', loadTableContent);
 
-/* ══ 1. QUICK VIEW / STATUS & PAYMENT MODAL ══ */
+/* ══ 1. QUICK VIEW / STATUS & PAYMENT MODAL (Row Click) ══ */
 function openQuickStatus(row){
   const cfg = TABLES[currentKey];
   selectedRow = row;
   document.getElementById('quickModalTitle').innerText = `${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
 
+  // Complete information display so user can find records easily
   const detailGrid = document.getElementById('quickDetailGrid');
-  detailGrid.innerHTML = `
-    <div class="detail-item"><div class="k">ऑर्डर ID / REG</div><div class="v">${row.order_id || row.reg_no || row[cfg.idKey]}</div></div>
-    <div class="detail-item"><div class="k">नाम</div><div class="v">${row.raiyat_name || row.customer_name || row.name || '—'}</div></div>
-    <div class="detail-item"><div class="k">ज़िला / अंचल</div><div class="v">${row.district || '—'} / ${row.block || row.anchal_circle || '—'}</div></div>
-    <div class="detail-item"><div class="k">मोबाइल</div><div class="v">${row.mobile || row.customer_mobile || '—'}</div></div>
-  `;
+  detailGrid.innerHTML = cfg.fields.map(f => {
+    let val = row[f.key];
+    let display = val ?? '<span style="color:#94a3b8">—</span>';
+    if (f.link && val) display = `<a href="${val}" target="_blank" rel="noopener">फाइल देखें ↗</a>`;
+    if (f.image && val) display = `<a href="${val}" target="_blank" rel="noopener">फोटो देखें ↗</a>`;
+    const isFull = ['full_address', 'remarks', 'file_url'].includes(f.key);
+    return `<div class="detail-item ${isFull ? 'full-col' : ''}"><div class="k lang-dev">${f.label}</div><div class="v lang-dev">${display}</div></div>`;
+  }).join('');
 
   const editDiv = document.getElementById('quickEditFields');
   editDiv.innerHTML = cfg.quickEditable.map(f => {
@@ -991,7 +1000,7 @@ function openQuickStatus(row){
       return `
         <div class="form-group" style="margin-bottom:12px;">
           <label class="lang-dev" style="font-weight:700;">${f.label}</label>
-          <input type="text" id="quick_${f.key}" value="${currentVal}" placeholder="उदा. टोकन प्राप्त, फ़ाइल भेजी आदि">
+          <input type="text" id="quick_${f.key}" value="${currentVal}" placeholder="रिमार्क्स या नोट लिखें...">
         </div>
       `;
     }
@@ -1024,6 +1033,7 @@ function openQuickStatus(row){
   document.getElementById('quickOverlay').classList.add('open');
 }
 
+// ---------------- Quick Save (Safe Column Handling) ----------------
 document.getElementById('quickSaveBtn').addEventListener('click', async () => {
   const cfg = TABLES[currentKey];
   const msg = document.getElementById('quickModalMsg');
@@ -1043,14 +1053,32 @@ document.getElementById('quickSaveBtn').addEventListener('click', async () => {
         return;
       }
     }
-    updateData[f.key] = val;
+    
+    // Safety check: only add if column actually exists in selectedRow, or is primary status/payment key
+    if (selectedRow[f.key] !== undefined || ['status', 'order_status', 'payment_status', 'payment_method'].includes(f.key)) {
+      updateData[f.key] = val;
+    } else if (f.key === 'remarks' && val.trim() !== '') {
+      // If user typed remarks but table doesn't have it yet, try saving
+      updateData[f.key] = val;
+    }
   }
 
   saveBtn.disabled = true;
   msg.className = 'modal-msg box msg-info';
   msg.innerText = 'अपडेट किया जा रहा है...';
 
-  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  const rowId = selectedRow[cfg.idKey];
+
+  // Attempt update
+  let { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, rowId);
+
+  // If remarks column specifically missing in database, retry without it safely!
+  if (error && error.message && error.message.includes("'remarks' column")) {
+    delete updateData.remarks;
+    const retry = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, rowId);
+    error = retry.error;
+  }
+
   saveBtn.disabled = false;
 
   if (error) {
@@ -1066,16 +1094,17 @@ document.getElementById('quickSaveBtn').addEventListener('click', async () => {
   await loadTableContent();
 });
 
-/* ══ 2. MASTER FULL EDIT MODAL (ACTION BUTTON) ══ */
+/* ══ 2. MASTER FULL EDIT MODAL (Action Button Click) ══ */
 window.openFullEditById = function(id) {
   const cfg = TABLES[currentKey];
   const row = currentRows.find(r => r[cfg.idKey] === id);
   if (!row) return;
   selectedRow = row;
 
-  document.getElementById('fullModalTitle').innerText = `✏️ एडिट: ${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
+  document.getElementById('fullModalTitle').innerText = `✏️ पूर्ण एडिट: ${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
   const grid = document.getElementById('fullEditGrid');
 
+  // Load all authentic fields of that specific table
   grid.innerHTML = cfg.fields.map(f => {
     let val = row[f.key] ?? '';
     return `
@@ -1100,14 +1129,26 @@ document.getElementById('fullEditForm').addEventListener('submit', async (e) => 
   const updateData = {};
   cfg.fields.forEach(f => {
     const el = document.getElementById(`full_${f.key}`);
-    if (el) updateData[f.key] = el.value || null;
+    if (el) {
+      // Only include if column exists in original row
+      if (selectedRow[f.key] !== undefined) {
+        updateData[f.key] = el.value || null;
+      }
+    }
   });
 
   saveBtn.disabled = true;
   msg.className = 'modal-msg box msg-info';
   msg.innerText = 'डेटाबेस में सेव हो रहा है...';
 
-  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  let { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+
+  if (error && error.message && error.message.includes("'remarks' column")) {
+    delete updateData.remarks;
+    const retry = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+    error = retry.error;
+  }
+
   saveBtn.disabled = false;
 
   if (error) {
@@ -1125,7 +1166,7 @@ document.getElementById('fullEditForm').addEventListener('submit', async (e) => 
 
 document.getElementById('fullDeleteBtn').addEventListener('click', async () => {
   const cfg = TABLES[currentKey];
-  if (!confirm('क्या आप वाकई इस पूरे रिकॉर्ड को डिलीट करना चाहते हैं?')) return;
+  if (!confirm('क्या आप वाकई इस पूरे रिकॉर्ड को डिलीट करना चाहते हैं? यह वापस नहीं होगा।')) return;
   const { error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]);
   if (error) {
     alert('डिलीट एरर: ' + error.message);
@@ -1141,7 +1182,7 @@ window.closeOverlay = function(id) {
 
 function escapeHtml(str) {
   if (!str) return '';
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 /* ══ INIT & AUTH ══ */
