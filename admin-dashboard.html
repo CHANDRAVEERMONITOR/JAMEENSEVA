@@ -2,474 +2,1157 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JameenSeva Master Admin Console</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>जमीन सेवा - एडमिन डैशबोर्ड</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI','Noto Sans Devanagari',Arial,sans-serif;background:#f1f5f9;color:#1e293b;line-height:1.5;visibility:hidden}
-.top{background:#0f172a;color:#fff;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.brand{font-size:1.3rem;font-weight:800}.brand span{color:#22c55e}
-.right{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.who{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:5px 14px;border-radius:50px}
-.av{width:34px;height:34px;border-radius:50%;background:#22c55e;color:#0f172a;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
-.who b{font-size:13px;display:block}.who small{font-size:11px;color:#94a3b8;font-weight:600}
-.vf{display:inline-block;background:#22c55e;color:#0f172a;border-radius:50%;width:15px;height:15px;font-size:10px;text-align:center;line-height:15px;margin-left:3px}
-.btn{padding:8px 15px;border-radius:8px;font-size:13.5px;font-weight:700;border:none;cursor:pointer;font-family:inherit}
-.btn:disabled{opacity:.6;cursor:not-allowed}
-.red{background:#dc2626;color:#fff}.red:hover{background:#b91c1c}
-.green{background:#16a34a;color:#fff}.green:hover{background:#15803d}
-.grey{background:#f1f5f9;color:#0f172a;border:1.5px solid #cbd5e1}.grey:hover{background:#e2e8f0}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:16px 24px 0}
-.card{background:#fff;border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 18px}
-.card .t{font-size:12px;font-weight:700;color:#64748b}
-.card .v{font-size:1.6rem;font-weight:900;margin-top:2px}
-.card .s{font-size:11px;font-weight:700;margin-top:2px;color:#64748b}
-.nav{background:#fff;padding:12px 24px;margin-top:14px;border-top:1.5px solid #e2e8f0;border-bottom:1.5px solid #e2e8f0;overflow-x:auto;white-space:nowrap;display:flex;gap:8px;flex-wrap:nowrap;scrollbar-width:thin}
-.pill{flex:0 0 auto;padding:8px 16px;border-radius:30px;font-size:13px;font-weight:700;border:1.8px solid #cbd5e1;background:#f8fafc;color:#334155;cursor:pointer;white-space:nowrap;font-family:inherit}
-.pill:hover{border-color:#16a34a;background:#f0fdf4;color:#15803d}
-.pill.on{border-color:#15803d;background:#15803d;color:#fff}
-.bar{background:#fff;padding:12px 24px;border-bottom:1.5px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.bar .l{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.inp,.sel{padding:8px 12px;border:1.8px solid #cbd5e1;border-radius:8px;font-size:13.5px;outline:none;background:#fff;font-family:inherit}
-.inp{width:240px}.inp:focus,.sel:focus{border-color:#2563eb}
-.tcard{margin:16px 24px 60px;background:#fff;border-radius:12px;border:1.5px solid #e2e8f0;overflow:hidden}
-.scroll{overflow-x:auto}
-table{width:100%;min-width:980px;border-collapse:collapse;table-layout:fixed;font-size:13px}
-th{background:#f8fafc;color:#475569;font-weight:700;padding:12px 14px;text-align:left;border-bottom:2px solid #e2e8f0}
-td{padding:12px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle;word-break:break-word;overflow-wrap:anywhere}
-tr:hover td{background:#f8fafc}
-.c-id{width:125px}.c-name{width:auto;font-weight:600;word-break:break-word}.c-dist{width:120px}.c-mob{width:120px}.c-st{width:170px}.c-pay{width:135px}.c-date{width:105px;color:#64748b;font-size:12px}.c-act{width:80px;text-align:center}
-.oid{color:#0284c7;font-weight:800;text-decoration:none;cursor:pointer;background:none;border:none;font-size:13px;font-family:inherit;text-align:left}
-.oid:hover{text-decoration:underline}
-.badge{display:inline-block;padding:3px 9px;border-radius:14px;font-size:11.5px;font-weight:700;white-space:normal;line-height:1.35}
-.b-pend{background:#fef3c7;color:#b45309}.b-proc{background:#e0f2fe;color:#0369a1}.b-recv{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
-.b-can{background:#fee2e2;color:#dc2626}.b-ok{background:#dcfce7;color:#166534}
-.ed{padding:5px 10px;background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe;border-radius:6px;font-size:11.5px;font-weight:700;cursor:pointer}
-.ed:hover{background:#2563eb;color:#fff}
-.msg{text-align:center;padding:40px;color:#64748b}
-.ov{display:none;position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:99;align-items:center;justify-content:center;padding:16px}
-.ov.open{display:flex}
-.mb{background:#fff;width:100%;max-width:680px;border-radius:14px;overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
-.mh{color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-.mh h3{font-size:1.05rem;font-weight:800}
-.mx{background:none;border:none;color:#e2e8f0;font-size:20px;cursor:pointer}
-.mbody{padding:20px;overflow-y:auto}
-.mf{padding:14px 20px;background:#f8fafc;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.g{display:flex;flex-direction:column;gap:4px}.g.full{grid-column:1/-1}
-.g label{font-size:12px;font-weight:700;color:#334155}.g label i{font-weight:400;color:#94a3b8}
-.g input,.g select,.g textarea{padding:8px 12px;border:1.5px solid #cbd5e1;border-radius:6px;font-size:13.5px;outline:none;font-family:inherit;width:100%}
-.g input:focus,.g select:focus,.g textarea:focus{border-color:#2563eb}
-.g input:disabled,.g textarea:disabled{background:#f1f5f9;color:#94a3b8}
-.view{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px;margin-bottom:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px}
-.view strong{color:#64748b;font-size:11.5px;display:block}.view span{font-weight:700;word-break:break-word}
-.err{margin-top:10px;padding:10px 12px;border-radius:7px;background:#fee2e2;color:#b91c1c;font-size:13px;font-weight:600;display:none}
-@media(max-width:640px){.grid,.view{grid-template-columns:1fr}.top,.stats,.nav,.bar{padding-left:14px;padding-right:14px}.tcard{margin:12px 10px 40px}}
+  :root{
+    --navy:#12314f;
+    --navy-light:#1c4a75;
+    --gold:#c9922f;
+    --gold-light:#e8b95c;
+    --bg:#f2f4f7;
+    --card:#ffffff;
+    --border:#e2e6ec;
+    --text:#1e2733;
+    --text-mute:#6b7684;
+    --green:#1f8a52;
+    --green-bg:#e7f6ee;
+    --amber:#b3760a;
+    --amber-bg:#fdf1dc;
+    --red:#c0392b;
+    --red-bg:#fbe8e5;
+    --blue:#1c5d9e;
+    --blue-bg:#e7f0fa;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Inter','Noto Sans Devanagari',sans-serif;
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    display:none;
+  }
+  .lang-dev{font-family:'Noto Sans Devanagari','Inter',sans-serif;}
+
+  /* ---- Navbar ---- */
+  .navbar{
+    background:linear-gradient(135deg,var(--navy) 0%, var(--navy-light) 100%);
+    color:#fff;
+    padding:12px 28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    position:sticky; top:0; z-index:50;
+    flex-wrap:wrap; gap:10px;
+  }
+  .navbar .brand{display:flex; align-items:center; gap:10px;}
+  .navbar .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold-light);}
+  .navbar h1{margin:0; font-size:18px; font-weight:700; letter-spacing:.2px;}
+  .navbar .sub{font-size:11px; color:#c7d4e2; margin-top:2px;}
+  
+  .admin-profile-badge{
+    display:flex; align-items:center; gap:10px;
+    background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2);
+    padding:5px 14px; border-radius:50px;
+  }
+  .admin-avatar{
+    width:32px; height:32px; border-radius:50%;
+    background:#22c55e; color:#0f172a;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:13px; border:2px solid #fff;
+  }
+  .admin-info{line-height:1.2; text-align:left;}
+  .admin-name{font-size:13px; font-weight:700; color:#ffffff;}
+  .admin-role{font-size:10.5px; color:#c7d4e2;}
+
+  .btn-logout{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.25);
+    color:#fff; padding:8px 16px; border-radius:6px;
+    cursor:pointer; font-weight:600; font-size:13px;
+    transition:.15s;
+  }
+  .btn-logout:hover{background:var(--red); border-color:var(--red);}
+
+  .container{padding:22px 28px 60px; max-width:1440px; margin:0 auto;}
+
+  /* ---- Tabs ---- */
+  .tabs-container{display:flex; gap:8px; margin-bottom:18px; overflow-x:auto; padding-bottom:6px;}
+  .tab-btn{
+    padding:10px 18px; background:#fff; border:1px solid var(--border);
+    border-radius:8px; cursor:pointer; font-weight:600; color:var(--text-mute);
+    white-space:nowrap; font-size:13.5px; transition:.15s;
+  }
+  .tab-btn:hover{border-color:var(--navy-light); color:var(--navy);}
+  .tab-btn.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  /* ---- Summary chips ---- */
+  .summary-row{display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;}
+  .chip{
+    background:#fff; border:1px solid var(--border); border-radius:10px;
+    padding:12px 18px; min-width:120px;
+  }
+  .chip .num{font-size:22px; font-weight:700; color:var(--navy);}
+  .chip .label{font-size:12px; color:var(--text-mute); margin-top:2px;}
+  .chip.total .num{color:var(--navy);}
+  .chip.pending .num{color:var(--amber);}
+  .chip.done .num{color:var(--green);}
+  .chip.rejected .num{color:var(--red);}
+
+  /* ---- Toolbar ---- */
+  .toolbar{
+    display:flex; gap:10px; margin-bottom:16px; flex-wrap:wrap; align-items:center;
+  }
+  .toolbar input[type=text], .toolbar select{
+    padding:10px 12px; border:1px solid var(--border); border-radius:7px;
+    font-size:13.5px; background:#fff;
+  }
+  .toolbar input[type=text]{flex:1; min-width:220px;}
+  .btn-outline{
+    padding:10px 16px; border-radius:7px; border:1px solid var(--navy);
+    background:#fff; color:var(--navy); font-weight:600; cursor:pointer; font-size:13.5px;
+  }
+  .btn-outline:hover{background:var(--navy); color:#fff;}
+  .btn-refresh{margin-left:auto;}
+
+  /* ---- Add panel ---- */
+  .add-panel{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:0; margin-bottom:18px; overflow:hidden;
+  }
+  .add-panel summary{
+    cursor:pointer; padding:14px 18px; font-weight:700; color:var(--navy);
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+    background:#f8f9fb;
+  }
+  .add-panel summary::-webkit-details-marker{display:none;}
+  .add-panel .add-body{padding:18px;}
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:14px;}
+  .form-group label{display:block; margin-bottom:5px; font-weight:600; font-size:12.5px; color:var(--text-mute);}
+  .form-group input, .form-group select, .form-group textarea{
+    width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:6px; font-size:13.5px; outline:none; font-family:inherit;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus{border-color:var(--blue);}
+  .btn-submit{
+    background:var(--navy); color:#fff; border:none; padding:11px 22px; border-radius:7px;
+    cursor:pointer; font-weight:700; font-size:13.5px; margin-top:14px;
+  }
+  .btn-submit:hover{background:var(--navy-light);}
+  #formMessage{margin-top:10px; font-weight:600; font-size:13px;}
+
+  /* ---- Table Layout ---- */
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:0; overflow:hidden;
+  }
+  .table-container{overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; font-size:13px; table-layout:fixed;}
+  th, td{padding:11px 12px; text-align:left; border-bottom:1px solid var(--border); vertical-align:middle;}
+  th{background:#f8f9fb; color:var(--text-mute); font-size:11.5px; text-transform:uppercase; letter-spacing:.4px; font-weight:700; white-space:nowrap;}
+  tbody tr{cursor:pointer; transition:.1s;}
+  tbody tr:hover{background:#f5f8fc;}
+
+  /* Strict width & break rules to fix date cut off */
+  .col-break{word-break:break-word; line-height:1.35;}
+
+  .badge{
+    display:inline-block; padding:4px 9px; border-radius:20px; font-size:11.5px; font-weight:700; white-space:nowrap;
+  }
+  .btn-edit-action{
+    background:#eff6ff; color:#2563eb; border:1px solid #bfdbfe;
+    padding:5px 10px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:.15s;
+  }
+  .btn-edit-action:hover{background:#2563eb; color:#fff;}
+
+  #loadingText{font-weight:600; color:var(--text-mute); padding:22px;}
+  .empty-state{padding:40px; text-align:center; color:var(--text-mute);}
+
+  /* ---- Modals ---- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(15,25,40,0.65);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:16px;
+    backdrop-filter:blur(2px);
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:#fff; border-radius:12px; width:100%; max-width:680px; max-height:90vh;
+    overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-head{
+    padding:16px 20px; border-bottom:1px solid var(--border); display:flex;
+    justify-content:space-between; align-items:center; position:sticky; top:0; background:#fff; z-index:10;
+  }
+  .modal-head h3{margin:0; font-size:16px; color:var(--navy);}
+  .modal-close{cursor:pointer; border:none; background:none; font-size:22px; color:var(--text-mute); line-height:1;}
+  .modal-body{padding:20px;}
+  
+  .detail-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; background:#f8f9fb; padding:14px; border-radius:8px; border:1px solid var(--border);}
+  .detail-item .k{font-size:11px; color:var(--text-mute); font-weight:700; text-transform:uppercase;}
+  .detail-item .v{font-size:13.5px; margin-top:3px; word-break:break-word; font-weight:600;}
+  .detail-item .v a{color:var(--blue);}
+
+  .edit-row{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr)); gap:12px; margin-top:14px;}
+  .modal-actions{display:flex; gap:10px; margin-top:20px;}
+  .btn-save{flex:1; background:var(--green); color:#fff; border:none; padding:11px; border-radius:7px; font-weight:700; cursor:pointer;}
+  .btn-save:disabled{opacity:.6; cursor:not-allowed;}
+  .btn-delete{background:var(--red-bg); color:var(--red); border:1px solid var(--red); padding:11px 18px; border-radius:7px; font-weight:700; cursor:pointer;}
+  .modal-msg{margin-top:10px; font-weight:600; font-size:13px;}
+  .modal-msg.box{padding:10px 12px; border-radius:7px;}
+  .modal-msg.msg-info{background:var(--blue-bg); color:var(--blue);}
+  .modal-msg.msg-success{background:var(--green-bg); color:var(--green);}
+  .modal-msg.msg-error{background:var(--red-bg); color:var(--red);}
+
+  .quick-chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;}
+  .quick-chip{
+    padding:4px 10px; border-radius:16px; border:1px solid var(--border); background:#fff;
+    font-size:11.5px; font-weight:600; cursor:pointer; color:var(--text); transition:.12s;
+  }
+  .quick-chip:hover{border-color:var(--navy); color:var(--navy); background:var(--blue-bg);}
+  .custom-status-input{margin-top:6px; display:none;}
+  .custom-status-input.show{display:block;}
+
+  @media (max-width:640px){
+    .detail-grid{grid-template-columns:1fr;}
+    .navbar{padding:12px 16px;}
+    .container{padding:14px;}
+  }
 </style>
 </head>
 <body>
 
-<header class="top">
-  <div class="brand">📦 JameenSeva <span>Master Admin Console</span></div>
-  <div class="right">
-    <div class="who">
-      <div class="av">CY</div>
-      <div><b>Er. Chandraveer Yadav <span class="vf" title="Verified">✔</span></b><small>Founder &amp; CEO, JameenSeva.in</small></div>
+<div class="navbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <div>
+      <h1 class="lang-dev">जमीन सेवा — मास्टर एडमिन</h1>
+      <div class="sub">JameenSeva.in Live Database Management</div>
     </div>
-    <button class="btn red" onclick="logoutAdmin()">🚪 Logout</button>
   </div>
-</header>
 
-<section class="stats">
-  <div class="card" style="border-left:4px solid #16a34a"><div class="t">कुल प्राप्त राशि (Total Paid / Collected)</div><div class="v" id="stPaid">₹0</div><div class="s" id="stPaidSub"></div></div>
-  <div class="card" style="border-left:4px solid #0284c7"><div class="t">कुल ऑर्डर्स (Total Orders)</div><div class="v" id="stCount">0</div><div class="s" id="stCountSub"></div></div>
-  <div class="card" style="border-left:4px solid #d97706"><div class="t">बकाया राशि (Pending Amount)</div><div class="v" id="stPend" style="color:#d97706">₹0</div><div class="s">कैंसिल ऑर्डर्स शामिल नहीं</div></div>
-</section>
-
-<nav class="nav" id="nav"></nav>
-
-<div class="bar">
-  <div class="l">
-    <select id="fMonth" class="sel" onchange="render()">
-      <option value="">सभी महीने (All Months)</option>
-      <option value="01">जनवरी</option><option value="02">फ़रवरी</option><option value="03">मार्च</option><option value="04">अप्रैल</option>
-      <option value="05">मई</option><option value="06">जून</option><option value="07">जुलाई</option><option value="08">अगस्त</option>
-      <option value="09">सितंबर</option><option value="10">अक्टूबर</option><option value="11">नवंबर</option><option value="12">दिसंबर</option>
-    </select>
-    <select id="fYear" class="sel" onchange="render()"><option value="">सभी साल</option></select>
-    <input id="fSearch" class="inp" placeholder="खोजें: नाम, मोबाइल, ID, ज़िला..." oninput="render()">
-    <select id="fStatus" class="sel" onchange="render()"><option value="">सभी स्टेटस</option></select>
-  </div>
-  <div style="display:flex;gap:10px">
-    <button class="btn green" onclick="openAdd()">➕ नया ऑर्डर जोड़ें</button>
-    <button class="btn grey" onclick="fetchOrders()">🔄 रिफ्रेश</button>
+  <div style="display:flex; align-items:center; gap:12px;">
+    <div class="admin-profile-badge">
+      <div class="admin-avatar">CY</div>
+      <div class="admin-info">
+        <div class="admin-name">Er. Chandraveer Yadav <span style="color:#4ade80;">✔</span></div>
+        <div class="admin-role">Founder & CEO, JameenSeva</div>
+      </div>
+    </div>
+    <button class="btn-logout" id="logoutBtn">Logout</button>
   </div>
 </div>
 
-<div class="tcard"><div class="scroll">
-  <table>
-    <thead><tr>
-      <th class="c-id">ऑर्डर ID</th><th class="c-name">रैयत / किसान का नाम</th><th class="c-dist">ज़िला</th><th class="c-mob">मोबाइल</th>
-      <th class="c-st">ऑर्डर स्टेटस</th><th class="c-pay">पेमेंट / विवरण</th><th class="c-date">तारीख</th><th class="c-act">एक्शन</th>
-    </tr></thead>
-    <tbody id="tbody"></tbody>
-  </table>
-</div></div>
+<div class="container">
 
-<!-- Tier 1: Quick view + status -->
-<div class="ov" id="qvOv"><div class="mb" style="max-width:520px">
-  <div class="mh" style="background:#0284c7"><h3>🔍 ऑर्डर विवरण व तुरंत स्टेटस बदलें</h3><button class="mx" onclick="closeM('qvOv')">✕</button></div>
-  <div class="mbody">
-    <div class="view" id="qvCard"></div>
-    <div class="grid">
-      <div class="g"><label style="color:#0284c7">ऑर्डर स्टेटस</label><select id="qvStatus"></select></div>
-      <div class="g"><label style="color:#0284c7">पेमेंट स्टेटस / रिमार्क्स</label><input id="qvPay" placeholder="Pending / Paid / CS 116 F1"></div>
+  <div class="tabs-container lang-dev" id="tabsContainer"></div>
+
+  <div class="summary-row" id="summaryRow"></div>
+
+  <details class="add-panel">
+    <summary class="lang-dev">➕ नया रिकॉर्ड जोड़ें (मैन्युअल एंट्री)</summary>
+    <div class="add-body">
+      <form id="dynamicForm">
+        <div class="form-grid" id="dynamicInputs"></div>
+        <button type="submit" class="btn-submit lang-dev">डेटाबेस में सेव करें</button>
+      </form>
+      <div id="formMessage"></div>
     </div>
-    <div class="err" id="qvErr"></div>
+  </details>
+
+  <div class="toolbar">
+    <input type="text" id="searchInput" class="lang-dev" placeholder="खोजें: नाम, मोबाइल, ऑर्डर ID, ज़िला, मौजा...">
+    <select id="statusFilter" class="lang-dev"><option value="">सभी स्टेटस</option></select>
+    <button class="btn-outline btn-refresh lang-dev" id="refreshBtn">🔄 रिफ्रेश करें</button>
   </div>
-  <div class="mf"><button class="btn grey" onclick="closeM('qvOv')">बंद करें</button><button class="btn green" id="qvSave" onclick="saveQuick()">⚡ स्टेटस अपडेट करें</button></div>
-</div></div>
 
-<!-- Tier 2: Full editor -->
-<div class="ov" id="edOv"><div class="mb">
-  <div class="mh" style="background:#0f172a"><h3>✏️ पूरा ऑर्डर विवरण संपादित करें</h3><button class="mx" onclick="closeM('edOv')">✕</button></div>
-  <div class="mbody">
-    <div class="g" style="margin-bottom:12px"><label>ऑर्डर ID</label><input id="edOid" readonly style="background:#f1f5f9;font-weight:700"></div>
-    <div class="grid" id="edForm"></div>
-    <div class="err" id="edErr"></div>
+  <div class="card">
+    <div id="loadingText" class="lang-dev">डेटा लोड हो रहा है...</div>
+    <div class="table-container">
+      <table id="dataTable" style="display:none;">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <div class="empty-state lang-dev" id="emptyState" style="display:none;">इस टेबल में कोई मिलान रिकॉर्ड नहीं मिला।</div>
   </div>
-  <div class="mf"><button class="btn grey" onclick="closeM('edOv')">रद्द करें</button><button class="btn green" id="edSave" onclick="saveFull()">💾 पूरा विवरण सुरक्षित करें</button></div>
-</div></div>
 
-<!-- Manual order -->
-<div class="ov" id="adOv"><div class="mb">
-  <div class="mh" style="background:#15803d"><h3>➕ नया ऑर्डर दर्ज करें — <span id="adTbl"></span></h3><button class="mx" onclick="closeM('adOv')">✕</button></div>
-  <div class="mbody"><div class="grid" id="adForm"></div><div class="err" id="adErr"></div></div>
-  <div class="mf"><button class="btn grey" onclick="closeM('adOv')">रद्द करें</button><button class="btn green" id="adSave" onclick="saveNew()">✅ ऑर्डर सुरक्षित करें</button></div>
-</div></div>
+</div>
 
-<script>
-const SB_URL = "https://efgvsddclcnbmwqbtily.supabase.co";
-const SB_KEY = "sb_publishable_9w-thNkNGT410q9-xfqISQ_sH2Uzmv5";
-const ADMIN_UUID = "0de0af38-6afa-4248-8057-80e276fc7763";
-const DEFAULT_FEE = 79;   // जिस ऑर्डर में amount कॉलम/वैल्यू नहीं है, उसकी राशि (amins के लिए 0 गिना जाता है)
-const sb = supabase.createClient(SB_URL, SB_KEY);
+<!-- 1. Quick Status & Payment Modal (Row click) -->
+<div class="overlay" id="quickOverlay">
+  <div class="modal" style="max-width:540px;">
+    <div class="modal-head">
+      <h3 class="lang-dev" id="quickModalTitle">त्वरित स्टेटस व पेमेंट अपडेट</h3>
+      <button class="modal-close" onclick="closeOverlay('quickOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-grid" id="quickDetailGrid"></div>
+      <div id="quickEditFields"></div>
+      <div class="modal-actions">
+        <button class="btn-save lang-dev" id="quickSaveBtn">⚡ स्टेटस व पेमेंट सेव करें</button>
+      </div>
+      <div class="modal-msg" id="quickModalMsg"></div>
+    </div>
+  </div>
+</div>
 
-const TABLES = [
-  ['khatiyan order','📜 खतियान'],['kevala_orders','📑 केवाला'],['amin-booking','📐 अमीन बुकिंग'],
-  ['jamabandi_orders','📋 जमाबंदी'],['panchnama_orders','⚖️ पंचनामा ऑर्डर्स'],['panchnama batwara','⚖️ पंचनामा बटवारा'],
-  ['map_orders','🗺️ नक्शा ऑर्डर्स'],['khesra to khesra','🔄 खेसरा-खेसरा'],['amins','🤝 अमीन पार्टनर्स']
-];
+<!-- 2. Master Full Edit Modal (Action Button Click) -->
+<div class="overlay" id="fullEditOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 class="lang-dev" id="fullModalTitle">✏️ पूरा रिकॉर्ड एडिट करें</h3>
+      <button class="modal-close" onclick="closeOverlay('fullEditOverlay')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="fullEditForm">
+        <div class="edit-row" id="fullEditGrid"></div>
+        <div class="modal-actions">
+          <button type="submit" class="btn-save lang-dev" id="fullSaveBtn">💾 सभी बदलाव सुरक्षित करें</button>
+          <button type="button" class="btn-delete lang-dev" id="fullDeleteBtn">डिलीट करें</button>
+        </div>
+      </form>
+      <div class="modal-msg" id="fullModalMsg"></div>
+    </div>
+  </div>
+</div>
 
-/* Smart auto-mapper: हर field के लिए संभावित कॉलम नाम (सिर्फ exact match — गलत कॉलम नहीं उठेगा) */
-const CANDS = {
-  oid:['order_id','reg_no','orderid'],
-  name:['raiyat_name','customer_name','applicant_name','name','buyer_name','kisan_name','full_name'],
-  dist:['district','jila'],
-  mob:['mobile','customer_mobile','mobile_no','phone','phone_number','contact','whatsapp'],
-  status:['status','order_status'],
-  pay:['payment_status','payment_method','payment','remarks'],
-  amt:['amount','total_amount','price','fee'],
-  odate:['order_date'], cdate:['created_at'],
-  block:['block','anchal_circle','anchal','circle'],
-  vil:['village','mauja','mauza','moza'],
-  thana:['thana_no','thana_number','thana'],
-  khata:['khata_no','khata_number','khata','khata_new'],
-  khesra:['khesra_no','plot_number','plot_no','khasra','khesra','khesra_new'],
-  trk:['tracking_number','tracking_id'],
-  addr:['full_address','address'],
-  exp:['experience']
-};
-/* खाली टेबल के लिए डिफ़ॉल्ट कॉलम (जब कोई row न हो) */
-const DEF = {
-  kevala_orders:{name:'customer_name',mob:'customer_mobile',block:'anchal_circle',vil:'mauza',thana:'thana_number',khata:'khata_number',khesra:'plot_number',status:'order_status',pay:'payment_method'},
-  map_orders:{name:'customer_name',vil:'mauza',status:'order_status',amt:'total_amount'},
-  jamabandi_orders:{vil:'mauja',thana:'thana',khata:'khata',khesra:'khesra'},
-  'khesra to khesra':{khata:'khata_new',khesra:'khesra_new'},
-  amins:{oid:'reg_no',exp:'experience',block:'block'}
-};
-const OPT = ['amt','trk','exp','odate','cdate'];
-const STATUSES = ['Order Received','Processing','Pending','Pending Token','Active','Under Review','Approved','Rejected ❌','भेजने के लियें तैयार है','Dispatched','Delivered','Completed','On Hold','किसान के जबाब का इंतजार','दोहरा ऑर्डर -cancel ❌','रिकॉर्ड फटा होने के कारण आर्डर cancel ❌','रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌','Cancelled ❌'];
-const FD = { // field → [label, type]
-  oid:['ऑर्डर ID / Reg No'], odate:['ऑर्डर तारीख'], name:['रैयत / किसान / आवेदक का नाम *','full'], mob:['मोबाइल नंबर (10 अंक) *'],
-  amt:['राशि (Amount ₹)','number'], status:['ऑर्डर स्टेटस','select'], pay:['पेमेंट / रिमार्क्स'], dist:['ज़िला (District) *'],
-  block:['प्रखंड / अंचल'], vil:['मौजा / गाँव'], thana:['थाना नंबर'], khata:['खाता नंबर'], khesra:['खेसरा / प्लॉट नंबर'],
-  exp:['Passing no / अनुभव','number'], trk:['स्पीड पोस्ट / ट्रैकिंग नंबर','full'], addr:['पूरा पता (Full Address)','area']
-};
-const EDIT = ['name','mob','amt','status','pay','dist','block','vil','thana','khata','khesra','exp','trk','addr'];
-const ADD  = ['oid','odate','name','mob','amt','pay','dist','block','vil','thana','khata','khesra','status','exp','addr'];
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-let CUR = TABLES[0][0], ALL = [], SEL = null, SEQ = 0;
-const $ = id => document.getElementById(id);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+/* ══ SUPABASE CLIENT CONFIG ══ */
+const SUPABASE_URL = 'https://efgvsddclcnbmwqbtily.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmZ3ZzZGRjbGNuYm13cWJ0aWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNjM4MTIsImV4cCI6MjA4OTgzOTgxMn0.0Ctpos-lGsmIrNpajjtFZu8Cf5-ailFNvTjs2ItduxI'
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const ADMIN_UUID = '0de0af38-6afa-4248-8057-80e276fc7763'
 
-/* ── Column helpers ── */
-const keysNow = () => ALL.length ? Object.keys(ALL[0].raw) : [];
-function colFor(sem, keys) {
-  if (keys.length) return CANDS[sem].find(k => keys.includes(k)) || null;
-  const d = DEF[CUR] && DEF[CUR][sem];
-  if (d) return d;
-  return OPT.includes(sem) ? null : CANDS[sem][0];
+/* ══ STATUS COLOR LOGIC ══ */
+function getStatusStyle(val) {
+  const s = (val || '').toLowerCase();
+  if (s.includes('cancel') || s.includes('reject') || s.includes('failed')) return { bg: '#fee2e2', text: '#dc2626' };
+  if (s.includes('process') || s.includes('तैयार') || s.includes('इंतजार') || s.includes('search')) return { bg: '#fef3c7', text: '#d97706' };
+  if (s.includes('dispatch') || s.includes('transit')) return { bg: '#dbeafe', text: '#2563eb' };
+  if (s.includes('deliver') || s.includes('paid') || s.includes('complet') || s.includes('approve') || s.includes('confirm')) return { bg: '#dcfce7', text: '#15803d' };
+  if (s.includes('pending')) return { bg: '#fef3c7', text: '#b45309' };
+  return { bg: '#e2e8f0', text: '#334155' };
 }
-function norm(raw) {
-  const o = { id: raw.id, raw };
-  for (const s in CANDS) {
-    const k = CANDS[s].find(k => k in raw && raw[k] !== null && String(raw[k]).trim() !== '');
-    o[s] = k ? raw[k] : '';
+
+/* ══ PRESERVED TABLE METADATA CONFIG ══ */
+const TABLES = {
+  panchnama: {
+    table: 'panchnama batwara',
+    label: 'पंचनामा बंटवारा',
+    icon: '📄',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'raiyat_name', label:'रैयत का नाम', width:'210px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'160px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'110px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'file_url', label:'फाइल', link:true },
+      { key:'payment_id', label:'पेमेंट ID' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','COD','Failed','Refunded'] },
+      { key:'remarks', label:'रिमार्क्स / नोट', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ]
+  },
+
+  khatiyan: {
+    table: 'khatiyan order',
+    label: 'खतियान ऑर्डर्स',
+    icon: '📑',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'raiyat_name', label:'रैयत का नाम', width:'210px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'180px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'110px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'khatiyan_type', label:'खतियान प्रकार' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_id', label:'पेमेंट ID' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','प्लॉट या खाता नंबर के साथ करें order cencel❌','Processing','भेजने के लियें तैयार है','In Transit','Order Received','Dispatched','Delivered','रिकार्ड इस समय उपलब्ध नहीं है आर्डर cancel ❌','किसान के जबाब का इंतजार order cancel❌','रिकॉर्ड फटा होने के कारण आर्डर cancel ❌','On Hold','Cancelled ❌','दोहरा ऑर्डर -cancel ❌'],
+        quick:['Processing','भेजने के लियें तैयार है','Dispatched','Delivered','Cancelled ❌'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','COD','Failed','Refunded'] },
+      { key:'remarks', label:'रिमार्क्स / नोट', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ]
+  },
+
+  jamabandi: {
+    table: 'jamabandi_orders',
+    label: 'जमाबंदी ऑर्डर्स',
+    icon: '💳',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'raiyat_name', label:'रैयत का नाम', width:'210px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'160px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'110px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana', label:'थाना' },
+      { key:'mauja', label:'मौजा' },
+      { key:'khata', label:'खाता' },
+      { key:'khesra', label:'खेसरा' },
+      { key:'jamabandi', label:'जमाबंदी' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_method', label:'पेमेंट माध्यम' },
+      { key:'payment_id', label:'पेमेंट ID' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Payment Verification','Processing','Ready to Dispatch','In Transit','Dispatched','Delivered','Completed','On Hold','Cancelled ❌','Rejected ❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled ❌'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','Failed','Refunded'] },
+      { key:'remarks', label:'रिमार्क्स', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ]
+  },
+
+  kevala: {
+    table: 'kevala_orders',
+    label: 'केवाला ऑर्डर्स',
+    icon: '📜',
+    idKey: 'id',
+    listCols: [
+      { key: 'order_id', label: 'ऑर्डर ID', width:'110px' },
+      { key: 'customer_name', label: 'आवेदक', width:'200px', isName:true },
+      { key: 'district', label: 'ज़िला', width:'120px' },
+      { key: 'customer_mobile', label: 'मोबाइल', width:'120px' },
+      { key: 'order_status', label: 'स्टेटस', badge: true, width:'180px' },
+      { key: 'payment_method', label: 'पेमेंट विधि', badge: true, width:'130px' },
+      { key: 'created_at', label: 'तारीख', date: true, width:'105px' },
+      { key: '_action', label: 'एक्शन', action: true, width:'75px' }
+    ],
+    fields: [
+      { key: 'order_id', label: 'ऑर्डर ID' },
+      { key: 'document_type', label: 'दस्तावेज़ प्रकार' },
+      { key: 'district', label: 'ज़िला' },
+      { key: 'registry_office', label: 'रजिस्ट्री ऑफिस (SRO)' },
+      { key: 'anchal_circle', label: 'अंचल / ब्लॉक' },
+      { key: 'mauza', label: 'मौजा' },
+      { key: 'thana_number', label: 'थाना नंबर' },
+      { key: 'date_from', label: 'कब से (From Date)' },
+      { key: 'date_to', label: 'कब तक (To Date)' },
+      { key: 'seller_name', label: 'बेचने वाले का नाम (दाता)' },
+      { key: 'buyer_name', label: 'खरीदने वाले का नाम (गृहीता)' },
+      { key: 'khata_number', label: 'खाता नंबर' },
+      { key: 'plot_number', label: 'प्लॉट/खेसरा नंबर' },
+      { key: 'deed_number', label: 'डीड नंबर' },
+      { key: 'customer_name', label: 'आवेदक का नाम' },
+      { key: 'customer_mobile', label: 'मोबाइल' },
+      { key: 'full_address', label: 'पूरा पता' },
+      { key: 'pincode', label: 'पिनकोड' },
+      { key: 'payment_method', label: 'पेमेंट मोड' },
+      { key: 'remarks', label: 'रिमार्क्स / नोट' }
+    ],
+    quickEditable: [
+      { key: 'order_status', label: 'स्टेटस', type: 'select', custom: true,
+        options: [
+          'Pending',
+          'सर्च जारी है (Searching)',
+          'Processing',
+          'एडवांस ₹99 टोकन का इंतजार',
+          'भेजने के लियें तैयार है',
+          'Dispatched',
+          'Delivered',
+          'रिकार्ड इस समय उपलब्ध नहीं है ऑर्डर Cancel ❌',
+          'ग्राहक के जबाब का इंतजार',
+          'रिकॉर्ड फटा/अस्पष्ट होने के कारण Cancel ❌',
+          'On Hold',
+          'Cancelled',
+          'दिए गए विवरण के आधार पर रिकॉर्ड नहीं मिला ऑर्डर Cancel ❌'
+        ],
+        quick: ['Searching', 'Processing', 'एडवांस ₹99 टोकन का इंतजार', 'भेजने के लियें तैयार है', 'Dispatched', 'Delivered', 'Cancelled'] },
+      { key: 'payment_method', label: 'पेमेंट स्टेटस', type: 'select', custom: true,
+        options: ['COD', 'Online', 'Paid Advance ₹99', 'Fully Paid', 'Failed', 'Refunded'] },
+      { key: 'remarks', label: 'रिमार्क्स / नोट', type: 'text' }
+    ],
+    addFields: [
+      { key: 'order_id', label: 'ऑर्डर ID' },
+      { key: 'customer_name', label: 'आवेदक' },
+      { key: 'customer_mobile', label: 'मोबाइल' },
+      { key: 'district', label: 'ज़िला' },
+      { key: 'registry_office', label: 'SRO ऑफिस' },
+      { key: 'document_type', label: 'प्रकार' },
+      { key: 'remarks', label: 'रिमार्क्स' }
+    ]
+  },
+
+  map: {
+    table: 'map_orders',
+    label: 'भू-नक्शा ऑर्डर्स',
+    icon: '🗺️',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'customer_name', label:'ग्राहक का नाम', width:'200px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'order_status', label:'स्टेटस', badge:true, width:'180px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'120px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'अंचल / प्रखंड' },
+      { key:'mauza', label:'मौजा / वार्ड' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'total_sheets', label: 'कुल नक्शा शीट' },
+      { key:'total_amount', label: 'कुल राशि' },
+      { key:'customer_name', label:'ग्राहक का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'payment_id', label:'पेमेंट ID' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'order_status', label:'स्टेटस', type:'select', custom:true,
+        options:[
+          'Order Received',
+          'Processing',
+          'भेजने के लियें तैयार है',
+          'Dispatched',
+          'Delivered',
+          'नक्शा इस मौजा का उपलब्ध नहीं है',
+          'शीट नंबर अस्पष्ट / गलत है cancel',
+          'किसान के जबाब का इंतजार',
+          'On Hold',
+          'Cancelled',
+          'दोहरा ऑर्डर - cancel'
+        ],
+        quick:['Processing', 'भेजने के लियें तैयार है', 'Dispatched', 'Delivered', 'Cancelled'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending', 'Paid', 'Failed', 'Refunded', 'Cash on Delivery'] },
+      { key:'remarks', label:'रिमार्क्स', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'अंचल / प्रखंड' },
+      { key:'mauza', label:'मौजा' },
+      { key:'customer_name', label:'ग्राहक का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ]
+  },
+
+  aminBooking: {
+    table: 'amin-booking',
+    label: 'अमीन बुकिंग',
+    icon: '📅',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'raiyat_name', label:'ग्राहक', width:'210px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'160px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'110px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'बुकिंग तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_no', label:'खाता नंबर' },
+      { key:'khesra_no', label:'खेसरा नंबर' },
+      { key:'raiyat_name', label:'ग्राहक का नाम' },
+      { key:'full_address', label:'पूरा पता' },
+      { key:'pincode', label:'पिनकोड' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Confirmed','Amin Assigned','Visit Scheduled','In Progress','Completed','Cancelled❌','Rescheduled'],
+        quick:['Confirmed','Amin Assigned','In Progress','Completed','Cancelled❌'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','COD','Failed'] },
+      { key:'remarks', label:'रिमार्क्स', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'raiyat_name', label:'ग्राहक का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'order_date', label:'बुकिंग तारीख' }
+    ]
+  },
+
+  amins: {
+    table: 'amins',
+    label: 'अमीन लिस्ट',
+    icon: '🕵️‍♂️',
+    idKey: 'id',
+    listCols: [
+      { key:'reg_no', label:'Reg नंबर', width:'110px' },
+      { key:'name', label:'नाम', width:'200px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'experience', label:'Passing no', width:'100px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'140px' },
+      { key:'created_at', label:'रजिस्टर्ड', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
+      { key:'name', label:'नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'experience', label:'Passing no' },
+      { key:'self_photo_url', label:'फोटो', link:true },
+      { key:'aadhar_photo_url', label:'आधार फोटो', link:true },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Under Review','Approved','Rejected','Suspended'],
+        quick:['Under Review','Approved','Rejected'] },
+      { key:'remarks', label:'रिमार्क्स', type:'text' }
+    ],
+    addFields: [
+      { key:'reg_no', label:'रेगिस्ट्रेशन नंबर' },
+      { key:'name', label:'नाम' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'experience', label:'अनुभव (वर्ष)', type:'number' }
+    ]
+  },
+
+  khesra: {
+    table: 'khesra to khesra',
+    label: 'खेसरा टू खेसरा',
+    icon: '🔀',
+    idKey: 'id',
+    listCols: [
+      { key:'order_id', label:'ऑर्डर ID', width:'110px' },
+      { key:'raiyat_name', label:'रैयत का नाम', width:'210px', isName:true },
+      { key:'district', label:'ज़िला', width:'120px' },
+      { key:'mobile', label:'मोबाइल', width:'120px' },
+      { key:'status', label:'स्टेटस', badge:true, width:'160px' },
+      { key:'payment_status', label:'पेमेंट', badge:true, width:'110px' },
+      { key:'created_at', label:'तारीख', date:true, width:'105px' },
+      { key:'_action', label:'एक्शन', action:true, width:'75px' }
+    ],
+    fields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'order_date', label:'ऑर्डर तारीख' },
+      { key:'district', label:'ज़िला' },
+      { key:'block', label:'ब्लॉक' },
+      { key:'thana_no', label:'थाना नंबर' },
+      { key:'village', label:'गांव' },
+      { key:'khata_new', label:'नया खाता' },
+      { key:'khesra_new', label:'नया खेसरा' },
+      { key:'khesra_old', label:'पुराना खेसरा' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' },
+      { key:'remarks', label:'रिमार्क्स' }
+    ],
+    quickEditable: [
+      { key:'status', label:'स्टेटस', type:'select', custom:true,
+        options:['Pending','Verifying Details','Processing','Ready to Dispatch','Dispatched','Delivered','Completed','On Hold','Cancelled❌','Rejected❌'],
+        quick:['Processing','Ready to Dispatch','Dispatched','Completed','Cancelled❌'] },
+      { key:'payment_status', label:'पेमेंट स्टेटस', type:'select', custom:true,
+        options:['Pending','Paid','COD','Failed'] },
+      { key:'remarks', label:'रिमार्क्स', type:'text' }
+    ],
+    addFields: [
+      { key:'order_id', label:'ऑर्डर ID' },
+      { key:'district', label:'ज़िला' },
+      { key:'raiyat_name', label:'रैयत का नाम' },
+      { key:'mobile', label:'मोबाइल' }
+    ]
   }
-  return o;
-}
-const parseD = v => { if (!v) return null; const d = new Date(v); return isNaN(d) ? null : d; };
-const rowDate = o => parseD(o.cdate) || parseD(o.odate);
-function fmtDate(o) {
-  const d = parseD(o.odate) || parseD(o.cdate);
-  if (d) return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-  return o.odate ? String(o.odate).slice(0, 15) : '—';
-}
-function setSel(sel, val) {
-  val = val || 'Order Received';
-  if (![...sel.options].some(o => o.value === val)) sel.add(new Option(val, val));
-  sel.value = val;
-}
-const statusOpts = () => STATUSES.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
+};
 
-/* ── Navigation ── */
-function buildNav() {
-  $('nav').innerHTML = TABLES.map(([t, l]) =>
-    `<button class="pill ${t === CUR ? 'on' : ''}" data-t="${esc(t)}">${l} (${esc(t)})</button>`).join('');
-  $('nav').querySelectorAll('.pill').forEach(b => b.onclick = () => {
-    CUR = b.dataset.t;
-    $('nav').querySelectorAll('.pill').forEach(x => x.classList.toggle('on', x === b));
-    $('fSearch').value = ''; $('fStatus').value = '';
-    fetchOrders();
-  });
-}
+let currentKey = 'panchnama';
+let currentRows = [];
+let selectedRow = null;
 
-/* ── Fetch (1000+ rows safe) ── */
-async function fetchOrders() {
-  const my = ++SEQ;
-  $('tbody').innerHTML = `<tr><td colspan="8" class="msg">डेटा लोड हो रहा है ("${esc(CUR)}")...</td></tr>`;
-  try {
-    let all = [], from = 0, col = 'created_at';
-    for (;;) {
-      const { data, error } = await sb.from(CUR).select('*').order(col, { ascending: false }).range(from, from + 999);
-      if (error && col === 'created_at' && from === 0) { col = 'id'; continue; }
-      if (error) throw error;
-      all = all.concat(data || []);
-      if (!data || data.length < 1000) break;
-      from += 1000;
-    }
-    if (my !== SEQ) return;
-    ALL = all.map(norm);
-    fillYears(); fillStatuses(); render();
-  } catch (e) {
-    if (my !== SEQ) return;
-    ALL = [];
-    $('tbody').innerHTML = `<tr><td colspan="8" class="msg" style="color:#dc2626;font-weight:700">त्रुटि: ${esc(e.message)}<br><small style="color:#64748b">जाँचें कि तालिका "${esc(CUR)}" Supabase में मौजूद है और RLS SELECT की अनुमति देता है।</small></td></tr>`;
+// ---------------- Security ----------------
+async function checkSecurity() {
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user || user.id !== ADMIN_UUID) {
+    alert('अनाधिकृत प्रवेश!')
+    window.location.href = 'admin-login.html'
+  } else {
+    document.body.style.display = 'block'
+    buildTabs();
+    loadTableContent();
   }
 }
-function fillYears() {
-  const ys = [...new Set(ALL.map(rowDate).filter(Boolean).map(d => d.getFullYear()))].sort((a, b) => b - a);
-  const cur = $('fYear').value;
-  $('fYear').innerHTML = '<option value="">सभी साल</option>' + ys.map(y => `<option>${y}</option>`).join('');
-  $('fYear').value = ys.map(String).includes(cur) ? cur : '';
-}
-function fillStatuses() {
-  const cur = $('fStatus').value;
-  const ss = [...new Set(ALL.map(o => o.status).filter(Boolean))];
-  $('fStatus').innerHTML = '<option value="">सभी स्टेटस</option>' + ss.map(s => `<option value="${esc(s)}">${esc(s)}</option>`).join('');
-  $('fStatus').value = ss.includes(cur) ? cur : '';
-}
 
-/* ── Metrics + table ── */
-function badge(s) {
-  const v = String(s).toLowerCase();
-  if (/cancel|reject|कैंसिल/.test(v)) return 'b-can';
-  if (/deliver|complet|active|approved/.test(v)) return 'b-ok';
-  if (/process|dispatch|transit|ready|भेजने|search|review/.test(v)) return 'b-proc';
-  if (/pending|hold|इंतजार/.test(v)) return 'b-pend';
-  return 'b-recv';
-}
-function monthRows() {
-  const m = $('fMonth').value, y = $('fYear').value;
-  if (!m && !y) return ALL;
-  return ALL.filter(o => {
-    const d = rowDate(o); if (!d) return false;
-    return (!m || String(d.getMonth() + 1).padStart(2, '0') === m) && (!y || String(d.getFullYear()) === y);
+// ---------------- Tabs ----------------
+function buildTabs(){
+  const container = document.getElementById('tabsContainer');
+  container.innerHTML = '';
+  Object.keys(TABLES).forEach(key => {
+    const cfg = TABLES[key];
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (key === currentKey ? ' active' : '');
+    btn.textContent = `${cfg.icon} ${cfg.label}`;
+    btn.onclick = () => switchTable(key);
+    btn.dataset.key = key;
+    container.appendChild(btn);
   });
 }
-function render() {
-  const rows = monthRows();
-  let paid = 0, pend = 0, fb = 0;
-  rows.forEach(o => {
-    const hasAmt = o.amt !== '' && !isNaN(parseFloat(o.amt));
-    const a = hasAmt ? parseFloat(o.amt) : (CUR === 'amins' ? 0 : DEFAULT_FEE);
-    if (!hasAmt && CUR !== 'amins') fb++;
-    const p = String(o.pay).toLowerCase(), st = String(o.status).toLowerCase();
-    if (/paid|success|received|fully/.test(p) && !/unpaid|not paid/.test(p)) paid += a;
-    else if (!/refund|fail/.test(p) && !/cancel|reject/.test(st)) pend += a;
-  });
-  $('stPaid').textContent = inr(paid); $('stPend').textContent = inr(pend); $('stCount').textContent = rows.length;
-  $('stPaidSub').textContent = $('fMonth').selectedOptions[0].text + ($('fYear').value ? ' ' + $('fYear').value : '');
-  $('stCountSub').textContent = fb ? `${fb} ऑर्डर में ₹${DEFAULT_FEE} डिफ़ॉल्ट राशि गिनी गई` : 'चयनित अवधि में';
 
-  const q = $('fSearch').value.trim().toLowerCase(), sf = $('fStatus').value;
-  const list = rows.filter(o => (!sf || o.status === sf) &&
-    (!q || [o.oid, o.name, o.mob, o.dist, o.vil, o.block].join(' ').toLowerCase().includes(q)));
-  if (!list.length) { $('tbody').innerHTML = `<tr><td colspan="8" class="msg">इस चयन ("${esc(CUR)}") में कोई ऑर्डर नहीं मिला।</td></tr>`; return; }
-  $('tbody').innerHTML = list.map(o => {
-    const pay = o.pay || (o.exp !== '' ? 'Passing: ' + o.exp : 'Pending');
-    const pb = /paid|success/i.test(pay) ? 'b-ok' : /pending/i.test(pay) ? 'b-pend' : 'b-recv';
-    return `<tr data-id="${esc(o.id)}">
-      <td class="c-id"><button class="oid" data-a="qv" title="विवरण देखें / स्टेटस बदलें">${esc(o.oid || ('JS-' + o.id))} ↗</button></td>
-      <td class="c-name">${esc(o.name || '—')}</td>
-      <td class="c-dist">${esc(o.dist || '—')}</td>
-      <td class="c-mob">${o.mob ? `<a href="tel:${esc(o.mob)}" style="color:#0f172a;text-decoration:none;font-weight:600">${esc(o.mob)}</a>` : '—'}</td>
-      <td class="c-st"><span class="badge ${badge(o.status)}">${esc(o.status || '—')}</span></td>
-      <td class="c-pay"><span class="badge ${pb}">${esc(pay)}</span></td>
-      <td class="c-date">${esc(fmtDate(o))}</td>
-      <td class="c-act"><button class="ed" data-a="ed">✏️ Edit</button></td></tr>`;
-  }).join('');
+function switchTable(key){
+  currentKey = key;
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.key === key);
+  });
+  document.getElementById('searchInput').value = '';
+  document.getElementById('formMessage').innerText = '';
+  buildAddForm();
+  loadTableContent();
 }
-$('tbody').addEventListener('click', e => {
-  const b = e.target.closest('[data-a]'); if (!b) return;
-  const id = b.closest('tr').dataset.id;
-  SEL = ALL.find(o => String(o.id) === id);
-  if (!SEL) return;
-  b.dataset.a === 'qv' ? openQuick() : openEdit();
+
+// ---------------- Add form ----------------
+function buildAddForm(){
+  const cfg = TABLES[currentKey];
+  const inputsDiv = document.getElementById('dynamicInputs');
+  inputsDiv.innerHTML = '';
+  cfg.addFields.forEach(f => {
+    const wrap = document.createElement('div');
+    wrap.className = 'form-group';
+    wrap.innerHTML = `
+      <label class="lang-dev">${f.label}</label>
+      <input type="${f.type || 'text'}" id="add_${f.key}">
+    `;
+    inputsDiv.appendChild(wrap);
+  });
+}
+
+document.getElementById('dynamicForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const cfg = TABLES[currentKey];
+  const msg = document.getElementById('formMessage');
+  msg.style.color = '#1c5d9e';
+  msg.innerText = 'सेव किया जा रहा है...';
+
+  const insertData = {};
+  cfg.addFields.forEach(f => {
+    const el = document.getElementById(`add_${f.key}`);
+    if (!el) return;
+    let val = el.value;
+    if (f.type === 'number') val = val ? Number(val) : null;
+    insertData[f.key] = val || null;
+  });
+
+  const { error } = await supabase.from(cfg.table).insert([insertData]);
+  if (error) {
+    msg.style.color = '#c0392b';
+    msg.innerText = 'एरर: ' + error.message;
+  } else {
+    msg.style.color = '#1f8a52';
+    msg.innerText = 'बधाई हो! रिकॉर्ड सेव हो गया। 🎉';
+    document.getElementById('dynamicForm').reset();
+    loadTableContent();
+  }
 });
 
-/* ── Modal utils ── */
-const openM = id => $(id).classList.add('open');
-function closeM(id) { $(id).classList.remove('open'); }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.ov.open').forEach(o => o.classList.remove('open')); });
-function showErr(id, m) { const e = $(id); e.textContent = m; e.style.display = m ? 'block' : 'none'; }
+// ---------------- Load & Render Table ----------------
+async function loadTableContent(){
+  const cfg = TABLES[currentKey];
+  document.getElementById('loadingText').style.display = 'block';
+  document.getElementById('loadingText').innerText = 'डेटा लोड हो रहा है...';
+  document.getElementById('dataTable').style.display = 'none';
+  document.getElementById('emptyState').style.display = 'none';
 
-async function doUpdate(payload) {
-  if (!Object.keys(payload).length) throw new Error('इस टेबल में बदलने योग्य कोई कॉलम नहीं मिला।');
-  const { data, error } = await sb.from(CUR).update(payload).eq('id', SEL.id).select();
-  if (error) throw error;
-  if (!data || !data.length) throw new Error('अपडेट सेव नहीं हुआ — Supabase RLS की UPDATE policy admin को अनुमति नहीं दे रही। (admin login ज़रूरी है)');
-}
+  const { data, error } = await supabase.from(cfg.table).select('*').order('created_at', { ascending:false });
 
-/* ── Tier 1: Quick view ── */
-function openQuick() {
-  const o = SEL, V = x => esc(x || '—');
-  $('qvCard').innerHTML = `
-    <div><strong>ऑर्डर ID</strong><span>${V(o.oid)}</span></div><div><strong>तारीख</strong><span>${esc(fmtDate(o))}</span></div>
-    <div><strong>नाम</strong><span>${V(o.name)}</span></div><div><strong>मोबाइल</strong><span>${V(o.mob)}</span></div>
-    <div><strong>ज़िला</strong><span>${V(o.dist)}</span></div><div><strong>अंचल / प्रखंड</strong><span>${V(o.block)}</span></div>
-    <div><strong>मौजा / गाँव</strong><span>${V(o.vil)}</span></div><div><strong>थाना</strong><span>${V(o.thana)}</span></div>
-    <div><strong>खाता</strong><span>${V(o.khata)}</span></div><div><strong>खेसरा</strong><span>${V(o.khesra)}</span></div>
-    <div style="grid-column:1/-1"><strong>पता</strong><span>${V(o.addr)}</span></div>`;
-  $('qvStatus').innerHTML = statusOpts(); setSel($('qvStatus'), o.status);
-  const hasPay = !!colFor('pay', Object.keys(o.raw));
-  $('qvPay').value = o.pay || ''; $('qvPay').disabled = !hasPay;
-  $('qvPay').placeholder = hasPay ? 'Pending / Paid / CS 116 F1' : 'इस टेबल में पेमेंट कॉलम नहीं है';
-  showErr('qvErr', ''); openM('qvOv');
-}
-async function saveQuick() {
-  const keys = Object.keys(SEL.raw), p = {};
-  const sk = colFor('status', keys), pk = colFor('pay', keys);
-  if (!sk) return showErr('qvErr', 'इस टेबल में स्टेटस कॉलम नहीं मिला।');
-  p[sk] = $('qvStatus').value;
-  if (pk) p[pk] = $('qvPay').value.trim();
-  const btn = $('qvSave'); btn.disabled = true; btn.textContent = 'अपडेट हो रहा है...';
-  try { await doUpdate(p); closeM('qvOv'); await fetchOrders(); }
-  catch (e) { showErr('qvErr', 'त्रुटि: ' + e.message); }
-  finally { btn.disabled = false; btn.textContent = '⚡ स्टेटस अपडेट करें'; }
-}
-
-/* ── Shared form builder (Edit + Add) ── */
-function buildForm(boxId, pre, list, keys, hideMissing) {
-  $(boxId).innerHTML = list.map(s => {
-    const [lab, t] = FD[s], k = colFor(s, keys);
-    if (!k && hideMissing) return '';
-    const dis = k ? '' : 'disabled', id = `${pre}_${s}`, d = `data-col="${esc(k || '')}"`;
-    const inp = t === 'select' ? `<select id="${id}" ${d} ${dis}>${statusOpts()}</select>`
-      : t === 'area' ? `<textarea id="${id}" rows="2" ${d} ${dis}></textarea>`
-      : `<input id="${id}" type="${t === 'number' ? 'number' : 'text'}" ${d} ${dis}>`;
-    return `<div class="g ${t === 'full' || t === 'area' ? 'full' : ''}"><label>${lab}${k ? '' : ' <i>(इस टेबल में कॉलम नहीं)</i>'}</label>${inp}</div>`;
-  }).join('');
-}
-function collect(boxId, skipEmpty) {
-  const p = {};
-  for (const el of $(boxId).querySelectorAll('[data-col]')) {
-    const col = el.dataset.col; if (!col || el.disabled) continue;
-    let v = el.value.trim();
-    if (el.type === 'number') v = v === '' ? null : Number(v);
-    if (skipEmpty && (v === '' || v === null)) continue;
-    p[col] = v;
+  if (error) {
+    document.getElementById('loadingText').innerText = 'डेटा लोड एरर: ' + error.message;
+    return;
   }
-  return p;
-}
-const mobBad = box => { const el = $(box).querySelector('[id$="_mob"]'); return el && !el.disabled && el.value.trim() && !/^\d{10}$/.test(el.value.trim()); };
 
-/* ── Tier 2: Full edit ── */
-function openEdit() {
-  const o = SEL;
-  $('edOid').value = o.oid || ('JS-' + o.id);
-  buildForm('edForm', 'ed', EDIT, Object.keys(o.raw), false);
-  EDIT.forEach(s => {
-    const el = $('ed_' + s); if (!el) return;
-    if (s === 'status') setSel(el, o.status); else el.value = o[s] ?? '';
+  currentRows = data || [];
+  renderSummary();
+  populateStatusFilter();
+  renderTable();
+  document.getElementById('loadingText').style.display = 'none';
+}
+
+function renderSummary(){
+  const total = currentRows.length;
+  const pending = currentRows.filter(r => (r.status || r.order_status || '').toLowerCase().includes('pending')).length;
+  const done = currentRows.filter(r => ['completed','approved','confirmed','delivered'].some(k => (r.status || r.order_status || '').toLowerCase().includes(k))).length;
+  const rejected = currentRows.filter(r => ['rejected','cancel'].some(k => (r.status || r.order_status || '').toLowerCase().includes(k))).length;
+
+  document.getElementById('summaryRow').innerHTML = `
+    <div class="chip total"><div class="num">${total}</div><div class="label lang-dev">कुल रिकॉर्ड</div></div>
+    <div class="chip pending"><div class="num">${pending}</div><div class="label lang-dev">पेंडिंग</div></div>
+    <div class="chip done"><div class="num">${done}</div><div class="label lang-dev">पूर्ण / स्वीकृत</div></div>
+    <div class="chip rejected"><div class="num">${rejected}</div><div class="label lang-dev">कैंसिल / रिजेक्ट</div></div>
+  `;
+}
+
+function populateStatusFilter(){
+  const sel = document.getElementById('statusFilter');
+  const cfg = TABLES[currentKey];
+  const statusField = cfg.quickEditable.find(f => f.key === 'status' || f.key === 'order_status');
+  sel.innerHTML = '<option value="">सभी स्टेटस</option>';
+  if (statusField && statusField.options) {
+    statusField.options.forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt; o.textContent = opt;
+      sel.appendChild(o);
+    });
+  }
+}
+
+function fmtDate(val){
+  if (!val) return '';
+  try { return new Date(val).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }); }
+  catch { return val; }
+}
+
+function getFilteredRows(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const statusF = document.getElementById('statusFilter').value;
+  return currentRows.filter(row => {
+    const rowStatus = row.status || row.order_status || '';
+    const matchesStatus = !statusF || rowStatus === statusF;
+    if (!matchesStatus) return false;
+    if (!q) return true;
+    const haystack = [row.order_id, row.raiyat_name, row.customer_name, row.name, row.mobile, row.customer_mobile, row.district, row.mauja, row.village, row.reg_no]
+      .filter(Boolean).join(' ').toLowerCase();
+    return haystack.includes(q);
   });
-  showErr('edErr', ''); openM('edOv');
-}
-async function saveFull() {
-  if (!$('ed_name').value.trim() && !$('ed_name').disabled) return showErr('edErr', 'नाम खाली नहीं हो सकता।');
-  if (mobBad('edForm')) return showErr('edErr', 'मोबाइल नंबर 10 अंकों का होना चाहिए।');
-  const btn = $('edSave'); btn.disabled = true; btn.textContent = 'सुरक्षित हो रहा है...';
-  try { await doUpdate(collect('edForm', false)); closeM('edOv'); await fetchOrders(); }
-  catch (e) { showErr('edErr', 'त्रुटि: ' + e.message); }
-  finally { btn.disabled = false; btn.textContent = '💾 पूरा विवरण सुरक्षित करें'; }
 }
 
-/* ── Manual entry ── */
-function openAdd() {
-  $('adTbl').textContent = CUR;
-  buildForm('adForm', 'ad', ADD, keysNow(), true);
-  const isAmin = CUR === 'amins';
-  if ($('ad_oid')) $('ad_oid').value = (isAmin ? 'JSA-' : 'JS-') + Math.floor(100000 + Math.random() * 900000);
-  if ($('ad_odate')) $('ad_odate').value = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-  if ($('ad_amt') && !isAmin) $('ad_amt').value = DEFAULT_FEE;
-  if ($('ad_pay')) $('ad_pay').value = 'Pending';
-  if ($('ad_status')) setSel($('ad_status'), isAmin ? 'Pending' : 'Order Received');
-  showErr('adErr', ''); openM('adOv');
-}
-async function saveNew() {
-  if (!$('ad_name').value.trim() || !$('ad_dist').value.trim()) return showErr('adErr', 'नाम और ज़िला भरना अनिवार्य है।');
-  if (!/^\d{10}$/.test($('ad_mob').value.trim())) return showErr('adErr', '10 अंकों का मोबाइल नंबर भरें।');
-  const btn = $('adSave'); btn.disabled = true; btn.textContent = 'दर्ज हो रहा है...';
-  try {
-    const { data, error } = await sb.from(CUR).insert([collect('adForm', true)]).select();
-    if (error) throw error;
-    if (!data || !data.length) throw new Error('INSERT सेव नहीं हुआ — RLS की INSERT policy जाँचें।');
-    closeM('adOv'); await fetchOrders();
-  } catch (e) { showErr('adErr', 'त्रुटि: ' + e.message); }
-  finally { btn.disabled = false; btn.textContent = '✅ ऑर्डर सुरक्षित करें'; }
+function renderTable(){
+  const cfg = TABLES[currentKey];
+  const thead = document.getElementById('tableHead');
+  const tbody = document.getElementById('tableBody');
+  const rows = getFilteredRows();
+
+  thead.innerHTML = '<tr>' + cfg.listCols.map(c => `<th style="${c.width ? `width:${c.width};` : ''}" class="lang-dev">${c.label}</th>`).join('') + '</tr>';
+  tbody.innerHTML = '';
+
+  if (rows.length === 0) {
+    document.getElementById('dataTable').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+    return;
+  }
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('dataTable').style.display = 'table';
+
+  rows.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = cfg.listCols.map(c => {
+      if (c.action) {
+        return `<td style="text-align:center;"><button class="btn-edit-action" onclick="event.stopPropagation(); window.openFullEditById(${row[cfg.idKey]})">✏️ Edit</button></td>`;
+      }
+      let val = row[c.key];
+      if (c.date) val = fmtDate(val);
+      if (c.badge) {
+        const style = getStatusStyle(val);
+        return `<td><span class="badge" style="background:${style.bg}; color:${style.text};">${val || 'N/A'}</span></td>`;
+      }
+      return `<td class="${c.isName ? 'col-break' : ''}">${val ?? '—'}</td>`;
+    }).join('');
+    
+    // Row click -> Quick Status/Payment Modal
+    tr.addEventListener('click', () => openQuickStatus(row));
+    tbody.appendChild(tr);
+  });
 }
 
-/* ── Logout ── */
-async function logoutAdmin() {
-  if (!confirm('क्या आप एडमिन पैनल से लॉगआउट करना चाहते हैं?')) return;
-  try { await sb.auth.signOut(); } catch (e) {}
-  try { sessionStorage.clear(); } catch (e) {}
-  location.href = 'index.html';
+document.getElementById('searchInput').addEventListener('input', renderTable);
+document.getElementById('statusFilter').addEventListener('change', renderTable);
+document.getElementById('refreshBtn').addEventListener('click', loadTableContent);
+
+/* ══ 1. QUICK VIEW / STATUS & PAYMENT MODAL ══ */
+function openQuickStatus(row){
+  const cfg = TABLES[currentKey];
+  selectedRow = row;
+  document.getElementById('quickModalTitle').innerText = `${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
+
+  const detailGrid = document.getElementById('quickDetailGrid');
+  detailGrid.innerHTML = `
+    <div class="detail-item"><div class="k">ऑर्डर ID / REG</div><div class="v">${row.order_id || row.reg_no || row[cfg.idKey]}</div></div>
+    <div class="detail-item"><div class="k">नाम</div><div class="v">${row.raiyat_name || row.customer_name || row.name || '—'}</div></div>
+    <div class="detail-item"><div class="k">ज़िला / अंचल</div><div class="v">${row.district || '—'} / ${row.block || row.anchal_circle || '—'}</div></div>
+    <div class="detail-item"><div class="k">मोबाइल</div><div class="v">${row.mobile || row.customer_mobile || '—'}</div></div>
+  `;
+
+  const editDiv = document.getElementById('quickEditFields');
+  editDiv.innerHTML = cfg.quickEditable.map(f => {
+    const currentVal = row[f.key] || '';
+    if (f.type === 'select') {
+      const isKnown = f.options.includes(currentVal);
+      const options = f.options.map(o => `<option value="${o}" ${currentVal===o?'selected':''}>${o}</option>`).join('');
+      const customOptionHtml = f.custom ? `<option value="__custom__" ${(!isKnown && currentVal) ? 'selected' : ''}>✏️ Custom / अन्य लिखें</option>` : '';
+      const chipsHtml = (f.quick && f.quick.length) ? `<div class="quick-chips">${f.quick.map(q => `<button type="button" class="quick-chip" data-target="quick_${f.key}" data-value="${q}">${q}</button>`).join('')}</div>` : '';
+      const customInputHtml = f.custom ? `<input type="text" id="quick_${f.key}_custom" class="custom-status-input lang-dev ${(!isKnown && currentVal) ? 'show' : ''}" placeholder="कस्टम ${f.label} लिखें..." value="${(!isKnown && currentVal) ? currentVal : ''}">` : '';
+
+      return `
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="lang-dev" style="font-weight:700;">${f.label}</label>
+          <select id="quick_${f.key}" class="lang-dev">${options}${customOptionHtml}</select>
+          ${customInputHtml}
+          ${chipsHtml}
+        </div>
+      `;
+    } else {
+      return `
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="lang-dev" style="font-weight:700;">${f.label}</label>
+          <input type="text" id="quick_${f.key}" value="${currentVal}" placeholder="उदा. टोकन प्राप्त, फ़ाइल भेजी आदि">
+        </div>
+      `;
+    }
+  }).join('');
+
+  cfg.quickEditable.forEach(f => {
+    if (!f.custom) return;
+    const sel = document.getElementById(`quick_${f.key}`);
+    const customInput = document.getElementById(`quick_${f.key}_custom`);
+    if(sel && customInput){
+      sel.addEventListener('change', () => {
+        customInput.classList.toggle('show', sel.value === '__custom__');
+        if (sel.value === '__custom__') customInput.focus();
+      });
+    }
+  });
+
+  editDiv.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const targetSel = document.getElementById(chip.dataset.target);
+      if (targetSel) {
+        targetSel.value = chip.dataset.value;
+        targetSel.dispatchEvent(new Event('change'));
+      }
+    });
+  });
+
+  document.getElementById('quickModalMsg').className = 'modal-msg';
+  document.getElementById('quickModalMsg').innerText = '';
+  document.getElementById('quickOverlay').classList.add('open');
 }
 
-/* ── Init: सिर्फ admin user को पेज दिखेगा ── */
-(async () => {
-  try {
-    const { data: { user } } = await sb.auth.getUser();
-    if (!user || user.id !== ADMIN_UUID) { alert('अनाधिकृत प्रवेश!'); location.href = 'admin-login.html'; return; }
-  } catch (e) { location.href = 'admin-login.html'; return; }
-  document.body.style.visibility = 'visible';
-  buildNav(); fetchOrders();
-})();
+document.getElementById('quickSaveBtn').addEventListener('click', async () => {
+  const cfg = TABLES[currentKey];
+  const msg = document.getElementById('quickModalMsg');
+  const saveBtn = document.getElementById('quickSaveBtn');
+
+  const updateData = {};
+  for (const f of cfg.quickEditable) {
+    const el = document.getElementById(`quick_${f.key}`);
+    if (!el) continue;
+    let val = el.value;
+    if (val === '__custom__') {
+      const customEl = document.getElementById(`quick_${f.key}_custom`);
+      val = (customEl ? customEl.value : '').trim();
+      if (!val) {
+        msg.className = 'modal-msg box msg-error';
+        msg.innerText = `कृपया "${f.label}" के लिए कस्टम मान लिखें।`;
+        return;
+      }
+    }
+    updateData[f.key] = val;
+  }
+
+  saveBtn.disabled = true;
+  msg.className = 'modal-msg box msg-info';
+  msg.innerText = 'अपडेट किया जा रहा है...';
+
+  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  saveBtn.disabled = false;
+
+  if (error) {
+    msg.className = 'modal-msg box msg-error';
+    msg.innerText = 'एरर: ' + error.message;
+    return;
+  }
+
+  msg.className = 'modal-msg box msg-success';
+  msg.innerText = 'सफलतापूर्वक सुरक्षित हो गया ✅';
+  Object.assign(selectedRow, updateData);
+  setTimeout(() => closeOverlay('quickOverlay'), 800);
+  await loadTableContent();
+});
+
+/* ══ 2. MASTER FULL EDIT MODAL (ACTION BUTTON) ══ */
+window.openFullEditById = function(id) {
+  const cfg = TABLES[currentKey];
+  const row = currentRows.find(r => r[cfg.idKey] === id);
+  if (!row) return;
+  selectedRow = row;
+
+  document.getElementById('fullModalTitle').innerText = `✏️ एडिट: ${cfg.label} — ${row.order_id || row.reg_no || row[cfg.idKey]}`;
+  const grid = document.getElementById('fullEditGrid');
+
+  grid.innerHTML = cfg.fields.map(f => {
+    let val = row[f.key] ?? '';
+    return `
+      <div class="form-group">
+        <label class="lang-dev">${f.label}</label>
+        <input type="text" id="full_${f.key}" value="${escapeHtml(String(val))}">
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('fullModalMsg').className = 'modal-msg';
+  document.getElementById('fullModalMsg').innerText = '';
+  document.getElementById('fullEditOverlay').classList.add('open');
+};
+
+document.getElementById('fullEditForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const cfg = TABLES[currentKey];
+  const msg = document.getElementById('fullModalMsg');
+  const saveBtn = document.getElementById('fullSaveBtn');
+
+  const updateData = {};
+  cfg.fields.forEach(f => {
+    const el = document.getElementById(`full_${f.key}`);
+    if (el) updateData[f.key] = el.value || null;
+  });
+
+  saveBtn.disabled = true;
+  msg.className = 'modal-msg box msg-info';
+  msg.innerText = 'डेटाबेस में सेव हो रहा है...';
+
+  const { error } = await supabase.from(cfg.table).update(updateData).eq(cfg.idKey, selectedRow[cfg.idKey]);
+  saveBtn.disabled = false;
+
+  if (error) {
+    msg.className = 'modal-msg box msg-error';
+    msg.innerText = 'एरर: ' + error.message;
+    return;
+  }
+
+  msg.className = 'modal-msg box msg-success';
+  msg.innerText = 'पूरा रिकॉर्ड अपडेट हो गया ✅';
+  Object.assign(selectedRow, updateData);
+  setTimeout(() => closeOverlay('fullEditOverlay'), 900);
+  await loadTableContent();
+});
+
+document.getElementById('fullDeleteBtn').addEventListener('click', async () => {
+  const cfg = TABLES[currentKey];
+  if (!confirm('क्या आप वाकई इस पूरे रिकॉर्ड को डिलीट करना चाहते हैं?')) return;
+  const { error } = await supabase.from(cfg.table).delete().eq(cfg.idKey, selectedRow[cfg.idKey]);
+  if (error) {
+    alert('डिलीट एरर: ' + error.message);
+  } else {
+    closeOverlay('fullEditOverlay');
+    loadTableContent();
+  }
+});
+
+window.closeOverlay = function(id) {
+  document.getElementById(id).classList.remove('open');
+};
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+/* ══ INIT & AUTH ══ */
+buildAddForm();
+checkSecurity();
+
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  window.location.href = 'admin-login.html';
+});
 </script>
+
 </body>
 </html>
