@@ -3,73 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JameenSeva - Partner & Admin Login</title>
+    <title>JameenSeva - Partner Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 min-h-screen flex items-center justify-center p-4 font-sans">
+<body class="bg-gray-50 font-sans min-h-screen">
 
-    <div class="max-w-md w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-8 text-white">
-        <div class="text-center mb-8">
-            <span class="bg-blue-600/30 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30">JameenSeva Portal</span>
-            <h1 class="text-2xl font-bold mt-3 tracking-wide">Partner Login</h1>
-            <p class="text-xs text-gray-300 mt-1">Apne credentials ke sath securely login karein</p>
+    <!-- Top Navbar -->
+    <nav class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center shadow-sm">
+        <div class="flex items-center space-x-3">
+            <span class="bg-blue-600 text-white font-bold px-3 py-1.5 rounded-xl text-sm">JS</span>
+            <h1 class="text-lg font-bold text-gray-800 tracking-tight">Partner & Amin Approval Panel</h1>
+        </div>
+        <div class="flex items-center space-x-3">
+            <button onclick="openAddModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition">
+                ➕ Add New Amin
+            </button>
+            <button onclick="fetchAmins()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-xs font-semibold transition">
+                🔄 Refresh
+            </button>
+            <button onclick="handleLogout()" class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-xl text-xs font-semibold transition">
+                🚪 Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto p-6">
+        <div class="mb-6 flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-bold text-gray-800">Pending & Registered Amins</h2>
+                <p class="text-xs text-gray-500 mt-0.5">Kisi bhi row par click karke poori details dekh sakte hain.</p>
+            </div>
         </div>
 
-        <form onsubmit="handleLogin(event)" class="space-y-5">
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Email Address</label>
-                <input type="email" id="email" required 
-                    class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition text-white placeholder-gray-500" 
-                    placeholder="admin@jameenseva.in">
+        <!-- Table Card -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100/70 text-gray-600 text-xs uppercase tracking-wider border-b border-gray-200">
+                            <th class="p-4 font-semibold">Partner Code</th>
+                            <th class="p-4 font-semibold">Full Name</th>
+                            <th class="p-4 font-semibold">District / State</th>
+                            <th class="p-4 font-semibold">Status</th>
+                            <th class="p-4 font-semibold text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="aminTableBody" class="divide-y divide-gray-100 text-sm text-gray-700">
+                        <tr><td colspan="5" class="p-8 text-center text-gray-400">Loading records...</td></tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </main>
 
-            <div>
-                <label class="block text-xs font-medium text-gray-300 mb-1">Password</label>
-                <input type="password" id="password" required 
-                    class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition text-white placeholder-gray-500" 
-                    placeholder="••••••••">
+    <!-- Details View Modal -->
+    <div id="detailsModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-lg font-bold text-gray-800">📋 Amin Full Details</h3>
+                <button onclick="closeDetailsModal()" class="text-gray-400 hover:text-gray-600 font-bold text-xl">&times;</button>
             </div>
+            <div id="modalDetailsContent" class="space-y-3 text-xs text-gray-700">
+                <!-- Dynamic Data -->
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeDetailsModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-xl font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
 
-            <button type="submit" id="loginBtn"
-                class="w-full bg-blue-600 hover:bg-blue-500 active:scale-[0.98] transition font-semibold py-3 rounded-xl text-sm shadow-lg shadow-blue-600/30">
-                Sign In to Dashboard
-            </button>
-
-            <p id="loginError" class="text-red-400 text-xs text-center mt-2 font-medium"></p>
-        </form>
-
-        <div class="mt-8 text-center border-t border-white/10 pt-4">
-            <p class="text-[11px] text-gray-400">Secure Authentication Powered by Supabase</p>
+    <!-- Add Amin Modal -->
+    <div id="addAminModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold text-gray-800">Add New Amin Manually</h3>
+                <button onclick="closeAddModal()" class="text-gray-400 hover:text-gray-600 font-bold text-lg">&times;</button>
+            </div>
+            <form onsubmit="handleAddNewAmin(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block font-medium text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" id="addName" required class="w-full p-2.5 border rounded-xl" placeholder="Ramesh Kumar">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Calling Mobile *</label>
+                        <input type="text" id="addMobile" required class="w-full p-2.5 border rounded-xl" placeholder="10-digit number">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">WhatsApp Number</label>
+                        <input type="text" id="addWa" class="w-full p-2.5 border rounded-xl" placeholder="10-digit number">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">State *</label>
+                        <input type="text" id="addState" required class="w-full p-2.5 border rounded-xl" placeholder="bihar">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">District *</label>
+                        <input type="text" id="addDist" required class="w-full p-2.5 border rounded-xl" placeholder="Darbhanga">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Tehsil / Block *</label>
+                        <input type="text" id="addTehsil" required class="w-full p-2.5 border rounded-xl" placeholder="Block name">
+                    </div>
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-1">Partner Code (Optional)</label>
+                        <input type="text" id="addCode" class="w-full p-2.5 border rounded-xl" placeholder="JS-BR-1003">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-medium text-gray-700 mb-1">Qualification Type</label>
+                    <select id="addQual" class="w-full p-2.5 border rounded-xl">
+                        <option value="retired_ameen">Retired Govt Ameen</option>
+                        <option value="retired_lekhpal_kanungo">Retired Lekhpal / Patwari</option>
+                        <option value="iti_diploma">ITI / Diploma Surveyor</option>
+                        <option value="private_experienced">Experienced Private Specialist</option>
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-2 pt-2">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 bg-gray-100 rounded-xl font-semibold">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700">Save Amin</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <script>
         const SUPABASE_URL = 'https://zixhxfehswhetpwbonjh.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_uzBqu_noFtC9nQok4zkJ_g_QNvFJDv0';
+        const SUPABASE_ANON = 'sb_publishable_uzBqu_noFtC9nQok4zkJ_g_QNvFJDv0';
         
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-        async function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const errorTag = document.getElementById('loginError');
-            const btn = document.getElementById('loginBtn');
+        let allAminsData = [];
 
-            errorTag.innerText = '';
-            btn.innerText = 'Signing In...';
-            btn.disabled = true;
+        async function checkSession() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (!session) {
+                window.location.href = 'partner-login.html';
+            } else {
+                fetchAmins();
+            }
+        }
+        checkSession();
 
-            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        async function fetchAmins() {
+            const tbody = document.getElementById('aminTableBody');
+            tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-gray-400">Loading records...</td></tr>`;
+
+            const { data, error } = await supabaseClient
+                .from('upamin')
+                .select('*')
+                .order('id', { ascending: false });
 
             if (error) {
-                errorTag.innerText = error.message;
-                btn.innerText = 'Sign In to Dashboard';
-                btn.disabled = false;
-            } else {
-                window.location.href = 'partner-dashboard.html';
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-red-500 font-medium">Error: ${error.message}</td></tr>`;
+                return;
             }
+
+            if (!data || data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-gray-400">Koi records nahi mile.</td></tr>`;
+                return;
+            }
+
+            allAminsData = data;
+            tbody.innerHTML = '';
+            data.forEach(amin => {
+                const statusBadge = amin.status === 'approved' || amin.status === 'verified'
+                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-200">Approved</span>`
+                    : amin.status === 'rejected'
+                    ? `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200">Rejected</span>`
+                    : `<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">Pending</span>`;
+
+                const row = document.createElement('tr');
+                row.className = "hover:bg-gray-50/80 transition cursor-pointer";
+                row.innerHTML = `
+                    <td class="p-4 font-medium text-gray-900" onclick="showDetails('${amin.id}')">${amin.partner_code || 'N/A'}</td>
+                    <td class="p-4 font-semibold" onclick="showDetails('${amin.id}')">${amin.full_name || 'N/A'}</td>
+                    <td class="p-4 text-gray-500" onclick="showDetails('${amin.id}')">${amin.district || ''}, ${amin.state || ''}</td>
+                    <td class="p-4" onclick="showDetails('${amin.id}')">${statusBadge}</td>
+                    <td class="p-4 text-center space-x-2" onclick="event.stopPropagation()">
+                        <button onclick="updateStatus('${amin.id}', 'verified')" 
+                            class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-medium shadow-sm transition">
+                            Approve
+                        </button>
+                        <button onclick="updateStatus('${amin.id}', 'rejected')" 
+                            class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-medium shadow-sm transition">
+                            Reject
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function showDetails(id) {
+            const amin = allAminsData.find(item => item.id == id);
+            if (!amin) return;
+
+            const contentBox = document.getElementById('modalDetailsContent');
+            contentBox.innerHTML = `
+                <div class="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-xl border">
+                    <div><strong>Partner Code:</strong> ${amin.partner_code || 'N/A'}</div>
+                    <div><strong>Full Name:</strong> ${amin.full_name || 'N/A'}</div>
+                    <div><strong>Mobile:</strong> ${amin.mobile || 'N/A'}</div>
+                    <div><strong>WhatsApp:</strong> ${amin.whatsapp || 'N/A'}</div>
+                    <div><strong>Email:</strong> ${amin.email || 'N/A'}</div>
+                    <div><strong>State / District:</strong> ${amin.state || ''}, ${amin.district || ''}</div>
+                    <div><strong>Tehsil / Block:</strong> ${amin.tehsil_block || 'N/A'}</div>
+                    <div><strong>Pincode:</strong> ${amin.pincode || 'N/A'}</div>
+                    <div><strong>Experience:</strong> ${amin.experience_years || 0} Years</div>
+                    <div><strong>Qualification:</strong> ${amin.qualification_type || 'N/A'}</div>
+                    <div><strong>Fee:</strong> ₹${amin.fee_amount || 0} / ${amin.fee_unit || ''}</div>
+                    <div><strong>Status:</strong> ${amin.status || 'pending'}</div>
+                </div>
+            `;
+            document.getElementById('detailsModal').classList.remove('hidden');
+        }
+
+        function closeDetailsModal() { document.getElementById('detailsModal').classList.add('hidden'); }
+
+        async function updateStatus(id, newStatus) {
+            const { error } = await supabaseClient
+                .from('upamin')
+                .update({ status: newStatus })
+                .eq('id', id);
+
+            if (error) {
+                alert('Update failed: ' + error.message);
+            } else {
+                fetchAmins();
+            }
+        }
+
+        function openAddModal() { document.getElementById('addAminModal').classList.remove('hidden'); }
+        function closeAddModal() { document.getElementById('addAminModal').classList.add('hidden'); }
+
+        async function handleAddNewAmin(e) {
+            e.preventDefault();
+            const payload = {
+                full_name: document.getElementById('addName').value.trim(),
+                mobile: document.getElementById('addMobile').value.trim(),
+                whatsapp: document.getElementById('addWa').value.trim() || document.getElementById('addMobile').value.trim(),
+                state: document.getElementById('addState').value.trim(),
+                district: document.getElementById('addDist').value.trim(),
+                tehsil_block: document.getElementById('addTehsil').value.trim(),
+                partner_code: document.getElementById('addCode').value.trim() || null,
+                qualification_type: document.getElementById('addQual').value,
+                status: 'verified',
+                terms_accepted: true
+            };
+
+            const { error } = await supabaseClient.from('upamin').insert([payload]);
+            if (error) {
+                alert('Error inserting amin: ' + error.message);
+            } else {
+                closeAddModal();
+                fetchAmins();
+                alert('Amin successfully added and verified!');
+            }
+        }
+
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = 'partner-login.html';
         }
     </script>
 </body>
