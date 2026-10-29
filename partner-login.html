@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JameenSeva - Partner & Admin Login</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 min-h-screen flex items-center justify-center p-4 font-sans">
+
+    <div class="max-w-md w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-2xl p-8 text-white">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <span class="bg-blue-600/30 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full border border-blue-500/30">JameenSeva Portal</span>
+            <h1 class="text-2xl font-bold mt-3 tracking-wide">Partner Login</h1>
+            <p class="text-xs text-gray-300 mt-1">Apne credentials ke sath securely login karein</p>
+        </div>
+
+        <!-- Login Form -->
+        <form onsubmit="handleLogin(event)" class="space-y-5">
+            <div>
+                <label class="block text-xs font-medium text-gray-300 mb-1">Email Address</label>
+                <input type="email" id="email" required 
+                    class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition text-white placeholder-gray-500" 
+                    placeholder="admin@jameenseva.in">
+            </div>
+
+            <div>
+                <label class="block text-xs font-medium text-gray-300 mb-1">Password</label>
+                <input type="password" id="password" required 
+                    class="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition text-white placeholder-gray-500" 
+                    placeholder="••••••••">
+            </div>
+
+            <button type="submit" id="loginBtn"
+                class="w-full bg-blue-600 hover:bg-blue-500 active:scale-[0.98] transition font-semibold py-3 rounded-xl text-sm shadow-lg shadow-blue-600/30">
+                Sign In to Dashboard
+            </button>
+
+            <p id="loginError" class="text-red-400 text-xs text-center mt-2 font-medium"></p>
+        </form>
+
+        <!-- Footer Note -->
+        <div class="mt-8 text-center border-t border-white/10 pt-4">
+            <p class="text-[11px] text-gray-400">Secure Authentication Powered by Supabase</p>
+        </div>
+    </div>
+
+    <script>
+        // Supabase Credentials Provided
+        const SUPABASE_URL = 'https://zixhxfehswhetpwbonjh.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_uzBqu_noFtC9nQok4zkJ_g_QNvFJDv0';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Check if already logged in, redirect to dashboard if session exists
+        async function checkExistingSession() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                window.location.href = 'partner-dashboard.html';
+            }
+        }
+        checkExistingSession();
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorTag = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+
+            errorTag.innerText = '';
+            btn.innerText = 'Signing In...';
+            btn.disabled = true;
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                errorTag.innerText = error.message;
+                btn.innerText = 'Sign In to Dashboard';
+                btn.disabled = false;
+            } else {
+                // Login successful, redirect to dashboard file
+                window.location.href = 'partner-dashboard.html';
+            }
+        }
+    </script>
+</body>
+</html>
